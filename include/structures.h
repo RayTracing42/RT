@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 13:30:00 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 13:49:15 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,7 @@ typedef struct				s_parallel_light
 	t_vector				direction;
 	SDL_Color				color;
 	int						(*is_in_light)();
+	t_vector				(*get_ray_vect)();
 }							t_parallel_light;
 
 /*
@@ -220,6 +221,7 @@ typedef struct				s_spotlight
 	t_vector				direction;
 	SDL_Color				color;
 	int						(*is_in_light)();
+	t_vector				(*get_ray_vect)();
 	double					aperture;
 }							t_spotlight;
 
@@ -231,6 +233,7 @@ typedef struct				s_orb_light
 	t_vector				direction;
 	SDL_Color				color;
 	int						(*is_in_light)();
+	t_vector				(*get_ray_vect)();
 	double					aperture;
 }							t_orb_light;
 
