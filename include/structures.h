@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/23 15:42:07 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 12:08:57 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct				s_object
 	double					(*intersect)();
 	const t_vector			*(*get_normal)();
 	t_dot					origin;
+	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
 }							t_object;
@@ -111,12 +112,12 @@ typedef struct				s_sphere
 	double					(*intersect)();
 	const t_vector			*(*get_normal)();
 	t_dot					origin;
+	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
 	double					radius;
 /*	stocker le rayon au carré pour éviter d'avoir à le recalculer ?
 	double			r2;*/
-	t_dot					center;
 }							t_sphere;
 
 typedef struct				s_cylinder
@@ -125,6 +126,7 @@ typedef struct				s_cylinder
 	double					(*intersect)();
 	const t_vector			*(*get_normal)();
 	t_dot					origin;
+	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
 	double					radius;
@@ -140,6 +142,7 @@ typedef struct				s_cone
 	double					(*intersect)();
 	const t_vector			*(*get_normal)();
 	t_dot					origin;
+	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
 	double					hangle;
@@ -153,6 +156,7 @@ typedef struct				s_plane
 	double					(*intersect)();
 	const t_vector			*(*get_normal)();
 	t_dot					origin;
+	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
 }							t_plane;
