@@ -6,15 +6,17 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 12:08:35 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 13:03:29 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			sphere_intersect(t_ray *ray, t_sphere *s)
+/*Nombre d'arguments non définitif*/
+static double			sphere_intersect(t_sphere *s)
 {
+	(void)s;
 	return (0);
 	/*t_dot		res;
 	t_vector	*vd;
@@ -44,17 +46,17 @@ static double			sphere_intersect(t_ray *ray, t_sphere *s)
 
 static const t_vector	*get_sphere_normal(t_dot *d, t_sphere *s)
 {
+	(void)d;
 	//set_vector(&s->normal, 2 * d->x, 2 * d->y, 2 * d->z);
 	return (&s->normal);
 }
 
-t_sphere				*new_sphere(t_dot orig, double rad, t_vector dir,
-									SDL_Color col)
+t_sphere				*new_sphere(t_objs_comp args, double radius)
 {
 	t_sphere	*sphere;
 
-	sphere = (t_sphere*)new_object(SPHERE, orig, dir, col);
-	sphere->radius = rad;
+	sphere = (t_sphere*)new_object(SPHERE, args.orig, args.dir, args.col);
+	sphere->radius = radius;
 	sphere->get_normal = get_sphere_normal;
 	sphere->intersect = sphere_intersect;
 //	sphere->r2 = pow(radius, 2);

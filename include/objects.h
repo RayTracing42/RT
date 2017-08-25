@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 12:02:42 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 13:26:31 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,24 @@ void		translate_object(t_object *obj, double x, double y, double z);*/
 /*
 ** cone.c
 */
-t_cone		*new_cone(t_dot pos, double angle, double radius, double height);
+t_cone		*new_cone(t_objs_comp args, double angle, double height_top,
+					double height_bottom);
 
 /*
 ** cylinder.c
 */
-t_cylinder	*new_cylinder(t_dot pos, double radius, double height);
+t_cylinder	*new_cylinder(t_objs_comp args, double radius, double height_top,
+						double height_bottom);
 
 /*
 ** plane.c
 */
 int			is_in_plane(t_dot *d, t_plane *p);
-t_plane		*new_plane(t_dot pos, double x_angle, double z_angle);
+t_plane		*new_plane(t_objs_comp args, t_vector normal);
 
 /*
 ** sphere.c
 */
-t_sphere	*new_sphere(t_dot center, double radius);
+t_sphere	*new_sphere(t_objs_comp args, double rad);
 
 #endif

@@ -6,14 +6,11 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 11:48:01 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 12:54:39 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-/*double (*intersect)(),
-						const t_vector *(*get_normal)(t_dot*, struct s_object*)*/
 
 static size_t	get_type_size(t_type type)
 {
@@ -22,7 +19,7 @@ static size_t	get_type_size(t_type type)
 	return (sizes[type]);
 }
 
-t_object	*new_object(t_type type, t_dot origin
+t_object	*new_object(t_type type, t_dot origin,
 	 					t_vector dir, SDL_Color color)
 {
 	t_object	*obj;
@@ -34,7 +31,7 @@ t_object	*new_object(t_type type, t_dot origin
 	obj->dir = dir;
 	obj->color = color;
 	obj->get_normal = NULL;
-	obj->normal = NULL;
+	obj->intersect = NULL;
 	return (obj);
 }
 

@@ -6,26 +6,18 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 11:04:54 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 13:07:30 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static int				in_boundary(t_ray *ray, t_cylinder *c, double t)
+static double			cylinder_intersect(t_cylinder *c)
 {
-	t_dot		dot;
-
-	if (c->height < 0)
-		return (1);
-	equation_get_dot(&dot, &ray->eq_obj, t);
-	return (dot.y >= 0 && dot.y <= c->height);
-}
-
-static double			cylinder_intersect(t_ray *ray, t_cylinder *c)
-{
-	t_dot		res;
+	(void)c;
+	return (0);
+	/*t_dot		res;
 	t_vector	*vd;
 	t_vector	*vc;
 	double		t;
@@ -47,27 +39,27 @@ static double			cylinder_intersect(t_ray *ray, t_cylinder *c)
 		else if ((long)(res.y * pow(10, 12)) > 0 && in_boundary(ray, c, res.y))
 			t = (res.y);
 	}
-	return (t);
+	return (t);*/
 }
 
 static const t_vector	*get_cylinder_normal(t_dot *d, t_cylinder *c)
 {
-	(void)c;
-	set_vector(&c->normal, 2 * d->x, 0, 2 * d->z);
+	//set_vector(&c->normal, 2 * d->x, 0, 2 * d->z);
+	(void)d;
 	return (&c->normal);
 }
 
-t_cylinder				*new_cylinder(t_dot pos, double radius, double height)
+t_cylinder				*new_cylinder(t_objs_comp args, double radius,
+									double height_top, double height_bottom)
 {
 	t_cylinder	*c;
 
-	c = (t_cylinder*)new_object(CYLINDER, &cylinder_intersect,
-								&get_cylinder_normal, sizeof(t_cylinder));
-	translation(&c->trans, pos.x, pos.y, pos.z);
-	translation(&c->trans_inv, -pos.x, -pos.y, -pos.z);
+	c = (t_cylinder*)new_object(CYLINDER, args.orig, args.dir, args.col);
 	c->radius = radius;
-	c->r2 = pow(radius, 2);
-	c->center = pos;
-	c->height = height;
+	c->height_top = height_top;
+	c->height_bottom = height_bottom;
+	c->get_normal = get_cylinder_normal;
+	c->intersect = cylinder_intersect;
+	//c->r2 = pow(radius, 2);
 	return (c);
 }

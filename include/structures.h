@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 12:08:57 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 13:18:09 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,13 @@ typedef struct				s_object
 	SDL_Color				color;
 }							t_object;
 
+typedef struct				s_objs_comp
+{
+	t_dot					orig;
+	t_vector				dir;
+	SDL_Color				col;
+}							t_objs_comp;
+
 typedef struct				s_sphere
 {
 	const t_type			obj_type;
@@ -145,7 +152,7 @@ typedef struct				s_cone
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
-	double					hangle;
+	double					angle;
 	double					height_top;
 	double					height_bottom;
 }							t_cone;
