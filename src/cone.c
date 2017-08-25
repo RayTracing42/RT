@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 13:31:24 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 15:08:27 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,9 @@ t_cone					*new_cone(t_objs_comp args, double angle,
 	c->intersect = cone_intersection;
 //	c->tanalpha2 = pow(tan(ft_to_rad(angle)), 2);
 	return (c);
+}
+
+void					delete_cone(t_cone *cone)
+{
+	delete_object((t_object*)cone);
 }

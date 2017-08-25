@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 13:31:03 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 15:12:27 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,9 @@ t_sphere				*new_sphere(t_objs_comp args, double radius)
 	sphere->intersect = sphere_intersect;
 //	sphere->r2 = pow(radius, 2);
 	return (sphere);
+}
+
+void					delete_sphere(t_sphere *sphere)
+{
+	delete_object((t_object*)sphere);
 }

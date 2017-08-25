@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 13:31:24 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 15:09:23 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,9 @@ t_cylinder				*new_cylinder(t_objs_comp args, double radius,
 	c->intersect = cylinder_intersect;
 	//c->r2 = pow(radius, 2);
 	return (c);
+}
+
+void					delete_cylinder(t_cylinder *cylinder)
+{
+	delete_object((t_object*)cylinder);
 }
