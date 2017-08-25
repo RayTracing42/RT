@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:04:25 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 14:55:25 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 15:05:08 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,9 @@ t_spotlight	*new_spotlight(t_vector direction, t_dot orig, SDL_Color color,
 	spot->get_ray_vect = get_ray_vect;
 	spot->is_in_light = is_in_spotlight;
 	return (spot);
+}
+
+void		delete_spotlight(t_spotlight *spot)
+{
+	delete_light((t_light*)spot);
 }
