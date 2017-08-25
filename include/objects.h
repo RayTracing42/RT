@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 13:26:31 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 13:33:26 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 ** objects*.c
 */
 void		delete_object(t_object *obj);
-t_object	*new_object(t_type type, t_dot origin,
-	 					t_vector dir, SDL_Color color);
+t_object	*new_object(t_type type, t_dot origin, t_vector dir,
+						SDL_Color color);
 void		set_object_color(t_object *obj, int r, int g, int b);
 /*
 void		rotate_object(t_object *obj, double x_angle, double y_angle,
