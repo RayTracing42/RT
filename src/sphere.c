@@ -6,17 +6,17 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 13:03:29 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 13:31:03 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-/*Nombre d'arguments non définitif*/
-static double			sphere_intersect(t_sphere *s)
+static double			sphere_intersect(t_ray *ray, t_sphere *s)
 {
 	(void)s;
+	(void)ray;
 	return (0);
 	/*t_dot		res;
 	t_vector	*vd;

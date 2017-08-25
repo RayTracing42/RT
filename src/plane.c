@@ -6,16 +6,17 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 13:27:09 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 13:31:10 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			plane_intersect(t_plane *p)
+static double			plane_intersect(t_ray *ray, t_plane *p)
 {
 	(void)p;
+	(void)ray;
 	return (0);
 	/*double		t;
 	double		denom;

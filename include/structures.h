@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 13:18:09 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 13:30:00 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,10 +264,8 @@ typedef struct				s_scene
 	t_list_objs				*objects;
 }							t_scene;
 
-/*	les ray pour après
 typedef struct		s_ray
 {
 }					t_ray;
-*/
 
 #endif

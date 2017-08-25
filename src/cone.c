@@ -6,16 +6,17 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 13:19:43 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 13:31:24 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			cone_intersection(t_cone *c)
+static double			cone_intersection(t_ray *ray, t_cone *c)
 {
 	(void)c;
+	(void)ray;
 	return (0);
 	/*t_dot		res;
 	t_vector	*vd;
