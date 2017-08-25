@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 13:49:15 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 14:42:57 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,12 +194,20 @@ typedef struct		s_box_intersect
 	double			t;
 }					t_box_intersect;*/
 
+typedef enum				e_light_type
+{
+	ORB,
+	PARALLEL,
+	SPOT
+}							t_light_type;
+
 typedef struct				s_light
 {
+	const t_light_type		type;
 	t_vector				direction;
 	SDL_Color				color;
 	int						(*is_in_light)();
-	t_vector				(*get_ray_vect)();
+	void					(*get_ray_vect)();
 }							t_light;
 
 /*
@@ -207,10 +215,11 @@ typedef struct				s_light
 */
 typedef struct				s_parallel_light
 {
+	const t_light_type		type;
 	t_vector				direction;
 	SDL_Color				color;
 	int						(*is_in_light)();
-	t_vector				(*get_ray_vect)();
+	void					(*get_ray_vect)();
 }							t_parallel_light;
 
 /*
@@ -218,22 +227,27 @@ typedef struct				s_parallel_light
 */
 typedef struct				s_spotlight
 {
+	const t_light_type		type;
 	t_vector				direction;
 	SDL_Color				color;
 	int						(*is_in_light)();
-	t_vector				(*get_ray_vect)();
+	void					(*get_ray_vect)();
+	t_dot					orig;
 	double					aperture;
 }							t_spotlight;
 
 /*
-** orb_light hérite de spotlight
+** orb_light hérite de spotlight /!\ ne pas ajouter de champs, le constructeur
+**                                   actuel ne le permet pas. /!\
 */
 typedef struct				s_orb_light
 {
+	const t_light_type		type;
 	t_vector				direction;
 	SDL_Color				color;
 	int						(*is_in_light)();
-	t_vector				(*get_ray_vect)();
+	void					(*get_ray_vect)();
+	t_dot					orig;
 	double					aperture;
 }							t_orb_light;
 
