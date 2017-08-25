@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 14:42:57 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 15:15:39 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,13 +186,7 @@ typedef struct		s_box
 	t_plane			*left;
 	t_plane			*right;
 }					t_box;
-
-typedef struct		s_box_intersect
-{
-	t_box			*box;
-	double			dist;
-	double			t;
-}					t_box_intersect;*/
+*/
 
 typedef enum				e_light_type
 {
