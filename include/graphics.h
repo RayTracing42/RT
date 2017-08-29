@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt.h                                               :+:      :+:    :+:   */
+/*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/29 13:03:53 by edescoin         ###   ########.fr       */
+/*   Created: 2017/06/06 17:10:36 by edescoin          #+#    #+#             */
+/*   Updated: 2017/08/25 10:57:59 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_H
-# define RT_H
+#ifndef GRAPHICS_H
+# define GRAPHICS_H
+# include "structures.h"
 # ifndef __APPLE__
 #  include <SDL2/SDL.h>
-#  define SDL_VIDEO		SDL_INIT_VIDEO
 # else
 #  include "SDL2/SDL.h"
-#  define SDL_VIDEO		SDL_VIDEO_DRIVER_COCOA
 # endif
 
-# define TITLE			"RTv1"
-
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include "events.h"
-# include "graphics.h"
-# include "libft.h"
-# include "lights.h"
-# include "objects.h"
-# include "structures.h"
-
+/*
+** graphics.c
+*/
+void		delete_sdl_core();
+Uint32		get_color(int r, int g, int b);
+t_sdl_core	*get_sdl_core();
+void		put_pixel(int x, int y, SDL_Color *color);
+void		refresh_win();
 
 #endif
