@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt.h                                               :+:      :+:    :+:   */
+/*   orb_light.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/29 13:01:15 by edescoin         ###   ########.fr       */
+/*   Created: 2017/08/25 14:32:44 by edescoin          #+#    #+#             */
+/*   Updated: 2017/08/25 15:06:10 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_H
-# define RT_H
-# ifndef __APPLE__
-#  include <SDL2/SDL.h>
-#  define SDL_VIDEO		SDL_INIT_VIDEO
-# else
-#  include "SDL2/SDL.h"
-#  define SDL_VIDEO		SDL_VIDEO_DRIVER_COCOA
-# endif
+#include "rt.h"
 
-# define TITLE			"RTv1"
+static int	is_in_orb_light(void)
+{
+	return (1);
+}
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include "graphics.h"
-# include "libft.h"
-# include "lights.h"
-# include "objects.h"
-# include "structures.h"
+t_orb_light	*new_orb_light(t_dot orig, SDL_Color color)
+{
+	t_orb_light	*orb;
 
+	orb = (t_orb_light*)new_spotlight((t_vector){0, 0, 0}, orig, color, 360);
+	*(t_light_type*)&orb->type = ORB;
+	orb->is_in_light = is_in_orb_light;
+	return (orb);
+}
 
-#endif
+void		delete_orb_light(t_orb_light *orb)
+{
+	delete_spotlight((t_spotlight*)orb);
+}

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/23 15:42:07 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 15:15:39 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,17 @@ typedef struct				s_object
 	double					(*intersect)();
 	const t_vector			*(*get_normal)();
 	t_dot					origin;
+	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
 }							t_object;
+
+typedef struct				s_objs_comp
+{
+	t_dot					orig;
+	t_vector				dir;
+	SDL_Color				col;
+}							t_objs_comp;
 
 typedef struct				s_sphere
 {
@@ -111,12 +119,12 @@ typedef struct				s_sphere
 	double					(*intersect)();
 	const t_vector			*(*get_normal)();
 	t_dot					origin;
+	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
 	double					radius;
 /*	stocker le rayon au carré pour éviter d'avoir à le recalculer ?
 	double			r2;*/
-	t_dot					center;
 }							t_sphere;
 
 typedef struct				s_cylinder
@@ -125,6 +133,7 @@ typedef struct				s_cylinder
 	double					(*intersect)();
 	const t_vector			*(*get_normal)();
 	t_dot					origin;
+	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
 	double					radius;
@@ -140,9 +149,10 @@ typedef struct				s_cone
 	double					(*intersect)();
 	const t_vector			*(*get_normal)();
 	t_dot					origin;
+	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
-	double					hangle;
+	double					angle;
 	double					height_top;
 	double					height_bottom;
 }							t_cone;
@@ -153,6 +163,7 @@ typedef struct				s_plane
 	double					(*intersect)();
 	const t_vector			*(*get_normal)();
 	t_dot					origin;
+	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
 }							t_plane;
@@ -175,20 +186,22 @@ typedef struct		s_box
 	t_plane			*left;
 	t_plane			*right;
 }					t_box;
+*/
 
-typedef struct		s_box_intersect
+typedef enum				e_light_type
 {
-	t_box			*box;
-	double			dist;
-	double			t;
-}					t_box_intersect;*/
+	ORB,
+	PARALLEL,
+	SPOT
+}							t_light_type;
 
 typedef struct				s_light
 {
+	const t_light_type		type;
 	t_vector				direction;
 	SDL_Color				color;
 	int						(*is_in_light)();
-	t_vector				(*get_ray_vect)();
+	void					(*get_ray_vect)();
 }							t_light;
 
 /*
@@ -196,9 +209,11 @@ typedef struct				s_light
 */
 typedef struct				s_parallel_light
 {
+	const t_light_type		type;
 	t_vector				direction;
 	SDL_Color				color;
 	int						(*is_in_light)();
+	void					(*get_ray_vect)();
 }							t_parallel_light;
 
 /*
@@ -206,20 +221,27 @@ typedef struct				s_parallel_light
 */
 typedef struct				s_spotlight
 {
+	const t_light_type		type;
 	t_vector				direction;
 	SDL_Color				color;
 	int						(*is_in_light)();
+	void					(*get_ray_vect)();
+	t_dot					orig;
 	double					aperture;
 }							t_spotlight;
 
 /*
-** orb_light hérite de spotlight
+** orb_light hérite de spotlight /!\ ne pas ajouter de champs, le constructeur
+**                                   actuel ne le permet pas. /!\
 */
 typedef struct				s_orb_light
 {
+	const t_light_type		type;
 	t_vector				direction;
 	SDL_Color				color;
 	int						(*is_in_light)();
+	void					(*get_ray_vect)();
+	t_dot					orig;
 	double					aperture;
 }							t_orb_light;
 
@@ -253,10 +275,8 @@ typedef struct				s_scene
 	t_list_objs				*objects;
 }							t_scene;
 
-/*	les ray pour après
 typedef struct		s_ray
 {
 }					t_ray;
-*/
 
 #endif
