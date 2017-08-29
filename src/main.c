@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/29 13:08:46 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/29 13:09:35 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int			main(int ac, char **av)
 	(void)ac;
 	(void)av;
 	events = NULL;
+	get_sdl_core();
 	init_list_evts(&events, NULL);
 	wait_events(events);
 	delete_sdl_core();
