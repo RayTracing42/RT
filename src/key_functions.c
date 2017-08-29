@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt.h                                               :+:      :+:    :+:   */
+/*   key_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/29 12:53:05 by edescoin         ###   ########.fr       */
+/*   Created: 2017/01/25 14:48:19 by edescoin          #+#    #+#             */
+/*   Updated: 2017/08/29 12:49:48 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_H
-# define RT_H
+#include "rt.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include "events.h"
-# include "libft.h"
-# include "lights.h"
-# include "objects.h"
-# include "structures.h"
+int			key_management(SDL_Event *current, t_event *evt)
+{
+	t_evt_data	*data;
 
-
-#endif
+	data = evt->data;
+	if (current->key.keysym.sym == SDLK_ESCAPE)
+		return (0);
+	return (1);
+}

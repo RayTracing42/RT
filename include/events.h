@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt.h                                               :+:      :+:    :+:   */
+/*   events.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/29 12:53:05 by edescoin         ###   ########.fr       */
+/*   Created: 2017/06/06 17:10:33 by edescoin          #+#    #+#             */
+/*   Updated: 2017/08/29 12:51:44 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_H
-# define RT_H
-
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include "events.h"
-# include "libft.h"
-# include "lights.h"
-# include "objects.h"
+#ifndef EVENTS_H
+# define EVENTS_H
 # include "structures.h"
+# include "key_functions.h"
+# ifndef __APPLE__
+#  include <SDL2/SDL.h>
+# else
+#  include "SDL2/SDL.h"
+# endif
 
+/*
+** events.c
+*/
+void	clear_events(t_event **head);
+void	delete_event(t_event **head);
+void	new_event(t_event **head, SDL_EventType type, void *data, int (*fct)());
+void	wait_events(t_event *list_evts);
 
 #endif
