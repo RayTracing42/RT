@@ -13,7 +13,7 @@
 #include "rt.h"
 #include <math.h>
 
-static double			cone_intersection(t_ray *ray, t_cone *c)
+static double			cone_intersect(t_ray *ray, t_cone *c)
 {
 	(void)c;
 	(void)ray;
