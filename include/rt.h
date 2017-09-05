@@ -6,17 +6,17 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/29 13:03:53 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/06 00:52:46 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_H
 # define RT_H
 # ifndef __APPLE__
-#  include <SDL2/SDL.h>
+#  include <../SDL2/include/SDL.h>
 #  define SDL_VIDEO		SDL_INIT_VIDEO
 # else
-#  include "SDL2/SDL.h"
+#  include "../SDL2/include/SDL.h"
 #  define SDL_VIDEO		SDL_VIDEO_DRIVER_COCOA
 # endif
 
@@ -31,6 +31,7 @@
 # include "lights.h"
 # include "objects.h"
 # include "structures.h"
+
 
 
 #endif

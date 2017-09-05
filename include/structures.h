@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 15:15:39 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/06 00:52:49 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 # define WIN_WIDTH 	1200
 # define WIN_HEIGHT 650
 # ifndef __APPLE__
-#  include <SDL2/SDL.h>
+#  include <../SDL2/include/SDL.h>
 # else
-#  include "SDL2/SDL.h"
+#  include <../SDL2/include/SDL.h>
 # endif
 
 /*
