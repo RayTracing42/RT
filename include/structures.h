@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/11 12:47:17 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/11 14:01:49 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,13 @@ typedef enum				e_type
 	SPHERE
 }							t_type;
 
+typedef struct				s_obj_phys
+{
+	double					reflection_amount;
+	double					refraction_amount;
+	double					refractive_index;
+}							t_obj_phys;
+
 typedef struct				s_object
 {
 	const t_type			obj_type;
@@ -104,8 +111,7 @@ typedef struct				s_object
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
-	double					reflection;
-	double					refraction;
+	s_obj_phys				obj_light;
 }							t_object;
 
 typedef struct				s_objs_comp
@@ -124,8 +130,7 @@ typedef struct				s_sphere
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
-	double					reflection;
-	double					refraction;
+	s_obj_phys				obj_light;
 	double					radius;
 /*	stocker le rayon au carré pour éviter d'avoir à le recalculer ?
 	double			r2;*/
@@ -140,8 +145,7 @@ typedef struct				s_cylinder
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
-	double					reflection;
-	double					refraction;
+	s_obj_phys				obj_light;
 	double					radius;
 /*	idem que pour la sphère ?
 	double					r2;*/
@@ -158,8 +162,7 @@ typedef struct				s_cone
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
-	double					reflection;
-	double					refraction;
+	s_obj_phys				obj_light;
 	double					angle;
 	double					height_top;
 	double					height_bottom;
@@ -174,8 +177,7 @@ typedef struct				s_plane
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
-	double					reflection;
-	double					refraction;
+	s_obj_phys				obj_light;
 }							t_plane;
 
 /* La box (le pavé quoi) pour plus tard
@@ -287,6 +289,7 @@ typedef struct				s_scene
 
 typedef struct		s_ray
 {
+	SDL_Color		color;
 }					t_ray;
 
 #endif

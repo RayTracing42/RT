@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt.h                                               :+:      :+:    :+:   */
+/*   light_physic.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/11 13:55:48 by edescoin         ###   ########.fr       */
+/*   Created: 2017/09/11 13:54:41 by edescoin          #+#    #+#             */
+/*   Updated: 2017/09/11 14:06:06 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_H
-# define RT_H
-# ifndef __APPLE__
-#  include <SDL2/SDL.h>
-#  define SDL_VIDEO		SDL_INIT_VIDEO
-# else
-#  include "SDL2/SDL.h"
-#  define SDL_VIDEO		SDL_VIDEO_DRIVER_COCOA
-# endif
-
-# define TITLE			"RTv1"
-
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include "events.h"
-# include "graphics.h"
-# include "libft.h"
-# include "lights.h"
-# include "light_physic.h"
-# include "objects.h"
+#ifndef LIGHT_PHYSIC_H
+# define LIGHT_PHYSIC_H
 # include "structures.h"
-# include "vectors.h"
 
+void	get_reflected_vect(t_vector *dir, const t_vector *norm);
+void	get_refracted_vect(t_vector *dir, const t_vector *norm,
+							t_object *src, t_object *dst);
+void	get_reflected_col(t_ray *ray, t_object *src,
+							SDL_Color reflected_obj_col);
+void	get_refracted_col(t_ray *ray, t_object *src,
+							SDL_Color refracted_obj_col);
 
 #endif
