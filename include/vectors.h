@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt.h                                               :+:      :+:    :+:   */
+/*   vectors.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/11 12:52:58 by edescoin         ###   ########.fr       */
+/*   Created: 2017/09/11 12:52:00 by edescoin          #+#    #+#             */
+/*   Updated: 2017/09/11 12:52:41 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_H
-# define RT_H
-# ifndef __APPLE__
-#  include <SDL2/SDL.h>
-#  define SDL_VIDEO		SDL_INIT_VIDEO
-# else
-#  include "SDL2/SDL.h"
-#  define SDL_VIDEO		SDL_VIDEO_DRIVER_COCOA
-# endif
-
-# define TITLE			"RTv1"
-
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include "events.h"
-# include "graphics.h"
-# include "libft.h"
-# include "lights.h"
-# include "objects.h"
+#ifndef VECTORS_H
+# define VECTORS_H
 # include "structures.h"
-# include "vectors.h"
 
+t_vector	*new_vector(double x, double y, double z);
+void		set_vector(t_vector *vect, double x, double y, double z);
+double		get_vect_lenght(const t_vector *vect);
+double		vect_dot_product(const t_vector *v1, const t_vector *v2);
 
 #endif

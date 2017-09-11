@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 15:15:39 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/11 12:47:17 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ typedef struct				s_object
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	double					reflection;
+	double					refraction;
 }							t_object;
 
 typedef struct				s_objs_comp
@@ -122,6 +124,8 @@ typedef struct				s_sphere
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	double					reflection;
+	double					refraction;
 	double					radius;
 /*	stocker le rayon au carré pour éviter d'avoir à le recalculer ?
 	double			r2;*/
@@ -136,6 +140,8 @@ typedef struct				s_cylinder
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	double					reflection;
+	double					refraction;
 	double					radius;
 /*	idem que pour la sphère ?
 	double					r2;*/
@@ -152,6 +158,8 @@ typedef struct				s_cone
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	double					reflection;
+	double					refraction;
 	double					angle;
 	double					height_top;
 	double					height_bottom;
@@ -166,6 +174,8 @@ typedef struct				s_plane
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	double					reflection;
+	double					refraction;
 }							t_plane;
 
 /* La box (le pavé quoi) pour plus tard
