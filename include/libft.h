@@ -1,1 +1,0 @@
-/Users/fcecilie/Rendus/rt_docs/rt/libft/libft.h
