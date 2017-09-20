@@ -33,11 +33,7 @@ int		view_plane(t_camera *cam, t_view_plane *vp)
 {
 	double	dist_cam_vp;
 
-	vp->fov = 70;
-	vp->front = vector(1, 0, 0);
-	vp->up = vector(0, 1, 0);
-	vp->right = vector(0, 0 , 1);
-	dist_cam_vp = (WIN_WIDTH / 2) / tan(vp->fov * M_PI / 180);
+	dist_cam_vp = (WIN_WIDTH / 2) / tan((vp->fov / 2) * M_PI / 180);
 	vp->size = vector(dist_cam_vp, WIN_HEIGHT, WIN_WIDTH);
 	view_plane_rotation(vp, (cam->angle_x * M_PI / 180),
 		(cam->angle_y * M_PI / 180), (cam->angle_z * M_PI / 180));

@@ -108,9 +108,9 @@ typedef struct				s_object
 
 typedef struct				s_objs_comp
 {
-	t_dot					orig;
+	t_dot					origin;
 	t_vector				dir;
-	SDL_Color				col;
+	SDL_Color				color;
 }							t_objs_comp;
 
 typedef struct				s_sphere
@@ -224,7 +224,7 @@ typedef struct				s_spotlight
 	SDL_Color				color;
 	int						(*is_in_light)();
 	void					(*get_ray_vect)();
-	t_dot					orig;
+	t_dot					origin;
 	double					aperture;
 }							t_spotlight;
 
@@ -239,7 +239,7 @@ typedef struct				s_orb_light
 	SDL_Color				color;
 	int						(*is_in_light)();
 	void					(*get_ray_vect)();
-	t_dot					orig;
+	t_dot					origin;
 	double					aperture;
 }							t_orb_light;
 

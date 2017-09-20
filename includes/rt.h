@@ -38,8 +38,11 @@ t_vector	matrice_rotation_y(t_vector *m, double angle);
 t_vector	matrice_rotation_z(t_vector *m, double angle);
 
 t_vector	vector(double x, double y, double z);
+t_dot		dot(double x, double y, double z);
 
 int			view_plane(t_camera *cam, t_view_plane *vp);
 void		view_plane_vector(int x, int y, t_view_plane *vp, t_vector *ray);
+
+int			parsing(t_scene *scn, int argc, char *argv);
 
 #endif

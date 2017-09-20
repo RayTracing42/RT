@@ -21,17 +21,17 @@ static int	is_in_spotlight(t_vector dir)
 
 static void	get_ray_vect(t_spotlight *spot, t_vector *dest, t_dot inter)
 {
-	*dest = (t_vector){spot->orig.x - inter.x, spot->orig.y - inter.y,
-						spot->orig.z - inter.z};
+	*dest = (t_vector){spot->origin.x - inter.x, spot->origin.y - inter.y,
+						spot->origin.z - inter.z};
 }
 
-t_spotlight	*new_spotlight(t_vector direction, t_dot orig, SDL_Color color,
+t_spotlight	*new_spotlight(t_vector direction, t_dot origin, SDL_Color color,
 						double aperture)
 {
 	t_spotlight	*spot;
 
 	spot = (t_spotlight*)new_light(SPOT, direction, color);
-	spot->orig = orig;
+	spot->origin = origin;
 	spot->aperture = aperture;
 	spot->get_ray_vect = get_ray_vect;
 	spot->is_in_light = is_in_spotlight;

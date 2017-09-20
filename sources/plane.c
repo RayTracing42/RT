@@ -48,7 +48,7 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal)
 {
 	t_plane		*plane;
 
-	plane = (t_plane*)new_object(PLANE, args.orig, args.dir, args.col);
+	plane = (t_plane*)new_object(PLANE, args.origin, args.dir, args.color);
 	plane->normal = normal;
 	plane->get_normal = get_plane_normal;
 	plane->intersect = plane_intersect;

@@ -56,7 +56,7 @@ t_cone					*new_cone(t_objs_comp args, double angle,
 {
 	t_cone	*c;
 
-	c = (t_cone*)new_object(CONE, args.orig, args.dir, args.col);
+	c = (t_cone*)new_object(CONE, args.origin, args.dir, args.color);
 	c->angle = angle;
 	c->height_top = height_top;
 	c->height_bottom = height_bottom;

@@ -55,7 +55,7 @@ t_cylinder				*new_cylinder(t_objs_comp args, double radius,
 {
 	t_cylinder	*c;
 
-	c = (t_cylinder*)new_object(CYLINDER, args.orig, args.dir, args.col);
+	c = (t_cylinder*)new_object(CYLINDER, args.origin, args.dir, args.color);
 	c->radius = radius;
 	c->height_top = height_top;
 	c->height_bottom = height_bottom;

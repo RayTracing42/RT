@@ -22,7 +22,8 @@ LFT_INCLUDE = $(LFT_PATH)/includes
 
 SRC = main.c cone.c events.c key_functions.c objects.c parallel_light.c \
 	  scanning.c spotlight.c cylinder.c graphics.c light.c objects2.c \
-	  orb_light.c plane.c sphere.c view_plane.c utils.c matrice_rotation.c
+	  orb_light.c plane.c sphere.c view_plane.c utils.c matrice_rotation.c \
+	  parsing.c
 	
 SRC:= $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)
