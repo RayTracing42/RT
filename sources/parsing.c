@@ -39,7 +39,7 @@ int		parsing_lights(t_list_lights *l_lights)
 	return (0);
 }
 */
-int		parsing(t_scene *scn, int argc, char *argv)
+int		parsing(t_scene *scn, int argc, char **argv)
 {
 	if (argc && argv)
 	{

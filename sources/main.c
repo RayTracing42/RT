@@ -34,12 +34,12 @@ int			main(int ac, char **av)
 //	events = NULL;
 //	get_sdl_core();
 //	init_list_evts(&events, NULL);
-	if (parsing(scn, ac, av[1]) == -1)
+	if (parsing(scn, ac, av) == -1)
 		return (-1);
 	if (view_plane(scn->cam, scn->cam->vp) == -1)
 		return (-1);
 	printf("scn->cam->vp->up_left : (%.2f ; %.2f ; %.2f)\n", scn->cam->vp->up_left.x, scn->cam->vp->up_left.y, scn->cam->vp->up_left.z);
-//	scanning();
+	scanning(scn);
 //	display();
 //	wait_events(events);
 //	delete_sdl_core();

@@ -41,8 +41,10 @@ t_vector	vector(double x, double y, double z);
 t_dot		dot(double x, double y, double z);
 
 int			view_plane(t_camera *cam, t_view_plane *vp);
-void		view_plane_vector(int x, int y, t_view_plane *vp, t_vector *ray);
+void		view_plane_vector(int x, int y, t_camera *cam, t_vector *cam_pixel);
 
-int			parsing(t_scene *scn, int argc, char *argv);
+int			parsing(t_scene *scn, int argc, char **argv);
+
+int			scanning(t_scene *scn);
 
 #endif

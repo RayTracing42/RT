@@ -50,8 +50,9 @@ int		scanning(t_scene *scn)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			//	recuperer le vecteur directeur camera > pixel;
-				view_plane_vector(x, y, scn->cam->vp, &cam_pixel);
+			//	recuperer le vecteur directeur unitaire camera -> pixel;
+				view_plane_vector(x, y, scn->cam, &cam_pixel);
+				printf("vecteur camera -> pixel pour x = %d et y = %d --> (%.2f ; %.2f ; %.2f)\n", x, y, cam_pixel.x, cam_pixel.y, cam_pixel.z);
 			//	tester les objs pour verifier si l'un d'eux est sur la route du rayon;
 				distance = check_intersect(&ray, scn->objects);
 				distance = (double)distance;

@@ -9,11 +9,28 @@
 
 #include "rt.h"
 
-void	view_plane_vector(int x, int y, t_view_plane *vp, t_vector *cam_pixel)
+/*
+**	t_dot pixel correspond au point sur le view_plane
+**	t_dot diff corresppond au vecteur cam > pixel non normé
+**	on divise donc diff par sa longueur afin d'obtenir le vecteur normé
+*/
+
+void	view_plane_vector(int x, int y, t_camera *cam, t_vector *cam_pixel)
 {
-	cam_pixel->x = vp->up_left.x + (vp->right.x * x) - (vp->up.x * y);
-	cam_pixel->y = vp->up_left.y + (vp->right.y * x) - (vp->up.y * y);
-	cam_pixel->z = vp->up_left.z + (vp->right.z * x) - (vp->up.z * y);
+	t_dot	pixel;
+	t_dot	diff;
+	double	vector_distance;
+
+	pixel.x = cam->vp->up_left.x + (cam->vp->right.x * x) - (cam->vp->up.x * y);
+	pixel.y = cam->vp->up_left.y + (cam->vp->right.y * x) - (cam->vp->up.y * y);
+	pixel.z = cam->vp->up_left.z + (cam->vp->right.z * x) - (cam->vp->up.z * y);
+	diff.x = pixel.x - cam->origin.x;
+	diff.y = pixel.y - cam->origin.y;
+	diff.z = pixel.z - cam->origin.z;
+	vector_distance = sqrt(pow(diff.x, 2) + pow(diff.y, 2) + pow(diff.z, 2));
+	cam_pixel->x = diff.x / vector_distance;
+	cam_pixel->y = diff.y / vector_distance;
+	cam_pixel->z = diff.z / vector_distance;
 }
 
 void	view_plane_rotation(t_view_plane *vp, double x, double y, double z)
