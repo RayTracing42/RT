@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/21 19:42:54 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/21 19:53:38 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,7 @@ typedef struct				s_sphere
 	t_vector				normal;
 	SDL_Color				color;
 	double					radius;
-/*	stocker le rayon au carré pour éviter d'avoir à le recalculer ?
-	double			r2;*/
+	double					r2;
 }							t_sphere;
 
 typedef struct				s_cylinder

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/29 13:03:53 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/21 19:49:47 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,12 @@
 # include "objects.h"
 # include "structures.h"
 
+
+/*
+** tools.c
+*/
+int		get_quad_equation_sol(t_dot *res, double a, double b, double c);
+void	set_rect_dim(SDL_Rect *rect, int w, int h);
+void	set_rect_crd(SDL_Rect *rect, int x, int y);
 
 #endif
