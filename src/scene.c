@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 14:41:24 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/21 20:04:07 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/21 20:42:45 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void			delete_scene(t_scene *scene)
 	{
 		while (scene->objects)
 			delete_cell_obj(&scene->objects);
-		//delete_camera(scene->cam);
+		delete_camera(scene->cam);
 		//delete_spotlight(scene->light);
 		free(scene);
 	}
