@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 15:15:39 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/21 19:32:39 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,12 @@ typedef struct				s_dot
 	double					y;
 	double					z;
 }							t_dot;
+
+typedef struct				s_parequation
+{
+	t_vector				vc;
+	t_vector				vd;
+}							t_parequation;
 
 typedef enum				e_type
 {
@@ -277,6 +283,7 @@ typedef struct				s_scene
 
 typedef struct		s_ray
 {
+	t_parequation	equ;
 }					t_ray;
 
 #endif
