@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt.h                                               :+:      :+:    :+:   */
+/*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/21 20:06:32 by edescoin         ###   ########.fr       */
+/*   Created: 2017/06/06 17:10:39 by edescoin          #+#    #+#             */
+/*   Updated: 2017/09/21 20:05:58 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_H
-# define RT_H
-# ifndef __APPLE__
-#  include <SDL2/SDL.h>
-#  define SDL_VIDEO		SDL_INIT_VIDEO
-# else
-#  include "SDL2/SDL.h"
-#  define SDL_VIDEO		SDL_VIDEO_DRIVER_COCOA
-# endif
-
-# define TITLE			"RT"
-
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include "events.h"
-# include "graphics.h"
-# include "libft.h"
-# include "lights.h"
-# include "objects.h"
-# include "scene.h"
+#ifndef SCENE_H
+# define SCENE_H
 # include "structures.h"
 
+/*
+** scene.c
+*/
+void		delete_scene(t_scene *scene);
+t_scene		*new_scene(t_camera *cam, double brightness);
+void		scene_add_object(t_object *obj, t_scene *scene);
 
 #endif
