@@ -6,24 +6,13 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 14:41:24 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/22 13:05:45 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/22 13:13:31 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			delete_scene(t_scene *scene)
-{
-	if (scene)
-	{
-		while (scene->objects)
-			delete_cell_obj(&scene->objects);
-		delete_camera(scene->cam);
-		free(scene);
-	}
-}
-
-t_scene			*new_scene(t_camera *cam, double brightness)
+t_scene	*new_scene(t_camera *cam, double brightness)
 {
 	t_scene	*scene;
 
@@ -38,4 +27,15 @@ t_scene			*new_scene(t_camera *cam, double brightness)
 	scene->lights = NULL;
 	scene->objects = NULL;
 	return (scene);
+}
+
+void	delete_scene(t_scene *scene)
+{
+	if (scene)
+	{
+		while (scene->objects)
+			delete_cell_obj(&scene->objects);
+		delete_camera(scene->cam);
+		free(scene);
+	}
 }
