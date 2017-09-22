@@ -257,7 +257,6 @@ typedef struct				s_view_plane
 typedef struct				s_camera
 {
 	t_dot					origin;
-	t_dot					screen[WIN_WIDTH][WIN_HEIGHT];
 	double					focal;
 	double					angle_x;
 	double					angle_y;

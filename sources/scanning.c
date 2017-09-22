@@ -52,9 +52,11 @@ int		scanning(t_scene *scn)
 		{
 				view_plane_vector(x, y, scn->cam, &ray.equ.vd);
 				distance = check_intersect(&ray, scn->objects);
-				distance = (double)distance;
-				printf("vd = (%.2f ; %.2f ; %.2f) && vc = (%.2f ; %.2f ; %.2f)\n", ray.equ.vd.x, ray.equ.vd.y, ray.equ.vd.z,
-						ray.equ.vc.x, ray.equ.vc.y, ray.equ.vc.z);
+		//		printf("distance = %f\n", distance);
+				if (distance > 0)
+					put_pixel(x, y, &(SDL_Color){255, 255, 255, 255});
+				else
+					put_pixel(x, y, &(SDL_Color){0, 0, 0, 0});
 			//	si un obje a ete rencontre, tester les lumieres et differents effets;
 			x++;
 		}

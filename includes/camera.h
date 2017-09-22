@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_functions.c                                    :+:      :+:    :+:   */
+/*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/25 14:48:19 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/29 12:49:48 by edescoin         ###   ########.fr       */
+/*   Created: 2017/06/06 17:10:29 by edescoin          #+#    #+#             */
+/*   Updated: 2017/09/21 20:13:36 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#ifndef CAMERA_H
+# define CAMERA_H
+# include "structures.h"
 
-int			key_management(SDL_Event *current, t_event *evt)
-{
-	t_evt_data	*data;
+/*
+** camera.c
+*/
+void		delete_camera(t_camera *cam);
+//void		init_cam_screen(t_camera *cam);
+t_camera	*new_camera(int fov, const t_dot origin,
+						double angle_x, double angle_y, double angle_z);
 
-	data = evt->data;
-	(void)data;
-	if (current->key.keysym.sym == SDLK_ESCAPE)
-		return (0);
-	return (1);
-}
+#endif

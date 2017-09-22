@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:52:28 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 10:57:21 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/01 13:44:19 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,13 @@ void		refresh_win(void)
 
 Uint32		get_color(int r, int g, int b)
 {
-	return (SDL_MapRGB(SDL_AllocFormat(SDL_GetWindowPixelFormat(
-										get_sdl_core()->window)),
-						r, g, b));
+	SDL_PixelFormat	*f;
+	Uint32			col;
+
+	f = SDL_AllocFormat(SDL_GetWindowPixelFormat(get_sdl_core()->window));
+	col = SDL_MapRGB(f, r, g, b);
+	SDL_FreeFormat(f);
+	return (col);
 }
 
 void		put_pixel(int x, int y, SDL_Color *color)

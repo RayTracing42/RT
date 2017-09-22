@@ -16,10 +16,6 @@ int		parsing_camera(t_camera *cam)
 	*/
 	if (!(cam->vp = (t_view_plane *)ft_memalloc(sizeof(t_view_plane))))
 		return (-1);
-	cam->origin = dot(0, 0, 0);
-	cam->angle_x = 0;
-	cam->angle_y = 0;
-	cam->angle_z = 0;
 	cam->vp->front = vector(1, 0, 0);
 	cam->vp->up = vector(0, 1, 0);
 	cam->vp->right = vector(0, 0, 1);

@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_functions.c                                    :+:      :+:    :+:   */
+/*   scene_objs.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/25 14:48:19 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/29 12:49:48 by edescoin         ###   ########.fr       */
+/*   Created: 2017/09/22 13:04:14 by edescoin          #+#    #+#             */
+/*   Updated: 2017/09/22 13:05:01 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#ifndef SCENE_OBJS_H
+# define SCENE_OBJS_H
+# include "structures.h"
 
-int			key_management(SDL_Event *current, t_event *evt)
-{
-	t_evt_data	*data;
+void	delete_cell_obj(t_list_objs **cell);
+void	scene_add_object(t_object *obj, t_scene *scene);
 
-	data = evt->data;
-	(void)data;
-	if (current->key.keysym.sym == SDLK_ESCAPE)
-		return (0);
-	return (1);
-}
+#endif

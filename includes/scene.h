@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_functions.c                                    :+:      :+:    :+:   */
+/*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/25 14:48:19 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/29 12:49:48 by edescoin         ###   ########.fr       */
+/*   Created: 2017/06/06 17:10:39 by edescoin          #+#    #+#             */
+/*   Updated: 2017/09/22 13:12:13 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#ifndef SCENE_H
+# define SCENE_H
+# include "structures.h"
+# include "scene_objs.h"
+# include "scene_lights.h"
 
-int			key_management(SDL_Event *current, t_event *evt)
-{
-	t_evt_data	*data;
+/*
+** scene.c
+*/
+void		delete_scene(t_scene *scene);
+t_scene		*new_scene(t_camera *cam, double brightness);
 
-	data = evt->data;
-	(void)data;
-	if (current->key.keysym.sym == SDLK_ESCAPE)
-		return (0);
-	return (1);
-}
+#endif
