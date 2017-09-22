@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/29 13:09:35 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/22 13:27:04 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ int			main(int ac, char **av)
 	events = NULL;
 	get_sdl_core();
 	init_list_evts(&events, NULL);
+
+
+	t_scene	*scene = new_scene(new_camera(60, (t_dot){0, 0, 0}, 0, 0, 0), 100);
+	scene_add_light(new_light(ORB, (t_vector){0, 0, 0}, (SDL_Color){255, 255, 255, 255}), scene);
+	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){10, 0, 0}, (t_vector){0, 0, 0}, (SDL_Color){255, 255, 255, 255}}, 3), scene);
+
+
 	wait_events(events);
 	delete_sdl_core();
 	exit(0);
