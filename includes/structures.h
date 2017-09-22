@@ -285,8 +285,17 @@ typedef struct				s_scene
 	t_list_objs				*objects;
 }							t_scene;
 
+
+typedef struct				s_parequation
+{
+	t_vector				vc;
+	t_vector				vd;
+}							t_parequation;
+
 typedef struct		s_ray
 {
+	t_parequation			equ;
+	t_dot					inter;
 }					t_ray;
 
 #endif

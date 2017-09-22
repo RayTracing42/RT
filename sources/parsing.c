@@ -47,6 +47,8 @@ int		parsing(t_scene *scn, int argc, char **argv)
 			return (-1);
 		if (parsing_camera(scn->cam) == -1)
 			return (-1);
+		scn->objects = NULL;
+		scn->lights = NULL;
 //		parsing_objects(scn->objects);
 //		parsing_lights(scn->lights);
 	}

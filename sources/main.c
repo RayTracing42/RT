@@ -30,15 +30,13 @@ int			main(int ac, char **av)
 	t_scene		*scn;
 
 	if (!(scn = ft_memalloc(sizeof(t_scene))))
-		return (0);
+		return (-1);
 //	events = NULL;
 //	get_sdl_core();
 //	init_list_evts(&events, NULL);
 	if (parsing(scn, ac, av) == -1)
 		return (-1);
-	if (view_plane(scn->cam, scn->cam->vp) == -1)
-		return (-1);
-	printf("scn->cam->vp->up_left : (%.2f ; %.2f ; %.2f)\n", scn->cam->vp->up_left.x, scn->cam->vp->up_left.y, scn->cam->vp->up_left.z);
+	view_plane(scn->cam, scn->cam->vp);
 	scanning(scn);
 //	display();
 //	wait_events(events);

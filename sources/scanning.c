@@ -24,7 +24,6 @@ static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	{
 		tmp = -1;
 		tmp = l_objs->obj->intersect(ray, l_objs->obj);
-
 		if (tmp != -1 && (distance == -1 || (tmp < distance && distance > 0)))
 		{
 			distance = tmp;
@@ -42,21 +41,21 @@ int		scanning(t_scene *scn)
 	int			y;
 	double		distance;
 	t_ray		ray;
-	t_vector	cam_pixel;
-
+	
+	ray.equ.vc = vector(scn->cam->origin.x, scn->cam->origin.y,
+			scn->cam->origin.z);
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			//	recuperer le vecteur directeur unitaire camera -> pixel;
-				view_plane_vector(x, y, scn->cam, &cam_pixel);
-				printf("vecteur camera -> pixel pour x = %d et y = %d --> (%.2f ; %.2f ; %.2f)\n", x, y, cam_pixel.x, cam_pixel.y, cam_pixel.z);
-			//	tester les objs pour verifier si l'un d'eux est sur la route du rayon;
+				view_plane_vector(x, y, scn->cam, &ray.equ.vd);
 				distance = check_intersect(&ray, scn->objects);
 				distance = (double)distance;
-			//	si un objet a ete rencontre, tester les lumieres et differents effets;
+				printf("vd = (%.2f ; %.2f ; %.2f) && vc = (%.2f ; %.2f ; %.2f)\n", ray.equ.vd.x, ray.equ.vd.y, ray.equ.vd.z,
+						ray.equ.vc.x, ray.equ.vc.y, ray.equ.vc.z);
+			//	si un obje a ete rencontre, tester les lumieres et differents effets;
 			x++;
 		}
 		y++;
