@@ -1,41 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   scene_objs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 14:41:24 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/22 13:05:45 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/22 13:05:02 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			delete_scene(t_scene *scene)
+static t_list_objs	*new_cell_obj(t_list_objs **head, t_object *obj)
 {
-	if (scene)
-	{
-		while (scene->objects)
-			delete_cell_obj(&scene->objects);
-		delete_camera(scene->cam);
-		free(scene);
-	}
+	t_list_objs	*tmp;
+
+	if (!(tmp = malloc(sizeof(t_list_objs))))
+		exit_error("rtv1", "malloc");
+	tmp->next = NULL;
+	tmp->obj = obj;
+	if (!head)
+		return (tmp);
+	tmp->next = *head;
+	*head = tmp;
+	return (tmp);
 }
 
-t_scene			*new_scene(t_camera *cam, double brightness)
+void				delete_cell_obj(t_list_objs **cell)
 {
-	t_scene	*scene;
+	t_list_objs	*tmp;
 
-	if (!(scene = malloc(sizeof(t_scene))))
-		exit_error("rtv1", "malloc");
-	if (brightness > 100)
-		brightness = 100;
-	if (brightness < 0)
-		brightness = 0;
-	scene->brightness = brightness / 100;
-	scene->cam = cam;
-	scene->lights = NULL;
-	scene->objects = NULL;
-	return (scene);
+	tmp = *cell;
+	*cell = (*cell)->next;
+	free(tmp->obj);
+	free(tmp);
+}
+
+void			scene_add_object(t_object *obj, t_scene *scene)
+{
+	if (!scene->objects)
+		scene->objects = new_cell_obj(NULL, obj);
+	else
+		new_cell_obj(&scene->objects, obj);
 }

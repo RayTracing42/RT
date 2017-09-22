@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/21 20:42:41 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/22 13:05:34 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include "lights.h"
 # include "objects.h"
 # include "scene.h"
+# include "scene_objs.h"
 # include "structures.h"
 
 

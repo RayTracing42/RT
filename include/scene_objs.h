@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.h                                            :+:      :+:    :+:   */
+/*   scene_objs.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/06 17:10:39 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/22 13:05:02 by edescoin         ###   ########.fr       */
+/*   Created: 2017/09/22 13:04:14 by edescoin          #+#    #+#             */
+/*   Updated: 2017/09/22 13:05:01 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_H
-# define SCENE_H
+#ifndef SCENE_OBJS_H
+# define SCENE_OBJS_H
 # include "structures.h"
 
-/*
-** scene.c
-*/
-void		delete_scene(t_scene *scene);
-t_scene		*new_scene(t_camera *cam, double brightness);
+void	delete_cell_obj(t_list_objs **cell);
+void	scene_add_object(t_object *obj, t_scene *scene);
 
 #endif
