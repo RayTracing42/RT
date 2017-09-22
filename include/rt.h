@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/21 19:49:47 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/22 13:17:21 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,18 @@
 #  define SDL_VIDEO		SDL_VIDEO_DRIVER_COCOA
 # endif
 
-# define TITLE			"RTv1"
+# define TITLE			"RT"
 
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
+# include "camera.h"
 # include "events.h"
 # include "graphics.h"
 # include "libft.h"
 # include "lights.h"
 # include "objects.h"
+# include "scene.h"
 # include "structures.h"
 
 

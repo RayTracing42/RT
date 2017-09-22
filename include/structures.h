@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/21 19:53:38 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/22 13:17:38 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,6 @@ typedef struct				s_orb_light
 typedef struct				s_camera
 {
 	t_dot					origin;
-	t_dot					screen[WIN_WIDTH][WIN_HEIGHT];
 	double					focal;
 	double					angle_x;
 	double					angle_y;
