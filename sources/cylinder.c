@@ -15,32 +15,22 @@
 
 static double			cylinder_intersect(t_ray *ray, t_cylinder *c)
 {
-	(void)c;
-	(void)ray;
-	return (0);
-	/*t_dot		res;
 	t_vector	*vd;
-	t_vector	*vc;
+	t_vector	vc;
 	double		t;
 
-	t = -1;
-	vc = &ray->eq_obj.vconst;
-	vd = &ray->eq_obj.vdir;
-	if (get_quad_equation_sol(&res, pow(vd->x, 2) + pow(vd->z, 2),
-							2 * (vd->x * vc->x + vd->z * vc->z),
-							pow(vc->x, 2) + pow(vc->z, 2) - c->r2))
+	vc = vector(ray->equ.vc.x - c->origin.x, ray->equ.vc.y - c->origin.y,
+			ray->equ.vc.z - c->origin.z);
+	vd = &ray->equ.vd;
+	if ((t = delta(pow(vd->x, 2) + pow(vd->z, 2),
+			2 * (vd->x * vc.x + vd->z * vc.z),
+			pow(vc.x, 2) + pow(vc.z, 2) - c->r2)))
 	{
-		if ((long)(res.x * pow(10, 12)) > 0 && in_boundary(ray, c, res.x))
-		{
-			if ((long)(res.y * pow(10, 12)) > 0 && in_boundary(ray, c, res.y))
-				t = (res.x < res.y ? res.x : res.y);
-			else
-				t = (res.x);
-		}
-		else if ((long)(res.y * pow(10, 12)) > 0 && in_boundary(ray, c, res.y))
-			t = (res.y);
+		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
+				ray->equ.vc.z + vd->z * t);
+		return (t);
 	}
-	return (t);*/
+	return (-1);
 }
 
 static const t_vector	*get_cylinder_normal(t_dot *d, t_cylinder *c)
@@ -61,7 +51,7 @@ t_cylinder				*new_cylinder(t_objs_comp args, double radius,
 	c->height_bottom = height_bottom;
 	c->get_normal = get_cylinder_normal;
 	c->intersect = cylinder_intersect;
-	//c->r2 = pow(radius, 2);
+	c->r2 = pow(radius, 2);
 	return (c);
 }
 

@@ -151,6 +151,7 @@ typedef struct				s_cone
 	t_vector				normal;
 	SDL_Color				color;
 	double					angle;
+	double					tanalpha2;
 	double					height_top;
 	double					height_bottom;
 }							t_cone;
@@ -295,6 +296,7 @@ typedef struct		s_ray
 {
 	t_parequation			equ;
 	t_dot					inter;
+	SDL_Color				color;
 }					t_ray;
 
 #endif

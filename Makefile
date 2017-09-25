@@ -64,4 +64,5 @@ fclean: clean
 
 re: fclean all
 
-test:
+debug: $(SRC)
+	$(CC) $(CFLAGS) -g -I $(INCLUDE_DIR) $(SRC) $(SDL) -L $(LIB_DIR) $(LFT) -o $@

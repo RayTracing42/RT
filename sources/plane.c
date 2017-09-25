@@ -15,23 +15,25 @@
 
 static double			plane_intersect(t_ray *ray, t_plane *p)
 {
-	(void)p;
-	(void)ray;
-	return (0);
-	/*double		t;
-	double		denom;
 	t_vector	*vd;
-	t_vector	*vc;
+	t_vector	vc;
+	double		t;
+	double		denom;
 
-	vd = &ray->eq_obj.vdir;
-	vc = &ray->eq_obj.vconst;
-	denom = (p->a * vd->x + p->b * vd->y + p->c * vd->z);
+	vc = vector(ray->equ.vc.x - p->origin.x, ray->equ.vc.y - p->origin.y,
+			ray->equ.vc.z - p->origin.z);
+	vd = &ray->equ.vd;
+	denom = (p->normal.x * vd->x + p->normal.y * vd->y + p->normal.z * vd->z);
 	if (!denom)
 		return (-1);
-	t = -((p->a * vc->x + p->b * vc->y + p->c * vc->z + p->d) / denom);
-	if ((long)(t * pow(10, 12)) > 0)
+	if ((t = -((p->normal.x * vc.x + p->normal.y * vc.y +
+			p->normal.z * vc.z + 0) / denom)))
+	{
+		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
+				ray->equ.vc.z + vd->z * t);
 		return (t);
-	return (-1);*/
+	}
+	return (-1);
 }
 
 static const t_vector	*get_plane_normal(t_dot *d, t_plane *p)
