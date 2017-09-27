@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/27 17:49:59 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/27 18:26:39 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ typedef struct				s_cone
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					angle;
+	double					tanalpha2;
 	double					height_top;
 	double					height_bottom;
 }							t_cone;
