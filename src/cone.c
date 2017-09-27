@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/27 18:26:55 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/27 20:01:40 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ static double			cone_intersection(t_ray *ray, t_cone *c)
 
 static const t_vector	*get_cone_normal(t_dot *d, t_cone *c)
 {
-	c->normal = (t_vector){2 * d->x, -2 * c->tanalpha2 * d->y, 2 * d->z};
+	c->normal = (t_vector){2 * (d->x - c->origin.x),
+							-2 * c->tanalpha2 * (d->y - c->origin.y),
+							2 * (d->z - c->origin.z)};
 	return (&c->normal);
 }
 

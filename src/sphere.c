@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/27 18:24:45 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/27 20:00:10 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static double			sphere_intersect(t_ray *ray, t_sphere *s)
 
 static const t_vector	*get_sphere_normal(t_dot *d, t_sphere *s)
 {
-	s->normal = (t_vector){2 * d->x, 2 * d->y, 2 * d->z};
+	s->normal = (t_vector){2 * (d->x - s->origin.x), 2 * (d->y - s->origin.y),
+							2 * (d->z - + s->origin.z)};
 	return (&s->normal);
 }
 

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/27 18:29:04 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/27 20:02:42 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static double			cylinder_intersect(t_ray *ray, t_cylinder *c)
 
 static const t_vector	*get_cylinder_normal(t_dot *d, t_cylinder *c)
 {
-	c->normal = (t_vector){2 * d->x, 0, 2 * d->z};
+	c->normal = (t_vector){2 * (d->x - c->origin.x), 0, 2 * (d->z - c->origin.z)};
 	return (&c->normal);
 }
 
