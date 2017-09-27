@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/27 18:27:34 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/27 18:28:23 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_cylinder				*new_cylinder(t_objs_comp args, double radius,
 	c->height_bottom = height_bottom;
 	c->get_normal = get_cylinder_normal;
 	c->intersect = cylinder_intersect;
-	//c->r2 = pow(radius, 2);
+	c->r2 = pow(radius, 2);
 	return (c);
 }
 

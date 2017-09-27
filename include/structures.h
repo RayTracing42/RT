@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/27 18:26:39 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/27 18:28:31 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,7 @@ typedef struct				s_cylinder
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					radius;
-/*	idem que pour la sphère ?
-	double					r2;*/
+	double					r2;
 	double					height_top;
 	double					height_bottom;
 }							t_cylinder;
