@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/27 17:42:57 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/27 17:49:59 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,6 +297,7 @@ typedef struct		s_ray
 	SDL_Color		color;
 	t_parequation	equ;
 	t_dot			inter;
+	t_vector		normal;
 }					t_ray;
 
 #endif
