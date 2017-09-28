@@ -6,25 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/28 17:39:49 by edescoin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-Branch: scanning Find file Copy pathRT/includes/structures.h
-4fa20db  2 hours ago
-@fcecilie fcecilie Sauvegarde 28/09/2017
-1 contributor
-RawBlameHistory
-316 lines (283 sloc)  6.43 KB
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   structures.h                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/06 00:52:49 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/09/28 17:41:35 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
