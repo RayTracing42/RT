@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/09/06 00:52:44 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/09/28 16:15:05 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		scanning(t_scene *scn)
 	int			y;
 	double		distance;
 	t_ray		ray;
-	
+
 	ray.equ.vc = vector(scn->cam->origin.x, scn->cam->origin.y,
 			scn->cam->origin.z);
 	y = 0;
