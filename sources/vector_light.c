@@ -8,7 +8,7 @@
 /*============================================================================*/
 
 #include "rt.h"
-
+/*
 t_vector	define_vector_orb(t_dot inter, t_orb_light *o)
 {
 	t_vector	vec;
@@ -24,7 +24,7 @@ t_vector	define_vector_spot(t_dot inter, t_spotlight *s)
 	vec = vector(s->origin.x - inter.x, s->origin.y - inter.y, s->origin.z - inter.z);
 	return (vec);
 }
-
+*/
 t_vector	define_vector_parallel(t_parallel_light *p)
 {
 	t_vector	vec;

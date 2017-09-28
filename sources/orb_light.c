@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:32:44 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/28 17:22:20 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/28 19:45:47 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static int	is_in_orb_light(void)
 static t_vector	get_orb_ray_vect(t_vector *pos, t_orb_light *light)
 {
 	return ((t_vector){light->orig.x - pos->x,
-						light->orig.x - pos->y,
-						light->orig.x - pos->z});
+						light->orig.y - pos->y,
+						light->orig.z - pos->z});
 }
 
 t_orb_light	*new_orb_light(t_dot orig, SDL_Color color)
