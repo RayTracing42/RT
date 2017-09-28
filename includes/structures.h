@@ -6,7 +6,25 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/28 17:30:49 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/28 17:39:49 by edescoin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+Branch: scanning Find file Copy pathRT/includes/structures.h
+4fa20db  2 hours ago
+@fcecilie fcecilie Sauvegarde 28/09/2017
+1 contributor
+RawBlameHistory
+316 lines (283 sloc)  6.43 KB
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
+/*   Updated: 2017/09/06 00:52:49 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +35,7 @@
 # ifndef __APPLE__
 #  include <SDL2/SDL.h>
 # else
-#  include "SDL2/SDL.h"
+#  include <SDL2/SDL.h>
 # endif
 
 /*
@@ -28,7 +46,6 @@ typedef enum		e_thread_state
 	PAUSE,
 	STOP
 }					t_thread_state;
-
 typedef struct		s_thread
 {
 	SDL_Thread		*ptr;
@@ -86,12 +103,6 @@ typedef struct				s_dot
 	double					z;
 }							t_dot;
 
-typedef struct				s_parequation
-{
-	t_vector				vc;
-	t_vector				vd;
-}							t_parequation;
-
 typedef enum				e_type
 {
 //	BOX, pour plus tard
@@ -100,6 +111,13 @@ typedef enum				e_type
 	PLANE,
 	SPHERE
 }							t_type;
+
+typedef struct				s_obj_phys
+{
+	double					reflection_amount;
+	double					refraction_amount;
+	double					refractive_index;
+}							t_obj_phys;
 
 typedef struct				s_object
 {
@@ -110,13 +128,14 @@ typedef struct				s_object
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	t_obj_phys				obj_light;
 }							t_object;
 
 typedef struct				s_objs_comp
 {
-	t_dot					orig;
+	t_dot					origin;
 	t_vector				dir;
-	SDL_Color				col;
+	SDL_Color				color;
 }							t_objs_comp;
 
 typedef struct				s_sphere
@@ -128,9 +147,9 @@ typedef struct				s_sphere
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	t_obj_phys				obj_light;
 	double					radius;
-/*	stocker le rayon au carré pour éviter d'avoir à le recalculer ?
-	double			r2;*/
+	double					r2;
 }							t_sphere;
 
 typedef struct				s_cylinder
@@ -142,9 +161,9 @@ typedef struct				s_cylinder
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	t_obj_phys				obj_light;
 	double					radius;
-/*	idem que pour la sphère ?
-	double					r2;*/
+	double					r2;
 	double					height_top;
 	double					height_bottom;
 }							t_cylinder;
@@ -158,7 +177,9 @@ typedef struct				s_cone
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	t_obj_phys				obj_light;
 	double					angle;
+	double					tanalpha2;
 	double					height_top;
 	double					height_bottom;
 }							t_cone;
@@ -172,6 +193,7 @@ typedef struct				s_plane
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	t_obj_phys				obj_light;
 }							t_plane;
 
 /* La box (le pavé quoi) pour plus tard
@@ -204,10 +226,10 @@ typedef enum				e_light_type
 typedef struct				s_light
 {
 	const t_light_type		type;
-	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)();
+	SDL_Color				color;
 	int						(*is_in_light)();
+	void					(*get_ray_vect)();
 }							t_light;
 
 /*
@@ -216,10 +238,10 @@ typedef struct				s_light
 typedef struct				s_parallel_light
 {
 	const t_light_type		type;
-	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)();
+	SDL_Color				color;
 	int						(*is_in_light)();
+	void					(*get_ray_vect)();
 }							t_parallel_light;
 
 /*
@@ -228,11 +250,11 @@ typedef struct				s_parallel_light
 typedef struct				s_spotlight
 {
 	const t_light_type		type;
-	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)();
+	SDL_Color				color;
 	int						(*is_in_light)();
-	t_dot					orig;
+	void					(*get_ray_vect)();
+	t_dot					origin;
 	double					aperture;
 }							t_spotlight;
 
@@ -243,13 +265,24 @@ typedef struct				s_spotlight
 typedef struct				s_orb_light
 {
 	const t_light_type		type;
-	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)();
+	SDL_Color				color;
 	int						(*is_in_light)();
-	t_dot					orig;
+	void					(*get_ray_vect)();
+	t_dot					origin;
 	double					aperture;
 }							t_orb_light;
+
+//	ecran imaginaire qui permet de definir le vecteur camera -> pixel;
+typedef struct				s_view_plane
+{
+	t_dot					up_left;
+	t_vector				front;
+	t_vector				up;
+	t_vector				right;
+	t_vector				size;
+	double					fov;
+}							t_view_plane;
 
 typedef struct				s_camera
 {
@@ -258,6 +291,7 @@ typedef struct				s_camera
 	double					angle_x;
 	double					angle_y;
 	double					angle_z;
+	t_view_plane			*vp;
 }							t_camera;
 
 typedef struct				s_list_objs
@@ -280,11 +314,19 @@ typedef struct				s_scene
 	t_list_objs				*objects;
 }							t_scene;
 
-typedef struct		s_ray
+
+typedef struct				s_parequation
 {
-	SDL_Color		color;
-	t_parequation	equ;
-	t_dot			inter;
-}					t_ray;
+	t_vector				vc;
+	t_vector				vd;
+}							t_parequation;
+
+typedef struct				s_ray
+{
+	t_parequation			equ;
+	t_dot					inter;
+	t_vector				normal;
+	SDL_Color				color;
+}							t_ray;
 
 #endif
