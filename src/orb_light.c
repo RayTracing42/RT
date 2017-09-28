@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:32:44 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 15:06:10 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/28 17:14:00 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	is_in_orb_light(void)
 {
 	return (1);
 }
+
+static int	get_orb_ray_vect()
 
 t_orb_light	*new_orb_light(t_dot orig, SDL_Color color)
 {
