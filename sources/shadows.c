@@ -12,14 +12,13 @@
 int		check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs, t_light *light)
 {
 	t_list_objs	*first;
-	double	distance;
 
-	distance = 0;
 	first = l_objs;
+	if (!light->is_in_light(light, light_ray->equ.vd))
+		return (1);
 	while (l_objs != NULL)
-	{	
-		distance = l_objs->obj->intersect(light_ray, l_objs->obj);
-		if ((distance > 0) || (light->type == SPOT && light->is_in_light((t_spotlight *)light, light_ray->equ.vd) == 0))
+	{
+		if (l_objs->obj->intersect(light_ray, l_objs->obj) > 0)
 			return (1);
 		l_objs = l_objs->next;
 	}
