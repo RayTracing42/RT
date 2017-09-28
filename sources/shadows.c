@@ -52,7 +52,7 @@ int		shadows(t_ray *ray, t_scene *scn)
 	while (tmp != NULL)
 	{
 		//light_ray = define_light_ray(ray->inter, scn->lights->light);
-		light_ray.equ.vd = tmp->light->get_ray_vect(ray->inter, tmp->light);
+		light_ray.equ.vd = tmp->light->get_ray_vect(&ray->inter, &tmp->light);
 		*(t_dot*)&light_ray.equ.vc = ray->inter;
 		light_ray.color = ray->color;
 		if (check_objs_on_ray(&light_ray, scn->objects, tmp->light))
