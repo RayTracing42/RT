@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/28 17:28:12 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/28 17:30:49 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,6 +282,7 @@ typedef struct				s_scene
 
 typedef struct		s_ray
 {
+	SDL_Color		color;
 	t_parequation	equ;
 	t_dot			inter;
 }					t_ray;

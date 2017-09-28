@@ -54,7 +54,8 @@ int		shadows(t_ray *ray, t_scene *scn)
 	hidden_lights = 0;
 	while (scn->lights != NULL)
 	{
-		light_ray = define_light_ray(ray->inter, scn->lights->light);
+		//light_ray = define_light_ray(ray->inter, scn->lights->light);
+		light_ray.equ.vd = scn->lights->light->get_ray_vect(ray->inter, scn->lights->light);
 		light_ray.color = ray->color;
 		if (check_objs_on_ray(&light_ray, scn->objects, scn->lights->light) == 1)
 		{
