@@ -35,8 +35,7 @@ static double			cylinder_intersect(t_ray *ray, t_cylinder *c)
 
 static const t_vector	*get_cylinder_normal(t_dot *d, t_cylinder *c)
 {
-	//set_vector(&c->normal, 2 * d->x, 0, 2 * d->z);
-	(void)d;
+	c->normal =  (t_vector){2 * (d->x - c->origin.x), 0, 2 * (d->z - c->origin.z)};
 	return (&c->normal);
 }
 

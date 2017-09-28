@@ -12,11 +12,14 @@
 
 #include "rt.h"
 
-static int	is_in_spotlight(t_vector dir)
+static int	is_in_spotlight(t_spotlight *s, t_vector light_ray)
 {
-	//À modifier
-	(void)dir;
-	return (0);
+	t_vector	opposite;
+
+	opposite = vector_opposite(s->direction.x, s->direction.y, s->direction.z);
+	if (angle_between_vectors(light_ray, opposite) > s->aperture)
+		return (0);
+	return (1);
 }
 
 static void	get_ray_vect(t_spotlight *spot, t_vector *dest, t_dot inter)

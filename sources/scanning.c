@@ -27,7 +27,8 @@ static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 		{
 			distance = tmp;
 			ray->color = l_objs->obj->color;
-			//	il faut garder en memoire l'addresse de l'obj que le ray a rencontre;
+			l_objs->obj->get_normal(&ray->inter, l_objs->obj);
+			ray->normal = vector(l_objs->obj->normal.x, l_objs->obj->normal.x, l_objs->obj->normal.z);
 		}
 		l_objs = l_objs->next;
 	}
@@ -52,13 +53,14 @@ int		scanning(t_scene *scn)
 		{
 				view_plane_vector(x, y, scn->cam, &ray.equ.vd);
 				distance = check_intersect(&ray, scn->objects);
-			//	DEBUT ---	AFFICHAGE DEGUEUX TEMPORAIRE	
+
 				if (distance > 0)
+				{
+					shadows(&ray, scn);
 					put_pixel(x, y, &ray.color);
+				}
 				else
 					put_pixel(x, y, &(SDL_Color){0, 0, 0, 0});
-			//	FIN ---		AFFICHAGE DEGUEUX TEMPORAIRE	
-			//	si un obje a ete rencontre, tester les lumieres et differents effets;
 			x++;
 		}
 		y++;

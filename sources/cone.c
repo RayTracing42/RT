@@ -35,8 +35,9 @@ static double			cone_intersect(t_ray *ray, t_cone *c)
 
 static const t_vector	*get_cone_normal(t_dot *d, t_cone *c)
 {
-	(void)d;
-	//set_vector(&c->normal, 2 * d->x, -2 * c->tanalpha2 * d->y, 2 * d->z);
+	c->normal = (t_vector){2 * (d->x - c->origin.x),
+								-2 * c->tanalpha2 * (d->y - c->origin.y),
+								2 * (d->z - c->origin.z)};
 	return (&c->normal);
 }
 

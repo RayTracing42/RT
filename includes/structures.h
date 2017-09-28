@@ -95,6 +95,13 @@ typedef enum				e_type
 	SPHERE
 }							t_type;
 
+typedef struct				s_obj_phys
+{
+	double					reflection_amount;
+	double					refraction_amount;
+	double					refractive_index;
+}							t_obj_phys;
+
 typedef struct				s_object
 {
 	const t_type			obj_type;
@@ -104,6 +111,7 @@ typedef struct				s_object
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	t_obj_phys				obj_light;
 }							t_object;
 
 typedef struct				s_objs_comp
@@ -122,6 +130,7 @@ typedef struct				s_sphere
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	t_obj_phys				obj_light;
 	double					radius;
 	double					r2;
 }							t_sphere;
@@ -135,6 +144,7 @@ typedef struct				s_cylinder
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	t_obj_phys				obj_light;
 	double					radius;
 	double					r2;
 	double					height_top;
@@ -150,6 +160,7 @@ typedef struct				s_cone
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	t_obj_phys				obj_light;
 	double					angle;
 	double					tanalpha2;
 	double					height_top;
@@ -165,6 +176,7 @@ typedef struct				s_plane
 	t_vector				dir;
 	t_vector				normal;
 	SDL_Color				color;
+	t_obj_phys				obj_light;
 }							t_plane;
 
 /* La box (le pavé quoi) pour plus tard
@@ -292,11 +304,12 @@ typedef struct				s_parequation
 	t_vector				vd;
 }							t_parequation;
 
-typedef struct		s_ray
+typedef struct				s_ray
 {
 	t_parequation			equ;
 	t_dot					inter;
+	t_vector				normal;
 	SDL_Color				color;
-}					t_ray;
+}							t_ray;
 
 #endif
