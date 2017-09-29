@@ -61,7 +61,8 @@ int		shadows(t_ray *ray, t_scene *scn)
 	while (scn->lights != NULL)
 	{
 		light_ray = define_light_ray(ray->inter, scn->lights->light);
-//		light_ray.color = ray->color;
+		light_ray.color = ray->color;
+		light_ray.normal = ray->normal;
 		if (check_objs_on_ray(&light_ray, scn->objects, scn->lights->light) == 1)
 		{
 			hidden_lights++;
@@ -69,8 +70,8 @@ int		shadows(t_ray *ray, t_scene *scn)
 			ray->color.g = 0;
 			ray->color.b = 0;
 		}
-	//	else
-	//		ray->color = get_shade_col(&light_ray, scn);
+		else
+			ray->color = get_shade_col(&light_ray, scn);
 		nb_lights++;
 		scn->lights = scn->lights->next;
 	}
