@@ -6,22 +6,23 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:32:44 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 13:44:55 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 15:41:28 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int	is_in_orb_light(void)
+static int	is_in_orb_light(t_vector dir)
 {
+	(void)dir;
 	return (1);
 }
 
-static t_vector	get_orb_ray_vect(t_vector *pos, t_orb_light *orb)
+static t_vector	get_orb_ray_vect(t_vector *pos, t_light *light)
 {
-	return ((t_vector){orb->orig.x - pos->x,
-						orb->orig.y - pos->y,
-						orb->orig.z - pos->z});
+	return ((t_vector){((t_orb_light*)light)->orig.x - pos->x,
+						((t_orb_light*)light)->orig.x - pos->y,
+						((t_orb_light*)light)->orig.x - pos->z});
 }
 
 t_orb_light	*new_orb_light(t_dot orig, SDL_Color color)
