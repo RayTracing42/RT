@@ -6,60 +6,48 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 15:15:50 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/08/25 15:12:27 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			sphere_intersect(t_ray *ray, t_object *obj)
+static double			sphere_intersect(t_ray *ray, t_sphere *s)
 {
-	(void)obj;
-	(void)ray;
-	return (0);
-	/*t_dot		res;
 	t_vector	*vd;
-	t_vector	*vc;
+	t_vector	vc;
 	double		t;
 
-	t = -1;
-	vc = &ray->eq_obj.vconst;
-	vd = &ray->eq_obj.vdir;
-	if (get_quad_equation_sol(&res,
-			pow(vd->x, 2) + pow(vd->y, 2) + pow(vd->z, 2),
-			2 * (vd->x * vc->x + vd->y * vc->y + vd->z * vc->z),
-			pow(vc->x, 2) + pow(vc->y, 2) + pow(vc->z, 2) - s->r2))
+	vc = vector(ray->equ.vc.x - s->origin.x, ray->equ.vc.y - s->origin.y,
+			ray->equ.vc.z - s->origin.z);
+	vd = &ray->equ.vd;
+	if ((t = delta(pow(vd->x, 2) + pow(vd->y, 2) + pow(vd->z, 2),
+		2 * (vd->x * vc.x + vd->y * vc.y + vd->z * vc.z),
+		pow(vc.x, 2) + pow(vc.y, 2) + pow(vc.z, 2) - s->r2)))
 	{
-		if ((long)(res.x * pow(10, 12)) > 0)
-		{
-			if ((long)(res.y * pow(10, 12)) > 0)
-				t = (res.x < res.y ? res.x : res.y);
-			else
-				t = (res.x);
-		}
-		else if ((long)(res.y * pow(10, 12)) > 0)
-			t = (res.y);
+		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
+				ray->equ.vc.z + vd->z * t);
+		return (t);
 	}
-	return (t);*/
+	return (-1);
 }
 
-static const t_vector	*get_sphere_normal(t_dot *inter, t_object *obj)
+static const t_vector	*get_sphere_normal(t_dot *d, t_sphere *s)
 {
-	(void)inter;
-	//set_vector(&s->normal, 2 * d->x, 2 * d->y, 2 * d->z);
-	return (&obj->normal);
+	s->normal = (t_vector){2 * (d->x - s->origin.x), 2 * (d->y - s->origin.y), 2 * (d->z - s->origin.z)};
+	return (&s->normal);
 }
 
 t_sphere				*new_sphere(t_objs_comp args, double radius)
 {
 	t_sphere	*sphere;
 
-	sphere = (t_sphere*)new_object(SPHERE, args.orig, args.dir, args.col);
+	sphere = (t_sphere*)new_object(SPHERE, args.origin, args.dir, args.color);
 	sphere->radius = radius;
 	sphere->get_normal = get_sphere_normal;
 	sphere->intersect = sphere_intersect;
-//	sphere->r2 = pow(radius, 2);
+	sphere->r2 = pow(radius, 2);
 	return (sphere);
 }
 

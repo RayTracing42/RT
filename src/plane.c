@@ -6,38 +6,41 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 15:14:56 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 14:26:30 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			plane_intersect(t_ray *ray, t_object *obj)
+static double			plane_intersect(t_ray *ray, t_plane *p)
 {
-	(void)obj;
-	(void)ray;
-	return (0);
-	/*double		t;
-	double		denom;
 	t_vector	*vd;
-	t_vector	*vc;
+	t_vector	vc;
+	double		t;
+	double		denom;
 
-	vd = &ray->eq_obj.vdir;
-	vc = &ray->eq_obj.vconst;
-	denom = (p->a * vd->x + p->b * vd->y + p->c * vd->z);
+	vc = (t_vector){ray->equ.vc.x - p->origin.x, ray->equ.vc.y - p->origin.y,
+					ray->equ.vc.z - p->origin.z};
+	vd = &ray->equ.vd;
+	denom = (p->normal.x * vd->x + p->normal.y * vd->y + p->normal.z * vd->z);
 	if (!denom)
 		return (-1);
-	t = -((p->a * vc->x + p->b * vc->y + p->c * vc->z + p->d) / denom);
+	t = -((p->normal.x * vc.x + p->normal.y * vc.y + p->normal.z * vc.z + 0) /
+		denom);
 	if ((long)(t * pow(10, 12)) > 0)
+	{
+		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
+				ray->equ.vc.z + vd->z * t);
 		return (t);
-	return (-1);*/
+	}
+	return (-1);
 }
 
-static const t_vector	*get_plane_normal(t_dot *inter, t_object *obj)
+static const t_vector	*get_plane_normal(t_dot *d, t_plane *p)
 {
-	(void)inter;
-	return (&obj->normal);
+	(void)d;
+	return (&p->normal);
 }
 
 /*int						is_in_plane(t_dot *d, t_plane *p)
@@ -48,7 +51,7 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal)
 {
 	t_plane		*plane;
 
-	plane = (t_plane*)new_object(PLANE, args.orig, args.dir, args.col);
+	plane = (t_plane*)new_object(PLANE, args.origin, args.dir, args.color);
 	plane->normal = normal;
 	plane->get_normal = get_plane_normal;
 	plane->intersect = plane_intersect;

@@ -17,6 +17,7 @@ int			key_management(SDL_Event *current, t_event *evt)
 	t_evt_data	*data;
 
 	data = evt->data;
+	(void)data;
 	if (current->key.keysym.sym == SDLK_ESCAPE)
 		return (0);
 	return (1);
