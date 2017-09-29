@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/06 00:52:25 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/09/28 16:08:12 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ int			main(int ac, char **av)
 	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){200, 0, -50}, (t_vector){0, 0, 0}, (SDL_Color){100, 255, 120, 255}}, 40), scn);
 	scene_add_object((t_object*)new_plane((t_objs_comp){(t_dot){0, -50, 0}, (t_vector){0, 0, 0}, (SDL_Color){80, 120, 180, 255}}, (t_vector){0, 1, 0}), scn);
 	
+/*
+	scene_add_object((t_object*)new_cone((t_objs_comp){(t_dot){200, 0, -100}, (t_vector){0, 0, 0}, (SDL_Color){100, 80, 120, 255}}, 20, 50, 30), scn);
+	scene_add_object((t_object*)new_cylinder((t_objs_comp){(t_dot){200, 0, 0}, (t_vector){0, 0, 0}, (SDL_Color){120, 50, 70, 255}}, 20, 50, 30), scn);
+*/
+
 	view_plane(scn->cam, scn->cam->vp);
 	scanning(scn);
 
