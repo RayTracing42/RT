@@ -17,6 +17,7 @@ static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	t_list_objs	*first;
 	double		tmp;
 	double		distance;
+	t_dot		intersect;
 
 	distance = 0;
 	first = l_objs;
@@ -26,12 +27,14 @@ static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 		if (tmp > 0 && (distance == 0 || (tmp < distance && distance > 0)))
 		{
 			distance = tmp;
+			intersect = ray->inter;
 			ray->color = l_objs->obj->color;
 			l_objs->obj->get_normal(&ray->inter, l_objs->obj);
-			ray->normal = vector(l_objs->obj->normal.x, l_objs->obj->normal.x, l_objs->obj->normal.z);
+			ray->normal = vector(l_objs->obj->normal.x, l_objs->obj->normal.y, l_objs->obj->normal.z);
 		}
 		l_objs = l_objs->next;
 	}
+	ray->inter = intersect;
 	l_objs = first;
 	return (distance);
 }

@@ -11,19 +11,24 @@
 
 int		check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs, t_light *light)
 {
-	t_list_objs	*first;
-	double	distance;
+	double	distance_1;
+	double	distance_2;
+	double	tmp;
+	t_dot	vc;
 
-	distance = 0;
-	first = l_objs;
+	vc = dot(light_ray->equ.vc.x, light_ray->equ.vc.y, light_ray->equ.vc.z);
+	if (!light->is_in_light(light, light_ray->equ.vd))
+		return (1);
 	while (l_objs != NULL)
-	{	
-		distance = l_objs->obj->intersect(light_ray, l_objs->obj);
-		if ((distance > 0) || (light->type == SPOT && light->is_in_light((t_spotlight *)light, light_ray->equ.vd) == 0))
+	{
+		tmp = 0;
+		tmp = l_objs->obj->intersect(light_ray, l_objs->obj);
+		distance_1 = get_vect_lenght(&light_ray->equ.vd);
+		distance_2 = get_dot_dist(&light_ray->inter, &vc);
+		if (tmp > 0.00000000000000000000001 && distance_2 < distance_1)
 			return (1);
 		l_objs = l_objs->next;
 	}
-	l_objs = first;
 	return (0);
 }
 
@@ -56,7 +61,7 @@ int		shadows(t_ray *ray, t_scene *scn)
 	while (scn->lights != NULL)
 	{
 		light_ray = define_light_ray(ray->inter, scn->lights->light);
-		light_ray.color = ray->color;
+//		light_ray.color = ray->color;
 		if (check_objs_on_ray(&light_ray, scn->objects, scn->lights->light) == 1)
 		{
 			hidden_lights++;

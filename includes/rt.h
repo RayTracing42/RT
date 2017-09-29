@@ -67,5 +67,5 @@ void		set_rect_crd(SDL_Rect *rect, int x, int y);
 
 double		vect_dot_product(const t_vector *v1, const t_vector *v2);
 double		get_vect_lenght(const t_vector *vect);
-
+double		get_dot_dist(t_dot *d1, t_dot *d2);
 #endif
