@@ -56,7 +56,7 @@ int		shadows(t_ray *ray, t_scene *scn)
 		light_ray.color = ray->color;
 		light_ray.normal = ray->normal;
 		if (check_objs_on_ray(&light_ray, scn->objects, tmp->light))
-			ray->color = (SDL_Color){0, 0, 0, 0};
+			ray->color = (SDL_Color){0, 0, 0, 255};
 		else
 			ray->color = get_shade_col(&light_ray, scn);
 		tmp = tmp->next;
