@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 13:33:32 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 14:19:46 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int			main(int ac, char **av)
 	init_list_evts(&events, NULL);
 
 	t_scene	*scn = new_scene(new_camera(60, (t_dot){-200, 30, 50}, 0, 0, 0), 50);
-	scene_add_light((t_light*)new_orb_light((t_dot){200, 50, 150}, (SDL_Color){255, 255, 255, 255}), scn);
+	scene_add_light((t_light*)new_orb_light((t_dot){200, 0, 0}, (SDL_Color){255, 255, 255, 255}), scn);
 	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){200, 0, -50}, (t_vector){0, 0, 0}, (SDL_Color){100, 255, 120, 255}}, 40), scn);
-	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){200, 0, 20}, (t_vector){0, 0, 0}, (SDL_Color){100, 80, 120, 255}}, 30), scn);
+	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){200, 0, 50}, (t_vector){0, 0, 0}, (SDL_Color){100, 80, 120, 255}}, 30), scn);
 	scene_add_object((t_object*)new_plane((t_objs_comp){(t_dot){0, -50, 0}, (t_vector){0, 0, 0}, (SDL_Color){80, 120, 180, 255}}, (t_vector){0, 1, 0}), scn);
 
 /*

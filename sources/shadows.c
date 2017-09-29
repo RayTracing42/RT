@@ -11,20 +11,14 @@
 
 int		check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs, t_light *light)
 {
-	double	distance_1;
-	double	distance_2;
 	double	tmp;
-	t_dot	*vc;
 
-	vc = (t_dot*)&light_ray->equ.vc;
 	if (!light->is_in_light(light, light_ray->equ.vd))
 		return (1);
 	while (l_objs != NULL)
 	{
 		tmp = l_objs->obj->intersect(light_ray, l_objs->obj);
-		distance_1 = get_vect_lenght(&light_ray->equ.vd);
-		distance_2 = get_dot_dist(&light_ray->inter, vc);
-		if (tmp > 0 && distance_2 < distance_1)
+		if (tmp > 0 && tmp < 1)
 			return (1);
 		l_objs = l_objs->next;
 	}
