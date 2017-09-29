@@ -6,16 +6,16 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 15:08:27 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 15:10:56 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			cone_intersection(t_ray *ray, t_cone *c)
+static double			cone_intersection(t_ray *ray, t_object *obj)
 {
-	(void)c;
+	(void)obj;
 	(void)ray;
 	return (0);
 	/*t_dot		res;
@@ -44,11 +44,11 @@ static double			cone_intersection(t_ray *ray, t_cone *c)
 	return (t);*/
 }
 
-static const t_vector	*get_cone_normal(t_dot *d, t_cone *c)
+static const t_vector	*get_cone_normal(t_dot *inter, t_object *obj)
 {
-	(void)d;
+	(void)inter;
 	//set_vector(&c->normal, 2 * d->x, -2 * c->tanalpha2 * d->y, 2 * d->z);
-	return (&c->normal);
+	return (&obj->normal);
 }
 
 t_cone					*new_cone(t_objs_comp args, double angle,

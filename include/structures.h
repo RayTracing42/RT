@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/28 17:23:19 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 15:09:45 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,12 @@ typedef struct				s_parequation
 	t_vector				vd;
 }							t_parequation;
 
+typedef struct		s_ray
+{
+	t_parequation	equ;
+	t_dot			inter;
+}					t_ray;
+
 typedef enum				e_type
 {
 //	BOX, pour plus tard
@@ -104,8 +110,8 @@ typedef enum				e_type
 typedef struct				s_object
 {
 	const t_type			obj_type;
-	double					(*intersect)();
-	const t_vector			*(*get_normal)();
+	double					(*intersect)(t_ray *ray, struct s_object *obj);
+	const t_vector			*(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
@@ -122,8 +128,8 @@ typedef struct				s_objs_comp
 typedef struct				s_sphere
 {
 	const t_type			obj_type;
-	double					(*intersect)();
-	const t_vector			*(*get_normal)();
+	double					(*intersect)(t_ray *ray, t_object *obj);
+	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
@@ -136,8 +142,8 @@ typedef struct				s_sphere
 typedef struct				s_cylinder
 {
 	const t_type			obj_type;
-	double					(*intersect)();
-	const t_vector			*(*get_normal)();
+	double					(*intersect)(t_ray *ray, t_object *obj);
+	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
@@ -152,8 +158,8 @@ typedef struct				s_cylinder
 typedef struct				s_cone
 {
 	const t_type			obj_type;
-	double					(*intersect)();
-	const t_vector			*(*get_normal)();
+	double					(*intersect)(t_ray *ray, t_object *obj);
+	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
@@ -166,8 +172,8 @@ typedef struct				s_cone
 typedef struct				s_plane
 {
 	const t_type			obj_type;
-	double					(*intersect)();
-	const t_vector			*(*get_normal)();
+	double					(*intersect)(t_ray *ray, t_object *obj);
+	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
@@ -280,10 +286,5 @@ typedef struct				s_scene
 	t_list_objs				*objects;
 }							t_scene;
 
-typedef struct		s_ray
-{
-	t_parequation	equ;
-	t_dot			inter;
-}					t_ray;
 
 #endif
