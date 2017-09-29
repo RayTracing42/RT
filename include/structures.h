@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 15:38:26 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 17:30:59 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct				s_parequation
 
 typedef struct		s_ray
 {
+	SDL_Color		color;
 	t_parequation	equ;
 	t_dot			inter;
 }					t_ray;
