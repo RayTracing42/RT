@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/09/28 17:01:37 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 13:29:51 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 {
-	t_list_objs	*first;
 	double		tmp;
 	double		distance;
 	t_dot		intersect;
 
 	distance = 0;
-	first = l_objs;
 	while (l_objs != NULL)
 	{
 		tmp = l_objs->obj->intersect(ray, l_objs->obj);
@@ -29,13 +27,11 @@ static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 			distance = tmp;
 			intersect = ray->inter;
 			ray->color = l_objs->obj->color;
-			l_objs->obj->get_normal(&ray->inter, l_objs->obj);
-			ray->normal = vector(l_objs->obj->normal.x, l_objs->obj->normal.y, l_objs->obj->normal.z);
+			ray->normal = *l_objs->obj->get_normal(&ray->inter, l_objs->obj);
 		}
 		l_objs = l_objs->next;
 	}
 	ray->inter = intersect;
-	l_objs = first;
 	return (distance);
 }
 
@@ -46,8 +42,7 @@ int		scanning(t_scene *scn)
 	double		distance;
 	t_ray		ray;
 
-	ray.equ.vc = vector(scn->cam->origin.x, scn->cam->origin.y,
-			scn->cam->origin.z);
+	ray.equ.vc = *(t_vector*)&scn->cam->origin;
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
@@ -56,7 +51,6 @@ int		scanning(t_scene *scn)
 		{
 				view_plane_vector(x, y, scn->cam, &ray.equ.vd);
 				distance = check_intersect(&ray, scn->objects);
-
 				if (distance > 0)
 				{
 					shadows(&ray, scn);
