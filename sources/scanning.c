@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/09/29 13:29:51 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 14:10:59 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int		scanning(t_scene *scn)
 	t_ray		ray;
 
 	ray.equ.vc = *(t_vector*)&scn->cam->origin;
-	y = 0;
-	while (y < WIN_HEIGHT)
+	y = -1;
+	while (++y < WIN_HEIGHT)
 	{
-		x = 0;
-		while (x < WIN_WIDTH)
+		x = -1;
+		while (++x < WIN_WIDTH)
 		{
 				view_plane_vector(x, y, scn->cam, &ray.equ.vd);
 				distance = check_intersect(&ray, scn->objects);
@@ -57,10 +57,8 @@ int		scanning(t_scene *scn)
 					put_pixel(x, y, &ray.color);
 				}
 				else
-					put_pixel(x, y, &(SDL_Color){0, 0, 0, 0});
-			x++;
+					put_pixel(x, y, &(SDL_Color){0, 0, 0, 255});
 		}
-		y++;
 	}
 	return (0);
 }
