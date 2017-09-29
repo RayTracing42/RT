@@ -6,16 +6,16 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 15:12:27 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 15:15:50 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			sphere_intersect(t_ray *ray, t_sphere *s)
+static double			sphere_intersect(t_ray *ray, t_object *obj)
 {
-	(void)s;
+	(void)obj;
 	(void)ray;
 	return (0);
 	/*t_dot		res;
@@ -44,11 +44,11 @@ static double			sphere_intersect(t_ray *ray, t_sphere *s)
 	return (t);*/
 }
 
-static const t_vector	*get_sphere_normal(t_dot *d, t_sphere *s)
+static const t_vector	*get_sphere_normal(t_dot *inter, t_object *obj)
 {
-	(void)d;
+	(void)inter;
 	//set_vector(&s->normal, 2 * d->x, 2 * d->y, 2 * d->z);
-	return (&s->normal);
+	return (&obj->normal);
 }
 
 t_sphere				*new_sphere(t_objs_comp args, double radius)
