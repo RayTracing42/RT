@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 15:42:54 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 17:49:11 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ static double			plane_intersect(t_ray *ray, t_object *obj)
 	t_vector	vc;
 	double		t;
 	double		denom;
+	t_plane		*p;
 
+	p = (t_plane*)obj;
 	vc = (t_vector){ray->equ.vc.x - p->origin.x, ray->equ.vc.y - p->origin.y,
 					ray->equ.vc.z - p->origin.z};
 	vd = &ray->equ.vd;

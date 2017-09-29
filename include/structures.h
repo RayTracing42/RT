@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 17:30:59 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 17:44:43 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,10 @@ typedef struct				s_parequation
 
 typedef struct		s_ray
 {
-	SDL_Color		color;
-	t_parequation	equ;
-	t_dot			inter;
+	t_parequation			equ;
+	t_dot					inter;
+	t_vector				normal;
+	SDL_Color				color;
 }					t_ray;
 
 typedef enum				e_type
@@ -223,8 +224,8 @@ typedef struct				s_light
 	const t_light_type		type;
 	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)(t_vector *pos, struct s_light *light);
-	int						(*is_in_light)(t_vector dir);
+	t_vector				(*get_ray_vect)(t_dot *pos, struct s_light *light);
+	int						(*is_in_light)(struct s_light *light, t_ray *light_ray);
 }							t_light;
 
 /*
@@ -235,8 +236,8 @@ typedef struct				s_parallel_light
 	const t_light_type		type;
 	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)(t_vector *pos, t_light *light);
-	int						(*is_in_light)(t_vector dir);
+	t_vector				(*get_ray_vect)(t_dot *pos, t_light *light);
+	int						(*is_in_light)(t_light *light, t_ray *light_ray);
 }							t_parallel_light;
 
 /*
@@ -247,8 +248,8 @@ typedef struct				s_spotlight
 	const t_light_type		type;
 	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)(t_vector *pos, t_light *light);
-	int						(*is_in_light)(t_vector dir);
+	t_vector				(*get_ray_vect)(t_dot *pos, t_light *light);
+	int						(*is_in_light)(t_light *light, t_ray *light_ray);
 	t_dot					orig;
 	double					aperture;
 }							t_spotlight;
@@ -262,8 +263,8 @@ typedef struct				s_orb_light
 	const t_light_type		type;
 	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)(t_vector *pos, t_light *light);
-	int						(*is_in_light)(t_vector dir);
+	t_vector				(*get_ray_vect)(t_dot *pos, t_light *light);
+	int						(*is_in_light)(t_light *light, t_ray *light_ray);
 	t_dot					orig;
 	double					aperture;
 }							t_orb_light;
