@@ -852,7 +852,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for strlcpy
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/cckBLVlA.o: In function `main':
+/tmp/ccJEkUyJ.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:98: undefined reference to `strlcpy'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -961,7 +961,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for strlcat
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/cc9XWrhC.o: In function `main':
+/tmp/cc1u3B6P.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:98: undefined reference to `strlcat'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1077,7 +1077,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for _strrev
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccBbd2pK.o: In function `main':
+/tmp/cckItaFU.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:99: undefined reference to `_strrev'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1187,7 +1187,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for _strupr
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/cczv1ccM.o: In function `main':
+/tmp/ccL1L2IZ.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:99: undefined reference to `_strupr'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1297,7 +1297,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for _strlwr
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccHgnGPO.o: In function `main':
+/tmp/cciP8oq1.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:99: undefined reference to `_strlwr'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1428,7 +1428,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for itoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccBfjhP4.o: In function `main':
+/tmp/cchsjfGh.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:102: undefined reference to `itoa'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1541,7 +1541,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for _ltoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccH33Gs6.o: In function `main':
+/tmp/ccKbfHqj.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:102: undefined reference to `_ltoa'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1654,7 +1654,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for _uitoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/cc6SDyRb.o: In function `main':
+/tmp/ccTiCJQo.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:102: undefined reference to `_uitoa'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1767,7 +1767,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for _ultoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/cc7UEHrd.o: In function `main':
+/tmp/ccgrm2yr.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:102: undefined reference to `_ultoa'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1888,7 +1888,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for _i64toa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccIEPIbn.o: In function `main':
+/tmp/ccWxjsOp.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:104: undefined reference to `_i64toa'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -2003,7 +2003,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for _ui64toa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccHkYmut.o: In function `main':
+/tmp/ccx07Jbv.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:104: undefined reference to `_ui64toa'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -2148,7 +2148,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for _stricmp
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccglRabH.o: In function `main':
+/tmp/ccCjKINQ.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:110: undefined reference to `_stricmp'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -2276,7 +2276,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for _strnicmp
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccU8WePL.o: In function `main':
+/tmp/cc2nE7ZZ.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:111: undefined reference to `_strnicmp'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -2447,7 +2447,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for sysctlbyname
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/cctm3nom.o: In function `main':
+/tmp/ccYaDAwq.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:121: undefined reference to `sysctlbyname'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -3428,7 +3428,7 @@ configure:23130: $? = 0
 configure:23136: result: yes
 configure:23140: checking for dlopen in -lc
 configure:23165: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos    conftest.c -lc   -lm >&5
-/tmp/ccoUOJq5.o: In function `main':
+/tmp/ccDPFev9.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:126: undefined reference to `dlopen'
 collect2: error: ld returned 1 exit status
 configure:23165: $? = 1
@@ -6064,7 +6064,7 @@ configure:22789: $? = 0
 configure:22803: result: yes
 configure:22806: checking for pthread_set_name_np
 configure:22826: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos   -D_REENTRANT  -Iinclude -I/home/flavian/Rendus/rt_branch_scanning/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/src/video/khronos     conftest.c  -lm -lpthread >&5
-/tmp/cc7kJx3h.o: In function `main':
+/tmp/ccPVZSFV.o: In function `main':
 /home/flavian/Rendus/rt_branch_scanning/libraries/SDL/conftest.c:175: undefined reference to `pthread_set_name_np'
 collect2: error: ld returned 1 exit status
 configure:22826: $? = 1
