@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 15:39:52 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 17:12:27 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 static double			cone_intersection(t_ray *ray, t_object *obj)
 {
-	t_dot		res;
+	t_cone		*c;
 	t_vector	*vd;
 	t_vector	vc;
 	double		t;
 
+	c = (t_cone*)obj;
 	vc = vector(ray->equ.vc.x - c->origin.x, ray->equ.vc.y - c->origin.y,
 			ray->equ.vc.z - c->origin.z);
 	vd = &ray->equ.vd;
@@ -36,9 +37,12 @@ static double			cone_intersection(t_ray *ray, t_object *obj)
 
 static const t_vector	*get_cone_normal(t_dot *inter, t_object *obj)
 {
-	c->normal = (t_vector){2 * (d->x - c->origin.x),
-								-2 * c->tanalpha2 * (d->y - c->origin.y),
-								2 * (d->z - c->origin.z)};
+	t_cone	*c;
+
+	c = (t_cone*)obj;
+	c->normal = (t_vector){2 * (inter->x - c->origin.x),
+								-2 * c->tanalpha2 * (inter->y - c->origin.y),
+								2 * (inter->z - c->origin.z)};
 	return (&c->normal);
 }
 
@@ -52,7 +56,7 @@ t_cone					*new_cone(t_objs_comp args, double angle,
 	c->height_top = height_top;
 	c->height_bottom = height_bottom;
 	c->get_normal = get_cone_normal;
-	c->intersect = cone_intersect;
+	c->intersect = cone_intersection;
 	c->tanalpha2 = pow(tan(angle * M_PI / 180), 2);
 	return (c);
 }
