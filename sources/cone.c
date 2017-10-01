@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 15:08:27 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/01 11:54:51 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ static double			cone_intersect(t_ray *ray, t_cone *c)
 	vc = vector(ray->equ.vc.x - c->origin.x, ray->equ.vc.y - c->origin.y,
 			ray->equ.vc.z - c->origin.z);
 	vd = &ray->equ.vd;
-	if ((t = delta(pow(vd->x, 2) + pow(vd->z, 2) - pow(vd->y, 2) * c->tanalpha2,
+	t = delta(pow(vd->x, 2) + pow(vd->z, 2) - pow(vd->y, 2) * c->tanalpha2,
 			2 * (vd->x * vc.x + vd->z * vc.z - vd->y * vc.y * c->tanalpha2),
-			pow(vc.x, 2) + pow(vc.z, 2) - pow(vc.y, 2) * c->tanalpha2)))
+			pow(vc.x, 2) + pow(vc.z, 2) - pow(vc.y, 2) * c->tanalpha2);
+	if ((long)(t * pow(10, 12)) > 0)
 	{
 		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
 				ray->equ.vc.z + vd->z * t);
