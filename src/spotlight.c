@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:04:25 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 15:05:08 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 15:28:36 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ static int	is_in_spotlight(t_vector dir)
 	return (0);
 }
 
-static void	get_ray_vect(t_spotlight *spot, t_vector *dest, t_dot inter)
+static t_vector	get_spot_ray_vect(t_vector *pos, t_light *light)
 {
-	*dest = (t_vector){spot->orig.x - inter.x, spot->orig.y - inter.y,
-						spot->orig.z - inter.z};
+	return ((t_vector){((t_spotlight*)light)->orig.x - pos->x,
+						((t_spotlight*)light)->orig.y - pos->y,
+						((t_spotlight*)light)->orig.z - pos->z});
 }
 
 t_spotlight	*new_spotlight(t_vector direction, t_dot orig, SDL_Color color,
@@ -33,7 +34,7 @@ t_spotlight	*new_spotlight(t_vector direction, t_dot orig, SDL_Color color,
 	spot = (t_spotlight*)new_light(SPOT, direction, color);
 	spot->orig = orig;
 	spot->aperture = aperture;
-	spot->get_ray_vect = get_ray_vect;
+	spot->get_ray_vect = get_spot_ray_vect;
 	spot->is_in_light = is_in_spotlight;
 	return (spot);
 }
