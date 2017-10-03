@@ -1,6 +1,6 @@
 # sdl pkg-config source file
 
-prefix=/home/flavian/Rendus/rt_branch_scanning_tests/libraries/SDL/build
+prefix=/home/flavian/Rendus/rt_branch_multi_spot/libraries/SDL/build
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

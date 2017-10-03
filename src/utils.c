@@ -34,10 +34,10 @@ double	delta(double a, double b, double c)
 	d = (b * b) - (4 * a * c);
 	if (d < 0)
 		return (0);
-	r1 = ((b * -1) + sqrt(d)) / (2 * a);
+	r1 = (((-b) + sqrt(d)) / (2 * a)) - 0.000001;
 	if (d == 0)
 		return (r1);
-	r2 = ((b * -1) - sqrt(d)) / (2 * a);
+	r2 = (((-b) - sqrt(d)) / (2 * a)) - 0.000001;
 	if (r1 < r2)
 		return (r1);
 	else

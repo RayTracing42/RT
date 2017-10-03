@@ -25,45 +25,33 @@ int			check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs, t_light *light)
 	return (0);
 }
 
-/*
-t_ray		define_light_ray(t_dot inter, t_light *light)
-{
-	t_ray	ray;
-
-	ray.equ.vc = vector(inter.x, inter.y, inter.z);
-	// /!\ ATTENTION ; le resultat pour ORB et SPOT ne sont pas norme tandis que PARALLEL l'est si sa variable direction l'est.
-	if (light->type == ORB)
-		ray.equ.vd = define_vector_orb(inter, (t_orb_light*)light);
-	if (light->type == SPOT)
-		ray.equ.vd = define_vector_spot(inter, (t_spotlight*)light);
-	if (light->type == PARALLEL)
-		ray.equ.vd = define_vector_parallel((t_parallel_light*)light);
-	return (ray);
-}
-*/
-
 SDL_Color	add_colors(SDL_Color dst, SDL_Color src)
 {
 	SDL_Color res;
-
-	res.r = dst.r + src.r;
-	res.g = dst.g + src.g;
-	res.b = dst.b + src.b;
+	
+	if ((dst.r + src.r) < 255)
+		res.r = dst.r + src.r;
+	else
+		res.r = 255;
+	if ((dst.g + src.g) < 255)
+		res.g = dst.g + src.g;
+	else
+		res.g = 255;
+	if ((dst.b + src.b) < 255)
+		res.b = dst.b + src.b;
+	else
+		res.b = 255;
 	return (res);
 }
 
-SDL_Color	div_colors(SDL_Color dst, int div, t_scene *scn)
+SDL_Color	div_colors(SDL_Color dst, t_scene *scn)
 {
 	SDL_Color res;
 
-	if (div != 0)
-	{
-		res.r = (dst.r / div) * scn->brightness;
-		res.g = (dst.g / div) * scn->brightness;
-		res.b = (dst.b / div) * scn->brightness;
-		return (res);
-	}
-	return (dst);
+	res.r = dst.r * scn->brightness;
+	res.g = dst.g * scn->brightness;
+	res.b = dst.b * scn->brightness;
+	return (res);
 }
 
 int			shadows(t_ray *ray, t_scene *scn)
@@ -71,14 +59,11 @@ int			shadows(t_ray *ray, t_scene *scn)
 	t_list_lights	*tmp;
 	t_ray			light_ray;
 	SDL_Color		multi_lights;
-	int				nb_lights;
 
-	nb_lights = 0;
 	multi_lights = (SDL_Color){0, 0, 0, 255};
 	tmp = scn->lights;
 	while (tmp != NULL)
 	{
-		//light_ray = define_light_ray(ray->inter, scn->lights->light);
 		light_ray.equ.vd = tmp->light->get_ray_vect(&ray->inter, tmp->light);
 		light_ray.equ.vc = *(t_vector*)&ray->inter;
 		light_ray.color = ray->color;
@@ -88,9 +73,8 @@ int			shadows(t_ray *ray, t_scene *scn)
 		else
 			multi_lights = add_colors(multi_lights, get_shade_col(&light_ray));
 		tmp = tmp->next;
-		nb_lights++;
 	}
-	multi_lights = div_colors(multi_lights, nb_lights, scn);
+	multi_lights = div_colors(multi_lights, scn);
 	ray->color = multi_lights;
 	return (0);
 }
