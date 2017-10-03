@@ -6,20 +6,22 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 14:26:30 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 17:49:11 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			plane_intersect(t_ray *ray, t_plane *p)
+static double			plane_intersect(t_ray *ray, t_object *obj)
 {
 	t_vector	*vd;
 	t_vector	vc;
 	double		t;
 	double		denom;
+	t_plane		*p;
 
+	p = (t_plane*)obj;
 	vc = (t_vector){ray->equ.vc.x - p->origin.x, ray->equ.vc.y - p->origin.y,
 					ray->equ.vc.z - p->origin.z};
 	vd = &ray->equ.vd;
@@ -37,10 +39,10 @@ static double			plane_intersect(t_ray *ray, t_plane *p)
 	return (-1);
 }
 
-static const t_vector	*get_plane_normal(t_dot *d, t_plane *p)
+static const t_vector	*get_plane_normal(t_dot *inter, t_object *obj)
 {
-	(void)d;
-	return (&p->normal);
+	(void)inter;
+	return (&obj->normal);
 }
 
 /*int						is_in_plane(t_dot *d, t_plane *p)

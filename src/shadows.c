@@ -13,7 +13,7 @@ int		check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs, t_light *light)
 {
 	double	tmp;
 
-	if (!light->is_in_light(light, light_ray->equ.vd))
+	if (!light->is_in_light(light, light_ray))
 		return (1);
 	while (l_objs != NULL)
 	{
