@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 15:10:56 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/03 13:50:41 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,36 @@
 
 static double			cone_intersection(t_ray *ray, t_object *obj)
 {
-	(void)obj;
-	(void)ray;
-	return (0);
-	/*t_dot		res;
+	t_cone		*c;
 	t_vector	*vd;
-	t_vector	*vc;
+	t_vector	vc;
 	double		t;
 
-	t = -1;
-	vc = &ray->eq_obj.vconst;
-	vd = &ray->eq_obj.vdir;
-	if (get_quad_equation_sol(&res,
-			pow(vd->x, 2) + pow(vd->z, 2) - pow(vd->y, 2) * c->tanalpha2,
-			2 * (vd->x * vc->x + vd->z * vc->z - vd->y * vc->y * c->tanalpha2),
-			pow(vc->x, 2) + pow(vc->z, 2) - pow(vc->y, 2) * c->tanalpha2))
+	c = (t_cone*)obj;
+	vc = vector(ray->equ.vc.x - c->origin.x, ray->equ.vc.y - c->origin.y,
+			ray->equ.vc.z - c->origin.z);
+	vd = &ray->equ.vd;
+	t = delta(pow(vd->x, 2) + pow(vd->z, 2) - pow(vd->y, 2) * c->tanalpha2,
+			2 * (vd->x * vc.x + vd->z * vc.z - vd->y * vc.y * c->tanalpha2),
+			pow(vc.x, 2) + pow(vc.z, 2) - pow(vc.y, 2) * c->tanalpha2);
+	if ((long)(t * pow(10, 12)) > 0)
 	{
-		if ((long)(res.x * pow(10, 12)) > 0 && in_boundary(ray, c, res.x))
-		{
-			if ((long)(res.y * pow(10, 12)) > 0 && in_boundary(ray, c, res.y))
-				t = (res.x < res.y ? res.x : res.y);
-			else
-				t = (res.x);
-		}
-		else if ((long)(res.y * pow(10, 12)) > 0 && in_boundary(ray, c, res.y))
-			t = (res.y);
+		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
+				ray->equ.vc.z + vd->z * t);
+		return (t);
 	}
-	return (t);*/
+	return (-1);
 }
 
 static const t_vector	*get_cone_normal(t_dot *inter, t_object *obj)
 {
-	(void)inter;
-	//set_vector(&c->normal, 2 * d->x, -2 * c->tanalpha2 * d->y, 2 * d->z);
-	return (&obj->normal);
+	t_cone	*c;
+
+	c = (t_cone*)obj;
+	c->normal = (t_vector){2 * (inter->x - c->origin.x),
+								-2 * c->tanalpha2 * (inter->y - c->origin.y),
+								2 * (inter->z - c->origin.z)};
+	return (&c->normal);
 }
 
 t_cone					*new_cone(t_objs_comp args, double angle,
@@ -56,13 +52,13 @@ t_cone					*new_cone(t_objs_comp args, double angle,
 {
 	t_cone	*c;
 
-	c = (t_cone*)new_object(CONE, args.orig, args.dir, args.col);
+	c = (t_cone*)new_object(CONE, args.origin, args.dir, args.color);
 	c->angle = angle;
 	c->height_top = height_top;
 	c->height_bottom = height_bottom;
 	c->get_normal = get_cone_normal;
 	c->intersect = cone_intersection;
-//	c->tanalpha2 = pow(tan(ft_to_rad(angle)), 2);
+	c->tanalpha2 = pow(tan(angle * M_PI / 180), 2);
 	return (c);
 }
 
