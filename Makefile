@@ -25,7 +25,7 @@ SRC = main.c cone.c events.c key_functions.c objects.c parallel_light.c \
 	  orb_light.c plane.c sphere.c view_plane.c utils.c matrice_rotation.c \
 	  tools.c scene.c scene_objs.c scene_lights.c camera.c \
 	  shadows.c light_physic.c vectors.c
-	
+
 SRC:= $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)
 

@@ -6,19 +6,21 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/25 15:09:23 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/29 17:46:40 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			cylinder_intersect(t_ray *ray, t_cylinder *c)
+static double			cylinder_intersect(t_ray *ray, t_object *obj)
 {
+	t_cylinder	*c;
 	t_vector	*vd;
 	t_vector	vc;
 	double		t;
 
+	c = (t_cylinder*)obj;
 	vc = vector(ray->equ.vc.x - c->origin.x, ray->equ.vc.y - c->origin.y,
 			ray->equ.vc.z - c->origin.z);
 	vd = &ray->equ.vd;
@@ -33,9 +35,12 @@ static double			cylinder_intersect(t_ray *ray, t_cylinder *c)
 	return (-1);
 }
 
-static const t_vector	*get_cylinder_normal(t_dot *d, t_cylinder *c)
+static const t_vector	*get_cylinder_normal(t_dot *inter, t_object *obj)
 {
-	c->normal =  (t_vector){2 * (d->x - c->origin.x), 0, 2 * (d->z - c->origin.z)};
+	t_cylinder	*c;
+
+	c = (t_cylinder*)obj;
+	c->normal =  (t_vector){2 * (inter->x - c->origin.x), 0, 2 * (inter->z - c->origin.z)};
 	return (&c->normal);
 }
 
