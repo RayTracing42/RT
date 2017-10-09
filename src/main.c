@@ -36,8 +36,8 @@ int			main(int ac, char **av)
 
 	t_scene	*scn = new_scene(new_camera(60, (t_dot){-200, 30, 0}, 0, 0, 0), 75);
 	scene_add_light((t_light*)new_orb_light((t_dot){200, 0, 0}, (SDL_Color){255, 255, 255, 255}), scn);
-	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){200, 0, -80}, (t_vector){0, 0, 0}, (SDL_Color){100, 255, 120, 255}, 0.5, 0.5, 1.5}, 40), scn);
-	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){200, 0, 80}, (t_vector){0, 0, 0}, (SDL_Color){255, 100, 120, 255}, 0, 0, 0}, 40), scn);
+	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){350, 0, -80}, (t_vector){0, 0, 0}, (SDL_Color){100, 255, 120, 255}, 1, 0.5, 1.5}, 40), scn);
+	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){200, 0, 80}, (t_vector){0, 0, 0}, (SDL_Color){255, 100, 120, 255}, 1, 0, 0}, 40), scn);
 	scene_add_object((t_object*)new_plane((t_objs_comp){(t_dot){0, -50, 0}, (t_vector){0, 0, 0}, (SDL_Color){80, 120, 180, 255}, 0, 0, 0}, (t_vector){0, 1, 0}), scn);
 
 /*

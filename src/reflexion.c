@@ -8,16 +8,18 @@
 /*============================================================================*/
 
 #include "rt.h"
-/*
+
 SDL_Color	reflect(t_ray *ray, t_scene *scn)
 {
-	t_vector	dir;
+	t_ray		reflected_ray;
 
-	if (ray->obj->obj_light.reflection_amount != 0 || )
-	{	dir = ray->equ.vd;
-		get_reflected_vect(&dir, &ray->normal);
+	if (ray->obj->obj_light.reflection_amount != 0)
+	{
+		reflected_ray = *ray;
+		reflected_ray.equ.vc = vector(ray->inter.x, ray->inter.y, ray->inter.z);
+		get_reflected_vect(&reflected_ray.equ.vd, &ray->normal);
 	
-		ray->color = effects(ray, scn);
+		reflected_ray.color = effects(&reflected_ray, scn);
 	}
-	return (ray->color);
-}*/
+	return (reflected_ray.color);
+}

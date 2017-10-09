@@ -38,11 +38,16 @@ static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 
 SDL_Color		effects(t_ray *ray, t_scene *scn)
 {
+	SDL_Color	reflected;
+	
 	if (check_intersect(ray, scn->objects) > 0)
 	{
 		shadows(ray, scn);
-//		reflect(ray, scn);
+		reflected = reflect(ray, scn);
 //		refract(ray, scn);
+		ray->color.r = (ray->color.r + reflected.r) / 2;
+		ray->color.g = (ray->color.g + reflected.g) / 2;
+		ray->color.b = (ray->color.b + reflected.b) / 2;
 		return (ray->color);
 	}
 	return (ray->color = (SDL_Color){0, 0, 0, 255});
