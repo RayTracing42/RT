@@ -53,7 +53,17 @@ int			parsing(t_scene *scn, int argc, char **argv);
 int			scanning(t_scene *scn);
 
 SDL_Color	get_shade_col(t_ray *ray);
+SDL_Color	effects(t_ray *ray, t_scene *scn);
+SDL_Color	reflect(t_ray *ray, t_scene *scn);
+SDL_Color	refract(t_ray *ray, t_scene *scn);
 
+void		get_reflected_vect(t_vector *dir, const t_vector *norm);
+void		get_refracted_vect(t_vector *dir, const t_vector *norm,
+				t_object *src, t_object *dst);
+void		get_reflected_col(t_ray *ray, t_object *src,
+				SDL_Color reflected_obj_col);
+void		get_refracted_col(t_ray *ray, t_object *src,
+				SDL_Color refracted_obj_col);
 /*
 **	tools.c
 */

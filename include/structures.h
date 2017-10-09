@@ -97,6 +97,7 @@ typedef struct		s_ray
 	t_dot					inter;
 	t_vector				normal;
 	SDL_Color				color;
+	struct s_object			*obj;
 }					t_ray;
 
 typedef enum				e_type
