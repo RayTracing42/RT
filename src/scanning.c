@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/10/09 19:03:21 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/09 19:17:15 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,16 @@ static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 SDL_Color		effects(t_ray *ray, t_scene *scn)
 {
 	SDL_Color	reflected;
-	
+
 	if (check_intersect(ray, scn->objects) > 0)
 	{
 		shadows(ray, scn);
 		reflected = reflect(ray, scn);
 //		refract(ray, scn);
-		ray->color.r = (ray->color.r + reflected.r) / 2;
+		get_reflected_col(ray, NULL, reflected);
+		/*ray->color.r = (ray->color.r + reflected.r) / 2;f
 		ray->color.g = (ray->color.g + reflected.g) / 2;
-		ray->color.b = (ray->color.b + reflected.b) / 2;
+		ray->color.b = (ray->color.b + reflected.b) / 2;*/
 		return (ray->color);
 	}
 	return (ray->color = (SDL_Color){0, 0, 0, 255});

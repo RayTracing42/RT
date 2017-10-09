@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 12:42:42 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/09 18:58:19 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/09 19:16:51 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ void	get_refracted_vect(t_vector *dir, const t_vector *norm,
 void	get_reflected_col(t_ray *ray, t_object *src,
 				SDL_Color reflected_obj_col)
 {
+	(void)src;
 	ray->color.r *= (reflected_obj_col.r /
-			(src->obj_light.reflection_amount * 255));
+			(/*src->obj_light.reflection_amount*/0.5 * 255));
 	ray->color.g *= (reflected_obj_col.g /
-			(src->obj_light.reflection_amount * 255));
+			(/*src->obj_light.reflection_amount*/0.5 * 255));
 	ray->color.b *= (reflected_obj_col.b /
-			(src->obj_light.reflection_amount * 255));
+			(/*src->obj_light.reflection_amount*/0.5 * 255));
 }
 
 void	get_refracted_col(t_ray *ray, t_object *src,
