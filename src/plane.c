@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 17:49:11 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/09 19:03:53 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal)
 {
 	t_plane		*plane;
 
-	plane = (t_plane*)new_object(PLANE, args.origin, args.dir, args.color);
+	plane = (t_plane*)new_object(PLANE, args);
 	plane->normal = normal;
 	plane->get_normal = get_plane_normal;
 	plane->intersect = plane_intersect;

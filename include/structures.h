@@ -97,6 +97,7 @@ typedef struct		s_ray
 	t_dot					inter;
 	t_vector				normal;
 	SDL_Color				color;
+	struct s_object			*obj;
 }					t_ray;
 
 typedef enum				e_type
@@ -118,8 +119,8 @@ typedef struct				s_obj_phys
 typedef struct				s_object
 {
 	const t_type			obj_type;
-	double					(*intersect)(t_ray *ray, struct s_object *obj);
-	const t_vector			*(*get_normal)(t_dot *inter, struct s_object *obj);
+	double					(*intersect)();
+	const t_vector			*(*get_normal)();
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
@@ -129,16 +130,19 @@ typedef struct				s_object
 
 typedef struct				s_objs_comp
 {
-	t_dot					origin;
+	t_dot					orig;
 	t_vector				dir;
-	SDL_Color				color;
+	SDL_Color				col;
+	double					reflection_amount;
+	double					refraction_amount;
+	double					refractive_index;
 }							t_objs_comp;
 
 typedef struct				s_sphere
 {
 	const t_type			obj_type;
-	double					(*intersect)(t_ray *ray, t_object *obj);
-	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
+	double					(*intersect)();
+	const t_vector			*(*get_normal)();
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
@@ -151,8 +155,8 @@ typedef struct				s_sphere
 typedef struct				s_cylinder
 {
 	const t_type			obj_type;
-	double					(*intersect)(t_ray *ray, t_object *obj);
-	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
+	double					(*intersect)();
+	const t_vector			*(*get_normal)();
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
@@ -167,8 +171,8 @@ typedef struct				s_cylinder
 typedef struct				s_cone
 {
 	const t_type			obj_type;
-	double					(*intersect)(t_ray *ray, t_object *obj);
-	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
+	double					(*intersect)();
+	const t_vector			*(*get_normal)();
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
@@ -183,8 +187,8 @@ typedef struct				s_cone
 typedef struct				s_plane
 {
 	const t_type			obj_type;
-	double					(*intersect)(t_ray *ray, t_object *obj);
-	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
+	double					(*intersect)();
+	const t_vector			*(*get_normal)();
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;

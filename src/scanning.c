@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/09/29 14:31:54 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/09 19:03:21 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 			intersect = ray->inter;
 			ray->color = l_objs->obj->color;
 			ray->normal = *l_objs->obj->get_normal(&ray->inter, l_objs->obj);
+			ray->obj = l_objs->obj;
 		}
 		l_objs = l_objs->next;
 	}
@@ -35,11 +36,27 @@ static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	return (distance);
 }
 
+SDL_Color		effects(t_ray *ray, t_scene *scn)
+{
+	SDL_Color	reflected;
+	
+	if (check_intersect(ray, scn->objects) > 0)
+	{
+		shadows(ray, scn);
+		reflected = reflect(ray, scn);
+//		refract(ray, scn);
+		ray->color.r = (ray->color.r + reflected.r) / 2;
+		ray->color.g = (ray->color.g + reflected.g) / 2;
+		ray->color.b = (ray->color.b + reflected.b) / 2;
+		return (ray->color);
+	}
+	return (ray->color = (SDL_Color){0, 0, 0, 255});
+}
+
 int		scanning(t_scene *scn)
 {
 	int			x;
 	int			y;
-	double		distance;
 	t_ray		ray;
 
 	ray.equ.vc = *(t_vector*)&scn->cam->origin;
@@ -50,14 +67,8 @@ int		scanning(t_scene *scn)
 		while (++x < WIN_WIDTH)
 		{
 				view_plane_vector(x, y, scn->cam, &ray.equ.vd);
-				distance = check_intersect(&ray, scn->objects);
-				if (distance > 0)
-				{
-					shadows(&ray, scn);
-					put_pixel(x, y, &ray.color);
-				}
-				else
-					put_pixel(x, y, &(SDL_Color){0, 0, 0, 255});
+				effects(&ray, scn);
+				put_pixel(x, y, &ray.color);
 		}
 	}
 	return (0);

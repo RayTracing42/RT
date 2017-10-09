@@ -49,7 +49,7 @@ t_sphere				*new_sphere(t_objs_comp args, double radius)
 {
 	t_sphere	*sphere;
 
-	sphere = (t_sphere*)new_object(SPHERE, args.origin, args.dir, args.color);
+	sphere = (t_sphere*)new_object(SPHERE, args);
 	sphere->radius = radius;
 	sphere->get_normal = get_sphere_normal;
 	sphere->intersect = sphere_intersect;
