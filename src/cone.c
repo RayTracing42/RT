@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 15:10:56 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/09 16:59:22 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_cone					*new_cone(t_objs_comp args, double angle,
 {
 	t_cone	*c;
 
-	c = (t_cone*)new_object(CONE, args.orig, args.dir, args.col);
+	c = (t_cone*)new_object(CONE, args);
 	c->angle = angle;
 	c->height_top = height_top;
 	c->height_bottom = height_bottom;

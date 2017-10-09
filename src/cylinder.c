@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 15:14:01 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/09 16:59:47 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_cylinder				*new_cylinder(t_objs_comp args, double radius,
 {
 	t_cylinder	*c;
 
-	c = (t_cylinder*)new_object(CYLINDER, args.orig, args.dir, args.col);
+	c = (t_cylinder*)new_object(CYLINDER, args);
 	c->radius = radius;
 	c->height_top = height_top;
 	c->height_bottom = height_bottom;
