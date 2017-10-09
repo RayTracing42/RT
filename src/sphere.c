@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 15:15:50 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/09 17:00:33 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_sphere				*new_sphere(t_objs_comp args, double radius)
 {
 	t_sphere	*sphere;
 
-	sphere = (t_sphere*)new_object(SPHERE, args.orig, args.dir, args.col);
+	sphere = (t_sphere*)new_object(SPHERE, args);
 	sphere->radius = radius;
 	sphere->get_normal = get_sphere_normal;
 	sphere->intersect = sphere_intersect;

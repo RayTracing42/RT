@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/09 16:49:37 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/09 16:55:49 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,9 @@ typedef struct				s_objs_comp
 	t_dot					orig;
 	t_vector				dir;
 	SDL_Color				col;
+	double					reflection_amount;
+	double					refraction_amount;
+	double					refractive_index;
 }							t_objs_comp;
 
 typedef struct				s_sphere
