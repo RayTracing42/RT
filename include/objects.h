@@ -18,8 +18,7 @@
 ** objects*.c
 */
 void		delete_object(t_object *obj);
-t_object	*new_object(t_type type, t_dot origin, t_vector dir,
-						SDL_Color color);
+t_object	*new_object(t_type type, t_objs_comp args);
 void		set_object_color(t_object *obj, int r, int g, int b);
 /*
 void		rotate_object(t_object *obj, double x_angle, double y_angle,
