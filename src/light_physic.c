@@ -40,25 +40,25 @@ void	get_refracted_vect(t_vector *dir, const t_vector *norm,
 }
 
 void	get_reflected_col(t_ray *ray, t_object *src,
-				SDL_Color reflected_obj_col)
+						SDL_Color reflected_obj_col)
 {
-	ray->color.r *= (reflected_obj_col.r /
-			(src->obj_light.reflection_amount * 255));
-	ray->color.g *= (reflected_obj_col.g /
-			(src->obj_light.reflection_amount * 255));
-	ray->color.b *= (reflected_obj_col.b /
-			(src->obj_light.reflection_amount * 255));
+	ray->color.r = (ray->color.r * (1 - src->obj_light.reflection_amount)) +
+					(reflected_obj_col.r * src->obj_light.reflection_amount);
+	ray->color.g = (ray->color.g * (1 - src->obj_light.reflection_amount)) +
+					(reflected_obj_col.g * src->obj_light.reflection_amount);
+	ray->color.b = (ray->color.b * (1 - src->obj_light.reflection_amount)) +
+					(reflected_obj_col.b * src->obj_light.reflection_amount);
 }
 
 void	get_refracted_col(t_ray *ray, t_object *src,
-				SDL_Color refracted_obj_col)
+						SDL_Color refracted_obj_col)
 {
-	ray->color.r *= (refracted_obj_col.r /
-			(src->obj_light.refraction_amount * 255));
-	ray->color.g *= (refracted_obj_col.g /
-			(src->obj_light.refraction_amount * 255));
-	ray->color.b *= (refracted_obj_col.b /
-			(src->obj_light.refraction_amount * 255));
+	ray->color.r = (ray->color.r * (1 - src->obj_light.refraction_amount)) +
+					(refracted_obj_col.r * src->obj_light.refraction_amount);
+	ray->color.g = (ray->color.g * (1 - src->obj_light.refraction_amount)) +
+					(refracted_obj_col.g * src->obj_light.refraction_amount);
+	ray->color.b = (ray->color.b * (1 - src->obj_light.refraction_amount)) +
+					(refracted_obj_col.b * src->obj_light.refraction_amount);
 }
 
 SDL_Color	get_shade_col(t_ray *ray)

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/03 14:03:55 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/09/27 17:42:07 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@
 # include "graphics.h"
 # include "libft.h"
 # include "lights.h"
+# include "light_physic.h"
 # include "objects.h"
 # include "scene.h"
 # include "structures.h"
+# include "vectors.h"
 
 t_vector	matrice_rotation_x(t_vector *m, double angle);
 t_vector	matrice_rotation_y(t_vector *m, double angle);
@@ -78,4 +80,5 @@ void		set_rect_crd(SDL_Rect *rect, int x, int y);
 double		vect_dot_product(const t_vector *v1, const t_vector *v2);
 double		get_vect_lenght(const t_vector *vect);
 double		get_dot_dist(t_dot *d1, t_dot *d2);
+
 #endif

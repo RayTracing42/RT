@@ -40,7 +40,8 @@ static const t_vector	*get_sphere_normal(t_dot *inter, t_object *obj)
 	t_sphere	*s;
 
 	s = (t_sphere*)obj;
-	s->normal = (t_vector){2 * (inter->x - s->origin.x), 2 * (inter->y - s->origin.y), 2 * (inter->z - s->origin.z)};
+	s->normal = (t_vector){2 * (inter->x - s->origin.x), 2 *
+			(inter->y - s->origin.y), 2 * (inter->z - s->origin.z)};
 	return (&s->normal);
 }
 
