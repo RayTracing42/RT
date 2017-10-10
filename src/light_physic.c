@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 12:42:42 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/09 19:16:51 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/09 19:33:57 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	get_reflected_col(t_ray *ray, t_object *src,
 				SDL_Color reflected_obj_col)
 {
 	(void)src;
-	ray->color.r *= (reflected_obj_col.r /
+	ray->color.r = ray->color.r + (reflected_obj_col.r *
 			(/*src->obj_light.reflection_amount*/0.5 * 255));
-	ray->color.g *= (reflected_obj_col.g /
+	ray->color.g = ray->color.g + (reflected_obj_col.g *
 			(/*src->obj_light.reflection_amount*/0.5 * 255));
-	ray->color.b *= (reflected_obj_col.b /
+	ray->color.b = ray->color.b + (reflected_obj_col.b *
 			(/*src->obj_light.reflection_amount*/0.5 * 255));
 }
 

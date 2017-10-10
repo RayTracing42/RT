@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/10/09 19:17:15 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/09 19:26:09 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 		reflected = reflect(ray, scn);
 //		refract(ray, scn);
 		get_reflected_col(ray, NULL, reflected);
-		/*ray->color.r = (ray->color.r + reflected.r) / 2;f
+		/*ray->color.r = (ray->color.r + reflected.r) / 2;
 		ray->color.g = (ray->color.g + reflected.g) / 2;
 		ray->color.b = (ray->color.b + reflected.b) / 2;*/
 		return (ray->color);
