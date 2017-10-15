@@ -98,6 +98,7 @@ typedef struct		s_ray
 	t_vector				normal;
 	SDL_Color				color;
 	struct s_object			*obj;
+	double					refractive_index;
 }					t_ray;
 
 typedef enum				e_type

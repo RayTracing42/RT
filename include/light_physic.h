@@ -16,10 +16,10 @@
 
 void	get_reflected_vect(t_vector *dir, const t_vector *norm);
 void	get_refracted_vect(t_vector *dir, const t_vector *norm,
-							t_object *src, t_object *dst);
+			double actual_refractive_index, double percuted_refractive_index);
 void	get_reflected_col(t_ray *ray, t_object *src,
-							SDL_Color reflected_obj_col);
+			SDL_Color reflected_obj_col);
 void	get_refracted_col(t_ray *ray, t_object *src,
-							SDL_Color refracted_obj_col);
+			SDL_Color refracted_obj_col);
 
 #endif
