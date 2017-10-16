@@ -45,7 +45,7 @@ int			main(int ac, char **av)
 
 */
 
-	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){200, 50, 0}, (t_vector){0, 0, 0}, (SDL_Color){255, 255, 255, 255}, 0, 1, 1.5}, 40), scn);
+	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){200, 20, 0}, (t_vector){0, 0, 0}, (SDL_Color){255, 255, 255, 255}, 0, 1, 1.5}, 40), scn);
 	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){400, 0, 30}, (t_vector){0, 0, 0}, (SDL_Color){100, 255, 120, 255}, 0, 0, 0}, 40), scn);
 	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){400, 0, -30}, (t_vector){0, 0, 0}, (SDL_Color){100, 155, 220, 255}, 0, 0, 0}, 40), scn);
 	scene_add_object((t_object*)new_plane((t_objs_comp){(t_dot){0, -50, 0}, (t_vector){0, 0, 0}, (SDL_Color){80, 120, 180, 255}, 0, 0, 0}, (t_vector){0, 1, 0}), scn);

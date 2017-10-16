@@ -39,7 +39,6 @@ double	delta(double a, double b, double c, int n)
 		return (r1);
 	r2 = (((-b) - sqrt(d)) / (2 * a));
 	if (r1 < r2)
-		
 		return ((n == 1) ? (r1 - 0.0001) : (r2 + 0.0001));
 	else
 		return ((n == 1) ? (r2 - 0.0001) : (r1 + 0.0001));

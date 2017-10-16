@@ -53,10 +53,10 @@ void		view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 void		scanning(t_scene *scn);
 
 SDL_Color	get_shade_col(t_ray *ray);
-SDL_Color	effects(t_ray *ray, t_scene *scn, int n);
+SDL_Color	effects(t_ray *ray, t_scene *scn);
 SDL_Color	shadows(t_ray *ray, t_scene *scn);
-SDL_Color	reflect(t_ray *ray, t_scene *scn, int n);
-SDL_Color	refract(t_ray *ray, t_scene *scn, int n);
+SDL_Color	reflect(t_ray *ray, t_scene *scn);
+SDL_Color	refract(t_ray *ray, t_scene *scn);
 void		get_col_mix(t_ray *ray, SDL_Color shadows, SDL_Color reflect,
 					SDL_Color refract);
 

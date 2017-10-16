@@ -36,7 +36,7 @@ static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	return (distance);
 }
 
-SDL_Color		effects(t_ray *ray, t_scene *scn, int n)
+SDL_Color		effects(t_ray *ray, t_scene *scn)
 {
 	SDL_Color	reflect_ray;
 	SDL_Color	refract_ray;
@@ -45,8 +45,8 @@ SDL_Color		effects(t_ray *ray, t_scene *scn, int n)
 	if (check_intersect(ray, scn->objects) > 0)
 	{
 		shadows_ray = shadows(ray, scn);
-		reflect_ray = reflect(ray, scn, n);
-		refract_ray = refract(ray, scn, n);
+		reflect_ray = reflect(ray, scn);
+		refract_ray = refract(ray, scn);
 //		get_col_mix(ray, shadows_ray, reflect_ray, refract_ray);
 /**/
 		ray->color = shadows_ray;
@@ -73,7 +73,7 @@ void	scanning(t_scene *scn)
 		while (++x < WIN_WIDTH)
 		{
 				view_plane_vector(x, y, scn->cam, &ray.equ.vd);
-				effects(&ray, scn, 0);
+				effects(&ray, scn);
 				put_pixel(x, y, &ray.color);
 		}
 	}
