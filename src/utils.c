@@ -25,7 +25,7 @@ double	angle_between_vectors(t_vector a, t_vector b)
 	return (angle);
 }
 
-double	delta(double a, double b, double c)
+double	delta(double a, double b, double c, int n)
 {
 	double	d;
 	double	r1;
@@ -34,14 +34,14 @@ double	delta(double a, double b, double c)
 	d = (b * b) - (4 * a * c);
 	if (d < 0)
 		return (0);
-	r1 = (((-b) + sqrt(d)) / (2 * a)) - 0.000001;
+	r1 = (((-b) + sqrt(d)) / (2 * a));
 	if (d == 0)
 		return (r1);
-	r2 = (((-b) - sqrt(d)) / (2 * a)) - 0.000001;
+	r2 = (((-b) - sqrt(d)) / (2 * a));
 	if (r1 < r2)
-		return (r1);
+		return ((n == 1) ? (r1 - 0.0001) : (r2 + 0.0001));
 	else
-		return (r2);
+		return ((n == 1) ? (r2 - 0.0001) : (r1 + 0.0001));
 }
 
 t_vector	vector_opposite(double x, double y, double z)

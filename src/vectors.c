@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 14:45:00 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/16 18:12:12 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/16 23:42:12 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 double		get_vect_lenght(const t_vector *vect)
 {
 	return (sqrt(pow(vect->x, 2) + pow(vect->y, 2) + pow(vect->z, 2)));
+}
+
+double		get_dot_dist(t_dot *d1, t_dot *d2)
+{
+	return (sqrt(pow(d2->x - d1->x, 2) + pow(d2->y - d1->y, 2) +
+			pow(d2->z - d1->z, 2)));
 }
 
 double		vect_dot_product(const t_vector *v1, const t_vector *v2)

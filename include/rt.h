@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/16 18:06:09 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/16 23:40:01 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,23 @@ t_vector	matrice_rotation_z(t_vector *m, double angle);
 t_vector	vector(double x, double y, double z);
 t_vector	vector_opposite(double x, double y, double z);
 t_dot		dot(double x, double y, double z);
-double		delta(double a, double b, double c);
+double		delta(double a, double b, double c, int n);
 double		angle_between_vectors(t_vector a, t_vector b);
 
 void		view_plane(t_camera *cam, t_view_plane *vp);
 void		view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 
-int			parsing(t_scene *scn, int argc, char **argv);
-
-int			scanning(t_scene *scn);
+void		scanning(t_scene *scn);
 
 SDL_Color	get_shade_col(t_ray *ray);
 SDL_Color	effects(t_ray *ray, t_scene *scn);
+SDL_Color	shadows(t_ray *ray, t_scene *scn);
 SDL_Color	reflect(t_ray *ray, t_scene *scn);
 SDL_Color	refract(t_ray *ray, t_scene *scn);
+void		get_col_mix(t_ray *ray, SDL_Color shadows, SDL_Color reflect,
+					SDL_Color refract);
 
-void		get_reflected_vect(t_vector *dir, const t_vector *norm);
-void		get_refracted_vect(t_vector *dir, const t_vector *norm,
-				t_object *src, t_object *dst);
-void		get_reflected_col(t_ray *ray, t_object *src,
-				SDL_Color reflected_obj_col);
-void		get_refracted_col(t_ray *ray, t_object *src,
-				SDL_Color refracted_obj_col);
+
 /*
 **	tools.c
 */
@@ -80,4 +75,5 @@ void		set_rect_crd(SDL_Rect *rect, int x, int y);
 double		vect_dot_product(const t_vector *v1, const t_vector *v2);
 double		get_vect_lenght(const t_vector *vect);
 double		get_dot_dist(t_dot *d1, t_dot *d2);
+
 #endif

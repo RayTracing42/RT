@@ -6,14 +6,14 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/16 18:07:55 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/16 23:40:24 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			cone_intersection(t_ray *ray, t_object *obj)
+static double			cone_intersection(t_ray *ray, t_object *obj, int n)
 {
 	t_cone		*c;
 	t_vector	*vd;
@@ -26,7 +26,7 @@ static double			cone_intersection(t_ray *ray, t_object *obj)
 	vd = &ray->equ.vd;
 	t = delta(pow(vd->x, 2) + pow(vd->z, 2) - pow(vd->y, 2) * c->tanalpha2,
 			2 * (vd->x * vc.x + vd->z * vc.z - vd->y * vc.y * c->tanalpha2),
-			pow(vc.x, 2) + pow(vc.z, 2) - pow(vc.y, 2) * c->tanalpha2);
+			pow(vc.x, 2) + pow(vc.z, 2) - pow(vc.y, 2) * c->tanalpha2, n);
 	if ((long)(t * pow(10, 12)) > 0)
 	{
 		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/16 18:06:56 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/16 23:40:07 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct		s_ray
 	t_vector				normal;
 	SDL_Color				color;
 	struct s_object			*obj;
+	double					refractive_index;
 }					t_ray;
 
 typedef enum				e_type

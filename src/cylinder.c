@@ -6,14 +6,14 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/16 18:08:19 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/16 23:40:48 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			cylinder_intersect(t_ray *ray, t_object *obj)
+static double			cylinder_intersect(t_ray *ray, t_object *obj, int n)
 {
 	t_cylinder	*c;
 	t_vector	*vd;
@@ -26,7 +26,7 @@ static double			cylinder_intersect(t_ray *ray, t_object *obj)
 	vd = &ray->equ.vd;
 	if ((t = delta(pow(vd->x, 2) + pow(vd->z, 2),
 			2 * (vd->x * vc.x + vd->z * vc.z),
-			pow(vc.x, 2) + pow(vc.z, 2) - c->r2)))
+			pow(vc.x, 2) + pow(vc.z, 2) - c->r2, n)))
 	{
 		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
 				ray->equ.vc.z + vd->z * t);
@@ -40,7 +40,8 @@ static const t_vector	*get_cylinder_normal(t_dot *inter, t_object *obj)
 	t_cylinder	*c;
 
 	c = (t_cylinder*)obj;
-	c->normal =  (t_vector){2 * (inter->x - c->origin.x), 0, 2 * (inter->z - c->origin.z)};
+	c->normal =  (t_vector){2 * (inter->x - c->origin.x), 0,
+			2 * (inter->z - c->origin.z)};
 	return (&c->normal);
 }
 
