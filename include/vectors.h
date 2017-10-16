@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors.c                                          :+:      :+:    :+:   */
+/*   vectors.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/14 14:45:00 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/16 18:12:12 by edescoin         ###   ########.fr       */
+/*   Created: 2017/09/11 12:52:00 by edescoin          #+#    #+#             */
+/*   Updated: 2017/09/22 14:13:51 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
-#include <math.h>
+#ifndef VECTORS_H
+# define VECTORS_H
+# include "structures.h"
 
-double		get_vect_lenght(const t_vector *vect)
-{
-	return (sqrt(pow(vect->x, 2) + pow(vect->y, 2) + pow(vect->z, 2)));
-}
+double		get_vect_lenght(const t_vector *vect);
+double		vect_dot_product(const t_vector *v1, const t_vector *v2);
 
-double		vect_dot_product(const t_vector *v1, const t_vector *v2)
-{
-	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
-}
+#endif

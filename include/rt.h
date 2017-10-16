@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/03 14:03:55 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/16 18:06:09 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@
 # include "graphics.h"
 # include "libft.h"
 # include "lights.h"
+# include "light_physic.h"
 # include "objects.h"
 # include "scene.h"
 # include "structures.h"
+# include "vectors.h"
 
 t_vector	matrice_rotation_x(t_vector *m, double angle);
 t_vector	matrice_rotation_y(t_vector *m, double angle);
