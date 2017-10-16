@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/09 15:55:46 by fcecilie          #+#    #+#              #
-#    Updated: 2017/05/18 05:31:32 by fcecilie         ###   ########.fr        #
+#    Updated: 2017/10/16 23:31:24 by edescoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,7 @@ SRC_LIBFT = ft_memset.c \
 			ft_itoa_base.c \
 			ft_utoa_base.c \
 			errors.c \
+			ft_angles.c
 
 INCLUDE = libft.h \
 
