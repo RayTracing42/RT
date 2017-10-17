@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors.c                                          :+:      :+:    :+:   */
+/*   ft_angles.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/14 14:45:00 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/16 23:42:12 by edescoin         ###   ########.fr       */
+/*   Created: 2017/01/14 11:43:59 by edescoin          #+#    #+#             */
+/*   Updated: 2017/02/26 20:00:43 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
 #include <math.h>
+#include "libft.h"
 
-double		get_vect_lenght(const t_vector *vect)
+double	ft_to_rad(double deg)
 {
-	return (sqrt(pow(vect->x, 2) + pow(vect->y, 2) + pow(vect->z, 2)));
+	return (deg * (M_PI / 180.0f));
 }
 
-double		get_dot_dist(t_dot *d1, t_dot *d2)
+double	ft_to_deg(double rad)
 {
-	return (sqrt(pow(d2->x - d1->x, 2) + pow(d2->y - d1->y, 2) +
-			pow(d2->z - d1->z, 2)));
-}
-
-double		vect_dot_product(const t_vector *v1, const t_vector *v2)
-{
-	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
+	return (rad * (180.0f / M_PI));
 }
