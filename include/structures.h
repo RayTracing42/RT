@@ -99,6 +99,7 @@ typedef struct		s_ray
 	SDL_Color				color;
 	struct s_object			*obj;
 	double					refractive_index;
+	double					limit;
 }					t_ray;
 
 typedef enum				e_type

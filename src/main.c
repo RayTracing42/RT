@@ -34,8 +34,8 @@ int			main(int ac, char **av)
 	get_sdl_core();
 	init_list_evts(&events, NULL);
 
-	t_scene	*scn = new_scene(new_camera(60, (t_dot){-200, 0, 0}, 0, 0, 0), 75);
-	scene_add_light((t_light*)new_orb_light((t_dot){200, 500, 0}, (SDL_Color){255, 255, 255, 255}), scn);
+	t_scene	*scn = new_scene(new_camera(60, (t_dot){-700, 0, 0}, 0, 0, 0), 75);
+	scene_add_light((t_light*)new_orb_light((t_dot){600, 100, 0}, (SDL_Color){255, 255, 255, 255}), scn);
 
 /*
 	scene_add_light((t_light*)new_orb_light((t_dot){200, -100, 200}, (SDL_Color){255, 255, 255, 255}), scn);
@@ -45,11 +45,20 @@ int			main(int ac, char **av)
 
 */
 
+	scene_add_object((t_object*)new_plane((t_objs_comp){(t_dot){0, 0, 100}, (t_vector){0, 0, 0}, (SDL_Color){200, 100, 100, 255}, 0.6, 0, 0}, (t_vector){0, 0, -1}), scn);
+	scene_add_object((t_object*)new_plane((t_objs_comp){(t_dot){0, 0, -100}, (t_vector){0, 0, 0}, (SDL_Color){100, 200, 100, 255}, 0.6, 0, 0}, (t_vector){0, 0, 1}), scn);
+	scene_add_object((t_object*)new_plane((t_objs_comp){(t_dot){0, 150, 0}, (t_vector){0, 0, 0}, (SDL_Color){100, 100, 200, 255}, 0.6, 0, 0}, (t_vector){0, -1, 0}), scn);
+	scene_add_object((t_object*)new_plane((t_objs_comp){(t_dot){0, -150, 0}, (t_vector){0, 0, 0}, (SDL_Color){100, 200, 200, 255}, 0.6, 0, 0}, (t_vector){0, 1, 0}), scn);
+	scene_add_object((t_object*)new_plane((t_objs_comp){(t_dot){800, 0, 0}, (t_vector){0, 0, 0}, (SDL_Color){200, 200, 100, 255}, 0.6, 0, 0}, (t_vector){-1, 0, 0}), scn);
+	scene_add_object((t_object*)new_plane((t_objs_comp){(t_dot){-800, 0, 0}, (t_vector){0, 0, 0}, (SDL_Color){200, 100, 200, 255}, 0.6, 0, 0}, (t_vector){1, 0, 0}), scn);
+	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){600, 20, 0}, (t_vector){0, 0, 0}, (SDL_Color){255, 0, 0, 255}, 0, 0.8, 1.5}, 40), scn);
+
+/*
 	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){200, 20, 0}, (t_vector){0, 0, 0}, (SDL_Color){255, 255, 255, 255}, 0, 1, 1.5}, 40), scn);
 	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){400, 0, 30}, (t_vector){0, 0, 0}, (SDL_Color){100, 255, 120, 255}, 0, 0, 0}, 40), scn);
 	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){400, 0, -30}, (t_vector){0, 0, 0}, (SDL_Color){100, 155, 220, 255}, 0, 0, 0}, 40), scn);
 	scene_add_object((t_object*)new_plane((t_objs_comp){(t_dot){0, -50, 0}, (t_vector){0, 0, 0}, (SDL_Color){80, 120, 180, 255}, 0, 0, 0}, (t_vector){0, 1, 0}), scn);
-
+*/
 /*
 	scene_add_object((t_object*)new_cone((t_objs_comp){(t_dot){200, 0, -100}, (t_vector){0, 0, 0}, (SDL_Color){100, 80, 120, 255}}, 20, 50, 30), scn);
 	scene_add_object((t_object*)new_cylinder((t_objs_comp){(t_dot){200, 0, 0}, (t_vector){0, 0, 0}, (SDL_Color){120, 50, 70, 255}}, 20, 50, 30), scn);

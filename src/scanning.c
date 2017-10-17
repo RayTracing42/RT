@@ -66,6 +66,7 @@ void	scanning(t_scene *scn)
 
 	ray.equ.vc = *(t_vector*)&scn->cam->origin;
 	ray.refractive_index = 1;
+	ray.limit = 1;
 	y = -1;
 	while (++y < WIN_HEIGHT)
 	{

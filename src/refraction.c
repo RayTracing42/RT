@@ -57,6 +57,9 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 	refracted_ray = *ray;
 	if (ray->obj->obj_light.refraction_amount != 0)
 	{
+		if (ray->limit < 0.1)
+			return ((SDL_Color){0, 0, 0, 255});
+		refracted_ray.limit = refracted_ray.limit - ray->obj->obj_light.refraction_amount / 100;
 		refracted_ray.equ.vc = vector(ray->inter.x, ray->inter.y, ray->inter.z);
 		get_refracted_vect(&refracted_ray.equ.vd, &ray->normal, ray->refractive_index, ray->obj->obj_light.refractive_index);
 		if (ray->obj->intersect(&refracted_ray, &ray->obj, 2) > 0 && ray->obj->obj_type != PLANE)
