@@ -17,7 +17,7 @@ static t_list_objs	*new_cell_obj(t_list_objs **head, t_object *obj)
 	t_list_objs	*tmp;
 
 	if (!(tmp = malloc(sizeof(t_list_objs))))
-		exit_error("rtv1", "malloc");
+		exit_error("rt", "malloc");
 	tmp->next = NULL;
 	tmp->obj = obj;
 	if (!head)

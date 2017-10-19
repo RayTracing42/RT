@@ -32,10 +32,12 @@ static double			plane_intersect(t_ray *ray, t_object *obj)
 		denom);
 	if ((long)(t * pow(10, 12)) > 0)
 	{
+		ray->nb_intersect = 1;
 		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
 				ray->equ.vc.z + vd->z * t);
 		return (t);
 	}
+	ray->nb_intersect = 0;
 	return (-1);
 }
 

@@ -13,7 +13,7 @@
 #include "rt.h"
 #include <math.h>
 
-static double			cylinder_intersect(t_ray *ray, t_object *obj, int n)
+static double			cylinder_intersect(t_ray *ray, t_object *obj)
 {
 	t_cylinder	*c;
 	t_vector	*vd;
@@ -26,7 +26,7 @@ static double			cylinder_intersect(t_ray *ray, t_object *obj, int n)
 	vd = &ray->equ.vd;
 	if ((t = delta(pow(vd->x, 2) + pow(vd->z, 2),
 			2 * (vd->x * vc.x + vd->z * vc.z),
-			pow(vc.x, 2) + pow(vc.z, 2) - c->r2, n)))
+			pow(vc.x, 2) + pow(vc.z, 2) - c->r2, &ray->nb_intersect)))
 	{
 		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
 				ray->equ.vc.z + vd->z * t);
