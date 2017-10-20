@@ -65,7 +65,7 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 			if (!if_node_exist(refracted_ray.l_objs, ray->obj))
 			{
 				add_node(&refracted_ray.l_objs, ray->obj);
-				refracted_ray.ari = ray->obj->obj_light.refractive_index;
+				refracted_ray.pri = ray->obj->obj_light.refractive_index;
 			}
 			else
 			{
@@ -81,6 +81,8 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 		refracted_ray.equ.vc = vector(ray->inter.x + 0.00001 * ray->equ.vd.x,
 				ray->inter.y + 0.00001 * ray->equ.vd.y,
 				ray->inter.z + 0.00001 * ray->equ.vd.z);
+		if (ray->nb_intersect == 2)
+			refracted_ray.ari = refracted_ray.pri;
 		return (effects(&refracted_ray, scn));
 	}
 	return (refracted_ray.color);

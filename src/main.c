@@ -44,8 +44,8 @@ int			main(int ac, char **av)
 	scene_add_light((t_light*)new_orb_light((t_dot){200, 200, 0}, (SDL_Color){255, 255, 255, 255}), scn);
 	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){400, 20, -30}, (t_vector){0, 0, 0}, (SDL_Color){255, 255, 0, 255}, 0, 0, 1.5}, 40), scn);
 	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){400, 20, 30}, (t_vector){0, 0, 0}, (SDL_Color){255, 0, 255, 255}, 0, 0, 1.5}, 40), scn);
-	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){100, 20, 0}, (t_vector){0, 0, 0}, (SDL_Color){255, 0, 0, 255}, 0, 0.7, 1.5}, 30), scn);
-	scene_add_object((t_object*)new_cylinder((t_objs_comp){(t_dot){130, 20, 0}, (t_vector){0, 0, 0}, (SDL_Color){0, 0, 255, 255}, 0, 0.7, 1.2}, 10, 10, 10), scn);
+	scene_add_object((t_object*)new_sphere((t_objs_comp){(t_dot){100, 20, 0}, (t_vector){0, 0, 0}, (SDL_Color){255, 0, 0, 255}, 0, 0.7, 1.5}, 20), scn);
+	scene_add_object((t_object*)new_cylinder((t_objs_comp){(t_dot){100, 20, 0}, (t_vector){0, 0, 0}, (SDL_Color){0, 0, 255, 255}, 0, 0.7, 1.8}, 5, 5, 5), scn);
 
 	printf("4\n");
 	view_plane(scn->cam, scn->cam->vp);
