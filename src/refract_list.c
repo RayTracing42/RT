@@ -23,38 +23,23 @@ void	add_node(t_list_objs **l, t_object *obj)
 	{
 		new->next = *l;
 		*l = new;
-	}	
+	}
 }
 
 void	remove_node(t_list_objs **l, t_object *obj)
 {
 	t_list_objs *tmp;
-	t_list_objs *prev;
 
-	tmp = *l;
-	prev = NULL;
-	while (tmp)
+	while (*l)
 	{
-		if (tmp->obj == obj)
+		if ((*l)->obj == obj)
 		{
-			if (prev == NULL)
-			{
-				*l = tmp->next;
-				free(tmp);
-				tmp = *l;
-			}
-			else
-			{
-				prev->next = tmp->next;
-				free(tmp);
-				tmp = prev;
-			}
+			tmp = *l;
+			*l = tmp->next;
+			free(tmp);
 		}
-		if (tmp)
-		{	
-			prev = tmp;
-			tmp = tmp->next;
-		}
+		else
+			l = &(*l)->next;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/16 23:40:07 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/24 19:46:03 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ typedef struct		s_ray
 	SDL_Color				color;
 	struct s_object			*obj;
 	struct s_list_objs		*l_objs;
-	double					ari;
-	double					pri;
+	double					actual_refractive_i;
+	double					percuted_refractive_i;
 	double					limit;
 	int						nb_intersect;
 }					t_ray;

@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/10/09 19:03:21 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/24 19:48:44 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 			ray->color = l_objs->obj->color;
 			ray->normal = *l_objs->obj->get_normal(&ray->inter, l_objs->obj);
 			ray->obj = l_objs->obj;
-			ray->pri = l_objs->obj->obj_light.refractive_index;
+			ray->percuted_refractive_i = l_objs->obj->obj_light.refractive_index;
 			nb = ray->nb_intersect;
 		}
 		l_objs = l_objs->next;
@@ -64,7 +64,7 @@ void	scanning(t_scene *scn)
 	t_ray		ray;
 
 	ray.equ.vc = *(t_vector*)&scn->cam->origin;
-	ray.ari = 1;
+	ray.actual_refractive_i = 1;
 	ray.limit = 1;
 	ray.l_objs = NULL;
 	y = -1;
