@@ -45,16 +45,7 @@ void	remove_node(t_list_objs **l, t_object *obj)
 
 int		if_node_exist(t_list_objs *l, t_object *obj)
 {
-	t_list_objs *tmp;
-	int			nb_node;
-
-	tmp = l;
-	nb_node = 0;
-	while (tmp)
-	{
-		if (tmp->obj == obj)
-			nb_node++;
-		tmp = tmp->next;
-	}
-	return (nb_node);
+	while (l && l->obj != obj)
+		l = l->next;
+	return (l && l->obj == obj);
 }
