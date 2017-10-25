@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/16 23:40:07 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/25 17:10:38 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,8 +264,7 @@ typedef struct				s_spotlight
 }							t_spotlight;
 
 /*
-** orb_light hérite de spotlight /!\ ne pas ajouter de champs, le constructeur
-**                                   actuel ne le permet pas. /!\
+** orb_light hérite de spotlight
 */
 typedef struct				s_orb_light
 {
