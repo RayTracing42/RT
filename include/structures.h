@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/25 17:54:02 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/25 18:05:04 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,8 @@ typedef struct				s_objs_comp
 typedef struct				s_sphere
 {
 	const t_type			obj_type;
-	double					(*intersect)();
-	const t_vector			*(*get_normal)();
+	double					(*intersect)(t_ray *ray, t_object *obj);
+	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
