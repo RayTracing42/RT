@@ -17,7 +17,7 @@ void	get_refracted_vect(t_vector *dir, const t_vector *norm,
 	double		n1_by_n2;
 	t_vector	u_dir;
 	t_vector	u_norm;
-	
+
 	cos_theta1 = get_vect_lenght(dir);
 	cos_theta2 = get_vect_lenght(norm);
 	u_dir = vector(dir->x / cos_theta1, dir->y / cos_theta1, dir->z / cos_theta1);
