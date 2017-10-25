@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/25 17:13:49 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/25 17:21:38 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,12 @@ typedef struct		s_ray
 	t_dot					inter;
 	t_vector				normal;
 	SDL_Color				color;
+	struct s_object			*obj;
+	struct s_list_objs		*l_objs;
+	double					ari;
+	double					pri;
+	double					limit;
+	int						nb_intersect;
 }					t_ray;
 
 typedef enum				e_type
@@ -129,7 +135,7 @@ typedef struct				s_object
 
 typedef struct				s_objs_comp
 {
-	t_dot					origin;
+	t_dot					orig;
 	t_vector				dir;
 	SDL_Color				col;
 	double					reflection_amount;
