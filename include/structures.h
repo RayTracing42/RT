@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/24 19:46:03 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/25 17:54:02 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ typedef struct				s_obj_phys
 typedef struct				s_object
 {
 	const t_type			obj_type;
-	double					(*intersect)();
-	const t_vector			*(*get_normal)();
+	double					(*intersect)(t_ray *ray, struct s_object *obj);
+	const t_vector			*(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
@@ -160,8 +160,8 @@ typedef struct				s_sphere
 typedef struct				s_cylinder
 {
 	const t_type			obj_type;
-	double					(*intersect)();
-	const t_vector			*(*get_normal)();
+	double					(*intersect)(t_ray *ray, t_object *obj);
+	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
@@ -176,8 +176,8 @@ typedef struct				s_cylinder
 typedef struct				s_cone
 {
 	const t_type			obj_type;
-	double					(*intersect)();
-	const t_vector			*(*get_normal)();
+	double					(*intersect)(t_ray *ray, t_object *obj);
+	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
@@ -192,8 +192,8 @@ typedef struct				s_cone
 typedef struct				s_plane
 {
 	const t_type			obj_type;
-	double					(*intersect)();
-	const t_vector			*(*get_normal)();
+	double					(*intersect)(t_ray *ray, t_object *obj);
+	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
@@ -264,8 +264,7 @@ typedef struct				s_spotlight
 }							t_spotlight;
 
 /*
-** orb_light hérite de spotlight /!\ ne pas ajouter de champs, le constructeur
-**                                   actuel ne le permet pas. /!\
+** orb_light hérite de spotlight
 */
 typedef struct				s_orb_light
 {
