@@ -17,7 +17,7 @@ void	get_refracted_vect(t_vector *dir, const t_vector *norm,
 	double		n1_by_n2;
 	t_vector	u_dir;
 	t_vector	u_norm;
-	
+
 	cos_theta1 = get_vect_lenght(dir);
 	cos_theta2 = get_vect_lenght(norm);
 	u_dir = vector(dir->x / cos_theta1, dir->y / cos_theta1, dir->z / cos_theta1);
@@ -63,7 +63,7 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 		{
 			refracted_ray.normal = *ray->obj->get_normal(&refracted_ray.inter, ray->obj);
 //			refracted_ray.normal = vector_opposite(refracted_ray.normal.x, refracted_ray.normal.y, refracted_ray.normal.z);
-			
+
 			refracted_ray.equ.vc = vector(refracted_ray.inter.x, refracted_ray.inter.y, refracted_ray.inter.z);
 			get_refracted_vect(&refracted_ray.equ.vd, &refracted_ray.normal, ray->obj->obj_light.refractive_index, ray->refractive_index);
 			return (effects(&refracted_ray, scn));
