@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/09 16:55:49 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/25 15:36:34 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,7 +238,7 @@ typedef struct				s_parallel_light
 	const t_light_type		type;
 	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)(t_vector *pos, t_light *light);
+	t_vector				(*get_ray_vect)(t_vector *pos, struct s_light *light);
 	int						(*is_in_light)(t_vector dir);
 }							t_parallel_light;
 
@@ -250,22 +250,21 @@ typedef struct				s_spotlight
 	const t_light_type		type;
 	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)(t_vector *pos, t_light *light);
+	t_vector				(*get_ray_vect)(t_vector *pos, struct s_light *light);
 	int						(*is_in_light)(t_vector dir);
 	t_dot					orig;
 	double					aperture;
 }							t_spotlight;
 
 /*
-** orb_light hérite de spotlight /!\ ne pas ajouter de champs, le constructeur
-**                                   actuel ne le permet pas. /!\
+** orb_light hérite de spotlight
 */
 typedef struct				s_orb_light
 {
 	const t_light_type		type;
 	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)(t_vector *pos, t_light *light);
+	t_vector				(*get_ray_vect)(t_vector *pos, struct s_light *light);
 	int						(*is_in_light)(t_vector dir);
 	t_dot					orig;
 	double					aperture;
