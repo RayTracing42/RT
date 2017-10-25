@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/25 15:36:34 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/25 17:00:59 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # ifndef __APPLE__
 #  include <SDL2/SDL.h>
 # else
-#  include "SDL2/SDL.h"
+#  include <SDL2/SDL.h>
 # endif
 
 /*
@@ -28,7 +28,6 @@ typedef enum		e_thread_state
 	PAUSE,
 	STOP
 }					t_thread_state;
-
 typedef struct		s_thread
 {
 	SDL_Thread		*ptr;
@@ -94,8 +93,10 @@ typedef struct				s_parequation
 
 typedef struct		s_ray
 {
-	t_parequation	equ;
-	t_dot			inter;
+	t_parequation			equ;
+	t_dot					inter;
+	t_vector				normal;
+	SDL_Color				color;
 }					t_ray;
 
 typedef enum				e_type
@@ -128,7 +129,7 @@ typedef struct				s_object
 
 typedef struct				s_objs_comp
 {
-	t_dot					orig;
+	t_dot					origin;
 	t_vector				dir;
 	SDL_Color				col;
 	double					reflection_amount;
@@ -226,8 +227,8 @@ typedef struct				s_light
 	const t_light_type		type;
 	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)(t_vector *pos, struct s_light *light);
-	int						(*is_in_light)(t_vector dir);
+	t_vector				(*get_ray_vect)(t_dot *pos, struct s_light *light);
+	int						(*is_in_light)(struct s_light *light, t_ray *light_ray);
 }							t_light;
 
 /*
@@ -270,6 +271,17 @@ typedef struct				s_orb_light
 	double					aperture;
 }							t_orb_light;
 
+//	ecran imaginaire qui permet de definir le vecteur camera -> pixel;
+typedef struct				s_view_plane
+{
+	t_dot					up_left;
+	t_vector				front;
+	t_vector				up;
+	t_vector				right;
+	t_vector				size;
+	double					fov;
+}							t_view_plane;
+
 typedef struct				s_camera
 {
 	t_dot					origin;
@@ -277,6 +289,7 @@ typedef struct				s_camera
 	double					angle_x;
 	double					angle_y;
 	double					angle_z;
+	t_view_plane			*vp;
 }							t_camera;
 
 typedef struct				s_list_objs
