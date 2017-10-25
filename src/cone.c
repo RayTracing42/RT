@@ -13,7 +13,7 @@
 #include "rt.h"
 #include <math.h>
 
-static double			cone_intersection(t_ray *ray, t_object *obj, int n)
+static double			cone_intersection(t_ray *ray, t_object *obj)
 {
 	t_cone		*c;
 	t_vector	*vd;
@@ -26,7 +26,8 @@ static double			cone_intersection(t_ray *ray, t_object *obj, int n)
 	vd = &ray->equ.vd;
 	t = delta(pow(vd->x, 2) + pow(vd->z, 2) - pow(vd->y, 2) * c->tanalpha2,
 			2 * (vd->x * vc.x + vd->z * vc.z - vd->y * vc.y * c->tanalpha2),
-			pow(vc.x, 2) + pow(vc.z, 2) - pow(vc.y, 2) * c->tanalpha2, n);
+			pow(vc.x, 2) + pow(vc.z, 2) - pow(vc.y, 2) * c->tanalpha2,
+			&ray->nb_intersect);
 	if ((long)(t * pow(10, 12)) > 0)
 	{
 		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,

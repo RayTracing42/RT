@@ -57,19 +57,33 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 	refracted_ray = *ray;
 	if (ray->obj->obj_light.refraction_amount != 0)
 	{
-		refracted_ray.equ.vc = vector(ray->inter.x, ray->inter.y, ray->inter.z);
-		get_refracted_vect(&refracted_ray.equ.vd, &ray->normal, ray->refractive_index, ray->obj->obj_light.refractive_index);
-		if (ray->obj->intersect(&refracted_ray, &ray->obj, 2) > 0 && ray->obj->obj_type != PLANE)
+		if (ray->limit < 0.1)
+			return ((SDL_Color){0, 0, 0, 255});
+		refracted_ray.limit = refracted_ray.limit - (1 - ray->obj->obj_light.refraction_amount) / 100;
+		if (ray->nb_intersect == 2)
 		{
-			refracted_ray.normal = *ray->obj->get_normal(&refracted_ray.inter, ray->obj);
-//			refracted_ray.normal = vector_opposite(refracted_ray.normal.x, refracted_ray.normal.y, refracted_ray.normal.z);
-
-			refracted_ray.equ.vc = vector(refracted_ray.inter.x, refracted_ray.inter.y, refracted_ray.inter.z);
-			get_refracted_vect(&refracted_ray.equ.vd, &refracted_ray.normal, ray->obj->obj_light.refractive_index, ray->refractive_index);
-			return (effects(&refracted_ray, scn));
+			if (!if_node_exist(refracted_ray.l_objs, ray->obj))
+			{
+				add_node(&refracted_ray.l_objs, ray->obj);
+				refracted_ray.pri = ray->obj->obj_light.refractive_index;
+			}
+			else
+			{
+				remove_node(&refracted_ray.l_objs, ray->obj);
+				refracted_ray.ari = ray->obj->obj_light.refractive_index;
+				if (refracted_ray.l_objs)
+					refracted_ray.pri = refracted_ray.l_objs->obj->obj_light.refractive_index;
+				else
+					refracted_ray.pri = 1;
+			}
 		}
-		else
-			return (effects(&refracted_ray, scn));
+		get_refracted_vect(&refracted_ray.equ.vd, &ray->normal, ray->ari, ray->pri);
+		refracted_ray.equ.vc = vector(ray->inter.x + 0.00001 * ray->equ.vd.x,
+				ray->inter.y + 0.00001 * ray->equ.vd.y,
+				ray->inter.z + 0.00001 * ray->equ.vd.z);
+		if (ray->nb_intersect == 2)
+			refracted_ray.ari = refracted_ray.pri;
+		return (effects(&refracted_ray, scn));
 	}
 	return (refracted_ray.color);
 }

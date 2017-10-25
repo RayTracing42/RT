@@ -13,7 +13,7 @@
 #include "rt.h"
 #include <math.h>
 
-static double			sphere_intersect(t_ray *ray, t_object *obj, int n)
+static double			sphere_intersect(t_ray *ray, t_object *obj)
 {
 	t_sphere	*s;
 	t_vector	*vd;
@@ -26,7 +26,8 @@ static double			sphere_intersect(t_ray *ray, t_object *obj, int n)
 	vd = &ray->equ.vd;
 	if ((t = delta(pow(vd->x, 2) + pow(vd->y, 2) + pow(vd->z, 2),
 			2 * (vd->x * vc.x + vd->y * vc.y + vd->z * vc.z),
-			pow(vc.x, 2) + pow(vc.y, 2) + pow(vc.z, 2) - s->r2, n)))
+			pow(vc.x, 2) + pow(vc.y, 2) + pow(vc.z, 2) - s->r2,
+			&ray->nb_intersect)))
 	{
 		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
 				ray->equ.vc.z + vd->z * t);

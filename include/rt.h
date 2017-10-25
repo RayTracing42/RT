@@ -44,7 +44,7 @@ t_vector	matrice_rotation_z(t_vector *m, double angle);
 t_vector	vector(double x, double y, double z);
 t_vector	vector_opposite(double x, double y, double z);
 t_dot		dot(double x, double y, double z);
-double		delta(double a, double b, double c, int n);
+double		delta(double a, double b, double c, int *n);
 double		angle_between_vectors(t_vector a, t_vector b);
 
 void		view_plane(t_camera *cam, t_view_plane *vp);
@@ -59,6 +59,14 @@ SDL_Color	reflect(t_ray *ray, t_scene *scn);
 SDL_Color	refract(t_ray *ray, t_scene *scn);
 void		get_col_mix(t_ray *ray, SDL_Color shadows, SDL_Color reflect,
 					SDL_Color refract);
+
+/*
+**	refract_list.c
+*/
+
+void		add_node(t_list_objs **l, t_object *obj);
+void		remove_node(t_list_objs **l, t_object *obj);
+int			if_node_exist(t_list_objs *l, t_object *obj);
 
 
 /*
