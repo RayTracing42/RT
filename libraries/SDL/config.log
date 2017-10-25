@@ -30,8 +30,8 @@ Kernel configured for up to 4 processors.
 Processor type: i486 (Intel 80486)
 Processors active: 0 1 2 3
 Primary memory available: 8.00 gigabytes
-Default processor set: 314 tasks, 1602 threads, 4 processors
-Load average: 2.20, Mach factor: 1.78
+Default processor set: 334 tasks, 1727 threads, 4 processors
+Load average: 2.33, Mach factor: 1.93
 /bin/machine           = unknown
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
@@ -1045,7 +1045,7 @@ configure:16641: checking for _strrev
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__strrev", referenced from:
-      _main in conftest-f06701.o
+      _main in conftest-d261de.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1158,7 +1158,7 @@ configure:16641: checking for _strupr
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__strupr", referenced from:
-      _main in conftest-e1fa54.o
+      _main in conftest-05bd2f.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1271,7 +1271,7 @@ configure:16641: checking for _strlwr
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__strlwr", referenced from:
-      _main in conftest-dca885.o
+      _main in conftest-91498f.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1411,7 +1411,7 @@ configure:16641: checking for itoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_itoa", referenced from:
-      _main in conftest-84d8b2.o
+      _main in conftest-7ca4b1.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1527,7 +1527,7 @@ configure:16641: checking for _ltoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__ltoa", referenced from:
-      _main in conftest-f3b5f8.o
+      _main in conftest-b84b93.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1643,7 +1643,7 @@ configure:16641: checking for _uitoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__uitoa", referenced from:
-      _main in conftest-99678b.o
+      _main in conftest-9d0615.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1759,7 +1759,7 @@ configure:16641: checking for _ultoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__ultoa", referenced from:
-      _main in conftest-2dfd00.o
+      _main in conftest-ab52e4.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1883,7 +1883,7 @@ configure:16641: checking for _i64toa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__i64toa", referenced from:
-      _main in conftest-878651.o
+      _main in conftest-5d2317.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -2001,7 +2001,7 @@ configure:16641: checking for _ui64toa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__ui64toa", referenced from:
-      _main in conftest-037393.o
+      _main in conftest-2347f3.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -2153,7 +2153,7 @@ configure:16641: checking for _stricmp
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__stricmp", referenced from:
-      _main in conftest-267324.o
+      _main in conftest-4af498.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -2286,7 +2286,7 @@ configure:16641: checking for _strnicmp
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__strnicmp", referenced from:
-      _main in conftest-7e4821.o
+      _main in conftest-ce4a30.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -2438,7 +2438,7 @@ configure:16641: checking for fopen64
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_fopen64", referenced from:
-      _main in conftest-8ec3bd.o
+      _main in conftest-8bf0e1.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -2570,7 +2570,7 @@ configure:16641: checking for fseeko64
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_fseeko64", referenced from:
-      _main in conftest-f6fdb1.o
+      _main in conftest-43bdea.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -2723,7 +2723,7 @@ configure:16641: checking for getauxval
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos   -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_getauxval", referenced from:
-      _main in conftest-d1b293.o
+      _main in conftest-e85991.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -4034,7 +4034,7 @@ conftest.c:131:19: warning: implicit declaration of function 'sem_timedwait' is 
 1 warning generated.
 Undefined symbols for architecture x86_64:
   "_sem_timedwait", referenced from:
-      _main in conftest-ec8017.o
+      _main in conftest-32620d.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:22739: $? = 1
@@ -4317,7 +4317,7 @@ configure:22806: checking for pthread_set_name_np
 configure:22826: gcc -o conftest -g -O2 -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos  -D_THREAD_SAFE  -Iinclude -I/Users/edescoin/Documents/RT/libraries/SDL/include -idirafter /Users/edescoin/Documents/RT/libraries/SDL/src/video/khronos    conftest.c  -lm -liconv  >&5
 Undefined symbols for architecture x86_64:
   "_pthread_set_name_np", referenced from:
-      _main in conftest-d6f4fa.o
+      _main in conftest-06db3e.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:22826: $? = 1
@@ -4484,6 +4484,7 @@ config.status:1293: creating sdl2-config.cmake
 config.status:1293: creating SDL2.spec
 config.status:1293: creating sdl2.pc
 config.status:1293: creating include/SDL_config.h
+config.status:1453: include/SDL_config.h is unchanged
 config.status:1467: executing libtool commands
 config.status:1467: executing sdl2_config commands
 config.status:1467: executing summary commands
