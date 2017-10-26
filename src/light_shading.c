@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 12:42:42 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 19:16:35 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 19:42:46 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ SDL_Color	get_shade_col(t_ray *ray, const t_scene *scene)
 		(get_vect_lenght(&ray->equ.vd) * get_vect_lenght(&ray->normal)));
 	if (coef < 0)
 		coef = 0;
-	tmp.x = col->r * (scene->brightness + coef);
-	tmp.y = col->g * (scene->brightness + coef);
-	tmp.z = col->b * (scene->brightness + coef);
+	tmp.x = col->r * coef + scene->brightness;
+	tmp.y = col->g * coef + scene->brightness;
+	tmp.z = col->b * coef + scene->brightness;
 	return ((SDL_Color){tmp.x > 255 ? 255 : tmp.x,
 						tmp.y > 255 ? 255 : tmp.y,
 						tmp.z > 255 ? 255 : tmp.z, 255});
