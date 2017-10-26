@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:46:09 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 19:29:58 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 20:18:32 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_parallel_light	*new_parallel_light(t_vector direction, SDL_Color color,
 {
 	t_parallel_light	*par;
 
-	par = (t_parallel_light*)new_light(PARALLEL, direction, color);
+	par = (t_parallel_light*)new_light(PARALLEL, direction, color, power);
 	par->get_ray_vect = &get_par_ray_vect;
 	par->is_in_light = &is_in_parallel_light;
 	return (par);

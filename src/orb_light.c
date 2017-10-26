@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:32:44 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 19:27:14 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 20:17:51 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_orb_light	*new_orb_light(t_dot orig, SDL_Color color, double power)
 {
 	t_orb_light	*orb;
 
-	orb = (t_orb_light*)new_spotlight((t_light_crd){(t_vector){0, 0, 0}, orig},
+	orb = (t_orb_light*)new_spotlight((t_light_crd){orig, (t_vector){0, 0, 0}},
 									color, 360, power);
 	orb->is_in_light = &is_in_orb_light;
 	orb->get_ray_vect = &get_orb_ray_vect;
