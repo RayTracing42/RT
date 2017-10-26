@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/25 17:21:38 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/25 18:05:04 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ typedef struct		s_ray
 	SDL_Color				color;
 	struct s_object			*obj;
 	struct s_list_objs		*l_objs;
-	double					ari;
-	double					pri;
+	double					actual_refractive_i;
+	double					percuted_refractive_i;
 	double					limit;
 	int						nb_intersect;
 }					t_ray;
@@ -146,8 +146,8 @@ typedef struct				s_objs_comp
 typedef struct				s_sphere
 {
 	const t_type			obj_type;
-	double					(*intersect)();
-	const t_vector			*(*get_normal)();
+	double					(*intersect)(t_ray *ray, t_object *obj);
+	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				dir;
 	t_vector				normal;
