@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 12:42:42 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/10 12:13:52 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 19:04:42 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	get_refracted_vect(t_vector *dir, const t_vector *norm,
 
 	cos_theta1 = vect_dot_product(norm, &(t_vector){-dir->x, -dir->y, -dir->z});
 	n1_by_n2 = src->obj_light.refractive_index /
-				dst->obj_light.refractive_index;
+			dst->obj_light.refractive_index;
 	cos_theta2 = sqrt(1 - pow(n1_by_n2, 2) * (1 - pow(cos_theta1, 2)));
 	dir->x = n1_by_n2 * dir->x + (n1_by_n2 * cos_theta1 - cos_theta2) * norm->x;
 	dir->y = n1_by_n2 * dir->y + (n1_by_n2 * cos_theta1 - cos_theta2) * norm->y;
@@ -40,6 +40,7 @@ void	get_refracted_vect(t_vector *dir, const t_vector *norm,
 }
 
 void	get_reflected_col(t_ray *ray, t_object *src,
+<<<<<<< HEAD
 						SDL_Color reflected_obj_col)
 {
 	ray->color.r = (ray->color.r * (1 - src->obj_light.reflection_amount)) +

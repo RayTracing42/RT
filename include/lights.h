@@ -26,4 +26,10 @@ t_spotlight			*new_spotlight(t_vector direction, t_dot orig,
 t_orb_light			*new_orb_light(t_dot orig, SDL_Color color);
 t_parallel_light	*new_parallel_light(t_vector direction, SDL_Color color);
 
+
+int					shadows(t_ray *ray, t_scene *scn);
+t_vector			define_vector_orb(t_dot inter, t_orb_light *o);
+t_vector			define_vector_spot(t_dot inter, t_spotlight *s);
+t_vector			define_vector_parallel(t_parallel_light *p);
+
 #endif
