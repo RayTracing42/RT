@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 12:42:42 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 19:04:42 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 19:08:31 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	get_refracted_vect(t_vector *dir, const t_vector *norm,
 }
 
 void	get_reflected_col(t_ray *ray, t_object *src,
-<<<<<<< HEAD
 						SDL_Color reflected_obj_col)
 {
 	ray->color.r = (ray->color.r * (1 - src->obj_light.reflection_amount)) +
@@ -60,23 +59,4 @@ void	get_refracted_col(t_ray *ray, t_object *src,
 					(refracted_obj_col.g * src->obj_light.refraction_amount);
 	ray->color.b = (ray->color.b * (1 - src->obj_light.refraction_amount)) +
 					(refracted_obj_col.b * src->obj_light.refraction_amount);
-}
-
-SDL_Color	get_shade_col(t_ray *ray, const t_scene *scene)
-{
-	double		coef;
-	SDL_Color	*col;
-	t_vector	tmp;
-
-	col = &ray->color;
-	coef = (vect_dot_product(&ray->equ.vd, &ray->normal) /
-		(get_vect_lenght(&ray->equ.vd) * get_vect_lenght(&ray->normal)));
-	if (coef < 0)
-		coef = 0;
-	tmp.x = col->r * (scene->brightness + coef);
-	tmp.y = col->g * (scene->brightness + coef);
-	tmp.z = col->b * (scene->brightness + coef);
-	return ((SDL_Color){tmp.x > 255 ? 255 : tmp.x,
-						tmp.y > 255 ? 255 : tmp.y,
-						tmp.z > 255 ? 255 : tmp.z, 255});
 }

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:46:09 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/25 17:03:10 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 19:29:58 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static t_vector		get_par_ray_vect(t_dot *pos, t_light *light)
 					-light->direction.z});
 }
 
-t_parallel_light	*new_parallel_light(t_vector direction, SDL_Color color)
+t_parallel_light	*new_parallel_light(t_vector direction, SDL_Color color,
+										double power)
 {
 	t_parallel_light	*par;
 

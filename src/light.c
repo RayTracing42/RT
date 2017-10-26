@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 13:51:24 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/25 17:03:10 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 19:22:05 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static size_t	get_type_size(t_light_type type)
 }
 
 t_light			*new_light(t_light_type type, t_vector direction,
-							SDL_Color color)
+							SDL_Color color, double power)
 {
 	t_light	*light;
 
@@ -33,6 +33,7 @@ t_light			*new_light(t_light_type type, t_vector direction,
 	light->color = color;
 	light->get_ray_vect = NULL;
 	light->is_in_light = NULL;
+	light->power = power;
 	return (light);
 }
 
