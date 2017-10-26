@@ -28,7 +28,7 @@ void	get_refracted_vect(t_vector *dir, const t_vector *norm,
 	cos_t2 = sqrt(1 - pow(n1_n2, 2) * (1 - pow(cos_t1, 2)));
 	if (cos_t1 > 0)
 		cos_t2 = -cos_t2;
-	u_dir = (t_vector){n1_n2 * u_dir.x + (n1_n2 * cos_t1 + cos_t2) * u_norm.x,
+	*dir = (t_vector){n1_n2 * u_dir.x + (n1_n2 * cos_t1 + cos_t2) * u_norm.x,
 					n1_n2 * u_dir.y + (n1_n2 * cos_t1 + cos_t2) * u_norm.y,
 					n1_n2 * u_dir.z + (n1_n2 * cos_t1 + cos_t2) * u_norm.z};
 }
