@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/25 18:05:04 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 19:47:34 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct				s_obj_phys
 	double					reflection_amount;
 	double					refraction_amount;
 	double					refractive_index;
+	double					shininess;
 }							t_obj_phys;
 
 typedef struct				s_object
@@ -141,6 +142,7 @@ typedef struct				s_objs_comp
 	double					reflection_amount;
 	double					refraction_amount;
 	double					refractive_index;
+	double					shininess;
 }							t_objs_comp;
 
 typedef struct				s_sphere
@@ -228,6 +230,12 @@ typedef enum				e_light_type
 	SPOT
 }							t_light_type;
 
+typedef struct	s_light_crd
+{
+	t_dot		orig;
+	t_vector	direction;
+}				t_light_crd;
+
 typedef struct				s_light
 {
 	const t_light_type		type;
@@ -235,6 +243,7 @@ typedef struct				s_light
 	t_vector				direction;
 	t_vector				(*get_ray_vect)(t_dot *pos, struct s_light *light);
 	int						(*is_in_light)(struct s_light *light, t_ray *light_ray);
+	double					power;
 }							t_light;
 
 /*
@@ -247,6 +256,7 @@ typedef struct				s_parallel_light
 	t_vector				direction;
 	t_vector				(*get_ray_vect)(t_dot *pos, t_light *light);
 	int						(*is_in_light)(t_light *light, t_ray *light_ray);
+	double					power;
 }							t_parallel_light;
 
 /*
@@ -259,6 +269,7 @@ typedef struct				s_spotlight
 	t_vector				direction;
 	t_vector				(*get_ray_vect)(t_dot *pos, t_light *light);
 	int						(*is_in_light)(t_light *light, t_ray *light_ray);
+	double					power;
 	t_dot					orig;
 	double					aperture;
 }							t_spotlight;
@@ -273,6 +284,7 @@ typedef struct				s_orb_light
 	t_vector				direction;
 	t_vector				(*get_ray_vect)(t_dot *pos, t_light *light);
 	int						(*is_in_light)(t_light *light, t_ray *light_ray);
+	double					power;
 	t_dot					orig;
 	double					aperture;
 }							t_orb_light;

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:04:25 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/25 17:49:12 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 19:47:34 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ static t_vector	get_spot_ray_vect(t_dot *pos, t_light *light)
 						((t_spotlight*)light)->orig.z - pos->z});
 }
 
-t_spotlight	*new_spotlight(t_vector direction, t_dot origin, SDL_Color color,
-						double aperture)
+t_spotlight	*new_spotlight(t_light_crd coords, SDL_Color color, double aperture,
+						double power)
 {
 	t_spotlight	*spot;
 
 	if (aperture == 360)
-		spot = (t_spotlight*)new_light(ORB, direction, color);
+		spot = (t_spotlight*)new_light(ORB, coords.direction, color, power);
 	else
-		spot = (t_spotlight*)new_light(SPOT, direction, color);
-	spot->orig = origin;
+		spot = (t_spotlight*)new_light(SPOT, coords.direction, color, power);
+	spot->orig = coords.orig;
 	spot->aperture = aperture;
 	spot->get_ray_vect = &get_spot_ray_vect;
 	spot->is_in_light = &is_in_spotlight;

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/24 19:49:16 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 19:44:36 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include "libft.h"
 # include "lights.h"
 # include "light_physic.h"
+# include "light_shading.h"
 # include "objects.h"
 # include "scene.h"
 # include "structures.h"
@@ -52,7 +53,6 @@ void		view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 
 void		scanning(t_scene *scn);
 
-SDL_Color	get_shade_col(t_ray *ray);
 SDL_Color	effects(t_ray *ray, t_scene *scn);
 SDL_Color	shadows(t_ray *ray, t_scene *scn);
 SDL_Color	reflect(t_ray *ray, t_scene *scn);
