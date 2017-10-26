@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 19:44:36 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 20:25:23 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ SDL_Color	effects(t_ray *ray, t_scene *scn);
 SDL_Color	shadows(t_ray *ray, t_scene *scn);
 SDL_Color	reflect(t_ray *ray, t_scene *scn);
 SDL_Color	refract(t_ray *ray, t_scene *scn);
-void		get_col_mix(t_ray *ray, SDL_Color shadows, SDL_Color reflect,
-					SDL_Color refract);
 
 /*
 **	refract_list.c

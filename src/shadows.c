@@ -70,7 +70,7 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 		light_ray.normal = ray->normal;
 		if (!(check_objs_on_ray(&light_ray, scn->objects, tmp->light)))
 			multi_lights = add_colors(multi_lights,
-									get_shade_col(&light_ray, scn));
+									get_shade_col(&light_ray));
 		tmp = tmp->next;
 	}
 	return (div_colors(multi_lights, scn));
