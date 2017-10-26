@@ -6,13 +6,12 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 12:42:42 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 19:47:34 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 19:49:46 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
-
 
 void		get_col_mix(t_ray *ray, SDL_Color shadows, SDL_Color reflect,
 					SDL_Color refract)
