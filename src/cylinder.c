@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aancel <aancel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 19:47:34 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/27 17:01:35 by aancel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,38 @@
 static double			cylinder_intersect(t_ray *ray, t_object *obj)
 {
 	t_cylinder	*c;
-	t_vector	*vd;
+	t_dot		a;
+	t_vector	d;
+	t_vector	vd;
 	t_vector	vc;
-	double		t;
+	t_vector	tmp;
+	t_vector	tmp2;
 
+	vc = ray->equ.vc;
+	vd = ray->equ.vd;
 	c = (t_cylinder*)obj;
-	vc = vector(ray->equ.vc.x - c->origin.x, ray->equ.vc.y - c->origin.y,
-			ray->equ.vc.z - c->origin.z);
-	vd = &ray->equ.vd;
+	d = vec_sub(vc, *(t_vector*)&c->origin);
+	tmp = vec_prod(c->dir, scal(vd, c->dir));
+	tmp = vec_sub(vd, tmp);
+	a.x = scal(tmp, tmp);
+	tmp2 = vec_prod(c->dir, scal(d, c->dir));
+	tmp2 = vec_sub(d, tmp2);
+	a.y = 2 * scal(tmp, tmp2);
+	a.z = scal(tmp2, tmp2) - c->r2;
+	// solve_it(a, c.color, ptr, (t_ptd){vc, vd});
+
+
+	// t_cylinder	*c;
+	// t_vector	*vd;
+	// t_vector	vc;
+	// double		t;
+
+	// c = (t_cylinder*)obj;
+	// vc = vector(ray->equ.vc.x - c->origin.x, ray->equ.vc.y - c->origin.y,
+	// 		ray->equ.vc.z - c->origin.z);
+	// vd = &ray->equ.vd;
+
+
 	if ((t = delta(pow(vd->x, 2) + pow(vd->z, 2),
 			2 * (vd->x * vc.x + vd->z * vc.z),
 			pow(vc.x, 2) + pow(vc.z, 2) - c->r2, &ray->nb_intersect)))

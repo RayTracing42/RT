@@ -1,8 +1,8 @@
 build/SDL_dataqueue.lo: \
-  /Users/edescoin/Documents/RT/libraries/SDL/src/SDL_dataqueue.c \
-  /Users/edescoin/Documents/RT/libraries/SDL/src/./SDL_internal.h \
-  /Users/edescoin/Documents/RT/libraries/SDL/src/dynapi/SDL_dynapi.h \
-  /Users/edescoin/Documents/RT/libraries/SDL/src/dynapi/SDL_dynapi_overrides.h \
+  /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/SDL_dataqueue.c \
+  /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/./SDL_internal.h \
+  /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/dynapi/SDL_dynapi.h \
+  /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/dynapi/SDL_dynapi_overrides.h \
   include/SDL_config.h include/SDL_platform.h include/begin_code.h \
   include/close_code.h include/SDL.h include/SDL_main.h \
   include/SDL_stdinc.h include/SDL_assert.h include/SDL_atomic.h \
@@ -18,4 +18,4 @@ build/SDL_dataqueue.lo: \
   include/SDL_log.h include/SDL_messagebox.h include/SDL_power.h \
   include/SDL_render.h include/SDL_shape.h include/SDL_system.h \
   include/SDL_timer.h include/SDL_version.h \
-  /Users/edescoin/Documents/RT/libraries/SDL/src/./SDL_dataqueue.h
+  /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/./SDL_dataqueue.h

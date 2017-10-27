@@ -1,5 +1,5 @@
 build/SDL_test_log.lo: \
-  /Users/edescoin/Documents/RT/libraries/SDL/src/test/SDL_test_log.c \
+  /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_log.c \
   include/SDL_config.h include/SDL_platform.h include/begin_code.h \
   include/close_code.h include/SDL.h include/SDL_main.h \
   include/SDL_stdinc.h include/SDL_assert.h include/SDL_atomic.h \

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-prefix=/Users/edescoin/Documents/RT/libraries/SDL/build
+prefix=/Users/aancel/project/RT_OFFICIEL/libraries/SDL/build
 exec_prefix=${prefix}
 exec_prefix_set=no
 libdir=${exec_prefix}/lib

@@ -1,6 +1,6 @@
 # sdl pkg-config source file
 
-prefix=/Users/edescoin/Documents/RT/libraries/SDL/build
+prefix=/Users/aancel/project/RT_OFFICIEL/libraries/SDL/build
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
