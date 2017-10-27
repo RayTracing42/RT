@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 19:47:34 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 20:59:07 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct		s_ray
 	t_vector				normal;
 	SDL_Color				color;
 	struct s_object			*obj;
+	struct s_light			*light;
 	struct s_list_objs		*l_objs;
 	double					actual_refractive_i;
 	double					percuted_refractive_i;
