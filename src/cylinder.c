@@ -6,7 +6,7 @@
 /*   By: aancel <aancel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/27 17:01:35 by aancel           ###   ########.fr       */
+/*   Updated: 2017/10/27 19:04:06 by aancel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static double			cylinder_intersect(t_ray *ray, t_object *obj)
 	// vd = &ray->equ.vd;
 
 
-	if ((t = delta(pow(vd->x, 2) + pow(vd->z, 2),
-			2 * (vd->x * vc.x + vd->z * vc.z),
+	if ((t = delta(pow(a, 2) + pow(a, 2),
+			2 * (a * a + a * a),
 			pow(vc.x, 2) + pow(vc.z, 2) - c->r2, &ray->nb_intersect)))
 	{
 		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
