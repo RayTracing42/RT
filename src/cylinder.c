@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 17:46:40 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 19:47:34 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static double			cylinder_intersect(t_ray *ray, t_object *obj)
 	vd = &ray->equ.vd;
 	if ((t = delta(pow(vd->x, 2) + pow(vd->z, 2),
 			2 * (vd->x * vc.x + vd->z * vc.z),
-			pow(vc.x, 2) + pow(vc.z, 2) - c->r2)))
+			pow(vc.x, 2) + pow(vc.z, 2) - c->r2, &ray->nb_intersect)))
 	{
 		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
 				ray->equ.vc.z + vd->z * t);
@@ -40,7 +40,8 @@ static const t_vector	*get_cylinder_normal(t_dot *inter, t_object *obj)
 	t_cylinder	*c;
 
 	c = (t_cylinder*)obj;
-	c->normal =  (t_vector){2 * (inter->x - c->origin.x), 0, 2 * (inter->z - c->origin.z)};
+	c->normal =  (t_vector){2 * (inter->x - c->origin.x), 0,
+			2 * (inter->z - c->origin.z)};
 	return (&c->normal);
 }
 
@@ -49,7 +50,7 @@ t_cylinder				*new_cylinder(t_objs_comp args, double radius,
 {
 	t_cylinder	*c;
 
-	c = (t_cylinder*)new_object(CYLINDER, args.origin, args.dir, args.color);
+	c = (t_cylinder*)new_object(CYLINDER, args);
 	c->radius = radius;
 	c->height_top = height_top;
 	c->height_bottom = height_bottom;

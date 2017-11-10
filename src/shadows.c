@@ -25,41 +25,57 @@ int		check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs, t_light *light)
 	return (0);
 }
 
-/*
-t_ray	define_light_ray(t_dot inter, t_light *light)
+SDL_Color	add_colors(SDL_Color dst, SDL_Color src)
 {
-	t_ray	ray;
+	SDL_Color res;
 
-	ray.equ.vc = vector(inter.x, inter.y, inter.z);
-	// /!\ ATTENTION ; le resultat pour ORB et SPOT ne sont pas norme tandis que PARALLEL l'est si sa variable direction l'est.
-	if (light->type == ORB)
-		ray.equ.vd = define_vector_orb(inter, (t_orb_light*)light);
-	if (light->type == SPOT)
-		ray.equ.vd = define_vector_spot(inter, (t_spotlight*)light);
-	if (light->type == PARALLEL)
-		ray.equ.vd = define_vector_parallel((t_parallel_light*)light);
-	return (ray);
+	if ((dst.r + src.r) < 255)
+		res.r = dst.r + src.r;
+	else
+		res.r = 255;
+	if ((dst.g + src.g) < 255)
+		res.g = dst.g + src.g;
+	else
+		res.g = 255;
+	if ((dst.b + src.b) < 255)
+		res.b = dst.b + src.b;
+	else
+		res.b = 255;
+	return (res);
 }
-*/
 
-int		shadows(t_ray *ray, t_scene *scn)
+SDL_Color	div_colors(SDL_Color dst, t_scene *scn)
+{
+	SDL_Color res;
+
+	res.r = dst.r * scn->brightness;
+	res.g = dst.g * scn->brightness;
+	res.b = dst.b * scn->brightness;
+	return (res);
+}
+
+SDL_Color	shadows(t_ray *ray, t_scene *scn)
 {
 	t_list_lights	*tmp;
 	t_ray			light_ray;
+	SDL_Color		multi_lights;
 
+	multi_lights = (SDL_Color){0, 0, 0, 255};
 	tmp = scn->lights;
 	while (tmp != NULL)
 	{
-		//light_ray = define_light_ray(ray->inter, scn->lights->light);
 		light_ray.equ.vd = tmp->light->get_ray_vect(&ray->inter, tmp->light);
 		light_ray.equ.vc = *(t_vector*)&ray->inter;
 		light_ray.color = ray->color;
 		light_ray.normal = ray->normal;
-		if (check_objs_on_ray(&light_ray, scn->objects, tmp->light))
-			ray->color = (SDL_Color){0, 0, 0, 255};
-		else
-			ray->color = get_shade_col(&light_ray, scn);
+		if (!(check_objs_on_ray(&light_ray, scn->objects, tmp->light)))
+		{
+			light_ray.light = tmp->light;
+			multi_lights = add_colors(add_colors(multi_lights,
+												get_shade_col(&light_ray)),
+									get_specular_col(ray, &light_ray));
+		}
 		tmp = tmp->next;
 	}
-	return (0);
+	return (div_colors(multi_lights, scn));
 }

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:46:09 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 17:49:02 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 20:18:32 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ static int			is_in_parallel_light(t_light *light, t_ray *light_ray)
 static t_vector		get_par_ray_vect(t_dot *pos, t_light *light)
 {
 	(void)pos;
-	return ((t_vector){-light->direction.x,
-						-light->direction.y,
-						-light->direction.z});
+	return ((t_vector){-light->direction.x, -light->direction.y,
+					-light->direction.z});
 }
 
-t_parallel_light	*new_parallel_light(t_vector direction, SDL_Color color)
+t_parallel_light	*new_parallel_light(t_vector direction, SDL_Color color,
+										double power)
 {
 	t_parallel_light	*par;
 
-	par = (t_parallel_light*)new_light(PARALLEL, direction, color);
-	par->get_ray_vect = get_par_ray_vect;
-	par->is_in_light = is_in_parallel_light;
+	par = (t_parallel_light*)new_light(PARALLEL, direction, color, power);
+	par->get_ray_vect = &get_par_ray_vect;
+	par->is_in_light = &is_in_parallel_light;
 	return (par);
 }
 

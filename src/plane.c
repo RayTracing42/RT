@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/29 17:49:11 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/25 17:12:09 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,12 @@ static double			plane_intersect(t_ray *ray, t_object *obj)
 		denom);
 	if ((long)(t * pow(10, 12)) > 0)
 	{
+		ray->nb_intersect = 1;
 		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
 				ray->equ.vc.z + vd->z * t);
 		return (t);
 	}
+	ray->nb_intersect = 0;
 	return (-1);
 }
 
@@ -53,7 +55,7 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal)
 {
 	t_plane		*plane;
 
-	plane = (t_plane*)new_object(PLANE, args.origin, args.dir, args.color);
+	plane = (t_plane*)new_object(PLANE, args);
 	plane->normal = normal;
 	plane->get_normal = get_plane_normal;
 	plane->intersect = plane_intersect;

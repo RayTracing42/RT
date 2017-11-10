@@ -11,21 +11,21 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = rt
 
-SRC_DIR = sources
+SRC_DIR = src
 LIB_DIR = libraries
-INCLUDE_DIR = includes
+INCLUDE_DIR = include
 
 LFT_PATH = $$(pwd)/libraries/libft
 SDL_PATH = $$(pwd)/libraries/SDL
 
 LFT_INCLUDE = $(LFT_PATH)/includes
 
-SRC = main.c cone.c events.c key_functions.c objects.c parallel_light.c \
-	  scanning.c spotlight.c cylinder.c graphics.c light.c objects2.c \
-	  orb_light.c plane.c sphere.c view_plane.c utils.c matrice_rotation.c \
-	  parsing.c tools.c scene.c scene_objs.c scene_lights.c camera.c \
-	  shadows.c vector_light.c light_physic.c vectors.c
-	
+SRC = camera.c cone.c cylinder.c events.c graphics.c key_functions.c light.c \
+light_shading.c main.c matrice_rotation.c objects.c objects2.c orb_light.c \
+parallel_light.c plane.c reflexion.c refract_list.c refraction.c scanning.c \
+scene.c scene_lights.c scene_objs.c shadows.c sphere.c spotlight.c tools.c \
+utils.c vectors.c view_plane.c
+
 SRC:= $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/06 00:52:46 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/10/26 20:25:23 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@
 # include "graphics.h"
 # include "libft.h"
 # include "lights.h"
+# include "light_physic.h"
+# include "light_shading.h"
 # include "objects.h"
 # include "scene.h"
 # include "structures.h"
+# include "vectors.h"
 
 t_vector	matrice_rotation_x(t_vector *m, double angle);
 t_vector	matrice_rotation_y(t_vector *m, double angle);
@@ -42,17 +45,27 @@ t_vector	matrice_rotation_z(t_vector *m, double angle);
 t_vector	vector(double x, double y, double z);
 t_vector	vector_opposite(double x, double y, double z);
 t_dot		dot(double x, double y, double z);
-double		delta(double a, double b, double c);
+double		delta(double a, double b, double c, int *n);
 double		angle_between_vectors(t_vector a, t_vector b);
 
 void		view_plane(t_camera *cam, t_view_plane *vp);
 void		view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 
-int			parsing(t_scene *scn, int argc, char **argv);
+void		scanning(t_scene *scn);
 
-int			scanning(t_scene *scn);
+SDL_Color	effects(t_ray *ray, t_scene *scn);
+SDL_Color	shadows(t_ray *ray, t_scene *scn);
+SDL_Color	reflect(t_ray *ray, t_scene *scn);
+SDL_Color	refract(t_ray *ray, t_scene *scn);
 
-SDL_Color	get_shade_col(t_ray *ray, const t_scene *scene);
+/*
+**	refract_list.c
+*/
+
+void		add_node(t_list_objs **l, t_object *obj);
+void		remove_node(t_list_objs **l, t_object *obj);
+int			if_node_exist(t_list_objs *l, t_object *obj);
+
 
 /*
 **	tools.c
@@ -68,4 +81,5 @@ void		set_rect_crd(SDL_Rect *rect, int x, int y);
 double		vect_dot_product(const t_vector *v1, const t_vector *v2);
 double		get_vect_lenght(const t_vector *vect);
 double		get_dot_dist(t_dot *d1, t_dot *d2);
+
 #endif
