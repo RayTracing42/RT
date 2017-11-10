@@ -6,7 +6,7 @@
 #    By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/09 15:55:46 by fcecilie          #+#    #+#              #
-#    Updated: 2017/10/25 17:11:51 by edescoin         ###   ########.fr        #
+#    Updated: 2017/11/10 15:41:44 by shiro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,8 @@ SRC_LIBFT = ft_memset.c \
 			ft_itoa_base.c \
 			ft_utoa_base.c \
 			errors.c \
-			ft_angles.c
+			ft_angles.c \
+			ft_minmax.c
 
 INCLUDE = libft.h \
 

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 20:25:23 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/10 16:02:11 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include "lights.h"
 # include "light_physic.h"
 # include "light_shading.h"
+# include "matrix.h"
 # include "objects.h"
 # include "scene.h"
 # include "structures.h"
@@ -70,9 +71,9 @@ int			if_node_exist(t_list_objs *l, t_object *obj);
 /*
 **	tools.c
 */
-int			get_quad_equation_sol(t_dot *res, double a, double b, double c);
-void		set_rect_dim(SDL_Rect *rect, int w, int h);
-void		set_rect_crd(SDL_Rect *rect, int x, int y);
+t_dot		equation_get_dot(t_parequation *eq, double t);
+int			get_quad_equation_sol(double *res, double a, double b, double c);
+int			gt_0(double nb);
 
 /*
 **	vectors.c

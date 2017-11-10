@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/25 17:12:09 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/10 14:53:05 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,14 @@ static const t_vector	*get_plane_normal(t_dot *inter, t_object *obj)
 	return (&obj->normal);
 }
 
-/*int						is_in_plane(t_dot *d, t_plane *p)
+int						is_in_plane(t_dot *d, t_plane *p)
 {
-}*/
+	double	res;
+
+	res = p->a * d->x + p->b * d->y + p->c * d->z + p->d;
+	res *= pow(10, 12);
+	return (!((long)res > 0 || (long)res < 0));
+}
 
 t_plane					*new_plane(t_objs_comp args, t_vector normal)
 {
@@ -59,6 +64,11 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal)
 	plane->normal = normal;
 	plane->get_normal = get_plane_normal;
 	plane->intersect = plane_intersect;
+	plane->a = normal.x;
+	plane->b = normal.y;
+	plane->c = normal.z;
+	plane->d = -(normal.x * args.orig.x + normal.y * args.orig.y + normal.z * args.orig.z);
+	plane->z = args.orig.z;
 	return (plane);
 }
 

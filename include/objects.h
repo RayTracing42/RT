@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/09 16:57:08 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/10 13:34:30 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 void		delete_object(t_object *obj);
 t_object	*new_object(t_type type, t_objs_comp args);
 void		set_object_color(t_object *obj, int r, int g, int b);
-/*
+
 void		rotate_object(t_object *obj, double x_angle, double y_angle,
 						double z_angle);
 void		scale_object(t_object *obj, double x, double y, double z);
-void		translate_object(t_object *obj, double x, double y, double z);*/
+void		translate_object(t_object *obj, double x, double y, double z);
 
 /*
 ** box.c

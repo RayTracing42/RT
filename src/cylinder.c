@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 19:47:34 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/10 14:45:58 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ static const t_vector	*get_cylinder_normal(t_dot *inter, t_object *obj)
 	t_cylinder	*c;
 
 	c = (t_cylinder*)obj;
-	c->normal =  (t_vector){2 * (inter->x - c->origin.x), 0,
-			2 * (inter->z - c->origin.z)};
+	c->normal =  (t_vector){2 * inter->x, 0, 2 * inter->z};
 	return (&c->normal);
 }
 

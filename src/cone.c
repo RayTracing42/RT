@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 19:47:34 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/10 16:12:16 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,22 @@ static double			cone_intersection(t_ray *ray, t_object *obj)
 {
 	t_cone		*c;
 	t_vector	*vd;
-	t_vector	vc;
+	t_vector	*vc;
 	double		t;
 
+	t = -1;
 	c = (t_cone*)obj;
-	vc = vector(ray->equ.vc.x - c->origin.x, ray->equ.vc.y - c->origin.y,
-			ray->equ.vc.z - c->origin.z);
+	vc = &ray->equ.vc;
 	vd = &ray->equ.vd;
-	t = delta(pow(vd->x, 2) + pow(vd->z, 2) - pow(vd->y, 2) * c->tanalpha2,
-			2 * (vd->x * vc.x + vd->z * vc.z - vd->y * vc.y * c->tanalpha2),
-			pow(vc.x, 2) + pow(vc.z, 2) - pow(vc.y, 2) * c->tanalpha2,
-			&ray->nb_intersect);
-	if ((long)(t * pow(10, 12)) > 0)
+	if (get_quad_equation_sol(&t,
+			pow(vd->x, 2) + pow(vd->z, 2) - pow(vd->y, 2) * c->tanalpha2,
+			2 * (vd->x * vc->x + vd->z * vc->z - vd->y * vc->y * c->tanalpha2),
+			pow(vc->x, 2) + pow(vc->z, 2) - pow(vc->y, 2) * c->tanalpha2))
 	{
 		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
-				ray->equ.vc.z + vd->z * t);
-		return (t);
+			ray->equ.vc.z + vd->z * t);
 	}
-	return (-1);
+	return (t);
 }
 
 static const t_vector	*get_cone_normal(t_dot *inter, t_object *obj)
@@ -42,9 +40,8 @@ static const t_vector	*get_cone_normal(t_dot *inter, t_object *obj)
 	t_cone	*c;
 
 	c = (t_cone*)obj;
-	c->normal = (t_vector){2 * (inter->x - c->origin.x),
-								-2 * c->tanalpha2 * (inter->y - c->origin.y),
-								2 * (inter->z - c->origin.z)};
+	c->normal = (t_vector){2 * inter->x, -2 * c->tanalpha2 * inter->y,
+							2 * inter->z};
 	return (&c->normal);
 }
 

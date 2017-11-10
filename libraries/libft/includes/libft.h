@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:22:29 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/10/25 17:12:09 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/10 15:41:15 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ int				ft_tolower(int c);
 
 double			ft_to_rad(double deg);
 double			ft_to_deg(double rad);
+
+int				ft_imin(int i1, int i2);
+int				ft_imax(int i1, int i2);
+double			ft_dmin(double d1, double d2);
+double			ft_dmax(double d1, double d2);
 
 void			*ft_memalloc(size_t size);
 void			ft_memdel(void **ap);

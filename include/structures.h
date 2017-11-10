@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 20:59:07 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/10 13:23:24 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,13 @@ typedef struct				s_object
 	double					(*intersect)(t_ray *ray, struct s_object *obj);
 	const t_vector			*(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
-	t_vector				dir;
 	t_vector				normal;
+	t_matrix				*rot;
+	t_matrix				*rot_inv;
+	t_matrix				*trans;
+	t_matrix				*trans_inv;
+	t_matrix				*scale;
+	t_matrix				*scale_inv;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 }							t_object;
@@ -152,8 +157,13 @@ typedef struct				s_sphere
 	double					(*intersect)(t_ray *ray, t_object *obj);
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
-	t_vector				dir;
 	t_vector				normal;
+	t_matrix				*rot;
+	t_matrix				*rot_inv;
+	t_matrix				*trans;
+	t_matrix				*trans_inv;
+	t_matrix				*scale;
+	t_matrix				*scale_inv;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					radius;
@@ -166,8 +176,13 @@ typedef struct				s_cylinder
 	double					(*intersect)(t_ray *ray, t_object *obj);
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
-	t_vector				dir;
 	t_vector				normal;
+	t_matrix				*rot;
+	t_matrix				*rot_inv;
+	t_matrix				*trans;
+	t_matrix				*trans_inv;
+	t_matrix				*scale;
+	t_matrix				*scale_inv;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					radius;
@@ -182,8 +197,13 @@ typedef struct				s_cone
 	double					(*intersect)(t_ray *ray, t_object *obj);
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
-	t_vector				dir;
 	t_vector				normal;
+	t_matrix				*rot;
+	t_matrix				*rot_inv;
+	t_matrix				*trans;
+	t_matrix				*trans_inv;
+	t_matrix				*scale;
+	t_matrix				*scale_inv;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					angle;
@@ -198,10 +218,20 @@ typedef struct				s_plane
 	double					(*intersect)(t_ray *ray, t_object *obj);
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
-	t_vector				dir;
 	t_vector				normal;
+	t_matrix				*rot;
+	t_matrix				*rot_inv;
+	t_matrix				*trans;
+	t_matrix				*trans_inv;
+	t_matrix				*scale;
+	t_matrix				*scale_inv;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
+	double					a;
+	double					b;
+	double					c;
+	double					d;
+	double					z;
 }							t_plane;
 
 /* La box (le pavé quoi) pour plus tard
