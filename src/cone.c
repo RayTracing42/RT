@@ -6,32 +6,25 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/10 16:12:16 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/10 17:07:46 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			cone_intersection(t_ray *ray, t_object *obj)
+static double			cone_intersection(t_dot *dst, t_parequation e, t_object *obj)
 {
 	t_cone		*c;
-	t_vector	*vd;
-	t_vector	*vc;
 	double		t;
 
 	t = -1;
 	c = (t_cone*)obj;
-	vc = &ray->equ.vc;
-	vd = &ray->equ.vd;
 	if (get_quad_equation_sol(&t,
-			pow(vd->x, 2) + pow(vd->z, 2) - pow(vd->y, 2) * c->tanalpha2,
-			2 * (vd->x * vc->x + vd->z * vc->z - vd->y * vc->y * c->tanalpha2),
-			pow(vc->x, 2) + pow(vc->z, 2) - pow(vc->y, 2) * c->tanalpha2))
-	{
-		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
-			ray->equ.vc.z + vd->z * t);
-	}
+			pow(e.vd.x, 2) + pow(e.vd.z, 2) - pow(e.vd.y, 2) * c->tanalpha2,
+			2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z - e.vd.y * e.vc.y * c->tanalpha2),
+			pow(e.vc.x, 2) + pow(e.vc.z, 2) - pow(e.vc.y, 2) * c->tanalpha2))
+		*dst = equation_get_dot(&e, t);
 	return (t);
 }
 
