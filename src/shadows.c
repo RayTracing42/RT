@@ -54,7 +54,7 @@ SDL_Color	div_colors(SDL_Color dst, t_scene *scn)
 	return (res);
 }
 
-int			shadows(t_ray *ray, t_scene *scn)
+SDL_Color	shadows(t_ray *ray, t_scene *scn)
 {
 	t_list_lights	*tmp;
 	t_ray			light_ray;
@@ -68,13 +68,10 @@ int			shadows(t_ray *ray, t_scene *scn)
 		light_ray.equ.vc = *(t_vector*)&ray->inter;
 		light_ray.color = ray->color;
 		light_ray.normal = ray->normal;
-		if (check_objs_on_ray(&light_ray, scn->objects, tmp->light))
-			multi_lights = add_colors(multi_lights, (SDL_Color){0, 0, 0, 255});
-		else
-			multi_lights = add_colors(multi_lights, get_shade_col(&light_ray));
+		if (!(check_objs_on_ray(&light_ray, scn->objects, tmp->light)))
+			multi_lights = add_colors(multi_lights,
+									get_shade_col(&light_ray));
 		tmp = tmp->next;
 	}
-	multi_lights = div_colors(multi_lights, scn);
-	ray->color = multi_lights;
-	return (0);
+	return (div_colors(multi_lights, scn));
 }

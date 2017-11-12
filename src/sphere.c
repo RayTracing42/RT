@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 14:45:49 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/03 14:47:05 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/12 17:05:31 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static double			sphere_intersect(t_ray *ray, t_object *obj)
 	vd = &ray->equ.vd;
 	if ((t = delta(pow(vd->x, 2) + pow(vd->y, 2) + pow(vd->z, 2),
 			2 * (vd->x * vc.x + vd->y * vc.y + vd->z * vc.z),
-			pow(vc.x, 2) + pow(vc.y, 2) + pow(vc.z, 2) - s->r2)))
+			pow(vc.x, 2) + pow(vc.y, 2) + pow(vc.z, 2) - s->r2,
+			&ray->nb_intersect)))
 	{
 		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
 				ray->equ.vc.z + vd->z * t);
@@ -41,7 +42,8 @@ static const t_vector	*get_sphere_normal(t_dot *inter, t_object *obj)
 	t_sphere	*s;
 
 	s = (t_sphere*)obj;
-	s->normal = (t_vector){2 * (inter->x - s->origin.x), 2 * (inter->y - s->origin.y), 2 * (inter->z - s->origin.z)};
+	s->normal = (t_vector){2 * (inter->x - s->origin.x), 2 *
+			(inter->y - s->origin.y), 2 * (inter->z - s->origin.z)};
 	return (&s->normal);
 }
 

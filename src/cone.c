@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/03 13:50:41 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/26 19:47:34 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static double			cone_intersection(t_ray *ray, t_object *obj)
 	vd = &ray->equ.vd;
 	t = delta(pow(vd->x, 2) + pow(vd->z, 2) - pow(vd->y, 2) * c->tanalpha2,
 			2 * (vd->x * vc.x + vd->z * vc.z - vd->y * vc.y * c->tanalpha2),
-			pow(vc.x, 2) + pow(vc.z, 2) - pow(vc.y, 2) * c->tanalpha2);
+			pow(vc.x, 2) + pow(vc.z, 2) - pow(vc.y, 2) * c->tanalpha2,
+			&ray->nb_intersect);
 	if ((long)(t * pow(10, 12)) > 0)
 	{
 		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
@@ -58,7 +59,7 @@ t_cone					*new_cone(t_objs_comp args, double angle,
 	c->height_bottom = height_bottom;
 	c->get_normal = get_cone_normal;
 	c->intersect = cone_intersection;
-	c->tanalpha2 = pow(tan(angle * M_PI / 180), 2);
+	c->tanalpha2 = pow(tan(ft_to_rad(angle)), 2);
 	return (c);
 }
 
