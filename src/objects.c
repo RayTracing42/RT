@@ -45,6 +45,23 @@ t_object		*new_object(t_type type, t_objs_comp args)
 	return (obj);
 }
 
+t_matrix	*set_all_matrix(t_object *object, t_data *data)
+{
+	object->trans_const = create_identity(4);
+	x_rotation(object->trans_const, data->rot.x);
+	y_rotation(object->trans_const, data->rot.y);
+	z_rotation(object->trans_const, data->rot.z);
+	translation(object->trans_const, x, y, z);
+	scale(object->trans_const, x, y, z);
+	get_inv_3x3mat(object->trans_iconst, object->trans_const);
+	object->trans_dir = create_identity(4);
+	x_rotation(object->trans_dir, data->rot.x);
+	y_rotation(object->trans_dir, data->rot.y);
+	z_rotation(object->trans_dir, data->rot.z);
+	translation(object->trans_dir, x, y, z);
+	get_inv_3x3mat(object->trans_idir, object->trans_dir);
+}
+
 void		delete_object(t_object *obj)
 {
 	if (obj)

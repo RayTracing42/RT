@@ -74,6 +74,7 @@ typedef struct				s_vector
 	double					z;
 }							t_vector;
 
+
 /*	Oui c'est la même chose que le vecteur, on peut du coup soit ignorer le
 	vecteur complètement et utiliser que des points, soit utiliser les points
 	et les vecteurs pour plus de clareté, soit changer la forme des
@@ -84,6 +85,13 @@ typedef struct				s_dot
 	double					y;
 	double					z;
 }							t_dot;
+
+typedef struct				s_data
+{
+	t_dot						trans;
+	t_dot						rot;
+	t_dot						scale;
+}							t_data;
 
 typedef struct				s_parequation
 {
@@ -130,12 +138,17 @@ typedef struct				s_object
 	const t_vector			*(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
 	t_vector				normal;
-	t_matrix				*rot;
-	t_matrix				*rot_inv;
-	t_matrix				*trans;
-	t_matrix				*trans_inv;
-	t_matrix				*scale;
-	t_matrix				*scale_inv;
+
+	t_matrix				*trans_const;
+	t_matrix				*trans_dir;
+	t_matrix				*trans_iconst;
+	t_matrix				*trans_idir;
+	// t_matrix				*rot;
+	// t_matrix				*rot_inv;
+	// t_matrix				*trans;
+	// t_matrix				*trans_inv;
+	// t_matrix				*scale;
+	// t_matrix				*scale_inv;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 }							t_object;
