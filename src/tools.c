@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:35:27 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/10 16:02:06 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/12 20:07:37 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		get_quad_equation_sol(double *res, double a, double b, double c)
 		*res = ft_dmax(s1, s2);
 	else
 		return (0);
-	return (1);
+	return ((delta != 0) + 1);
 }
 
 t_dot	equation_get_dot(t_parequation *eq, double t)

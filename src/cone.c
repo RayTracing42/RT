@@ -6,24 +6,24 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/10 17:07:46 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/12 20:05:29 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			cone_intersection(t_dot *dst, t_parequation e, t_object *obj)
+static double			cone_intersection(int *nbi, t_dot *dst, t_parequation e, t_object *obj)
 {
 	t_cone		*c;
 	double		t;
 
 	t = -1;
 	c = (t_cone*)obj;
-	if (get_quad_equation_sol(&t,
+	if ((*nbi = get_quad_equation_sol(&t,
 			pow(e.vd.x, 2) + pow(e.vd.z, 2) - pow(e.vd.y, 2) * c->tanalpha2,
 			2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z - e.vd.y * e.vc.y * c->tanalpha2),
-			pow(e.vc.x, 2) + pow(e.vc.z, 2) - pow(e.vc.y, 2) * c->tanalpha2))
+			pow(e.vc.x, 2) + pow(e.vc.z, 2) - pow(e.vc.y, 2) * c->tanalpha2)))
 		*dst = equation_get_dot(&e, t);
 	return (t);
 }
