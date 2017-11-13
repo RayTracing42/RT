@@ -6,34 +6,26 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/10 14:53:53 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/13 16:36:06 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			sphere_intersect(t_ray *ray, t_object *obj)
+static double			sphere_intersect(int *nbi, t_dot *dst, t_parequation e, t_object *obj)
 {
 	t_sphere	*s;
-	t_vector	*vd;
-	t_vector	vc;
 	double		t;
 
+	t = -1;
 	s = (t_sphere*)obj;
-	vc = vector(ray->equ.vc.x - s->origin.x, ray->equ.vc.y - s->origin.y,
-			ray->equ.vc.z - s->origin.z);
-	vd = &ray->equ.vd;
-	if ((t = delta(pow(vd->x, 2) + pow(vd->y, 2) + pow(vd->z, 2),
-			2 * (vd->x * vc.x + vd->y * vc.y + vd->z * vc.z),
-			pow(vc.x, 2) + pow(vc.y, 2) + pow(vc.z, 2) - s->r2,
-			&ray->nb_intersect)))
-	{
-		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
-				ray->equ.vc.z + vd->z * t);
-		return (t);
-	}
-	return (-1);
+	if ((*nbi = get_quad_equation_sol(&t,
+				pow(e.vd.x, 2) + pow(e.vd.y, 2) + pow(e.vd.z, 2),
+				2 * (e.vd.x * e.vc.x + e.vd.y * e.vc.y + e.vd.z * e.vc.z),
+				pow(e.vc.x, 2) + pow(e.vc.y, 2) + pow(e.vc.z, 2) - s->r2)))
+		*dst = equation_get_dot(&e, t);
+	return (t);
 }
 
 static const t_vector	*get_sphere_normal(t_dot *inter, t_object *obj)
