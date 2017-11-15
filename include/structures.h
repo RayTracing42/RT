@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/13 16:17:22 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/15 16:51:19 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # ifndef __APPLE__
 #  include <SDL2/SDL.h>
 # else
-#  include <SDL2/SDL.h>
+#  include "SDL2/SDL.h"
 # endif
 
 /*
