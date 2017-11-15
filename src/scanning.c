@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/12 20:10:26 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/15 14:53:47 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,16 @@ static t_parequation	transform_equ(t_ray *ray, t_object *obj)
 {
 	t_parequation	trs;
 
-	mult_vect(&trs.vc, obj->trans_inv, &ray->equ.vc);
-	mult_vect(&trs.vc, obj->rot_inv, &trs.vc);
-	mult_vect(&trs.vc, obj->scale_inv, &trs.vc);
-	mult_vect(&trs.vd, obj->rot_inv, &ray->equ.vd);
-	mult_vect(&trs.vd, obj->scale_inv, &trs.vd);
+	mult_vect(&trs.vc, obj->trans_iconst, &ray->equ.vc);
+	mult_vect(&trs.vd, obj->trans_idir, &trs.vd);
 	return (trs);
 }
 
 static void				transform_inter(t_ray *ray, t_object *obj)
 {
-	mult_vect(&ray->normal, obj->scale_inv, obj->get_normal(&ray->inter, obj));
-	mult_vect(&ray->normal, obj->rot, &ray->normal);
-	mult_vect((t_vector*)&ray->inter, obj->scale, (t_vector*)&ray->inter);
-	mult_vect((t_vector*)&ray->inter, obj->rot, (t_vector*)&ray->inter);
-	mult_vect((t_vector*)&ray->inter, obj->trans, (t_vector*)&ray->inter);
+	mult_vect(&ray->normal, obj->trans_dir, obj->get_normal(&ray->inter, obj));
+	mult_vect((t_vector*)&ray->inter, obj->trans_const, (t_vector*)&ray->inter);
+
 }
 
 static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
