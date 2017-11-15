@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/10 13:34:30 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/15 14:24:38 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		set_object_color(t_object *obj, int r, int g, int b);
 void		rotate_object(t_object *obj, double x_angle, double y_angle,
 						double z_angle);
 void		scale_object(t_object *obj, double x, double y, double z);
+void		set_all_matrix(t_object *object, t_data data);
 void		translate_object(t_object *obj, double x, double y, double z);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:14:48 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/10 13:24:36 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/14 16:08:34 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_matrix	*new_matrix(double **mat, int r, int c)
 {
 	t_matrix	*matrix;
 	int			i;
-	int			j;
 
 	if (!(matrix = malloc(sizeof(t_matrix))))
 		return (NULL);
@@ -39,16 +38,12 @@ t_matrix	*new_matrix(double **mat, int r, int c)
 	if (!mat)
 	{
 		if (!(matrix->mat = (double**)malloc(r * sizeof(double*))))
-			return_free(NULL, matrix);
+			exit_error("rt", "malloc");
 		i = -1;
 		while (++i < r)
-		{
 			if (!(matrix->mat[i] = (double*)malloc(c * sizeof(double))))
-				return_free(NULL, matrix);
-			j = -1;
-			while (++j < c)
-				matrix->mat[i][j] = 0;
-		}
+				exit_error("rt", "malloc");
+		clear_matrix(matrix);
 	}
 	else
 		matrix->mat = mat;
