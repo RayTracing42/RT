@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 17:10:42 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/20 17:00:27 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/20 17:22:32 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ t_matrix	*mult_matrix(t_matrix **res, t_matrix *m1, t_matrix *m2);
 /*
 ** matrix_ops.c
 */
+t_matrix	*sub_matrix(t_matrix **res, t_matrix *m1, t_matrix *m2);
+t_matrix	*add_matrix(t_matrix **res, t_matrix *m1, t_matrix *m2);
+t_matrix	*neg_matrix(t_matrix **res, t_matrix *m);
 double		get_det_3x3mat(t_matrix *m);
 t_matrix	*get_inv_2x2mat(t_matrix **res, t_matrix *m);
 t_matrix	*get_inv_3x3mat(t_matrix *res, t_matrix *m);

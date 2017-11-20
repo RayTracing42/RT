@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/15 16:51:19 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/20 20:17:16 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ typedef struct				s_dot
 	double					z;
 }							t_dot;
 
-typedef struct				s_data
+typedef struct				s_trans_data
 {
 	t_dot						trans;
 	t_dot						rot;
 	t_dot						scale;
-}							t_data;
+}							t_trans_data;
 
 typedef struct				s_parequation
 {
@@ -138,17 +138,10 @@ typedef struct				s_object
 	const t_vector			*(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
 	t_vector				normal;
-
 	t_matrix				*trans_const;
-	t_matrix				*trans_dir;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
-	// t_matrix				*rot;
-	// t_matrix				*rot_inv;
-	// t_matrix				*trans;
-	// t_matrix				*trans_inv;
-	// t_matrix				*scale;
-	// t_matrix				*scale_inv;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 }							t_object;
@@ -171,12 +164,10 @@ typedef struct				s_sphere
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				normal;
-	t_matrix				*rot;
-	t_matrix				*rot_inv;
-	t_matrix				*trans;
-	t_matrix				*trans_inv;
-	t_matrix				*scale;
-	t_matrix				*scale_inv;
+	t_matrix				*trans_const;
+	t_matrix				*trans_iconst;
+	t_matrix				*trans_idir;
+	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					radius;
@@ -190,12 +181,10 @@ typedef struct				s_cylinder
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				normal;
-	t_matrix				*rot;
-	t_matrix				*rot_inv;
-	t_matrix				*trans;
-	t_matrix				*trans_inv;
-	t_matrix				*scale;
-	t_matrix				*scale_inv;
+	t_matrix				*trans_const;
+	t_matrix				*trans_iconst;
+	t_matrix				*trans_idir;
+	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					radius;
@@ -211,12 +200,10 @@ typedef struct				s_cone
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				normal;
-	t_matrix				*rot;
-	t_matrix				*rot_inv;
-	t_matrix				*trans;
-	t_matrix				*trans_inv;
-	t_matrix				*scale;
-	t_matrix				*scale_inv;
+	t_matrix				*trans_const;
+	t_matrix				*trans_iconst;
+	t_matrix				*trans_idir;
+	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					angle;
@@ -232,12 +219,10 @@ typedef struct				s_plane
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				normal;
-	t_matrix				*rot;
-	t_matrix				*rot_inv;
-	t_matrix				*trans;
-	t_matrix				*trans_inv;
-	t_matrix				*scale;
-	t_matrix				*scale_inv;
+	t_matrix				*trans_const;
+	t_matrix				*trans_iconst;
+	t_matrix				*trans_idir;
+	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					a;

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/10 16:02:11 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/20 20:33:25 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ double		angle_between_vectors(t_vector a, t_vector b);
 void		view_plane(t_camera *cam, t_view_plane *vp);
 void		view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 
-void		scanning(t_scene *scn);
+void			scanning(t_scene *scn);
+t_parequation	transform_equ(t_ray *ray, t_object *obj);
+void			transform_inter(t_ray *ray, t_object *obj);
 
 SDL_Color	effects(t_ray *ray, t_scene *scn);
 SDL_Color	shadows(t_ray *ray, t_scene *scn);

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 16:30:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/20 17:09:40 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/20 17:22:59 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ t_matrix	*get_inv_2x2mat(t_matrix **res, t_matrix *m)
 	return (*res);
 }
 
-double		**set_2x2mat_tab(double **dst, t_matrix *m, int i, int j)
+static double	**set_2x2mat_tab(double **dst, t_matrix *m, int i, int j)
 {
 	if (!dst)
 	{
@@ -136,7 +136,7 @@ double		**set_2x2mat_tab(double **dst, t_matrix *m, int i, int j)
 	return (dst);
 }
 
-void		set_2x2tab_mat(t_matrix *dst, double **tab, int i, int j)
+static void	set_2x2tab_mat(t_matrix *dst, double **tab, int i, int j)
 {
 	if (i < dst->r && (i + 1) < dst->r && j < dst->c && (j + 1) < dst->c)
 	{
@@ -164,11 +164,6 @@ t_matrix	*neg_matrix(t_matrix **res, t_matrix *m)
 			(*res)->mat[i][j] = -m->mat[i][j];
 	}
 	return (*res);
-}
-
-void	disp_2x2mat(t_matrix *m)
-{
-	printf("%.2f %.2f\n%.2f %.2f\n\n", m->mat[0][0], m->mat[0][1], m->mat[1][0], m->mat[1][1]);
 }
 
 t_matrix	*get_inv_4x4mat(t_matrix *res, t_matrix *m)

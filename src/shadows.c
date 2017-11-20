@@ -17,7 +17,7 @@ int		check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs, t_light *light)
 		return (1);
 	while (l_objs != NULL)
 	{
-		tmp = l_objs->obj->intersect(&light_ray->nb_intersect, &light_ray->inter, light_ray->equ, l_objs->obj);
+		tmp = l_objs->obj->intersect(&light_ray->nb_intersect, &light_ray->inter, transform_equ(light_ray, l_objs->obj), l_objs->obj);
 		if (tmp > 0 && tmp < 1)
 			return (1);
 		l_objs = l_objs->next;
@@ -67,9 +67,9 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 		light_ray.equ.vd = tmp->light->get_ray_vect(&ray->inter, tmp->light);
 		light_ray.equ.vc = *(t_vector*)&ray->inter;
 		light_ray.color = ray->color;
-		light_ray.normal = ray->normal;
 		if (!(check_objs_on_ray(&light_ray, scn->objects, tmp->light)))
 		{
+			light_ray.normal = ray->normal;
 			light_ray.light = tmp->light;
 			multi_lights = add_colors(add_colors(multi_lights,
 												get_shade_col(&light_ray)),

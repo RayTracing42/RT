@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/15 14:53:50 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/20 20:17:39 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,33 +34,30 @@ t_object		*new_object(t_type type, t_objs_comp args)
 	obj->get_normal = NULL;
 	obj->intersect = NULL;
 	obj->trans_const = create_identity(4);
-	obj->trans_dir = create_identity(4);
 	obj->trans_iconst = create_identity(4);
 	obj->trans_idir = create_identity(4);
+	obj->trans_norm = create_identity(4);
 	return (obj);
 }
 
-void		set_all_matrix(t_object *object, t_data data)
+void		set_all_matrix(t_object *object, t_trans_data data)
 {
 	scale(&object->trans_const, data.scale.x, data.scale.y, data.scale.z);
 	x_rotation(&object->trans_const, data.rot.x);
 	y_rotation(&object->trans_const, data.rot.y);
 	z_rotation(&object->trans_const, data.rot.z);
 	translation(&object->trans_const, data.trans.x, data.trans.y, data.trans.z);
-	get_inv_3x3mat(object->trans_iconst, object->trans_const);
-	scale(&object->trans_dir, data.scale.x, data.scale.y, data.scale.z);
-	x_rotation(&object->trans_dir, data.rot.x);
-	y_rotation(&object->trans_dir, data.rot.y);
-	z_rotation(&object->trans_dir, data.rot.z);
-	get_inv_3x3mat(object->trans_idir, object->trans_dir);
-	/*à modifier après : trans_dir sert pour la normale uniquement */
-	delete_matrix(object->trans_dir);
-	object->trans_dir = create_identity(4);
-	scale(&object->trans_dir, data.scale.x, data.scale.y, data.scale.z);
-	get_inv_3x3mat(object->trans_dir, object->trans_dir);
-	x_rotation(&object->trans_dir, data.rot.x);
-	y_rotation(&object->trans_dir, data.rot.y);
-	z_rotation(&object->trans_dir, data.rot.z);
+	get_inv_4x4mat(object->trans_iconst, object->trans_const);
+	scale(&object->trans_idir, data.scale.x, data.scale.y, data.scale.z);
+	x_rotation(&object->trans_idir, data.rot.x);
+	y_rotation(&object->trans_idir, data.rot.y);
+	z_rotation(&object->trans_idir, data.rot.z);
+	get_inv_4x4mat(object->trans_idir, object->trans_idir);
+	scale(&object->trans_norm, data.scale.x, data.scale.y, data.scale.z);
+	get_inv_4x4mat(object->trans_norm, object->trans_norm);
+	x_rotation(&object->trans_norm, data.rot.x);
+	y_rotation(&object->trans_norm, data.rot.y);
+	z_rotation(&object->trans_norm, data.rot.z);
 }
 
 void		delete_object(t_object *obj)
@@ -68,9 +65,9 @@ void		delete_object(t_object *obj)
 	if (obj)
 	{
 		delete_matrix(obj->trans_const);
-		delete_matrix(obj->trans_dir);
 		delete_matrix(obj->trans_iconst);
 		delete_matrix(obj->trans_idir);
+		delete_matrix(obj->trans_norm);
 		free(obj);
 	}
 }
