@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:14:48 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/14 16:08:34 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/20 17:01:00 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,23 @@ t_matrix	*create_identity(int i)
 	return (mtx);
 }
 
+t_matrix	*copy_matrix(t_matrix *dst, t_matrix *src)
+{
+	int	i;
+	int	j;
+
+	if (dst->r != src->r || dst->c != src->c)
+		return (NULL);
+	i = -1;
+	while (++i < dst->r)
+	{
+		j = -1;
+		while (++j < dst->c)
+			dst->mat[i][j] = src->mat[i][j];
+	}
+	return (dst);
+}
+
 void		delete_matrix(t_matrix *matrix)
 {
 	int	r;
@@ -75,27 +92,28 @@ void		delete_matrix(t_matrix *matrix)
 	}
 }
 
-t_matrix	*mult_matrix(t_matrix *m1, t_matrix *m2)
+t_matrix	*mult_matrix(t_matrix **res, t_matrix *m1, t_matrix *m2)
 {
-	t_matrix	*mult;
 	int			r;
 	int			c;
 	int			i;
+	t_matrix	*tmp;
 
-	if (m1->c != m2->r)
+	if (m1->c != m2->r || !res)
 		return (NULL);
-	mult = new_matrix(NULL, m1->r, m2->c);
+	if (!*res)
+		*res = new_matrix(NULL, m1->r, m2->c);
+	tmp = new_matrix(NULL, m1->r, m2->c);
 	r = -1;
-	while (++r < mult->r)
+	while (++r < (*res)->r)
 	{
 		c = -1;
-		while (++c < mult->c)
+		while (++c < (*res)->c)
 		{
 			i = -1;
-			mult->mat[r][c] = 0;
 			while (++i < m1->c)
-				mult->mat[r][c] += m1->mat[r][i] * m2->mat[i][c];
+				tmp->mat[r][c] += m1->mat[r][i] * m2->mat[i][c];
 		}
 	}
-	return (mult);
+	return (copy_matrix(*res, tmp));
 }

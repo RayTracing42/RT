@@ -6,12 +6,12 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/10 13:33:39 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/20 13:00:14 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
+/*
 void		rotate_object(t_object *obj, double x_angle, double y_angle,
 						double z_angle)
 {
@@ -32,7 +32,7 @@ void		scale_object(t_object *obj, double x, double y, double z)
 	scale(&obj->scale, x, y, z);
 	get_inv_3x3mat(obj->scale_inv, obj->scale);
 }
-
+*/
 void		set_object_color(t_object *obj, int r, int g, int b)
 {
 	obj->color.r = r;

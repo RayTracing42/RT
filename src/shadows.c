@@ -17,7 +17,7 @@ int		check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs, t_light *light)
 		return (1);
 	while (l_objs != NULL)
 	{
-		tmp = l_objs->obj->intersect(light_ray, l_objs->obj);
+		tmp = l_objs->obj->intersect(&light_ray->nb_intersect, &light_ray->inter, light_ray->equ, l_objs->obj);
 		if (tmp > 0 && tmp < 1)
 			return (1);
 		l_objs = l_objs->next;
