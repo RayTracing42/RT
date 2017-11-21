@@ -25,7 +25,8 @@ light_shading.c main.c matrice_rotation.c objects.c objects2.c orb_light.c \
 parallel_light.c plane.c reflexion.c refract_list.c refraction.c scanning.c \
 scene.c scene_lights.c scene_objs.c shadows.c sphere.c spotlight.c tools.c \
 utils.c vectors.c view_plane.c parsing.c parsing_tools.c parsing_camera.c \
-parsing_scene.c parsing_lights.c parsing_objects.c
+parsing_scene.c parsing_lights.c parsing_objects.c transformations.c \
+matrix_ops.c matrix.c
 
 SRC:= $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)

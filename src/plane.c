@@ -6,39 +6,31 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/25 17:12:09 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/13 16:30:57 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			plane_intersect(t_ray *ray, t_object *obj)
+static double			plane_intersect(int *nbi, t_dot *dst, t_parequation e, t_object *obj)
 {
-	t_vector	*vd;
-	t_vector	vc;
 	double		t;
 	double		denom;
 	t_plane		*p;
 
+	t = -1;
+	*nbi = 0;
 	p = (t_plane*)obj;
-	vc = (t_vector){ray->equ.vc.x - p->origin.x, ray->equ.vc.y - p->origin.y,
-					ray->equ.vc.z - p->origin.z};
-	vd = &ray->equ.vd;
-	denom = (p->normal.x * vd->x + p->normal.y * vd->y + p->normal.z * vd->z);
-	if (!denom)
+	if (!(denom = p->a * e.vd.x + p->b * e.vd.y + p->c * e.vd.z))
 		return (-1);
-	t = -((p->normal.x * vc.x + p->normal.y * vc.y + p->normal.z * vc.z + 0) /
-		denom);
-	if ((long)(t * pow(10, 12)) > 0)
+	t = -((p->a * e.vc.x + p->b * e.vc.y + p->c * e.vc.z + p->d) / denom);
+	if (gt_0(t))
 	{
-		ray->nb_intersect = 1;
-		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
-				ray->equ.vc.z + vd->z * t);
-		return (t);
+		*nbi = 1;
+		*dst = equation_get_dot(&e, t);
 	}
-	ray->nb_intersect = 0;
-	return (-1);
+	return (t);
 }
 
 static const t_vector	*get_plane_normal(t_dot *inter, t_object *obj)
@@ -47,9 +39,14 @@ static const t_vector	*get_plane_normal(t_dot *inter, t_object *obj)
 	return (&obj->normal);
 }
 
-/*int						is_in_plane(t_dot *d, t_plane *p)
+int						is_in_plane(t_dot *d, t_plane *p)
 {
-}*/
+	double	res;
+
+	res = p->a * d->x + p->b * d->y + p->c * d->z + p->d;
+	res *= pow(10, 12);
+	return (!((long)res > 0 || (long)res < 0));
+}
 
 t_plane					*new_plane(t_objs_comp args, t_vector normal)
 {
@@ -59,6 +56,11 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal)
 	plane->normal = normal;
 	plane->get_normal = get_plane_normal;
 	plane->intersect = plane_intersect;
+	plane->a = normal.x;
+	plane->b = normal.y;
+	plane->c = normal.z;
+	plane->d = -(normal.x * args.orig.x + normal.y * args.orig.y + normal.z * args.orig.z);
+	plane->z = args.orig.z;
 	return (plane);
 }
 

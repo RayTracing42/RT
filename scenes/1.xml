@@ -49,8 +49,8 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<b>0</b>
 		</color>
 		<physic>
-			<refraction_amount>0</refraction_amount>
 			<reflexion_amount>0.5</reflexion_amount>
+			<refraction_amount>0</refraction_amount>
 			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>
 		</physic>
@@ -75,8 +75,8 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<b>0</b>
 		</color>
 		<physic>
-			<refraction_amount>0</refraction_amount>
 			<reflexion_amount>0.5</reflexion_amount>
+			<refraction_amount>0</refraction_amount>
 			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>
 		</physic>
@@ -103,8 +103,8 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<b>255</b>
 		</color>
 		<physic>
-			<refraction_amount>0</refraction_amount>
 			<reflexion_amount>0.5</reflexion_amount>
+			<refraction_amount>0</refraction_amount>
 			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>
 		</physic>
@@ -136,8 +136,8 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<b>100</b>
 		</color>
 		<physic>
-			<refraction_amount>0</refraction_amount>
 			<reflexion_amount>0.5</reflexion_amount>
+			<refraction_amount>0</refraction_amount>
 			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>
 		</physic>
@@ -147,7 +147,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 		<type>spot</type>
 		<origin>
 			<x>200</x>
-			<y>0</y>
+			<y>100</y>
 			<z>200</z>
 		</origin>
 		<direction>
@@ -164,18 +164,4 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 		<aperture>45</aperture>
 	</light>
 
-	<light>
-		<type>orb</type>
-		<origin>
-			<x>200</x>
-			<y>0</y>
-			<z>-200</z>
-		</origin>
-		<color>
-			<r>100</r>
-			<g>100</g>
-			<b>100</b>
-		</color>
-		<power>0.8</power>
-	</light>
 </scene>

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 20:25:23 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/20 20:33:25 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # include "lights.h"
 # include "light_physic.h"
 # include "light_shading.h"
+# include "matrix.h"
 # include "objects.h"
 # include "scene.h"
 # include "structures.h"
@@ -53,7 +54,9 @@ double		angle_between_vectors(t_vector a, t_vector b);
 void		view_plane(t_camera *cam, t_view_plane *vp);
 void		view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 
-void		scanning(t_scene *scn);
+void			scanning(t_scene *scn);
+t_parequation	transform_equ(t_ray *ray, t_object *obj);
+void			transform_inter(t_ray *ray, t_object *obj);
 
 SDL_Color	effects(t_ray *ray, t_scene *scn);
 SDL_Color	shadows(t_ray *ray, t_scene *scn);
@@ -72,9 +75,9 @@ int			if_node_exist(t_list_objs *l, t_object *obj);
 /*
 **	tools.c
 */
-int			get_quad_equation_sol(t_dot *res, double a, double b, double c);
-void		set_rect_dim(SDL_Rect *rect, int w, int h);
-void		set_rect_crd(SDL_Rect *rect, int x, int y);
+t_dot		equation_get_dot(t_parequation *eq, double t);
+int			get_quad_equation_sol(double *res, double a, double b, double c);
+int			gt_0(double nb);
 
 /*
 **	vectors.c
