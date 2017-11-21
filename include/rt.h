@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/20 20:33:25 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/21 16:47:15 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ int			if_node_exist(t_list_objs *l, t_object *obj);
 */
 t_dot		equation_get_dot(t_parequation *eq, double t);
 int			get_quad_equation_sol(double *res, double a, double b, double c);
-int			gt_0(double nb);
+int		gt(double nb1, double nb2);
+int		lt(double nb1, double nb2);
+int		eq(double nb1, double nb2);
 
 /*
 **	vectors.c

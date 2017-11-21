@@ -6,16 +6,26 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:35:27 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/12 20:07:37 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/21 16:49:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-int		gt_0(double nb)
+int		gt(double nb1, double nb2)
 {
-	return ((long)(nb * pow(10, 12)) > 0);
+	return ((long)(nb1 * pow(10, 11)) > (long)(nb2 * pow(10, 11)));
+}
+
+int		lt(double nb1, double nb2)
+{
+	return ((long)(nb1 * pow(10, 11)) < (long)(nb2 * pow(10, 11)));
+}
+
+int		eq(double nb1, double nb2)
+{
+	return ((long)(nb1 * pow(10, 11)) == (long)(nb2 * pow(10, 11)));
 }
 
 int		get_quad_equation_sol(double *res, double a, double b, double c)
@@ -35,12 +45,13 @@ int		get_quad_equation_sol(double *res, double a, double b, double c)
 		return (0);
 	s1 = (-b - sqrt(delta)) / (2 * a),
 	s2 = (-b + sqrt(delta)) / (2 * a);
-	if (gt_0(s1) && gt_0(s2))
+	if (gt(s1, 0) && gt(s2, 0))
 		*res = ft_dmin(s1, s2);
-	else if (gt_0(s1) || gt_0(s2))
+	else if (gt(s1, 0) || gt(s2, 0))
 		*res = ft_dmax(s1, s2);
 	else
 		return (0);
+
 	return ((delta != 0) + 1);
 }
 

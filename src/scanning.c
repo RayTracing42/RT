@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/20 20:47:00 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/21 16:47:48 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	while (l_objs != NULL)
 	{
 		tmp = l_objs->obj->intersect(&ray->nb_intersect, &ray->inter, transform_equ(ray, l_objs->obj), l_objs->obj);
-		if (tmp > 0 && (distance == 0 || (tmp < distance && distance > 0)))
+		if (gt(tmp, 0) && (eq(distance, 0) || (lt(tmp, distance) && gt(distance, 0))))
 		{
 			distance = tmp;
 			transform_inter(ray, l_objs->obj);
