@@ -305,6 +305,7 @@ typedef struct				s_camera
 {
 	t_dot					origin;
 	double					focal;
+	t_vector				angle;
 	double					angle_x;
 	double					angle_y;
 	double					angle_z;

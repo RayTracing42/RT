@@ -74,6 +74,7 @@ SRC_LIBFT = ft_memset.c \
 			ft_realloc.c \
 			ft_cnt_word.c \
 			get_next_line.c \
+			get_file_to_string.c \
 			ft_itoa_base.c \
 			ft_utoa_base.c \
 			errors.c \

@@ -26,6 +26,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
+# include <fcntl.h>
 # include "camera.h"
 # include "events.h"
 # include "graphics.h"
@@ -37,6 +38,7 @@
 # include "scene.h"
 # include "structures.h"
 # include "vectors.h"
+# include "parsing.h"
 
 t_vector	matrice_rotation_x(t_vector *m, double angle);
 t_vector	matrice_rotation_y(t_vector *m, double angle);

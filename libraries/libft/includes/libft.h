@@ -114,6 +114,7 @@ char			*ft_realloc(char *old, size_t add);
 int				ft_cnt_word(char *str, char c);
 
 int				get_next_line(const int fd, char **line);
+int				get_file_to_string(int fd, char **file);
 char			*ft_itoa_base(long long int n, int base, int maj);
 char			*ft_utoa_base(unsigned long long int n, int base, int maj);
 
