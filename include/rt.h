@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/21 16:47:15 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/21 16:56:48 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # endif
 
 # define TITLE			"RT"
+# define POW			10000000000
 
 # include <stdlib.h>
 # include <stdio.h>

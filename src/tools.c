@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:35:27 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/21 16:49:08 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/21 16:55:44 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 int		gt(double nb1, double nb2)
 {
-	return ((long)(nb1 * pow(10, 11)) > (long)(nb2 * pow(10, 11)));
+	return ((long)(nb1 * POW) > (long)(nb2 * POW));
 }
 
 int		lt(double nb1, double nb2)
 {
-	return ((long)(nb1 * pow(10, 11)) < (long)(nb2 * pow(10, 11)));
+	return ((long)(nb1 * POW) < (long)(nb2 * POW));
 }
 
 int		eq(double nb1, double nb2)
 {
-	return ((long)(nb1 * pow(10, 11)) == (long)(nb2 * pow(10, 11)));
+	return ((long)(nb1 * POW) == (long)(nb2 * POW));
 }
 
 int		get_quad_equation_sol(double *res, double a, double b, double c)
