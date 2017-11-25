@@ -139,13 +139,13 @@ int			parsing_object(char *scene, t_scene *scn)
 			obj = (t_object *)parsing_sphere(data[0]);
 		else if (!(ft_strcmp(data[1], "plane")) || !(ft_strcmp(data[1], "PLANE")))
 			obj = (t_object *)parsing_plane(data[0]);
-		else if(!(ft_strcmp(data[1], "cylinder")) || !(ft_strcmp(data[1], "CYLINDER")))
+		else if (!(ft_strcmp(data[1], "cylinder")) || !(ft_strcmp(data[1], "CYLINDER")))
 			obj = (t_object *)parsing_cylinder(data[0]);
-		else if(!(ft_strcmp(data[1], "cone")) || !(ft_strcmp(data[1], "CONE")))
+		else if (!(ft_strcmp(data[1], "cone")) || !(ft_strcmp(data[1], "CONE")))
 			obj = (t_object *)parsing_cone(data[0]);
 		else 
 			return (-1);
-		if (!obj)
+		if (!obj || (parsing_transformations(obj, data[0]) == -1))
 			return (-1);
 		scene = ft_strstr(scene, "</object>") + ft_strlen("</object>");
 		free(data[1]);

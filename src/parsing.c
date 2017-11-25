@@ -19,7 +19,7 @@ int		parsing_vector(char *data_vector, t_vector *d)
 		|| !(y = get_interval(data_vector, "<y>", "</y>"))
 		|| !(z = get_interval(data_vector, "<z>", "</z>")))
 		return (-1);
-	*d = vector(atoi(x), atoi(y), atoi(z));
+	*d = vector(atod(x), atod(y), atod(z));
 	free(x);
 	free(y);
 	free(z);
@@ -36,7 +36,7 @@ int		parsing_dot(char *data_dot, t_dot *d)
 		|| !(y = get_interval(data_dot, "<y>", "</y>"))
 		|| !(z = get_interval(data_dot, "<z>", "</z>")))
 		return (-1);
-	*d = dot(atoi(x), atoi(y), atoi(z));
+	*d = dot(atod(x), atod(y), atod(z));
 	free(x);
 	free(y);
 	free(z);

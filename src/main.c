@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/20 20:50:52 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/25 22:51:11 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int			main(int ac, char **av)
 	{
 		get_sdl_core();
 		init_list_evts(&events, NULL);
-		set_all_matrix(scn->objects->obj, (t_trans_data){(t_dot){5,5,5}, (t_dot){10,10,10}, (t_dot){1.2,1,1}});
 		view_plane(scn->cam, scn->cam->vp);
 		scanning(scn);
 		refresh_win();

@@ -54,6 +54,23 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
+		<transformations>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>1</x>
+				<y>1</y>
+				<z>1</z>
+			</scale>
+			<translation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</translation>
+		</transformations>
 		<radius>40</radius>
 	</object>
 
@@ -80,6 +97,23 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
+		<transformations>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>1</x>
+				<y>1</y>
+				<z>1</z>
+			</scale>
+			<translation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</translation>
+		</transformations>
 		<radius>40</radius>
 	</object>
 
@@ -106,6 +140,23 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
+		<transformations>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>1</x>
+				<y>1</y>
+				<z>1</z>
+			</scale>
+			<translation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</translation>
+		</transformations>
 		<radius>20</radius>
 	</object>
 
@@ -133,6 +184,23 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<refraction_index>1.8</refraction_index>
 			<shininess>30</shininess>
 		</physic>
+		<transformations>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>1</x>
+				<y>1</y>
+				<z>1</z>
+			</scale>
+			<translation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</translation>
+		</transformations>
 		<radius>5</radius>
 		<height_top>5</height_top>
 		<height_bottom>5</height_bottom>
