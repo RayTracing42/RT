@@ -1,32 +1,31 @@
-/*============================================================================*/
+/* ************************************************************************** */
 /*                                                                            */
-/*        fichier :   parsing_camera.c                                        */
+/*                                                        :::      ::::::::   */
+/*   parsing_camera.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/26 15:28:43 by fcecilie          #+#    #+#             */
+/*   Updated: 2017/11/26 15:28:49 by fcecilie         ###   ########.fr       */
 /*                                                                            */
-/*        auteur  :   fcecilie                                                */
-/*        adresse :   fcecilie@student.42.fr                                  */
-/*                                                                            */
-/*============================================================================*/
+/* ************************************************************************** */
 
 #include "rt.h"
 
 t_camera	*parsing_camera(char *scene)
 {
-	char		*data[4];
+	char		*data[3];
 	t_dot		angle;
 	t_dot		origin;
-	double		focal;
 
 	if (!(data[0] = get_interval(scene, "<camera>", "</camera>"))
 		|| !(data[1] = get_interval(data[0], "<origin>", "</origin>"))
 		|| !(data[2] = get_interval(data[0], "<angle>", "</angle>"))
-		|| !(data[3] = get_interval(data[0], "<focal>", "</focal>"))
 		|| (parsing_dot(data[1], &origin) == -1)
 		|| (parsing_dot(data[2], &angle) == -1))
 		return (NULL);
-	focal = atoi(data[3]);
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);
-	free(data[3]);
-	return (new_camera(focal, origin, angle.x, angle.y, angle.z));
+	return (new_camera(60, origin, angle.x, angle.y, angle.z));
 }

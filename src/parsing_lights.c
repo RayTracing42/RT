@@ -1,11 +1,14 @@
-/*============================================================================*/
+/* ************************************************************************** */
 /*                                                                            */
-/*        fichier :   parsing_lights.c                                        */
+/*                                                        :::      ::::::::   */
+/*   parsing_lights.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/26 15:30:32 by fcecilie          #+#    #+#             */
+/*   Updated: 2017/11/26 15:42:34 by fcecilie         ###   ########.fr       */
 /*                                                                            */
-/*        auteur  :   fcecilie                                                */
-/*        adresse :   fcecilie@student.42.fr                                  */
-/*                                                                            */
-/*============================================================================*/
+/* ************************************************************************** */
 
 #include "rt.h"
 
@@ -94,7 +97,7 @@ int					parsing_light(char *scene, t_scene *scn)
 {
 	char		*data[2];
 	t_light		*lux;
-	
+
 	while ((data[0] = get_interval(scene, "<light>", "</light>")))
 	{
 		lux = NULL;
@@ -105,9 +108,9 @@ int					parsing_light(char *scene, t_scene *scn)
 		else if (!(ft_strcmp(data[1], "parallel"))
 			|| !(ft_strcmp(data[1], "PARALLEL")))
 			lux = (t_light *)parsing_parallel_light(data[0]);
-		else if(!(ft_strcmp(data[1], "spot")) || !(ft_strcmp(data[1], "SPOT")))
+		else if (!(ft_strcmp(data[1], "spot")) || !(ft_strcmp(data[1], "SPOT")))
 			lux = (t_light *)parsing_spotlight(data[0]);
-		else 
+		else
 			return (-1);
 		if (!lux)
 			return (-1);

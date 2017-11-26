@@ -1,11 +1,14 @@
-/*============================================================================*/
+/* ************************************************************************** */
 /*                                                                            */
-/*        fichier :   parsing_scene.c                                         */
+/*                                                        :::      ::::::::   */
+/*   parsing_scene.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/26 14:48:47 by fcecilie          #+#    #+#             */
+/*   Updated: 2017/11/26 15:28:22 by fcecilie         ###   ########.fr       */
 /*                                                                            */
-/*        auteur  :   fcecilie                                                */
-/*        adresse :   fcecilie@student.42.fr                                  */
-/*                                                                            */
-/*============================================================================*/
+/* ************************************************************************** */
 
 #include "rt.h"
 
@@ -14,12 +17,13 @@ t_scene		*parsing_scene(char *scene)
 	char		*data;
 	t_camera	*cam;
 	int			brightness;
-	
+
 	if (!(cam = parsing_camera(scene)))
 		exit_custom_error("rt", ":parsing_camera() failed");
 	if (!(data = get_interval(scene, "<brightness>", "</brightness>")))
 		return (NULL);
-	brightness = atod(data);
+	if (between(brightness = atod(data), 0, 100) == -1)
+		exit_custom_error("rt", ":brightness must be between <0 - 100>");
 	free(data);
 	return (new_scene(cam, brightness));
 }

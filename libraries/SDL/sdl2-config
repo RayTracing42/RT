@@ -1,6 +1,6 @@
 #!/bin/sh
 
-prefix=/Users/fcecilie/Rendus/rt_docs/rt_branch_master/libraries/SDL/build
+prefix=/Users/fcecilie/Rendus/rt_docs/rt_branch_parsing/libraries/SDL/build
 exec_prefix=${prefix}
 exec_prefix_set=no
 libdir=${exec_prefix}/lib

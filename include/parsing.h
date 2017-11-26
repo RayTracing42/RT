@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/25 22:30:40 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/11/26 14:41:39 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ double				int_to_decimal(int n);
 double				atod(char *src);
 char				*get_interval(const char *src, const char *start,
 						const char *stop);
-int					value_is_in_interval(double value, double low_limit,
+int					between(double value, double low_limit,
 						double height_limit);
 
 /*

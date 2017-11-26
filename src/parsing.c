@@ -1,15 +1,18 @@
-/*============================================================================*/
+/* ************************************************************************** */
 /*                                                                            */
-/*        fichier :   parsing.c                                               */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
+/*   Updated: 2017/11/26 15:15:01 by fcecilie         ###   ########.fr       */
 /*                                                                            */
-/*        auteur  :   fcecilie                                                */
-/*        adresse :   fcecilie@student.42.fr                                  */
-/*                                                                            */
-/*============================================================================*/
+/* ************************************************************************** */
 
 #include "rt.h"
 
-int		parsing_vector(char *data_vector, t_vector *d)
+int			parsing_vector(char *data_vector, t_vector *d)
 {
 	char	*x;
 	char	*y;
@@ -26,7 +29,7 @@ int		parsing_vector(char *data_vector, t_vector *d)
 	return (0);
 }
 
-int		parsing_dot(char *data_dot, t_dot *d)
+int			parsing_dot(char *data_dot, t_dot *d)
 {
 	char	*x;
 	char	*y;
@@ -43,7 +46,7 @@ int		parsing_dot(char *data_dot, t_dot *d)
 	return (0);
 }
 
-int		parsing_color(char *data_color, SDL_Color *c)
+int			parsing_color(char *data_color, SDL_Color *c)
 {
 	char	*r;
 	char	*g;
@@ -60,19 +63,28 @@ int		parsing_color(char *data_color, SDL_Color *c)
 	return (0);
 }
 
-int		parsing_physic(char *data_physic, t_objs_comp *args)
+int			parsing_physic(char *data_physic, t_objs_comp *args)
 {
 	char	*data[4];
 
-	if (!(data[0] = get_interval(data_physic, "<refraction_amount>", "</refraction_amount>"))
-		|| !(data[1] = get_interval(data_physic, "<refraction_index>", "</refraction_index>"))
-		|| !(data[2] = get_interval(data_physic, "<reflexion_amount>", "</reflexion_amount>"))
-		|| !(data[3] = get_interval(data_physic, "<shininess>", "</shininess>")))
+	if (!(data[0] = get_interval(data_physic, "<refraction_amount>",
+		"</refraction_amount>"))
+		|| !(data[1] = get_interval(data_physic, "<refraction_index>",
+		"</refraction_index>"))
+		|| !(data[2] = get_interval(data_physic, "<reflexion_amount>",
+		"</reflexion_amount>"))
+		|| !(data[3] = get_interval(data_physic, "<shininess>",
+		"</shininess>")))
 		return (-1);
-	args->refraction_amount = atod(data[0]);
-	args->refractive_index = atod(data[1]);
-	args->reflection_amount = atod(data[2]);
-	args->shininess = atod(data[3]);
+	if (between(args->refraction_amount = atod(data[0]), 0, 1) == -1)
+		exit_custom_error("rt", ":refraction_amount must be between <0 - 1.0>");
+	if (args->refraction_amount != 0
+		&& between(args->refractive_index = atod(data[1]), 1.1, 10) == -1)
+		exit_custom_error("rt", ":refractive_index must be between <1.1 - 10>");
+	if (between(args->reflection_amount = atod(data[2]), 0, 1) == -1)
+		exit_custom_error("rt", ":reflection_amount must be between <0 - 1.0>");
+	if (between(args->shininess = atod(data[3]), 0, 100) == -1)
+		exit_custom_error("rt", ":shininess must be between <0 - 100>");
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);

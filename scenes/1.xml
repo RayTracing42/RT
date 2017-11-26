@@ -4,7 +4,6 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 	<brightness>75</brightness>
 	
 	<camera>
-		<focal>60</focal>
 		<origin>
 			<x>-400</x>
 			<y>20</y>
@@ -49,9 +48,9 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<b>0</b>
 		</color>
 		<physic>
-			<reflexion_amount>0.5</reflexion_amount>
-			<refraction_amount>0</refraction_amount>
-			<refraction_index>0</refraction_index>
+			<reflexion_amount>0</reflexion_amount>
+			<refraction_amount>0.8</refraction_amount>
+			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
 		<transformations>
@@ -77,7 +76,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 	<object>
 		<type>cylinder</type>
 		<origin>
-			<x>400</x>
+			<x>200</x>
 			<y>0</y>
 			<z>-100</z>
 		</origin>
@@ -92,9 +91,9 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<b>0</b>
 		</color>
 		<physic>
-			<reflexion_amount>0.5</reflexion_amount>
-			<refraction_amount>0</refraction_amount>
-			<refraction_index>0</refraction_index>
+			<reflexion_amount>0</reflexion_amount>
+			<refraction_amount>0.8</refraction_amount>
+			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
 		<transformations>
@@ -161,7 +160,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 		</transformations>
 		<height_top>40</height_top>
 		<height_bottom>40</height_bottom>
-		<angle>20</angle>
+		<angle>50</angle>
 	</object>
 
 	<object>
@@ -187,7 +186,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<b>100</b>
 		</color>
 		<physic>
-			<reflexion_amount>0.5</reflexion_amount>
+			<reflexion_amount>0</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
 			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>

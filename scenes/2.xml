@@ -4,7 +4,6 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 	<brightness>75</brightness>
 	
 	<camera>
-		<focal>60</focal>
 		<origin>
 			<x>-100</x>
 			<y>20</y>
