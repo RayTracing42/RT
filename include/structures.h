@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/25 22:30:42 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/11/29 04:06:42 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,17 @@ typedef struct				s_dot
 	double					y;
 	double					z;
 }							t_dot;
+
+typedef struct				s_limit
+{
+	double					*up_x;
+	double					*up_y;
+	double					*up_z;
+	double					*down_x;
+	double					*down_y;
+	double					*down_z;
+
+}							t_limit;
 
 typedef struct				s_trans_data
 {

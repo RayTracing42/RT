@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/21 16:47:48 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/29 04:06:32 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,31 +29,58 @@ void				transform_inter(t_ray *ray, t_object *obj)
 	ray->inter = (t_dot){ray->inter.x + obj->origin.x, ray->inter.y + obj->origin.y, ray->inter.z + obj->origin.z};
 }
 
+/*
+**	if (first_intersect()
+**		if (local_limit()
+**			if (transfo()
+**				if (global_limit()
+**					OK;
+**	else if ("mode creux" && second_intersect)
+**		if (local_limit()
+**			if (transfo()
+**				if (global_limit()
+**					OK;
+**	else if ("mode plein")
+**		intersect(local_x) && verification de si le pt en auestion est toujours dans l'objet;
+**		intersect(local_y) && verification de si le pt en auestion est toujours dans l'objet;
+**		intersect(local_z) && verification de si le pt en auestion est toujours dans l'objet;
+**					
+**		intersect(global_x) && verification de si le pt en auestion est toujours dans l'objet;
+**		intersect(global_y) && verification de si le pt en auestion est toujours dans l'objet;
+**		intersect(global_z) && verification de si le pt en auestion est toujours dans l'objet;
+**			-> on prend le pt le plus proche. 	
+**					
+**					
+*/
+void	first_intersect(t_ray *ray, t_object *obj, double *dist)
+{
+	double	tmp;
+	t_ray	tmp_ray;
+
+	tmp_ray = *ray;
+	tmp = obj->intersect(&tmp_ray.nb_intersect, &tmp_ray.inter,
+		transform_equ(&tmp_ray, obj), obj);
+	if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && gt(*dist, 0))))
+	{
+		*ray = tmp_ray;
+		transform_inter(ray, obj);
+		ray->color = obj->color;
+		ray->obj = obj;
+		ray->percuted_refractive_i = obj->obj_light.refractive_index;
+		*dist = tmp;
+	}
+}
+
 static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 {
-	double		tmp;
 	double		distance;
-	int			nb;
-	t_dot		inter;
 
 	distance = 0;
 	while (l_objs != NULL)
 	{
-		tmp = l_objs->obj->intersect(&ray->nb_intersect, &ray->inter, transform_equ(ray, l_objs->obj), l_objs->obj);
-		if (gt(tmp, 0) && (eq(distance, 0) || (lt(tmp, distance) && gt(distance, 0))))
-		{
-			distance = tmp;
-			transform_inter(ray, l_objs->obj);
-			inter = ray->inter;
-			ray->color = l_objs->obj->color;
-			ray->obj = l_objs->obj;
-			ray->percuted_refractive_i = l_objs->obj->obj_light.refractive_index;
-			nb = ray->nb_intersect;
-		}
+		first_intersect(ray, l_objs->obj, &distance);
 		l_objs = l_objs->next;
 	}
-	ray->inter = inter;
-	ray->nb_intersect = nb;
 	return (distance);
 }
 
