@@ -55,9 +55,13 @@ double		angle_between_vectors(t_vector a, t_vector b);
 void		view_plane(t_camera *cam, t_view_plane *vp);
 void		view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 
+void			first_intersect(t_ray *ray, t_object *obj, double *dist);
+void			second_intersect(t_ray *ray, t_object *obj, double *dist);
 void			scanning(t_scene *scn);
 t_parequation	transform_equ(t_ray *ray, t_object *obj);
 void			transform_inter(t_ray *ray, t_object *obj);
+
+int				test_limit(t_dot *inter, t_limit *lim);
 
 SDL_Color	effects(t_ray *ray, t_scene *scn);
 SDL_Color	shadows(t_ray *ray, t_scene *scn);
@@ -77,7 +81,7 @@ int			if_node_exist(t_list_objs *l, t_object *obj);
 **	tools.c
 */
 t_dot		equation_get_dot(t_parequation *eq, double t);
-int			get_quad_equation_sol(double *res, double a, double b, double c);
+int			get_quad_equation_sol(double *res, int i);
 int		gt(double nb1, double nb2);
 int		lt(double nb1, double nb2);
 int		eq(double nb1, double nb2);

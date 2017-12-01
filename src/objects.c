@@ -33,6 +33,18 @@ t_object		*new_object(t_type type, t_objs_comp args)
 								args.shininess};
 	obj->get_normal = NULL;
 	obj->intersect = NULL;
+	obj->global_limit.up_x = NULL;
+	obj->global_limit.up_y = NULL;
+	obj->global_limit.up_z = NULL;
+	obj->global_limit.down_x = NULL;
+	obj->global_limit.down_y = NULL;
+	obj->global_limit.down_z = NULL;
+	obj->local_limit.up_x = NULL;
+	obj->local_limit.up_y = NULL;
+	obj->local_limit.up_z = NULL;
+	obj->local_limit.down_x = NULL;
+	obj->local_limit.down_y = NULL;
+	obj->local_limit.down_z = NULL;
 	obj->trans_const = create_identity(4);
 	obj->trans_iconst = create_identity(4);
 	obj->trans_idir = create_identity(4);

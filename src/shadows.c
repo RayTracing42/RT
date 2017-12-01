@@ -12,14 +12,43 @@
 int		check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs, t_light *light)
 {
 	double	tmp;
+	t_ray	tmp_ray;
 
 	if (!light->is_in_light(light, light_ray))
 		return (1);
 	while (l_objs != NULL)
 	{
-		tmp = l_objs->obj->intersect(&light_ray->nb_intersect, &light_ray->inter, transform_equ(light_ray, l_objs->obj), l_objs->obj);
-		if (gt(tmp, 0) && lt(tmp, 1))
-			return (1);
+/*		tmp_ray = *light_ray;
+		tmp_ray.equ = transform_equ(light_ray, l_objs->obj);
+		tmp = l_objs->obj->intersect(&tmp_ray, l_objs->obj, 1);
+		light_ray->nb_intersect = tmp_ray.nb_intersect;
+		light_ray->inter = tmp_ray.inter;*/
+//		first_intersect(light_ray, l_objs->obj, &tmp);
+
+
+	tmp_ray = *light_ray;
+	tmp_ray.equ = transform_equ(&tmp_ray, l_objs->obj);
+	tmp = l_objs->obj->intersect(&tmp_ray, l_objs->obj, 1);
+	if (gt(tmp, 0) && lt(tmp, 1))
+	{
+		if (test_limit(&tmp_ray.inter, &l_objs->obj->local_limit))
+		{
+			transform_inter(&tmp_ray, l_objs->obj);
+			if (test_limit(&tmp_ray.inter, &l_objs->obj->global_limit))
+			{
+				light_ray->inter = tmp_ray.inter;
+				light_ray->normal = tmp_ray.normal;
+				light_ray->color = l_objs->obj->color;
+				light_ray->obj = l_objs->obj;
+				light_ray->percuted_refractive_i = l_objs->obj->obj_light.refractive_index;
+				light_ray->nb_intersect = tmp_ray.nb_intersect;
+				return (1);
+			}
+		}
+	}
+
+//		if (gt(tmp, 0) && lt(tmp, 1))
+//			return (1);
 		l_objs = l_objs->next;
 	}
 	return (0);

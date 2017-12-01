@@ -13,19 +13,21 @@
 #include "rt.h"
 #include <math.h>
 
-static double			cone_intersection(int *nbi, t_dot *dst, t_parequation e, t_object *obj)
+static double			cone_intersection(t_ray *ray, t_object *obj, int i)
 {
-	t_cone		*c;
-	double		t;
+	t_cone			*c;
+	t_parequation	e;
+	double			t[4];
 
-	t = -1;
+	e = ray->equ;
 	c = (t_cone*)obj;
-	if ((*nbi = get_quad_equation_sol(&t,
-			pow(e.vd.x, 2) + pow(e.vd.z, 2) - pow(e.vd.y, 2) * c->tanalpha2,
-			2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z - e.vd.y * e.vc.y * c->tanalpha2),
-			pow(e.vc.x, 2) + pow(e.vc.z, 2) - pow(e.vc.y, 2) * c->tanalpha2)))
-		*dst = equation_get_dot(&e, t);
-	return (t);
+	t[0] = -1;
+	t[1] = pow(e.vd.x, 2) + pow(e.vd.z, 2) - pow(e.vd.y, 2) * c->tanalpha2;
+	t[2] = 2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z - e.vd.y * e.vc.y * c->tanalpha2);
+	t[3] = pow(e.vc.x, 2) + pow(e.vc.z, 2) - pow(e.vc.y, 2) * c->tanalpha2;
+	if ((ray->nb_intersect = get_quad_equation_sol(t, i)))
+		ray->inter = equation_get_dot(&e, t[0]);
+	return (t[0]);
 }
 
 static const t_vector	*get_cone_normal(t_dot *inter, t_object *obj)

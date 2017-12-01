@@ -52,24 +52,6 @@ void				transform_inter(t_ray *ray, t_object *obj)
 **					
 **					
 */
-void	first_intersect(t_ray *ray, t_object *obj, double *dist)
-{
-	double	tmp;
-	t_ray	tmp_ray;
-
-	tmp_ray = *ray;
-	tmp = obj->intersect(&tmp_ray.nb_intersect, &tmp_ray.inter,
-		transform_equ(&tmp_ray, obj), obj);
-	if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && gt(*dist, 0))))
-	{
-		*ray = tmp_ray;
-		transform_inter(ray, obj);
-		ray->color = obj->color;
-		ray->obj = obj;
-		ray->percuted_refractive_i = obj->obj_light.refractive_index;
-		*dist = tmp;
-	}
-}
 
 static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 {

@@ -28,30 +28,29 @@ int		eq(double nb1, double nb2)
 	return ((long)(nb1 * POW) == (long)(nb2 * POW));
 }
 
-int		get_quad_equation_sol(double *res, double a, double b, double c)
+int		get_quad_equation_sol(double *res, int i)
 {
 	double	delta;
 	double	s1;
 	double	s2;
 
-	if (!a)
+	if (!res[1])
 	{
-		if (!b)
+		if (!res[2])
 			return (0);
-		*res = -c / b;
+		res[0] = -res[3] / res[2];
 		return (1);
 	}
-	if ((delta = (b * b) - (4 * a * c)) < 0)
+	if ((delta = (res[2] * res[2]) - (4 * res[1] * res[3])) < 0)
 		return (0);
-	s1 = (-b - sqrt(delta)) / (2 * a),
-	s2 = (-b + sqrt(delta)) / (2 * a);
+	s1 = (-res[2] - sqrt(delta)) / (2 * res[1]),
+	s2 = (-res[2] + sqrt(delta)) / (2 * res[1]);
 	if (gt(s1, 0) && gt(s2, 0))
-		*res = ft_dmin(s1, s2);
+		res[0] = (i == 1) ? ft_dmin(s1, s2) : ft_dmax(s1, s2);
 	else if (gt(s1, 0) || gt(s2, 0))
-		*res = ft_dmax(s1, s2);
+		res[0] = (i == 2) ? ft_dmin(s1, s2) : ft_dmax(s1, s2);
 	else
 		return (0);
-
 	return ((delta != 0) + 1);
 }
 

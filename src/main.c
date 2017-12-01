@@ -34,6 +34,12 @@ int			main(int ac, char **av)
 		ft_putendl("usage : ./rt file.xml");
 	else
 	{
+		
+		
+		scn->objects->next->next->obj->local_limit.up_z = ft_memalloc(sizeof(double*));
+		*scn->objects->next->next->obj->local_limit.up_z = -10;
+
+
 		get_sdl_core();
 		init_list_evts(&events, NULL);
 		view_plane(scn->cam, scn->cam->vp);

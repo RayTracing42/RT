@@ -13,22 +13,25 @@
 #include "rt.h"
 #include <math.h>
 
-static double			plane_intersect(int *nbi, t_dot *dst, t_parequation e, t_object *obj)
+static double			plane_intersect(t_ray *ray, t_object *obj, int i)
 {
-	double		t;
-	double		denom;
-	t_plane		*p;
+	double			t;
+	double			denom;
+	t_parequation	e;
+	t_plane			*p;
 
+	(void)i;
+	e = ray->equ;
 	t = -1;
-	*nbi = 0;
+	ray->nb_intersect = 0;
 	p = (t_plane*)obj;
 	if (!(denom = p->a * e.vd.x + p->b * e.vd.y + p->c * e.vd.z))
 		return (-1);
 	t = -((p->a * e.vc.x + p->b * e.vc.y + p->c * e.vc.z + p->d) / denom);
 	if (gt(t, 0))
 	{
-		*nbi = 1;
-		*dst = equation_get_dot(&e, t);
+		ray->nb_intersect = 1;
+		ray->inter = equation_get_dot(&e, t);
 	}
 	return (t);
 }

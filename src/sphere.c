@@ -13,19 +13,21 @@
 #include "rt.h"
 #include <math.h>
 
-static double			sphere_intersect(int *nbi, t_dot *dst, t_parequation e, t_object *obj)
+static double			sphere_intersect(t_ray *ray, t_object *obj, int i)
 {
-	t_sphere	*s;
-	double		t;
+	t_sphere		*s;
+	t_parequation	e;
+	double			t[4];
 
-	t = -1;
+	e = ray->equ;
 	s = (t_sphere*)obj;
-	if ((*nbi = get_quad_equation_sol(&t,
-				pow(e.vd.x, 2) + pow(e.vd.y, 2) + pow(e.vd.z, 2),
-				2 * (e.vd.x * e.vc.x + e.vd.y * e.vc.y + e.vd.z * e.vc.z),
-				pow(e.vc.x, 2) + pow(e.vc.y, 2) + pow(e.vc.z, 2) - s->r2)))
-		*dst = equation_get_dot(&e, t);
-	return (t);
+	t[0] = -1;
+	t[1] = pow(e.vd.x, 2) + pow(e.vd.y, 2) + pow(e.vd.z, 2);
+	t[2] = 2 * (e.vd.x * e.vc.x + e.vd.y * e.vc.y + e.vd.z * e.vc.z);
+	t[3] = pow(e.vc.x, 2) + pow(e.vc.y, 2) + pow(e.vc.z, 2) - s->r2;
+	if ((ray->nb_intersect = get_quad_equation_sol(t, i)))
+		ray->inter = equation_get_dot(&e, t[0]);
+	return (t[0]);
 }
 
 static const t_vector	*get_sphere_normal(t_dot *inter, t_object *obj)
