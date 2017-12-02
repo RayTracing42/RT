@@ -38,6 +38,8 @@ int			main(int ac, char **av)
 		
 		scn->objects->next->next->obj->local_limit.up_z = ft_memalloc(sizeof(double*));
 		*scn->objects->next->next->obj->local_limit.up_z = -10;
+		scn->objects->next->next->obj->local_limit.up_y = ft_memalloc(sizeof(double*));
+		*scn->objects->next->next->obj->local_limit.up_y = 20;
 
 
 		get_sdl_core();

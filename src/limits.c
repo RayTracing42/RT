@@ -23,3 +23,25 @@ int		test_limit(t_dot *inter, t_limit *lim)
 		return (0);
 	return (1);
 }
+
+int		is_in_limits(t_ray *ray, t_ray *tmp_ray, t_object *obj)
+{
+	if (test_limit(&tmp_ray->inter, &obj->local_limit))
+	{
+		transform_inter(tmp_ray, obj);
+		if (test_limit(&tmp_ray->inter, &obj->global_limit))
+		{
+			ray->inter = tmp_ray->inter;
+			ray->normal = tmp_ray->normal;
+			ray->nb_intersect = tmp_ray->nb_intersect;
+			ray->color = obj->color;
+			ray->obj = obj;
+			ray->percuted_refractive_i = obj->obj_light.refractive_index;
+			return (1);
+		}
+		else
+			return (0);
+	}
+	else
+		return (0);
+}

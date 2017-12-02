@@ -53,19 +53,6 @@ void				transform_inter(t_ray *ray, t_object *obj)
 **					
 */
 
-static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
-{
-	double		distance;
-
-	distance = 0;
-	while (l_objs != NULL)
-	{
-		first_intersect(ray, l_objs->obj, &distance);
-		l_objs = l_objs->next;
-	}
-	return (distance);
-}
-
 SDL_Color		effects(t_ray *ray, t_scene *scn)
 {
 	SDL_Color	reflect_ray;

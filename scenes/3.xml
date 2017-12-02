@@ -4,12 +4,12 @@
 	<camera>
 		<origin>
 			<x>-400</x>
-			<y>0</y>
-			<z>0</z>
+			<y>80</y>
+			<z>200</z>
 		</origin>
 		<angle>
 			<x>0</x>
-			<y>0</y>
+			<y>30</y>
 			<z>0</z>
 		</angle>
 	</camera>	
@@ -54,7 +54,7 @@
 		<transformations>
 			<rotation>
 				<x>0</x>
-				<y>0</y>
+				<y>-20</y>
 				<z>0</z>
 			</rotation>
 			<scale>

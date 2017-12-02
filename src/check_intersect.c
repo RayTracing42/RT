@@ -12,49 +12,49 @@
 
 #include "rt.h"
 
-void	first_intersect(t_ray *ray, t_object *obj, double *dist)
+double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 {
-	double	tmp;
-	t_ray	tmp_ray;
+	double		dist;
+	double		tmp;
+	t_ray		tmp_ray;
 
-	tmp_ray = *ray;
-	tmp_ray.equ = transform_equ(&tmp_ray, obj);
-	tmp = obj->intersect(&tmp_ray, obj, 1);
-	if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && gt(*dist, 0))))
+	dist = 0;
+	while (l_objs != NULL)
 	{
-		if (test_limit(&tmp_ray.inter, &obj->local_limit))
+		tmp_ray = first_intersect(ray, l_objs->obj, &tmp);
+		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
-			transform_inter(&tmp_ray, obj);
-			if (test_limit(&tmp_ray.inter, &obj->global_limit))
+			if (is_in_limits(ray, &tmp_ray, l_objs->obj))
+				dist = tmp;
+			else
 			{
-				ray->inter = tmp_ray.inter;
-				ray->normal = tmp_ray.normal;
-				ray->color = obj->color;
-				ray->obj = obj;
-				ray->percuted_refractive_i = obj->obj_light.refractive_index;
-				ray->nb_intersect = tmp_ray.nb_intersect;
-				*dist = tmp;
+				tmp_ray = second_intersect(ray, l_objs->obj, &tmp);
+				if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
+					if (is_in_limits(ray, &tmp_ray, l_objs->obj))
+						dist = tmp;
 			}
 		}
+		l_objs = l_objs->next;
 	}
+	return (dist);
 }
 
-void	second_intersect(t_ray *ray, t_object *obj, double *dist)
+t_ray	first_intersect(t_ray *ray, t_object *obj, double *tmp)
 {
-	double	tmp;
 	t_ray	tmp_ray;
 
 	tmp_ray = *ray;
 	tmp_ray.equ = transform_equ(&tmp_ray, obj);
-	tmp = obj->intersect(&tmp_ray, obj, 2);
-	if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && gt(*dist, 0))))
-	{
-		ray->inter = tmp_ray.inter;
-		ray->nb_intersect = tmp_ray.nb_intersect;
-		transform_inter(ray, obj);
-		ray->color = obj->color;
-		ray->obj = obj;
-		ray->percuted_refractive_i = obj->obj_light.refractive_index;
-		*dist = tmp;
-	}
+	*tmp = obj->intersect(&tmp_ray, obj, 1);
+	return (tmp_ray);
+}
+
+t_ray	second_intersect(t_ray *ray, t_object *obj, double *tmp)
+{
+	t_ray	tmp_ray;
+
+	tmp_ray = *ray;
+	tmp_ray.equ = transform_equ(&tmp_ray, obj);
+	*tmp = obj->intersect(&tmp_ray, obj, 2);
+	return (tmp_ray);
 }
