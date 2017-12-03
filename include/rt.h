@@ -58,12 +58,13 @@ void		view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 t_ray			first_intersect(t_ray *ray, t_object *obj, double *tmp);
 t_ray			second_intersect(t_ray *ray, t_object *obj, double *tmp);
 double			check_intersect(t_ray *ray, t_list_objs *l_objs);
+
 void			scanning(t_scene *scn);
 t_parequation	transform_equ(t_ray *ray, t_object *obj);
 void			transform_inter(t_ray *ray, t_object *obj);
 
 int				test_limit(t_dot *inter, t_limit *lim);
-int				is_in_limits(t_ray *ray, t_ray *tmp_ray, t_object *obj);
+int				is_in_limit(t_ray *ray, t_ray *tmp_ray, t_object *obj);
 
 SDL_Color	effects(t_ray *ray, t_scene *scn);
 SDL_Color	shadows(t_ray *ray, t_scene *scn);

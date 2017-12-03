@@ -37,11 +37,6 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<y>0</y>
 			<z>0</z>
 		</origin>
-		<direction>
-			<x>0</x>
-			<y>0</y>
-			<z>0</z>
-		</direction>
 		<color>
 			<r>255</r>
 			<g>0</g>
@@ -80,11 +75,6 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<y>0</y>
 			<z>-100</z>
 		</origin>
-		<direction>
-			<x>0</x>
-			<y>0</y>
-			<z>0</z>
-		</direction>
 		<color>
 			<r>0</r>
 			<g>255</g>
@@ -125,11 +115,6 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<y>0</y>
 			<z>100</z>
 		</origin>
-		<direction>
-			<x>0</x>
-			<y>0</y>
-			<z>0</z>
-		</direction>
 		<color>
 			<r>0</r>
 			<g>0</g>
@@ -170,11 +155,6 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<y>-50</y>
 			<z>0</z>
 		</origin>
-		<direction>
-			<x>0</x>
-			<y>0</y>
-			<z>0</z>
-		</direction>
 		<normal>
 			<x>0</x>
 			<y>1</y>

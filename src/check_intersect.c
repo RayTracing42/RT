@@ -24,13 +24,13 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 		tmp_ray = first_intersect(ray, l_objs->obj, &tmp);
 		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
-			if (is_in_limits(ray, &tmp_ray, l_objs->obj))
+			if (is_in_limit(ray, &tmp_ray, l_objs->obj))
 				dist = tmp;
 			else
 			{
 				tmp_ray = second_intersect(ray, l_objs->obj, &tmp);
 				if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
-					if (is_in_limits(ray, &tmp_ray, l_objs->obj))
+					if (is_in_limit(ray, &tmp_ray, l_objs->obj))
 						dist = tmp;
 			}
 		}

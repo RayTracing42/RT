@@ -72,4 +72,10 @@ int					parsing_object(char *scene, t_scene *scn);
 
 int					parsing_transformations(t_object *obj, char *object);
 
+/*
+**	parsing_limit.c
+*/
+
+void				parsing_limit(t_object *obj, char *object);
+
 #endif

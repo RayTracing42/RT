@@ -37,15 +37,13 @@ void		translate_object(t_object *obj, double x, double y, double z);
 ** cone.c
 */
 void		delete_cone(t_cone *cone);
-t_cone		*new_cone(t_objs_comp args, double angle, double height_top,
-					double height_bottom);
+t_cone		*new_cone(t_objs_comp args, double angle);
 
 /*
 ** cylinder.c
 */
 void		delete_cylinder(t_cylinder *cylinder);
-t_cylinder	*new_cylinder(t_objs_comp args, double radius, double height_top,
-						double height_bottom);
+t_cylinder	*new_cylinder(t_objs_comp args, double radius);
 
 /*
 ** plane.c

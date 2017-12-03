@@ -21,13 +21,13 @@ int		check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs, t_light *light)
 		tmp_ray = first_intersect(light_ray, l_objs->obj, &tmp);
 		if (gt(tmp, 0) && lt(tmp, 1))
 		{
-			if (is_in_limits(light_ray, &tmp_ray, l_objs->obj))
+			if (is_in_limit(light_ray, &tmp_ray, l_objs->obj))
 				return (1);
 			else
 			{
 				tmp_ray = second_intersect(light_ray, l_objs->obj, &tmp);
 				if (gt(tmp, 0) && lt(tmp, 1))
-					if (is_in_limits(light_ray, &tmp_ray, l_objs->obj))
+					if (is_in_limit(light_ray, &tmp_ray, l_objs->obj))
 						return (1);
 			}
 		}

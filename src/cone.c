@@ -40,15 +40,12 @@ static const t_vector	*get_cone_normal(t_dot *inter, t_object *obj)
 	return (&c->normal);
 }
 
-t_cone					*new_cone(t_objs_comp args, double angle,
-								double height_top, double height_bottom)
+t_cone					*new_cone(t_objs_comp args, double angle)
 {
 	t_cone	*c;
 
 	c = (t_cone*)new_object(CONE, args);
 	c->angle = angle;
-	c->height_top = height_top;
-	c->height_bottom = height_bottom;
 	c->get_normal = get_cone_normal;
 	c->intersect = cone_intersection;
 	c->tanalpha2 = pow(tan(ft_to_rad(angle)), 2);

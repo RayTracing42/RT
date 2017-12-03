@@ -88,13 +88,8 @@ typedef struct				s_dot
 
 typedef struct				s_limit
 {
-	double					*up_x;
-	double					*up_y;
-	double					*up_z;
-	double					*down_x;
-	double					*down_y;
-	double					*down_z;
-
+	double					**nb;
+	struct s_plane			**p;
 }							t_limit;
 
 typedef struct				s_trans_data
@@ -162,7 +157,6 @@ typedef struct				s_object
 typedef struct				s_objs_comp
 {
 	t_dot					orig;
-	t_vector				dir;
 	SDL_Color				col;
 	double					reflection_amount;
 	double					refraction_amount;
@@ -206,8 +200,6 @@ typedef struct				s_cylinder
 	t_limit					local_limit;
 	double					radius;
 	double					r2;
-	double					height_top;
-	double					height_bottom;
 }							t_cylinder;
 
 typedef struct				s_cone
@@ -227,8 +219,6 @@ typedef struct				s_cone
 	t_limit					local_limit;
 	double					angle;
 	double					tanalpha2;
-	double					height_top;
-	double					height_bottom;
 }							t_cone;
 
 typedef struct				s_plane

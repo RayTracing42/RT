@@ -39,15 +39,12 @@ static const t_vector	*get_cylinder_normal(t_dot *inter, t_object *obj)
 	return (&c->normal);
 }
 
-t_cylinder				*new_cylinder(t_objs_comp args, double radius,
-									double height_top, double height_bottom)
+t_cylinder				*new_cylinder(t_objs_comp args, double radius)
 {
 	t_cylinder	*c;
 
 	c = (t_cylinder*)new_object(CYLINDER, args);
 	c->radius = radius;
-	c->height_top = height_top;
-	c->height_bottom = height_bottom;
 	c->get_normal = get_cylinder_normal;
 	c->intersect = cylinder_intersect;
 	c->r2 = pow(radius, 2);

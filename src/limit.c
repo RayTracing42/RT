@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   limits.c                                           :+:      :+:    :+:   */
+/*   limit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,17 +14,17 @@
 
 int		test_limit(t_dot *inter, t_limit *lim)
 {
-	if ((lim->up_x && inter->x > *lim->up_x)
-		|| (lim->up_y && inter->y > *lim->up_y)
-		|| (lim->up_z && inter->z > *lim->up_z)
-		|| (lim->down_x && inter->x < *lim->down_x)
-		|| (lim->down_y && inter->y < *lim->down_y)
-		|| (lim->down_z && inter->z < *lim->down_z))
+	if ((lim->nb[0] && inter->x > *lim->nb[0])
+		|| (lim->nb[1] && inter->y > *lim->nb[1])
+		|| (lim->nb[2] && inter->z > *lim->nb[2])
+		|| (lim->nb[3] && inter->x < *lim->nb[3])
+		|| (lim->nb[4] && inter->y < *lim->nb[4])
+		|| (lim->nb[5] && inter->z < *lim->nb[5]))
 		return (0);
 	return (1);
 }
 
-int		is_in_limits(t_ray *ray, t_ray *tmp_ray, t_object *obj)
+int		is_in_limit(t_ray *ray, t_ray *tmp_ray, t_object *obj)
 {
 	if (test_limit(&tmp_ray->inter, &obj->local_limit))
 	{

@@ -26,7 +26,8 @@ parallel_light.c plane.c reflexion.c refract_list.c refraction.c scanning.c \
 scene.c scene_lights.c scene_objs.c shadows.c sphere.c spotlight.c tools.c \
 utils.c vectors.c view_plane.c parsing.c parsing_tools.c parsing_camera.c \
 parsing_scene.c parsing_lights.c parsing_objects.c parsing_transformations.c \
-transformations.c matrix_ops.c matrix.c check_intersect.c limits.c
+transformations.c matrix_ops.c matrix.c check_intersect.c parsing_limit.c \
+limit.c
 
 SRC:= $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)
