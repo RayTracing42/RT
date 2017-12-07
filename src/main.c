@@ -34,6 +34,14 @@ int			main(int ac, char **av)
 		ft_putendl("usage : ./rt file.xml");
 	else
 	{
+		t_object *o;
+
+		o = scn->objects->next->next->obj;
+		if (o->is_in_obj(&(t_dot){200, 40, 0}, o))
+			printf("C'est dans la sphere !\n");
+		else
+			printf("C'est pas dans la sphere !\n");
+
 		get_sdl_core();
 		init_list_evts(&events, NULL);
 		view_plane(scn->cam, scn->cam->vp);

@@ -38,17 +38,21 @@ t_plane	*parsing_plane_limit(t_object *obj, t_vector normal, double *nb)
 	p = NULL;
 	if (nb)
 	{
-		origin = (t_dot){0, 0, 0};
+		origin = (t_dot){obj->origin.x, obj->origin.y, obj->origin.z};
 		if ((normal.x == 1) || (normal.x == -1))
-			origin.x = *nb;
+			origin.x += *nb;
 		else if ((normal.y == 1) || (normal.y == -1))
-			origin.y = *nb;
+			origin.y += *nb;
 		else if ((normal.z == 1) || (normal.z == -1))
-			origin.z = *nb;
+			origin.z += *nb;
 
 		p = new_plane((t_objs_comp){origin, obj->color,
 			obj->obj_light.reflection_amount, obj->obj_light.refraction_amount,
 			obj->obj_light.refractive_index, obj->obj_light.shininess}, normal);
+		p->trans_const = obj->trans_const;
+		p->trans_iconst = obj->trans_iconst;
+		p->trans_idir = obj->trans_idir;
+		p->trans_inorm = obj->trans_norm;
 	}
 	return (p);
 }

@@ -183,7 +183,7 @@
 /* #undef HAVE_ALTIVEC_H */
 #define HAVE_LIBUDEV_H 1
 #define HAVE_DBUS_DBUS_H 1
-/* #undef HAVE_IBUS_IBUS_H */
+#define HAVE_IBUS_IBUS_H 1
 /* #undef HAVE_FCITX_FRONTEND_H */
 /* #undef HAVE_LIBSAMPLERATE_H */
 

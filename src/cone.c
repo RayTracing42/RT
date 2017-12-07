@@ -40,6 +40,14 @@ static const t_vector	*get_cone_normal(t_dot *inter, t_object *obj)
 	return (&c->normal);
 }
 
+static int				is_in_cone(t_dot *i, t_object *obj)
+{
+	t_cone	*c;
+
+	c = (t_cone*)obj;
+	return ((pow(i->x - c->origin.x, 2) + pow(i->z - c->origin.z, 2) <= pow(i->y - c->origin.y, 2) * c->tanalpha2));
+}
+
 t_cone					*new_cone(t_objs_comp args, double angle)
 {
 	t_cone	*c;
@@ -47,6 +55,7 @@ t_cone					*new_cone(t_objs_comp args, double angle)
 	c = (t_cone*)new_object(CONE, args);
 	c->angle = angle;
 	c->get_normal = get_cone_normal;
+	c->is_in_obj = is_in_cone;
 	c->intersect = cone_intersection;
 	c->tanalpha2 = pow(tan(ft_to_rad(angle)), 2);
 	return (c);

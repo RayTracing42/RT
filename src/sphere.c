@@ -39,6 +39,14 @@ static const t_vector	*get_sphere_normal(t_dot *inter, t_object *obj)
 	return (&s->normal);
 }
 
+static int				is_in_sphere(t_dot *i, t_object *obj)
+{
+	t_sphere	*s;
+
+	s = (t_sphere*)obj;
+	return ((pow(i->x - s->origin.x, 2) + pow(i->y - s->origin.y, 2) + pow(i->z - s->origin.z, 2) <= s->r2));
+}
+
 t_sphere				*new_sphere(t_objs_comp args, double radius)
 {
 	t_sphere	*sphere;
@@ -46,6 +54,7 @@ t_sphere				*new_sphere(t_objs_comp args, double radius)
 	sphere = (t_sphere*)new_object(SPHERE, args);
 	sphere->radius = radius;
 	sphere->get_normal = get_sphere_normal;
+	sphere->is_in_obj = is_in_sphere;
 	sphere->intersect = sphere_intersect;
 	sphere->r2 = pow(radius, 2);
 	return (sphere);

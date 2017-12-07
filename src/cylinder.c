@@ -39,6 +39,14 @@ static const t_vector	*get_cylinder_normal(t_dot *inter, t_object *obj)
 	return (&c->normal);
 }
 
+static int				is_in_cylinder(t_dot *i, t_object *obj)
+{
+	t_cylinder	*c;
+
+	c = (t_cylinder*)obj;
+	return ((pow(i->x - c->origin.x, 2) + pow(i->z - c->origin.z, 2) <= c->r2));
+}
+
 t_cylinder				*new_cylinder(t_objs_comp args, double radius)
 {
 	t_cylinder	*c;
@@ -46,6 +54,7 @@ t_cylinder				*new_cylinder(t_objs_comp args, double radius)
 	c = (t_cylinder*)new_object(CYLINDER, args);
 	c->radius = radius;
 	c->get_normal = get_cylinder_normal;
+	c->is_in_obj = is_in_cylinder;
 	c->intersect = cylinder_intersect;
 	c->r2 = pow(radius, 2);
 	return (c);
