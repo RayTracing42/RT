@@ -30,7 +30,7 @@ double	*parsing_value_limit(char *limit, char *start, char *stop)
 	return (nb);
 }
 
-t_plane	*parsing_plane_limit(t_object *obj, t_vector normal, double *nb)
+t_plane	*parsing_plane_limit(t_object *obj, t_vector normal, double *nb, t_trans_data trans)
 {
 	t_plane 	*p;
 	t_dot		origin;
@@ -40,24 +40,29 @@ t_plane	*parsing_plane_limit(t_object *obj, t_vector normal, double *nb)
 	{
 		origin = (t_dot){obj->origin.x, obj->origin.y, obj->origin.z};
 		if ((normal.x == 1) || (normal.x == -1))
+		{
 			origin.x += *nb;
+//			trans.trans.x += *nb;
+		}
 		else if ((normal.y == 1) || (normal.y == -1))
+		{
 			origin.y += *nb;
+//			trans.trans.y += *nb;
+		}
 		else if ((normal.z == 1) || (normal.z == -1))
+		{
 			origin.z += *nb;
-
+//			trans.trans.z += *nb;
+		}
 		p = new_plane((t_objs_comp){origin, obj->color,
 			obj->obj_light.reflection_amount, obj->obj_light.refraction_amount,
 			obj->obj_light.refractive_index, obj->obj_light.shininess}, normal);
-		p->trans_const = obj->trans_const;
-		p->trans_iconst = obj->trans_iconst;
-		p->trans_idir = obj->trans_idir;
-		p->trans_inorm = obj->trans_norm;
+		set_all_matrix((t_object *)p, trans);
 	}
 	return (p);
 }
 
-void	parsing_unit_limit(t_object *obj, char *lim, t_limit *l)
+void	parsing_unit_limit(t_object *obj, char *lim, t_limit *l, t_trans_data trans)
 {
 	if (!(l->nb = (double **)ft_memalloc(sizeof(double *) * 6)))
 		exit_error("rt", "malloc");
@@ -69,23 +74,23 @@ void	parsing_unit_limit(t_object *obj, char *lim, t_limit *l)
 	l->nb[3] = parsing_value_limit(lim, "<down_x>", "</down_x>");
 	l->nb[4] = parsing_value_limit(lim, "<down_y>", "</down_y>");
 	l->nb[5] = parsing_value_limit(lim, "<down_z>", "</down_z>");
-	l->p[0] = parsing_plane_limit(obj, (t_vector){1, 0, 0}, l->nb[0]);
-	l->p[1] = parsing_plane_limit(obj, (t_vector){0, 1, 0}, l->nb[1]);
-	l->p[2] = parsing_plane_limit(obj, (t_vector){0, 0, 1}, l->nb[2]);
-	l->p[3] = parsing_plane_limit(obj, (t_vector){-1, 0, 0}, l->nb[3]);
-	l->p[4] = parsing_plane_limit(obj, (t_vector){0, -1, 0}, l->nb[4]);
-	l->p[5] = parsing_plane_limit(obj, (t_vector){0, 0, -1}, l->nb[5]);
+	l->p[0] = parsing_plane_limit(obj, (t_vector){1, 0, 0}, l->nb[0], trans);
+	l->p[1] = parsing_plane_limit(obj, (t_vector){0, 1, 0}, l->nb[1], trans);
+	l->p[2] = parsing_plane_limit(obj, (t_vector){0, 0, 1}, l->nb[2], trans);
+	l->p[3] = parsing_plane_limit(obj, (t_vector){-1, 0, 0}, l->nb[3], trans);
+	l->p[4] = parsing_plane_limit(obj, (t_vector){0, -1, 0}, l->nb[4], trans);
+	l->p[5] = parsing_plane_limit(obj, (t_vector){0, 0, -1}, l->nb[5], trans);
 }
 
-void	parsing_limit(t_object *obj, char *object)
+void	parsing_limit(t_object *obj, char *object, t_trans_data trans)
 {
 	char	*data[3];
 
 	data[0] = get_interval(object, "<limit>", "</limit>");
 	data[1] = get_interval(data[0], "<local>", "</local>");
 	data[2] = get_interval(data[0], "<global>", "</global>");
-	parsing_unit_limit(obj, data[1], &obj->local_limit);
-	parsing_unit_limit(obj, data[2], &obj->global_limit);
+	parsing_unit_limit(obj, data[1], &obj->local_limit, trans);
+	parsing_unit_limit(obj, data[2], &obj->global_limit, trans);
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);

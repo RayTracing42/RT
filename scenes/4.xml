@@ -4,8 +4,8 @@
 	<camera>
 		<origin>
 			<x>-400</x>
-			<y>80</y>
-			<z>-90</z>
+			<y>200</y>
+			<z>350</z>
 		</origin>
 		<angle>
 			<x>0</x>
@@ -49,8 +49,8 @@
 		<transformations>
 			<rotation>
 				<x>0</x>
-				<y>-180</y>
-				<z>-95</z>
+				<y>0</y>
+				<z>-20</z>
 			</rotation>
 			<scale>
 				<x>1</x>
@@ -59,7 +59,7 @@
 			</scale>
 			<translation>
 				<x>0</x>
-				<y>150</y>
+				<y>40</y>
 				<z>200</z>
 			</translation>
 		</transformations>

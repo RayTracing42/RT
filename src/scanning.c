@@ -24,34 +24,10 @@ t_parequation	transform_equ(t_ray *ray, t_object *obj)
 
 void				transform_inter(t_ray *ray, t_object *obj)
 {
-	mult_vect(&ray->normal, obj->trans_norm, obj->get_normal(&ray->inter, obj));
+	mult_vect(&ray->normal, obj->trans_norm, &ray->normal);
 	mult_vect((t_vector*)&ray->inter, obj->trans_const, (t_vector*)&ray->inter);
 	ray->inter = (t_dot){ray->inter.x + obj->origin.x, ray->inter.y + obj->origin.y, ray->inter.z + obj->origin.z};
 }
-
-/*
-**	if (first_intersect()
-**		if (local_limit()
-**			if (transfo()
-**				if (global_limit()
-**					OK;
-**	else if ("mode creux" && second_intersect)
-**		if (local_limit()
-**			if (transfo()
-**				if (global_limit()
-**					OK;
-**	else if ("mode plein")
-**		intersect(local_x) && verification de si le pt en auestion est toujours dans l'objet;
-**		intersect(local_y) && verification de si le pt en auestion est toujours dans l'objet;
-**		intersect(local_z) && verification de si le pt en auestion est toujours dans l'objet;
-**					
-**		intersect(global_x) && verification de si le pt en auestion est toujours dans l'objet;
-**		intersect(global_y) && verification de si le pt en auestion est toujours dans l'objet;
-**		intersect(global_z) && verification de si le pt en auestion est toujours dans l'objet;
-**			-> on prend le pt le plus proche. 	
-**					
-**					
-*/
 
 SDL_Color		effects(t_ray *ray, t_scene *scn)
 {

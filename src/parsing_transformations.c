@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-int		parsing_transformations(t_object *obj, char *object)
+t_trans_data	parsing_transformations(char *object)
 {
 	char			*data[4];
 	t_trans_data	trans;
@@ -25,13 +25,13 @@ int		parsing_transformations(t_object *obj, char *object)
 		|| (parsing_dot(data[1], &trans.trans) == -1)
 		|| (parsing_dot(data[2], &trans.rot) == -1)
 		|| (parsing_dot(data[3], &trans.scale) == -1))
-		return (-1);
+		exit_custom_error("rt", ":parsing_transformations() failed");
 	if (trans.scale.x < 1 || trans.scale.y < 1 || trans.scale.z < 1)
 		exit_custom_error("rt", ":scale must be between <1 - x>");
-	set_all_matrix(obj, trans);
+//	set_all_matrix(obj, trans);
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
-	return (0);
+	return (trans);
 }

@@ -55,6 +55,8 @@ double		angle_between_vectors(t_vector a, t_vector b);
 void		view_plane(t_camera *cam, t_view_plane *vp);
 void		view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 
+t_ray			intersect_full_obj(t_ray *ray, t_object *obj, double *dist);
+t_ray			annex_intersect(t_ray *ray, t_object *obj, t_object *lim, double *tmp);
 t_ray			first_intersect(t_ray *ray, t_object *obj, double *tmp);
 t_ray			second_intersect(t_ray *ray, t_object *obj, double *tmp);
 double			check_intersect(t_ray *ray, t_list_objs *l_objs);

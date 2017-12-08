@@ -70,12 +70,12 @@ int					parsing_object(char *scene, t_scene *scn);
 **	parsing_transformations.c
 */
 
-int					parsing_transformations(t_object *obj, char *object);
+t_trans_data		parsing_transformations(char *object);
 
 /*
 **	parsing_limit.c
 */
 
-void				parsing_limit(t_object *obj, char *object);
+void				parsing_limit(t_object *obj, char *object, t_trans_data trans);
 
 #endif

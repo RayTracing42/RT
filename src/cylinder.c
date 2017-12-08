@@ -13,13 +13,11 @@
 #include "rt.h"
 #include <math.h>
 
-static double			cylinder_intersect(t_ray *ray, t_object *obj, int i)
+static double			cylinder_intersect(t_ray *ray, t_parequation e, t_object *obj, int i)
 {
 	t_cylinder		*c;
-	t_parequation	e;
 	double			t[4];
 
-	e = ray->equ;
 	c = (t_cylinder*)obj;
 	t[0] = -1;
 	t[1] = pow(e.vd.x, 2) + pow(e.vd.z, 2);

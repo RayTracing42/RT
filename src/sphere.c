@@ -13,13 +13,11 @@
 #include "rt.h"
 #include <math.h>
 
-static double			sphere_intersect(t_ray *ray, t_object *obj, int i)
+static double			sphere_intersect(t_ray *ray, t_parequation e, t_object *obj, int i)
 {
 	t_sphere		*s;
-	t_parequation	e;
 	double			t[4];
 
-	e = ray->equ;
 	s = (t_sphere*)obj;
 	t[0] = -1;
 	t[1] = pow(e.vd.x, 2) + pow(e.vd.y, 2) + pow(e.vd.z, 2);
@@ -44,7 +42,7 @@ static int				is_in_sphere(t_dot *i, t_object *obj)
 	t_sphere	*s;
 
 	s = (t_sphere*)obj;
-	return ((pow(i->x - s->origin.x, 2) + pow(i->y - s->origin.y, 2) + pow(i->z - s->origin.z, 2) <= s->r2));
+	return ((pow(i->x, 2) + pow(i->y, 2) + pow(i->z, 2) <= s->r2));
 }
 
 t_sphere				*new_sphere(t_objs_comp args, double radius)
