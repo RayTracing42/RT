@@ -76,25 +76,11 @@ t_orb_light			*parsing_orb_light(char *light)
 	return (new_orb_light(origin, color, power));
 }
 
-int					parsing_ambient_light(char *scene, t_scene *scn)
-{
-	t_light	*lux;
-	char	*data;
-
-	if (!(data = get_interval(scene, "<ambient_light>", "</ambient_light>")))
-		return (-1);
-	if (!(lux = (t_light *)parsing_parallel_light(data)))
-		return (-1);
-	free(data);
-	scene_add_light(lux, scn);
-	return (0);
-}
-
 int					parsing_light(char *scene, t_scene *scn)
 {
 	char		*data[2];
 	t_light		*lux;
-	
+
 	while ((data[0] = get_interval(scene, "<light>", "</light>")))
 	{
 		lux = NULL;
@@ -107,7 +93,7 @@ int					parsing_light(char *scene, t_scene *scn)
 			lux = (t_light *)parsing_parallel_light(data[0]);
 		else if(!(ft_strcmp(data[1], "spot")) || !(ft_strcmp(data[1], "SPOT")))
 			lux = (t_light *)parsing_spotlight(data[0]);
-		else 
+		else
 			return (-1);
 		if (!lux)
 			return (-1);

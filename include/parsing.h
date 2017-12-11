@@ -6,12 +6,13 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/09 16:57:08 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/12/11 15:23:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
+# include "structures.h"
 
 /*
 **	parsing.c
@@ -53,7 +54,6 @@ t_camera			*parsing_camera(char *scene);
 t_parallel_light	*parsing_parallel_light(char *light);
 t_spotlight			*parsing_spotlight(char *light);
 t_orb_light			*parsing_orb_light(char *light);
-int					parsing_ambient_light(char *scene, t_scene *scn);
 int					parsing_light(char *scene, t_scene *scn);
 
 /*
