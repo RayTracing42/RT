@@ -97,8 +97,8 @@ t_scene		*parsing(int argc, char **argv)
 		if (!(scene = get_interval(file, "<scene>", "</scene>"))
 			|| !(scn = parsing_scene(scene)))
 			exit_custom_error("rt", ":parsing_scene() failed");
-		if ((parsing_ambient_light(scene, scn) == -1))
-			exit_custom_error("rt", ":parsing_ambient_light() failed");
+		/*if ((parsing_ambient_light(scene, scn) == -1))
+			exit_custom_error("rt", ":parsing_ambient_light() failed");*/
 		if ((parsing_light(scene, scn) == -1))
 			exit_custom_error("rt", ":parsing_light() failed");
 		if ((parsing_object(scene, scn) == -1))
