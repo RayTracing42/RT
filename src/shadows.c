@@ -60,7 +60,7 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 	t_ray			light_ray;
 	SDL_Color		multi_lights;
 
-	multi_lights = (SDL_Color){0, 0, 0, 255};
+	multi_lights = div_colors(ray->color, scn);
 	tmp = scn->lights;
 	while (tmp != NULL)
 	{
@@ -77,5 +77,5 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 		}
 		tmp = tmp->next;
 	}
-	return (div_colors(multi_lights, scn));
+	return (multi_lights);
 }

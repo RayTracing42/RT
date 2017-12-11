@@ -1,8 +1,8 @@
 Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'est pas traité;
 
 <scene>
-	<brightness>75</brightness>
-	
+	<brightness>20</brightness>
+
 	<camera>
 		<focal>60</focal>
 		<origin>
@@ -15,21 +15,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<y>0</y>
 			<z>0</z>
 		</angle>
-	</camera>	
-
-	<ambient_light>
-		<direction>
-			<x>1</x>
-			<y>-1</y>
-			<z>-1</z>
-		</direction>
-		<color>
-			<r>100</r>
-			<g>100</g>
-			<b>100</b>
-		</color>
-		<power>0.5</power>
-	</ambient_light>
+	</camera>
 
 	<object>
 		<type>sphere</type>
