@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/20 20:17:36 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/11 17:31:06 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_cylinder	*new_cylinder(t_objs_comp args, double radius, double height_top,
 */
 void		delete_plane(t_plane *plane);
 int			is_in_plane(t_dot *d, t_plane *p);
-t_plane		*new_plane(t_objs_comp args, t_vector normal);
+t_plane		*new_plane(t_objs_comp args, t_vector normal, int tgl);
 
 /*
 ** sphere.c

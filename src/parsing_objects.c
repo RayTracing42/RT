@@ -31,7 +31,7 @@ t_plane		*parsing_plane(char *object)
 	free(data[2]);
 	free(data[3]);
 	free(data[4]);
-	return (new_plane(args, normal));
+	return (new_plane(args, normal, 0));
 }
 
 t_sphere	*parsing_sphere(char *object)
@@ -129,7 +129,7 @@ int			parsing_object(char *scene, t_scene *scn)
 {
 	char		*data[2];
 	t_object	*obj;
-	
+
 	while ((data[0] = get_interval(scene, "<object>", "</object>")))
 	{
 		obj = NULL;
@@ -143,7 +143,7 @@ int			parsing_object(char *scene, t_scene *scn)
 			obj = (t_object *)parsing_cylinder(data[0]);
 		else if(!(ft_strcmp(data[1], "cone")) || !(ft_strcmp(data[1], "CONE")))
 			obj = (t_object *)parsing_cone(data[0]);
-		else 
+		else
 			return (-1);
 		if (!obj)
 			return (-1);

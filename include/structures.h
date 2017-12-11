@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/20 20:17:16 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/11 17:29:19 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,8 @@ typedef enum				e_type
 	CONE,
 	CYLINDER,
 	PLANE,
-	SPHERE
+	SPHERE,
+	TRIANGLE
 }							t_type;
 
 typedef struct				s_obj_phys
@@ -231,6 +232,32 @@ typedef struct				s_plane
 	double					d;
 	double					z;
 }							t_plane;
+
+/*
+** t_triangle hérite de plane puisque les calculs se ressemblent bcp
+*/
+typedef struct				s_triangle
+{
+	const t_type			obj_type;
+	double					(*intersect)(int *nbi, t_dot *dst, t_parequation e, t_object *obj);
+	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
+	t_dot					origin;
+	t_vector				normal;
+	t_matrix				*trans_const;
+	t_matrix				*trans_iconst;
+	t_matrix				*trans_idir;
+	t_matrix				*trans_inorm;
+	SDL_Color				color;
+	t_obj_phys				obj_light;
+	double					a;
+	double					b;
+	double					c;
+	double					d;
+	double					z;
+	t_dot					dA;
+	t_dot					dB;
+	t_dot					dC;
+}							t_triangle;
 
 /* La box (le pavé quoi) pour plus tard
 typedef struct		s_box
