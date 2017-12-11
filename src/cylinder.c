@@ -3,60 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aancel <aancel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/27 19:04:06 by aancel           ###   ########.fr       */
+/*   Updated: 2017/12/11 17:11:18 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			cylinder_intersect(t_ray *ray, t_object *obj)
+static double			cylinder_intersect(int *nbi, t_dot *dst, t_parequation e, t_object *obj)
 {
 	t_cylinder	*c;
-	t_dot		a;
-	t_vector	d;
-	t_vector	vd;
-	t_vector	vc;
-	t_vector	tmp;
-	t_vector	tmp2;
+	double		t;
 
-	vc = ray->equ.vc;
-	vd = ray->equ.vd;
+	t = -1;
 	c = (t_cylinder*)obj;
-	d = vec_sub(vc, *(t_vector*)&c->origin);
-	tmp = vec_prod(c->dir, scal(vd, c->dir));
-	tmp = vec_sub(vd, tmp);
-	a.x = scal(tmp, tmp);
-	tmp2 = vec_prod(c->dir, scal(d, c->dir));
-	tmp2 = vec_sub(d, tmp2);
-	a.y = 2 * scal(tmp, tmp2);
-	a.z = scal(tmp2, tmp2) - c->r2;
-	// solve_it(a, c.color, ptr, (t_ptd){vc, vd});
-
-
-	// t_cylinder	*c;
-	// t_vector	*vd;
-	// t_vector	vc;
-	// double		t;
-
-	// c = (t_cylinder*)obj;
-	// vc = vector(ray->equ.vc.x - c->origin.x, ray->equ.vc.y - c->origin.y,
-	// 		ray->equ.vc.z - c->origin.z);
-	// vd = &ray->equ.vd;
-
-
-	if ((t = delta(pow(a, 2) + pow(a, 2),
-			2 * (a * a + a * a),
-			pow(vc.x, 2) + pow(vc.z, 2) - c->r2, &ray->nb_intersect)))
-	{
-		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
-				ray->equ.vc.z + vd->z * t);
-		return (t);
-	}
-	return (-1);
+	if ((*nbi = get_quad_equation_sol(&t, pow(e.vd.x, 2) + pow(e.vd.z, 2),
+									2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z),
+									pow(e.vc.x, 2) + pow(e.vc.z, 2) - c->r2)))
+		*dst = equation_get_dot(&e, t);
+	return (t);
 }
 
 static const t_vector	*get_cylinder_normal(t_dot *inter, t_object *obj)
@@ -64,8 +32,7 @@ static const t_vector	*get_cylinder_normal(t_dot *inter, t_object *obj)
 	t_cylinder	*c;
 
 	c = (t_cylinder*)obj;
-	c->normal =  (t_vector){2 * (inter->x - c->origin.x), 0,
-			2 * (inter->z - c->origin.z)};
+	c->normal =  (t_vector){2 * inter->x, 0, 2 * inter->z};
 	return (&c->normal);
 }
 

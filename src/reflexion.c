@@ -9,14 +9,14 @@
 
 #include "rt.h"
 
-void		get_reflected_vect(t_vector *dir, const t_vector *norm)
+t_vector	get_reflected_vect(t_vector *dir, const t_vector *norm)
 {
 	double	cos_theta1;
 
 	cos_theta1 = vect_dot_product(norm, &(t_vector){-dir->x, -dir->y, -dir->z});
-	dir->x += 2 * cos_theta1 * norm->x;
-	dir->y += 2 * cos_theta1 * norm->y;
-	dir->z += 2 * cos_theta1 * norm->z;
+	return ((t_vector){dir->x + 2 * cos_theta1 * norm->x,
+						dir->y + 2 * cos_theta1 * norm->y,
+						dir->z + 2 * cos_theta1 * norm->z});
 }
 
 void		get_reflected_col(t_ray *ray, t_object *src,
@@ -41,7 +41,7 @@ SDL_Color	reflect(t_ray *ray, t_scene *scn)
 			return ((SDL_Color){0, 0, 0, 255});
 		reflected_ray.limit = reflected_ray.limit - (1 - ray->obj->obj_light.reflection_amount) / 100;
 		reflected_ray.equ.vc = vector(ray->inter.x, ray->inter.y, ray->inter.z);
-		get_reflected_vect(&reflected_ray.equ.vd, &ray->normal);
+		reflected_ray.equ.vd = get_reflected_vect(&ray->equ.vd, &ray->normal);
 		effects(&reflected_ray, scn);
 	}
 	return (reflected_ray.color);

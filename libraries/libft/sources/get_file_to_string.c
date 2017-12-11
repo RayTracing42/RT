@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   get_file_to_string.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 14:30:28 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/01/02 13:44:53 by fcecilie         ###   ########.fr       */
+/*   Created: 2017/06/28 00:57:00 by fcecilie          #+#    #+#             */
+/*   Updated: 2017/08/23 15:00:17 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int		get_file_to_string(int fd, char **file)
 {
-	int			n;
-	const char	*s_result;
+	char	*buf;
+	int		readed;
+	int		size;
 
-	s_result = NULL;
-	n = 0;
-	while (s[n] != '\0' && s[n] != (unsigned char)c)
-		n++;
-	if (s[n] == (unsigned char)c)
-		s_result = &s[n];
-	else
-		s_result = NULL;
-	return ((char*)s_result);
+	size = 0;
+	readed = 0;
+	if (!(buf = (char *)ft_memalloc(10000 + 1)))
+		return (-1);
+	while ((readed = read(fd, buf + size, 10000)) > 0)
+	{
+		size = size + readed;
+		if (!(buf = ft_realloc(buf, readed)))
+			return (-1);
+	}
+	if (readed < 0 || !(*file = ft_strdup(buf)))
+		return (-1);
+	ft_memdel((void**)&buf);
+	return (0);
 }

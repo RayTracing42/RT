@@ -6,36 +6,53 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/10/24 19:48:44 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/12/11 15:04:43 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+t_parequation	transform_equ(t_ray *ray, t_object *obj)
+{
+	t_parequation	trs;
+
+	trs.vc = (t_vector){ray->equ.vc.x - obj->origin.x, ray->equ.vc.y - obj->origin.y, ray->equ.vc.z - obj->origin.z};
+	mult_vect(&trs.vc, obj->trans_iconst, &trs.vc);
+	mult_vect(&trs.vd, obj->trans_idir, &ray->equ.vd);
+	return (trs);
+}
+
+void				transform_inter(t_ray *ray, t_object *obj)
+{
+	mult_vect(&ray->normal, obj->trans_norm, obj->get_normal(&ray->inter, obj));
+	mult_vect((t_vector*)&ray->inter, obj->trans_const, (t_vector*)&ray->inter);
+	ray->inter = (t_dot){ray->inter.x + obj->origin.x, ray->inter.y + obj->origin.y, ray->inter.z + obj->origin.z};
+}
 
 static double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 {
 	double		tmp;
 	double		distance;
 	int			nb;
-	t_dot		intersect;
+	t_dot		inter;
 
 	distance = 0;
 	while (l_objs != NULL)
 	{
-		tmp = l_objs->obj->intersect(ray, l_objs->obj);
-		if (tmp > 0 && (distance == 0 || (tmp < distance && distance > 0)))
+		tmp = l_objs->obj->intersect(&ray->nb_intersect, &ray->inter, transform_equ(ray, l_objs->obj), l_objs->obj);
+		if (gt(tmp, 0) && (eq(distance, 0) || (lt(tmp, distance) && gt(distance, 0))))
 		{
 			distance = tmp;
-			intersect = ray->inter;
+			transform_inter(ray, l_objs->obj);
+			inter = ray->inter;
 			ray->color = l_objs->obj->color;
-			ray->normal = *l_objs->obj->get_normal(&ray->inter, l_objs->obj);
 			ray->obj = l_objs->obj;
 			ray->percuted_refractive_i = l_objs->obj->obj_light.refractive_index;
 			nb = ray->nb_intersect;
 		}
 		l_objs = l_objs->next;
 	}
-	ray->inter = intersect;
+	ray->inter = inter;
 	ray->nb_intersect = nb;
 	return (distance);
 }

@@ -1,10 +1,10 @@
 # Makefile to build and install the SDL library
 
 top_builddir = .
-srcdir  = /Users/aancel/project/RT_OFFICIEL/libraries/SDL
+srcdir  = /home/flavian/Rendus/rt_branch_parsing/libraries/SDL
 objects = build
 gen = gen
-prefix = /Users/aancel/project/RT_OFFICIEL/libraries/SDL/build
+prefix = /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/build
 exec_prefix = ${prefix}
 bindir	= ${exec_prefix}/bin
 libdir  = ${exec_prefix}/lib
@@ -17,13 +17,13 @@ distdir = SDL2-2.0.6
 distfile = $(distdir).tar.gz
 
 
-SHELL	= /bin/sh
+SHELL	= /bin/bash
 CC      = gcc
-INCLUDE = -Iinclude -I/Users/aancel/project/RT_OFFICIEL/libraries/SDL/include -idirafter /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/khronos
+INCLUDE = -Iinclude -I/home/flavian/Rendus/rt_branch_parsing/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/khronos
 CFLAGS  = -g -O3 -DUSING_GENERATED_CONFIG_H
-EXTRA_CFLAGS = -Iinclude -I/Users/aancel/project/RT_OFFICIEL/libraries/SDL/include -idirafter /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/khronos  -mmmx -m3dnow -msse -msse2 -msse3 -Wall -DTARGET_API_MAC_CARBON -DTARGET_API_MAC_OSX -fvisibility=hidden -Wdeclaration-after-statement -Werror=declaration-after-statement -D_THREAD_SAFE
+EXTRA_CFLAGS = -Iinclude -I/home/flavian/Rendus/rt_branch_parsing/libraries/SDL/include -idirafter /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/khronos  -mmmx -m3dnow -msse -msse2 -msse3 -Wall -fvisibility=hidden -Wdeclaration-after-statement -Werror=declaration-after-statement  -D_REENTRANT   -pthread -I/usr/include/mirclient -I/usr/include/mircookie -I/usr/include/mircore -I/usr/include/libdrm -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -D_REENTRANT -DHAVE_LINUX_VERSION_H
 LDFLAGS = 
-EXTRA_LDFLAGS =  -lm -liconv  -Wl,-framework,CoreAudio -Wl,-framework,AudioToolbox -Wl,-framework,ForceFeedback -lobjc -Wl,-framework,CoreVideo -Wl,-framework,Cocoa -Wl,-framework,Carbon -Wl,-framework,IOKit
+EXTRA_LDFLAGS =  -Wl,--no-undefined -lm -ldl -lsndio -lpthread -lrt
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 INSTALL = /usr/bin/install -c
 AR	= ar
@@ -31,7 +31,7 @@ RANLIB	= ranlib
 WINDRES	= :
 
 TARGET  = libSDL2.la
-OBJECTS = $(objects)/SDL.lo $(objects)/SDL_assert.lo $(objects)/SDL_dataqueue.lo $(objects)/SDL_error.lo $(objects)/SDL_hints.lo $(objects)/SDL_log.lo $(objects)/SDL_atomic.lo $(objects)/SDL_spinlock.lo $(objects)/SDL_audio.lo $(objects)/SDL_audiocvt.lo $(objects)/SDL_audiodev.lo $(objects)/SDL_audiotypecvt.lo $(objects)/SDL_mixer.lo $(objects)/SDL_wave.lo $(objects)/SDL_cpuinfo.lo $(objects)/SDL_dynapi.lo $(objects)/SDL_clipboardevents.lo $(objects)/SDL_dropevents.lo $(objects)/SDL_events.lo $(objects)/SDL_gesture.lo $(objects)/SDL_keyboard.lo $(objects)/SDL_mouse.lo $(objects)/SDL_quit.lo $(objects)/SDL_touch.lo $(objects)/SDL_windowevents.lo $(objects)/SDL_rwops.lo $(objects)/SDL_haptic.lo $(objects)/SDL_gamecontroller.lo $(objects)/SDL_joystick.lo $(objects)/e_atan2.lo $(objects)/e_log.lo $(objects)/e_pow.lo $(objects)/e_rem_pio2.lo $(objects)/e_sqrt.lo $(objects)/k_cos.lo $(objects)/k_rem_pio2.lo $(objects)/k_sin.lo $(objects)/k_tan.lo $(objects)/s_atan.lo $(objects)/s_copysign.lo $(objects)/s_cos.lo $(objects)/s_fabs.lo $(objects)/s_floor.lo $(objects)/s_scalbn.lo $(objects)/s_sin.lo $(objects)/s_tan.lo $(objects)/SDL_power.lo $(objects)/SDL_d3dmath.lo $(objects)/SDL_render.lo $(objects)/SDL_yuv_mmx.lo $(objects)/SDL_yuv_sw.lo $(objects)/SDL_render_d3d.lo $(objects)/SDL_render_d3d11.lo $(objects)/SDL_render_gl.lo $(objects)/SDL_shaders_gl.lo $(objects)/SDL_render_gles.lo $(objects)/SDL_render_gles2.lo $(objects)/SDL_shaders_gles2.lo $(objects)/SDL_render_psp.lo $(objects)/SDL_blendfillrect.lo $(objects)/SDL_blendline.lo $(objects)/SDL_blendpoint.lo $(objects)/SDL_drawline.lo $(objects)/SDL_drawpoint.lo $(objects)/SDL_render_sw.lo $(objects)/SDL_rotate.lo $(objects)/SDL_getenv.lo $(objects)/SDL_iconv.lo $(objects)/SDL_malloc.lo $(objects)/SDL_qsort.lo $(objects)/SDL_stdlib.lo $(objects)/SDL_string.lo $(objects)/SDL_thread.lo $(objects)/SDL_timer.lo $(objects)/SDL_RLEaccel.lo $(objects)/SDL_blit.lo $(objects)/SDL_blit_0.lo $(objects)/SDL_blit_1.lo $(objects)/SDL_blit_A.lo $(objects)/SDL_blit_N.lo $(objects)/SDL_blit_auto.lo $(objects)/SDL_blit_copy.lo $(objects)/SDL_blit_slow.lo $(objects)/SDL_bmp.lo $(objects)/SDL_clipboard.lo $(objects)/SDL_egl.lo $(objects)/SDL_fillrect.lo $(objects)/SDL_pixels.lo $(objects)/SDL_rect.lo $(objects)/SDL_shape.lo $(objects)/SDL_stretch.lo $(objects)/SDL_surface.lo $(objects)/SDL_video.lo $(objects)/SDL_vulkan_utils.lo $(objects)/SDL_nullevents.lo $(objects)/SDL_nullframebuffer.lo $(objects)/SDL_nullvideo.lo $(objects)/SDL_diskaudio.lo $(objects)/SDL_dummyaudio.lo $(objects)/SDL_sysloadso.lo $(objects)/SDL_cocoaclipboard.lo $(objects)/SDL_cocoaevents.lo $(objects)/SDL_cocoakeyboard.lo $(objects)/SDL_cocoamessagebox.lo $(objects)/SDL_cocoametalview.lo $(objects)/SDL_cocoamodes.lo $(objects)/SDL_cocoamouse.lo $(objects)/SDL_cocoamousetap.lo $(objects)/SDL_cocoaopengl.lo $(objects)/SDL_cocoashape.lo $(objects)/SDL_cocoavideo.lo $(objects)/SDL_cocoavulkan.lo $(objects)/SDL_cocoawindow.lo $(objects)/SDL_systhread.lo $(objects)/SDL_syssem.lo $(objects)/SDL_sysmutex.lo $(objects)/SDL_syscond.lo $(objects)/SDL_systls.lo $(objects)/SDL_coreaudio.lo $(objects)/SDL_sysjoystick.lo $(objects)/SDL_syshaptic.lo $(objects)/SDL_syspower.lo $(objects)/SDL_sysfilesystem.lo $(objects)/SDL_systimer.lo $(objects)/SDL_rwopsbundlesupport.lo $(objects)/SDL_poll.lo
+OBJECTS = $(objects)/SDL.lo $(objects)/SDL_assert.lo $(objects)/SDL_dataqueue.lo $(objects)/SDL_error.lo $(objects)/SDL_hints.lo $(objects)/SDL_log.lo $(objects)/SDL_atomic.lo $(objects)/SDL_spinlock.lo $(objects)/SDL_audio.lo $(objects)/SDL_audiocvt.lo $(objects)/SDL_audiodev.lo $(objects)/SDL_audiotypecvt.lo $(objects)/SDL_mixer.lo $(objects)/SDL_wave.lo $(objects)/SDL_cpuinfo.lo $(objects)/SDL_dynapi.lo $(objects)/SDL_clipboardevents.lo $(objects)/SDL_dropevents.lo $(objects)/SDL_events.lo $(objects)/SDL_gesture.lo $(objects)/SDL_keyboard.lo $(objects)/SDL_mouse.lo $(objects)/SDL_quit.lo $(objects)/SDL_touch.lo $(objects)/SDL_windowevents.lo $(objects)/SDL_rwops.lo $(objects)/SDL_haptic.lo $(objects)/SDL_gamecontroller.lo $(objects)/SDL_joystick.lo $(objects)/e_atan2.lo $(objects)/e_log.lo $(objects)/e_pow.lo $(objects)/e_rem_pio2.lo $(objects)/e_sqrt.lo $(objects)/k_cos.lo $(objects)/k_rem_pio2.lo $(objects)/k_sin.lo $(objects)/k_tan.lo $(objects)/s_atan.lo $(objects)/s_copysign.lo $(objects)/s_cos.lo $(objects)/s_fabs.lo $(objects)/s_floor.lo $(objects)/s_scalbn.lo $(objects)/s_sin.lo $(objects)/s_tan.lo $(objects)/SDL_power.lo $(objects)/SDL_d3dmath.lo $(objects)/SDL_render.lo $(objects)/SDL_yuv_mmx.lo $(objects)/SDL_yuv_sw.lo $(objects)/SDL_render_d3d.lo $(objects)/SDL_render_d3d11.lo $(objects)/SDL_render_gl.lo $(objects)/SDL_shaders_gl.lo $(objects)/SDL_render_gles.lo $(objects)/SDL_render_gles2.lo $(objects)/SDL_shaders_gles2.lo $(objects)/SDL_render_psp.lo $(objects)/SDL_blendfillrect.lo $(objects)/SDL_blendline.lo $(objects)/SDL_blendpoint.lo $(objects)/SDL_drawline.lo $(objects)/SDL_drawpoint.lo $(objects)/SDL_render_sw.lo $(objects)/SDL_rotate.lo $(objects)/SDL_getenv.lo $(objects)/SDL_iconv.lo $(objects)/SDL_malloc.lo $(objects)/SDL_qsort.lo $(objects)/SDL_stdlib.lo $(objects)/SDL_string.lo $(objects)/SDL_thread.lo $(objects)/SDL_timer.lo $(objects)/SDL_RLEaccel.lo $(objects)/SDL_blit.lo $(objects)/SDL_blit_0.lo $(objects)/SDL_blit_1.lo $(objects)/SDL_blit_A.lo $(objects)/SDL_blit_N.lo $(objects)/SDL_blit_auto.lo $(objects)/SDL_blit_copy.lo $(objects)/SDL_blit_slow.lo $(objects)/SDL_bmp.lo $(objects)/SDL_clipboard.lo $(objects)/SDL_egl.lo $(objects)/SDL_fillrect.lo $(objects)/SDL_pixels.lo $(objects)/SDL_rect.lo $(objects)/SDL_shape.lo $(objects)/SDL_stretch.lo $(objects)/SDL_surface.lo $(objects)/SDL_video.lo $(objects)/SDL_vulkan_utils.lo $(objects)/SDL_nullevents.lo $(objects)/SDL_nullframebuffer.lo $(objects)/SDL_nullvideo.lo $(objects)/SDL_diskaudio.lo $(objects)/SDL_dummyaudio.lo $(objects)/SDL_sysloadso.lo $(objects)/SDL_dspaudio.lo $(objects)/SDL_alsa_audio.lo $(objects)/SDL_pulseaudio.lo $(objects)/SDL_sndioaudio.lo $(objects)/SDL_x11clipboard.lo $(objects)/SDL_x11dyn.lo $(objects)/SDL_x11events.lo $(objects)/SDL_x11framebuffer.lo $(objects)/SDL_x11keyboard.lo $(objects)/SDL_x11messagebox.lo $(objects)/SDL_x11modes.lo $(objects)/SDL_x11mouse.lo $(objects)/SDL_x11opengl.lo $(objects)/SDL_x11opengles.lo $(objects)/SDL_x11shape.lo $(objects)/SDL_x11touch.lo $(objects)/SDL_x11video.lo $(objects)/SDL_x11vulkan.lo $(objects)/SDL_x11window.lo $(objects)/SDL_x11xinput2.lo $(objects)/edid-parse.lo $(objects)/imKStoUCS.lo $(objects)/SDL_mirdyn.lo $(objects)/SDL_mirevents.lo $(objects)/SDL_mirframebuffer.lo $(objects)/SDL_mirmouse.lo $(objects)/SDL_miropengl.lo $(objects)/SDL_mirvideo.lo $(objects)/SDL_mirvulkan.lo $(objects)/SDL_mirwindow.lo $(objects)/SDL_dbus.lo $(objects)/SDL_ime.lo $(objects)/SDL_systhread.lo $(objects)/SDL_syssem.lo $(objects)/SDL_sysmutex.lo $(objects)/SDL_syscond.lo $(objects)/SDL_systls.lo $(objects)/SDL_sysjoystick.lo $(objects)/SDL_syshaptic.lo $(objects)/SDL_syspower.lo $(objects)/SDL_sysfilesystem.lo $(objects)/SDL_systimer.lo $(objects)/SDL_udev.lo $(objects)/SDL_evdev.lo $(objects)/SDL_evdev_kbd.lo $(objects)/SDL_poll.lo
 GEN_HEADERS = 
 GEN_OBJECTS = 
 VERSION_OBJECTS = 
@@ -242,418 +242,478 @@ rpm: $(distfile)
 -include $(OBJECTS:.lo=.d)
 
 # Special dependency for SDL.c, since it depends on SDL_revision.h
-/Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/SDL.c: update-revision
+/home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/SDL.c: update-revision
 
-$(objects)/SDL.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/SDL.c
+$(objects)/SDL.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/SDL.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_assert.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/SDL_assert.c
+$(objects)/SDL_assert.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/SDL_assert.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_dataqueue.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/SDL_dataqueue.c
+$(objects)/SDL_dataqueue.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/SDL_dataqueue.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_error.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/SDL_error.c
+$(objects)/SDL_error.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/SDL_error.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_hints.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/SDL_hints.c
+$(objects)/SDL_hints.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/SDL_hints.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_log.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/SDL_log.c
+$(objects)/SDL_log.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/SDL_log.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_atomic.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/atomic/SDL_atomic.c
+$(objects)/SDL_atomic.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/atomic/SDL_atomic.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_spinlock.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/atomic/SDL_spinlock.c
+$(objects)/SDL_spinlock.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/atomic/SDL_spinlock.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_audio.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/audio/SDL_audio.c
+$(objects)/SDL_audio.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/audio/SDL_audio.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_audiocvt.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/audio/SDL_audiocvt.c
+$(objects)/SDL_audiocvt.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/audio/SDL_audiocvt.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_audiodev.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/audio/SDL_audiodev.c
+$(objects)/SDL_audiodev.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/audio/SDL_audiodev.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_audiotypecvt.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/audio/SDL_audiotypecvt.c
+$(objects)/SDL_audiotypecvt.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/audio/SDL_audiotypecvt.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_mixer.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/audio/SDL_mixer.c
+$(objects)/SDL_mixer.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/audio/SDL_mixer.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_wave.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/audio/SDL_wave.c
+$(objects)/SDL_wave.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/audio/SDL_wave.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cpuinfo.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/cpuinfo/SDL_cpuinfo.c
+$(objects)/SDL_cpuinfo.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/cpuinfo/SDL_cpuinfo.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_dynapi.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/dynapi/SDL_dynapi.c
+$(objects)/SDL_dynapi.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/dynapi/SDL_dynapi.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_clipboardevents.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/events/SDL_clipboardevents.c
+$(objects)/SDL_clipboardevents.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/events/SDL_clipboardevents.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_dropevents.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/events/SDL_dropevents.c
+$(objects)/SDL_dropevents.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/events/SDL_dropevents.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_events.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/events/SDL_events.c
+$(objects)/SDL_events.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/events/SDL_events.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_gesture.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/events/SDL_gesture.c
+$(objects)/SDL_gesture.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/events/SDL_gesture.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_keyboard.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/events/SDL_keyboard.c
+$(objects)/SDL_keyboard.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/events/SDL_keyboard.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_mouse.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/events/SDL_mouse.c
+$(objects)/SDL_mouse.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/events/SDL_mouse.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_quit.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/events/SDL_quit.c
+$(objects)/SDL_quit.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/events/SDL_quit.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_touch.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/events/SDL_touch.c
+$(objects)/SDL_touch.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/events/SDL_touch.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_windowevents.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/events/SDL_windowevents.c
+$(objects)/SDL_windowevents.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/events/SDL_windowevents.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_rwops.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/file/SDL_rwops.c
+$(objects)/SDL_rwops.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/file/SDL_rwops.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_haptic.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/haptic/SDL_haptic.c
+$(objects)/SDL_haptic.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/haptic/SDL_haptic.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_gamecontroller.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/joystick/SDL_gamecontroller.c
+$(objects)/SDL_gamecontroller.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/joystick/SDL_gamecontroller.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_joystick.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/joystick/SDL_joystick.c
+$(objects)/SDL_joystick.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/joystick/SDL_joystick.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/e_atan2.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/e_atan2.c
+$(objects)/e_atan2.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/e_atan2.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/e_log.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/e_log.c
+$(objects)/e_log.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/e_log.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/e_pow.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/e_pow.c
+$(objects)/e_pow.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/e_pow.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/e_rem_pio2.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/e_rem_pio2.c
+$(objects)/e_rem_pio2.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/e_rem_pio2.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/e_sqrt.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/e_sqrt.c
+$(objects)/e_sqrt.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/e_sqrt.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/k_cos.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/k_cos.c
+$(objects)/k_cos.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/k_cos.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/k_rem_pio2.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/k_rem_pio2.c
+$(objects)/k_rem_pio2.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/k_rem_pio2.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/k_sin.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/k_sin.c
+$(objects)/k_sin.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/k_sin.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/k_tan.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/k_tan.c
+$(objects)/k_tan.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/k_tan.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_atan.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/s_atan.c
+$(objects)/s_atan.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/s_atan.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_copysign.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/s_copysign.c
+$(objects)/s_copysign.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/s_copysign.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_cos.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/s_cos.c
+$(objects)/s_cos.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/s_cos.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_fabs.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/s_fabs.c
+$(objects)/s_fabs.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/s_fabs.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_floor.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/s_floor.c
+$(objects)/s_floor.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/s_floor.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_scalbn.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/s_scalbn.c
+$(objects)/s_scalbn.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/s_scalbn.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_sin.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/s_sin.c
+$(objects)/s_sin.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/s_sin.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/s_tan.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/libm/s_tan.c
+$(objects)/s_tan.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/libm/s_tan.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_power.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/power/SDL_power.c
+$(objects)/SDL_power.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/power/SDL_power.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_d3dmath.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/SDL_d3dmath.c
+$(objects)/SDL_d3dmath.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/SDL_d3dmath.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/SDL_render.c
+$(objects)/SDL_render.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/SDL_render.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_yuv_mmx.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/SDL_yuv_mmx.c
+$(objects)/SDL_yuv_mmx.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/SDL_yuv_mmx.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_yuv_sw.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/SDL_yuv_sw.c
+$(objects)/SDL_yuv_sw.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/SDL_yuv_sw.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_d3d.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/direct3d/SDL_render_d3d.c
+$(objects)/SDL_render_d3d.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/direct3d/SDL_render_d3d.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_d3d11.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/direct3d11/SDL_render_d3d11.c
+$(objects)/SDL_render_d3d11.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/direct3d11/SDL_render_d3d11.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_gl.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/opengl/SDL_render_gl.c
+$(objects)/SDL_render_gl.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/opengl/SDL_render_gl.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_shaders_gl.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/opengl/SDL_shaders_gl.c
+$(objects)/SDL_shaders_gl.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/opengl/SDL_shaders_gl.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_gles.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/opengles/SDL_render_gles.c
+$(objects)/SDL_render_gles.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/opengles/SDL_render_gles.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_gles2.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/opengles2/SDL_render_gles2.c
+$(objects)/SDL_render_gles2.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/opengles2/SDL_render_gles2.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_shaders_gles2.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/opengles2/SDL_shaders_gles2.c
+$(objects)/SDL_shaders_gles2.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/opengles2/SDL_shaders_gles2.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_psp.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/psp/SDL_render_psp.c
+$(objects)/SDL_render_psp.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/psp/SDL_render_psp.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blendfillrect.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/software/SDL_blendfillrect.c
+$(objects)/SDL_blendfillrect.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/software/SDL_blendfillrect.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blendline.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/software/SDL_blendline.c
+$(objects)/SDL_blendline.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/software/SDL_blendline.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blendpoint.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/software/SDL_blendpoint.c
+$(objects)/SDL_blendpoint.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/software/SDL_blendpoint.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_drawline.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/software/SDL_drawline.c
+$(objects)/SDL_drawline.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/software/SDL_drawline.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_drawpoint.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/software/SDL_drawpoint.c
+$(objects)/SDL_drawpoint.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/software/SDL_drawpoint.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_render_sw.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/software/SDL_render_sw.c
+$(objects)/SDL_render_sw.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/software/SDL_render_sw.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_rotate.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/render/software/SDL_rotate.c
+$(objects)/SDL_rotate.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/render/software/SDL_rotate.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_getenv.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/stdlib/SDL_getenv.c
+$(objects)/SDL_getenv.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/stdlib/SDL_getenv.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_iconv.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/stdlib/SDL_iconv.c
+$(objects)/SDL_iconv.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/stdlib/SDL_iconv.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_malloc.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/stdlib/SDL_malloc.c
+$(objects)/SDL_malloc.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/stdlib/SDL_malloc.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_qsort.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/stdlib/SDL_qsort.c
+$(objects)/SDL_qsort.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/stdlib/SDL_qsort.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_stdlib.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/stdlib/SDL_stdlib.c
+$(objects)/SDL_stdlib.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/stdlib/SDL_stdlib.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_string.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/stdlib/SDL_string.c
+$(objects)/SDL_string.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/stdlib/SDL_string.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_thread.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/thread/SDL_thread.c
+$(objects)/SDL_thread.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/thread/SDL_thread.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_timer.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/timer/SDL_timer.c
+$(objects)/SDL_timer.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/timer/SDL_timer.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_RLEaccel.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_RLEaccel.c
+$(objects)/SDL_RLEaccel.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_RLEaccel.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_blit.c
+$(objects)/SDL_blit.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_blit.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_0.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_blit_0.c
+$(objects)/SDL_blit_0.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_blit_0.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_1.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_blit_1.c
+$(objects)/SDL_blit_1.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_blit_1.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_A.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_blit_A.c
+$(objects)/SDL_blit_A.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_blit_A.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_N.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_blit_N.c
+$(objects)/SDL_blit_N.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_blit_N.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_auto.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_blit_auto.c
+$(objects)/SDL_blit_auto.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_blit_auto.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_copy.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_blit_copy.c
+$(objects)/SDL_blit_copy.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_blit_copy.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_blit_slow.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_blit_slow.c
+$(objects)/SDL_blit_slow.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_blit_slow.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_bmp.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_bmp.c
+$(objects)/SDL_bmp.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_bmp.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_clipboard.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_clipboard.c
+$(objects)/SDL_clipboard.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_clipboard.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_egl.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_egl.c
+$(objects)/SDL_egl.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_egl.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_fillrect.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_fillrect.c
+$(objects)/SDL_fillrect.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_fillrect.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_pixels.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_pixels.c
+$(objects)/SDL_pixels.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_pixels.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_rect.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_rect.c
+$(objects)/SDL_rect.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_rect.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_shape.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_shape.c
+$(objects)/SDL_shape.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_shape.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_stretch.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_stretch.c
+$(objects)/SDL_stretch.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_stretch.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_surface.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_surface.c
+$(objects)/SDL_surface.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_surface.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_video.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_video.c
+$(objects)/SDL_video.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_video.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_vulkan_utils.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/SDL_vulkan_utils.c
+$(objects)/SDL_vulkan_utils.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/SDL_vulkan_utils.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_nullevents.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/dummy/SDL_nullevents.c
+$(objects)/SDL_nullevents.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/dummy/SDL_nullevents.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_nullframebuffer.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/dummy/SDL_nullframebuffer.c
+$(objects)/SDL_nullframebuffer.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/dummy/SDL_nullframebuffer.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_nullvideo.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/dummy/SDL_nullvideo.c
+$(objects)/SDL_nullvideo.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/dummy/SDL_nullvideo.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_diskaudio.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/audio/disk/SDL_diskaudio.c
+$(objects)/SDL_diskaudio.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/audio/disk/SDL_diskaudio.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_dummyaudio.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/audio/dummy/SDL_dummyaudio.c
+$(objects)/SDL_dummyaudio.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/audio/dummy/SDL_dummyaudio.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_sysloadso.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/loadso/dlopen/SDL_sysloadso.c
+$(objects)/SDL_sysloadso.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/loadso/dlopen/SDL_sysloadso.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cocoaclipboard.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/cocoa/SDL_cocoaclipboard.m
+$(objects)/SDL_dspaudio.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/audio/dsp/SDL_dspaudio.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cocoaevents.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/cocoa/SDL_cocoaevents.m
+$(objects)/SDL_alsa_audio.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/audio/alsa/SDL_alsa_audio.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cocoakeyboard.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/cocoa/SDL_cocoakeyboard.m
+$(objects)/SDL_pulseaudio.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/audio/pulseaudio/SDL_pulseaudio.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cocoamessagebox.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/cocoa/SDL_cocoamessagebox.m
+$(objects)/SDL_sndioaudio.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/audio/sndio/SDL_sndioaudio.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cocoametalview.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/cocoa/SDL_cocoametalview.m
+$(objects)/SDL_x11clipboard.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11clipboard.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cocoamodes.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/cocoa/SDL_cocoamodes.m
+$(objects)/SDL_x11dyn.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11dyn.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cocoamouse.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/cocoa/SDL_cocoamouse.m
+$(objects)/SDL_x11events.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11events.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cocoamousetap.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/cocoa/SDL_cocoamousetap.m
+$(objects)/SDL_x11framebuffer.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11framebuffer.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cocoaopengl.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/cocoa/SDL_cocoaopengl.m
+$(objects)/SDL_x11keyboard.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11keyboard.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cocoashape.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/cocoa/SDL_cocoashape.m
+$(objects)/SDL_x11messagebox.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11messagebox.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cocoavideo.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/cocoa/SDL_cocoavideo.m
+$(objects)/SDL_x11modes.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11modes.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cocoavulkan.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/cocoa/SDL_cocoavulkan.m
+$(objects)/SDL_x11mouse.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11mouse.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_cocoawindow.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/video/cocoa/SDL_cocoawindow.m
+$(objects)/SDL_x11opengl.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11opengl.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_systhread.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/thread/pthread/SDL_systhread.c
+$(objects)/SDL_x11opengles.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11opengles.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_syssem.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/thread/pthread/SDL_syssem.c
+$(objects)/SDL_x11shape.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11shape.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_sysmutex.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/thread/pthread/SDL_sysmutex.c
+$(objects)/SDL_x11touch.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11touch.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_syscond.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/thread/pthread/SDL_syscond.c
+$(objects)/SDL_x11video.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11video.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_systls.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/thread/pthread/SDL_systls.c
+$(objects)/SDL_x11vulkan.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11vulkan.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_coreaudio.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/audio/coreaudio/SDL_coreaudio.m
+$(objects)/SDL_x11window.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11window.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_sysjoystick.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/joystick/darwin/SDL_sysjoystick.c
+$(objects)/SDL_x11xinput2.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/SDL_x11xinput2.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_syshaptic.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/haptic/darwin/SDL_syshaptic.c
+$(objects)/edid-parse.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/edid-parse.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_syspower.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/power/macosx/SDL_syspower.c
+$(objects)/imKStoUCS.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/x11/imKStoUCS.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_sysfilesystem.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/filesystem/cocoa/SDL_sysfilesystem.m
+$(objects)/SDL_mirdyn.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/mir/SDL_mirdyn.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_systimer.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/timer/unix/SDL_systimer.c
+$(objects)/SDL_mirevents.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/mir/SDL_mirevents.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_rwopsbundlesupport.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/file/cocoa/SDL_rwopsbundlesupport.m
+$(objects)/SDL_mirframebuffer.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/mir/SDL_mirframebuffer.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_poll.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/core/unix/SDL_poll.c
+$(objects)/SDL_mirmouse.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/mir/SDL_mirmouse.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
+$(objects)/SDL_miropengl.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/mir/SDL_miropengl.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_mirvideo.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/mir/SDL_mirvideo.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_mirvulkan.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/mir/SDL_mirvulkan.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_mirwindow.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/video/mir/SDL_mirwindow.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_dbus.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/core/linux/SDL_dbus.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_ime.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/core/linux/SDL_ime.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_systhread.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/thread/pthread/SDL_systhread.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_syssem.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/thread/pthread/SDL_syssem.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_sysmutex.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/thread/pthread/SDL_sysmutex.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_syscond.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/thread/pthread/SDL_syscond.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_systls.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/thread/pthread/SDL_systls.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_sysjoystick.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/joystick/linux/SDL_sysjoystick.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_syshaptic.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/haptic/linux/SDL_syshaptic.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_syspower.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/power/linux/SDL_syspower.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_sysfilesystem.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/filesystem/unix/SDL_sysfilesystem.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_systimer.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/timer/unix/SDL_systimer.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_udev.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/core/linux/SDL_udev.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_evdev.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/core/linux/SDL_evdev.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_evdev_kbd.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/core/linux/SDL_evdev_kbd.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_poll.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/core/unix/SDL_poll.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
 
-$(objects)/SDL_dummy_main.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/main/dummy/SDL_dummy_main.c
+$(objects)/SDL_dummy_main.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/main/dummy/SDL_dummy_main.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
-$(objects)/SDL_test_assert.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_assert.c
+$(objects)/SDL_test_assert.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_assert.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_common.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_common.c
+$(objects)/SDL_test_common.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_common.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_compare.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_compare.c
+$(objects)/SDL_test_compare.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_compare.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_crc32.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_crc32.c
+$(objects)/SDL_test_crc32.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_crc32.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_font.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_font.c
+$(objects)/SDL_test_font.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_font.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_fuzzer.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_fuzzer.c
+$(objects)/SDL_test_fuzzer.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_fuzzer.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_harness.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_harness.c
+$(objects)/SDL_test_harness.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_harness.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_imageBlit.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_imageBlit.c
+$(objects)/SDL_test_imageBlit.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_imageBlit.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_imageBlitBlend.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_imageBlitBlend.c
+$(objects)/SDL_test_imageBlitBlend.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_imageBlitBlend.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_imageFace.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_imageFace.c
+$(objects)/SDL_test_imageFace.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_imageFace.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_imagePrimitives.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_imagePrimitives.c
+$(objects)/SDL_test_imagePrimitives.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_imagePrimitives.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_imagePrimitivesBlend.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_imagePrimitivesBlend.c
+$(objects)/SDL_test_imagePrimitivesBlend.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_imagePrimitivesBlend.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_log.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_log.c
+$(objects)/SDL_test_log.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_log.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_md5.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_md5.c
+$(objects)/SDL_test_md5.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_md5.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@ 
-$(objects)/SDL_test_random.lo: /Users/aancel/project/RT_OFFICIEL/libraries/SDL/src/test/SDL_test_random.c
+$(objects)/SDL_test_random.lo: /home/flavian/Rendus/rt_branch_parsing/libraries/SDL/src/test/SDL_test_random.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
