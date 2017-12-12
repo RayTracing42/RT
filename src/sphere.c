@@ -5,19 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/03 14:45:49 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/12 13:43:40 by shiro            ###   ########.fr       */
+/*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
+/*   Updated: 2017/11/13 16:36:06 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "rt.h"
 #include <math.h>
 
 static double			sphere_intersect(int *nbi, t_dot *dst, t_parequation e, t_object *obj)
 {
-	double		t;
 	t_sphere	*s;
+	double		t;
 
 	t = -1;
 	s = (t_sphere*)obj;
@@ -46,7 +45,7 @@ t_sphere				*new_sphere(t_objs_comp args, double radius)
 	sphere->radius = radius;
 	sphere->get_normal = get_sphere_normal;
 	sphere->intersect = sphere_intersect;
-//	sphere->r2 = pow(radius, 2);
+	sphere->r2 = pow(radius, 2);
 	return (sphere);
 }
 
