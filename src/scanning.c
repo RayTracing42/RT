@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/11 15:04:43 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/12 16:29:37 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,15 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 {
 	SDL_Color	reflect_ray;
 	SDL_Color	refract_ray;
-
+//static int i = 0;
 	if (check_intersect(ray, scn->objects) > 0)
 	{
 		ray->color = shadows(ray, scn);
+	//	printf("TEST %d\n", ++i);
 		reflect_ray = reflect(ray, scn);
 		refract_ray = refract(ray, scn);
+	//	printf("TEST POST %d\n", i);
+//		--i;
 		get_reflected_col(ray, ray->obj, reflect_ray);
 		get_refracted_col(ray, ray->obj, refract_ray);
 		return (ray->color);
@@ -80,16 +83,16 @@ void	scanning(t_scene *scn)
 	int			y;
 	t_ray		ray;
 
-	ray.equ.vc = *(t_vector*)&scn->cam->origin;
-	ray.actual_refractive_i = 1;
-	ray.limit = 1;
-	ray.l_objs = NULL;
 	y = -1;
 	while (++y < WIN_HEIGHT)
 	{
 		x = -1;
 		while (++x < WIN_WIDTH)
 		{
+				ray.equ.vc = *(t_vector*)&scn->cam->origin;
+				ray.actual_refractive_i = 1;
+				ray.limit = 1;
+				ray.l_objs = NULL;
 				view_plane_vector(x, y, scn->cam, &ray.equ.vd);
 				effects(&ray, scn);
 				put_pixel(x, y, &ray.color);

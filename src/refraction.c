@@ -86,5 +86,6 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 			ray->inter.z + 0.00001 * ray->equ.vd.z);
 	if (ray->nb_intersect == 2)
 		ref_ray.actual_refractive_i = ref_ray.percuted_refractive_i;
+	//printf("FIN REFRACTION\n");
 	return (effects(&ref_ray, scn));
 }

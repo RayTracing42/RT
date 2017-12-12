@@ -42,6 +42,7 @@ SDL_Color	reflect(t_ray *ray, t_scene *scn)
 		reflected_ray.limit = reflected_ray.limit - (1 - ray->obj->obj_light.reflection_amount) / 100;
 		reflected_ray.equ.vc = vector(ray->inter.x, ray->inter.y, ray->inter.z);
 		reflected_ray.equ.vd = get_reflected_vect(&ray->equ.vd, &ray->normal);
+		//printf("FIN REFLECTION\n");
 		effects(&reflected_ray, scn);
 	}
 	return (reflected_ray.color);

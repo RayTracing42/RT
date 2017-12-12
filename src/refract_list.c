@@ -17,7 +17,7 @@ void	add_node(t_list_objs **l, t_object *obj)
 		exit_error("rt", "malloc");
 	new->next = NULL;
 	new->obj = obj;
-	if (l == NULL)
+	if (*l == NULL)
 		*l = new;
 	else
 	{
@@ -28,15 +28,18 @@ void	add_node(t_list_objs **l, t_object *obj)
 
 void	remove_node(t_list_objs **l, t_object *obj)
 {
-	t_list_objs *tmp;
+	t_list_objs	*tmp;
+	int			flag;
 
-	while (*l)
+	flag = 0;
+	while (*l && !flag)
 	{
 		if ((*l)->obj == obj)
 		{
 			tmp = *l;
 			*l = tmp->next;
 			free(tmp);
+			flag = 1;
 		}
 		else
 			l = &(*l)->next;

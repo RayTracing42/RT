@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/21 16:29:01 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/12 14:29:55 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,18 @@ static void	init_list_evts(t_event **head, t_evt_data *data)
 	new_event(head, SDL_QUIT, NULL, &force_exit);
 }
 
+static int	fct_events(void* events)
+{
+	wait_events(events);
+	return (1);
+}
+
 int			main(int ac, char **av)
 {
 	t_event		*events;
 	t_scene 	*scn;
+
+	SDL_Thread	*t;
 
 	events = NULL;
 	if (!(scn = parsing(ac, av)))
@@ -36,12 +44,12 @@ int			main(int ac, char **av)
 	{
 		get_sdl_core();
 		init_list_evts(&events, NULL);
-		//set_all_matrix(scn->objects->obj, (t_trans_data){(t_dot){5,5,5}, (t_dot){10,10,10}, (t_dot){1.2,1,1}});
+		t = SDL_CreateThread(fct_events, "events", events);
 		view_plane(scn->cam, scn->cam->vp);
 		scanning(scn);
 		refresh_win();
-		wait_events(events);
+		SDL_WaitThread(t, NULL);
 		delete_sdl_core();
-		exit(0);
 	}
+	exit(0);
 }
