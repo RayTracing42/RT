@@ -6,47 +6,58 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:35:27 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/24 19:49:01 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/21 16:55:44 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-int		get_quad_equation_sol(t_dot *res, double a, double b, double c)
+int		gt(double nb1, double nb2)
+{
+	return ((long)(nb1 * POW) > (long)(nb2 * POW));
+}
+
+int		lt(double nb1, double nb2)
+{
+	return ((long)(nb1 * POW) < (long)(nb2 * POW));
+}
+
+int		eq(double nb1, double nb2)
+{
+	return ((long)(nb1 * POW) == (long)(nb2 * POW));
+}
+
+int		get_quad_equation_sol(double *res, double a, double b, double c)
 {
 	double	delta;
+	double	s1;
+	double	s2;
 
 	if (!a)
 	{
-		if (b && c)
-			*res = (t_dot){-c / b, -c / b, 0};
-		if (!b && c)
+		if (!b)
 			return (0);
-		else if (!b && !c)
-			*res = (t_dot){0, 0, 0};
+		*res = -c / b;
 		return (1);
 	}
-	delta = pow(b, 2) - 4 * a * c;
-	if (delta > 0)
-	{
-		*res = (t_dot){(-b - sqrt(delta)) / (2 * a),
-						(-b + sqrt(delta)) / (2 * a), 0};
-		return (1);
-	}
-	else if (delta == 0)
-		*res = (t_dot){-b / (2 * a), -b / (2 * a), 0};
-	return (0);
+	if ((delta = (b * b) - (4 * a * c)) < 0)
+		return (0);
+	s1 = (-b - sqrt(delta)) / (2 * a),
+	s2 = (-b + sqrt(delta)) / (2 * a);
+	if (gt(s1, 0) && gt(s2, 0))
+		*res = ft_dmin(s1, s2);
+	else if (gt(s1, 0) || gt(s2, 0))
+		*res = ft_dmax(s1, s2);
+	else
+		return (0);
+
+	return ((delta != 0) + 1);
 }
 
-void	set_rect_dim(SDL_Rect *rect, int w, int h)
+t_dot	equation_get_dot(t_parequation *eq, double t)
 {
-	rect->h = h;
-	rect->w = w;
-}
-
-void	set_rect_crd(SDL_Rect *rect, int x, int y)
-{
-	rect->x = x;
-	rect->y = y;
+	return ((t_dot){eq->vd.x * t + eq->vc.x,
+					eq->vd.y * t + eq->vc.y,
+					eq->vd.z * t + eq->vc.z});
 }

@@ -6,33 +6,25 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 19:47:34 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/13 16:21:34 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			cylinder_intersect(t_ray *ray, t_object *obj)
+static double			cylinder_intersect(int *nbi, t_dot *dst, t_parequation e, t_object *obj)
 {
 	t_cylinder	*c;
-	t_vector	*vd;
-	t_vector	vc;
 	double		t;
 
+	t = -1;
 	c = (t_cylinder*)obj;
-	vc = vector(ray->equ.vc.x - c->origin.x, ray->equ.vc.y - c->origin.y,
-			ray->equ.vc.z - c->origin.z);
-	vd = &ray->equ.vd;
-	if ((t = delta(pow(vd->x, 2) + pow(vd->z, 2),
-			2 * (vd->x * vc.x + vd->z * vc.z),
-			pow(vc.x, 2) + pow(vc.z, 2) - c->r2, &ray->nb_intersect)))
-	{
-		ray->inter = dot(ray->equ.vc.x + vd->x * t, ray->equ.vc.y + vd->y * t,
-				ray->equ.vc.z + vd->z * t);
-		return (t);
-	}
-	return (-1);
+	if ((*nbi = get_quad_equation_sol(&t, pow(e.vd.x, 2) + pow(e.vd.z, 2),
+									2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z),
+									pow(e.vc.x, 2) + pow(e.vc.z, 2) - c->r2)))
+		*dst = equation_get_dot(&e, t);
+	return (t);
 }
 
 static const t_vector	*get_cylinder_normal(t_dot *inter, t_object *obj)
@@ -40,8 +32,7 @@ static const t_vector	*get_cylinder_normal(t_dot *inter, t_object *obj)
 	t_cylinder	*c;
 
 	c = (t_cylinder*)obj;
-	c->normal =  (t_vector){2 * (inter->x - c->origin.x), 0,
-			2 * (inter->z - c->origin.z)};
+	c->normal =  (t_vector){2 * inter->x, 0, 2 * inter->z};
 	return (&c->normal);
 }
 

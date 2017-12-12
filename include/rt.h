@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 20:25:23 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/11/21 16:56:48 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@
 # endif
 
 # define TITLE			"RT"
+# define POW			10000000000
 
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
+# include <fcntl.h>
 # include "camera.h"
 # include "events.h"
 # include "graphics.h"
@@ -33,10 +35,12 @@
 # include "lights.h"
 # include "light_physic.h"
 # include "light_shading.h"
+# include "matrix.h"
 # include "objects.h"
 # include "scene.h"
 # include "structures.h"
 # include "vectors.h"
+# include "parsing.h"
 
 t_vector	matrice_rotation_x(t_vector *m, double angle);
 t_vector	matrice_rotation_y(t_vector *m, double angle);
@@ -51,7 +55,9 @@ double		angle_between_vectors(t_vector a, t_vector b);
 void		view_plane(t_camera *cam, t_view_plane *vp);
 void		view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 
-void		scanning(t_scene *scn);
+void			scanning(t_scene *scn);
+t_parequation	transform_equ(t_ray *ray, t_object *obj);
+void			transform_inter(t_ray *ray, t_object *obj);
 
 SDL_Color	effects(t_ray *ray, t_scene *scn);
 SDL_Color	shadows(t_ray *ray, t_scene *scn);
@@ -70,9 +76,11 @@ int			if_node_exist(t_list_objs *l, t_object *obj);
 /*
 **	tools.c
 */
-int			get_quad_equation_sol(t_dot *res, double a, double b, double c);
-void		set_rect_dim(SDL_Rect *rect, int w, int h);
-void		set_rect_crd(SDL_Rect *rect, int x, int y);
+t_dot		equation_get_dot(t_parequation *eq, double t);
+int			get_quad_equation_sol(double *res, double a, double b, double c);
+int		gt(double nb1, double nb2);
+int		lt(double nb1, double nb2);
+int		eq(double nb1, double nb2);
 
 /*
 **	vectors.c

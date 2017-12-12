@@ -21,5 +21,6 @@ void		delete_camera(t_camera *cam);
 //void		init_cam_screen(t_camera *cam);
 t_camera	*new_camera(int fov, const t_dot origin,
 						double angle_x, double angle_y, double angle_z);
+t_camera	*parsing_camera(char *file);
 
 #endif

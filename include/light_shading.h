@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 13:54:41 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 20:51:37 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/10/27 20:43:47 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 # include "structures.h"
 
 SDL_Color	get_shade_col(t_ray *ray);
+SDL_Color	get_specular_col(t_ray *ray, t_ray *light_ray);
 
 #endif

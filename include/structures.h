@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/12 17:05:31 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/12/12 13:43:01 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # ifndef __APPLE__
 #  include <SDL2/SDL.h>
 # else
-#  include <SDL2/SDL.h>
+#  include "SDL2/SDL.h"
 # endif
 
 /*
@@ -74,6 +74,7 @@ typedef struct				s_vector
 	double					z;
 }							t_vector;
 
+
 /*	Oui c'est la même chose que le vecteur, on peut du coup soit ignorer le
 	vecteur complètement et utiliser que des points, soit utiliser les points
 	et les vecteurs pour plus de clareté, soit changer la forme des
@@ -84,6 +85,13 @@ typedef struct				s_dot
 	double					y;
 	double					z;
 }							t_dot;
+
+typedef struct				s_trans_data
+{
+	t_dot						trans;
+	t_dot						rot;
+	t_dot						scale;
+}							t_trans_data;
 
 typedef struct				s_parequation
 {
@@ -98,6 +106,7 @@ typedef struct		s_ray
 	t_vector				normal;
 	SDL_Color				color;
 	struct s_object			*obj;
+	struct s_light			*light;
 	struct s_list_objs		*l_objs;
 	double					actual_refractive_i;
 	double					percuted_refractive_i;
@@ -125,11 +134,14 @@ typedef struct				s_obj_phys
 typedef struct				s_object
 {
 	const t_type			obj_type;
-	double					(*intersect)(t_ray *ray, struct s_object *obj);
+	double					(*intersect)(int *nbi, t_dot *dst, t_parequation e, struct s_object *obj);
 	const t_vector			*(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
-	t_vector				dir;
 	t_vector				normal;
+	t_matrix				*trans_const;
+	t_matrix				*trans_iconst;
+	t_matrix				*trans_idir;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 }							t_object;
@@ -148,11 +160,14 @@ typedef struct				s_objs_comp
 typedef struct				s_sphere
 {
 	const t_type			obj_type;
-	double					(*intersect)(t_ray *ray, t_object *obj);
+	double					(*intersect)(int *nbi, t_dot *dst, t_parequation e, t_object *obj);
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
-	t_vector				dir;
 	t_vector				normal;
+	t_matrix				*trans_const;
+	t_matrix				*trans_iconst;
+	t_matrix				*trans_idir;
+	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					radius;
@@ -162,11 +177,14 @@ typedef struct				s_sphere
 typedef struct				s_cylinder
 {
 	const t_type			obj_type;
-	double					(*intersect)(t_ray *ray, t_object *obj);
+	double					(*intersect)(int *nbi, t_dot *dst, t_parequation e, t_object *obj);
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
-	t_vector				dir;
 	t_vector				normal;
+	t_matrix				*trans_const;
+	t_matrix				*trans_iconst;
+	t_matrix				*trans_idir;
+	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					radius;
@@ -178,11 +196,14 @@ typedef struct				s_cylinder
 typedef struct				s_cone
 {
 	const t_type			obj_type;
-	double					(*intersect)(t_ray *ray, t_object *obj);
+	double					(*intersect)(int *nbi, t_dot *dst, t_parequation e, t_object *obj);
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
-	t_vector				dir;
 	t_vector				normal;
+	t_matrix				*trans_const;
+	t_matrix				*trans_iconst;
+	t_matrix				*trans_idir;
+	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					angle;
@@ -194,13 +215,21 @@ typedef struct				s_cone
 typedef struct				s_plane
 {
 	const t_type			obj_type;
-	double					(*intersect)(t_ray *ray, t_object *obj);
+	double					(*intersect)(int *nbi, t_dot *dst, t_parequation e, t_object *obj);
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
-	t_vector				dir;
 	t_vector				normal;
+	t_matrix				*trans_const;
+	t_matrix				*trans_iconst;
+	t_matrix				*trans_idir;
+	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
+	double					a;
+	double					b;
+	double					c;
+	double					d;
+	double					z;
 }							t_plane;
 
 /* La box (le pavé quoi) pour plus tard
@@ -304,6 +333,7 @@ typedef struct				s_camera
 {
 	t_dot					origin;
 	double					focal;
+	t_vector				angle;
 	double					angle_x;
 	double					angle_y;
 	double					angle_z;

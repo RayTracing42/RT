@@ -21,5 +21,6 @@
 */
 void		delete_scene(t_scene *scene);
 t_scene		*new_scene(t_camera *cam, double brightness);
+t_scene		*parsing_scene(char *file);
 
 #endif
