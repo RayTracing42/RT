@@ -59,7 +59,8 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal)
 	plane->a = normal.x;
 	plane->b = normal.y;
 	plane->c = normal.z;
-	plane->d = -(normal.x * args.orig.x + normal.y * args.orig.y + normal.z * args.orig.z);
+/*	plane->d = -(normal.x * args.orig.x + normal.y * args.orig.y + normal.z * args.orig.z);*/
+	plane->d = 0;
 	plane->z = args.orig.z;
 	return (plane);
 }

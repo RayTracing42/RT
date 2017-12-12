@@ -1,6 +1,6 @@
 #!/bin/sh
 
-prefix=/home/flavian/Rendus/rt_branch_parsing/libraries/SDL/build
+prefix=/home/flavian/Rendus/rt_branch_master/libraries/SDL/build
 exec_prefix=${prefix}
 exec_prefix_set=no
 libdir=${exec_prefix}/lib
