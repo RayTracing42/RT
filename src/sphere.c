@@ -42,6 +42,7 @@ static int				is_in_sphere(t_dot *i, t_object *obj)
 	t_sphere	*s;
 
 	s = (t_sphere*)obj;
+//	printf("is_in(%.2f, %.2f, %.2f)\n", i->x, i->y, i->z);
 	return ((pow(i->x, 2) + pow(i->y, 2) + pow(i->z, 2) <= s->r2));
 }
 

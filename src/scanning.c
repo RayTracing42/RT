@@ -62,9 +62,9 @@ void	scanning(t_scene *scn)
 		x = -1;
 		while (++x < WIN_WIDTH)
 		{
-				view_plane_vector(x, y, scn->cam, &ray.equ.vd);
-				effects(&ray, scn);
-				put_pixel(x, y, &ray.color);
+			view_plane_vector(x, y, scn->cam, &ray.equ.vd);
+			effects(&ray, scn);
+			put_pixel(x, y, &ray.color);
 		}
 	}
 }

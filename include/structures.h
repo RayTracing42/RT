@@ -86,12 +86,6 @@ typedef struct				s_dot
 	double					z;
 }							t_dot;
 
-typedef struct				s_limit
-{
-	double					**nb;
-	struct s_plane			**p;
-}							t_limit;
-
 typedef struct				s_trans_data
 {
 	t_dot						trans;
@@ -151,8 +145,8 @@ typedef struct				s_object
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-	t_limit					global_limit;
-	t_limit					local_limit;
+	struct s_list_objs		*global_limit;
+	struct s_list_objs		*local_limit;
 }							t_object;
 
 typedef struct				s_objs_comp
@@ -179,8 +173,8 @@ typedef struct				s_sphere
 	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-	t_limit					global_limit;
-	t_limit					local_limit;
+	struct s_list_objs		*global_limit;
+	struct s_list_objs		*local_limit;
 	double					radius;
 	double					r2;
 }							t_sphere;
@@ -199,8 +193,8 @@ typedef struct				s_cylinder
 	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-	t_limit					global_limit;
-	t_limit					local_limit;
+	struct s_list_objs		*global_limit;
+	struct s_list_objs		*local_limit;
 	double					radius;
 	double					r2;
 }							t_cylinder;
@@ -219,8 +213,8 @@ typedef struct				s_cone
 	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-	t_limit					global_limit;
-	t_limit					local_limit;
+	struct s_list_objs		*global_limit;
+	struct s_list_objs		*local_limit;
 	double					angle;
 	double					tanalpha2;
 }							t_cone;
@@ -239,8 +233,9 @@ typedef struct				s_plane
 	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-	t_limit					global_limit;
-	t_limit					local_limit;
+	struct s_list_objs		*global_limit;
+	struct s_list_objs		*local_limit;
+	t_vector				exceeding_limit;
 	double					a;
 	double					b;
 	double					c;

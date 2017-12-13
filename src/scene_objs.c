@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-static t_list_objs	*new_cell_obj(t_list_objs **head, t_object *obj)
+t_list_objs	*new_cell_obj(t_list_objs **head, t_object *obj)
 {
 	t_list_objs	*tmp;
 

@@ -12,36 +12,31 @@
 
 #include "rt.h"
 
-int		test_limit(t_dot *inter, t_limit *lim)
+int		is_in_limit(t_dot *i, t_plane *p, t_object *f)
 {
-	if ((lim->nb[0] && inter->x > *lim->nb[0])
-		|| (lim->nb[1] && inter->y > *lim->nb[1])
-		|| (lim->nb[2] && inter->z > *lim->nb[2])
-		|| (lim->nb[3] && inter->x < *lim->nb[3])
-		|| (lim->nb[4] && inter->y < *lim->nb[4])
-		|| (lim->nb[5] && inter->z < *lim->nb[5]))
-		return (0);
-	return (1);
+	double	distance_1;
+	double	distance_2;
+
+	f = (t_object *)f;
+
+	distance_1 = get_dot_dist(i,
+		&(t_dot){(p->exceeding_limit.x + p->normal.x),
+		(p->exceeding_limit.y + p->normal.y),
+		(p->exceeding_limit.z + p->normal.z)});
+	distance_2 = get_dot_dist(i,
+		&(t_dot){(p->exceeding_limit.x - p->normal.x),
+		(p->exceeding_limit.y - p->normal.y),
+		(p->exceeding_limit.z - p->normal.z)});
+	return ((distance_1 >= distance_2));
 }
 
-int		is_in_limit(t_ray *ray, t_ray *tmp_ray, t_object *obj)
+int		limit_loop(t_dot *i, t_list_objs *l, t_object *father)
 {
-	if (test_limit(&tmp_ray->inter, &obj->local_limit))
+	while (l)
 	{
-		transform_inter(tmp_ray, obj);
-		if (test_limit(&tmp_ray->inter, &obj->global_limit))
-		{
-			ray->inter = tmp_ray->inter;
-			ray->normal = tmp_ray->normal;
-			ray->nb_intersect = tmp_ray->nb_intersect;
-			ray->color = obj->color;
-			ray->obj = obj;
-			ray->percuted_refractive_i = obj->obj_light.refractive_index;
-			return (1);
-		}
-		else
+		if (!(is_in_limit(i, (t_plane *)l->obj, father)))
 			return (0);
+		l = l->next;
 	}
-	else
-		return (0);
+	return (1);
 }

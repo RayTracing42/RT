@@ -65,21 +65,7 @@
 		</transformations>
 		<limit>
 			<local>
-				<up_x>30</up_x>
-				<up_y>30</up_y>
-				<up_z>30</up_z>
-				<down_x>-30</down_x>
-				<down_y>-30</down_y>
-				<down_z>-30</down_z>
 			</local>
-			<global>
-				<up_x></up_x>
-				<up_y></up_y>
-				<up_z></up_z>
-				<down_x></down_x>
-				<down_y></down_y>
-				<down_z></down_z>
-			</global>
 		</limit>
 		<radius>40</radius>
 	</object>

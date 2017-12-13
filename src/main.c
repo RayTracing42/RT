@@ -34,24 +34,6 @@ int			main(int ac, char **av)
 		ft_putendl("usage : ./rt file.xml");
 	else
 	{
-		t_object *o;
-		t_object *l;
-		t_ray	ro;
-		t_ray	rl;
-
-		o = scn->objects->next->next->obj;
-		l = (t_object*)scn->objects->next->next->obj->local_limit.p[0];
-
-		ro.inter = o->origin;
-		rl.inter = l->origin;
-		printf("origin : (%.1f, %.1f, %.1f)\n", ro.inter.x, ro.inter.y, ro.inter.z);
-		printf("origin : (%.1f, %.1f, %.1f)\n", rl.inter.x, rl.inter.y, rl.inter.z);
-		mult_vect((t_vector*)&ro.inter, o->trans_const, (t_vector*)&ro.inter);
-		mult_vect((t_vector*)&rl.inter, l->trans_const, (t_vector*)&rl.inter);
-		printf("m_origin : (%.1f, %.1f, %.1f)\n", ro.inter.x, ro.inter.y, ro.inter.z);
-		printf("m_origin : (%.1f, %.1f, %.1f)\n", rl.inter.x, rl.inter.y, rl.inter.z);
-
-
 
 		get_sdl_core();
 		init_list_evts(&events, NULL);
