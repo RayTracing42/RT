@@ -11,18 +11,21 @@
 
 int		check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs, t_light *light)
 {
-	double	tmp;
+//	double	tmp;
 
 	if (!light->is_in_light(light, light_ray))
 		return (1);
-	while (l_objs != NULL)
+	if (check_intersect(light_ray, l_objs) > 0)
+		return (1);
+	return (0);
+/*	while (l_objs != NULL)
 	{
 		first_intersect(light_ray, l_objs->obj, &tmp);
 		if (gt(tmp, 0) && lt(tmp, 1))
 			return (1);
 		l_objs = l_objs->next;
 	}
-	return (0);
+	return (0);*/
 }
 
 SDL_Color	add_colors(SDL_Color dst, SDL_Color src)

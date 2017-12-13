@@ -52,6 +52,9 @@ double	check_limit(t_ray *ray, t_list_objs *l, t_object *obj)
 			tmp_ray.inter.z -= p->exceeding_limit.z;
 			if (obj->is_in_obj(&tmp_ray.inter, obj))
 			{
+			tmp_ray.inter.x += p->exceeding_limit.x;
+			tmp_ray.inter.y += p->exceeding_limit.y;
+			tmp_ray.inter.z += p->exceeding_limit.z;
 			transform_inter(&tmp_ray, tmp_ray.obj);
 				
 			//	printf("valid(%.2f, %.2f, %.2f)\n", tmp_ray.inter.x, tmp_ray.inter.y, tmp_ray.inter.z);
