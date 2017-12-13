@@ -87,7 +87,7 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 		first = goto_root_obj(ray->tree, ray->obj);
 		ref_ray.tree = add_new_leaf(first->root, NULL, first->lvl < ray->tree->lvl ? ray->obj : first->root->obj, first->lvl < ray->tree->lvl ? ray->tree->lvl : first->root->lvl);
 	}
-	get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj->obj_light.refractive_index, ref_ray.tree->obj->obj_light.refractive_index);
+	get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj ?  ray->tree->obj->obj_light.refractive_index : 1, ref_ray.tree->obj ? ref_ray.tree->obj->obj_light.refractive_index : 1);
 	ref_ray.equ.vc = vector(ray->inter.x + 0.00001 * ray->equ.vd.x,
 			ray->inter.y + 0.00001 * ray->equ.vd.y,
 			ray->inter.z + 0.00001 * ray->equ.vd.z);
