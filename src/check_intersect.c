@@ -12,22 +12,6 @@
 
 #include "rt.h"
 
-t_ray	limit_intersect(t_ray *ray, t_object *obj, t_object *father, double *tmp)
-{
-	t_ray	tmp_ray;
-
-
-	father = (t_object *)father;
-
-	tmp_ray = *ray;
-	*tmp = obj->intersect(&tmp_ray, transform_equ(&tmp_ray, obj), obj, 1);
-	tmp_ray.normal = *obj->get_normal(&tmp_ray.inter, obj);
-	tmp_ray.color = obj->color;
-	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
-	tmp_ray.obj = obj;
-	return (tmp_ray);
-}
-
 double	check_limit(t_ray *ray, t_list_objs *l, t_object *obj)
 {
 	double		dist;
@@ -42,7 +26,6 @@ double	check_limit(t_ray *ray, t_list_objs *l, t_object *obj)
 	res_ray = *ray;
 	while (l != NULL)
 	{
-	//	tmp_ray = limit_intersect(ray, l->obj, obj, &tmp);
 		tmp_ray = first_intersect(ray, l->obj, &tmp);
 		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
