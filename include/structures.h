@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/20 20:17:16 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/13 15:11:38 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct		s_ray
 	SDL_Color				color;
 	struct s_object			*obj;
 	struct s_light			*light;
-	struct s_list_objs		*l_objs;
+	struct s_objs_tree		*tree;
 	double					actual_refractive_i;
 	double					percuted_refractive_i;
 	double					limit;
@@ -345,6 +345,15 @@ typedef struct				s_list_objs
 	t_object				*obj;
 	struct s_list_objs		*next;
 }							t_list_objs;
+
+typedef struct				s_objs_tree
+{
+	t_object				*obj;
+	int						lvl;
+	struct s_objs_tree		*root;
+	struct s_objs_tree		*reflected;
+	struct s_objs_tree		*refracted;
+}							t_objs_tree;
 
 typedef struct				s_list_lights
 {

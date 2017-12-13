@@ -43,7 +43,7 @@ void	get_refracted_col(t_ray *ray, t_object *src,
 	ray->color.b = (ray->color.b * (1 - src->obj_light.refraction_amount)) +
 			(refracted_obj_col.b * src->obj_light.refraction_amount);
 }
-
+/*
 static void	set_nodes(t_ray *ray, t_ray *ref_ray)
 {
 	if (ray->nb_intersect == 2)
@@ -67,10 +67,12 @@ static void	set_nodes(t_ray *ray, t_ray *ref_ray)
 		}
 	}
 }
-
+*/
 SDL_Color	refract(t_ray *ray, t_scene *scn)
 {
 	t_ray			ref_ray;
+	t_objs_tree		*first;
+	SDL_Color		ret;
 
 	ref_ray = *ray;
 	if (ray->obj->obj_light.refraction_amount == 0)
@@ -78,13 +80,18 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 	if (ray->limit < 0.1)
 		return ((SDL_Color){0, 0, 0, 255});
 	ref_ray.limit -= (1 - ray->obj->obj_light.refraction_amount) / 100;
-	set_nodes(ray, &ref_ray);
-	get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->actual_refractive_i,
-						ray->percuted_refractive_i);
+	if (ray->nb_intersect == 2)
+		ref_ray.tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->obj, ray->tree->lvl + 1);
+	else
+	{
+		first = goto_root_obj(ray->tree, ray->obj);
+		ref_ray.tree = add_new_leaf(first->root, NULL, first->lvl < ray->tree->lvl ? ray->obj : first->root->obj, first->lvl < ray->tree->lvl ? ray->tree->lvl : first->root->lvl);
+	}
+	get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj->obj_light.refractive_index, ref_ray.tree->obj->obj_light.refractive_index);
 	ref_ray.equ.vc = vector(ray->inter.x + 0.00001 * ray->equ.vd.x,
 			ray->inter.y + 0.00001 * ray->equ.vd.y,
 			ray->inter.z + 0.00001 * ray->equ.vd.z);
-	if (ray->nb_intersect == 2)
-		ref_ray.actual_refractive_i = ref_ray.percuted_refractive_i;
-	return (effects(&ref_ray, scn));
+	ret = effects(&ref_ray, scn);
+	remove_leaf(ref_ray.tree);
+	return (ret);
 }

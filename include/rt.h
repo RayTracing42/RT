@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/21 16:56:48 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/13 15:07:59 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # include "light_shading.h"
 # include "matrix.h"
 # include "objects.h"
+# include "reflect_refract_tree.h"
 # include "scene.h"
 # include "structures.h"
 # include "vectors.h"
