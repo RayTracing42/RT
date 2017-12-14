@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/29 00:21:14 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/14 12:56:58 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int				is_in_cone(t_dot *i, t_object *obj)
 	t_cone	*c;
 
 	c = (t_cone*)obj;
-	return ((pow(i->x - c->origin.x, 2) + pow(i->z - c->origin.z, 2) <= pow(i->y - c->origin.y, 2) * c->tanalpha2));
+	return ((pow(i->x, 2) + pow(i->z, 2) <= pow(i->y, 2) * c->tanalpha2));
 }
 
 t_cone					*new_cone(t_objs_comp args, double angle)

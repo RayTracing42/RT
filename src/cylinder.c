@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/13 16:21:34 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/14 12:56:39 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int				is_in_cylinder(t_dot *i, t_object *obj)
 	t_cylinder	*c;
 
 	c = (t_cylinder*)obj;
-	return ((pow(i->x - c->origin.x, 2) + pow(i->z - c->origin.z, 2) <= c->r2));
+	return ((pow(i->x, 2) + pow(i->z, 2) <= c->r2));
 }
 
 t_cylinder				*new_cylinder(t_objs_comp args, double radius)

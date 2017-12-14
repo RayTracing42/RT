@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/29 04:06:35 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/14 13:44:28 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ double	check_limit(t_ray *ray, t_list_objs *l, t_object *obj)
 	t_ray		tmp_ray;
 	t_ray		res_ray;
 
-	t_plane		*p;
-	obj = (t_object *)obj;
-
 	dist = 0;
 	res_ray = *ray;
 	while (l != NULL)
@@ -29,18 +26,8 @@ double	check_limit(t_ray *ray, t_list_objs *l, t_object *obj)
 		tmp_ray = first_intersect(ray, l->obj, &tmp);
 		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
-			p = (t_plane*)l->obj;
-			tmp_ray.inter.x -= p->exceeding_limit.x;
-			tmp_ray.inter.y -= p->exceeding_limit.y;
-			tmp_ray.inter.z -= p->exceeding_limit.z;
 			if (obj->is_in_obj(&tmp_ray.inter, obj))
 			{
-			tmp_ray.inter.x += p->exceeding_limit.x;
-			tmp_ray.inter.y += p->exceeding_limit.y;
-			tmp_ray.inter.z += p->exceeding_limit.z;
-			transform_inter(&tmp_ray, tmp_ray.obj);
-				
-			//	printf("valid(%.2f, %.2f, %.2f)\n", tmp_ray.inter.x, tmp_ray.inter.y, tmp_ray.inter.z);
 				dist = tmp;
 				res_ray = tmp_ray;
 			}
@@ -71,12 +58,12 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 				dist = tmp;
 				res_ray = tmp_ray;
 			}
-			
 			else
 			{
 				tmp = check_limit(&tmp_ray, l_objs->obj->local_limit, l_objs->obj);
 				if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 				{
+					transform_inter(&tmp_ray, tmp_ray.obj);
 					dist = tmp;
 					res_ray = tmp_ray;
 				}

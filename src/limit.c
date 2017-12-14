@@ -6,18 +6,16 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/29 04:06:37 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/14 13:44:31 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		is_in_limit(t_dot *i, t_plane *p, t_object *f)
+int		is_in_limit(t_dot *i, t_plane *p)
 {
 	double	distance_1;
 	double	distance_2;
-
-	f = (t_object *)f;
 
 	distance_1 = get_dot_dist(i,
 		&(t_dot){(p->exceeding_limit.x + p->normal.x),
@@ -34,8 +32,11 @@ int		limit_loop(t_dot *i, t_list_objs *l, t_object *father)
 {
 	while (l)
 	{
-		if (!(is_in_limit(i, (t_plane *)l->obj, father)))
-			return (0);
+		if (father != l->obj)
+		{
+			if (!(is_in_limit(i, (t_plane *)l->obj)))
+				return (0);
+		}
 		l = l->next;
 	}
 	return (1);

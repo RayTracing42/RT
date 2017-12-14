@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/29 04:06:17 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/14 12:56:25 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static int				is_in_sphere(t_dot *i, t_object *obj)
 
 	s = (t_sphere*)obj;
 //	printf("is_in(%.2f, %.2f, %.2f)\n", i->x, i->y, i->z);
-	return ((pow(i->x, 2) + pow(i->y, 2) + pow(i->z, 2) <= s->r2));
+return ((pow(i->x, 2) + pow(i->y, 2) + pow(i->z, 2) <= s->r2));
+//	return ((pow(i->x - obj->origin.x, 2) + pow(i->y - obj->origin.y, 2) + pow(i->z - obj->origin.z, 2) <= s->r2));
 }
 
 t_sphere				*new_sphere(t_objs_comp args, double radius)

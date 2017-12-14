@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/29 04:06:37 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/14 13:44:25 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	parsing_global_limit(t_object *o, char *limit)
 	char		*data[2];
 	t_plane		*p;
 
+	origin = (t_dot){0, 0, 0};
+	normal = (t_vector){0, 0, 0};
 	if (!(data[0] = get_interval(limit, "<origin>", "</origin>"))
 		|| !(data[1] = get_interval(limit, "<normal>", "</normal>"))
 		|| (parsing_dot(data[0], &origin) == -1)
@@ -44,21 +46,53 @@ void	parsing_local_limit(t_object *o, char *limit, t_trans_data trans)
 	char		*data[2];
 	t_plane		*p;
 
+	origin = (t_dot){0, 0, 0};
+	normal = (t_vector){0, 0, 0};
 	if (!(data[0] = get_interval(limit, "<origin>", "</origin>"))
 		|| !(data[1] = get_interval(limit, "<normal>", "</normal>"))
 		|| (parsing_dot(data[0], &origin) == -1)
 		|| (parsing_vector(data[1], &normal) == -1))
 		exit_custom_error("rt", ":parsing_local_limit failed");
 	p = new_plane((t_objs_comp){o->origin, o->color, o->obj_light.reflection_amount,
-			o->obj_light.refraction_amount, o->obj_light.refractive_index,
-			o->obj_light.shininess}, normal);
+		o->obj_light.refraction_amount, o->obj_light.refractive_index,
+		o->obj_light.shininess}, normal);
 	p->exceeding_limit.x = origin.x - o->origin.x;
 	p->exceeding_limit.y = origin.y - o->origin.y;
 	p->exceeding_limit.z = origin.z - o->origin.z;
-	trans.trans.x += p->exceeding_limit.x;
-	trans.trans.y += p->exceeding_limit.y;
-	trans.trans.z += p->exceeding_limit.z;
-//	printf("exceed : (%.2f, %.2f, %.2f)\n", p->exceeding_limit.x, p->exceeding_limit.y, p->exceeding_limit.z);
+
+
+
+	double	dist_1;
+	double	dist_2;
+	double	dist_3;
+	t_vector a_b;
+	t_vector a_c;
+	t_vector a_d;
+	double	angle;
+
+	a_b = (t_vector){p->exceeding_limit.x,
+		p->exceeding_limit.y,
+		p->exceeding_limit.z};
+	if ((a_b.x != 0 && a_b.y != 0 && a_b.z != 0))
+	{
+		a_c = p->normal;
+		vect_normalize(&a_c);
+		vect_normalize(&a_b);
+		angle = angle_between_vectors(a_b, a_c);
+		dist_1 = get_vect_lenght(&p->exceeding_limit);
+		dist_2 = 1 * cos(angle * M_PI / 180);
+		dist_3 = dist_1 * dist_2;
+		a_d = (t_vector){a_c.x * dist_3, a_c.y * dist_3, a_c.z * dist_3};
+	}
+	else
+		a_d = (t_vector){0, 0, 0};
+	
+
+
+	trans.trans.x += a_d.x;
+	trans.trans.y += a_d.y;
+	trans.trans.z += a_d.z;
+
 	set_all_matrix((t_object *)p, trans);
 	free(data[0]);
 	free(data[1]);
