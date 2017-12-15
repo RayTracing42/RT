@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/14 21:51:38 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/15 18:14:16 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,16 @@ void	scanning(t_scene *scn)
 	ray.actual_refractive_i = 1;
 	ray.limit = 1;
 	ray.tree = add_new_leaf(NULL, NULL, NULL, 0);
-	//y = 176;
-	y = -1;
-	while (++y < WIN_HEIGHT )//178)
+	y = 218;
+	printf("sphère 1: %p | sphère 2: %p\n", scn->objects->next->obj, scn->objects->next->next->obj);
+	//y = -1;
+	while (++y < /*WIN_HEIGHT )*/220)
 	{
-		//x = 586;
-		x = -1;
-		while (++x < WIN_WIDTH )//588)
+		x = 598;
+		//x = -1;
+		while (++x < /*WIN_WIDTH )*/600)
 		{
+			//printf("%d %d\n", x, y);
 			view_plane_vector(x, y, scn->cam, &ray.equ.vd);
 			effects(&ray, scn);
 			put_pixel(x, y, &ray.color);

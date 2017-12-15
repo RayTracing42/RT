@@ -89,30 +89,34 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 	if (ray->nb_intersect == 2)
 	{
 		ref_ray.tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->obj, ray->tree->lvl + 1);
-		//printf("R : %p (%p)\n", ref_ray.tree, ray->tree);
+		printf("%p -> R : %p (%p)\n", ray->obj, ref_ray.tree, ray->tree);
 		get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj ?  ray->tree->obj->obj_light.refractive_index : 1, ref_ray.tree->obj ? ref_ray.tree->obj->obj_light.refractive_index : 1);
 	}
 	else
 	{
 		first = goto_root_obj(ray->tree, ray->obj);
 		if (!first)
-			printf("R : (%p)\n", ray->tree);
+			printf("R : (%p) ray obj = %p | ray tree obj = %p\n", ray->tree, ray->obj, ray->tree->obj);
 
 		if (first->lvl < ray->tree->lvl)
 			total_ref = get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj ?  ray->tree->obj->obj_light.refractive_index : 1, ray->obj ? ray->obj->obj_light.refractive_index : 1);
 		else
 			total_ref = get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj ?  ray->tree->obj->obj_light.refractive_index : 1, first->root->obj ? first->root->obj->obj_light.refractive_index : 1);
 
-		if (!total_ref)
-			ref_ray.tree = add_new_leaf(first->root, NULL, first->lvl < ray->tree->lvl ? ray->obj : first->root->obj, first->lvl < ray->tree->lvl ? ray->tree->lvl : first->root->lvl);
+		if (!total_ref){
+			ref_ray.tree = add_new_leaf(first->root, NULL, first->lvl < ray->tree->lvl ? ray->tree->obj : first->root->obj, first->lvl < ray->tree->lvl ? ray->tree->lvl : first->root->lvl);
+			printf("%p -> R : %p (%p | New : %p)\nfirst lvl: %d | ray lvl: %d\n", ray->obj, ref_ray.tree, ray->tree, first->root, first->lvl, ray->tree->lvl);
+		}
 		else
+		{
 			ref_ray.tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->obj, ray->tree->lvl);
-		//printf("R : %p (%p | New : %p)\n", ref_ray.tree, ray->tree, first ? first->root : first);
+			printf("%p -> tR : %p (%p)\n", ray->obj, ref_ray.tree, ray->tree);
+		}
 	}
 	ref_ray.equ.vc = vector(ray->inter.x + 0.00001 * ray->equ.vd.x,
 			ray->inter.y + 0.00001 * ray->equ.vd.y,
 			ray->inter.z + 0.00001 * ray->equ.vd.z);
 	ret = effects(&ref_ray, scn);
-	remove_leaf(ref_ray.tree);
+	//remove_leaf(ref_ray.tree);
 	return (ret);
 }
