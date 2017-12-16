@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/16 09:50:45 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 10:39:29 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,20 @@ double	check_limit(t_ray *ray, t_list_objs *l, t_object *obj)
 	t_ray		tmp_ray;
 	t_ray		res_ray;
 	t_plane		*p;
+	t_list_objs	*first_l;
 
 	dist = 0;
 	res_ray = *ray;
+	first_l = l;
 	while (l != NULL)
 	{
 		p = (t_plane *)l->obj;
-		printf("%d\n", l->obj->status);
 		if (p->status == 0)
 		{
 			tmp_ray = second_intersect(ray, obj, &tmp);
 			if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 			{
-				if (limit_loop(&tmp_ray.inter, l, obj))
+				if (limit_loop(&tmp_ray.inter, first_l, obj))
 				{
 					tmp_ray.normal = (t_vector){-tmp_ray.normal.x, -tmp_ray.normal.y,
 						-tmp_ray.normal.z};
@@ -49,12 +50,15 @@ double	check_limit(t_ray *ray, t_list_objs *l, t_object *obj)
 				tmp_ray.inter.x += p->norm_diff.x;
 				tmp_ray.inter.y += p->norm_diff.y;
 				tmp_ray.inter.z += p->norm_diff.z;
+			if (limit_loop(&tmp_ray.inter, first_l, l->obj))
+			{
 				if (obj->is_in_obj(&tmp_ray.inter, obj))
 				{
 					transform_inter(&tmp_ray, tmp_ray.obj);
 					dist = tmp;
 					res_ray = tmp_ray;
 				}
+			}
 			}
 		}
 		l = l->next;
