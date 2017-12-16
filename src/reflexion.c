@@ -40,11 +40,11 @@ SDL_Color	reflect(t_ray *ray, t_scene *scn)
 			return ((SDL_Color){0, 0, 0, 255});
 		reflected_ray.limit = reflected_ray.limit - (1 - ray->obj->obj_light.reflection_amount) / 100;
 		reflected_ray.tree = add_new_leaf(ray->tree, &ray->tree->reflected, ray->obj, ray->tree->lvl);
-		printf("%p -> r : %p (%p)\n", ray->obj, ray->tree->reflected, ray->tree);
+		//printf("%p -> r : %p (%p)\n", ray->obj, ray->tree->reflected, ray->tree);
 		reflected_ray.equ.vc = vector(ray->inter.x, ray->inter.y, ray->inter.z);
 		reflected_ray.equ.vd = get_reflected_vect(&ray->equ.vd, &ray->normal);
 		effects(&reflected_ray, scn);
-		//remove_leaf(reflected_ray.tree);
+		remove_leaf(reflected_ray.tree);
 	}
 	return (reflected_ray.color);
 }

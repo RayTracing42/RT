@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 12:42:42 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/27 22:19:08 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/12/15 19:18:44 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ SDL_Color	get_specular_col(t_ray *ray, t_ray *light_ray)
 	vect_normalize(&r);
 	v = light_ray->equ.vd;
 	vect_normalize(&v);
-	coef = ray->obj->obj_light.shininess ? light_ray->light->power * pow(vect_dot_product(&r, &v), ray->obj->obj_light.shininess) : 0;
+	coef = ray->obj->obj_light.shininess ? (light_ray->light->power * pow(vect_dot_product(&r, &v), ray->obj->obj_light.shininess)) : 0;
 	tmp_col.x = light_ray->light->color.r * coef;
 	tmp_col.y = light_ray->light->color.g * coef;
 	tmp_col.z = light_ray->light->color.b * coef;
