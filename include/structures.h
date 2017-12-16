@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/29 04:06:42 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 09:36:27 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ typedef struct				s_object
 	t_obj_phys				obj_light;
 	struct s_list_objs		*global_limit;
 	struct s_list_objs		*local_limit;
+	int						status;
 }							t_object;
 
 typedef struct				s_objs_comp
@@ -177,6 +178,7 @@ typedef struct				s_sphere
 	struct s_list_objs		*local_limit;
 	double					radius;
 	double					r2;
+	int						status;
 }							t_sphere;
 
 typedef struct				s_cylinder
@@ -197,6 +199,7 @@ typedef struct				s_cylinder
 	struct s_list_objs		*local_limit;
 	double					radius;
 	double					r2;
+	int						status;
 }							t_cylinder;
 
 typedef struct				s_cone
@@ -217,6 +220,7 @@ typedef struct				s_cone
 	struct s_list_objs		*local_limit;
 	double					angle;
 	double					tanalpha2;
+	int						status;
 }							t_cone;
 
 typedef struct				s_plane
@@ -235,12 +239,14 @@ typedef struct				s_plane
 	t_obj_phys				obj_light;
 	struct s_list_objs		*global_limit;
 	struct s_list_objs		*local_limit;
-	t_vector				exceeding_limit;
+	t_vector				orig_diff;
+	t_vector				norm_diff;
 	double					a;
 	double					b;
 	double					c;
 	double					d;
 	double					z;
+	int						status;
 }							t_plane;
 
 /* La box (le pavé quoi) pour plus tard

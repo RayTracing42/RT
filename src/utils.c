@@ -51,14 +51,19 @@ double	delta(double a, double b, double c, int *n)
 		return (r2);
 }
 
-t_vector	vector_opposite(double x, double y, double z)
-{
-	t_vector	vec;
+/*
+**	Si tu viens a rejouter negatif un jour, pense aux limites a faire gaffe
+**	car elles pourraient buger avec ce status
+*/
 
-	vec.x = -x;
-	vec.y = -y;
-	vec.z = -z;
-	return (vec);
+int			get_status(char *status)
+{
+	if (ft_strcmp("empty", status) == 0)
+		return (0);
+	else if (ft_strcmp("full", status) == 0)
+		return (1);
+	else
+		return (-1);
 }
 
 t_vector	vector(double x, double y, double z)

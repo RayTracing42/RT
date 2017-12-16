@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/21 16:56:48 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/16 08:52:14 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,6 @@
 t_vector	matrice_rotation_x(t_vector *m, double angle);
 t_vector	matrice_rotation_y(t_vector *m, double angle);
 t_vector	matrice_rotation_z(t_vector *m, double angle);
-
-t_vector	vector(double x, double y, double z);
-t_vector	vector_opposite(double x, double y, double z);
-t_dot		dot(double x, double y, double z);
-double		delta(double a, double b, double c, int *n);
-double		angle_between_vectors(t_vector a, t_vector b);
-
 void		view_plane(t_camera *cam, t_view_plane *vp);
 void		view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 
@@ -64,6 +57,8 @@ t_parequation	transform_equ(t_ray *ray, t_object *obj);
 void			transform_inter(t_ray *ray, t_object *obj);
 
 int				limit_loop(t_dot *i, t_list_objs *l, t_object *father);
+void			normalized_diff(t_plane *p, t_dot *trans);
+
 
 SDL_Color	effects(t_ray *ray, t_scene *scn);
 SDL_Color	shadows(t_ray *ray, t_scene *scn);
@@ -95,5 +90,15 @@ int		eq(double nb1, double nb2);
 double		vect_dot_product(const t_vector *v1, const t_vector *v2);
 double		get_vect_lenght(const t_vector *vect);
 double		get_dot_dist(t_dot *d1, t_dot *d2);
+
+/*
+**	utils.c
+*/
+
+t_vector	vector(double x, double y, double z);
+t_dot		dot(double x, double y, double z);
+double		delta(double a, double b, double c, int *n);
+double		angle_between_vectors(t_vector a, t_vector b);
+int			get_status(char *status);
 
 #endif

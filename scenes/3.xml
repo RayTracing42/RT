@@ -48,8 +48,8 @@
 		</physic>
 		<transformations>
 			<rotation>
-				<x>0</x>
-				<y>0</y>
+				<x>180</x>
+				<y>-50</y>
 				<z>0</z>
 			</rotation>
 			<scale>
@@ -65,8 +65,9 @@
 		</transformations>
 		<limit>
 			<local>
-				<origin><x>200</x><y>0</y><z>0</z></origin>
-				<normal><x>0</x><y>3</y><z>3</z></normal>
+				<origin><x>200</x><y>30</y><z>10</z></origin>
+				<normal><x>0</x><y>5</y><z>5</z></normal>
+				<status>full</status>
 			</local>
 		</limit>
 		<radius>40</radius>
