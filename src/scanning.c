@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/16 17:39:48 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/16 19:20:33 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	scanning(t_scene *scn)
 		//while (++x < 601)
 		while (++x < WIN_WIDTH)
 		{
-			printf("%d %d\n", x, y);
+			//printf("%d %d\n", x, y);
 			view_plane_vector(x, y, scn->cam, &ray.equ.vd);
 			effects(&ray, scn);
 			put_pixel(x, y, &ray.color);

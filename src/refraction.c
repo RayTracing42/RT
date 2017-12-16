@@ -67,27 +67,36 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 	if (ray->nb_intersect == 2)
 	{
 		if (!(total_ref = get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj ?  ray->tree->obj->obj_light.refractive_index : 1, ray->obj ? ray->obj->obj_light.refractive_index : 1)))
+		{
 			ref_ray.tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->obj, ray->tree->lvl + 1);
+			//printf("%p -in--> R : %p (%p)\n", ray->obj, ref_ray.tree, ray->tree);
+		}
 		else
+		{
 			ref_ray.tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->tree->obj, ray->tree->lvl);
+			//printf("%p -in--> tR: %p (%p)\n", ray->obj, ref_ray.tree, ray->tree);
+		}
 	}
 	else
 	{
 		if (!(first = goto_root_obj(ray->tree, ray->obj)))
 			first = goto_root_obj(ray->tree, ray->tree->obj);
+		if (!first->root){
+			printf("%p -out-> R : (%p)\n", ray->obj, ray->tree);
+		}
 		if (first->lvl < ray->tree->lvl)
 			total_ref = get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj ?  ray->tree->obj->obj_light.refractive_index : 1, ray->obj ? ray->obj->obj_light.refractive_index : 1);
 		else
 			total_ref = get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj ? ray->tree->obj->obj_light.refractive_index : 1, (first->root && first->root->obj) ? first->root->obj->obj_light.refractive_index : 1);
 
 		if (!total_ref){
-			ref_ray.tree = add_new_leaf(first->root, NULL, first->lvl < ray->tree->lvl ? ray->tree->obj : first->root->obj, first->lvl < ray->tree->lvl ? ray->tree->lvl : first->root->lvl);
-			//printf("%p -> R : %p (%p | New : %p)\nfirst lvl: %d | ray lvl: %d\n", ray->obj, ref_ray.tree, ray->tree, first->root, first->lvl, ray->tree->lvl);
+			ref_ray.tree = add_new_leaf(first->root ? first->root : first, NULL, (first->lvl >= ray->tree->lvl) && first->root ? first->root->obj : ray->tree->obj, (first->lvl >= ray->tree->lvl) && first->root ? first->root->lvl : ray->tree->lvl);
+			//printf("%p -out-> R : %p (%p | New : %p)\n", ray->obj, ref_ray.tree, ray->tree, first->root);
 		}
 		else
 		{
 			ref_ray.tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->obj, ray->tree->lvl);
-			//printf("%p -> tR : %p (%p)\n", ray->obj, ref_ray.tree, ray->tree);
+			//printf("%p -out-> tR: %p (%p)\n", ray->obj, ref_ray.tree, ray->tree);
 		}
 	}
 	ref_ray.equ.vc = vector(ray->inter.x + (1 / POW) * ray->equ.vd.x,
