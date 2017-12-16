@@ -37,7 +37,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 		<physic>
 			<refraction_amount>1</refraction_amount>
 			<reflexion_amount>0</reflexion_amount>
-			<refraction_index>1.5</refraction_index>
+			<refraction_index>0.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
 		<radius>40</radius>

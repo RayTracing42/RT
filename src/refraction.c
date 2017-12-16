@@ -27,7 +27,7 @@ int		get_refracted_vect(t_vector *dir, const t_vector *norm,
 	n1_n2 = n1 / n2;
 	if ((cos_t2 = (1 - pow(n1_n2, 2) * (1 - pow(cos_t1, 2)))) < 0)
 	{
-		get_reflected_vect(dir, norm);
+		*dir = get_reflected_vect(dir, norm);
 		return (1);
 	}
 	else
@@ -66,9 +66,10 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 	ref_ray.limit -= (1 - ray->obj->obj_light.refraction_amount) / 100;
 	if (ray->nb_intersect == 2)
 	{
-		ref_ray.tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->obj, ray->tree->lvl + 1);
-		//printf("%p -> R : %p (%p)\n", ray->obj, ref_ray.tree, ray->tree);
-		get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj ?  ray->tree->obj->obj_light.refractive_index : 1, ref_ray.tree->obj ? ref_ray.tree->obj->obj_light.refractive_index : 1);
+		if (!(total_ref = get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj ?  ray->tree->obj->obj_light.refractive_index : 1, ray->obj ? ray->obj->obj_light.refractive_index : 1)))
+			ref_ray.tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->obj, ray->tree->lvl + 1);
+		else
+			ref_ray.tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->tree->obj, ray->tree->lvl);
 	}
 	else
 	{
@@ -77,7 +78,7 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 		if (first->lvl < ray->tree->lvl)
 			total_ref = get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj ?  ray->tree->obj->obj_light.refractive_index : 1, ray->obj ? ray->obj->obj_light.refractive_index : 1);
 		else
-			total_ref = get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj ?  ray->tree->obj->obj_light.refractive_index : 1, first->root->obj ? first->root->obj->obj_light.refractive_index : 1);
+			total_ref = get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->tree->obj ? ray->tree->obj->obj_light.refractive_index : 1, (first->root && first->root->obj) ? first->root->obj->obj_light.refractive_index : 1);
 
 		if (!total_ref){
 			ref_ray.tree = add_new_leaf(first->root, NULL, first->lvl < ray->tree->lvl ? ray->tree->obj : first->root->obj, first->lvl < ray->tree->lvl ? ray->tree->lvl : first->root->lvl);

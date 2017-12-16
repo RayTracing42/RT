@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 13:45:37 by shiro             #+#    #+#             */
-/*   Updated: 2017/12/15 17:51:12 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/16 16:58:48 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ t_objs_tree	*goto_root_obj(t_objs_tree *leaf, t_object *obj)
 {
 	while (leaf && leaf->obj != obj)
 		leaf = leaf->root;
-	while (leaf && leaf->root->obj == obj)
+	while (leaf && leaf->root && leaf->root->obj == obj)
 		leaf = leaf->root;
 	return (leaf);
 }
 
 void		remove_leaf(t_objs_tree *leaf)
 {
-	free(leaf);
+	if (leaf)
+		free(leaf);
 }

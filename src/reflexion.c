@@ -9,7 +9,7 @@
 
 #include "rt.h"
 
-t_vector	get_reflected_vect(t_vector *dir, const t_vector *norm)
+t_vector	get_reflected_vect(const t_vector *dir, const t_vector *norm)
 {
 	double	cos_theta1;
 
@@ -34,6 +34,7 @@ SDL_Color	reflect(t_ray *ray, t_scene *scn)
 {
 	t_ray		reflected_ray;
 	reflected_ray = *ray;
+
 	if (ray->obj->obj_light.reflection_amount != 0 && ray->nb_intersect == 2)
 	{
 		if (ray->limit < 0.1)
