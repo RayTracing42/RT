@@ -6,14 +6,15 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/16 09:36:44 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 11:27:42 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			sphere_intersect(t_ray *ray, t_parequation e, t_object *obj, int i)
+static double			sphere_intersect(t_ray *ray, t_parequation e,
+	t_object *obj, int i)
 {
 	t_sphere		*s;
 	double			t[4];

@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/26 15:27:48 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 11:31:46 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,17 +111,14 @@ int			parsing_object(char *scene, t_scene *scn)
 		obj = NULL;
 		if (!(data[1] = get_interval(data[0], "<type>", "</type>")))
 			return (-1);
-		if (!(ft_strcmp(data[1], "sphere")) || !(ft_strcmp(data[1], "SPHERE")))
+		if (!(ft_strcmp(data[1], "sphere")))
 			obj = (t_object *)parsing_sphere(data[0]);
-		else if (!(ft_strcmp(data[1], "plane"))
-			|| !(ft_strcmp(data[1], "PLANE")))
+		else if (!(ft_strcmp(data[1], "plane")))
 			obj = (t_object *)parsing_plane(data[0]);
-		else if (!(ft_strcmp(data[1], "cylinder")) || !(ft_strcmp(data[1], "CYLINDER")))
+		else if (!(ft_strcmp(data[1], "cylinder")))
 			obj = (t_object *)parsing_cylinder(data[0]);
-		else if (!(ft_strcmp(data[1], "cone")) || !(ft_strcmp(data[1], "CONE")))
+		else if (!(ft_strcmp(data[1], "cone")))
 			obj = (t_object *)parsing_cone(data[0]);
-		else
-			return (-1);
 		if (!obj)
 			return (-1);
 		trans = parsing_transformations(data[0]);

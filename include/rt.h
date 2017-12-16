@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/16 08:52:14 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 13:10:07 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,13 @@ void			scanning(t_scene *scn);
 t_parequation	transform_equ(t_ray *ray, t_object *obj);
 void			transform_inter(t_ray *ray, t_object *obj);
 
+void			check_limit(t_ray *ray, t_list_objs *l, t_object *obj, double *dist);
 int				limit_loop(t_dot *i, t_list_objs *l, t_object *father);
 void			normalized_diff(t_plane *p, t_dot *trans);
-
+int				full_limit(t_ray *ray, t_ray *tmp_ray, t_object *father,
+	t_list_objs *first);
+int				empty_limit(t_ray *ray, t_ray *tmp_ray, t_object *father,
+	t_list_objs *first);
 
 SDL_Color	effects(t_ray *ray, t_scene *scn);
 SDL_Color	shadows(t_ray *ray, t_scene *scn);
@@ -97,7 +101,6 @@ double		get_dot_dist(t_dot *d1, t_dot *d2);
 
 t_vector	vector(double x, double y, double z);
 t_dot		dot(double x, double y, double z);
-double		delta(double a, double b, double c, int *n);
 double		angle_between_vectors(t_vector a, t_vector b);
 int			get_status(char *status);
 

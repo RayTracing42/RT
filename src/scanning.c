@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/14 13:35:48 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 11:33:20 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,19 @@ t_parequation	transform_equ(t_ray *ray, t_object *obj)
 {
 	t_parequation	trs;
 
-	trs.vc = (t_vector){ray->equ.vc.x - obj->origin.x, ray->equ.vc.y - obj->origin.y, ray->equ.vc.z - obj->origin.z};
+	trs.vc = (t_vector){ray->equ.vc.x - obj->origin.x,
+		ray->equ.vc.y - obj->origin.y, ray->equ.vc.z - obj->origin.z};
 	mult_vect(&trs.vc, obj->trans_iconst, &trs.vc);
 	mult_vect(&trs.vd, obj->trans_idir, &ray->equ.vd);
 	return (trs);
 }
 
-void				transform_inter(t_ray *ray, t_object *obj)
+void			transform_inter(t_ray *ray, t_object *obj)
 {
 	mult_vect(&ray->normal, obj->trans_norm, &ray->normal);
 	mult_vect((t_vector*)&ray->inter, obj->trans_const, (t_vector*)&ray->inter);
-	ray->inter = (t_dot){ray->inter.x + obj->origin.x, ray->inter.y + obj->origin.y, ray->inter.z + obj->origin.z};
+	ray->inter = (t_dot){ray->inter.x + obj->origin.x,
+		ray->inter.y + obj->origin.y, ray->inter.z + obj->origin.z};
 }
 
 SDL_Color		effects(t_ray *ray, t_scene *scn)
@@ -46,7 +48,7 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 	return (ray->color = (SDL_Color){0, 0, 0, 255});
 }
 
-void	scanning(t_scene *scn)
+void			scanning(t_scene *scn)
 {
 	int			x;
 	int			y;

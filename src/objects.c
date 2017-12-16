@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/26 15:57:44 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 11:54:18 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static size_t	get_type_size(t_type type)
 {
 	const size_t	sizes[4] = {sizeof(t_cone), sizeof(t_cylinder),
 								sizeof(t_plane), sizeof(t_sphere)};
+
 	return (sizes[type]);
 }
 
@@ -42,7 +43,7 @@ t_object		*new_object(t_type type, t_objs_comp args)
 	return (obj);
 }
 
-void		set_all_matrix(t_object *object, t_trans_data data)
+void			set_all_matrix(t_object *object, t_trans_data data)
 {
 	scale(&object->trans_const, data.scale.x, data.scale.y, data.scale.z);
 	x_rotation(&object->trans_const, data.rot.x);
@@ -62,7 +63,7 @@ void		set_all_matrix(t_object *object, t_trans_data data)
 	z_rotation(&object->trans_norm, data.rot.z);
 }
 
-void		delete_object(t_object *obj)
+void			delete_object(t_object *obj)
 {
 	if (obj)
 	{

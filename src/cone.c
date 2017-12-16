@@ -6,14 +6,15 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/14 12:56:58 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 11:42:05 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			cone_intersection(t_ray *ray, t_parequation	e, t_object *obj, int i)
+static double			cone_intersection(t_ray *ray, t_parequation e,
+	t_object *obj, int i)
 {
 	t_cone			*c;
 	double			t[4];
@@ -21,7 +22,8 @@ static double			cone_intersection(t_ray *ray, t_parequation	e, t_object *obj, in
 	c = (t_cone*)obj;
 	t[0] = -1;
 	t[1] = pow(e.vd.x, 2) + pow(e.vd.z, 2) - pow(e.vd.y, 2) * c->tanalpha2;
-	t[2] = 2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z - e.vd.y * e.vc.y * c->tanalpha2);
+	t[2] = 2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z - e.vd.y *
+		e.vc.y * c->tanalpha2);
 	t[3] = pow(e.vc.x, 2) + pow(e.vc.z, 2) - pow(e.vc.y, 2) * c->tanalpha2;
 	if ((ray->nb_intersect = get_quad_equation_sol(t, i)))
 		ray->inter = equation_get_dot(&e, t[0]);

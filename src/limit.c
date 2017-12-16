@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/16 10:39:32 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 12:45:23 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,38 @@ void	normalized_diff(t_plane *p, t_dot *trans)
 	trans->x += p->norm_diff.x;
 	trans->y += p->norm_diff.y;
 	trans->z += p->norm_diff.z;
+}
+
+int		empty_limit(t_ray *ray, t_ray *tmp_ray, t_object *father, t_list_objs *first)
+{
+	t_plane *p;
+
+	p = (t_plane *)tmp_ray->obj;
+	if (limit_loop(&tmp_ray->inter, first, father))
+	{
+		transform_inter(tmp_ray, (t_object *)p);
+		*ray = *tmp_ray;
+		return (1);
+	}
+	return (0);
+}
+
+int		full_limit(t_ray *ray, t_ray *tmp_ray, t_object *father, t_list_objs *first)
+{
+	t_plane *p;
+
+	p = (t_plane *)tmp_ray->obj;
+	tmp_ray->inter.x += p->norm_diff.x;
+	tmp_ray->inter.y += p->norm_diff.y;
+	tmp_ray->inter.z += p->norm_diff.z;
+	if (limit_loop(&tmp_ray->inter, first, (t_object *)p))
+	{
+		if (father->is_in_obj(&tmp_ray->inter, father))
+		{
+			transform_inter(tmp_ray, (t_object *)p);
+			*ray = *tmp_ray;
+			return (1);
+		}
+	}
+	return (0);
 }

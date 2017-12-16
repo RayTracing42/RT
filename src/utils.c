@@ -1,15 +1,18 @@
-/*============================================================================*/
+/* ************************************************************************** */
 /*                                                                            */
-/*        fichier :   utils.c                                                 */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/16 11:25:07 by fcecilie          #+#    #+#             */
+/*   Updated: 2017/12/16 11:26:57 by fcecilie         ###   ########.fr       */
 /*                                                                            */
-/*        auteur  :   fcecilie                                                */
-/*        adresse :   fcecilie@student.42.fr                                  */
-/*                                                                            */
-/*============================================================================*/
+/* ************************************************************************** */
 
 #include "rt.h"
 
-double	angle_between_vectors(t_vector a, t_vector b)
+double		angle_between_vectors(t_vector a, t_vector b)
 {
 	double	angle;
 	double	pdt_scalaire;
@@ -23,32 +26,6 @@ double	angle_between_vectors(t_vector a, t_vector b)
 	pdt_scalaire = (a.x * b.x + a.y * b.y + a.z * b.z);
 	angle = acos(pdt_scalaire / (dist_a * dist_b)) * 180 / M_PI;
 	return (angle);
-}
-
-double	delta(double a, double b, double c, int *n)
-{
-	double	d;
-	double	r1;
-	double	r2;
-
-	d = (b * b) - (4 * a * c);
-	if (d < 0)
-	{
-		*n = 0;
-		return (0);
-	}
-	r1 = (((-b) + sqrt(d)) / (2 * a)) - 0.0001;
-	if (d == 0)
-	{
-		*n = 1;
-		return (r1);
-	}
-	*n = 2;
-	r2 = (((-b) - sqrt(d)) / (2 * a)) - 0.0001;
-	if (r1 < r2)
-		return (r1);
-	else
-		return (r2);
 }
 
 /*

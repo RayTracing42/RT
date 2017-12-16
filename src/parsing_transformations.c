@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 20:28:14 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/26 15:29:38 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 11:34:56 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_trans_data	parsing_transformations(char *object)
 		exit_custom_error("rt", ":parsing_transformations() failed");
 	if (trans.scale.x < 1 || trans.scale.y < 1 || trans.scale.z < 1)
 		exit_custom_error("rt", ":scale must be between <1 - x>");
-//	set_all_matrix(obj, trans);
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);

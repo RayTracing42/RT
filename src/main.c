@@ -6,13 +6,13 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/25 22:51:11 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 11:54:51 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int	force_exit(void)
+int			force_exit(void)
 {
 	exit(1);
 	return (0);
@@ -27,14 +27,13 @@ static void	init_list_evts(t_event **head, t_evt_data *data)
 int			main(int ac, char **av)
 {
 	t_event		*events;
-	t_scene 	*scn;
+	t_scene		*scn;
 
 	events = NULL;
 	if (!(scn = parsing(ac, av)))
 		ft_putendl("usage : ./rt file.xml");
 	else
 	{
-
 		get_sdl_core();
 		init_list_evts(&events, NULL);
 		view_plane(scn->cam, scn->cam->vp);

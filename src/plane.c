@@ -6,14 +6,15 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/16 09:44:14 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 11:34:09 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			plane_intersect(t_ray *ray, t_parequation e, t_object *obj, int i)
+static double			plane_intersect(t_ray *ray, t_parequation e,
+	t_object *obj, int i)
 {
 	double			t;
 	double			denom;
