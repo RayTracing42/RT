@@ -6,41 +6,11 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/16 12:45:23 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/17 10:24:51 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-int		is_in_limit(t_dot *i, t_plane *p)
-{
-	double	distance_1;
-	double	distance_2;
-
-	distance_1 = get_dot_dist(i,
-		&(t_dot){(p->orig_diff.x + p->normal.x),
-		(p->orig_diff.y + p->normal.y),
-		(p->orig_diff.z + p->normal.z)});
-	distance_2 = get_dot_dist(i,
-		&(t_dot){(p->orig_diff.x - p->normal.x),
-		(p->orig_diff.y - p->normal.y),
-		(p->orig_diff.z - p->normal.z)});
-	return ((distance_1 >= distance_2));
-}
-
-int		limit_loop(t_dot *i, t_list_objs *l, t_object *father)
-{
-	while (l)
-	{
-		if (father != l->obj)
-		{
-			if (!(is_in_limit(i, (t_plane *)l->obj)))
-				return (0);
-		}
-		l = l->next;
-	}
-	return (1);
-}
 
 void	normalized_diff(t_plane *p, t_dot *trans)
 {
@@ -66,21 +36,24 @@ void	normalized_diff(t_plane *p, t_dot *trans)
 	trans->z += p->norm_diff.z;
 }
 
-int		empty_limit(t_ray *ray, t_ray *tmp_ray, t_object *father, t_list_objs *first)
+int		empty_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 {
 	t_plane *p;
 
 	p = (t_plane *)tmp_ray->obj;
-	if (limit_loop(&tmp_ray->inter, first, father))
+	if (local_limit_loop(tmp_ray, father))
 	{
 		transform_inter(tmp_ray, (t_object *)p);
-		*ray = *tmp_ray;
-		return (1);
+		if (global_limit_loop(tmp_ray, father))
+		{
+			*ray = *tmp_ray;
+			return (1);
+		}
 	}
 	return (0);
 }
 
-int		full_limit(t_ray *ray, t_ray *tmp_ray, t_object *father, t_list_objs *first)
+int		full_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 {
 	t_plane *p;
 
@@ -88,13 +61,16 @@ int		full_limit(t_ray *ray, t_ray *tmp_ray, t_object *father, t_list_objs *first
 	tmp_ray->inter.x += p->norm_diff.x;
 	tmp_ray->inter.y += p->norm_diff.y;
 	tmp_ray->inter.z += p->norm_diff.z;
-	if (limit_loop(&tmp_ray->inter, first, (t_object *)p))
+	if (local_limit_loop(tmp_ray, father))
 	{
 		if (father->is_in_obj(&tmp_ray->inter, father))
 		{
 			transform_inter(tmp_ray, (t_object *)p);
-			*ray = *tmp_ray;
-			return (1);
+			if (global_limit_loop(tmp_ray, father))
+			{
+				*ray = *tmp_ray;
+				return (1);
+			}
 		}
 	}
 	return (0);

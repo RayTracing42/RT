@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/16 10:18:05 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/17 09:59:37 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	global_loop(t_object *obj, char *limit)
 
 	while ((data[0] = get_interval(limit, "<global>", "</global>")))
 	{
-		if (!(data[1] = get_interval(limit, "<origin>", "</origin>"))
-			|| !(data[2] = get_interval(limit, "<normal>", "</normal>"))
-			|| !(data[3] = get_interval(limit, "<status>", "</status>"))
+		if (!(data[1] = get_interval(data[0], "<origin>", "</origin>"))
+			|| !(data[2] = get_interval(data[0], "<normal>", "</normal>"))
+			|| !(data[3] = get_interval(data[0], "<status>", "</status>"))
 			|| (parsing_dot(data[1], &origin) == -1)
 			|| (parsing_vector(data[2], &normal) == -1)
 			|| ((status = get_status(data[3])) == -1))
@@ -82,9 +82,9 @@ void	local_loop(t_object *obj, char *limit, t_trans_data trans)
 
 	while ((data[0] = get_interval(limit, "<local>", "</local>")))
 	{
-		if (!(data[1] = get_interval(limit, "<origin>", "</origin>"))
-			|| !(data[2] = get_interval(limit, "<normal>", "</normal>"))
-			|| !(data[3] = get_interval(limit, "<status>", "</status>"))
+		if (!(data[1] = get_interval(data[0], "<origin>", "</origin>"))
+			|| !(data[2] = get_interval(data[0], "<normal>", "</normal>"))
+			|| !(data[3] = get_interval(data[0], "<status>", "</status>"))
 			|| (parsing_dot(data[1], &origin) == -1)
 			|| (parsing_vector(data[2], &normal) == -1)
 			|| ((status = get_status(data[3])) == -1))

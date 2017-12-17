@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/16 13:10:03 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/17 10:24:58 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void	check_limit(t_ray *ray, t_list_objs *l, t_object *obj, double *dist)
 	double		tmp;
 	t_ray		tmp_ray;
 	t_plane		*p;
-	t_list_objs	*first;
 
-	first = l;
 	while (l != NULL)
 	{
 		p = (t_plane *)l->obj;
@@ -28,10 +26,10 @@ void	check_limit(t_ray *ray, t_list_objs *l, t_object *obj, double *dist)
 		if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && gt(*dist, 0))))
 		{
 			if (p->status == 0)
-				if (empty_limit(ray, &tmp_ray, obj, first))
+				if (empty_limit(ray, &tmp_ray, obj))
 					*dist = tmp;
 			if (p->status == 1)
-				if (full_limit(ray, &tmp_ray, obj, first))
+				if (full_limit(ray, &tmp_ray, obj))
 					*dist = tmp;
 		}
 		l = l->next;
@@ -50,12 +48,14 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 		tmp_ray = first_intersect(ray, l_objs->obj, &tmp);
 		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
-			if (limit_loop(&tmp_ray.inter, l_objs->obj->local_limit,
-				l_objs->obj))
+			if (local_limit_loop(&tmp_ray, l_objs->obj))
 			{
 				transform_inter(&tmp_ray, l_objs->obj);
-				dist = tmp;
-				*ray = tmp_ray;
+				if (global_limit_loop(&tmp_ray, l_objs->obj))
+				{
+					dist = tmp;
+					*ray = tmp_ray;
+				}
 			}
 			else
 				check_limit(ray, l_objs->obj->local_limit, l_objs->obj, &dist);
@@ -85,8 +85,8 @@ t_ray	second_intersect(t_ray *ray, t_object *obj, double *tmp)
 	tmp_ray = *ray;
 	*tmp = obj->intersect(&tmp_ray, transform_equ(&tmp_ray, obj), obj, 2);
 	tmp_ray.normal = *obj->get_normal(&tmp_ray.inter, obj);
-	tmp_ray.normal = (t_vector){-tmp_ray.normal.x, -tmp_ray.normal.y,
-		-tmp_ray.normal.z};
+//	tmp_ray.normal = (t_vector){-tmp_ray.normal.x, -tmp_ray.normal.y,
+//		-tmp_ray.normal.z};
 	tmp_ray.color = obj->color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
 	tmp_ray.obj = obj;
