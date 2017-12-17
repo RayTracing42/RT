@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/21 16:48:44 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/16 16:00:49 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static double			plane_intersect(int *nbi, t_dot *dst, t_parequation e, t_object 
 	t = -((p->a * e.vc.x + p->b * e.vc.y + p->c * e.vc.z + p->d) / denom);
 	if (gt(t, 0))
 	{
-		*nbi = 1;
+		*nbi = 2;
 		*dst = equation_get_dot(&e, t);
 	}
 	return (t);

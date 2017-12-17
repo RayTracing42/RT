@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/21 16:56:48 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/16 14:29:05 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # include "light_shading.h"
 # include "matrix.h"
 # include "objects.h"
+# include "reflect_refract_tree.h"
 # include "scene.h"
 # include "structures.h"
 # include "vectors.h"
@@ -47,7 +48,7 @@ t_vector	matrice_rotation_y(t_vector *m, double angle);
 t_vector	matrice_rotation_z(t_vector *m, double angle);
 
 t_vector	vector(double x, double y, double z);
-t_vector	vector_opposite(double x, double y, double z);
+t_vector	vector_opposite(t_vector vec);
 t_dot		dot(double x, double y, double z);
 double		delta(double a, double b, double c, int *n);
 double		angle_between_vectors(t_vector a, t_vector b);

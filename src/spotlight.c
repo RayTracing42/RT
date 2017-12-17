@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:04:25 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 20:13:23 by edescoin         ###   ########.fr       */
+/*   Updated: 2017/12/16 14:29:41 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	is_in_spotlight(t_light *light, t_ray *light_ray)
 	t_spotlight	*s;
 
 	s = (t_spotlight*)light;
-	opposite = vector_opposite(s->direction.x, s->direction.y, s->direction.z);
+	opposite = vector_opposite(s->direction);
 	if (angle_between_vectors(light_ray->equ.vd, opposite) > s->aperture)
 		return (0);
 	return (1);
