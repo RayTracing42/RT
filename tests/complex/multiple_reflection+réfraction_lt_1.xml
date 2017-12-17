@@ -21,7 +21,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 		<type>sphere</type>
 		<origin>
 			<x>300</x>
-			<y>40</y>
+			<y>50</y>
 			<z>-20</z>
 		</origin>
 		<direction>
@@ -35,9 +35,35 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<b>0</b>
 		</color>
 		<physic>
-			<refraction_amount>1</refraction_amount>
-			<reflexion_amount>0</reflexion_amount>
+			<refraction_amount>0.9</refraction_amount>
+			<reflexion_amount>0.1</reflexion_amount>
 			<refraction_index>0.5</refraction_index>
+			<shininess>30</shininess>
+		</physic>
+		<radius>40</radius>
+	</object>
+
+	<object>
+		<type>sphere</type>
+		<origin>
+			<x>300</x>
+			<y>40</y>
+			<z>20</z>
+		</origin>
+		<direction>
+			<x>0</x>
+			<y>0</y>
+			<z>0</z>
+		</direction>
+		<color>
+			<r>255</r>
+			<g>0</g>
+			<b>255</b>
+		</color>
+		<physic>
+			<refraction_amount>0.9</refraction_amount>
+			<reflexion_amount>0.1</reflexion_amount>
+			<refraction_index>0.9</refraction_index>
 			<shininess>30</shininess>
 		</physic>
 		<radius>40</radius>
