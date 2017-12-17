@@ -3,13 +3,13 @@
 	
 	<camera>
 		<origin>
-			<x>0</x>
-			<y>10</y>
-			<z>140</z>
+			<x>-100</x>
+			<y>50</y>
+			<z>40</z>
 		</origin>
 		<angle>
 			<x>0</x>
-			<y>30</y>
+			<y>10</y>
 			<z>0</z>
 		</angle>
 	</camera>	
@@ -69,9 +69,14 @@
 				<normal><x>0</x><y>0</y><z>1</z></normal>
 				<status>full</status>
 			</local>
+			<local>
+				<origin><x>200</x><y>0</y><z>20</z></origin>
+				<normal><x>0</x><y>-1</y><z>1</z></normal>
+				<status>full</status>
+			</local>
 			<global>
-				<origin><x>270</x><y>0</y><z>20</z></origin>
-				<normal><x>0</x><y>0</y><z>1</z></normal>
+				<origin><x>170</x><y>0</y><z>0</z></origin>
+				<normal><x>-1</x><y>0</y><z>0</z></normal>
 				<status>full</status>
 			</global>
 		</limit>

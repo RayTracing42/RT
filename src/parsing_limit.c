@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/17 09:59:37 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/17 13:48:47 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 		o->obj_light.reflection_amount, o->obj_light.refraction_amount,
 		o->obj_light.refractive_index, o->obj_light.shininess}, normal);
 	p->status = status;
+	p->lim_type = GLOBAL;
 	set_all_matrix((t_object *)p, (t_trans_data){(t_dot){0, 0, 0},
 		(t_dot){0, 0, 0}, (t_dot){1, 1, 1}});
-	if (!(o->global_limit))
-		o->global_limit = new_cell_obj(NULL, (t_object *)p);
+	if (!(o->limit))
+		o->limit = new_cell_obj(NULL, (t_object *)p);
 	else
-		new_cell_obj(&o->global_limit, (t_object *)p);
+		new_cell_obj(&o->limit, (t_object *)p);
 }
 
 void	parsing_local_limit(t_object *o, t_trans_data trans, t_dot origin,
@@ -40,12 +41,13 @@ void	parsing_local_limit(t_object *o, t_trans_data trans, t_dot origin,
 	p->orig_diff = (t_vector){origin.x - o->origin.x, origin.y - o->origin.y,
 		origin.z - o->origin.z};
 	p->status = status;
+	p->lim_type = LOCAL;
 	normalized_diff(p, &trans.trans);
 	set_all_matrix((t_object *)p, trans);
-	if (!(o->local_limit))
-		o->local_limit = new_cell_obj(NULL, (t_object *)p);
+	if (!(o->limit))
+		o->limit = new_cell_obj(NULL, (t_object *)p);
 	else
-		new_cell_obj(&o->local_limit, (t_object *)p);
+		new_cell_obj(&o->limit, (t_object *)p);
 }
 
 void	global_loop(t_object *obj, char *limit)

@@ -6,11 +6,39 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/17 10:24:51 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/17 13:48:44 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+int		limit_loop(t_ray *tmp_ray, t_object *father)
+{
+	t_list_objs	*l;
+	t_plane		*p;
+	t_ray		trans_ray;
+
+	l = father->limit;
+	while (l)
+	{
+		p = (t_plane *)l->obj;
+		if (l->obj != tmp_ray->obj)
+		{
+			if (p->lim_type == LOCAL)
+				if (!(is_in_local_limit(&tmp_ray->inter, p)))
+					return (0);
+			if (p->lim_type == GLOBAL)
+			{
+				trans_ray = *tmp_ray;
+				transform_inter(&trans_ray, father);
+				if (!(is_in_global_limit(&trans_ray.inter, p)))
+					return (0);
+			}
+		}
+		l = l->next;
+	}
+	return (1);
+}
 
 void	normalized_diff(t_plane *p, t_dot *trans)
 {
@@ -41,14 +69,11 @@ int		empty_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 	t_plane *p;
 
 	p = (t_plane *)tmp_ray->obj;
-	if (local_limit_loop(tmp_ray, father))
+	if (limit_loop(tmp_ray, father))
 	{
-		transform_inter(tmp_ray, (t_object *)p);
-		if (global_limit_loop(tmp_ray, father))
-		{
-			*ray = *tmp_ray;
-			return (1);
-		}
+		transform_inter(tmp_ray, tmp_ray->obj);
+		*ray = *tmp_ray;
+		return (1);
 	}
 	return (0);
 }
@@ -58,19 +83,19 @@ int		full_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 	t_plane *p;
 
 	p = (t_plane *)tmp_ray->obj;
-	tmp_ray->inter.x += p->norm_diff.x;
-	tmp_ray->inter.y += p->norm_diff.y;
-	tmp_ray->inter.z += p->norm_diff.z;
-	if (local_limit_loop(tmp_ray, father))
+	if (p->lim_type == LOCAL)
 	{
-		if (father->is_in_obj(&tmp_ray->inter, father))
+		tmp_ray->inter.x += p->norm_diff.x;
+		tmp_ray->inter.y += p->norm_diff.y;
+		tmp_ray->inter.z += p->norm_diff.z;
+	}
+	if (father->is_in_obj(&tmp_ray->inter, father))
+	{
+		if (limit_loop(tmp_ray, father))
 		{
-			transform_inter(tmp_ray, (t_object *)p);
-			if (global_limit_loop(tmp_ray, father))
-			{
-				*ray = *tmp_ray;
-				return (1);
-			}
+			transform_inter(tmp_ray, tmp_ray->obj);
+			*ray = *tmp_ray;
+			return (1);
 		}
 	}
 	return (0);

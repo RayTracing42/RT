@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/16 11:54:18 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/17 12:18:38 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ t_object		*new_object(t_type type, t_objs_comp args)
 								args.shininess};
 	obj->get_normal = NULL;
 	obj->intersect = NULL;
-	obj->local_limit = NULL;
-	obj->global_limit = NULL;
+	obj->limit = NULL;
 	obj->trans_const = create_identity(4);
 	obj->trans_iconst = create_identity(4);
 	obj->trans_idir = create_identity(4);

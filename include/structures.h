@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/16 09:36:27 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/17 12:56:55 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,13 @@ typedef enum				e_type
 	SPHERE
 }							t_type;
 
+typedef enum				e_lim_type
+{
+	NONE,
+	LOCAL,
+	GLOBAL
+}							t_lim_type;
+
 typedef struct				s_obj_phys
 {
 	double					reflection_amount;
@@ -145,9 +152,7 @@ typedef struct				s_object
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-	struct s_list_objs		*global_limit;
-	struct s_list_objs		*local_limit;
-	int						status;
+	struct s_list_objs		*limit;
 }							t_object;
 
 typedef struct				s_objs_comp
@@ -174,11 +179,9 @@ typedef struct				s_sphere
 	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-	struct s_list_objs		*global_limit;
-	struct s_list_objs		*local_limit;
+	struct s_list_objs		*limit;
 	double					radius;
 	double					r2;
-	int						status;
 }							t_sphere;
 
 typedef struct				s_cylinder
@@ -195,11 +198,9 @@ typedef struct				s_cylinder
 	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-	struct s_list_objs		*global_limit;
-	struct s_list_objs		*local_limit;
+	struct s_list_objs		*limit;
 	double					radius;
 	double					r2;
-	int						status;
 }							t_cylinder;
 
 typedef struct				s_cone
@@ -216,11 +217,9 @@ typedef struct				s_cone
 	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-	struct s_list_objs		*global_limit;
-	struct s_list_objs		*local_limit;
+	struct s_list_objs		*limit;
 	double					angle;
 	double					tanalpha2;
-	int						status;
 }							t_cone;
 
 typedef struct				s_plane
@@ -237,16 +236,19 @@ typedef struct				s_plane
 	t_matrix				*trans_inorm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-	struct s_list_objs		*global_limit;
-	struct s_list_objs		*local_limit;
+	
+	struct s_list_obs		*limit;
+
+	t_lim_type				lim_type;
+	int						status;
 	t_vector				orig_diff;
 	t_vector				norm_diff;
+	
 	double					a;
 	double					b;
 	double					c;
 	double					d;
 	double					z;
-	int						status;
 }							t_plane;
 
 /* La box (le pavé quoi) pour plus tard

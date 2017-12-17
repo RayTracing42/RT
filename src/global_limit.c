@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 10:10:57 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/17 10:24:27 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/17 13:32:05 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,4 @@ int		is_in_global_limit(t_dot *i, t_plane *p)
 		(p->origin.y - p->normal.y),
 		(p->origin.z - p->normal.z)});
 	return ((distance_1 >= distance_2));
-}
-
-int		global_limit_loop(t_ray *tmp_ray, t_object *father)
-{
-	t_list_objs		*g;
-
-	g = father->global_limit;
-	while (g)
-	{
-		if (g->obj != tmp_ray->obj)
-		{
-			if (!(is_in_global_limit(&tmp_ray->inter, (t_plane *)g->obj)))
-				return (0);
-		}
-		g = g->next;
-	}
-	return (1);
 }
