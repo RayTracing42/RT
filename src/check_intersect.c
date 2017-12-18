@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/17 13:48:46 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/18 12:16:12 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,16 @@ void	check_limit(t_ray *ray, t_list_objs *l, t_object *obj, double *dist)
 				if (empty_limit(ray, &tmp_ray, obj))
 					*dist = tmp;
 			if (p->status == 1)
-				if (full_limit(ray, &tmp_ray, obj))
-					*dist = tmp;
+			{
+				if (p->lim_type == LOCAL)
+				{
+					if (full_limit(ray, &tmp_ray, obj))
+						*dist = tmp;
+				}
+				else
+					if (full_global_limit(ray, &tmp_ray, obj))
+						*dist = tmp;
+			}
 		}
 		l = l->next;
 	}

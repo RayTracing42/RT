@@ -40,16 +40,10 @@
 			<g>0</g>
 			<b>0</b>
 		</color>
-		<physic>
-			<reflexion_amount>0</reflexion_amount>
-			<refraction_amount>0</refraction_amount>
-			<refraction_index>1.5</refraction_index>
-			<shininess>30</shininess>
-		</physic>
 		<transformations>
 			<rotation>
 				<x>-45</x>
-				<y>-20</y>
+				<y>0</y>
 				<z>0</z>
 			</rotation>
 			<scale>
@@ -60,7 +54,7 @@
 			<translation>
 				<x>0</x>
 				<y>0</y>
-				<z>0</z>
+				<z>-20</z>
 			</translation>
 		</transformations>
 		<limit>
@@ -70,11 +64,17 @@
 				<status>full</status>
 			</local>
 			<global>
-				<origin><x>270</x><y>0</y><z>20</z></origin>
+				<origin><x>270</x><y>20</y><z>20</z></origin>
 				<normal><x>0</x><y>0</y><z>9</z></normal>
 				<status>full</status>
 			</global>
 		</limit>
+		<physic>
+			<reflexion_amount>0</reflexion_amount>
+			<refraction_amount>0</refraction_amount>
+			<refraction_index>1.5</refraction_index>
+			<shininess>30</shininess>
+		</physic>
 		<radius>40</radius>
 	</object>
 

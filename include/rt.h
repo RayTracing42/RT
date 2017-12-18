@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/17 13:34:23 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/18 08:04:52 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int				is_in_local_limit(t_dot *i, t_plane *p);
 
 void			normalized_diff(t_plane *p, t_dot *trans);
 int				full_limit(t_ray *ray, t_ray *tmp_ray, t_object *father);
+int				full_global_limit(t_ray *ray, t_ray *tmp_ray, t_object *father);
 int				empty_limit(t_ray *ray, t_ray *tmp_ray, t_object *father);
 
 SDL_Color	effects(t_ray *ray, t_scene *scn);

@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/17 13:48:47 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/18 07:36:27 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 			int status)
 {
-	t_plane		*p;
+	t_plane			*p;
+	t_trans_data	trans;
 
 	p = new_plane((t_objs_comp){origin, o->color,
 		o->obj_light.reflection_amount, o->obj_light.refraction_amount,
 		o->obj_light.refractive_index, o->obj_light.shininess}, normal);
 	p->status = status;
 	p->lim_type = GLOBAL;
-	set_all_matrix((t_object *)p, (t_trans_data){(t_dot){0, 0, 0},
-		(t_dot){0, 0, 0}, (t_dot){1, 1, 1}});
+	p->orig_diff = (t_vector){0, 0, 0};
+	trans = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
+	normalized_diff(p, &trans.trans);
+	set_all_matrix((t_object *)p, trans);
 	if (!(o->limit))
 		o->limit = new_cell_obj(NULL, (t_object *)p);
 	else

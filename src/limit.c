@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/17 13:48:44 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/18 12:16:15 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,37 @@ int		empty_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 		transform_inter(tmp_ray, tmp_ray->obj);
 		*ray = *tmp_ray;
 		return (1);
+	}
+	return (0);
+}
+
+int		full_global_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
+{
+	t_plane *p;
+
+	ray = (t_ray *)ray;
+	tmp_ray = (t_ray *)tmp_ray;
+	father = (t_object *)father;
+
+	p = (t_plane *)tmp_ray->obj;
+	if (limit_loop(tmp_ray, father))
+	{
+		transform_inter(tmp_ray, tmp_ray->obj);
+//printf("%.2f, %.2f, %.2f\n", tmp_ray->inter.x, tmp_ray->inter.y, tmp_ray->inter.z);
+		if (local_limit_loop(tmp_ray, father))
+		{
+		tmp_ray->inter.x -= father->origin.x;
+		tmp_ray->inter.y -= father->origin.y;
+		tmp_ray->inter.z -= father->origin.z;
+			if (father->is_in_obj(&tmp_ray->inter, father))
+			{
+				tmp_ray->inter.x += father->origin.x;
+				tmp_ray->inter.y += father->origin.y;
+				tmp_ray->inter.z += father->origin.z;
+				*ray = *tmp_ray;
+				return (1);
+			}
+		}
 	}
 	return (0);
 }
