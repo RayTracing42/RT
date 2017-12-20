@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/18 07:36:27 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/20 07:55:14 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 		o->obj_light.refractive_index, o->obj_light.shininess}, normal);
 	p->status = status;
 	p->lim_type = GLOBAL;
-	p->orig_diff = (t_vector){0, 0, 0};
+	p->orig_diff = (t_vector){origin.x - o->origin.x, origin.y - o->origin.y,
+		origin.z - o->origin.z};
+	//p->orig_diff = (t_vector){0, 0, 0};
 	trans = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
 	normalized_diff(p, &trans.trans);
 	set_all_matrix((t_object *)p, trans);
