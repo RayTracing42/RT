@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 09:59:45 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/20 10:12:38 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/20 12:16:57 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int		transformed_local_limit_loop(t_ray *tmp_ray, t_object *father)
 	t_list_objs	*l;
 	t_plane		*p;
 	t_plane		r;
+	t_ray		trans_ray;
+	t_vector	center;
 
 	l = father->limit;
 	while (l)
@@ -65,9 +67,15 @@ int		transformed_local_limit_loop(t_ray *tmp_ray, t_object *father)
 			if (tmp_ray->obj != l->obj)
 			{
 				r = *p;
+				trans_ray = *tmp_ray;
 				mult_vect(&r.normal, p->trans_inorm, &r.normal);
+				center = (t_vector){0, 0, 0};
+				mult_vect(&center, p->trans_const, &center);
+				r.norm_diff.x += center.x;
+				r.norm_diff.y += center.y;
+				r.norm_diff.z += center.z;
 				mult_vect(&r.norm_diff, p->trans_const, &r.norm_diff);
-				if (!(is_in_local_limit(&tmp_ray->inter, &r)))
+				if (!(is_in_local_limit(&trans_ray.inter, &r)))
 					return (0);
 			}
 		}

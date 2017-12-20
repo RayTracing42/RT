@@ -82,8 +82,6 @@ int		full_global_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 		center.x += father->origin.x;
 		center.y += father->origin.y;
 		center.z += father->origin.z;
-//			printf("cent : (%.2f, %.2f, %.2f)\n", center.x, center.y, center.z);
-	
 			
 //	printf("(%.2f, %.2f, %.2f)\n", tmp_ray->inter.x, tmp_ray->inter.y, tmp_ray->inter.z);
 //		if (global_limit_loop(tmp_ray, father))
