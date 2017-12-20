@@ -77,20 +77,19 @@ int		full_global_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 	father = (t_object *)father;
 
 	p = (t_plane *)tmp_ray->obj;
-//	printf("(%.2f, %.2f, %.2f)\n", tmp_ray->inter.x, tmp_ray->inter.y, tmp_ray->inter.z);
-//	if (local_limit_loop(tmp_ray, father))
-//	{
-//		if (global_limit_loop(tmp_ray, father))
-//		{
-//	printf("(%.2f, %.2f, %.2f)\n", tmp_ray->inter.x, tmp_ray->inter.y, tmp_ray->inter.z);
-			center = (t_vector){0, 0, 0};
-			mult_vect(&center, father->trans_const, &center);
-			center.x += father->origin.x;
-			center.y += father->origin.y;
-			center.z += father->origin.z;
+		center = (t_vector){0, 0, 0};
+		mult_vect(&center, father->trans_const, &center);
+		center.x += father->origin.x;
+		center.y += father->origin.y;
+		center.z += father->origin.z;
 //			printf("cent : (%.2f, %.2f, %.2f)\n", center.x, center.y, center.z);
 	
 			
+//	printf("(%.2f, %.2f, %.2f)\n", tmp_ray->inter.x, tmp_ray->inter.y, tmp_ray->inter.z);
+//		if (global_limit_loop(tmp_ray, father))
+//		{
+	if (transformed_local_limit_loop(tmp_ray, father))
+	{
 			transform_inter(tmp_ray, tmp_ray->obj);
 			tmp_ray->inter.x -= center.x;
 			tmp_ray->inter.y -= center.y;
@@ -105,7 +104,7 @@ int		full_global_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 				return (1);
 			}
 //		}
-//	}
+	}
 	return (0);
 }
 

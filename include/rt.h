@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/18 08:04:52 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/20 10:07:11 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void			transform_inter(t_ray *ray, t_object *obj);
 
 void			check_limit(t_ray *ray, t_list_objs *l, t_object *obj, double *dist);
 int				local_limit_loop(t_ray *tmp_ray, t_object *father);
+int				transformed_local_limit_loop(t_ray *tmp_ray, t_object *father);
 int				global_limit_loop(t_ray *tmp_ray, t_object *father);
 int				limit_loop(t_ray *tmp_ray, t_object *father);
 int				is_in_global_limit(t_dot *i, t_plane *p);
