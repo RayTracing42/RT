@@ -95,15 +95,11 @@ int		full_global_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 			tmp_ray->inter.x -= center.x;
 			tmp_ray->inter.y -= center.y;
 			tmp_ray->inter.z -= center.z;
-//		tmp_ray->inter.x -= p->norm_diff.x;
-//		tmp_ray->inter.y -= p->norm_diff.y;
-//		tmp_ray->inter.z -= p->norm_diff.z;
 			if (father->is_in_obj(&tmp_ray->inter, father))
 			{
 			tmp_ray->inter.x += center.x;
 			tmp_ray->inter.y += center.y;
 			tmp_ray->inter.z += center.z;
-		//	transform_inter(tmp_ray, tmp_ray->obj);
 
 				*ray = *tmp_ray;
 				return (1);

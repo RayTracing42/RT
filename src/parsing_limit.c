@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/20 07:55:14 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/20 08:50:35 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,16 @@ void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 		origin.z - o->origin.z};
 	//p->orig_diff = (t_vector){0, 0, 0};
 	trans = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
-	normalized_diff(p, &trans.trans);
+//	normalized_diff(p, &trans.trans);
 	set_all_matrix((t_object *)p, trans);
 	if (!(o->limit))
 		o->limit = new_cell_obj(NULL, (t_object *)p);
 	else
 		new_cell_obj(&o->limit, (t_object *)p);
+	printf("glob - norm : (%.2f, %.2f, %.2f)\n", p->norm_diff.x, p->norm_diff.y,
+		p->norm_diff.z);
+	printf("glob - orig : (%.2f, %.2f, %.2f)\n", p->orig_diff.x, p->orig_diff.y,
+		p->orig_diff.z);
 }
 
 void	parsing_local_limit(t_object *o, t_trans_data trans, t_dot origin,
