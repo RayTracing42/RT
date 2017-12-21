@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/17 12:56:55 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/21 12:27:14 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct		s_ray
 	SDL_Color				color;
 	struct s_object			*obj;
 	struct s_light			*light;
-	struct s_list_objs		*l_objs;
+	struct s_objs_tree		*tree;
 	double					actual_refractive_i;
 	double					percuted_refractive_i;
 	double					limit;
@@ -176,7 +176,7 @@ typedef struct				s_sphere
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
-	t_matrix				*trans_inorm;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
@@ -195,7 +195,7 @@ typedef struct				s_cylinder
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
-	t_matrix				*trans_inorm;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
@@ -214,7 +214,7 @@ typedef struct				s_cone
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
-	t_matrix				*trans_inorm;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
@@ -233,7 +233,7 @@ typedef struct				s_plane
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
-	t_matrix				*trans_inorm;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	
@@ -364,6 +364,15 @@ typedef struct				s_list_objs
 	t_object				*obj;
 	struct s_list_objs		*next;
 }							t_list_objs;
+
+typedef struct				s_objs_tree
+{
+	t_object				*obj;
+	int						lvl;
+	struct s_objs_tree		*root;
+	struct s_objs_tree		*reflected;
+	struct s_objs_tree		*refracted;
+}							t_objs_tree;
 
 typedef struct				s_list_lights
 {

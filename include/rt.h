@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/21 11:46:48 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/21 12:26:39 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 # include "light_shading.h"
 # include "matrix.h"
 # include "objects.h"
+# include "reflect_refract_tree.h"
 # include "scene.h"
 # include "structures.h"
 # include "vectors.h"
@@ -45,6 +46,7 @@
 t_vector	matrice_rotation_x(t_vector *m, double angle);
 t_vector	matrice_rotation_y(t_vector *m, double angle);
 t_vector	matrice_rotation_z(t_vector *m, double angle);
+
 void		view_plane(t_camera *cam, t_view_plane *vp);
 void		view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 

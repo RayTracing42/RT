@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/21 11:50:01 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/21 12:29:27 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			scanning(t_scene *scn)
 	ray.equ.vc = *(t_vector*)&scn->cam->origin;
 	ray.actual_refractive_i = 1;
 	ray.limit = 1;
-	ray.l_objs = NULL;
+	ray.tree = add_new_leaf(NULL, NULL, NULL, 0);
 	y = -1;
 	while (++y < WIN_HEIGHT)
 	{
@@ -69,4 +69,5 @@ void			scanning(t_scene *scn)
 			put_pixel(x, y, &ray.color);
 		}
 	}
+	remove_leaf(ray.tree);
 }

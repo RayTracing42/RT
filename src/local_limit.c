@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 09:59:45 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/21 11:48:55 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/21 12:31:15 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		transformed_local_limit_loop(t_ray *tmp_ray, t_object *father)
 				r = *p;
 				trans_ray = *tmp_ray;
 				center = (t_vector){father->origin.x, father->origin.y, father->origin.z};
-				mult_vect(&r.normal, p->trans_inorm, &r.normal);
+				mult_vect(&r.normal, p->trans_norm, &r.normal);
 				mult_vect(&r.norm_diff, father->trans_const, &r.norm_diff);
 				r.norm_diff.x += center.x;
 				r.norm_diff.y += center.y;
