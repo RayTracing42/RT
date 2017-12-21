@@ -14,20 +14,6 @@
 		</angle>
 	</camera>	
 
-	<ambient_light>
-		<direction>
-			<x>1</x>
-			<y>-1</y>
-			<z>-1</z>
-		</direction>
-		<color>
-			<r>255</r>
-			<g>255</g>
-			<b>255</b>
-		</color>
-		<power>0.5</power>
-	</ambient_light>
-
 	<object>
 		<type>sphere</type>
 		<origin>
@@ -60,7 +46,7 @@
 			<translation>
 				<x>0</x>
 				<y>0</y>
-				<z>0</z>
+				<z>-10</z>
 			</translation>
 		</transformations>
 		<limit>
@@ -70,9 +56,9 @@
 				<status>full</status>
 			</local>
 			<local>
-				<origin><x>200</x><y>0</y><z>-88</z></origin>
+				<origin><x>200</x><y>0</y><z>-80</z></origin>
 				<normal><x>0</x><y>0</y><z>1</z></normal>
-				<status>full</status>
+				<status>empty</status>
 			</local>
 			<global>
 				<origin><x>200</x><y>0</y><z>-70</z></origin>
@@ -80,7 +66,7 @@
 				<status>full</status>
 			</global>
 			<global>
-				<origin><x>170</x><y>0</y><z>-70</z></origin>
+				<origin><x>200</x><y>0</y><z>-70</z></origin>
 				<normal><x>-1</x><y>0</y><z>0</z></normal>
 				<status>full</status>
 			</global>
@@ -106,7 +92,8 @@
 
 #	LIGHTS
 
-	<light><type>orb</type><origin><x>200</x><y>0</y><z>0</z></origin><color><r>100</r><g>100</g><b>100</b></color><power>0.8</power></light>
 
+
+	<light><type>orb</type><origin><x>200</x><y>50</y><z>0</z></origin><color><r>100</r><g>100</g><b>100</b></color><power>0.3</power></light>
 
 </scene>

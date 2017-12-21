@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/17 10:24:34 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/21 12:04:03 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 	t_ray			light_ray;
 	SDL_Color		multi_lights;
 
-	multi_lights = (SDL_Color){0, 0, 0, 255};
+	multi_lights = div_colors(ray->color, scn);
 	tmp = scn->lights;
 	while (tmp != NULL)
 	{
@@ -79,5 +79,5 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 		}
 		tmp = tmp->next;
 	}
-	return (div_colors(multi_lights, scn));
+	return (multi_lights);
 }

@@ -15,8 +15,8 @@ SRC_DIR = src
 LIB_DIR = libraries
 INCLUDE_DIR = include
 
-LFT_PATH = $$(pwd)/libraries/libft
-SDL_PATH = $$(pwd)/libraries/SDL
+LFT_PATH = "$$(pwd)/libraries/libft"
+SDL_PATH = "$$(pwd)/libraries/SDL"
 
 LFT_INCLUDE = $(LFT_PATH)/includes
 

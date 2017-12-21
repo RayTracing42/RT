@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:35:27 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/16 11:24:50 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/21 11:52:50 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		get_quad_equation_sol(double *res, int i)
 		res[0] = (i == 2) ? ft_dmin(s1, s2) : ft_dmax(s1, s2);
 	else
 		return (0);
+
 	return ((delta != 0) + 1);
 }
 

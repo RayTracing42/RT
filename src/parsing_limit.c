@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/21 11:17:10 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/21 11:54:19 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,6 @@ void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 		o->limit = new_cell_obj(NULL, (t_object *)p);
 	else
 		new_cell_obj(&o->limit, (t_object *)p);
-	printf("glob - norm : (%.2f, %.2f, %.2f)\n", p->norm_diff.x, p->norm_diff.y,
-		p->norm_diff.z);
-	printf("glob - orig : (%.2f, %.2f, %.2f)\n", p->orig_diff.x, p->orig_diff.y,
-		p->orig_diff.z);
 }
 
 void	parsing_local_limit(t_object *o, t_trans_data trans, t_dot origin,
@@ -58,10 +54,6 @@ void	parsing_local_limit(t_object *o, t_trans_data trans, t_dot origin,
 		o->limit = new_cell_obj(NULL, (t_object *)p);
 	else
 		new_cell_obj(&o->limit, (t_object *)p);
-	printf("loca - norm : (%.2f, %.2f, %.2f)\n", p->norm_diff.x, p->norm_diff.y,
-		p->norm_diff.z);
-	printf("loca - orig : (%.2f, %.2f, %.2f)\n", p->orig_diff.x, p->orig_diff.y,
-		p->orig_diff.z);
 }
 
 void	global_loop(t_object *obj, char *limit)

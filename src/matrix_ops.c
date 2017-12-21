@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 16:30:54 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/20 17:22:59 by shiro            ###   ########.fr       */
+/*   Updated: 2017/11/28 14:32:46 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,16 @@ t_matrix	*get_inv_4x4mat(t_matrix *res, t_matrix *m)
 	set_2x2tab_mat(res, r_abcd[1]->mat, 0, 2);
 	set_2x2tab_mat(res, r_abcd[2]->mat, 2, 0);
 	set_2x2tab_mat(res, r_abcd[3]->mat, 2, 2);
+
+	delete_matrix(abcd[0]);
+	delete_matrix(abcd[1]);
+	delete_matrix(abcd[2]);
+	delete_matrix(abcd[3]);
+
+	delete_matrix(r_abcd[0]);
+	delete_matrix(r_abcd[1]);
+	delete_matrix(r_abcd[2]);
+	delete_matrix(r_abcd[3]);
 
 	return (res);
 }

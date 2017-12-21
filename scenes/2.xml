@@ -2,7 +2,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 
 <scene>
 	<brightness>75</brightness>
-	
+
 	<camera>
 		<origin>
 			<x>-100</x>
@@ -14,21 +14,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<y>0</y>
 			<z>0</z>
 		</angle>
-	</camera>	
-
-	<ambient_light>
-		<direction>
-			<x>1</x>
-			<y>-1</y>
-			<z>-1</z>
-		</direction>
-		<color>
-			<r>100</r>
-			<g>100</g>
-			<b>100</b>
-		</color>
-		<power>0.5</power>
-	</ambient_light>
+	</camera>
 
 	<object>
 		<type>sphere</type>

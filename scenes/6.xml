@@ -5,11 +5,11 @@
 		<origin>
 			<x>-100</x>
 			<y>50</y>
-			<z>40</z>
+			<z>90</z>
 		</origin>
 		<angle>
 			<x>0</x>
-			<y>10</y>
+			<y>20</y>
 			<z>0</z>
 		</angle>
 	</camera>	
