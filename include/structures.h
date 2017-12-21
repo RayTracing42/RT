@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/13 15:11:38 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/21 11:31:59 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ typedef struct				s_sphere
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
-	t_matrix				*trans_inorm;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					radius;
@@ -184,7 +184,7 @@ typedef struct				s_cylinder
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
-	t_matrix				*trans_inorm;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					radius;
@@ -203,7 +203,7 @@ typedef struct				s_cone
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
-	t_matrix				*trans_inorm;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					angle;
@@ -222,7 +222,7 @@ typedef struct				s_plane
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
-	t_matrix				*trans_inorm;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	double					a;
