@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/17 09:59:45 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/21 10:22:42 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/21 11:01:19 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int		transformed_local_limit_loop(t_ray *tmp_ray, t_object *father)
 			{
 				r = *p;
 				trans_ray = *tmp_ray;
-/*	penser a partir de l'origine du plan, pas de 0, 0, 0 */
 				center = (t_vector){father->origin.x, father->origin.y, father->origin.z};
 				mult_vect(&r.normal, p->trans_inorm, &r.normal);
 				mult_vect(&r.norm_diff, father->trans_const, &r.norm_diff);
