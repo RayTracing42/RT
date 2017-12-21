@@ -66,12 +66,17 @@
 		<limit>
 			<local>
 				<origin><x>200</x><y>0</y><z>20</z></origin>
-				<normal><x>0</x><y>1</y><z>1</z></normal>
+				<normal><x>0</x><y>7</y><z>9</z></normal>
 				<status>full</status>
 			</local>
 			<global>
 				<origin><x>270</x><y>0</y><z>-20</z></origin>
 				<normal><x>0</x><y>0</y><z>1</z></normal>
+				<status>full</status>
+			</global>
+			<global>
+				<origin><x>270</x><y>-20</y><z>-20</z></origin>
+				<normal><x>0</x><y>1</y><z>1</z></normal>
 				<status>full</status>
 			</global>
 		</limit>

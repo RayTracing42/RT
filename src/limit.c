@@ -69,38 +69,30 @@ int		empty_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 
 int		full_global_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 {
-	t_plane *p;
 	t_vector	center;
 
-	ray = (t_ray *)ray;
-	tmp_ray = (t_ray *)tmp_ray;
-	father = (t_object *)father;
-
-	p = (t_plane *)tmp_ray->obj;
-		center = (t_vector){0, 0, 0};
-		mult_vect(&center, father->trans_const, &center);
-		center.x += father->origin.x;
-		center.y += father->origin.y;
-		center.z += father->origin.z;
-			
-//		if (global_limit_loop(tmp_ray, father))
-//		{
-			transform_inter(tmp_ray, tmp_ray->obj);
-	if (transformed_local_limit_loop(tmp_ray, father))
+	center = (t_vector){0, 0, 0};
+	mult_vect(&center, father->trans_const, &center);
+	center.x += father->origin.x;
+	center.y += father->origin.y;
+	center.z += father->origin.z;
+	if (global_limit_loop(tmp_ray, father))
 	{
+		transform_inter(tmp_ray, tmp_ray->obj);
+		if (transformed_local_limit_loop(tmp_ray, father))
+		{
 			tmp_ray->inter.x -= center.x;
 			tmp_ray->inter.y -= center.y;
 			tmp_ray->inter.z -= center.z;
 			if (father->is_in_obj(&tmp_ray->inter, father))
 			{
-			tmp_ray->inter.x += center.x;
-			tmp_ray->inter.y += center.y;
-			tmp_ray->inter.z += center.z;
-
+				tmp_ray->inter.x += center.x;
+				tmp_ray->inter.y += center.y;
+				tmp_ray->inter.z += center.z;
 				*ray = *tmp_ray;
 				return (1);
 			}
-//		}
+		}
 	}
 	return (0);
 }
