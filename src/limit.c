@@ -70,7 +70,9 @@ int		empty_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 int		full_global_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 {
 	t_vector	center;
+	t_plane *p;
 
+	p = (t_plane *)tmp_ray->obj;
 	center = (t_vector){0, 0, 0};
 	mult_vect(&center, father->trans_const, &center);
 	center.x += father->origin.x;
