@@ -83,12 +83,11 @@ int		full_global_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 		center.y += father->origin.y;
 		center.z += father->origin.z;
 			
-//	printf("(%.2f, %.2f, %.2f)\n", tmp_ray->inter.x, tmp_ray->inter.y, tmp_ray->inter.z);
 //		if (global_limit_loop(tmp_ray, father))
 //		{
+			transform_inter(tmp_ray, tmp_ray->obj);
 	if (transformed_local_limit_loop(tmp_ray, father))
 	{
-			transform_inter(tmp_ray, tmp_ray->obj);
 			tmp_ray->inter.x -= center.x;
 			tmp_ray->inter.y -= center.y;
 			tmp_ray->inter.z -= center.z;
