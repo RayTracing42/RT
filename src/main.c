@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/13 17:45:43 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/21 14:00:26 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	init_list_evts(t_event **head, t_evt_data *data)
 
 static int	fct_events(void* events)
 {
+	get_sdl_core();
 	wait_events(events);
 	return (1);
 }
@@ -43,7 +44,6 @@ int			main(int ac, char **av)
 		ft_putendl("usage : ./rt file.xml");
 	else
 	{
-		get_sdl_core();
 		init_list_evts(&events, NULL);
 		t = SDL_CreateThread(fct_events, "events", events);
 		view_plane(scn->cam, scn->cam->vp);
@@ -51,6 +51,6 @@ int			main(int ac, char **av)
 		refresh_win();
 		SDL_WaitThread(t, NULL);
 		delete_sdl_core();
-		exit(0);
 	}
+	exit(0);
 }
