@@ -57,7 +57,7 @@
 			</local>
 			<local>
 				<origin><x>200</x><y>-20</y><z>-90</z></origin>
-				<normal><x>0</x><y>0</y><z>10</z></normal>
+				<normal><x>-4</x><y>-1</y><z>12</z></normal>
 				<status>full</status>
 			</local>
 			<global>
