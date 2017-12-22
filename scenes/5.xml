@@ -14,20 +14,6 @@
 		</angle>
 	</camera>	
 
-	<ambient_light>
-		<direction>
-			<x>0</x>
-			<y>0</y>
-			<z>-1</z>
-		</direction>
-		<color>
-			<r>100</r>
-			<g>100</g>
-			<b>100</b>
-		</color>
-		<power>0.5</power>
-	</ambient_light>
-
 	<object>
 		<type>sphere</type>
 		<origin>
@@ -128,8 +114,8 @@
 		<type>orb</type>
 		<origin>
 			<x>-200</x>
-			<y>100</y>
-			<z>-200</z>
+			<y>-180</y>
+			<z>200</z>
 		</origin>
 		<color>
 			<r>100</r>
