@@ -5,7 +5,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 
 	<camera>
 		<origin>
-			<x>-200</x>
+			<x>-400</x>
 			<y>10</y>
 			<z>0</z>
 		</origin>
@@ -29,7 +29,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<b>0</b>
 		</color>
 		<physic>
-			<reflexion_amount>0</reflexion_amount>
+			<reflexion_amount>0.5</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
 			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
@@ -67,7 +67,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<b>0</b>
 		</color>
 		<physic>
-			<reflexion_amount>0</reflexion_amount>
+			<reflexion_amount>0.5</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
 			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
@@ -105,7 +105,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<b>255</b>
 		</color>
 		<physic>
-			<reflexion_amount>0</reflexion_amount>
+			<reflexion_amount>0.5</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
 			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>
@@ -148,7 +148,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<b>100</b>
 		</color>
 		<physic>
-			<reflexion_amount>0</reflexion_amount>
+			<reflexion_amount>0.5</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
 			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>
