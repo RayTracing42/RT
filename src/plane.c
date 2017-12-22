@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/22 07:49:45 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/22 09:10:50 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal)
 	t_plane		*plane;
 
 	plane = (t_plane*)new_object(PLANE, args);
+	vect_normalize(&normal);
 	plane->normal = normal;
 	plane->get_normal = get_plane_normal;
 	plane->is_in_obj = is_in_plane;

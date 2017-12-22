@@ -113,7 +113,7 @@ int		full_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 		{
 			if (local_limit_loop(tmp_ray, father))
 			{
-				transform_inter(tmp_ray, tmp_ray->obj);
+				transform_inter(tmp_ray, father);
 				*ray = *tmp_ray;
 				return (1);
 			}
