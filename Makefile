@@ -27,7 +27,7 @@ scene.c scene_lights.c scene_objs.c shadows.c sphere.c spotlight.c tools.c \
 utils.c vectors.c view_plane.c parsing.c parsing_tools.c parsing_camera.c \
 parsing_scene.c parsing_lights.c parsing_objects.c parsing_transformations.c \
 transformations.c matrix_ops.c matrix.c check_intersect.c parsing_limit.c \
-limit.c local_limit.c global_limit.c reflect_refract_tree.c
+limit.c local_limit.c global_limit.c reflect_refract_tree.c matrix_ops2.c \
 
 SRC:= $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)

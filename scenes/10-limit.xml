@@ -15,7 +15,7 @@
 	</camera>	
 
 	<object>
-		<type>sphere</type>
+		<type>cone</type>
 		<origin>
 			<x>200</x>
 			<y>0</y>
@@ -27,14 +27,14 @@
 			<b>255</b>
 		</color>
 		<physic>
-			<reflexion_amount>0.8</reflexion_amount>
+			<reflexion_amount>0.7</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
-			<refraction_index>1.5</refraction_index>
+			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>
 		</physic>
 		<transformations>
 			<rotation>
-				<x>-45</x>
+				<x>0</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>
@@ -46,32 +46,42 @@
 			<translation>
 				<x>0</x>
 				<y>0</y>
-				<z>-20</z>
+				<z>0</z>
 			</translation>
 		</transformations>
 		<limit>
 			<local>
-				<origin><x>200</x><y>0</y><z>-70</z></origin>
-				<normal><x>0</x><y>50</y><z>50</z></normal>
+				<origin><x>200</x><y>0</y><z>-50</z></origin>
+				<normal><x>0</x><y>0</y><z>1</z></normal>
 				<status>full</status>
 			</local>
 			<local>
 				<origin><x>200</x><y>-20</y><z>-90</z></origin>
-				<normal><x>-4</x><y>-1</y><z>12</z></normal>
+				<normal><x>0</x><y>0</y><z>-1</z></normal>
 				<status>full</status>
 			</local>
 			<global>
-				<origin><x>200</x><y>0</y><z>-80</z></origin>
-				<normal><x>0</x><y>0</y><z>1</z></normal>
+				<origin><x>200</x><y>20</y><z>-70</z></origin>
+				<normal><x>0</x><y>1</y><z>0</z></normal>
 				<status>full</status>
 			</global>
 			<global>
-				<origin><x>200</x><y>0</y><z>-70</z></origin>
+				<origin><x>200</x><y>-20</y><z>-70</z></origin>
+				<normal><x>0</x><y>-1</y><z>0</z></normal>
+				<status>full</status>
+			</global>
+			<global>
+				<origin><x>220</x><y>0</y><z>-70</z></origin>
+				<normal><x>1</x><y>0</y><z>0</z></normal>
+				<status>full</status>
+			</global>
+			<global>
+				<origin><x>180</x><y>0</y><z>-70</z></origin>
 				<normal><x>-1</x><y>0</y><z>0</z></normal>
 				<status>full</status>
 			</global>
 		</limit>
-		<radius>80</radius>
+		<angle>60</angle>
 	</object>
 
 

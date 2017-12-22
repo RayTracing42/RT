@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/21 11:54:19 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/22 10:53:15 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 	p->lim_type = GLOBAL;
 	p->orig_diff = (t_vector){origin.x - o->origin.x, origin.y - o->origin.y,
 		origin.z - o->origin.z};
-	//p->orig_diff = (t_vector){0, 0, 0};
-	trans = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
+	trans = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0},
+		(t_dot){1, 1, 1}};
 	normalized_diff(p, &trans.trans);
-	trans = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
+	trans = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0},
+		(t_dot){1, 1, 1}};
 	set_all_matrix((t_object *)p, trans);
 	if (!(o->limit))
 		o->limit = new_cell_obj(NULL, (t_object *)p);

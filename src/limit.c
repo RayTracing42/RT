@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   limit.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
+/*   Updated: 2017/12/22 11:07:54 by fcecilie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "rt.h"
 
@@ -70,7 +81,7 @@ int		empty_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 int		full_global_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 {
 	t_vector	center;
-	t_plane *p;
+	t_plane		*p;
 
 	p = (t_plane *)tmp_ray->obj;
 	center = (t_vector){0, 0, 0};

@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:28:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/26 15:28:49 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/22 11:01:43 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ t_camera	*parsing_camera(char *scene)
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);
-	return (new_camera(60, origin, angle.x, angle.y, angle.z));
+	return (new_camera(origin, angle.x, angle.y, angle.z));
 }

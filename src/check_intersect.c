@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/21 11:54:00 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/22 11:06:19 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ void	check_limit(t_ray *ray, t_list_objs *l, t_object *obj, double *dist)
 			if (p->status == 1)
 			{
 				if (p->lim_type == LOCAL)
-				{
 					if (full_limit(ray, &tmp_ray, obj))
 						*dist = tmp;
-				}
-				else
+				if (p->lim_type == GLOBAL)
 					if (full_global_limit(ray, &tmp_ray, obj))
 						*dist = tmp;
 			}
@@ -90,8 +88,6 @@ t_ray	second_intersect(t_ray *ray, t_object *obj, double *tmp)
 	tmp_ray = *ray;
 	*tmp = obj->intersect(&tmp_ray, transform_equ(&tmp_ray, obj), obj, 2);
 	tmp_ray.normal = *obj->get_normal(&tmp_ray.inter, obj);
-//	tmp_ray.normal = (t_vector){-tmp_ray.normal.x, -tmp_ray.normal.y,
-//		-tmp_ray.normal.z};
 	tmp_ray.color = obj->color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
 	tmp_ray.obj = obj;
