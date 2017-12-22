@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/21 12:44:27 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/22 06:36:28 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,23 @@ static void	init_list_evts(t_event **head, t_evt_data *data)
 }
 
 
-/*static int	fct_events(void* events)
+static int	main_display(void* scene)
 {
-	wait_events(events);
+	t_scene	*scn;
+
+	scn = (t_scene*)scene;
+	view_plane(scn->cam, scn->cam->vp);
+	scanning(scn);
+	refresh_win();
 	return (1);
-}*/
+}
 
 int			main(int ac, char **av)
 {
 	t_event		*events;
 	t_scene		*scn;
 
-//	SDL_Thread	*t;
+	SDL_Thread	*t;
 
 	events = NULL;
 	if (!(scn = parsing(ac, av)))
@@ -45,13 +50,10 @@ int			main(int ac, char **av)
 	{
 		get_sdl_core();
 		init_list_evts(&events, NULL);
-//		t = SDL_CreateThread(fct_events, "events", events);
-		view_plane(scn->cam, scn->cam->vp);
-		scanning(scn);
-		refresh_win();
-//		SDL_WaitThread(t, NULL);
+		t = SDL_CreateThread(main_display, "", scn);
 		wait_events(events);
+		SDL_WaitThread(t, NULL);
 		delete_sdl_core();
-		exit(0);
 	}
+	exit(0);
 }
