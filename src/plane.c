@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/22 10:54:46 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/02 17:09:10 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal)
 	plane->get_normal = get_plane_normal;
 	plane->is_in_obj = is_in_plane;
 	plane->intersect = plane_intersect;
-	plane->lim_type = NONE;
 	plane->a = normal.x;
 	plane->b = normal.y;
 	plane->c = normal.z;

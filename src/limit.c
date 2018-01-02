@@ -6,129 +6,104 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/22 11:07:54 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/02 17:05:16 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		limit_loop(t_ray *tmp_ray, t_object *father)
+int		is_in_right_side_of_limit(t_dot *i, t_object *p)
+{
+	double	distance_1;
+	double	distance_2;
+
+	distance_1 = get_dot_dist(i,
+			&(t_dot){(p->origin.x + p->normal.x),
+			(p->origin.y + p->normal.y),
+			(p->origin.z + p->normal.z)});
+	distance_2 = get_dot_dist(i,
+			&(t_dot){(p->origin.x - p->normal.x),
+			(p->origin.y - p->normal.y),
+			(p->origin.z - p->normal.z)});
+	return ((distance_1 >= distance_2));
+}
+
+int		is_in_limit(t_ray *ray, t_object *father)
 {
 	t_list_objs	*l;
-	t_plane		*p;
-	t_ray		trans_ray;
 
 	l = father->limit;
 	while (l)
 	{
-		p = (t_plane *)l->obj;
-		if (l->obj != tmp_ray->obj)
+		if (ray->obj != l->obj)
 		{
-			if (p->lim_type == LOCAL)
-				if (!(is_in_local_limit(&tmp_ray->inter, p)))
-					return (0);
-			if (p->lim_type == GLOBAL)
-			{
-				trans_ray = *tmp_ray;
-				transform_inter(&trans_ray, trans_ray.obj);
-				if (!(is_in_global_limit(&trans_ray.inter, p)))
-					return (0);
-			}
+			if (!is_in_right_side_of_limit(&ray->inter, l->obj))
+				return (0);
 		}
 		l = l->next;
 	}
 	return (1);
 }
 
-void	normalized_diff(t_plane *p, t_dot *trans)
-{
-	double		dist;
-	double		angle;
-	t_vector	n;
-	t_vector	o;
-
-	o = (t_vector){p->orig_diff.x, p->orig_diff.y, p->orig_diff.z};
-	if (!(o.x == 0 && o.y == 0 && o.z == 0))
-	{
-		n = p->normal;
-		vect_normalize(&n);
-		vect_normalize(&o);
-		angle = angle_between_vectors(n, o);
-		dist = get_vect_lenght(&p->orig_diff) * cos(angle * M_PI / 180);
-		p->norm_diff = (t_vector){n.x * dist, n.y * dist, n.z * dist};
-	}
-	else
-		p->norm_diff = (t_vector){0, 0, 0};
-	trans->x += p->norm_diff.x;
-	trans->y += p->norm_diff.y;
-	trans->z += p->norm_diff.z;
-}
-
 int		empty_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 {
-	t_plane *p;
-
-	p = (t_plane *)tmp_ray->obj;
-	if (limit_loop(tmp_ray, father))
+	transform_inter(tmp_ray, tmp_ray->obj);
+	if (is_in_limit(tmp_ray, father))
 	{
-		transform_inter(tmp_ray, tmp_ray->obj);
 		*ray = *tmp_ray;
 		return (1);
 	}
 	return (0);
 }
 
-int		full_global_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
+int		full_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 {
 	t_vector	center;
-	t_plane		*p;
 
-	p = (t_plane *)tmp_ray->obj;
-	center = (t_vector){0, 0, 0};
-	mult_vect(&center, father->trans_const, &center);
+	mult_vect(&center, father->trans_const, &(t_vector){0, 0, 0});
 	center.x += father->origin.x;
 	center.y += father->origin.y;
 	center.z += father->origin.z;
-	if (global_limit_loop(tmp_ray, father))
+	transform_inter(tmp_ray, tmp_ray->obj);
+	if (is_in_limit(tmp_ray, father))
 	{
-		transform_inter(tmp_ray, tmp_ray->obj);
-		if (transformed_local_limit_loop(tmp_ray, father))
+		tmp_ray->inter.x -= center.x;
+		tmp_ray->inter.y -= center.y;
+		tmp_ray->inter.z -= center.z;
+		if (father->is_in_obj(&tmp_ray->inter, father))
 		{
-			tmp_ray->inter.x -= center.x;
-			tmp_ray->inter.y -= center.y;
-			tmp_ray->inter.z -= center.z;
-			if (father->is_in_obj(&tmp_ray->inter, father))
-			{
-				tmp_ray->inter.x += center.x;
-				tmp_ray->inter.y += center.y;
-				tmp_ray->inter.z += center.z;
-				*ray = *tmp_ray;
-				return (1);
-			}
+			tmp_ray->inter.x += center.x;
+			tmp_ray->inter.y += center.y;
+			tmp_ray->inter.z += center.z;
+			*ray = *tmp_ray;
+			return (1);
 		}
 	}
 	return (0);
 }
 
-int		full_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
+void	check_limit_intersect(t_ray *ray, t_object *father, double *dist)
 {
-	t_plane *p;
+	double		tmp;
+	t_ray		tmp_ray;
+	t_list_objs	*l;
+	t_plane		*p;
 
-	p = (t_plane *)tmp_ray->obj;
-	if (global_limit_loop(tmp_ray, father))
+	l = father->limit;
+	while (l)
 	{
-		tmp_ray->inter.x += p->norm_diff.x;
-		tmp_ray->inter.y += p->norm_diff.y;
-		tmp_ray->inter.z += p->norm_diff.z;
-		if (father->is_in_obj(&tmp_ray->inter, father))
+		p = (t_plane *)l->obj;
+		tmp_ray = (p->status == 0) ? second_intersect(ray, father, &tmp) :
+			first_intersect(ray, l->obj, &tmp);
+		if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && gt(*dist, 0))))
 		{
-			if (local_limit_loop(tmp_ray, father))
-			{
-				transform_inter(tmp_ray, father);
-				*ray = *tmp_ray;
-				return (1);
-			}
+			if (p->status == 0)
+				if (empty_limit(ray, &tmp_ray, father))
+					*dist = tmp;
+			if (p->status == 1)
+				if (full_limit(ray, &tmp_ray, father))
+					*dist = tmp;
 		}
+		l = l->next;
 	}
-	return (0);
 }

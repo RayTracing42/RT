@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/22 10:53:15 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/02 17:09:36 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,41 +16,39 @@ void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 			int status)
 {
 	t_plane			*p;
-	t_trans_data	trans;
+	t_trans_data	trs;
 
 	p = new_plane((t_objs_comp){origin, o->color,
 		o->obj_light.reflection_amount, o->obj_light.refraction_amount,
 		o->obj_light.refractive_index, o->obj_light.shininess}, normal);
+	trs = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
+	set_all_matrix((t_object *)p, trs);
 	p->status = status;
-	p->lim_type = GLOBAL;
-	p->orig_diff = (t_vector){origin.x - o->origin.x, origin.y - o->origin.y,
-		origin.z - o->origin.z};
-	trans = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0},
-		(t_dot){1, 1, 1}};
-	normalized_diff(p, &trans.trans);
-	trans = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0},
-		(t_dot){1, 1, 1}};
-	set_all_matrix((t_object *)p, trans);
 	if (!(o->limit))
 		o->limit = new_cell_obj(NULL, (t_object *)p);
 	else
 		new_cell_obj(&o->limit, (t_object *)p);
 }
 
-void	parsing_local_limit(t_object *o, t_trans_data trans, t_dot origin,
-			t_vector normal, int status)
+void	parsing_local_limit(t_object *o, t_dot origin, t_vector normal,
+			int status)
 {
-	t_plane		*p;
+	t_plane			*p;
+	t_trans_data	trs;
 
-	p = new_plane((t_objs_comp){o->origin, o->color,
+	origin = (t_dot){origin.x - o->origin.x, origin.y - o->origin.y,
+		origin.z - o->origin.z};
+	mult_vect((t_vector*)&origin, o->trans_const, (t_vector*)&origin);
+	mult_vect(&normal, o->trans_norm, &normal);
+	origin.x += o->origin.x;
+	origin.y += o->origin.y;
+	origin.z += o->origin.z;
+	p = new_plane((t_objs_comp){origin, o->color,
 		o->obj_light.reflection_amount, o->obj_light.refraction_amount,
 		o->obj_light.refractive_index, o->obj_light.shininess}, normal);
-	p->orig_diff = (t_vector){origin.x - o->origin.x, origin.y - o->origin.y,
-		origin.z - o->origin.z};
+	trs = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
+	set_all_matrix((t_object *)p, trs);
 	p->status = status;
-	p->lim_type = LOCAL;
-	normalized_diff(p, &trans.trans);
-	set_all_matrix((t_object *)p, trans);
 	if (!(o->limit))
 		o->limit = new_cell_obj(NULL, (t_object *)p);
 	else
@@ -82,7 +80,7 @@ void	global_loop(t_object *obj, char *limit)
 	}
 }
 
-void	local_loop(t_object *obj, char *limit, t_trans_data trans)
+void	local_loop(t_object *obj, char *limit)
 {
 	char		*data[4];
 	t_dot		origin;
@@ -98,7 +96,7 @@ void	local_loop(t_object *obj, char *limit, t_trans_data trans)
 			|| (parsing_vector(data[2], &normal) == -1)
 			|| ((status = get_status(data[3])) == -1))
 			exit_custom_error("rt", ":local_loop failed");
-		parsing_local_limit(obj, trans, origin, normal, status);
+		parsing_local_limit(obj, origin, normal, status);
 		limit = ft_strstr(limit, "</local>") + ft_strlen("</local>");
 		free(data[0]);
 		free(data[1]);
@@ -107,13 +105,13 @@ void	local_loop(t_object *obj, char *limit, t_trans_data trans)
 	}
 }
 
-void	parsing_limit(t_object *obj, char *object, t_trans_data trans)
+void	parsing_limit(t_object *obj, char *object)
 {
 	char	*data;
 
 	if (!(data = get_interval(object, "<limit>", "</limit>")))
 		return ;
-	local_loop(obj, data, trans);
+	local_loop(obj, data);
 	global_loop(obj, data);
 	free(data);
 }

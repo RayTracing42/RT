@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/16 11:31:46 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/02 16:03:47 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int			parsing_object(char *scene, t_scene *scn)
 			return (-1);
 		trans = parsing_transformations(data[0]);
 		set_all_matrix(obj, trans);
-		parsing_limit(obj, data[0], trans);
+		parsing_limit(obj, data[0]);
 		scene = ft_strstr(scene, "</object>") + ft_strlen("</object>");
 		free(data[1]);
 		free(data[0]);

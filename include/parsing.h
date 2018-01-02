@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/21 11:47:05 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/02 16:03:26 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ t_trans_data		parsing_transformations(char *object);
 **	parsing_limit.c
 */
 
-void				parsing_limit(t_object *obj, char *object, t_trans_data trans);
+void				parsing_limit(t_object *obj, char *object);
 
 #endif

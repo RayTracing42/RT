@@ -6,41 +6,11 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/22 11:06:19 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/02 17:05:20 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-void	check_limit(t_ray *ray, t_list_objs *l, t_object *obj, double *dist)
-{
-	double		tmp;
-	t_ray		tmp_ray;
-	t_plane		*p;
-
-	while (l != NULL)
-	{
-		p = (t_plane *)l->obj;
-		tmp_ray = (p->status == 0) ? second_intersect(ray, obj, &tmp) :
-			first_intersect(ray, l->obj, &tmp);
-		if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && gt(*dist, 0))))
-		{
-			if (p->status == 0)
-				if (empty_limit(ray, &tmp_ray, obj))
-					*dist = tmp;
-			if (p->status == 1)
-			{
-				if (p->lim_type == LOCAL)
-					if (full_limit(ray, &tmp_ray, obj))
-						*dist = tmp;
-				if (p->lim_type == GLOBAL)
-					if (full_global_limit(ray, &tmp_ray, obj))
-						*dist = tmp;
-			}
-		}
-		l = l->next;
-	}
-}
 
 double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 {
@@ -54,14 +24,14 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 		tmp_ray = first_intersect(ray, l_objs->obj, &tmp);
 		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
-			if (limit_loop(&tmp_ray, l_objs->obj))
+			transform_inter(&tmp_ray, tmp_ray.obj);
+			if (is_in_limit(&tmp_ray, l_objs->obj))
 			{
-				transform_inter(&tmp_ray, tmp_ray.obj);
 				dist = tmp;
 				*ray = tmp_ray;
 			}
 			else
-				check_limit(ray, l_objs->obj->limit, l_objs->obj, &dist);
+				check_limit_intersect(ray, l_objs->obj, &dist);
 		}
 		l_objs = l_objs->next;
 	}

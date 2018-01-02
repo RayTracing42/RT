@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/21 12:27:14 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/02 17:11:47 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,6 @@ typedef enum				e_type
 	SPHERE
 }							t_type;
 
-typedef enum				e_lim_type
-{
-	NONE,
-	LOCAL,
-	GLOBAL
-}							t_lim_type;
-
 typedef struct				s_obj_phys
 {
 	double					reflection_amount;
@@ -238,11 +231,7 @@ typedef struct				s_plane
 	t_obj_phys				obj_light;
 	
 	struct s_list_obs		*limit;
-
-	t_lim_type				lim_type;
 	int						status;
-	t_vector				orig_diff;
-	t_vector				norm_diff;
 	
 	double					a;
 	double					b;
