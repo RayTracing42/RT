@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:22:29 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/10 15:41:15 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/03 18:47:59 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,13 @@ char			*ft_utoa_base(unsigned long long int n, int base, int maj);
 
 void			exit_error(char *prog, char *err);
 void			exit_custom_error(char *prog, char *err);
+
+void			*galloc(size_t size);
+void			gexit(int status);
+void			gfree(void *ptr);
+
+# define malloc galloc
+# define free gfree
+# define exit gexit
 
 #endif
