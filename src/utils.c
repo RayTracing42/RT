@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:25:07 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/21 12:30:57 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/04 00:21:07 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ int			get_status(char *status)
 		return (0);
 	else if (ft_strcmp("full", status) == 0)
 		return (1);
+	else if (ft_strcmp("negative", status) == 0)
+		return (2);
+	else if (ft_strcmp("none", status) == 0)
+		return (3);
 	else
 		return (-1);
 }

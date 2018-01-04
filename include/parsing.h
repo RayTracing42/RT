@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/02 16:03:26 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/04 04:00:53 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ char				*get_interval(const char *src, const char *start,
 						const char *stop);
 int					between(double value, double low_limit,
 						double height_limit);
+int					get_nb_occ(const char *src, const char *occ, int lim);
 
 /*
 **	parsing_scene.c
@@ -64,7 +65,7 @@ t_plane				*parsing_plane(char *object);
 t_sphere			*parsing_sphere(char *object);
 t_cylinder			*parsing_cylinder(char *object);
 t_cone				*parsing_cone(char *object);
-int					parsing_object(char *scene, t_scene *scn);
+t_list_objs			*parsing_object(char *scene);
 
 /*
 **	parsing_transformations.c
@@ -77,5 +78,11 @@ t_trans_data		parsing_transformations(char *object);
 */
 
 void				parsing_limit(t_object *obj, char *object);
+
+/*
+**	parsing_negative_obj.c
+*/
+
+int					parsing_negative_obj(t_object *obj, char *object);
 
 #endif
