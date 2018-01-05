@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/05 03:50:12 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/05 05:26:26 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,43 +100,43 @@ t_cone		*parsing_cone(char *object)
 	return (new_cone(args, angle));
 }
 
-t_object	*parsing_object2(char *object, char *object_type)
+t_object	*parsing_object2(char *object)
 {
-	t_object *obj;
+	t_object	*obj;
+	char		*data;
 
 	obj = NULL;
-	if (!(ft_strcmp(object_type, "sphere")))
+	if (!(data = get_interval(object, "<type>", "</type>")))
+		return (NULL);
+	if (!(ft_strcmp(data, "sphere")))
 		obj = (t_object *)parsing_sphere(object);
-	else if (!(ft_strcmp(object_type, "plane")))
+	else if (!(ft_strcmp(data, "plane")))
 		obj = (t_object *)parsing_plane(object);
-	else if (!(ft_strcmp(object_type, "cylinder")))
+	else if (!(ft_strcmp(data, "cylinder")))
 		obj = (t_object *)parsing_cylinder(object);
-	else if (!(ft_strcmp(object_type, "cone")))
+	else if (!(ft_strcmp(data, "cone")))
 		obj = (t_object *)parsing_cone(object);
+	free(data);
 	return (obj);
 }
 
 t_list_objs	*parsing_object(char *scene)
 {
-	char			*data[2];
+	char			*data;
 	t_object		*obj;
 	t_list_objs		*l;
 
 	l = NULL;
-	while ((data[0] = get_interval(scene, "<object>", "</object>")))
+	while ((data = get_interval(scene, "<object>", "</object>")))
 	{
-		if (!(data[1] = get_interval(data[0], "<type>", "</type>")))
+		if (!(obj = parsing_object2(data)))
 			return (NULL);
-		if (!(obj = parsing_object2(data[0], data[1])))
-			return (NULL);
-		parsing_transformations(obj, data[0]);
-		parsing_limit(obj, data[0]);
-		if (parsing_negative_obj(obj, data[0]) == -1)
-			return (NULL);
+		parsing_transformations(obj, data);
+		parsing_limit(obj, data);
+		parsing_negative_obj(obj, data);
 		scene = ft_strstr(scene, "<object>") + ft_strlen("<object></object>") +
-			ft_strlen(data[0]);
-		free(data[1]);
-		free(data[0]);
+			ft_strlen(data);
+		free(data);
 		new_cell_obj(&l, obj);
 	}
 	return (l);

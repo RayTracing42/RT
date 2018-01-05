@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/04 00:21:05 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/05 04:02:52 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_object		*new_object(t_type type, t_objs_comp args)
 	obj->intersect = NULL;
 	obj->limit = NULL;
 	obj->negative_obj = NULL;
-	obj->status = get_status("none");
+	obj->status = get_status("full");
 	obj->trans_const = create_identity(4);
 	obj->trans_iconst = create_identity(4);
 	obj->trans_idir = create_identity(4);

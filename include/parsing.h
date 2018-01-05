@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/05 03:41:56 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/05 05:03:01 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_sphere			*parsing_sphere(char *object);
 t_cylinder			*parsing_cylinder(char *object);
 t_cone				*parsing_cone(char *object);
 t_list_objs			*parsing_object(char *scene);
+t_object			*parsing_object2(char *object);
 
 /*
 **	parsing_transformations.c
@@ -83,6 +84,6 @@ void				parsing_limit(t_object *obj, char *object);
 **	parsing_negative_obj.c
 */
 
-int					parsing_negative_obj(t_object *obj, char *object);
+void				parsing_negative_obj(t_object *obj, char *object);
 
 #endif
