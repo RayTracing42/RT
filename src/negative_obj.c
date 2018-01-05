@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/05 03:13:17 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/05 06:13:05 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,33 @@ int		is_in_negative_obj(t_ray *ray, t_object *father)
 
 void	check_negative_obj_intersect(t_ray *ray, t_object *father, double *dist)
 {
-//	double		tmp;
-//	t_ray		tmp_ray;
+	double		tmp;
+	t_ray		tmp_ray;
 	t_list_objs	*n;
 
 	n = father->negative_obj;
 	while (n)
 	{
 //merdier;
-		*dist = (double)*dist;
-		ray = (t_ray *)ray;
+		if (n->obj->status == 1)
+		{
+			tmp_ray = second_intersect(ray, n->obj, &tmp);
+			if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && gt(*dist, 0))))
+			{
+				if (is_in_negative_obj(&tmp_ray, father))
+					check_negative_obj_intersect(ray, n->obj, dist);
+				else
+				{
+					if (is_in_limit(&tmp_ray, n->obj))
+					{
+						*dist = tmp;
+						*ray = tmp_ray;
+					}
+					else
+						check_limit_intersect(ray, n->obj, dist);
+				}
+			}
+		}
 		n = n->next;
 	}
-
 }
