@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/04 02:44:23 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/05 03:25:16 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 	trs = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
 	set_all_matrix((t_object *)p, trs);
 	p->status = status;
-	if (!(o->limit))
-		o->limit = new_cell_obj(NULL, (t_object *)p);
-	else
-		new_cell_obj(&o->limit, (t_object *)p);
+	new_cell_obj(&o->limit, (t_object *)p);
 }
 
 void	parsing_local_limit(t_object *o, t_dot origin, t_vector normal,
@@ -49,10 +46,7 @@ void	parsing_local_limit(t_object *o, t_dot origin, t_vector normal,
 	trs = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
 	set_all_matrix((t_object *)p, trs);
 	p->status = status;
-	if (!(o->limit))
-		o->limit = new_cell_obj(NULL, (t_object *)p);
-	else
-		new_cell_obj(&o->limit, (t_object *)p);
+	new_cell_obj(&o->limit, (t_object *)p);
 }
 
 void	global_loop(t_object *obj, char *limit)

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/04 04:00:53 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/05 03:41:56 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 int					parsing_vector(char *data_vector, t_vector *d);
 int					parsing_dot(char *data_dot, t_dot *d);
 int					parsing_color(char *data_color, SDL_Color *c);
-int					parsing_physic(char *data_physic, t_objs_comp *args);
+void				parsing_physic(char *data_physic, t_objs_comp *args);
 t_scene				*parsing(int argc, char **argv);
 
 /*
@@ -55,7 +55,7 @@ t_camera			*parsing_camera(char *scene);
 t_parallel_light	*parsing_parallel_light(char *light);
 t_spotlight			*parsing_spotlight(char *light);
 t_orb_light			*parsing_orb_light(char *light);
-int					parsing_light(char *scene, t_scene *scn);
+t_list_lights		*parsing_light(char *scene);
 
 /*
 **	parsing_objects.c
@@ -71,7 +71,7 @@ t_list_objs			*parsing_object(char *scene);
 **	parsing_transformations.c
 */
 
-t_trans_data		parsing_transformations(char *object);
+void				parsing_transformations(t_object *obj, char *object);
 
 /*
 **	parsing_limit.c

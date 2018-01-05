@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 00:21:37 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/04 06:12:10 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/05 03:50:14 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		parsing_negative_obj(t_object *obj, char *object)
 	{
 		if (!(obj->negative_obj = parsing_object(data)))
 			return (-1);
+
 		free(data);
 	}
 	return (0);

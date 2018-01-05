@@ -26,28 +26,12 @@
 			<g>0</g>
 			<b>0</b>
 		</color>
-		<physic>
-			<reflexion_amount>0</reflexion_amount>
-			<refraction_amount>0</refraction_amount>
-			<refraction_index>1.5</refraction_index>
-			<shininess>30</shininess>
-		</physic>
 		<transformations>
 			<rotation>
 				<x>45</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
 		</transformations>
 		<radius>40</radius>
 		<negative_obj>
@@ -63,30 +47,15 @@
 					<g>255</g>
 					<b>0</b>
 				</color>
-				<physic>
-					<reflexion_amount>0</reflexion_amount>
-					<refraction_amount>0</refraction_amount>
-					<refraction_index>1.5</refraction_index>
-					<shininess>30</shininess>
-				</physic>
 				<transformations>
 					<rotation>
-						<x>45</x>
+						<x>-45</x>
 						<y>0</y>
 						<z>0</z>
 					</rotation>
-					<scale>
-						<x>1</x>
-						<y>1</y>
-						<z>1</z>
-					</scale>
-					<translation>
-						<x>0</x>
-						<y>0</y>
-						<z>0</z>
-					</translation>
 				</transformations>
 				<radius>30</radius>
+				<status>full</status>
 			</object>
 		</negative_obj>
 	</object>
@@ -104,37 +73,7 @@
 			<g>0</g>
 			<b>100</b>
 		</color>
-		<physic>
-			<reflexion_amount>0</reflexion_amount>
-			<refraction_amount>0</refraction_amount>
-			<refraction_index>1.5</refraction_index>
-			<shininess>30</shininess>
-		</physic>
-		<transformations>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
-		</transformations>
 	</object>
-
-
-
-
-
-
-
 
 	<light>
 		<type>orb</type>

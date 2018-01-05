@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/04 04:16:01 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/05 03:50:12 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ t_plane		*parsing_plane(char *object)
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
 		|| !(data[1] = get_interval(object, "<color>", "</color>"))
-		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
 		|| !(data[3] = get_interval(object, "<normal>", "</normal>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
 		|| (parsing_color(data[1], &args.col) == -1)
-		|| (parsing_physic(data[2], &args) == -1)
 		|| (parsing_vector(data[3], &normal) == -1))
 		return (NULL);
+	data[2] = get_interval(object, "<physic>", "</physic>");
+	parsing_physic(data[2], &args);
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);
@@ -42,12 +42,12 @@ t_sphere	*parsing_sphere(char *object)
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
 		|| !(data[1] = get_interval(object, "<color>", "</color>"))
-		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
 		|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
-		|| (parsing_color(data[1], &args.col) == -1)
-		|| (parsing_physic(data[2], &args) == -1))
+		|| (parsing_color(data[1], &args.col) == -1))
 		return (NULL);
+	data[2] = get_interval(object, "<physic>", "</physic>");
+	parsing_physic(data[2], &args);
 	radius = atod(data[3]);
 	free(data[0]);
 	free(data[1]);
@@ -64,12 +64,12 @@ t_cylinder	*parsing_cylinder(char *object)
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
 		|| !(data[1] = get_interval(object, "<color>", "</color>"))
-		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
 		|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
-		|| (parsing_color(data[1], &args.col) == -1)
-		|| (parsing_physic(data[2], &args) == -1))
+		|| (parsing_color(data[1], &args.col) == -1))
 		return (NULL);
+	data[2] = get_interval(object, "<physic>", "</physic>");
+	parsing_physic(data[2], &args);
 	radius = atod(data[3]);
 	free(data[0]);
 	free(data[1]);
@@ -86,12 +86,12 @@ t_cone		*parsing_cone(char *object)
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
 		|| !(data[1] = get_interval(object, "<color>", "</color>"))
-		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
 		|| !(data[3] = get_interval(object, "<angle>", "</angle>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
-		|| (parsing_color(data[1], &args.col) == -1)
-		|| (parsing_physic(data[2], &args) == -1))
+		|| (parsing_color(data[1], &args.col) == -1))
 		return (NULL);
+	data[2] = get_interval(object, "<physic>", "</physic>");
+	parsing_physic(data[2], &args);
 	angle = atod(data[3]);
 	free(data[0]);
 	free(data[1]);
@@ -121,7 +121,6 @@ t_list_objs	*parsing_object(char *scene)
 	char			*data[2];
 	t_object		*obj;
 	t_list_objs		*l;
-	t_trans_data	trans;
 
 	l = NULL;
 	while ((data[0] = get_interval(scene, "<object>", "</object>")))
@@ -130,8 +129,7 @@ t_list_objs	*parsing_object(char *scene)
 			return (NULL);
 		if (!(obj = parsing_object2(data[0], data[1])))
 			return (NULL);
-		trans = parsing_transformations(data[0]);
-		set_all_matrix(obj, trans);
+		parsing_transformations(obj, data[0]);
 		parsing_limit(obj, data[0]);
 		if (parsing_negative_obj(obj, data[0]) == -1)
 			return (NULL);
@@ -139,10 +137,7 @@ t_list_objs	*parsing_object(char *scene)
 			ft_strlen(data[0]);
 		free(data[1]);
 		free(data[0]);
-		if (!l)
-			l = new_cell_obj(NULL, obj);
-		else
-			new_cell_obj(&l, obj);
+		new_cell_obj(&l, obj);
 	}
 	return (l);
 }

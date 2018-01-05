@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/04 04:03:51 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/05 03:25:53 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,33 +63,34 @@ int			parsing_color(char *data_color, SDL_Color *c)
 	return (0);
 }
 
-int			parsing_physic(char *data_physic, t_objs_comp *args)
+void		parsing_physic(char *data_physic, t_objs_comp *args)
 {
 	char	*data[4];
 
-	if (!(data[0] = get_interval(data_physic, "<refraction_amount>",
-		"</refraction_amount>"))
-		|| !(data[1] = get_interval(data_physic, "<refraction_index>",
-		"</refraction_index>"))
-		|| !(data[2] = get_interval(data_physic, "<reflexion_amount>",
-		"</reflexion_amount>"))
-		|| !(data[3] = get_interval(data_physic, "<shininess>",
-		"</shininess>")))
-		return (-1);
-	if (between(args->refraction_amount = atod(data[0]), 0, 1) == -1)
-		exit_custom_error("rt", ":refraction_amount must be between <0 - 1.0>");
-	if (args->refraction_amount != 0
-		&& between(args->refractive_index = atod(data[1]), 1.1, 10) == -1)
-		exit_custom_error("rt", ":refractive_index must be between <1.1 - 10>");
-	if (between(args->reflection_amount = atod(data[2]), 0, 1) == -1)
-		exit_custom_error("rt", ":reflection_amount must be between <0 - 1.0>");
-	if (between(args->shininess = atod(data[3]), 0, 100) == -1)
-		exit_custom_error("rt", ":shininess must be between <0 - 100>");
+	args->refraction_amount = 0;
+	args->refractive_index = 0;
+	args->reflection_amount = 0;
+	args->shininess = 30;
+	if ((data[0] = get_interval(data_physic, "<refraction_amount>",
+		"</refraction_amount>")))
+		if (between(args->refraction_amount = atod(data[0]), 0, 1) == -1)
+			exit_custom_error("rt", ":refraction_amount must be between <0 - 1.0>");
+	if ((data[1] = get_interval(data_physic, "<refraction_index>",
+		"</refraction_index>")))
+		if (args->refraction_amount != 0 &&
+			(args->refractive_index = atod(data[1])) < 1)
+			exit_custom_error("rt", ":refractive_index must be greater than <1>");
+	if ((data[2] = get_interval(data_physic, "<reflexion_amount>",
+		"</reflexion_amount>")))
+		if (between(args->reflection_amount = atod(data[2]), 0, 1) == -1)
+			exit_custom_error("rt", ":reflection_amount must be between <0 - 1.0>");
+	if ((data[3] = get_interval(data_physic, "<shininess>", "</shininess>")))
+		if (between(args->shininess = atod(data[3]), 0, 100) == -1)
+			exit_custom_error("rt", ":shininess must be between <0 - 100>");
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
-	return (0);
 }
 
 t_scene		*parsing(int argc, char **argv)
@@ -109,7 +110,7 @@ t_scene		*parsing(int argc, char **argv)
 		if (!(scene = get_interval(file, "<scene>", "</scene>"))
 			|| !(scn = parsing_scene(scene)))
 			exit_custom_error("rt", ":parsing_scene() failed");
-		if ((parsing_light(scene, scn) == -1))
+		if (!(scn->lights = parsing_light(scene)))
 			exit_custom_error("rt", ":parsing_light() failed");
 		if (!(scn->objects = parsing_object(scene)))
 			exit_custom_error("rt", ":parsing_object() failed");
