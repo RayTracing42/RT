@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_limit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/02 17:09:36 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/03 13:33:31 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,9 @@ void	parsing_limit(t_object *obj, char *object)
 	char	*data;
 
 	if (!(data = get_interval(object, "<limit>", "</limit>")))
-		return ;
-	local_loop(obj, data);
-	global_loop(obj, data);
-	free(data);
+	{
+		local_loop(obj, data);
+		global_loop(obj, data);
+		free(data);
+	}
 }
