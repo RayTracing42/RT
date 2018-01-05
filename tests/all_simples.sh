@@ -10,7 +10,7 @@ else
 	echo Pas d\'exécutable.
 	exit
 fi
-for map in simple/*.xml
+for map in simple/*$1*.xml
 do
 	echo "$PWD/$map"
 	"$EXE" "$PWD/$map"

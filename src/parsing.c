@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/03 18:53:02 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/05 20:59:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ int			parsing_physic(char *data_physic, t_objs_comp *args)
 		return (-1);
 	if (between(args->refraction_amount = atod(data[0]), 0, 1) == -1)
 		exit_custom_error("rt", ":refraction_amount must be between <0 - 1.0>");
-	if (args->refraction_amount != 0
-		&& between(args->refractive_index = atod(data[1]), 1.1, 10) == -1)
-		exit_custom_error("rt", ":refractive_index must be between <1.1 - 10>");
+	if (args->refraction_amount != 0 &&
+		(args->refractive_index = atod(data[1])) < 1)
+		exit_custom_error("rt", ":refractive_index must be greater than <1>");
 	if (between(args->reflection_amount = atod(data[2]), 0, 1) == -1)
 		exit_custom_error("rt", ":reflection_amount must be between <0 - 1.0>");
 	if (between(args->shininess = atod(data[3]), 0, 100) == -1)
