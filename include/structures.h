@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/02 17:11:47 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/05 20:34:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct		s_ray
 	struct s_object			*obj;
 	struct s_light			*light;
 	struct s_objs_tree		*tree;
+	double					shad_opacity;
 	double					actual_refractive_i;
 	double					percuted_refractive_i;
 	double					limit;
@@ -229,10 +230,10 @@ typedef struct				s_plane
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-	
+
 	struct s_list_obs		*limit;
 	int						status;
-	
+
 	double					a;
 	double					b;
 	double					c;
