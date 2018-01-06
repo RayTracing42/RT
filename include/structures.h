@@ -6,14 +6,17 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/05 20:34:08 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/06 14:31:52 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
-# define WIN_WIDTH 	1200
-# define WIN_HEIGHT 650
+# define WIN_WIDTH	1200
+# define WIN_HEIGHT	650
+# define _A			0
+# define _B			1
+# define _C			2
 # ifndef __APPLE__
 #  include <SDL2/SDL.h>
 # else
