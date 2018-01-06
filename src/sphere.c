@@ -6,20 +6,19 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/29 04:06:17 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 11:27:42 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			sphere_intersect(t_ray *ray, t_object *obj, int i)
+static double			sphere_intersect(t_ray *ray, t_parequation e,
+	t_object *obj, int i)
 {
 	t_sphere		*s;
-	t_parequation	e;
 	double			t[4];
 
-	e = ray->equ;
 	s = (t_sphere*)obj;
 	t[0] = -1;
 	t[1] = pow(e.vd.x, 2) + pow(e.vd.y, 2) + pow(e.vd.z, 2);
@@ -39,6 +38,14 @@ static const t_vector	*get_sphere_normal(t_dot *inter, t_object *obj)
 	return (&s->normal);
 }
 
+static int				is_in_sphere(t_dot *i, t_object *obj)
+{
+	t_sphere	*s;
+
+	s = (t_sphere*)obj;
+	return ((pow(i->x, 2) + pow(i->y, 2) + pow(i->z, 2) <= s->r2));
+}
+
 t_sphere				*new_sphere(t_objs_comp args, double radius)
 {
 	t_sphere	*sphere;
@@ -46,6 +53,7 @@ t_sphere				*new_sphere(t_objs_comp args, double radius)
 	sphere = (t_sphere*)new_object(SPHERE, args);
 	sphere->radius = radius;
 	sphere->get_normal = get_sphere_normal;
+	sphere->is_in_obj = is_in_sphere;
 	sphere->intersect = sphere_intersect;
 	sphere->r2 = pow(radius, 2);
 	return (sphere);

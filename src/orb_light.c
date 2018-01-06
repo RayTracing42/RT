@@ -6,13 +6,13 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:32:44 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/10 13:05:54 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/16 11:37:24 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int	is_in_orb_light(t_light *light, t_ray *light_ray)
+static int		is_in_orb_light(t_light *light, t_ray *light_ray)
 {
 	(void)light;
 	(void)light_ray;
@@ -26,7 +26,7 @@ static t_vector	get_orb_ray_vect(t_dot *pos, t_light *light)
 						((t_orb_light*)light)->orig.z - pos->z});
 }
 
-t_orb_light	*new_orb_light(t_dot orig, SDL_Color color, double power)
+t_orb_light		*new_orb_light(t_dot orig, SDL_Color color, double power)
 {
 	t_orb_light	*orb;
 
@@ -37,7 +37,7 @@ t_orb_light	*new_orb_light(t_dot orig, SDL_Color color, double power)
 	return (orb);
 }
 
-void		delete_orb_light(t_orb_light *orb)
+void			delete_orb_light(t_orb_light *orb)
 {
 	delete_spotlight((t_spotlight*)orb);
 }

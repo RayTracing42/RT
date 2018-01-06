@@ -49,7 +49,6 @@ t_cylinder	*new_cylinder(t_objs_comp args, double radius);
 ** plane.c
 */
 void		delete_plane(t_plane *plane);
-int			is_in_plane(t_dot *d, t_plane *p);
 t_plane		*new_plane(t_objs_comp args, t_vector normal);
 
 /*

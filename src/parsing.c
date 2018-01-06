@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/26 15:15:01 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/16 11:35:30 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ t_scene		*parsing(int argc, char **argv)
 		if (!(scene = get_interval(file, "<scene>", "</scene>"))
 			|| !(scn = parsing_scene(scene)))
 			exit_custom_error("rt", ":parsing_scene() failed");
-		if ((parsing_ambient_light(scene, scn) == -1))
-			exit_custom_error("rt", ":parsing_ambient_light() failed");
 		if ((parsing_light(scene, scn) == -1))
 			exit_custom_error("rt", ":parsing_light() failed");
 		if ((parsing_object(scene, scn) == -1))

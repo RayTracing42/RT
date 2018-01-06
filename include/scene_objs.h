@@ -14,7 +14,7 @@
 # define SCENE_OBJS_H
 # include "structures.h"
 
-void	delete_cell_obj(t_list_objs **cell);
-void	scene_add_object(t_object *obj, t_scene *scene);
-
+void		delete_cell_obj(t_list_objs **cell);
+void		scene_add_object(t_object *obj, t_scene *scene);
+t_list_objs	*new_cell_obj(t_list_objs **head, t_object *obj);
 #endif

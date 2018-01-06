@@ -1,38 +1,29 @@
-/*============================================================================*/
+/* ************************************************************************** */
 /*                                                                            */
-/*        fichier :   shadows.c                                               */
+/*                                                        :::      ::::::::   */
+/*   shadows.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
+/*   Updated: 2017/12/21 12:04:03 by fcecilie         ###   ########.fr       */
 /*                                                                            */
-/*        auteur  :   fcecilie                                                */
-/*        adresse :   fcecilie@student.42.fr                                  */
-/*                                                                            */
-/*============================================================================*/
+/* ************************************************************************** */
 
 #include "rt.h"
 
-int		check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs, t_light *light)
+int			check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs,
+	t_light *light)
 {
 	double	tmp;
 	t_ray	tmp_ray;
 
 	if (!light->is_in_light(light, light_ray))
 		return (1);
-	while (l_objs != NULL)
-	{
-		tmp_ray = first_intersect(light_ray, l_objs->obj, &tmp);
-		if (gt(tmp, 0) && lt(tmp, 1))
-		{
-			if (is_in_limit(light_ray, &tmp_ray, l_objs->obj))
-				return (1);
-			else
-			{
-				tmp_ray = second_intersect(light_ray, l_objs->obj, &tmp);
-				if (gt(tmp, 0) && lt(tmp, 1))
-					if (is_in_limit(light_ray, &tmp_ray, l_objs->obj))
-						return (1);
-			}
-		}
-		l_objs = l_objs->next;
-	}
+	tmp_ray = *light_ray;
+	tmp = check_intersect(&tmp_ray, l_objs);
+	if (gt(tmp, 0) && lt(tmp, 1))
+		return (1);
 	return (0);
 }
 
@@ -71,7 +62,7 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 	t_ray			light_ray;
 	SDL_Color		multi_lights;
 
-	multi_lights = (SDL_Color){0, 0, 0, 255};
+	multi_lights = div_colors(ray->color, scn);
 	tmp = scn->lights;
 	while (tmp != NULL)
 	{
@@ -88,5 +79,5 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 		}
 		tmp = tmp->next;
 	}
-	return (div_colors(multi_lights, scn));
+	return (multi_lights);
 }

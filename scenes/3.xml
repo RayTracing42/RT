@@ -3,13 +3,13 @@
 	
 	<camera>
 		<origin>
-			<x>-400</x>
-			<y>80</y>
-			<z>200</z>
+			<x>-200</x>
+			<y>50</y>
+			<z>100</z>
 		</origin>
 		<angle>
 			<x>0</x>
-			<y>30</y>
+			<y>0</y>
 			<z>0</z>
 		</angle>
 	</camera>	
@@ -29,7 +29,7 @@
 	</ambient_light>
 
 	<object>
-		<type>sphere</type>
+		<type>cylinder</type>
 		<origin>
 			<x>200</x>
 			<y>0</y>
@@ -49,8 +49,8 @@
 		<transformations>
 			<rotation>
 				<x>0</x>
-				<y>-20</y>
-				<z>30</z>
+				<y>-40</y>
+				<z>0</z>
 			</rotation>
 			<scale>
 				<x>1</x>
@@ -65,88 +65,43 @@
 		</transformations>
 		<limit>
 			<local>
-				<up_x>30</up_x>
-				<up_y>30</up_y>
-				<up_z>30</up_z>
-				<down_x>-30</down_x>
-				<down_y>-30</down_y>
-				<down_z>-30</down_z>
+				<origin><x>200</x><y>10</y><z>10</z></origin>
+				<normal><x>0</x><y>0</y><z>5</z></normal>
+				<status>full</status>
 			</local>
-			<global>
-				<up_x></up_x>
-				<up_y></up_y>
-				<up_z></up_z>
-				<down_x></down_x>
-				<down_y></down_y>
-				<down_z></down_z>
-			</global>
+			<local>
+				<origin><x>200</x><y>10</y><z>10</z></origin>
+				<normal><x>0</x><y>10</y><z>2</z></normal>
+				<status>full</status>
+			</local>
+			<local>
+				<origin><x>200</x><y>0</y><z>0</z></origin>
+				<normal><x>0</x><y>5</y><z>5</z></normal>
+				<status>empty</status>
+			</local>
 		</limit>
 		<radius>40</radius>
 	</object>
+
+
+
 	<object>
 		<type>plane</type>
 		<origin>
-			<x>400</x>
-			<y>-50</y>
-			<z>0</z>
-		</origin>
-		<normal>
-			<x>-1</x>
+			<x>1500</x>
 			<y>0</y>
 			<z>0</z>
-		</normal>
-		<color>
-			<r>100</r>
-			<g>100</g>
-			<b>100</b>
-		</color>
-		<physic>
-			<reflexion_amount>0</reflexion_amount>
-			<refraction_amount>0</refraction_amount>
-			<refraction_index>0</refraction_index>
-			<shininess>30</shininess>
-		</physic>
-		<transformations>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
-		</transformations>
-	</object>
-
-
-	<object>
-		<type>plane</type>
-		<origin>
-			<x>0</x>
-			<y>-50</y>
-			<z>0</z>
 		</origin>
-		<normal>
-			<x>0</x>
-			<y>1</y>
-			<z>0</z>
-		</normal>
+		<normal><x>-1</x><y>0</y><z>0</z></normal>
 		<color>
-			<r>100</r>
-			<g>100</g>
+			<r>155</r>
+			<g>0</g>
 			<b>100</b>
 		</color>
 		<physic>
 			<reflexion_amount>0</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
-			<refraction_index>0</refraction_index>
+			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
 		<transformations>
@@ -167,12 +122,20 @@
 			</translation>
 		</transformations>
 	</object>
+
+
+
+
+
+
+
+
 	<light>
 		<type>orb</type>
 		<origin>
 			<x>-200</x>
 			<y>0</y>
-			<z>50</z>
+			<z>-200</z>
 		</origin>
 		<color>
 			<r>100</r>
@@ -182,26 +145,19 @@
 		<power>0.8</power>
 	</light>
 
-
 	<light>
-		<type>spot</type>
+		<type>orb</type>
 		<origin>
 			<x>-200</x>
-			<y>0</y>
-			<z>50</z>
+			<y>50</y>
+			<z>200</z>
 		</origin>
-		<direction>
-			<x>2</x>
-			<y>0</y>
-			<z>-1</z>
-		</direction>
 		<color>
 			<r>100</r>
 			<g>100</g>
 			<b>100</b>
 		</color>
 		<power>0.8</power>
-		<aperture>45</aperture>
 	</light>
 
 </scene>

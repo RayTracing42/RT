@@ -5,43 +5,105 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/29 04:06:37 by fcecilie         ###   ########.fr       */
+/*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
+/*   Updated: 2018/01/02 17:05:16 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		test_limit(t_dot *inter, t_limit *lim)
+int		is_in_right_side_of_limit(t_dot *i, t_object *p)
 {
-	if ((lim->nb[0] && inter->x > *lim->nb[0])
-		|| (lim->nb[1] && inter->y > *lim->nb[1])
-		|| (lim->nb[2] && inter->z > *lim->nb[2])
-		|| (lim->nb[3] && inter->x < *lim->nb[3])
-		|| (lim->nb[4] && inter->y < *lim->nb[4])
-		|| (lim->nb[5] && inter->z < *lim->nb[5]))
-		return (0);
+	double	distance_1;
+	double	distance_2;
+
+	distance_1 = get_dot_dist(i,
+			&(t_dot){(p->origin.x + p->normal.x),
+			(p->origin.y + p->normal.y),
+			(p->origin.z + p->normal.z)});
+	distance_2 = get_dot_dist(i,
+			&(t_dot){(p->origin.x - p->normal.x),
+			(p->origin.y - p->normal.y),
+			(p->origin.z - p->normal.z)});
+	return ((distance_1 >= distance_2));
+}
+
+int		is_in_limit(t_ray *ray, t_object *father)
+{
+	t_list_objs	*l;
+
+	l = father->limit;
+	while (l)
+	{
+		if (ray->obj != l->obj)
+		{
+			if (!is_in_right_side_of_limit(&ray->inter, l->obj))
+				return (0);
+		}
+		l = l->next;
+	}
 	return (1);
 }
 
-int		is_in_limit(t_ray *ray, t_ray *tmp_ray, t_object *obj)
+int		empty_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 {
-	if (test_limit(&tmp_ray->inter, &obj->local_limit))
+	transform_inter(tmp_ray, tmp_ray->obj);
+	if (is_in_limit(tmp_ray, father))
 	{
-		transform_inter(tmp_ray, obj);
-		if (test_limit(&tmp_ray->inter, &obj->global_limit))
+		*ray = *tmp_ray;
+		return (1);
+	}
+	return (0);
+}
+
+int		full_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
+{
+	t_vector	center;
+
+	mult_vect(&center, father->trans_const, &(t_vector){0, 0, 0});
+	center.x += father->origin.x;
+	center.y += father->origin.y;
+	center.z += father->origin.z;
+	transform_inter(tmp_ray, tmp_ray->obj);
+	if (is_in_limit(tmp_ray, father))
+	{
+		tmp_ray->inter.x -= center.x;
+		tmp_ray->inter.y -= center.y;
+		tmp_ray->inter.z -= center.z;
+		if (father->is_in_obj(&tmp_ray->inter, father))
 		{
-			ray->inter = tmp_ray->inter;
-			ray->normal = tmp_ray->normal;
-			ray->nb_intersect = tmp_ray->nb_intersect;
-			ray->color = obj->color;
-			ray->obj = obj;
-			ray->percuted_refractive_i = obj->obj_light.refractive_index;
+			tmp_ray->inter.x += center.x;
+			tmp_ray->inter.y += center.y;
+			tmp_ray->inter.z += center.z;
+			*ray = *tmp_ray;
 			return (1);
 		}
-		else
-			return (0);
 	}
-	else
-		return (0);
+	return (0);
+}
+
+void	check_limit_intersect(t_ray *ray, t_object *father, double *dist)
+{
+	double		tmp;
+	t_ray		tmp_ray;
+	t_list_objs	*l;
+	t_plane		*p;
+
+	l = father->limit;
+	while (l)
+	{
+		p = (t_plane *)l->obj;
+		tmp_ray = (p->status == 0) ? second_intersect(ray, father, &tmp) :
+			first_intersect(ray, l->obj, &tmp);
+		if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && gt(*dist, 0))))
+		{
+			if (p->status == 0)
+				if (empty_limit(ray, &tmp_ray, father))
+					*dist = tmp;
+			if (p->status == 1)
+				if (full_limit(ray, &tmp_ray, father))
+					*dist = tmp;
+		}
+		l = l->next;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/26 15:27:48 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/02 16:03:47 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,28 +102,27 @@ t_cone		*parsing_cone(char *object)
 
 int			parsing_object(char *scene, t_scene *scn)
 {
-	char		*data[2];
-	t_object	*obj;
+	char			*data[2];
+	t_object		*obj;
+	t_trans_data	trans;
 
 	while ((data[0] = get_interval(scene, "<object>", "</object>")))
 	{
 		obj = NULL;
 		if (!(data[1] = get_interval(data[0], "<type>", "</type>")))
 			return (-1);
-		if (!(ft_strcmp(data[1], "sphere")) || !(ft_strcmp(data[1], "SPHERE")))
+		if (!(ft_strcmp(data[1], "sphere")))
 			obj = (t_object *)parsing_sphere(data[0]);
-		else if (!(ft_strcmp(data[1], "plane"))
-			|| !(ft_strcmp(data[1], "PLANE")))
+		else if (!(ft_strcmp(data[1], "plane")))
 			obj = (t_object *)parsing_plane(data[0]);
-		else if (!(ft_strcmp(data[1], "cylinder"))
-			|| !(ft_strcmp(data[1], "CYLINDER")))
+		else if (!(ft_strcmp(data[1], "cylinder")))
 			obj = (t_object *)parsing_cylinder(data[0]);
-		else if (!(ft_strcmp(data[1], "cone")) || !(ft_strcmp(data[1], "CONE")))
+		else if (!(ft_strcmp(data[1], "cone")))
 			obj = (t_object *)parsing_cone(data[0]);
-		else
+		if (!obj)
 			return (-1);
-		if (!obj || (parsing_transformations(obj, data[0]) == -1))
-			return (-1);
+		trans = parsing_transformations(data[0]);
+		set_all_matrix(obj, trans);
 		parsing_limit(obj, data[0]);
 		scene = ft_strstr(scene, "</object>") + ft_strlen("</object>");
 		free(data[1]);

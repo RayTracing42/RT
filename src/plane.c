@@ -6,22 +6,21 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/21 16:48:44 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/02 17:09:10 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			plane_intersect(t_ray *ray, t_object *obj, int i)
+static double			plane_intersect(t_ray *ray, t_parequation e,
+	t_object *obj, int i)
 {
 	double			t;
 	double			denom;
-	t_parequation	e;
 	t_plane			*p;
 
 	(void)i;
-	e = ray->equ;
 	t = -1;
 	ray->nb_intersect = 0;
 	p = (t_plane*)obj;
@@ -30,7 +29,7 @@ static double			plane_intersect(t_ray *ray, t_object *obj, int i)
 	t = -((p->a * e.vc.x + p->b * e.vc.y + p->c * e.vc.z + p->d) / denom);
 	if (gt(t, 0))
 	{
-		ray->nb_intersect = 1;
+		ray->nb_intersect = 2;
 		ray->inter = equation_get_dot(&e, t);
 	}
 	return (t);
@@ -42,11 +41,13 @@ static const t_vector	*get_plane_normal(t_dot *inter, t_object *obj)
 	return (&obj->normal);
 }
 
-int						is_in_plane(t_dot *d, t_plane *p)
+static int				is_in_plane(t_dot *i, t_object *obj)
 {
 	double	res;
+	t_plane *p;
 
-	res = p->a * d->x + p->b * d->y + p->c * d->z + p->d;
+	p = (t_plane *)obj;
+	res = p->a * i->x + p->b * i->y + p->c * i->z + p->d;
 	res *= pow(10, 12);
 	return (!((long)res > 0 || (long)res < 0));
 }
@@ -56,13 +57,15 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal)
 	t_plane		*plane;
 
 	plane = (t_plane*)new_object(PLANE, args);
+	vect_normalize(&normal);
 	plane->normal = normal;
 	plane->get_normal = get_plane_normal;
+	plane->is_in_obj = is_in_plane;
 	plane->intersect = plane_intersect;
 	plane->a = normal.x;
 	plane->b = normal.y;
 	plane->c = normal.z;
-	plane->d = -(normal.x * args.orig.x + normal.y * args.orig.y + normal.z * args.orig.z);
+	plane->d = 0;
 	plane->z = args.orig.z;
 	return (plane);
 }

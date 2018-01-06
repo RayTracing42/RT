@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/29 04:06:35 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/02 17:05:20 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,14 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 		tmp_ray = first_intersect(ray, l_objs->obj, &tmp);
 		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
-			if (is_in_limit(ray, &tmp_ray, l_objs->obj))
-				dist = tmp;
-			else
+			transform_inter(&tmp_ray, tmp_ray.obj);
+			if (is_in_limit(&tmp_ray, l_objs->obj))
 			{
-				tmp_ray = second_intersect(ray, l_objs->obj, &tmp);
-				if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
-					if (is_in_limit(ray, &tmp_ray, l_objs->obj))
-						dist = tmp;
+				dist = tmp;
+				*ray = tmp_ray;
 			}
+			else
+				check_limit_intersect(ray, l_objs->obj, &dist);
 		}
 		l_objs = l_objs->next;
 	}
@@ -44,8 +43,11 @@ t_ray	first_intersect(t_ray *ray, t_object *obj, double *tmp)
 	t_ray	tmp_ray;
 
 	tmp_ray = *ray;
-	tmp_ray.equ = transform_equ(&tmp_ray, obj);
-	*tmp = obj->intersect(&tmp_ray, obj, 1);
+	*tmp = obj->intersect(&tmp_ray, transform_equ(&tmp_ray, obj), obj, 1);
+	tmp_ray.normal = *obj->get_normal(&tmp_ray.inter, obj);
+	tmp_ray.color = obj->color;
+	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
+	tmp_ray.obj = obj;
 	return (tmp_ray);
 }
 
@@ -54,7 +56,10 @@ t_ray	second_intersect(t_ray *ray, t_object *obj, double *tmp)
 	t_ray	tmp_ray;
 
 	tmp_ray = *ray;
-	tmp_ray.equ = transform_equ(&tmp_ray, obj);
-	*tmp = obj->intersect(&tmp_ray, obj, 2);
+	*tmp = obj->intersect(&tmp_ray, transform_equ(&tmp_ray, obj), obj, 2);
+	tmp_ray.normal = *obj->get_normal(&tmp_ray.inter, obj);
+	tmp_ray.color = obj->color;
+	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
+	tmp_ray.obj = obj;
 	return (tmp_ray);
 }
