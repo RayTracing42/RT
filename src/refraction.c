@@ -1,16 +1,19 @@
-/*============================================================================*/
+/* ************************************************************************** */
 /*                                                                            */
-/*        fichier :   refraction.c                                            */
+/*                                                        :::      ::::::::   */
+/*   refraction.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/22 10:57:01 by fcecilie          #+#    #+#             */
+/*   Updated: 2018/01/06 15:12:08 by shiro            ###   ########.fr       */
 /*                                                                            */
-/*        auteur  :   fcecilie                                                */
-/*        adresse :   fcecilie@student.42.fr                                  */
-/*                                                                            */
-/*============================================================================*/
+/* ************************************************************************** */
 
 #include "rt.h"
 
-void	get_refracted_vect(t_vector *dir, const t_vector *norm,
-			double actual_refractive_index, double percuted_refractive_index)
+int		get_refracted_vect(t_vector *dir, const t_vector *norm,
+			double n1, double n2)
 {
 	double		cos_t1;
 	double		cos_t2;
@@ -24,13 +27,20 @@ void	get_refracted_vect(t_vector *dir, const t_vector *norm,
 	u_norm = vector(norm->x / cos_t2, norm->y / cos_t2, norm->z / cos_t2);
 	cos_t1 = vect_dot_product(&u_norm,
 							&(t_vector){-u_dir.x, -u_dir.y, -u_dir.z});
-	n1_n2 = actual_refractive_index / percuted_refractive_index;
-	cos_t2 = sqrt(1 - pow(n1_n2, 2) * (1 - pow(cos_t1, 2)));
+	n1_n2 = n1 / n2;
+	if ((cos_t2 = (1 - pow(n1_n2, 2) * (1 - pow(cos_t1, 2)))) < 0)
+	{
+		*dir = get_reflected_vect(dir, norm);
+		return (1);
+	}
+	else
+		cos_t2 = sqrt(cos_t2);
 	if (cos_t1 > 0)
 		cos_t2 = -cos_t2;
 	*dir = (t_vector){n1_n2 * u_dir.x + (n1_n2 * cos_t1 + cos_t2) * u_norm.x,
 					n1_n2 * u_dir.y + (n1_n2 * cos_t1 + cos_t2) * u_norm.y,
 					n1_n2 * u_dir.z + (n1_n2 * cos_t1 + cos_t2) * u_norm.z};
+	return (0);
 }
 
 void	get_refracted_col(t_ray *ray, t_object *src,
@@ -44,33 +54,57 @@ void	get_refracted_col(t_ray *ray, t_object *src,
 			(refracted_obj_col.b * src->obj_light.refraction_amount);
 }
 
-static void	set_nodes(t_ray *ray, t_ray *ref_ray)
+static void	update_tree_in(t_ray *ray, t_ray *ref_ray)
 {
-	if (ray->nb_intersect == 2)
+	int		t_ref;
+	double	n1;
+	double	n2;
+
+	n1 = ray->tree->obj ? ray->tree->obj->obj_light.refractive_index : 1;
+	n2 = ray->obj->obj_light.refractive_index;
+	if (!(t_ref = get_refracted_vect(&ref_ray->equ.vd, &ray->normal, n1, n2)))
+		ref_ray->tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->obj,
+			ray->tree->lvl + 1);
+	else
+		ref_ray->tree = add_new_leaf(ray->tree, &ray->tree->refracted,
+			ray->tree->obj, ray->tree->lvl);
+}
+
+static int	update_tree_out(t_ray *ray, t_ray *ref_ray)
+{
+	t_objs_tree	*first;
+	int			t_ref;
+	double		n1;
+	double		n2;
+
+	n1 = ray->tree->obj ? ray->tree->obj->obj_light.refractive_index : 1;
+	n2 = ray->obj->obj_light.refractive_index;
+	if (!(first = goto_root_obj(ray->tree, ray->obj)))
+		first = goto_root_obj(ray->tree, ray->tree->obj);
+	if (!first->root)
+		return (0);
+	if (first->lvl >= ray->tree->lvl)
+		n2 = first->root->obj ?
+			first->root->obj->obj_light.refractive_index : 1;
+	if (!(t_ref = get_refracted_vect(&ref_ray->equ.vd, &ray->normal, n1, n2)))
 	{
-		if (!if_node_exist(ref_ray->l_objs, ray->obj))
-		{
-			add_node(&ref_ray->l_objs, ray->obj);
-			ref_ray->percuted_refractive_i =
-				ray->obj->obj_light.refractive_index;
-		}
+		if (first->lvl < ray->tree->lvl)
+			ref_ray->tree = add_new_leaf(first->root, NULL, ray->tree->obj,
+				ray->tree->lvl);
 		else
-		{
-			remove_node(&ref_ray->l_objs, ray->obj);
-			ref_ray->actual_refractive_i =
-				ray->obj->obj_light.refractive_index;
-			if (ref_ray->l_objs)
-				ref_ray->percuted_refractive_i =
-					ref_ray->l_objs->obj->obj_light.refractive_index;
-			else
-				ref_ray->percuted_refractive_i = 1;
-		}
+			ref_ray->tree = add_new_leaf(first->root, NULL, first->root->obj,
+				first->root->lvl);
 	}
+	else
+		ref_ray->tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->obj,
+			ray->tree->lvl);
+	return (1);
 }
 
 SDL_Color	refract(t_ray *ray, t_scene *scn)
 {
-	t_ray			ref_ray;
+	t_ray		ref_ray;
+	SDL_Color	ret;
 
 	ref_ray = *ray;
 	if (ray->obj->obj_light.refraction_amount == 0)
@@ -78,14 +112,14 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 	if (ray->limit < 0.1)
 		return ((SDL_Color){0, 0, 0, 255});
 	ref_ray.limit -= (1 - ray->obj->obj_light.refraction_amount) / 100;
-	set_nodes(ray, &ref_ray);
-	get_refracted_vect(&ref_ray.equ.vd, &ray->normal, ray->actual_refractive_i,
-						ray->percuted_refractive_i);
-	ref_ray.equ.vc = vector(ray->inter.x + 0.00001 * ray->equ.vd.x,
-			ray->inter.y + 0.00001 * ray->equ.vd.y,
-			ray->inter.z + 0.00001 * ray->equ.vd.z);
 	if (ray->nb_intersect == 2)
-		ref_ray.actual_refractive_i = ref_ray.percuted_refractive_i;
-	//printf("FIN REFRACTION\n");
-	return (effects(&ref_ray, scn));
+		update_tree_in(ray, &ref_ray);
+	else if (!(update_tree_out(ray, &ref_ray)))
+		return ((SDL_Color){0, 0, 0, 255});
+	ref_ray.equ.vc = vector(ray->inter.x + (1 / POW) * ray->equ.vd.x,
+			ray->inter.y + (1 / POW) * ray->equ.vd.y,
+			ray->inter.z + (1 / POW) * ray->equ.vd.z);
+	ret = effects(&ref_ray, scn);
+	remove_leaf(ref_ray.tree);
+	return (ret);
 }
