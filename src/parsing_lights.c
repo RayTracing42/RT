@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:30:32 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/05 03:29:05 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/06 06:36:55 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_parallel_light	*parsing_parallel_light(char *light)
 	SDL_Color	color;
 	double		power;
 
-	if (!(data[0] = get_interval(light, "<direction>", "</direction>"))
-		|| !(data[1] = get_interval(light, "<color>", "</color>"))
-		|| !(data[2] = get_interval(light, "<power>", "</power>"))
+	if (!(data[0] = get_interval(&light, "<direction>", "</direction>"))
+		|| !(data[1] = get_interval(&light, "<color>", "</color>"))
+		|| !(data[2] = get_interval(&light, "<power>", "</power>"))
 		|| (parsing_vector(data[0], &direction) == -1)
 		|| (parsing_color(data[1], &color) == -1))
 		return (NULL);
@@ -40,11 +40,11 @@ t_spotlight			*parsing_spotlight(char *light)
 	double		power;
 	double		aperture;
 
-	if (!(data[0] = get_interval(light, "<origin>", "</origin>"))
-		|| !(data[1] = get_interval(light, "<direction>", "</direction>"))
-		|| !(data[2] = get_interval(light, "<color>", "</color>"))
-		|| !(data[3] = get_interval(light, "<power>", "</power>"))
-		|| !(data[4] = get_interval(light, "<aperture>", "</aperture>"))
+	if (!(data[0] = get_interval(&light, "<origin>", "</origin>"))
+		|| !(data[1] = get_interval(&light, "<direction>", "</direction>"))
+		|| !(data[2] = get_interval(&light, "<color>", "</color>"))
+		|| !(data[3] = get_interval(&light, "<power>", "</power>"))
+		|| !(data[4] = get_interval(&light, "<aperture>", "</aperture>"))
 		|| (parsing_dot(data[0], &coords.orig) == -1)
 		|| (parsing_vector(data[1], &coords.direction) == -1)
 		|| (parsing_color(data[2], &color) == -1))
@@ -66,9 +66,9 @@ t_orb_light			*parsing_orb_light(char *light)
 	SDL_Color	color;
 	double		power;
 
-	if (!(data[0] = get_interval(light, "<origin>", "</origin>"))
-		|| !(data[1] = get_interval(light, "<color>", "</color>"))
-		|| !(data[2] = get_interval(light, "<power>", "</power>"))
+	if (!(data[0] = get_interval(&light, "<origin>", "</origin>"))
+		|| !(data[1] = get_interval(&light, "<color>", "</color>"))
+		|| !(data[2] = get_interval(&light, "<power>", "</power>"))
 		|| (parsing_dot(data[0], &origin) == -1)
 		|| (parsing_color(data[1], &color) == -1))
 		return (NULL);
@@ -100,14 +100,12 @@ t_list_lights		*parsing_light(char *scene)
 	t_list_lights	*l;
 
 	l = NULL;
-	while ((data[0] = get_interval(scene, "<light>", "</light>")))
+	while ((data[0] = get_interval(&scene, "<light>", "</light>")))
 	{
-		if (!(data[1] = get_interval(data[0], "<type>", "</type>")))
+		if (!(data[1] = get_interval(&data[0], "<type>", "</type>")))
 			return (NULL);
 		if (!(lux = parsing_light2(data[0], data[1])))
 			return (NULL);
-		scene = ft_strstr(scene, "<light>") + ft_strlen("<light></light>") +
-			ft_strlen(data[0]);
 		free(data[1]);
 		free(data[0]);
 		new_cell_light(&l, lux);

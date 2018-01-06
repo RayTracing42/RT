@@ -36,28 +36,6 @@
 		<radius>40</radius>
 		<negative_obj>
 			<object>
-				<type>cylinder</type>
-				<origin>
-					<x>200</x>
-					<y>0</y>
-					<z>0</z>
-				</origin>
-				<color>
-					<r>100</r>
-					<g>100</g>
-					<b>200</b>
-				</color>
-				<transformations>
-					<rotation>
-						<x>-45</x>
-						<y>0</y>
-						<z>0</z>
-					</rotation>
-				</transformations>
-				<radius>30</radius>
-				<status>full</status>
-			</object>
-			<object>
 				<type>sphere</type>
 				<origin>
 					<x>200</x>

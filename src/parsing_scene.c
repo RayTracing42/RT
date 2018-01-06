@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:48:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/26 15:28:22 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/06 06:03:34 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_scene		*parsing_scene(char *scene)
 
 	if (!(cam = parsing_camera(scene)))
 		exit_custom_error("rt", ":parsing_camera() failed");
-	if (!(data = get_interval(scene, "<brightness>", "</brightness>")))
+	if (!(data = get_interval(&scene, "<brightness>", "</brightness>")))
 		return (NULL);
 	if (between(brightness = atod(data), 0, 100) == -1)
 		exit_custom_error("rt", ":brightness must be between <0 - 100>");

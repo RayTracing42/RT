@@ -8,7 +8,7 @@
 # ============================================================================ #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra
 NAME = rt
 
 SRC_DIR = src
@@ -28,7 +28,7 @@ utils.c vectors.c view_plane.c parsing.c parsing_tools.c parsing_camera.c \
 parsing_scene.c parsing_lights.c parsing_objects.c parsing_transformations.c \
 transformations.c matrix_ops.c matrix.c check_intersect.c parsing_limit.c \
 limit.c reflect_refract_tree.c matrix_ops2.c parsing_negative_obj.c \
-negative_obj.c \
+negative_obj.c get_interval.c \
 
 SRC:= $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)

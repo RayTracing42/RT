@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:28:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/05 02:56:29 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/06 05:54:49 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_camera	*parsing_camera(char *scene)
 	t_dot		angle;
 	t_dot		origin;
 
-	if (!(data[0] = get_interval(scene, "<camera>", "</camera>"))
-		|| !(data[1] = get_interval(data[0], "<origin>", "</origin>"))
-		|| !(data[2] = get_interval(data[0], "<angle>", "</angle>"))
+	if (!(data[0] = get_interval(&scene, "<camera>", "</camera>"))
+		|| !(data[1] = get_interval(&data[0], "<origin>", "</origin>"))
+		|| !(data[2] = get_interval(&data[0], "<angle>", "</angle>"))
 		|| (parsing_dot(data[1], &origin) == -1)
 		|| (parsing_dot(data[2], &angle) == -1))
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/05 06:13:05 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/06 06:36:21 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	check_negative_obj_intersect(t_ray *ray, t_object *father, double *dist)
 	n = father->negative_obj;
 	while (n)
 	{
-//merdier;
 		if (n->obj->status == 1)
 		{
 			tmp_ray = second_intersect(ray, n->obj, &tmp);

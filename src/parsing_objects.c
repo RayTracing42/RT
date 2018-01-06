@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/05 05:26:26 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/06 06:46:52 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ t_plane		*parsing_plane(char *object)
 	t_objs_comp args;
 	t_vector	normal;
 
-	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-		|| !(data[1] = get_interval(object, "<color>", "</color>"))
-		|| !(data[3] = get_interval(object, "<normal>", "</normal>"))
+	if (!(data[0] = get_interval(&object, "<origin>", "</origin>"))
+		|| !(data[1] = get_interval(&object, "<color>", "</color>"))
+		|| !(data[3] = get_interval(&object, "<normal>", "</normal>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
 		|| (parsing_color(data[1], &args.col) == -1)
 		|| (parsing_vector(data[3], &normal) == -1))
 		return (NULL);
-	data[2] = get_interval(object, "<physic>", "</physic>");
+	data[2] = get_interval(&object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
 	free(data[0]);
 	free(data[1]);
@@ -40,13 +40,13 @@ t_sphere	*parsing_sphere(char *object)
 	t_objs_comp args;
 	double		radius;
 
-	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-		|| !(data[1] = get_interval(object, "<color>", "</color>"))
-		|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
+	if (!(data[0] = get_interval(&object, "<origin>", "</origin>"))
+		|| !(data[1] = get_interval(&object, "<color>", "</color>"))
+		|| !(data[3] = get_interval(&object, "<radius>", "</radius>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
 		|| (parsing_color(data[1], &args.col) == -1))
 		return (NULL);
-	data[2] = get_interval(object, "<physic>", "</physic>");
+	data[2] = get_interval(&object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
 	radius = atod(data[3]);
 	free(data[0]);
@@ -62,13 +62,13 @@ t_cylinder	*parsing_cylinder(char *object)
 	t_objs_comp args;
 	double		radius;
 
-	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-		|| !(data[1] = get_interval(object, "<color>", "</color>"))
-		|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
+	if (!(data[0] = get_interval(&object, "<origin>", "</origin>"))
+		|| !(data[1] = get_interval(&object, "<color>", "</color>"))
+		|| !(data[3] = get_interval(&object, "<radius>", "</radius>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
 		|| (parsing_color(data[1], &args.col) == -1))
 		return (NULL);
-	data[2] = get_interval(object, "<physic>", "</physic>");
+	data[2] = get_interval(&object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
 	radius = atod(data[3]);
 	free(data[0]);
@@ -84,13 +84,13 @@ t_cone		*parsing_cone(char *object)
 	t_objs_comp args;
 	double		angle;
 
-	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-		|| !(data[1] = get_interval(object, "<color>", "</color>"))
-		|| !(data[3] = get_interval(object, "<angle>", "</angle>"))
+	if (!(data[0] = get_interval(&object, "<origin>", "</origin>"))
+		|| !(data[1] = get_interval(&object, "<color>", "</color>"))
+		|| !(data[3] = get_interval(&object, "<angle>", "</angle>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
 		|| (parsing_color(data[1], &args.col) == -1))
 		return (NULL);
-	data[2] = get_interval(object, "<physic>", "</physic>");
+	data[2] = get_interval(&object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
 	angle = atod(data[3]);
 	free(data[0]);
@@ -106,7 +106,7 @@ t_object	*parsing_object2(char *object)
 	char		*data;
 
 	obj = NULL;
-	if (!(data = get_interval(object, "<type>", "</type>")))
+	if (!(data = get_interval(&object, "<type>", "</type>")))
 		return (NULL);
 	if (!(ft_strcmp(data, "sphere")))
 		obj = (t_object *)parsing_sphere(object);
@@ -127,15 +127,13 @@ t_list_objs	*parsing_object(char *scene)
 	t_list_objs		*l;
 
 	l = NULL;
-	while ((data = get_interval(scene, "<object>", "</object>")))
+	while ((data = get_interval(&scene, "<object>", "</object>")))
 	{
 		if (!(obj = parsing_object2(data)))
 			return (NULL);
 		parsing_transformations(obj, data);
 		parsing_limit(obj, data);
 		parsing_negative_obj(obj, data);
-		scene = ft_strstr(scene, "<object>") + ft_strlen("<object></object>") +
-			ft_strlen(data);
 		free(data);
 		new_cell_obj(&l, obj);
 	}
