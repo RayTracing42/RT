@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_intersect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/02 17:05:20 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/06 13:23:57 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	t_ray		tmp_ray;
 
 	dist = 0;
+	tmp_ray.shad_opacity = 0;
 	while (l_objs != NULL)
 	{
 		tmp_ray = first_intersect(ray, l_objs->obj, &tmp);
@@ -48,6 +49,8 @@ t_ray	first_intersect(t_ray *ray, t_object *obj, double *tmp)
 	tmp_ray.color = obj->color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
 	tmp_ray.obj = obj;
+	if (gt(*tmp, 0))
+		tmp_ray.shad_opacity += (1 - tmp_ray.obj->obj_light.refraction_amount);
 	return (tmp_ray);
 }
 

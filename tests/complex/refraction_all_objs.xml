@@ -1,7 +1,7 @@
 Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'est pas traité;
 
 <scene>
-	<brightness>50</brightness>
+	<brightness>20</brightness>
 
 	<camera>
 		<origin>
@@ -29,9 +29,9 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<z>0</z>
 		</normal>
 		<color>
-			<r>1</r>
-			<g>1</g>
-			<b>1</b>
+			<r>255</r>
+			<g>0</g>
+			<b>0</b>
 		</color>
 		<transformations>
 			<rotation>
