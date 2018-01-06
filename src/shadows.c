@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/06 13:58:46 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/06 14:50:17 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ static SDL_Color	div_colors(SDL_Color src, t_scene *scn)
 	return (dst);
 }
 
+static void	opacify_color(SDL_Color *color, double opacity)
+{
+	opacity = 1 - ft_dmin(opacity, 1);
+	color->r *= opacity;
+	color->g *= opacity;
+	color->b *= opacity;
+}
+
 SDL_Color	shadows(t_ray *ray, t_scene *scn)
 {
 	t_list_lights	*tmp;
@@ -67,24 +75,13 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 		light_ray.equ.vd = tmp->light->get_ray_vect(&ray->inter, tmp->light);
 		light_ray.equ.vc = *(t_vector*)&ray->inter;
 		light_ray.color = ray->color;
-		if (!(check_objs_on_ray(&light_ray, scn->objects, tmp->light)))
-		{
-			light_ray.normal = ray->normal;
-			light_ray.light = tmp->light;
-			multi_lights = add_colors(multi_lights,
-										add_colors(get_shade_col(&light_ray),
-											get_specular_col(ray, &light_ray)));
-		}
-		else
-		{
-			light_ray.shad_opacity = 1 - ft_dmin(light_ray.shad_opacity, 1);
-			light_ray.color = (SDL_Color){light_ray.color.r * light_ray.shad_opacity, light_ray.color.g * light_ray.shad_opacity, light_ray.color.b * light_ray.shad_opacity, 255};
-			light_ray.normal = ray->normal;
-			light_ray.light = tmp->light;
-			multi_lights = add_colors(multi_lights,
-										add_colors(get_shade_col(&light_ray),
-											get_specular_col(ray, &light_ray)));
-		}
+		if ((check_objs_on_ray(&light_ray, scn->objects, tmp->light)))
+			opacify_color(&light_ray.color, light_ray.shad_opacity);
+		light_ray.normal = ray->normal;
+		light_ray.light = tmp->light;
+		multi_lights = add_colors(multi_lights,
+									add_colors(get_shade_col(&light_ray),
+										get_specular_col(ray, &light_ray)));
 		tmp = tmp->next;
 	}
 	return (multi_lights);

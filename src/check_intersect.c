@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/06 13:23:57 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/06 14:42:15 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	return (dist);
 }
 
-t_ray	first_intersect(t_ray *ray, t_object *obj, double *tmp)
+t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 {
 	t_ray	tmp_ray;
 
@@ -54,7 +54,7 @@ t_ray	first_intersect(t_ray *ray, t_object *obj, double *tmp)
 	return (tmp_ray);
 }
 
-t_ray	second_intersect(t_ray *ray, t_object *obj, double *tmp)
+t_ray	second_intersect(const t_ray *ray, t_object *obj, double *tmp)
 {
 	t_ray	tmp_ray;
 
