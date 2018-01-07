@@ -28,6 +28,13 @@
 			<g>0</g>
 			<b>0</b>
 		</color>
+		<transformations>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>50</z>
+			</rotation>
+		</transformations>
 		<physic>
 			<refraction_amount>0</refraction_amount>
 			<reflexion_amount>0.6</reflexion_amount>
@@ -61,6 +68,32 @@
 			<shininess>30</shininess>
 		</physic>
 	</object>
+
+	<object>
+		<type>plane</type>
+		<origin>
+			<x>600</x>
+			<y>0</y>
+			<z>0</z>
+		</origin>
+		<normal>
+			<x>-3</x>
+			<y>0</y>
+			<z>1</z>
+		</normal>
+		<color>
+			<r>70</r>
+			<g>70</g>
+			<b>70</b>
+		</color>
+		<physic>
+			<reflexion_amount>0.9</reflexion_amount>
+			<refraction_amount>0</refraction_amount>
+			<refraction_index>0</refraction_index>
+			<shininess>30</shininess>
+		</physic>
+	</object>
+
 
 	<light>
 		<type>orb</type>

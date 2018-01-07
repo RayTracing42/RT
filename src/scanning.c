@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/06 15:12:08 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/06 15:42:35 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,12 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 {
 	SDL_Color	reflect_ray;
 	SDL_Color	refract_ray;
-//static int i = 0;
+
 	if (check_intersect(ray, scn->objects) > 0)
 	{
 		ray->color = shadows(ray, scn);
-	//	printf("TEST %d\n", ++i);
 		reflect_ray = reflect(ray, scn);
 		refract_ray = refract(ray, scn);
-	//	printf("TEST POST %d\n", i);
-//		--i;
 		get_reflected_col(ray, ray->obj, reflect_ray);
 		get_refracted_col(ray, ray->obj, refract_ray);
 		return (ray->color);

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/06 15:12:08 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/06 17:19:11 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static double			sphere_intersect(t_ray *ray, t_parequation e,
 	double			t;
 	double			fac[3];
 
+	double u,v;
+
 	s = (t_sphere*)obj;
 	t = -1;
 	fac[_A] = pow(e.vd.x, 2) + pow(e.vd.y, 2) + pow(e.vd.z, 2);
@@ -27,6 +29,21 @@ static double			sphere_intersect(t_ray *ray, t_parequation e,
 	fac[_C] = pow(e.vc.x, 2) + pow(e.vc.y, 2) + pow(e.vc.z, 2) - s->r2;
 	if ((ray->nb_intersect = get_quad_equation_sol(&t, fac, i)))
 		ray->inter = equation_get_dot(&e, t);
+
+/*
+	u = 0.5 + ft_to_deg(atan2(ray->inter.z, ray->inter.x)) / (2 * M_PI);
+	v = 0.5 - ft_to_deg(asin(ray->inter.y)) / M_PI;
+	s->color.r = (int)u % 255;
+*/
+
+	u = acos(ray->inter.y / s->radius);
+	v = acos(ray->inter.x / (s->radius * sin(u)));
+	u = ft_to_deg(u / (2 * M_PI));
+	v = ft_to_deg((M_PI - v) / M_PI);
+	if ((((int)(u / 10) % 2) && ((int)(v / 10) % 2)) || (!((int)(u / 10) % 2) && !((int)(v / 10) % 2)))
+		s->color = (SDL_Color){0,0,0,255};
+	else
+		s->color = (SDL_Color){255,255,255,255};
 	return (t);
 }
 
