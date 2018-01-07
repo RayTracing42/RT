@@ -1,27 +1,31 @@
-/*============================================================================*/
+/* ************************************************************************** */
 /*                                                                            */
-/*        fichier :   shadows.c                                               */
+/*                                                        :::      ::::::::   */
+/*   shadows.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
+/*   Updated: 2018/01/06 14:50:17 by shiro            ###   ########.fr       */
 /*                                                                            */
-/*        auteur  :   fcecilie                                                */
-/*        adresse :   fcecilie@student.42.fr                                  */
-/*                                                                            */
-/*============================================================================*/
+/* ************************************************************************** */
 
 #include "rt.h"
 
-int		check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs, t_light *light)
+static int	check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs,
+	t_light *light)
 {
 	double	tmp;
+	t_ray	tmp_ray;
 
 	if (!light->is_in_light(light, light_ray))
 		return (1);
-	while (l_objs != NULL)
-	{
-		tmp = l_objs->obj->intersect(&light_ray->nb_intersect, &light_ray->inter, transform_equ(light_ray, l_objs->obj), l_objs->obj);
-		if (gt(tmp, 0) && lt(tmp, 1))
-			return (1);
-		l_objs = l_objs->next;
-	}
+	tmp_ray = *light_ray;
+	tmp_ray.shad_opacity = 0;
+	tmp = check_intersect(&tmp_ray, l_objs);
+	light_ray->shad_opacity = tmp_ray.shad_opacity;
+	if (gt(tmp, 0) && lt(tmp, 1))
+		return (1);
 	return (0);
 }
 
@@ -29,29 +33,33 @@ SDL_Color	add_colors(SDL_Color dst, SDL_Color src)
 {
 	SDL_Color res;
 
-	if ((dst.r + src.r) < 255)
-		res.r = dst.r + src.r;
+	if (dst.r < 255 && dst.g < 255 && dst.b < 255)
+	{
+		res.r = (dst.r + src.r) < 255 ? dst.r + src.r : 255;
+		res.g = (dst.g + src.g) < 255 ? dst.g + src.g : 255;
+		res.b = (dst.b + src.b) < 255 ? dst.b + src.b : 255;
+	}
 	else
-		res.r = 255;
-	if ((dst.g + src.g) < 255)
-		res.g = dst.g + src.g;
-	else
-		res.g = 255;
-	if ((dst.b + src.b) < 255)
-		res.b = dst.b + src.b;
-	else
-		res.b = 255;
+		return (dst);
 	return (res);
 }
 
-SDL_Color	div_colors(SDL_Color dst, t_scene *scn)
+static SDL_Color	div_colors(SDL_Color src, t_scene *scn)
 {
-	SDL_Color res;
+	SDL_Color dst;
 
-	res.r = dst.r * scn->brightness;
-	res.g = dst.g * scn->brightness;
-	res.b = dst.b * scn->brightness;
-	return (res);
+	dst.r = src.r * scn->brightness;
+	dst.g = src.g * scn->brightness;
+	dst.b = src.b * scn->brightness;
+	return (dst);
+}
+
+static void	opacify_color(SDL_Color *color, double opacity)
+{
+	opacity = 1 - ft_dmin(opacity, 1);
+	color->r *= opacity;
+	color->g *= opacity;
+	color->b *= opacity;
 }
 
 SDL_Color	shadows(t_ray *ray, t_scene *scn)
@@ -67,14 +75,13 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 		light_ray.equ.vd = tmp->light->get_ray_vect(&ray->inter, tmp->light);
 		light_ray.equ.vc = *(t_vector*)&ray->inter;
 		light_ray.color = ray->color;
-		if (!(check_objs_on_ray(&light_ray, scn->objects, tmp->light)))
-		{
-			light_ray.normal = ray->normal;
-			light_ray.light = tmp->light;
-			multi_lights = add_colors(add_colors(multi_lights,
-												get_shade_col(&light_ray)),
-									get_specular_col(ray, &light_ray));
-		}
+		if ((check_objs_on_ray(&light_ray, scn->objects, tmp->light)))
+			opacify_color(&light_ray.color, light_ray.shad_opacity);
+		light_ray.normal = ray->normal;
+		light_ray.light = tmp->light;
+		multi_lights = add_colors(multi_lights,
+									add_colors(get_shade_col(&light_ray),
+										get_specular_col(ray, &light_ray)));
 		tmp = tmp->next;
 	}
 	return (multi_lights);

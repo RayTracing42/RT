@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/11 15:23:08 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/02 16:03:26 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ double				int_to_decimal(int n);
 double				atod(char *src);
 char				*get_interval(const char *src, const char *start,
 						const char *stop);
-int					value_is_in_interval(double value, double low_limit,
+int					between(double value, double low_limit,
 						double height_limit);
 
 /*
@@ -65,5 +65,17 @@ t_sphere			*parsing_sphere(char *object);
 t_cylinder			*parsing_cylinder(char *object);
 t_cone				*parsing_cone(char *object);
 int					parsing_object(char *scene, t_scene *scn);
+
+/*
+**	parsing_transformations.c
+*/
+
+t_trans_data		parsing_transformations(char *object);
+
+/*
+**	parsing_limit.c
+*/
+
+void				parsing_limit(t_object *obj, char *object);
 
 #endif
