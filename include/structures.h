@@ -6,14 +6,17 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/11 17:29:19 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/07 14:38:23 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
-# define WIN_WIDTH 	1200
-# define WIN_HEIGHT 650
+# define WIN_WIDTH	1200
+# define WIN_HEIGHT	650
+# define _A			0
+# define _B			1
+# define _C			2
 # ifndef __APPLE__
 #  include <SDL2/SDL.h>
 # else
@@ -107,7 +110,8 @@ typedef struct		s_ray
 	SDL_Color				color;
 	struct s_object			*obj;
 	struct s_light			*light;
-	struct s_list_objs		*l_objs;
+	struct s_objs_tree		*tree;
+	double					shad_opacity;
 	double					actual_refractive_i;
 	double					percuted_refractive_i;
 	double					limit;
@@ -135,7 +139,8 @@ typedef struct				s_obj_phys
 typedef struct				s_object
 {
 	const t_type			obj_type;
-	double					(*intersect)(int *nbi, t_dot *dst, t_parequation e, struct s_object *obj);
+	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
+	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
 	const t_vector			*(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
 	t_vector				normal;
@@ -145,12 +150,12 @@ typedef struct				s_object
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
+	struct s_list_objs		*limit;
 }							t_object;
 
 typedef struct				s_objs_comp
 {
 	t_dot					orig;
-	t_vector				dir;
 	SDL_Color				col;
 	double					reflection_amount;
 	double					refraction_amount;
@@ -161,16 +166,18 @@ typedef struct				s_objs_comp
 typedef struct				s_sphere
 {
 	const t_type			obj_type;
-	double					(*intersect)(int *nbi, t_dot *dst, t_parequation e, t_object *obj);
+	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
+	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				normal;
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
-	t_matrix				*trans_inorm;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
+	struct s_list_objs		*limit;
 	double					radius;
 	double					r2;
 }							t_sphere;
@@ -178,54 +185,59 @@ typedef struct				s_sphere
 typedef struct				s_cylinder
 {
 	const t_type			obj_type;
-	double					(*intersect)(int *nbi, t_dot *dst, t_parequation e, t_object *obj);
+	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
+	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				normal;
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
-	t_matrix				*trans_inorm;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
+	struct s_list_objs		*limit;
 	double					radius;
 	double					r2;
-	double					height_top;
-	double					height_bottom;
 }							t_cylinder;
 
 typedef struct				s_cone
 {
 	const t_type			obj_type;
-	double					(*intersect)(int *nbi, t_dot *dst, t_parequation e, t_object *obj);
+	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
+	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				normal;
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
-	t_matrix				*trans_inorm;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
+	struct s_list_objs		*limit;
 	double					angle;
 	double					tanalpha2;
-	double					height_top;
-	double					height_bottom;
 }							t_cone;
 
 typedef struct				s_plane
 {
 	const t_type			obj_type;
-	double					(*intersect)(int *nbi, t_dot *dst, t_parequation e, t_object *obj);
+	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
+	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
 	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				normal;
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
-	t_matrix				*trans_inorm;
+	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
+
+	struct s_list_obs		*limit;
+	int						status;
+
 	double					a;
 	double					b;
 	double					c;
@@ -372,6 +384,15 @@ typedef struct				s_list_objs
 	t_object				*obj;
 	struct s_list_objs		*next;
 }							t_list_objs;
+
+typedef struct				s_objs_tree
+{
+	t_object				*obj;
+	int						lvl;
+	struct s_objs_tree		*root;
+	struct s_objs_tree		*reflected;
+	struct s_objs_tree		*refracted;
+}							t_objs_tree;
 
 typedef struct				s_list_lights
 {

@@ -1,11 +1,14 @@
-/*============================================================================*/
+/* ************************************************************************** */
 /*                                                                            */
-/*        fichier :   matrice_rotation.c                                      */
+/*                                                        :::      ::::::::   */
+/*   matrice_rotation.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/16 11:38:49 by fcecilie          #+#    #+#             */
+/*   Updated: 2017/12/16 11:39:24 by fcecilie         ###   ########.fr       */
 /*                                                                            */
-/*        auteur  :   fcecilie                                                */
-/*        adresse :   fcecilie@student.42.fr                                  */
-/*                                                                            */
-/*============================================================================*/
+/* ************************************************************************** */
 
 #include "rt.h"
 
@@ -36,7 +39,7 @@ t_vector	matrice_rotation_y(t_vector *m, double angle)
 t_vector	matrice_rotation_z(t_vector *m, double angle)
 {
 	t_vector	vec;
-	
+
 	vec = vector(m->x * cos(angle) - m->y * sin(angle) + m->z * 0,
 			m->x * sin(angle) + m->y * cos(angle) + m->z * 0,
 			m->x * 0 + m->y * 0 + m->z * 1);

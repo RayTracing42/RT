@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/11 17:30:20 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/07 14:35:45 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_object		*new_object(t_type type, t_objs_comp args)
 								args.shininess};
 	obj->get_normal = NULL;
 	obj->intersect = NULL;
+	obj->limit = NULL;
 	obj->trans_const = create_identity(4);
 	obj->trans_iconst = create_identity(4);
 	obj->trans_idir = create_identity(4);
@@ -41,7 +42,7 @@ t_object		*new_object(t_type type, t_objs_comp args)
 	return (obj);
 }
 
-void		set_all_matrix(t_object *object, t_trans_data data)
+void			set_all_matrix(t_object *object, t_trans_data data)
 {
 	scale(&object->trans_const, data.scale.x, data.scale.y, data.scale.z);
 	x_rotation(&object->trans_const, data.rot.x);
@@ -61,7 +62,7 @@ void		set_all_matrix(t_object *object, t_trans_data data)
 	z_rotation(&object->trans_norm, data.rot.z);
 }
 
-void		delete_object(t_object *obj)
+void			delete_object(t_object *obj)
 {
 	if (obj)
 	{

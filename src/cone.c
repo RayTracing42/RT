@@ -6,25 +6,28 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/20 19:49:13 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/06 14:34:49 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			cone_intersection(int *nbi, t_dot *dst, t_parequation e, t_object *obj)
+static double			cone_intersection(t_ray *ray, t_parequation e,
+	t_object *obj, int i)
 {
-	t_cone		*c;
-	double		t;
+	t_cone			*c;
+	double			t;
+	double			fac[3];
 
-	t = -1;
 	c = (t_cone*)obj;
-	if ((*nbi = get_quad_equation_sol(&t,
-			pow(e.vd.x, 2) + pow(e.vd.z, 2) - pow(e.vd.y, 2) * c->tanalpha2,
-			2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z - e.vd.y * e.vc.y * c->tanalpha2),
-			pow(e.vc.x, 2) + pow(e.vc.z, 2) - pow(e.vc.y, 2) * c->tanalpha2)))
-		*dst = equation_get_dot(&e, t);
+	t = -1;
+	fac[_A] = pow(e.vd.x, 2) + pow(e.vd.z, 2) - pow(e.vd.y, 2) * c->tanalpha2;
+	fac[_B] = 2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z - e.vd.y *
+		e.vc.y * c->tanalpha2);
+	fac[_C] = pow(e.vc.x, 2) + pow(e.vc.z, 2) - pow(e.vc.y, 2) * c->tanalpha2;
+	if ((ray->nb_intersect = get_quad_equation_sol(&t, fac, i)))
+		ray->inter = equation_get_dot(&e, t);
 	return (t);
 }
 
@@ -38,16 +41,22 @@ static const t_vector	*get_cone_normal(t_dot *inter, t_object *obj)
 	return (&c->normal);
 }
 
-t_cone					*new_cone(t_objs_comp args, double angle,
-								double height_top, double height_bottom)
+static int				is_in_cone(t_dot *i, t_object *obj)
+{
+	t_cone	*c;
+
+	c = (t_cone*)obj;
+	return ((pow(i->x, 2) + pow(i->z, 2) <= pow(i->y, 2) * c->tanalpha2));
+}
+
+t_cone					*new_cone(t_objs_comp args, double angle)
 {
 	t_cone	*c;
 
 	c = (t_cone*)new_object(CONE, args);
 	c->angle = angle;
-	c->height_top = height_top;
-	c->height_bottom = height_bottom;
 	c->get_normal = get_cone_normal;
+	c->is_in_obj = is_in_cone;
 	c->intersect = cone_intersection;
 	c->tanalpha2 = pow(tan(ft_to_rad(angle)), 2);
 	return (c);

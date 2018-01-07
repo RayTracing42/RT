@@ -1,11 +1,14 @@
-/*============================================================================*/
+/* ************************************************************************** */
 /*                                                                            */
-/*        fichier :   parsing_tools.c                                         */
+/*                                                        :::      ::::::::   */
+/*   parsing_tools.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/26 14:47:51 by fcecilie          #+#    #+#             */
+/*   Updated: 2017/11/26 14:48:05 by fcecilie         ###   ########.fr       */
 /*                                                                            */
-/*        auteur  :   fcecilie                                                */
-/*        adresse :   fcecilie@student.42.fr                                  */
-/*                                                                            */
-/*============================================================================*/
+/* ************************************************************************** */
 
 #include "rt.h"
 
@@ -16,7 +19,7 @@
 **	Retourne NULL si start et stop ne sont pas trouvés dans src;
 */
 
-int		value_is_in_interval(double value, double low_limit, double height_limit)
+int		between(double value, double low_limit, double height_limit)
 {
 	if (value < low_limit || value > height_limit)
 		return (-1);

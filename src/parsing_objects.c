@@ -1,152 +1,129 @@
-/*============================================================================*/
+/* ************************************************************************** */
 /*                                                                            */
-/*        fichier :   parsing_objects.c                                       */
+/*                                                        :::      ::::::::   */
+/*   parsing_objects.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
+/*   Updated: 2018/01/07 14:35:45 by shiro            ###   ########.fr       */
 /*                                                                            */
-/*        auteur  :   fcecilie                                                */
-/*        adresse :   fcecilie@student.42.fr                                  */
-/*                                                                            */
-/*============================================================================*/
+/* ************************************************************************** */
 
 #include "rt.h"
 
 t_plane		*parsing_plane(char *object)
 {
-	char		*data[5];
+	char		*data[4];
 	t_objs_comp args;
 	t_vector	normal;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-		|| !(data[1] = get_interval(object, "<direction>", "</direction>"))
-		|| !(data[2] = get_interval(object, "<color>", "</color>"))
-		|| !(data[3] = get_interval(object, "<physic>", "</physic>"))
-		|| !(data[4] = get_interval(object, "<normal>", "</normal>"))
+		|| !(data[1] = get_interval(object, "<color>", "</color>"))
+		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
+		|| !(data[3] = get_interval(object, "<normal>", "</normal>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
-		|| (parsing_vector(data[1], &args.dir) == -1)
-		|| (parsing_color(data[2], &args.col) == -1)
-		|| (parsing_physic(data[3], &args) == -1)
-		|| (parsing_vector(data[4], &normal) == -1))
+		|| (parsing_color(data[1], &args.col) == -1)
+		|| (parsing_physic(data[2], &args) == -1)
+		|| (parsing_vector(data[3], &normal) == -1))
 		return (NULL);
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
-	free(data[4]);
-	return (new_plane(args, normal, 0));
+	return (new_plane(args, normal));
 }
 
 t_sphere	*parsing_sphere(char *object)
 {
-	char		*data[5];
+	char		*data[4];
 	t_objs_comp args;
 	double		radius;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-		|| !(data[1] = get_interval(object, "<direction>", "</direction>"))
-		|| !(data[2] = get_interval(object, "<color>", "</color>"))
-		|| !(data[3] = get_interval(object, "<physic>", "</physic>"))
-		|| !(data[4] = get_interval(object, "<radius>", "</radius>"))
+		|| !(data[1] = get_interval(object, "<color>", "</color>"))
+		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
+		|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
-		|| (parsing_vector(data[1], &args.dir) == -1)
-		|| (parsing_color(data[2], &args.col) == -1)
-		|| (parsing_physic(data[3], &args) == -1))
+		|| (parsing_color(data[1], &args.col) == -1)
+		|| (parsing_physic(data[2], &args) == -1))
 		return (NULL);
-	radius = atod(data[4]);
+	radius = atod(data[3]);
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
-	free(data[4]);
 	return (new_sphere(args, radius));
 }
 
 t_cylinder	*parsing_cylinder(char *object)
 {
-	char		*data[7];
+	char		*data[4];
 	t_objs_comp args;
 	double		radius;
-	double		height_top;
-	double		height_bottom;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-		|| !(data[1] = get_interval(object, "<direction>", "</direction>"))
-		|| !(data[2] = get_interval(object, "<color>", "</color>"))
-		|| !(data[3] = get_interval(object, "<physic>", "</physic>"))
-		|| !(data[4] = get_interval(object, "<radius>", "</radius>"))
-		|| !(data[5] = get_interval(object, "<height_top>", "</height_top>"))
-		|| !(data[6] = get_interval(object, "<height_bottom>", "</height_bottom>"))
+		|| !(data[1] = get_interval(object, "<color>", "</color>"))
+		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
+		|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
-		|| (parsing_vector(data[1], &args.dir) == -1)
-		|| (parsing_color(data[2], &args.col) == -1)
-		|| (parsing_physic(data[3], &args) == -1))
+		|| (parsing_color(data[1], &args.col) == -1)
+		|| (parsing_physic(data[2], &args) == -1))
 		return (NULL);
-	radius = atod(data[4]);
-	height_top = atod(data[5]);
-	height_bottom = atod(data[6]);
+	radius = atod(data[3]);
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
-	free(data[4]);
-	free(data[5]);
-	free(data[6]);
-	return (new_cylinder(args, radius, height_top, height_bottom));
+	return (new_cylinder(args, radius));
 }
 
 t_cone		*parsing_cone(char *object)
 {
-	char		*data[7];
+	char		*data[4];
 	t_objs_comp args;
 	double		angle;
-	double		height_top;
-	double		height_bottom;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-		|| !(data[1] = get_interval(object, "<direction>", "</direction>"))
-		|| !(data[2] = get_interval(object, "<color>", "</color>"))
-		|| !(data[3] = get_interval(object, "<physic>", "</physic>"))
-		|| !(data[4] = get_interval(object, "<angle>", "</angle>"))
-		|| !(data[5] = get_interval(object, "<height_top>", "</height_top>"))
-		|| !(data[6] = get_interval(object, "<height_bottom>", "</height_bottom>"))
+		|| !(data[1] = get_interval(object, "<color>", "</color>"))
+		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
+		|| !(data[3] = get_interval(object, "<angle>", "</angle>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
-		|| (parsing_vector(data[1], &args.dir) == -1)
-		|| (parsing_color(data[2], &args.col) == -1)
-		|| (parsing_physic(data[3], &args) == -1))
+		|| (parsing_color(data[1], &args.col) == -1)
+		|| (parsing_physic(data[2], &args) == -1))
 		return (NULL);
-	angle = atod(data[4]);
-	height_top = atod(data[5]);
-	height_bottom = atod(data[6]);
+	angle = atod(data[3]);
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
-	free(data[4]);
-	free(data[5]);
-	free(data[6]);
-	return (new_cone(args, angle, height_top, height_bottom));
+	return (new_cone(args, angle));
 }
 
 int			parsing_object(char *scene, t_scene *scn)
 {
-	char		*data[2];
-	t_object	*obj;
+	char			*data[2];
+	t_object		*obj;
+	t_trans_data	trans;
 
 	while ((data[0] = get_interval(scene, "<object>", "</object>")))
 	{
 		obj = NULL;
 		if (!(data[1] = get_interval(data[0], "<type>", "</type>")))
 			return (-1);
-		if (!(ft_strcmp(data[1], "sphere")) || !(ft_strcmp(data[1], "SPHERE")))
+		if (!(ft_strcmp(data[1], "sphere")))
 			obj = (t_object *)parsing_sphere(data[0]);
-		else if (!(ft_strcmp(data[1], "plane")) || !(ft_strcmp(data[1], "PLANE")))
+		else if (!(ft_strcmp(data[1], "plane")))
 			obj = (t_object *)parsing_plane(data[0]);
-		else if(!(ft_strcmp(data[1], "cylinder")) || !(ft_strcmp(data[1], "CYLINDER")))
+		else if (!(ft_strcmp(data[1], "cylinder")))
 			obj = (t_object *)parsing_cylinder(data[0]);
-		else if(!(ft_strcmp(data[1], "cone")) || !(ft_strcmp(data[1], "CONE")))
+		else if (!(ft_strcmp(data[1], "cone")))
 			obj = (t_object *)parsing_cone(data[0]);
-		else
-			return (-1);
 		if (!obj)
 			return (-1);
+		trans = parsing_transformations(data[0]);
+		set_all_matrix(obj, trans);
+		parsing_limit(obj, data[0]);
 		scene = ft_strstr(scene, "</object>") + ft_strlen("</object>");
 		free(data[1]);
 		free(data[0]);
