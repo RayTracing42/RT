@@ -6,14 +6,14 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/07 17:23:53 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/08 17:43:40 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			plane_intersect(t_ray *ray, t_parequation e,
+double					plane_intersect(t_ray *ray, t_parequation e,
 	t_object *obj, int i)
 {
 	double			t;

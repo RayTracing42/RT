@@ -6,43 +6,32 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 17:16:14 by shiro             #+#    #+#             */
-/*   Updated: 2018/01/08 17:34:16 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/08 17:50:16 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#include <math.h>
 
 static double			triangle_intersect(t_ray *ray, t_parequation e,
 	t_object *obj, int i)
 {
-		double		t;
-		double		denom;
-		double		tmp;
-		t_triangle	*tgl;
-		t_dot		dtmp;
+	double		t;
+	double		tmp;
+	t_triangle	*tgl;
+	t_dot		itmp;
 
-		(void)i;
-		t = -1;
-		ray->nb_intersect = 0;
-		tgl = (t_triangle*)obj;
-		if (!(denom = tgl->a * e.vd.x + tgl->b * e.vd.y + tgl->c * e.vd.z))
-			return (-1);
-		t = -((tgl->a * e.vc.x + tgl->b * e.vc.y + tgl->c * e.vc.z + tgl->d) / denom);
-		if (gt(t, 0))
-		{
-			ray->inter = equation_get_dot(&e, t);
-			dtmp = (t_dot){ray->inter.x + tgl->origin.x, ray->inter.y + tgl->origin.y, ray->inter.z + tgl->origin.z};
-			if (gt(tmp = angle_between_vectors(tgl->vAB, dots_to_vect(tgl->dA, dtmp)), tgl->aA))
-				t = -1;
-			else if (gt(tmp = angle_between_vectors(tgl->vBA, dots_to_vect(tgl->dB, dtmp)), tgl->aB))
-				t = -1;
-			else if (gt(tmp = angle_between_vectors(tgl->vBC, dots_to_vect(tgl->dB, dtmp)), tgl->aB))
-				t = -1;
-			else
-				ray->nb_intersect = 2;
-		}
-		return (t);
+	tgl = (t_triangle*)obj;
+	if (gt(t = plane_intersect(ray, e, obj, i), 0))
+	{
+		itmp = (t_dot){ray->inter.x + tgl->origin.x, ray->inter.y + tgl->origin.y, ray->inter.z + tgl->origin.z};
+		if (gt(tmp = angle_between_vectors(tgl->vAB, dots_to_vect(tgl->dA, itmp)), tgl->aA))
+			t = -1;
+		else if (gt(tmp = angle_between_vectors(tgl->vBA, dots_to_vect(tgl->dB, itmp)), tgl->aB))
+			t = -1;
+		else if (gt(tmp = angle_between_vectors(tgl->vBC, dots_to_vect(tgl->dB, itmp)), tgl->aB))
+			t = -1;
+	}
+	return (t);
 }
 
 t_triangle	*new_triangle(t_objs_comp args, t_dot dA, t_dot dB, t_dot dC)
@@ -58,7 +47,6 @@ t_triangle	*new_triangle(t_objs_comp args, t_dot dA, t_dot dB, t_dot dC)
 	triangle->dA = dA;
 	triangle->dB = dB;
 	triangle->dC = dC;
-	//(void)triangle_intersect;
 	triangle->intersect = &triangle_intersect;
 	return (triangle);
 }

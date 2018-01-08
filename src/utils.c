@@ -6,27 +6,11 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:25:07 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/08 17:36:57 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/08 17:41:55 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-double		angle_between_vectors(t_vector a, t_vector b)
-{
-	double	angle;
-	double	pdt_scalaire;
-	double	dist_a;
-	double	dist_b;
-
-	dist_a = get_vect_lenght(&a);
-	dist_b = get_vect_lenght(&b);
-	if (!(dist_a && dist_b))
-		return (0);
-	pdt_scalaire = vect_dot_product(&a, &b);
-	angle = acos(pdt_scalaire / (dist_a * dist_b)) * 180 / M_PI;
-	return (angle);
-}
 
 /*
 **	Si tu viens a rejouter negatif un jour, pense aux limites a faire gaffe
@@ -43,22 +27,17 @@ int			get_status(char *status)
 		return (-1);
 }
 
-t_vector	vector(double x, double y, double z)
+int		gt(double nb1, double nb2)
 {
-	t_vector	vec;
-
-	vec.x = x;
-	vec.y = y;
-	vec.z = z;
-	return (vec);
+	return ((long)(nb1 * POW) > (long)(nb2 * POW));
 }
 
-t_dot		dot(double x, double y, double z)
+int		lt(double nb1, double nb2)
 {
-	t_dot	d;
+	return ((long)(nb1 * POW) < (long)(nb2 * POW));
+}
 
-	d.x = x;
-	d.y = y;
-	d.z = z;
-	return (d);
+int		eq(double nb1, double nb2)
+{
+	return ((long)(nb1 * POW) == (long)(nb2 * POW));
 }
