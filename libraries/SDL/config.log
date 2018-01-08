@@ -30,8 +30,8 @@ Kernel configured for up to 4 processors.
 Processor type: i486 (Intel 80486)
 Processors active: 0 1 2 3
 Primary memory available: 8.00 gigabytes
-Default processor set: 293 tasks, 1104 threads, 4 processors
-Load average: 2.98, Mach factor: 1.16
+Default processor set: 302 tasks, 1101 threads, 4 processors
+Load average: 4.33, Mach factor: 0.69
 /bin/machine           = unknown
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
@@ -1055,7 +1055,7 @@ configure:16641: checking for _strrev
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__strrev", referenced from:
-      _main in conftest-7f014a.o
+      _main in conftest-294f27.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1168,7 +1168,7 @@ configure:16641: checking for _strupr
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__strupr", referenced from:
-      _main in conftest-fdd8b7.o
+      _main in conftest-969e54.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1281,7 +1281,7 @@ configure:16641: checking for _strlwr
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__strlwr", referenced from:
-      _main in conftest-180d75.o
+      _main in conftest-1f4783.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1421,7 +1421,7 @@ configure:16641: checking for itoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_itoa", referenced from:
-      _main in conftest-7a4cc6.o
+      _main in conftest-345afd.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1537,7 +1537,7 @@ configure:16641: checking for _ltoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__ltoa", referenced from:
-      _main in conftest-f0c168.o
+      _main in conftest-c65d1d.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1653,7 +1653,7 @@ configure:16641: checking for _uitoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__uitoa", referenced from:
-      _main in conftest-5ebed6.o
+      _main in conftest-2336ef.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1769,7 +1769,7 @@ configure:16641: checking for _ultoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__ultoa", referenced from:
-      _main in conftest-64350b.o
+      _main in conftest-5651aa.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -1893,7 +1893,7 @@ configure:16641: checking for _i64toa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__i64toa", referenced from:
-      _main in conftest-e1c66e.o
+      _main in conftest-573dcf.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -2011,7 +2011,7 @@ configure:16641: checking for _ui64toa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__ui64toa", referenced from:
-      _main in conftest-b53df4.o
+      _main in conftest-84943a.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -2163,7 +2163,7 @@ configure:16641: checking for _stricmp
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__stricmp", referenced from:
-      _main in conftest-450875.o
+      _main in conftest-317f9e.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -2296,7 +2296,7 @@ configure:16641: checking for _strnicmp
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "__strnicmp", referenced from:
-      _main in conftest-ed4e67.o
+      _main in conftest-10fcf0.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -2448,7 +2448,7 @@ configure:16641: checking for fopen64
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_fopen64", referenced from:
-      _main in conftest-2e0f81.o
+      _main in conftest-db3c8d.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -2580,7 +2580,7 @@ configure:16641: checking for fseeko64
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_fseeko64", referenced from:
-      _main in conftest-cc7c8a.o
+      _main in conftest-3cac25.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -2733,7 +2733,7 @@ configure:16641: checking for getauxval
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos   -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_getauxval", referenced from:
-      _main in conftest-59202e.o
+      _main in conftest-33eeee.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:16641: $? = 1
@@ -4044,7 +4044,7 @@ conftest.c:131:19: warning: implicit declaration of function 'sem_timedwait' is 
 1 warning generated.
 Undefined symbols for architecture x86_64:
   "_sem_timedwait", referenced from:
-      _main in conftest-8e0ed2.o
+      _main in conftest-e00319.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:22739: $? = 1
@@ -4327,7 +4327,7 @@ configure:22806: checking for pthread_set_name_np
 configure:22826: gcc -o conftest -g -O2 -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos  -D_THREAD_SAFE  -Iinclude -I/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/include -idirafter /Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/src/video/khronos    conftest.c  -lm -liconv  >&5
 Undefined symbols for architecture x86_64:
   "_pthread_set_name_np", referenced from:
-      _main in conftest-21e7ce.o
+      _main in conftest-35c5be.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:22826: $? = 1
