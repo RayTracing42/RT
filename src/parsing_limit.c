@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/06 05:44:43 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/08 03:03:16 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	global_loop(t_object *obj, char *limit)
 	t_vector	normal;
 	int			status;
 
-	while ((data[0] = get_interval(&limit, "<global>", "</global>")))
+	while ((data[0] = get_interval(limit, "<global>", "</global>")))
 	{
-		if (!(data[1] = get_interval(&data[0], "<origin>", "</origin>"))
-			|| !(data[2] = get_interval(&data[0], "<normal>", "</normal>"))
-			|| !(data[3] = get_interval(&data[0], "<status>", "</status>"))
+		if (!(data[1] = get_interval(data[0], "<origin>", "</origin>"))
+			|| !(data[2] = get_interval(data[0], "<normal>", "</normal>"))
+			|| !(data[3] = get_interval(data[0], "<status>", "</status>"))
 			|| (parsing_dot(data[1], &origin) == -1)
 			|| (parsing_vector(data[2], &normal) == -1)
 			|| ((status = get_status(data[3])) == -1))
@@ -80,11 +80,11 @@ void	local_loop(t_object *obj, char *limit)
 	t_vector	normal;
 	int			status;
 
-	while ((data[0] = get_interval(&limit, "<local>", "</local>")))
+	while ((data[0] = get_interval(limit, "<local>", "</local>")))
 	{
-		if (!(data[1] = get_interval(&data[0], "<origin>", "</origin>"))
-			|| !(data[2] = get_interval(&data[0], "<normal>", "</normal>"))
-			|| !(data[3] = get_interval(&data[0], "<status>", "</status>"))
+		if (!(data[1] = get_interval(data[0], "<origin>", "</origin>"))
+			|| !(data[2] = get_interval(data[0], "<normal>", "</normal>"))
+			|| !(data[3] = get_interval(data[0], "<status>", "</status>"))
 			|| (parsing_dot(data[1], &origin) == -1)
 			|| (parsing_vector(data[2], &normal) == -1)
 			|| ((status = get_status(data[3])) == -1))
@@ -101,7 +101,7 @@ void	parsing_limit(t_object *obj, char *object)
 {
 	char	*data;
 
-	if (!(data = get_interval(&object, "<limit>", "</limit>")))
+	if (!(data = get_interval(object, "<limit>", "</limit>")))
 		return ;
 	local_loop(obj, data);
 	global_loop(obj, data);

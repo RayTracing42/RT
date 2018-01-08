@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/06 06:15:24 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/08 03:04:38 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ t_scene				*parsing(int argc, char **argv);
 
 double				int_to_decimal(int n);
 double				atod(char *src);
-char				*get_interval(char **src, const char *start, const char *stop);
-char				*cut_interval(char *src, const char *interval);
+char				*get_interval(char *src, const char *start, const char *stop);
 int					between(double value, double low_limit,
 						double height_limit);
 int					get_nb_occ(const char *src, const char *occ, int lim);

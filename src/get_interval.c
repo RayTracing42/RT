@@ -6,35 +6,22 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 02:24:44 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/06 06:46:42 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/08 03:09:55 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-char	*cut_interval(char *src, const char *interval)
+void	clear_interval(char *src, const int start, const int len)
 {
-	char	*final;
-	char	*ptr_inter;
-	int		len_inter;
-	int		len_src;
-	int		len_first;
-	int		len_final;
+	int	n;
 
-	if (src && ft_strcmp(src, "") && interval && ft_strcmp(interval, ""))
+	n = 0;
+	while (src[start + n] && n < len)
 	{
-		ptr_inter = ft_strstr(src, interval);
-		len_inter = ft_strlen(interval);
-		len_src = ft_strlen(src);
-		len_final = len_src - len_inter;
-		len_first = len_src - ft_strlen(ptr_inter);
-		if (!(final = ft_memalloc(len_final + 1)))
-			return (NULL);
-		ft_strncpy(final, src, len_first);
-		ft_strcat(final, ptr_inter + len_inter);
-		return (final);
+		src[start + n] = ' ';
+		n++;
 	}
-	return (NULL);
 }
 
 int		get_order_of_apparition(const char *src, const char *s1, const char *s2)
@@ -89,7 +76,7 @@ char	*get_order_buffer(const char *src, const char *start, const char *stop)
 	return (buffer);
 }
 
-char	*get_stop_ptr(const char *src, char *buffer, const char *start,
+char	*get_stop_ptr(const char *src, const char *buffer, const char *start,
 	const char *stop)
 {
 	char	*ptr;
@@ -102,18 +89,19 @@ char	*get_stop_ptr(const char *src, char *buffer, const char *start,
 	n = 0;
 	len_start = ft_strlen(start);
 	len_stop = ft_strlen(stop);
-	while (buffer[n] && status)
+	ptr = (char *)src;
+	while (status)
 	{
 		if (status == -1)
 			status++;
 		if (buffer[n] == '1')
 		{
-			ptr = ft_strstr(src, start) + len_start;
+			ptr = ft_strstr(ptr, start) + len_start;
 			status++;
 		}
 		if (buffer[n] == '2')
 		{
-			ptr = ft_strstr(src, stop) + len_stop;
+			ptr = ft_strstr(ptr, stop) + len_stop;
 			status--;
 		}
 		n++;
@@ -121,42 +109,32 @@ char	*get_stop_ptr(const char *src, char *buffer, const char *start,
 	return (ptr);
 }
 
-char	*get_interval(char **src, const char *start, const char *stop)
+char	*get_interval(char *src, const char *start, const char *stop)
 {
 	char		*dst;
-	char		*cut;
 	char		*buffer;
 	char		*ptr_stop;
 	char		*ptr_start;
 
 	dst = NULL;
-	if (*src && ft_strcmp(*src, "") && start && ft_strcmp(start, "")
+	if (src && ft_strcmp(src, "") && start && ft_strcmp(start, "")
 			&& stop && ft_strcmp(stop, ""))
 	{
-		if ((buffer = get_order_buffer(*src, start, stop)))
+		if ((buffer = get_order_buffer(src, start, stop)))
 		{
-			ptr_stop = get_stop_ptr(*src, buffer, start, stop) - ft_strlen(stop);
-			ptr_start = ft_strstr(*src, start);
+			ptr_stop = get_stop_ptr(src, buffer, start, stop) - ft_strlen(stop);
+			ptr_start = ft_strstr(src, start);
 			if ((dst = (char *)ft_memalloc(ft_strlen(ptr_start +
 				ft_strlen(start)) - ft_strlen(ptr_stop) + 1)))
 			{
-				if ((cut = (char *)ft_memalloc(ft_strlen(ptr_start) -
-					ft_strlen(ptr_stop) + ft_strlen(stop) + 1)))
-				{
-dst = ft_strncpy(dst, ptr_start + ft_strlen(start), 
-		ft_strlen(ptr_start + ft_strlen(start)) - ft_strlen(ptr_stop));
-					cut = ft_strncpy(cut, ptr_start, ft_strlen(ptr_start) -
-						ft_strlen(ptr_stop) + ft_strlen(stop));
-					cut = cut_interval(*src, cut);
-			//		free(*src);
-//					free(buffer);
-					*src = cut;
-//					printf("stt : %s\n", ptr_start);
-//					printf("stp : %s\n", ptr_stop);
-//					printf("dst : %s\n", dst);
-//					printf("cut : %s\n", cut);
-				}
+				dst = ft_strncpy(dst, ptr_start + ft_strlen(start), 
+					ft_strlen(ptr_start + ft_strlen(start)) -
+					ft_strlen(ptr_stop));
+				clear_interval(src, ft_strlen(src) - ft_strlen(ptr_start),
+					ft_strlen(ptr_start) - ft_strlen(ptr_stop) +
+					ft_strlen(stop));
 			}
+			free(buffer);
 		}
 	}
 	return (dst);
