@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/06 14:31:52 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/08 17:28:06 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ typedef enum				e_type
 	CONE,
 	CYLINDER,
 	PLANE,
-	SPHERE
+	SPHERE,
+	TRIANGLE
 }							t_type;
 
 typedef struct				s_obj_phys
@@ -243,6 +244,42 @@ typedef struct				s_plane
 	double					d;
 	double					z;
 }							t_plane;
+
+/*
+** t_triangle hérite de plane puisque les calculs se ressemblent bcp
+*/
+typedef struct				s_triangle
+{
+	const t_type			obj_type;
+	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
+	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
+	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
+	t_dot					origin;
+	t_vector				normal;
+	t_matrix				*trans_const;
+	t_matrix				*trans_iconst;
+	t_matrix				*trans_idir;
+	t_matrix				*trans_norm;
+	SDL_Color				color;
+	t_obj_phys				obj_light;
+
+	struct s_list_obs		*limit;
+	int						status;
+
+	double					a;
+	double					b;
+	double					c;
+	double					d;
+	double					z;
+	double					aA;
+	double					aB;
+	t_dot					dA;
+	t_dot					dB;
+	t_dot					dC;
+	t_vector				vAB;
+	t_vector				vBA;
+	t_vector				vBC;
+}							t_triangle;
 
 /* La box (le pavé quoi) pour plus tard
 typedef struct		s_box

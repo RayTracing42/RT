@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/20 20:17:36 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/08 17:44:00 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,19 @@ t_cylinder	*new_cylinder(t_objs_comp args, double radius);
 ** plane.c
 */
 void		delete_plane(t_plane *plane);
-t_plane		*new_plane(t_objs_comp args, t_vector normal);
+t_plane		*new_plane(t_objs_comp args, t_vector normal, int tgl);
+double		plane_intersect(t_ray *ray, t_parequation e, t_object *obj, int i);
 
 /*
 ** sphere.c
 */
 void		delete_sphere(t_sphere *sphere);
 t_sphere	*new_sphere(t_objs_comp args, double rad);
+
+/*
+** triangle.c
+*/
+void		delete_triangle(t_triangle	*triangle);
+t_triangle	*new_triangle(t_objs_comp args, t_dot dA, t_dot dB, t_dot dC);
 
 #endif

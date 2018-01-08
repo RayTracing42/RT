@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/06 14:21:31 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/07 15:48:14 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 
 	p = new_plane((t_objs_comp){origin, o->color,
 		o->obj_light.reflection_amount, o->obj_light.refraction_amount,
-		o->obj_light.refractive_index, o->obj_light.shininess}, normal);
+		o->obj_light.refractive_index, o->obj_light.shininess}, normal, 0);
 	trs = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
 	set_all_matrix((t_object *)p, trs);
 	p->status = status;
@@ -45,7 +45,7 @@ void	parsing_local_limit(t_object *o, t_dot origin, t_vector normal,
 	origin.z += o->origin.z;
 	p = new_plane((t_objs_comp){origin, o->color,
 		o->obj_light.reflection_amount, o->obj_light.refraction_amount,
-		o->obj_light.refractive_index, o->obj_light.shininess}, normal);
+		o->obj_light.refractive_index, o->obj_light.shininess}, normal, 0);
 	trs = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
 	set_all_matrix((t_object *)p, trs);
 	p->status = status;

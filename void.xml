@@ -1,0 +1,33 @@
+<scene>
+	<brightness>50</brightness>
+
+	<camera>
+		<focal>60</focal>
+		<origin>
+			<x>-100</x>
+			<y>20</y>
+			<z>0</z>
+		</origin>
+		<angle>
+			<x>0</x>
+			<y>0</y>
+			<z>0</z>
+		</angle>
+	</camera>
+
+	<light>
+		<type>orb</type>
+		<origin>
+			<x>0</x>
+			<y>100</y>
+			<z>0</z>
+		</origin>
+		<color>
+			<r>255</r>
+			<g>255</g>
+			<b>255</b>
+		</color>
+		<power>1</power>
+	</light>
+
+</scene>
