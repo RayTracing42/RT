@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 14:41:24 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 04:54:07 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/08 05:04:15 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	delete_scene(t_scene *scene)
 		while (scene->objects)
 			delete_cell_obj(&scene->objects);
 		while (scene->lights)
-			delete_cell_obj(&scene->lights);
+			delete_cell_light(&scene->lights);
 		delete_camera(scene->cam);
 		free(scene);
 	}
