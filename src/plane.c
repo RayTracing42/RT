@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 17:43:40 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/08 19:53:34 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ static int				is_in_plane(t_dot *i, t_object *obj)
 
 	p = (t_plane *)obj;
 	res = p->a * i->x + p->b * i->y + p->c * i->z + p->d;
-	res *= pow(10, 12);
-	return (!((long)res > 0 || (long)res < 0));
+	return (!(gt(res, 0) || lt(res, 0)));
 }
 
 t_plane					*new_plane(t_objs_comp args, t_vector normal, int tgl)

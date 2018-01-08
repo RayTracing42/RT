@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 17:16:14 by shiro             #+#    #+#             */
-/*   Updated: 2018/01/08 17:50:16 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/08 20:09:25 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static double			triangle_intersect(t_ray *ray, t_parequation e,
 	t_object *obj, int i)
 {
 	double		t;
-	double		tmp;
 	t_triangle	*tgl;
 	t_dot		itmp;
 
@@ -24,14 +23,30 @@ static double			triangle_intersect(t_ray *ray, t_parequation e,
 	if (gt(t = plane_intersect(ray, e, obj, i), 0))
 	{
 		itmp = (t_dot){ray->inter.x + tgl->origin.x, ray->inter.y + tgl->origin.y, ray->inter.z + tgl->origin.z};
-		if (gt(tmp = angle_between_vectors(tgl->vAB, dots_to_vect(tgl->dA, itmp)), tgl->aA))
-			t = -1;
-		else if (gt(tmp = angle_between_vectors(tgl->vBA, dots_to_vect(tgl->dB, itmp)), tgl->aB))
-			t = -1;
-		else if (gt(tmp = angle_between_vectors(tgl->vBC, dots_to_vect(tgl->dB, itmp)), tgl->aB))
+		if (gt(angle_between_vectors(tgl->vAB, dots_to_vect(tgl->dA, itmp)), tgl->aA) ||
+			gt(angle_between_vectors(tgl->vBA, dots_to_vect(tgl->dB, itmp)), tgl->aB) ||
+			gt(angle_between_vectors(tgl->vBC, dots_to_vect(tgl->dB, itmp)), tgl->aB))
 			t = -1;
 	}
 	return (t);
+}
+
+static int	is_in_triangle(t_dot *i, t_object *obj)
+{
+	double		res;
+	t_triangle	*tgl;
+
+	tgl = (t_triangle*)obj;
+	res = tgl->a * i->x + tgl->b * i->y + tgl->c * i->z + tgl->d;
+	if (!(gt(res, 0) || lt(res, 0)))
+	{
+		if (gt(angle_between_vectors(tgl->vAB, dots_to_vect(tgl->dA, *i)), tgl->aA) ||
+			gt(angle_between_vectors(tgl->vBA, dots_to_vect(tgl->dB, *i)), tgl->aB) ||
+			gt(angle_between_vectors(tgl->vBC, dots_to_vect(tgl->dB, *i)), tgl->aB))
+			return (0);
+		return (1);
+	}
+	return (0);
 }
 
 t_triangle	*new_triangle(t_objs_comp args, t_dot dA, t_dot dB, t_dot dC)
@@ -48,6 +63,7 @@ t_triangle	*new_triangle(t_objs_comp args, t_dot dA, t_dot dB, t_dot dC)
 	triangle->dB = dB;
 	triangle->dC = dC;
 	triangle->intersect = &triangle_intersect;
+	triangle->is_in_obj = &is_in_triangle;
 	return (triangle);
 }
 

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 17:28:06 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/08 20:29:26 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ typedef struct		s_ray
 
 typedef enum				e_type
 {
-//	BOX, pour plus tard
+	BOX,
 	CONE,
 	CYLINDER,
 	PLANE,
@@ -178,6 +178,7 @@ typedef struct				s_sphere
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+
 	double					radius;
 	double					r2;
 }							t_sphere;
@@ -197,6 +198,7 @@ typedef struct				s_cylinder
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+
 	double					radius;
 	double					r2;
 }							t_cylinder;
@@ -216,6 +218,7 @@ typedef struct				s_cone
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+
 	double					angle;
 	double					tanalpha2;
 }							t_cone;
@@ -234,10 +237,9 @@ typedef struct				s_plane
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-
 	struct s_list_obs		*limit;
-	int						status;
 
+	int						status;
 	double					a;
 	double					b;
 	double					c;
@@ -262,10 +264,9 @@ typedef struct				s_triangle
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-
 	struct s_list_obs		*limit;
-	int						status;
 
+	int						status;
 	double					a;
 	double					b;
 	double					c;
@@ -281,15 +282,22 @@ typedef struct				s_triangle
 	t_vector				vBC;
 }							t_triangle;
 
-/* La box (le pavé quoi) pour plus tard
 typedef struct		s_box
 {
-	const t_type	obj_type;
-	double			(*intersect)();
-	const t_vector	*(*get_normal)();
-	t_dot			origin;
-	t_vector		normal;
-	SDL_Color		color;
+	const t_type			obj_type;
+	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
+	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
+	const t_vector			*(*get_normal)(t_dot *inter, struct s_object *obj);
+	t_dot					origin;
+	t_vector				normal;
+	t_matrix				*trans_const;
+	t_matrix				*trans_iconst;
+	t_matrix				*trans_idir;
+	t_matrix				*trans_norm;
+	SDL_Color				color;
+	t_obj_phys				obj_light;
+	struct s_list_objs		*limit;
+
 	t_dot			fbl_corner;
 	t_dot			btr_corner;
 	t_plane			*front;
@@ -299,7 +307,13 @@ typedef struct		s_box
 	t_plane			*left;
 	t_plane			*right;
 }					t_box;
-*/
+
+typedef struct		s_box_intersect
+{
+	t_box			*box;
+	int				i;
+	double			t;
+}					t_box_intersect;
 
 typedef enum				e_light_type
 {
