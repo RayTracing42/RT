@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 00:21:37 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/08 03:03:57 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/08 03:44:54 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 void	parsing_negative_obj(t_object *obj, char *object)
 {
-	char		*data[4];
+	char		*data[3];
 	t_object	*neg_obj;
 	
 	if ((data[0] = get_interval(object, "<negative_obj>", "</negative_obj>")))
 	{
-		data[3] = data[0];
 		while ((data[1] = get_interval(data[0], "<object>", "</object>")))
 		{
 			if (!(neg_obj = parsing_object2(data[1]))
@@ -33,6 +32,6 @@ void	parsing_negative_obj(t_object *obj, char *object)
 			free(data[1]);
 			new_cell_obj(&obj->negative_obj, neg_obj);
 		}
-		free(data[3]);
+		free(data[0]);
 	}
 }

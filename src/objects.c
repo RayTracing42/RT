@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 03:29:11 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/08 04:57:23 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ void			delete_object(t_object *obj)
 		delete_matrix(obj->trans_iconst);
 		delete_matrix(obj->trans_idir);
 		delete_matrix(obj->trans_norm);
+		while (obj->limit)
+			delete_cell_obj(&obj->limit);
+		while (obj->negative_obj)
+			delete_cell_obj(&obj->negative_obj);
 		free(obj);
 	}
 }

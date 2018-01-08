@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/06 06:36:23 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/08 04:57:11 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 				check_negative_obj_intersect(ray, l_objs->obj, &dist);
 			else
 			{
-			if (is_in_limit(&tmp_ray, l_objs->obj))
-			{
-				dist = tmp;
-				*ray = tmp_ray;
-			}
-			else
-				check_limit_intersect(ray, l_objs->obj, &dist);
+				if (is_in_limit(&tmp_ray, l_objs->obj))
+				{
+					dist = tmp;
+					*ray = tmp_ray;
+				}
+				else
+					check_limit_intersect(ray, l_objs->obj, &dist);
 			}
 		}
 		l_objs = l_objs->next;
