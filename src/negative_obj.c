@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/08 05:33:50 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/08 06:09:52 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		is_in_negative_obj(t_ray *ray, t_object *father)
 {
 	t_list_objs		*n;
 	t_dot			reverse_inter;
-	t_vector		center = {0, 0, 0};
+//	t_vector		center = {0, 0, 0};
 
 	n = father->negative_obj;
 	while (n)
@@ -31,6 +31,7 @@ int		is_in_negative_obj(t_ray *ray, t_object *father)
 	// 2) appliquer au point d'inter la translation inverse de l'obj negatif;
 	// 3) appliquer au point d'inter la rotation inverse de l'obj negatif;
 	// 4) verifier si le point d'inter se trouve dans l'obj;
+
 			/*mult_vect(&center, father->trans_const, &(t_vector){0, 0, 0});
 			center.x += father->origin.x;
 			center.y += father->origin.y;
