@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/07 14:35:45 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/07 15:48:44 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_plane		*parsing_plane(char *object)
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
-	return (new_plane(args, normal));
+	return (new_plane(args, normal, 0));
 }
 
 t_sphere	*parsing_sphere(char *object)

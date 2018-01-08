@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/03 18:55:52 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/08 17:31:42 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int			main(int ac, char **av)
 	{
 		get_sdl_core();
 		init_list_evts(&events, NULL);
+		scene_add_object((t_object*)new_triangle((t_objs_comp){(t_dot){10,0,0}, (SDL_Color){255,255,255,255}, 0, 0, 0, 30}, (t_dot){10,0,0}, (t_dot){0,0,20}, (t_dot){20,10,10}), scn);
 		t = SDL_CreateThread(main_display, "", scn);
 		wait_events(events);
 		SDL_WaitThread(t, NULL);

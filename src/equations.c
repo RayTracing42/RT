@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   equations.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/29 18:35:27 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/06 14:32:20 by shiro            ###   ########.fr       */
+/*   Created: 2018/01/08 15:36:36 by shiro             #+#    #+#             */
+/*   Updated: 2018/01/08 17:23:32 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#include <math.h>
 
-int		gt(double nb1, double nb2)
+t_dot	equation_get_dot(t_parequation *eq, double t)
 {
-	return ((long)(nb1 * POW) > (long)(nb2 * POW));
+	return ((t_dot){eq->vd.x * t + eq->vc.x,
+					eq->vd.y * t + eq->vc.y,
+					eq->vd.z * t + eq->vc.z});
 }
 
-int		lt(double nb1, double nb2)
-{
-	return ((long)(nb1 * POW) < (long)(nb2 * POW));
-}
-
-int		eq(double nb1, double nb2)
-{
-	return ((long)(nb1 * POW) == (long)(nb2 * POW));
-}
 
 int		get_quad_equation_sol(double *res, double fac[3], int i)
 {
@@ -52,11 +44,4 @@ int		get_quad_equation_sol(double *res, double fac[3], int i)
 	else
 		return (0);
 	return (gt(s1, 0) + gt(s2, 0));
-}
-
-t_dot	equation_get_dot(t_parequation *eq, double t)
-{
-	return ((t_dot){eq->vd.x * t + eq->vc.x,
-					eq->vd.y * t + eq->vc.y,
-					eq->vd.z * t + eq->vc.z});
 }

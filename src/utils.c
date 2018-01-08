@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:25:07 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/21 12:30:57 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/08 17:36:57 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ double		angle_between_vectors(t_vector a, t_vector b)
 	double	dist_a;
 	double	dist_b;
 
-	dist_a = sqrt(pow(a.x, 2) + pow(a.y, 2) + pow(a.z, 2));
-	dist_b = sqrt(pow(b.x, 2) + pow(b.y, 2) + pow(b.z, 2));
+	dist_a = get_vect_lenght(&a);
+	dist_b = get_vect_lenght(&b);
 	if (!(dist_a && dist_b))
 		return (0);
-	pdt_scalaire = (a.x * b.x + a.y * b.y + a.z * b.z);
+	pdt_scalaire = vect_dot_product(&a, &b);
 	angle = acos(pdt_scalaire / (dist_a * dist_b)) * 180 / M_PI;
 	return (angle);
 }
