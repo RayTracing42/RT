@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/08 04:57:04 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/08 05:33:50 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ int		is_in_negative_obj(t_ray *ray, t_object *father)
 	{
 		if (ray->obj != n->obj)
 		{
-			mult_vect(&center, father->trans_const, &(t_vector){0, 0, 0});
+	// 1) soustraire l'origine de l'obj negatif au point d'inter;
+	// 2) appliquer au point d'inter la translation inverse de l'obj negatif;
+	// 3) appliquer au point d'inter la rotation inverse de l'obj negatif;
+	// 4) verifier si le point d'inter se trouve dans l'obj;
+			/*mult_vect(&center, father->trans_const, &(t_vector){0, 0, 0});
 			center.x += father->origin.x;
 			center.y += father->origin.y;
 			center.z += father->origin.z;
@@ -36,7 +40,7 @@ int		is_in_negative_obj(t_ray *ray, t_object *father)
 			reverse_inter.y -= center.y;
 			reverse_inter.z -= center.z;
 			mult_vect((t_vector*)&reverse_inter, n->obj->trans_iconst,
-					(t_vector*)&reverse_inter);
+					(t_vector*)&reverse_inter);*/
 			if (n->obj->is_in_obj(&reverse_inter, n->obj))
 				return (1);
 		}
