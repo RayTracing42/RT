@@ -6,44 +6,62 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/08 06:09:52 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/09 04:11:37 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-/*
-**	C'est foireux;
-*/
-
-int		is_in_negative_obj(t_ray *ray, t_object *father)
+int		transformed_is_in_obj(t_ray *ray, t_object *father)
 {
-	t_list_objs		*n;
-	t_dot			reverse_inter;
-//	t_vector		center = {0, 0, 0};
+	t_vector	center;
+	t_ray		tmp_ray;
+
+	tmp_ray = *ray;
+	mult_vect(&center, father->trans_const, &(t_vector){0, 0, 0});
+	center.x += father->origin.x;
+	center.y += father->origin.y;
+	center.z += father->origin.z;
+	if (is_in_limit(&tmp_ray, father))
+	{
+		tmp_ray.inter.x -= center.x;
+		tmp_ray.inter.y -= center.y;
+		tmp_ray.inter.z -= center.z;
+		if (father->is_in_obj(&tmp_ray.inter, father))
+			return (1);
+	}
+	return (0);
+
+}
+
+double	is_in_negative_obj(t_ray *ray, t_object *father)
+{
+	t_list_objs	*n;
+	t_ray		first_ray;
+	t_ray		secnd_ray;
+	double		first_tmp;
+	double		secnd_tmp;
+	double		inter_tmp;
+	double		tmp;
 
 	n = father->negative_obj;
 	while (n)
 	{
-		if (ray->obj != n->obj)
+		first_ray = first_intersect(ray, n->obj, &first_tmp);
+		secnd_ray = second_intersect(ray, n->obj, &secnd_tmp);
+		tmp = secnd_tmp;
+		transform_inter(&first_ray, first_ray.obj);
+		transform_inter(&secnd_ray, secnd_ray.obj);
+		first_tmp = get_dot_dist((t_dot*)&ray->equ.vc, &first_ray.inter);
+		secnd_tmp = get_dot_dist((t_dot*)&ray->equ.vc, &secnd_ray.inter);
+		inter_tmp = get_dot_dist((t_dot*)&ray->equ.vc, &ray->inter);
+		if (first_tmp < inter_tmp && inter_tmp < secnd_tmp)
 		{
-	// 1) soustraire l'origine de l'obj negatif au point d'inter;
-	// 2) appliquer au point d'inter la translation inverse de l'obj negatif;
-	// 3) appliquer au point d'inter la rotation inverse de l'obj negatif;
-	// 4) verifier si le point d'inter se trouve dans l'obj;
-
-			/*mult_vect(&center, father->trans_const, &(t_vector){0, 0, 0});
-			center.x += father->origin.x;
-			center.y += father->origin.y;
-			center.z += father->origin.z;
-			reverse_inter = ray->inter;
-			reverse_inter.x -= center.x;
-			reverse_inter.y -= center.y;
-			reverse_inter.z -= center.z;
-			mult_vect((t_vector*)&reverse_inter, n->obj->trans_iconst,
-					(t_vector*)&reverse_inter);*/
-			if (n->obj->is_in_obj(&reverse_inter, n->obj))
-				return (1);
+			if (transformed_is_in_obj(&secnd_ray, father))
+			{
+				*ray = secnd_ray;
+				return (tmp);
+			}
 		}
 		n = n->next;
 	}

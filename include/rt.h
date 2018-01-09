@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/05 01:16:46 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/09 03:44:13 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void				check_limit_intersect(t_ray *ray, t_object *father,
 **	negative_obj.c
 */
 
-int					is_in_negative_obj(t_ray *ray, t_object *father);
+double				is_in_negative_obj(t_ray *ray, t_object *father);
 void				check_negative_obj_intersect(t_ray *ray, t_object *father,
 		double *dist);
 
