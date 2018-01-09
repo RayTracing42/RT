@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 14:45:00 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 17:49:39 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/09 11:21:58 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ double		get_dot_dist(t_dot *d1, t_dot *d2)
 			pow(d2->z - d1->z, 2)));
 }
 
-double		vect_dot_product(const t_vector *v1, const t_vector *v2)
+double		vect_dot_product(const t_vector v1, const t_vector v2)
 {
-	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
+	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
 }
 
 t_vector	vect_cross_product(const t_vector v1, const t_vector v2)

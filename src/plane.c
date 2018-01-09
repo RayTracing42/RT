@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 19:53:34 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/09 11:41:03 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal, int tgl)
 	plane->a = normal.x;
 	plane->b = normal.y;
 	plane->c = normal.z;
-	plane->d = 0;
+	plane->d = -(plane->a * args.orig.x + plane->b * args.orig.y + plane->c * args.orig.z);
 	plane->z = args.orig.z;
 	return (plane);
 }

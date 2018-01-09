@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 21:03:28 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/09 11:15:23 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 static int				is_in_boundaries(t_plane *p, t_box *b, t_dot *d)
 {
 	if (p == b->front || p == b->back)
-		return (d->x <= b->btr_corner.x && d->x >= b->fbl_corner.x &&
+		return (d->z <= b->btr_corner.z && d->z >= b->fbl_corner.z &&
 				d->y <= b->btr_corner.y && d->y >= b->fbl_corner.y);
 	else if (p == b->top || p == b->bottom)
 		return (d->x <= b->btr_corner.x && d->x >= b->fbl_corner.x &&
 				d->z <= b->btr_corner.z && d->z >= b->fbl_corner.z);
 	else if (p == b->left || p == b->right)
-	{
 		return (d->y <= b->btr_corner.y && d->y >= b->fbl_corner.y &&
-				d->z <= b->btr_corner.z && d->z >= b->fbl_corner.z);
-	}
+				d->x <= b->btr_corner.x && d->x >= b->fbl_corner.x);
 	return (0);
 }
 
@@ -38,7 +36,7 @@ static void				box_plane_intersect(t_ray *ray, t_plane *p,
 	{
 		if (its->t == -1)
 			ray->nb_intersect = 1;
-		if (its->i == 1 && (lt(t, its->t) || lt(its->t, 0)))
+		if (its->i == 1 && (lt(t, its->t) || its->t < 0))
 			its->t = t;
 		else if (its->i == 2 && gt(t, its->t))
 			its->t = t;

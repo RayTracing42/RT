@@ -6,11 +6,11 @@
 		<origin>
 			<x>-100</x>
 			<y>20</y>
-			<z>0</z>
+			<z>-50</z>
 		</origin>
 		<angle>
 			<x>0</x>
-			<y>0</y>
+			<y>-30</y>
 			<z>0</z>
 		</angle>
 	</camera>
