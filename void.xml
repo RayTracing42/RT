@@ -1,5 +1,5 @@
 <scene>
-	<brightness>50</brightness>
+	<brightness>20</brightness>
 
 	<camera>
 		<focal>60</focal>
@@ -19,7 +19,7 @@
 		<type>orb</type>
 		<origin>
 			<x>0</x>
-			<y>100</y>
+			<y>0</y>
 			<z>0</z>
 		</origin>
 		<color>

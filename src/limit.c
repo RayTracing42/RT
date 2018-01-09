@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   limit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/02 17:05:16 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/09 14:46:55 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		is_in_right_side_of_limit(t_dot *i, t_object *p)
+static int	is_in_right_side_of_limit(const t_dot *i, t_object *p)
 {
 	double	distance_1;
 	double	distance_2;
@@ -60,10 +60,7 @@ int		full_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 {
 	t_vector	center;
 
-	mult_vect(&center, father->trans_const, &(t_vector){0, 0, 0});
-	center.x += father->origin.x;
-	center.y += father->origin.y;
-	center.z += father->origin.z;
+	mult_vect(&center, father->trans_const, &(t_vector){father->origin.x, father->origin.y, father->origin.z});
 	transform_inter(tmp_ray, tmp_ray->obj);
 	if (is_in_limit(tmp_ray, father))
 	{

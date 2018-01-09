@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/07 15:48:14 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/09 15:03:24 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 			int status)
 {
-	t_plane			*p;
-	t_trans_data	trs;
+	t_plane	*p;
 
 	p = new_plane((t_objs_comp){origin, o->color,
 		o->obj_light.reflection_amount, o->obj_light.refraction_amount,
 		o->obj_light.refractive_index, o->obj_light.shininess}, normal, 0);
-	trs = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
-	set_all_matrix((t_object *)p, trs);
 	p->status = status;
+	p->d = 0;
 	if (!(o->limit))
 		o->limit = new_cell_obj(NULL, (t_object *)p);
 	else
@@ -33,8 +31,7 @@ void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 void	parsing_local_limit(t_object *o, t_dot origin, t_vector normal,
 			int status)
 {
-	t_plane			*p;
-	t_trans_data	trs;
+	t_plane	*p;
 
 	origin = (t_dot){origin.x - o->origin.x, origin.y - o->origin.y,
 		origin.z - o->origin.z};
@@ -46,9 +43,8 @@ void	parsing_local_limit(t_object *o, t_dot origin, t_vector normal,
 	p = new_plane((t_objs_comp){origin, o->color,
 		o->obj_light.reflection_amount, o->obj_light.refraction_amount,
 		o->obj_light.refractive_index, o->obj_light.shininess}, normal, 0);
-	trs = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
-	set_all_matrix((t_object *)p, trs);
 	p->status = status;
+	p->d = 0;
 	if (!(o->limit))
 		o->limit = new_cell_obj(NULL, (t_object *)p);
 	else
