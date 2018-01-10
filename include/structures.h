@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/10 13:44:17 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/10 18:38:19 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef enum				e_type
 	BOX,
 	CONE,
 	CYLINDER,
+	HYPERBOLOID,
 	PLANE,
 	SPHERE,
 	TRIANGLE
@@ -316,6 +317,28 @@ typedef struct		s_box_intersect
 	double			t;
 	t_plane			*p;
 }					t_box_intersect;
+
+typedef struct	s_hyperboloid
+{
+		const t_type			obj_type;
+		int						(*is_in_obj)(t_dot *i, struct s_object *obj);
+		double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
+		const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
+		t_dot					origin;
+		t_vector				normal;
+		t_matrix				*trans_const;
+		t_matrix				*trans_iconst;
+		t_matrix				*trans_idir;
+		t_matrix				*trans_norm;
+		SDL_Color				color;
+		t_obj_phys				obj_light;
+		struct s_list_objs		*limit;
+
+		double					a2;
+		double					b2;
+		double					c2;
+		double					d;
+}				t_hyperboloid;
 
 typedef enum				e_light_type
 {

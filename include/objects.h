@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 20:44:37 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/10 18:39:23 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ t_cone		*new_cone(t_objs_comp args, double angle);
 */
 void		delete_cylinder(t_cylinder *cylinder);
 t_cylinder	*new_cylinder(t_objs_comp args, double radius);
+
+/*
+** hyperboloid.c
+*/
+t_hyperboloid			*new_hyperboloid(t_objs_comp args, double a, double b, double c, double d);
+void					delete_hyperboloid(t_hyperboloid *h);
 
 /*
 ** plane.c

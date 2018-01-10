@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 18:43:00 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/10 17:47:26 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static size_t	get_type_size(t_type type)
 {
-	const size_t	sizes[6] = {sizeof(t_box), sizeof(t_cone), 
-								sizeof(t_cylinder), sizeof(t_plane),
-								sizeof(t_sphere), sizeof(t_triangle)};
+	const size_t	sizes[7] = {sizeof(t_box), sizeof(t_cone),
+								sizeof(t_cylinder), sizeof(t_hyperboloid),
+								sizeof(t_plane), sizeof(t_sphere),
+								sizeof(t_triangle)};
 	return (sizes[type]);
 }
 
