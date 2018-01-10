@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/09 11:08:32 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/10 13:44:17 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,7 @@ typedef struct				s_plane
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-	struct s_list_obs		*limit;
+	struct s_list_objs		*limit;
 
 	int						status;
 	double					a;
@@ -264,7 +264,7 @@ typedef struct				s_triangle
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
-	struct s_list_obs		*limit;
+	struct s_list_objs		*limit;
 
 	int						status;
 	double					a;
@@ -287,7 +287,7 @@ typedef struct		s_box
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
 	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
-	const t_vector			*(*get_normal)(t_dot *inter, struct s_object *obj);
+	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
 	t_dot					origin;
 	t_vector				normal;
 	t_matrix				*trans_const;
@@ -311,8 +311,10 @@ typedef struct		s_box
 typedef struct		s_box_intersect
 {
 	t_box			*box;
+	t_dot			inter;
 	int				i;
 	double			t;
+	t_plane			*p;
 }					t_box_intersect;
 
 typedef enum				e_light_type

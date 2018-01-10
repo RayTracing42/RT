@@ -6,13 +6,13 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/09 11:15:23 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/10 15:10:24 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int				is_in_boundaries(t_plane *p, t_box *b, t_dot *d)
+static int				is_in_boundaries(const t_plane *p, t_box *b, t_dot *d)
 {
 	if (p == b->front || p == b->back)
 		return (d->z <= b->btr_corner.z && d->z >= b->fbl_corner.z &&
@@ -26,7 +26,7 @@ static int				is_in_boundaries(t_plane *p, t_box *b, t_dot *d)
 	return (0);
 }
 
-static void				box_plane_intersect(t_ray *ray, t_plane *p,
+static void				box_plane_intersect(t_ray *ray, const t_plane *p,
 										t_parequation e, t_box_intersect *its)
 {
 	double		t;
@@ -36,10 +36,19 @@ static void				box_plane_intersect(t_ray *ray, t_plane *p,
 	{
 		if (its->t == -1)
 			ray->nb_intersect = 1;
+		else
+			ray->nb_intersect = 2;
 		if (its->i == 1 && (lt(t, its->t) || its->t < 0))
+		{
+			its->p = (t_plane*)p;
+			its->inter = ray->inter;
 			its->t = t;
+		}
 		else if (its->i == 2 && gt(t, its->t))
+		{
+			its->inter = ray->inter;
 			its->t = t;
+		}
 	}
 }
 
@@ -47,13 +56,18 @@ static double			box_intersect(t_ray *ray, t_parequation e, t_object *obj, int i)
 {
 	t_box_intersect	its;
 
-	its = (t_box_intersect){(t_box*)obj, i, -1};
+	its = (t_box_intersect){(t_box*)obj, (t_dot){0, 0, 0}, i, -1, NULL};
 	box_plane_intersect(ray, its.box->front, e, &its);
 	box_plane_intersect(ray, its.box->back, e, &its);
 	box_plane_intersect(ray, its.box->bottom, e, &its);
 	box_plane_intersect(ray, its.box->top, e, &its);
 	box_plane_intersect(ray, its.box->left, e, &its);
 	box_plane_intersect(ray, its.box->right, e, &its);
+	ray->inter = its.inter;
+	if (its.p == its.box->back)
+		write(1, "BACK\n", 5);
+	if (its.p == its.box->front)
+		write(1, "ERROR\n", 6);
 	return (its.t);
 }
 
@@ -105,6 +119,7 @@ t_box					*new_box(t_objs_comp args, double x_width,
 	box->fbl_corner = args.orig;
 	box->btr_corner = (t_dot){args.orig.x + x_width, args.orig.y + y_width,
 							args.orig.z + z_width};
+
 	box->front = new_plane(args, (t_vector){-1, 0, 0}, 0);
 	box->bottom = new_plane(args, (t_vector){0, -1, 0}, 0);
 	box->left = new_plane(args, (t_vector){0, 0, -1}, 0);
