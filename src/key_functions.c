@@ -20,5 +20,9 @@ int			key_management(SDL_Event *current, t_event *evt)
 	(void)data;
 	if (current->key.keysym.sym == SDLK_ESCAPE)
 		return (0);
+	if (current->key.keysym.sym == SDLK_s)
+	{
+		screenshot();
+	}
 	return (1);
 }

@@ -43,6 +43,7 @@ typedef struct				s_sdl_core
 {
 	SDL_Window				*window;
 	SDL_Renderer			*renderer;
+	SDL_Texture				*target;
 	int						width;
 	int						height;
 	int						fullscreen;

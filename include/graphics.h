@@ -28,4 +28,12 @@ t_sdl_core	*get_sdl_core();
 void		put_pixel(int x, int y, SDL_Color *color);
 void		refresh_win();
 
+/*
+** screenshot.c
+*/
+int		ft_access(const char *path);
+char	*screenshot_name(int num);
+char	*name_screen(void);
+int		screenshot(void);
+
 #endif
