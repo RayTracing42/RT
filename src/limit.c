@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/11 04:02:48 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/11 06:37:07 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist)
 		{
 			transform_inter(&tmp_ray, tmp_ray.obj);
 			if ((p->status == 0 && empty_limit(&tmp_ray, father))
-				|| (p->status == 1 && full_limit(&tmp_ray, father)))
+					|| (p->status == 1 && full_limit(&tmp_ray, father)))
 			{
 				res_ray = tmp_ray;
 				*dist = tmp;
@@ -91,4 +91,16 @@ t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist)
 		l = l->next;
 	}
 	return (res_ray);
+}
+
+void	limit(t_ray *ray, t_ray *tmp_ray, double *tmp, double *dist)
+{
+	t_object *obj;
+
+	obj = tmp_ray->obj;
+	if (is_in_limit(tmp_ray, obj))
+		*dist = *tmp;
+	else
+		*tmp_ray = check_limit_intersect(ray, obj, dist);
+	*ray = *tmp_ray;
 }

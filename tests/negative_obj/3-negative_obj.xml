@@ -3,8 +3,8 @@
 	
 	<camera>
 		<origin>
-			<x>-50</x>
-			<y>0</y>
+			<x>-150</x>
+			<y>70</y>
 			<z>150</z>
 		</origin>
 		<angle>
@@ -22,30 +22,58 @@
 			<z>0</z>
 		</origin>
 		<color>
-			<r>255</r>
-			<g>0</g>
-			<b>0</b>
+			<r>200</r>
+			<g>100</g>
+			<b>100</b>
 		</color>
 		<transformations>
 			<rotation>
-				<x>90</x>
+				<x>0</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>
 		</transformations>
 		<radius>40</radius>
-		<limit>
-			<local>
-				<origin><x>200</x><y>-20</y><z>0</z></origin>
-				<normal><x>0</x><y>-1</y><z>0</z></normal>
+		<negative_obj>
+			<object>
+				<type>sphere</type>
+				<origin>
+					<x>165</x>
+					<y>30</y>
+					<z>-20</z>
+				</origin>
+				<color>
+					<r>100</r>
+					<g>100</g>
+					<b>200</b>
+				</color>
+				<radius>60</radius>
 				<status>full</status>
-			</local>
-			<local>
-				<origin><x>200</x><y>20</y><z>-100</z></origin>
-				<normal><x>0</x><y>1</y><z>0</z></normal>
+			</object>
+			<object>
+				<type>cylinder</type>
+				<origin>
+					<x>200</x>
+					<y>110</y>
+					<z>0</z>
+				</origin>
+				<color>
+					<r>200</r>
+					<g>200</g>
+					<b>100</b>
+				</color>
+				<transformations>
+					<rotation>
+						<x>0</x>
+						<y>30</y>
+						<z>90</z>
+					</rotation>
+				</transformations>
+				<radius>20</radius>
 				<status>full</status>
-			</local>
-		</limit>
+			</object>
+	
+		</negative_obj>
 	</object>
 
 

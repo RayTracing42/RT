@@ -6,47 +6,46 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/09 06:07:12 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/11 06:37:03 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double	is_in_negative_obj(t_ray *ray, t_object *father)
+
+void	check_negative_obj_intersect(t_ray *ray, t_object *father, double *dist)
 {
 	t_list_objs	*n;
-	t_ray		first_ray;
-	t_ray		secnd_ray;
-	double		first_tmp;
-	double		secnd_tmp;
-	double		inter_tmp;
+	t_ray		secnd_neg;
 	double		tmp;
+	int			reset;
+	int			res;
 
 	n = father->negative_obj;
 	while (n)
 	{
-		first_ray = first_intersect(ray, n->obj, &first_tmp);
-		secnd_ray = second_intersect(ray, n->obj, &secnd_tmp);
-		tmp = secnd_tmp;
-		transform_inter(&first_ray, first_ray.obj);
-		transform_inter(&secnd_ray, secnd_ray.obj);
-		first_tmp = get_dot_dist((t_dot*)&ray->equ.vc, &first_ray.inter);
-		secnd_tmp = get_dot_dist((t_dot*)&ray->equ.vc, &secnd_ray.inter);
-		inter_tmp = get_dot_dist((t_dot*)&ray->equ.vc, &ray->inter);
-		if (first_tmp < inter_tmp && inter_tmp < secnd_tmp)
+		if (is_in_obj(&ray->inter, ray, n->obj))
 		{
-			*ray = secnd_ray;
-			return (tmp);
+			secnd_neg = second_intersect(ray, n->obj, &tmp);
+			transform_inter(&secnd_neg, n->obj);
+			if ((res = is_in_obj(&secnd_neg.inter, &secnd_neg, father)))
+			{
+				*dist = tmp;
+				*ray = secnd_neg;
+				reset = 1;
+			}
+			if (res == 0)
+			{
+				*dist = 0;
+				return ;
+			}
 		}
 		n = n->next;
+		if (reset)
+		{
+			reset = 0;
+			n = father->negative_obj;
+		}
 	}
-	return (0);
 }
 
-void	check_negative_obj_intersect(t_ray *ray, t_object *father, double *dist)
-{
-	ray = (t_ray*)ray;
-	father = (t_object*)father;
-	dist = (double *)dist;
-	*ray = second_intersect(ray, father, dist);
-}
