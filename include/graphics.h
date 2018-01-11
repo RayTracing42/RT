@@ -36,4 +36,20 @@ char	*screenshot_name(int num);
 char	*name_screen(void);
 int		screenshot(void);
 
+/*
+** blur_effect.c
+*/
+SDL_Color 	get_pixel_colors(SDL_Surface *screen, int x, int y);
+SDL_Color		pixelaccess(SDL_Surface *s, int x, int y, SDL_Color curr);
+SDL_Color 	blur_color_picker(t_blur c);
+void		apply_blur(SDL_Surface *screen, int x, int y);
+int		blur(void);
+
+/*
+** antialiasing.c
+*/
+SDL_Color			pixels_merger(SDL_Color pixel1, SDL_Color pixel2);
+void		x4_antia(SDL_Surface *screen, int x, int y);
+int		antia(void);
+
 #endif

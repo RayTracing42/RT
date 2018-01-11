@@ -22,6 +22,9 @@ int			key_management(SDL_Event *current, t_event *evt)
 		return (0);
 	if (current->key.keysym.sym == SDLK_s)
 	{
+		//blur();
+		antia();
+		antia();
 		screenshot();
 	}
 	return (1);

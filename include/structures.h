@@ -419,4 +419,17 @@ typedef struct				s_scene
 	t_list_objs				*objects;
 }							t_scene;
 
+typedef struct				s_blur
+{
+	SDL_Color				tl1;
+	SDL_Color				tr1;
+	SDL_Color				bl1;
+	SDL_Color				br1;
+	SDL_Color				tl2;
+	SDL_Color				tr2;
+	SDL_Color				bl2;
+	SDL_Color				br2;
+	SDL_Color				curr;
+}							t_blur;
+
 #endif
