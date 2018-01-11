@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/11 06:37:08 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/11 16:09:26 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ double			check_intersect(t_ray *ray, t_list_objs *l_objs);
 void			scanning(t_scene *scn);
 t_parequation	transform_equ(t_ray *ray, t_object *obj);
 void			transform_inter(t_ray *ray, t_object *obj);
+t_ray			first_intersect(t_ray *ray, t_object *obj, double *tmp);
+t_ray			second_intersect(t_ray *ray, t_object *obj, double *tmp);
 
 SDL_Color		effects(t_ray *ray, t_scene *scn);
 SDL_Color		shadows(t_ray *ray, t_scene *scn);
@@ -110,6 +112,9 @@ void				limit(t_ray *ray, t_ray *tmp_ray, double *tmo, double *dist);
 
 void				check_negative_obj_intersect(t_ray *ray, t_object *father,
 		double *dist);
+
+
+double	check_negative_intersect(t_ray *ray, t_list_objs *objs, double t, double t2);
 
 
 

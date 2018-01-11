@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_intersect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/11 06:37:02 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/11 17:47:33 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	double		dist;
 	double		neg_dist;
 	double		tmp;
+	//double		tmp2;
 	t_ray		tmp_ray;
 	t_ray		res_ray;
 
@@ -61,10 +62,10 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
 			transform_inter(&tmp_ray, tmp_ray.obj);
-			neg_dist = dist;
 			limit(&res_ray, &tmp_ray, &tmp, &neg_dist);
-			check_negative_obj_intersect(&res_ray, l_objs->obj, &neg_dist);
-			if (neg_dist != 0)
+			//check_negative_obj_intersect(&res_ray, l_objs->obj, &neg_dist);
+			tmp_ray = second_intersect(ray, l_objs->obj, &tmp2);
+			if ((neg_dist = check_negative_intersect(&res_ray, l_objs->obj->negative_obj, tmp, tmp2)))
 				dist = neg_dist;
 		}
 		l_objs = l_objs->next;

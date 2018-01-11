@@ -1,6 +1,6 @@
 <scene>
 	<brightness>75</brightness>
-	
+
 	<camera>
 		<origin>
 			<x>-150</x>
@@ -12,7 +12,7 @@
 			<y>30</y>
 			<z>0</z>
 		</angle>
-	</camera>	
+	</camera>
 
 	<object>
 		<type>cylinder</type>
@@ -72,7 +72,7 @@
 				<radius>20</radius>
 				<status>full</status>
 			</object>
-	
+
 		</negative_obj>
 	</object>
 

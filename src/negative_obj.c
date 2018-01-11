@@ -3,15 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   negative_obj.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/11 06:37:03 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/11 17:35:06 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
+double	check_negative_intersect(t_ray *ray, t_list_objs *objs, double t, double t2)
+{
+	t_ray		tmp_ray;
+	t_list_objs	*list;
+	double		tmp;
+
+	list = objs;
+	while (list)
+	{
+		tmp_ray = first_intersect(ray, list->obj, &tmp);
+		if ((gt(tmp, 0) || lt(t2, 0)) && lt(tmp, t))
+		{
+			tmp_ray = second_intersect(ray, list->obj, &tmp);
+			if (gt(tmp, 0) && gt(tmp, t) && lt(tmp, t2) && gt(t2, 0))
+			{
+				transform_inter(&tmp_ray, list->obj);
+				ray->normal = tmp_ray.normal;
+				ray->inter = tmp_ray.inter;
+				ray->color = tmp_ray.color;
+				ray->obj = tmp_ray.obj;
+				return(check_negative_intersect(ray, objs, tmp, t2));
+			}
+			else if ((gt(tmp, 0) && gt(tmp, t)) || lt(t2, 0))
+				return (0);
+		}
+		list = list->next;
+	}
+	return (t);
+}
 
 void	check_negative_obj_intersect(t_ray *ray, t_object *father, double *dist)
 {
@@ -48,4 +77,3 @@ void	check_negative_obj_intersect(t_ray *ray, t_object *father, double *dist)
 		}
 	}
 }
-
