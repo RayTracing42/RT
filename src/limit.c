@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/09 14:46:55 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/11 13:54:38 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,10 @@ int		full_limit(t_ray *ray, t_ray *tmp_ray, t_object *father)
 {
 	t_vector	center;
 
-	mult_vect(&center, father->trans_const, &(t_vector){father->origin.x, father->origin.y, father->origin.z});
+	mult_vect(&center, father->trans_const, &(t_vector){0, 0, 0});
+	center.x += father->origin.x;
+	center.y += father->origin.y;
+	center.z += father->origin.z;
 	transform_inter(tmp_ray, tmp_ray->obj);
 	if (is_in_limit(tmp_ray, father))
 	{

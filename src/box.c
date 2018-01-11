@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/10 15:10:24 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/11 13:40:34 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ static double			box_intersect(t_ray *ray, t_parequation e, t_object *obj, int i)
 	t_box_intersect	its;
 
 	its = (t_box_intersect){(t_box*)obj, (t_dot){0, 0, 0}, i, -1, NULL};
-	box_plane_intersect(ray, its.box->front, e, &its);
 	box_plane_intersect(ray, its.box->back, e, &its);
+	box_plane_intersect(ray, its.box->front, e, &its);
 	box_plane_intersect(ray, its.box->bottom, e, &its);
 	box_plane_intersect(ray, its.box->top, e, &its);
 	box_plane_intersect(ray, its.box->left, e, &its);
 	box_plane_intersect(ray, its.box->right, e, &its);
 	ray->inter = its.inter;
 	if (its.p == its.box->back)
-		write(1, "BACK\n", 5);
+		write(1, "BACK ", 5);
 	if (its.p == its.box->front)
 		write(1, "ERROR\n", 6);
 	return (its.t);
