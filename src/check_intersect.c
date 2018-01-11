@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/11 18:39:16 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/01/11 18:44:21 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,16 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
 			transform_inter(&tmp_ray, tmp_ray.obj);
-			limit(&res_ray, &tmp_ray, &tmp, &neg_dist);
 			//check_negative_obj_intersect(&res_ray, l_objs->obj, &neg_dist);
 			if (l_objs->obj->negative_obj)
 			{
+				limit(&res_ray, &tmp_ray, &tmp, &neg_dist);
 				tmp_ray = second_intersect(ray, l_objs->obj, &tmp2);
 				if ((neg_dist = check_negative_intersect(&res_ray, l_objs->obj->negative_obj, tmp, tmp2)))
 					dist = neg_dist;
 			}
 			else
-				dist = neg_dist;
+				limit(&res_ray, &tmp_ray, &tmp, &dist);
 		}
 		l_objs = l_objs->next;
 	}
