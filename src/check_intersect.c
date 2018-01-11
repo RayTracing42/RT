@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/11 17:47:33 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/01/11 17:59:05 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	double		dist;
 	double		neg_dist;
 	double		tmp;
-	//double		tmp2;
+	double		tmp2;
 	t_ray		tmp_ray;
 	t_ray		res_ray;
 
