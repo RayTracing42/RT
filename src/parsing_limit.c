@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/08 03:03:16 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/11 01:06:18 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,10 @@ void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 			int status)
 {
 	t_plane			*p;
-	t_trans_data	trs;
 
 	p = new_plane((t_objs_comp){origin, o->color,
 		o->obj_light.reflection_amount, o->obj_light.refraction_amount,
 		o->obj_light.refractive_index, o->obj_light.shininess}, normal);
-	trs = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
-	set_all_matrix((t_object *)p, trs);
 	p->status = status;
 	new_cell_obj(&o->limit, (t_object *)p);
 }
@@ -31,7 +28,6 @@ void	parsing_local_limit(t_object *o, t_dot origin, t_vector normal,
 			int status)
 {
 	t_plane			*p;
-	t_trans_data	trs;
 
 	origin = (t_dot){origin.x - o->origin.x, origin.y - o->origin.y,
 		origin.z - o->origin.z};
@@ -43,8 +39,6 @@ void	parsing_local_limit(t_object *o, t_dot origin, t_vector normal,
 	p = new_plane((t_objs_comp){origin, o->color,
 		o->obj_light.reflection_amount, o->obj_light.refraction_amount,
 		o->obj_light.refractive_index, o->obj_light.shininess}, normal);
-	trs = (t_trans_data){(t_dot){0, 0, 0}, (t_dot){0, 0, 0}, (t_dot){1, 1, 1}};
-	set_all_matrix((t_object *)p, trs);
 	p->status = status;
 	new_cell_obj(&o->limit, (t_object *)p);
 }

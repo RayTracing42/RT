@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 04:57:19 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/11 01:16:02 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,6 +334,16 @@ typedef struct				s_orb_light
 	t_dot					orig;
 	double					aperture;
 }							t_orb_light;
+
+typedef struct				s_intervaL_ray
+{
+	t_object 				*obj;
+	t_ray					first;
+	t_ray					secnd;
+	double					f_dist;
+	double					s_dist;
+}							t_interval_ray;
+
 
 //	ecran imaginaire qui permet de definir le vecteur camera -> pixel;
 typedef struct				s_view_plane

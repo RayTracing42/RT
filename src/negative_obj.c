@@ -6,33 +6,11 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/09 04:11:37 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/09 06:07:12 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-int		transformed_is_in_obj(t_ray *ray, t_object *father)
-{
-	t_vector	center;
-	t_ray		tmp_ray;
-
-	tmp_ray = *ray;
-	mult_vect(&center, father->trans_const, &(t_vector){0, 0, 0});
-	center.x += father->origin.x;
-	center.y += father->origin.y;
-	center.z += father->origin.z;
-	if (is_in_limit(&tmp_ray, father))
-	{
-		tmp_ray.inter.x -= center.x;
-		tmp_ray.inter.y -= center.y;
-		tmp_ray.inter.z -= center.z;
-		if (father->is_in_obj(&tmp_ray.inter, father))
-			return (1);
-	}
-	return (0);
-
-}
 
 double	is_in_negative_obj(t_ray *ray, t_object *father)
 {
@@ -57,11 +35,8 @@ double	is_in_negative_obj(t_ray *ray, t_object *father)
 		inter_tmp = get_dot_dist((t_dot*)&ray->equ.vc, &ray->inter);
 		if (first_tmp < inter_tmp && inter_tmp < secnd_tmp)
 		{
-			if (transformed_is_in_obj(&secnd_ray, father))
-			{
-				*ray = secnd_ray;
-				return (tmp);
-			}
+			*ray = secnd_ray;
+			return (tmp);
 		}
 		n = n->next;
 	}
