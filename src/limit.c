@@ -6,13 +6,13 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/12 15:14:58 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/12 15:17:27 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		is_in_right_side_of_limit(t_dot *i, t_object *p)
+static int		is_in_right_side_of_limit(t_dot *i, t_object *p)
 {
 	double	distance_1;
 	double	distance_2;
@@ -28,7 +28,7 @@ int		is_in_right_side_of_limit(t_dot *i, t_object *p)
 	return ((distance_1 >= distance_2));
 }
 
-int		is_in_limit(t_ray *ray, t_object *father)
+static int		is_in_limit(t_ray *ray, t_object *father)
 {
 	t_list_objs	*l;
 
@@ -45,14 +45,14 @@ int		is_in_limit(t_ray *ray, t_object *father)
 	return (1);
 }
 
-int		empty_limit(t_ray *tmp_ray, t_object *father)
+static int		empty_limit(t_ray *tmp_ray, t_object *father)
 {
 	if (is_in_limit(tmp_ray, father))
 		return (1);
 	return (0);
 }
 
-int		full_limit(t_ray *tmp_ray, t_object *father)
+static int		full_limit(t_ray *tmp_ray, t_object *father)
 {
 
 	if (is_in_limit(tmp_ray, father))
@@ -63,7 +63,7 @@ int		full_limit(t_ray *tmp_ray, t_object *father)
 	return (0);
 }
 
-t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist)
+static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist)
 {
 	double		tmp;
 	t_ray		tmp_ray;
