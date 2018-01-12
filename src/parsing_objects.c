@@ -131,7 +131,7 @@ t_list_objs	*parsing_object(char *scene)
 	{
 		data[1] = get_interval(data[0], "<negative_obj>", "</negative_obj>");
 		data[2] = get_interval(data[0], "<limit>", "</limit>");
-		data[3] = get_interval(data[0], "<transformations>", "<transformations>");
+		data[3] = get_interval(data[0], "<transformations>", "</transformations>");
 		if (!(obj = parsing_object2(data[0])))
 			return (NULL);
 		parsing_transformations(obj, data[3]);
