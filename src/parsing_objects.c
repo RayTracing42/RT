@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/08 03:15:48 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/12 02:00:47 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,19 +122,25 @@ t_object	*parsing_object2(char *object)
 
 t_list_objs	*parsing_object(char *scene)
 {
-	char			*data;
+	char			*data[4];
 	t_object		*obj;
 	t_list_objs		*l;
 
 	l = NULL;
-	while ((data = get_interval(scene, "<object>", "</object>")))
+	while ((data[0] = get_interval(scene, "<object>", "</object>")))
 	{
-		if (!(obj = parsing_object2(data)))
+		data[1] = get_interval(data[0], "<negative_obj>", "</negative_obj>");
+		data[2] = get_interval(data[0], "<limit>", "</limit>");
+		data[3] = get_interval(data[0], "<transformations>", "<transformations>");
+		if (!(obj = parsing_object2(data[0])))
 			return (NULL);
-		parsing_transformations(obj, data);
-		parsing_limit(obj, data);
-		parsing_negative_obj(obj, data);
-		free(data);
+		parsing_transformations(obj, data[3]);
+		parsing_limit(obj, data[2]);
+		parsing_negative_obj(obj, data[1]);
+		free(data[0]);
+		free(data[1]);
+		free(data[2]);
+		free(data[3]);
 		new_cell_obj(&l, obj);
 	}
 	return (l);

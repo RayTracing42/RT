@@ -62,6 +62,7 @@ clean:
 	rm -rf $(OBJ)
 	make clean -C $(LFT_PATH)
 
+
 fclean: clean
 	rm -rf $(NAME)
 	make fclean -C $(LFT_PATH)

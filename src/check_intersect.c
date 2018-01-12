@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/11 18:44:21 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/01/12 02:39:06 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,18 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
 			transform_inter(&tmp_ray, tmp_ray.obj);
-			//check_negative_obj_intersect(&res_ray, l_objs->obj, &neg_dist);
+/*
+			// FLAVIAN
+			neg_dist = dist;
+			limit(&res_ray, &tmp_ray, &tmp, &neg_dist);
+			check_negative_obj_intersect(&res_ray, l_objs->obj, &neg_dist);
+			if (!(neg_dist == 0))
+				dist = neg_dist;
+			// FLAVIAN
+*/
+
+/**/
+			// EMERIC
 			if (l_objs->obj->negative_obj)
 			{
 				limit(&res_ray, &tmp_ray, &tmp, &neg_dist);
@@ -72,6 +83,8 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 			}
 			else
 				limit(&res_ray, &tmp_ray, &tmp, &dist);
+			// EMERIC
+/**/
 		}
 		l_objs = l_objs->next;
 	}

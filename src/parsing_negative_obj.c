@@ -6,32 +6,37 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 00:21:37 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/08 03:44:54 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/12 02:00:44 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	parsing_negative_obj(t_object *obj, char *object)
+void	parsing_negative_obj(t_object *obj, char *neg)
 {
-	char		*data[3];
+	char		*data[5];
 	t_object	*neg_obj;
 	
-	if ((data[0] = get_interval(object, "<negative_obj>", "</negative_obj>")))
+	if (neg)
 	{
-		while ((data[1] = get_interval(data[0], "<object>", "</object>")))
+		while ((data[0] = get_interval(neg, "<object>", "</object>")))
 		{
-			if (!(neg_obj = parsing_object2(data[1]))
-				|| !(data[2] = get_interval(data[1], "<status>", "</status>"))
-				|| (neg_obj->status = get_status(data[2])) == -1)
+			data[4] = get_interval(data[0], "<negative_obj>", "</negative_obj>");
+			data[1] = get_interval(data[0], "<limit>", "</limit>");
+			data[2] = get_interval(data[0], "<transformations>", "</transformations>");
+			if (!(neg_obj = parsing_object2(data[0]))
+				|| !(data[3] = get_interval(data[0], "<status>", "</status>"))
+				|| (neg_obj->status = get_status(data[3])) == -1)
 				exit_custom_error("rt", ":parsing_negative_obj() failed");
-			parsing_transformations(neg_obj, data[1]);
+			parsing_transformations(neg_obj, data[2]);
 			parsing_limit(neg_obj, data[1]);
-			parsing_negative_obj(neg_obj, data[1]);
-			free(data[2]);
+//			parsing_negative_obj(neg_obj, data[4]);
+			free(data[0]);
 			free(data[1]);
+			free(data[2]);
+			free(data[3]);
+			free(data[4]);
 			new_cell_obj(&obj->negative_obj, neg_obj);
 		}
-		free(data[0]);
 	}
 }

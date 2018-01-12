@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/11 04:15:10 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/12 00:54:52 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,11 @@ void	local_loop(t_object *obj, char *limit)
 	}
 }
 
-void	parsing_limit(t_object *obj, char *object)
+void	parsing_limit(t_object *obj, char *limit)
 {
-	char	*data;
-
-	if (!(data = get_interval(object, "<limit>", "</limit>")))
-		return ;
-	local_loop(obj, data);
-	global_loop(obj, data);
-	free(data);
+	if (limit)
+	{
+		local_loop(obj, limit);
+		global_loop(obj, limit);
+	}
 }

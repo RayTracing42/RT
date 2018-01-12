@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 02:24:44 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/08 03:39:00 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/12 01:38:24 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,9 @@ char	*get_interval(char *src, const char *start, const char *stop)
 	if (src && ft_strcmp(src, "") && start && ft_strcmp(start, "")
 			&& stop && ft_strcmp(stop, ""))
 	{
-		if ((buffer = get_order_buffer(src, start, stop)))
+		ptr_start = ft_strstr(src, start);
+		ptr_stop = ft_strstr(src, stop);
+		if (ptr_start && ptr_stop && (buffer = get_order_buffer(src, start, stop)))
 		{
 			ptr_stop = get_stop_ptr(src, buffer, start, stop) - ft_strlen(stop);
 			ptr_start = ft_strstr(src, start);
