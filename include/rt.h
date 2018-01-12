@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/11 16:09:26 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/01/12 15:14:54 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int					get_status(char *status);
 **	limit.c
 */
 
-void				limit(t_ray *ray, t_ray *tmp_ray, double *tmo, double *dist);
+void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist);
 
 /*
 **	negative_obj.c

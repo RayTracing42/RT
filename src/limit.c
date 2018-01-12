@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   limit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/11 06:37:07 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/12 15:14:58 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist)
 
 	l = father->limit;
 	res_ray = *ray;
+	*dist = 0;
 	while (l)
 	{
 		p = (t_plane *)l->obj;
@@ -93,14 +94,14 @@ t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist)
 	return (res_ray);
 }
 
-void	limit(t_ray *ray, t_ray *tmp_ray, double *tmp, double *dist)
+void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist)
 {
 	t_object *obj;
 
-	obj = tmp_ray->obj;
-	if (is_in_limit(tmp_ray, obj))
-		*dist = *tmp;
+	obj = tmp_ray.obj;
+	if (is_in_limit(&tmp_ray, obj))
+		*dist = tmp;
 	else
-		*tmp_ray = check_limit_intersect(ray, obj, dist);
-	*ray = *tmp_ray;
+		tmp_ray = check_limit_intersect(ray, obj, dist);
+	*ray = tmp_ray;
 }

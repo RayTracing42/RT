@@ -65,12 +65,12 @@
 				<origin>
 					<x>200</x>
 					<y>0</y>
-					<z>30</z>
+					<z>20</z>
 				</origin>
 				<color>
 					<r>200</r>
 					<g>100</g>
-					<b>200</b>
+					<b>0</b>
 				</color>
 				<status>full</status>
 				<radius>20</radius>
