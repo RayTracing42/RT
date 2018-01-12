@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/12 15:14:54 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/12 16:59:32 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int					get_status(char *status);
 **	limit.c
 */
 
-void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist);
+void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, int i);
 
 /*
 **	negative_obj.c
@@ -114,7 +114,7 @@ void				check_negative_obj_intersect(t_ray *ray, t_object *father,
 		double *dist);
 
 
-double	check_negative_intersect(t_ray *ray, t_list_objs *objs, double t, double t2);
+double	check_negative_intersect(t_ray *ray, t_list_objs *objs, const double t, double t2);
 
 
 

@@ -6,13 +6,13 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/12 02:29:24 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/12 17:01:03 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double	check_negative_intersect(t_ray *ray, t_list_objs *objs, double t, double t2)
+double	check_negative_intersect(t_ray *ray, t_list_objs *objs, const double t, double t2)
 {
 	t_ray		tmp_ray;
 	t_list_objs	*list;
@@ -28,10 +28,7 @@ double	check_negative_intersect(t_ray *ray, t_list_objs *objs, double t, double 
 			if (gt(tmp, 0) && gt(tmp, t) && lt(tmp, t2) && gt(t2, 0))
 			{
 				transform_inter(&tmp_ray, list->obj);
-				ray->normal = tmp_ray.normal;
-				ray->inter = tmp_ray.inter;
-				ray->color = tmp_ray.color;
-				ray->obj = tmp_ray.obj;
+				*ray = tmp_ray;
 				return(check_negative_intersect(ray, objs, tmp, t2));
 			}
 			else if ((gt(tmp, 0) && gt(tmp, t)) || lt(t2, 0))
