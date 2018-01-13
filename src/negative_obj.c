@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/13 13:52:04 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/13 14:06:16 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ double	check_negative_intersect(t_ray *ray, t_list_objs *objs, const double t, d
 	}
 	return (t);
 }
-
+/*
 void	check_negative_obj_intersect(t_ray *ray, t_object *father, double *dist)
 {
 	t_list_objs	*n;
@@ -79,3 +79,4 @@ void	check_negative_obj_intersect(t_ray *ray, t_object *father, double *dist)
 		}
 	}
 }
+*/

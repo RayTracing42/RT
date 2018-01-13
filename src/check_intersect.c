@@ -6,39 +6,26 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/13 13:31:50 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/13 14:08:00 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		is_in_obj(t_dot *inter, t_ray *ray, t_object *obj)
+int		is_in_obj(double t, t_ray *ray, t_object *obj)
 {
-	t_ray	first;
-	t_ray	second;
-	double	a;
-	double	b;
-	double	c;
 	double	tmp;
 
 	if (ray->obj != obj)
 	{
-		first = first_intersect(ray, obj, &tmp);
-		if (tmp)
+		first_intersect(ray, obj, &tmp);
+		if (gt(tmp, 0))
 		{
-			transform_inter(&first, obj);
-			c = get_dot_dist(inter, (t_dot*)&ray->equ.vc);
-			a = get_dot_dist(&first.inter, (t_dot*)&ray->equ.vc);
-			if (a <= c)
+			if (lt(tmp, t))
 			{
-				second = second_intersect(ray, obj, &tmp);
-				if (tmp)
-				{
-					transform_inter(&second, obj);
-					b = get_dot_dist(&second.inter, (t_dot*)&ray->equ.vc);
-					if (c <= b)
-						return (1);
-				}
+				second_intersect(ray, obj, &tmp);
+				if (gt(tmp, 0) && lt(t, tmp))
+					return (1);
 			}
 		}
 	}
