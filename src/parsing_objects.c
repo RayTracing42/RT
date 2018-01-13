@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/07 15:48:44 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/13 03:52:04 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,28 @@ t_cone		*parsing_cone(char *object)
 	return (new_cone(args, angle));
 }
 
+t_box		*parsing_box(char *object)
+{
+	t_dot	size;
+	char		*data[4];
+	t_objs_comp args;
+
+	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
+		|| !(data[1] = get_interval(object, "<color>", "</color>"))
+		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
+		|| !(data[3] = get_interval(object, "<size>", "</size>"))
+		|| (parsing_dot(data[0], &args.orig) == -1)
+		|| (parsing_color(data[1], &args.col) == -1)
+		|| (parsing_physic(data[2], &args) == -1)
+		|| (parsing_dot(data[3], &size) == -1))
+		return (NULL);
+	free(data[0]);
+	free(data[1]);
+	free(data[2]);
+	free(data[3]);
+	return (new_box(args, size.x, size.y, size.z));
+}
+
 int			parsing_object(char *scene, t_scene *scn)
 {
 	char			*data[2];
@@ -119,6 +141,8 @@ int			parsing_object(char *scene, t_scene *scn)
 			obj = (t_object *)parsing_cylinder(data[0]);
 		else if (!(ft_strcmp(data[1], "cone")))
 			obj = (t_object *)parsing_cone(data[0]);
+		else if (!(ft_strcmp(data[1], "box")))
+			obj = (t_object *)parsing_box(data[0]);
 		if (!obj)
 			return (-1);
 		trans = parsing_transformations(data[0]);
