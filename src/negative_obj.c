@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/12 17:01:03 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/13 13:52:04 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,17 @@ double	check_negative_intersect(t_ray *ray, t_list_objs *objs, const double t, d
 	while (list)
 	{
 		tmp_ray = first_intersect(ray, list->obj, &tmp);
+		transform_inter(&tmp_ray, list->obj);
+		limit(&tmp_ray, tmp_ray, tmp, &tmp, 1);
 		if ((gt(tmp, 0) || lt(t2, 0)) && lt(tmp, t))
 		{
 			tmp_ray = second_intersect(ray, list->obj, &tmp);
+			transform_inter(&tmp_ray, list->obj);
+			limit(&tmp_ray, tmp_ray, tmp, &tmp, 1);
 			if (gt(tmp, 0) && gt(tmp, t) && lt(tmp, t2) && gt(t2, 0))
 			{
-				transform_inter(&tmp_ray, list->obj);
+				if (list->obj->status == EMPTY)
+					return (t2);
 				*ray = tmp_ray;
 				return(check_negative_intersect(ray, objs, tmp, t2));
 			}

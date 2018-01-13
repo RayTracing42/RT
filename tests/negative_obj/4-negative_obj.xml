@@ -72,6 +72,13 @@
 					<g>100</g>
 					<b>0</b>
 				</color>
+				<limit>
+					<local>
+						<origin><x>200</x><y>0</y><z>20</z></origin>
+						<normal><x>-1</x><y>0</y><z>0</z></normal>
+						<status>full</status>
+					</local>
+				</limit>
 				<status>full</status>
 				<radius>20</radius>
 			</object>

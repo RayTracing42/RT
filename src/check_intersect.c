@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/12 16:47:52 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/13 13:31:50 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	double		tmp;
 	double		tmp2;
 	t_ray		tmp_ray;
+	t_ray		tmp_ray2;
 	t_ray		res_ray;
 
 	dist = 0;
@@ -75,16 +76,26 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 /**/
 			// EMERIC
 			neg_dist = dist;
-			limit(&res_ray, tmp_ray, tmp, &neg_dist, 1);
+			limit(&tmp_ray, tmp_ray, tmp, &neg_dist, 1);
 			if (gt(neg_dist, 0) && l_objs->obj->negative_obj)
 			{
-				tmp_ray = second_intersect(&res_ray, l_objs->obj, &tmp2);
-				limit(&tmp_ray, tmp_ray, tmp2, &tmp2, 2);
-				if (gt(neg_dist = check_negative_intersect(&res_ray, l_objs->obj->negative_obj, neg_dist, tmp2), 0))
-					dist = neg_dist;
+				tmp_ray2 = second_intersect(&tmp_ray, l_objs->obj, &tmp2);
+				limit(&tmp_ray2, tmp_ray2, tmp2, &tmp2, 2);
+				if (gt(neg_dist = check_negative_intersect(&tmp_ray, l_objs->obj->negative_obj, neg_dist, tmp2), 0))
+				{
+					if (!eq(neg_dist, tmp2) || tmp_ray2.limit_status != EMPTY)
+						dist = neg_dist;
+					if (eq(neg_dist, tmp2) && tmp_ray2.limit_status != EMPTY)
+						res_ray = tmp_ray2;
+					else if (!eq(neg_dist, tmp2))
+						res_ray = tmp_ray;
+				}
 			}
 			else if (gt(neg_dist, 0))
+			{
+				res_ray = tmp_ray;
 				dist = neg_dist;
+			}
 			// EMERIC
 /**/
 		}
@@ -94,7 +105,7 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	return (dist);
 }
 
-t_ray	first_intersect(t_ray *ray, t_object *obj, double *tmp)
+t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 {
 	t_ray	tmp_ray;
 
@@ -107,7 +118,7 @@ t_ray	first_intersect(t_ray *ray, t_object *obj, double *tmp)
 	return (tmp_ray);
 }
 
-t_ray	second_intersect(t_ray *ray, t_object *obj, double *tmp)
+t_ray	second_intersect(const t_ray *ray, t_object *obj, double *tmp)
 {
 	t_ray	tmp_ray;
 

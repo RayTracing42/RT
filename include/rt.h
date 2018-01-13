@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/12 16:59:32 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/13 12:49:39 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 
 # define TITLE			"RT"
 # define POW			10000000000
+# define EMPTY			0
+# define FULL			1
+# define NONE			2
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -50,15 +53,13 @@ t_vector		matrice_rotation_z(t_vector *m, double angle);
 void			view_plane(t_camera *cam, t_view_plane *vp);
 void			view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 
-t_ray			first_intersect(t_ray *ray, t_object *obj, double *tmp);
-t_ray			second_intersect(t_ray *ray, t_object *obj, double *tmp);
+t_ray			first_intersect(const t_ray *ray, t_object *obj, double *tmp);
+t_ray			second_intersect(const t_ray *ray, t_object *obj, double *tmp);
 double			check_intersect(t_ray *ray, t_list_objs *l_objs);
 
 void			scanning(t_scene *scn);
 t_parequation	transform_equ(t_ray *ray, t_object *obj);
 void			transform_inter(t_ray *ray, t_object *obj);
-t_ray			first_intersect(t_ray *ray, t_object *obj, double *tmp);
-t_ray			second_intersect(t_ray *ray, t_object *obj, double *tmp);
 
 SDL_Color		effects(t_ray *ray, t_scene *scn);
 SDL_Color		shadows(t_ray *ray, t_scene *scn);

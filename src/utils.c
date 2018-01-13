@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:25:07 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/05 02:13:19 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/13 12:49:54 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ double		angle_between_vectors(t_vector a, t_vector b)
 int			get_status(char *status)
 {
 	if (ft_strcmp("empty", status) == 0)
-		return (0);
+		return (EMPTY);
 	else if (ft_strcmp("full", status) == 0)
-		return (1);
+		return (FULL);
 	else if (ft_strcmp("none", status) == 0)
-		return (2);
+		return (NONE);
 	else
 		return (-1);
 }
