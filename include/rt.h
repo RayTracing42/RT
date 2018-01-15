@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/13 14:04:12 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/15 12:22:47 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ double	check_negative_intersect(t_ray *ray, t_list_objs *objs, const double t, d
 
 
 
-int		is_in_obj(double t, t_ray *ray, t_object *obj);
-
+//int		is_in_obj(double t, t_ray *ray, t_object *obj);
+int					is_in_obj(t_dot *inter, t_ray *ray, t_object *obj);
 
 
 

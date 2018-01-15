@@ -6,13 +6,13 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/15 12:08:25 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/15 13:14:28 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		is_in_obj(double t, t_ray *ray, t_object *obj)
+/*int		is_in_obj(double t, t_ray *ray, t_object *obj)
 {
 	double	tmp;
 
@@ -30,7 +30,42 @@ int		is_in_obj(double t, t_ray *ray, t_object *obj)
 		}
 	}
 	return (0);
+}*/
+
+
+int		is_in_obj(t_dot *inter, t_ray *ray, t_object *obj)
+{
+	t_ray	first;
+	t_ray	second;
+	double	a;
+	double	b;
+	double	c;
+	double	tmp;
+
+	if (ray->obj != obj)
+	{
+		first = first_intersect(ray, obj, &tmp);
+		if (tmp)
+		{
+			transform_inter(&first, obj);
+			c = get_dot_dist(inter, (t_dot*)&ray->equ.vc);
+			a = get_dot_dist(&first.inter, (t_dot*)&ray->equ.vc);
+			if (a <= c)
+			{
+				second = second_intersect(ray, obj, &tmp);
+				if (tmp)
+				{
+					transform_inter(&second, obj);
+					b = get_dot_dist(&second.inter, (t_dot*)&ray->equ.vc);
+					if (c <= b)
+						return (1);
+				}
+			}
+		}
+	}
+	return (0);
 }
+
 
 double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 {

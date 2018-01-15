@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/13 14:05:53 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/15 13:10:27 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ static int		full_limit(t_ray *tmp_ray, t_object *father, double t)
 
 	if (is_in_limit(tmp_ray, father))
 	{
-		if (is_in_obj(t, tmp_ray, father))
+		if (is_in_obj(&tmp_ray->inter, tmp_ray, father))
+		//if (is_in_obj(t, tmp_ray, father))
 			return (1);
+		(void)t;
 	}
 	return (0);
 }
@@ -82,8 +84,8 @@ static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, i
 		if (gt(tmp, 0) && (eq(*dist, 0) || (gt(*dist, 0) && ((i == 1 && lt(tmp, *dist)) || (i == 2 && gt(tmp, *dist))))))
 		{
 			transform_inter(&tmp_ray, tmp_ray.obj);
-			if ((p->status == EMPTY && empty_limit(&tmp_ray, father))
-					|| (p->status == FULL && full_limit(&tmp_ray, father, tmp)))
+			if ((p->status == EMPTY && empty_limit(&tmp_ray, father)) ||
+				(p->status == FULL && full_limit(&tmp_ray, father, tmp)))
 			{
 				res_ray = tmp_ray;
 				res_ray.limit_status = p->status;
