@@ -1,6 +1,6 @@
 # sdl pkg-config source file
 
-prefix=/Users/edescoin/Documents/GitHub/RT/libraries/SDL/build
+prefix=/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/build
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

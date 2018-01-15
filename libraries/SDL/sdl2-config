@@ -1,6 +1,6 @@
 #!/bin/sh
 
-prefix=/Users/edescoin/Documents/GitHub/RT/libraries/SDL/build
+prefix=/Users/fcecilie/Rendus/rt_branch_limit/libraries/SDL/build
 exec_prefix=${prefix}
 exec_prefix_set=no
 libdir=${exec_prefix}/lib

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/11 13:57:14 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/01/15 06:43:48 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int			main(int ac, char **av)
 		ft_putendl("usage : ./rt file.xml");
 	else
 	{
-		scene_add_object((t_object*)new_box((t_objs_comp){(t_dot){10,0,0}, (SDL_Color){255,255,255,255},0,0,0,30}, 50, 50, 50), scn);
 		get_sdl_core();
 		init_list_evts(&events, NULL);
 		t = SDL_CreateThread(main_display, "", scn);

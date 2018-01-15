@@ -15,22 +15,30 @@
 		</angle>
 	</camera>
 
-	<light>
-		<type>orb</type>
-		<origin>
-			<x>-200</x>
-			<y>0</y>
-			<z>-200</z>
-		</origin>
-		<color>
-			<r>255</r>
-			<g>255</g>
-			<b>255</b>
-		</color>
-		<power>0.5</power>
-	</light>
-
-</scene>
+<object>
+	<type>box</type>
+	<origin>
+		<x>25</x>
+		<y>0</y>
+		<z>0</z>
+	</origin>
+	<color>
+		<r>255</r>
+		<g>255</g>
+		<b>255</b>
+	</color>
+	<size>
+		<x>50</x>
+		<y>50</y>
+		<z>50</z>
+	</size>
+	<physic>
+		<refraction_amount>0</refraction_amount>
+		<reflexion_amount>0</reflexion_amount>
+		<refraction_index>1.5</refraction_index>
+		<shininess>30</shininess>
+	</physic>
+</object>
 
 <object>
 	<type>sphere</type>
@@ -50,5 +58,23 @@
 		<refraction_index>1.5</refraction_index>
 		<shininess>30</shininess>
 	</physic>
-	<radius>10</radius>
+	<radius>25</radius>
 </object>
+
+	<light>
+		<type>orb</type>
+		<origin>
+			<x>-200</x>
+			<y>0</y>
+			<z>-200</z>
+		</origin>
+		<color>
+			<r>255</r>
+			<g>255</g>
+			<b>255</b>
+		</color>
+		<power>0.5</power>
+	</light>
+
+</scene>
+
