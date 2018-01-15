@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/15 14:14:10 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/15 14:19:07 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int		full_limit(t_ray *tmp_ray, t_object *father, double t)
 	return (0);
 }
 
-static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, int i)
+/*static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, int i)
 {
 	double		tmp;
 	t_ray		tmp_ray;
@@ -94,25 +94,59 @@ static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, i
 		l = l->next;
 	}
 	return (res_ray);
+}*/
+
+
+t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, int i)
+{
+	double		tmp;
+	t_ray		tmp_ray;
+	t_ray		res_ray;
+	t_list_objs	*l;
+	t_plane		*p;
+	(void)i;
+
+	l = father->limit;
+	res_ray = *ray;
+	while (l)
+	{
+		p = (t_plane *)l->obj;
+		tmp_ray = (p->status == 0) ? second_intersect(ray, father, &tmp) :
+			first_intersect(ray, l->obj, &tmp);
+		if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && gt(*dist, 0))))
+		{
+			transform_inter(&tmp_ray, tmp_ray.obj);
+			if ((p->status == 0 && empty_limit(&tmp_ray, father))
+					|| (p->status == 1 && full_limit(&tmp_ray, father, 0)))
+			{
+				res_ray = tmp_ray;
+				*dist = tmp;
+			}
+		}
+		l = l->next;
+	}
+	return (res_ray);
 }
+
 
 void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, int i)
 {
 	t_object	*obj;
-	double		tmp_dist;
+	//double		tmp_dist;
 
 	obj = tmp_ray.obj;
-	tmp_dist = *dist;
+	//tmp_dist = *dist;
 	tmp_ray.limit_status = NONE;
 	if (is_in_limit(&tmp_ray, obj))
 		*dist = tmp;
 	else
 	{
-		tmp_ray = check_limit_intersect(ray, obj, &tmp_dist, i);
+		tmp_ray = check_limit_intersect(ray, obj, dist, i);
+		/*tmp_ray = check_limit_intersect(ray, obj, &tmp_dist, i);
 		if (!eq(tmp_dist, *dist))
 			*dist = tmp_dist;
 		else
-			*dist = 0;
+			*dist = 0;*/
 	}
 	*ray = tmp_ray;
 }
