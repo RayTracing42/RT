@@ -4,8 +4,8 @@
 	<camera>
 		<focal>60</focal>
 		<origin>
-			<x>-200</x>
-			<y>60</y>
+			<x>-100</x>
+			<y>20</y>
 			<z>-50</z>
 		</origin>
 		<angle>
