@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/05 22:00:57 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/15 08:02:03 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void			transform_inter(t_ray *ray, t_object *obj)
 {
 	mult_vect(&ray->normal, obj->trans_norm, &ray->normal);
 	mult_vect((t_vector*)&ray->inter, obj->trans_const, (t_vector*)&ray->inter);
-	ray->inter = (t_dot){ray->inter.x + obj->origin.x,
-		ray->inter.y + obj->origin.y, ray->inter.z + obj->origin.z};
+	ray->inter = (t_dot){ray->inter.x + ray->obj->origin.x,
+		ray->inter.y + ray->obj->origin.y, ray->inter.z + ray->obj->origin.z};
 }
 
 SDL_Color		effects(t_ray *ray, t_scene *scn)

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/09 15:49:54 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/15 08:37:06 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ double					plane_intersect(t_ray *ray, t_parequation e,
 	{
 		ray->nb_intersect = 2;
 		ray->inter = equation_get_dot(&e, t);
+		ray->obj = obj;
 	}
 	return (t);
 }
@@ -67,7 +68,8 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal, int tgl)
 	plane->a = normal.x;
 	plane->b = normal.y;
 	plane->c = normal.z;
-	plane->d = -(plane->a * args.orig.x + plane->b * args.orig.y + plane->c * args.orig.z);
+//	plane->d = -(plane->a * args.orig.x + plane->b * args.orig.y + plane->c * args.orig.z);
+	plane->d = 0;
 	plane->z = args.orig.z;
 	return (plane);
 }

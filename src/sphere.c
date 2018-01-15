@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/10 18:48:47 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/15 08:37:09 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ static double			sphere_intersect(t_ray *ray, t_parequation e,
 	fac[_B] = 2 * (e.vd.x * e.vc.x + e.vd.y * e.vc.y + e.vd.z * e.vc.z);
 	fac[_C] = e.vc.x * e.vc.x + e.vc.y * e.vc.y + e.vc.z * e.vc.z - s->r2;
 	if ((ray->nb_intersect = get_quad_equation_sol(&t, fac, i)))
+	{
 		ray->inter = equation_get_dot(&e, t);
+		ray->obj = obj;
+	}
 	return (t);
 }
 

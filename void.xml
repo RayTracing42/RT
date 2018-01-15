@@ -4,13 +4,13 @@
 	<camera>
 		<focal>60</focal>
 		<origin>
-			<x>200</x>
-			<y>20</y>
+			<x>-200</x>
+			<y>60</y>
 			<z>-50</z>
 		</origin>
 		<angle>
 			<x>0</x>
-			<y>-150</y>
+			<y>-20</y>
 			<z>0</z>
 		</angle>
 	</camera>
@@ -18,9 +18,9 @@
 <object>
 	<type>box</type>
 	<origin>
-		<x>25</x>
+		<x>100</x>
 		<y>0</y>
-		<z>0</z>
+		<z>50</z>
 	</origin>
 	<color>
 		<r>255</r>
@@ -28,10 +28,27 @@
 		<b>255</b>
 	</color>
 	<size>
-		<x>50</x>
-		<y>50</y>
-		<z>50</z>
+		<x>40</x>
+		<y>40</y>
+		<z>40</z>
 	</size>
+	<transformations>
+		<rotation>
+			<x>60</x>
+			<y>45</y>
+			<z>20</z>
+		</rotation>
+		<translation>
+			<x>0</x>
+			<y>0</y>
+			<z>0</z>
+		</translation>
+		<scale>
+			<x>1</x>
+			<y>1</y>
+			<z>1</z>
+		</scale>
+	</transformations>
 	<physic>
 		<refraction_amount>0</refraction_amount>
 		<reflexion_amount>0</reflexion_amount>
@@ -43,9 +60,9 @@
 <object>
 	<type>sphere</type>
 	<origin>
-		<x>25</x>
+		<x>100</x>
 		<y>0</y>
-		<z>0</z>
+		<z>50</z>
 	</origin>
 	<color>
 		<r>255</r>

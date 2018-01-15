@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/09 14:31:23 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/15 08:46:21 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,16 @@ t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	t_ray	tmp_ray;
 
 	tmp_ray = *ray;
+	tmp_ray.obj = NULL;
 	*tmp = obj->intersect(&tmp_ray, transform_equ(&tmp_ray, obj), obj, 1);
-	tmp_ray.normal = *obj->get_normal(&tmp_ray.inter, obj);
 	tmp_ray.color = obj->color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
-	tmp_ray.obj = obj;
+	if (tmp_ray.obj)
+		tmp_ray.normal = *tmp_ray.obj->get_normal(&tmp_ray.inter, tmp_ray.obj);
 	if (gt(*tmp, 0))
+	{
 		tmp_ray.shad_opacity += (1 - tmp_ray.obj->obj_light.refraction_amount);
+	}
 	return (tmp_ray);
 }
 
@@ -59,10 +62,11 @@ t_ray	second_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	t_ray	tmp_ray;
 
 	tmp_ray = *ray;
+	tmp_ray.obj = NULL;
 	*tmp = obj->intersect(&tmp_ray, transform_equ(&tmp_ray, obj), obj, 2);
-	tmp_ray.normal = *obj->get_normal(&tmp_ray.inter, obj);
 	tmp_ray.color = obj->color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
-	tmp_ray.obj = obj;
+	if (tmp_ray.obj)
+		tmp_ray.normal = *tmp_ray.obj->get_normal(&tmp_ray.inter, tmp_ray.obj);
 	return (tmp_ray);
 }

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/10 18:47:29 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/15 08:35:25 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ static double			cylinder_intersect(t_ray *ray, t_parequation e,
 	fac[_B] = 2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z);
 	fac[_C] = e.vc.x * e.vc.x + e.vc.z * e.vc.z - c->r2;
 	if ((ray->nb_intersect = get_quad_equation_sol(&t, fac, i)))
+	{
 		ray->inter = equation_get_dot(&e, t);
+		ray->obj = obj;
+	}
 	return (t);
 }
 

@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/15 06:43:16 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/15 08:41:22 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_cone		*parsing_cone(char *object)
 	return (new_cone(args, angle));
 }
 
-t_box		*parsing_box(char *object)
+t_box		*parsing_box(char *object, t_trans_data *trs)
 {
 	t_dot	size;
 	char		*data[4];
@@ -119,7 +119,7 @@ t_box		*parsing_box(char *object)
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
-	return (new_box(args, size.x, size.y, size.z));
+	return (new_box(args, size.x, size.y, size.z, *trs));
 }
 
 int			parsing_object(char *scene, t_scene *scn)
@@ -131,6 +131,7 @@ int			parsing_object(char *scene, t_scene *scn)
 	while ((data[0] = get_interval(scene, "<object>", "</object>")))
 	{
 		obj = NULL;
+		trans = parsing_transformations(data[0]);
 		if (!(data[1] = get_interval(data[0], "<type>", "</type>")))
 			return (-1);
 		if (!(ft_strcmp(data[1], "sphere")))
@@ -142,10 +143,9 @@ int			parsing_object(char *scene, t_scene *scn)
 		else if (!(ft_strcmp(data[1], "cone")))
 			obj = (t_object *)parsing_cone(data[0]);
 		else if (!(ft_strcmp(data[1], "box")))
-			obj = (t_object *)parsing_box(data[0]);
+			obj = (t_object *)parsing_box(data[0], &trans);
 		if (!obj)
 			return (-1);
-		trans = parsing_transformations(data[0]);
 		set_all_matrix(obj, trans);
 		parsing_limit(obj, data[0]);
 		scene = ft_strstr(scene, "</object>") + ft_strlen("</object>");

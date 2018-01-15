@@ -6,13 +6,13 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/11 13:54:38 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/01/15 06:57:47 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int	is_in_right_side_of_limit(const t_dot *i, t_object *p)
+int	is_in_right_side_of_limit(const t_dot *i, t_object *p)
 {
 	double	distance_1;
 	double	distance_2;
