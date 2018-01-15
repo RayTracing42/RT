@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/15 14:36:05 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/15 14:37:58 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,21 +98,20 @@ static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, i
 void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, int i)
 {
 	t_object	*obj;
-	//double		tmp_dist;
+	double		tmp_dist;
 
 	obj = tmp_ray.obj;
-	//tmp_dist = *dist;
+	tmp_dist = *dist;
 	tmp_ray.limit_status = NONE;
 	if (is_in_limit(&tmp_ray, obj))
 		*dist = tmp;
 	else
 	{
-		tmp_ray = check_limit_intersect(ray, obj, dist, i);
-		/*tmp_ray = check_limit_intersect(ray, obj, &tmp_dist, i);
+		tmp_ray = check_limit_intersect(ray, obj, &tmp_dist, i);
 		if (!eq(tmp_dist, *dist))
 			*dist = tmp_dist;
 		else
-			*dist = 0;*/
+			*dist = 0;
 	}
 	*ray = tmp_ray;
 }
