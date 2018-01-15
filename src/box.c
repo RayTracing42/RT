@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/15 09:05:12 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/15 09:41:49 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void				box_plane_intersect(t_ray *ray, const t_plane *p,
 
 	e = transform_equ(ray, (t_object *)p);
 	if (gt(t = p->intersect(ray, e, (t_object*)p, 0), 0))
-	{
 		if (is_in_boundaries(p, its->box, &ray->inter))
 		{
 			if (its->t == -1)
@@ -53,10 +52,10 @@ static void				box_plane_intersect(t_ray *ray, const t_plane *p,
 				its->t = t;
 			}
 		}
-	}
 }
 
-static double			box_intersect(t_ray *ray, t_parequation e, t_object *obj, int i)
+static double			box_intersect(t_ray *ray, t_parequation e, t_object *obj,
+	int i)
 {
 	t_box_intersect	its;
 
@@ -72,84 +71,44 @@ static double			box_intersect(t_ray *ray, t_parequation e, t_object *obj, int i)
 	return (its.t);
 }
 
-static const t_vector	*get_box_normal(t_dot *inter, t_object *obj)
+void					transform_plane(t_box *box, t_dot *size, t_trans_data *trs)
 {
-	t_box	*b;
-
-	b = (t_box*)obj;
-	if (b->front->is_in_obj(inter, (t_object*)b->front))
-		return (&b->front->normal);
-	else if (b->back->is_in_obj(inter, (t_object*)b->back))
-		return (&b->back->normal);
-	else if (b->bottom->is_in_obj(inter, (t_object*)b->bottom))
-		return (&b->bottom->normal);
-	else if (b->top->is_in_obj(inter, (t_object*)b->top))
-		return (&b->top->normal);
-	else if (b->left->is_in_obj(inter, (t_object*)b->left))
-		return (&b->left->normal);
-	else
-		return (&b->right->normal);
-}
-
-static int				is_in_box(t_dot *i, t_object *obj)
-{
-	t_box	*b;
-
-	b = (t_box*)obj;
-	if (b->front->is_in_obj(i, (t_object*)b->front))
-		return (is_in_boundaries(b->front, b, i));
-	else if (b->back->is_in_obj(i, (t_object*)b->back))
-		return (is_in_boundaries(b->back, b, i));
-	else if (b->bottom->is_in_obj(i, (t_object*)b->bottom))
-		return (is_in_boundaries(b->bottom, b, i));
-	else if (b->top->is_in_obj(i, (t_object*)b->top))
-		return (is_in_boundaries(b->top, b, i));
-	else if (b->left->is_in_obj(i, (t_object*)b->left))
-		return (is_in_boundaries(b->left, b, i));
-	else if (b->right->is_in_obj(i, (t_object*)b->right))
-		return (is_in_boundaries(b->right, b, i));
-	return (0);
-}
-
-t_box					*new_box(t_objs_comp args, double x_width,
-		double y_width, double z_width, t_trans_data trs)
-{
-	t_box	*box;
 	t_dot	t;
 
+	t = trs->trans;
+	trs->trans = (t_dot){t.x - (size->x / 2), t.y, t.z};
+	set_all_matrix((t_object *)box->front, *trs);
+	trs->trans = (t_dot){t.x, t.y - (size->y / 2), t.z};
+	set_all_matrix((t_object *)box->bottom, *trs);
+	trs->trans = (t_dot){t.x, t.y, t.z - (size->z / 2)};
+	set_all_matrix((t_object *)box->left, *trs);
+	trs->trans = (t_dot){t.x + (size->x / 2), t.y, t.z};
+	set_all_matrix((t_object *)box->back, *trs);
+	trs->trans = (t_dot){t.x, t.y + (size->y / 2), t.z};
+	set_all_matrix((t_object *)box->top, *trs);
+	trs->trans = (t_dot){t.x, t.y, t.z + (size->z / 2)};
+	set_all_matrix((t_object *)box->right, *trs);
+	trs->trans = t;
+
+}
+
+t_box					*new_box(t_objs_comp args, t_dot *size, t_trans_data *trs)
+{
+	t_box	*box;
+
 	box = (t_box*)new_object(BOX, args);
-	
-	box->fbl_corner = (t_dot){-(x_width / 2), -(y_width / 2), -(z_width / 2)};
-	box->btr_corner = (t_dot){(x_width / 2), (y_width / 2), (z_width / 2)};
-
-	t = trs.trans;
-	trs.trans = (t_dot){t.x - (x_width / 2), t.y, t.z};
+	box->fbl_corner = (t_dot){-(size->x / 2), -(size->y / 2), -(size->z / 2)};
+	box->btr_corner = (t_dot){(size->x / 2), (size->y / 2), (size->z / 2)};
 	box->front = new_plane(args, (t_vector){-1, 0, 0}, 0);
-	set_all_matrix((t_object *)box->front, trs);
-	
-	trs.trans = (t_dot){t.x, t.y - (y_width / 2), t.z};
 	box->bottom = new_plane(args, (t_vector){0, -1, 0}, 0);
-	set_all_matrix((t_object *)box->bottom, trs);
-	
-	trs.trans = (t_dot){t.x, t.y, t.z - (z_width / 2)};
 	box->left = new_plane(args, (t_vector){0, 0, -1}, 0);
-	set_all_matrix((t_object *)box->left, trs);
-	
-	trs.trans = (t_dot){t.x + (x_width / 2), t.y, t.z};
 	box->back = new_plane(args, (t_vector){1, 0, 0}, 0);
-	set_all_matrix((t_object *)box->back, trs);
-	
-	trs.trans = (t_dot){t.x, t.y + (y_width / 2), t.z};
 	box->top = new_plane(args, (t_vector){0, 1, 0}, 0);
-	set_all_matrix((t_object *)box->top, trs);
-	
-	trs.trans = (t_dot){t.x, t.y, t.z + (z_width / 2)};
 	box->right = new_plane(args, (t_vector){0, 0, 1}, 0);
-	set_all_matrix((t_object *)box->right, trs);
-
+	transform_plane(box, size, trs);
 	box->intersect = &box_intersect;
-	box->get_normal = &get_box_normal;
-	box->is_in_obj = &is_in_box;
+	box->is_in_obj = NULL;
+	box->get_normal = NULL;
 	return (box);
 }
 

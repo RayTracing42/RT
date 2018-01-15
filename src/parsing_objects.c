@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/15 08:41:22 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/15 09:41:03 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ t_box		*parsing_box(char *object, t_trans_data *trs)
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
-	return (new_box(args, size.x, size.y, size.z, *trs));
+	return (new_box(args, &size, trs));
 }
 
 int			parsing_object(char *scene, t_scene *scn)
