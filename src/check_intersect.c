@@ -6,33 +6,27 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/15 14:36:34 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/15 15:29:54 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-/*int		is_in_obj(double t, t_ray *ray, t_object *obj)
+int		is_in_obj(double t, t_ray *ray, t_object *obj)
 {
 	double	tmp;
 
-	if (ray->obj != obj)
+	first_intersect(ray, obj, &tmp);
+	if (lt(tmp, t))
 	{
-		first_intersect(ray, obj, &tmp);
-		if (gt(tmp, 0))
-		{
-			if (lt(tmp, t))
-			{
-				second_intersect(ray, obj, &tmp);
-				if (gt(tmp, 0) && lt(t, tmp))
-					return (1);
-			}
-		}
+		second_intersect(ray, obj, &tmp);
+		if (lt(t, tmp))
+			return (1);
 	}
 	return (0);
-}*/
+}
 
-
+/*
 int		is_in_obj(t_dot *inter, t_ray *ray, t_object *obj)
 {
 	t_ray	first;
@@ -65,7 +59,7 @@ int		is_in_obj(t_dot *inter, t_ray *ray, t_object *obj)
 	}
 	return (0);
 }
-
+*/
 
 double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 {
