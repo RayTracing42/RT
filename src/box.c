@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/15 09:41:49 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/15 10:22:23 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void				box_plane_intersect(t_ray *ray, const t_plane *p,
 }
 
 static double			box_intersect(t_ray *ray, t_parequation e, t_object *obj,
-	int i)
+		int i)
 {
 	t_box_intersect	its;
 
@@ -71,6 +71,45 @@ static double			box_intersect(t_ray *ray, t_parequation e, t_object *obj,
 	return (its.t);
 }
 
+static const t_vector	*get_box_normal(t_dot *inter, t_object *obj)
+{
+	t_box	*b;
+
+	b = (t_box*)obj;
+
+	if (b->front->is_in_obj(inter, (t_object*)b->front))
+		return (&b->front->normal);
+	else if (b->back->is_in_obj(inter, (t_object*)b->back))
+		return (&b->back->normal);
+	else if (b->bottom->is_in_obj(inter, (t_object*)b->bottom))
+		return (&b->bottom->normal);
+	else if (b->top->is_in_obj(inter, (t_object*)b->top))
+		return (&b->top->normal);
+	else if (b->left->is_in_obj(inter, (t_object*)b->left))
+		return (&b->left->normal);
+	else
+		return (&b->right->normal);
+}
+
+static int				is_in_box(t_dot *i, t_object *obj)
+{
+	t_box	*b;
+
+	b = (t_box*)obj;
+	if (b->front->is_in_obj(i, (t_object*)b->front))
+		return (is_in_boundaries(b->front, b, i));
+	else if (b->back->is_in_obj(i, (t_object*)b->back))
+		return (is_in_boundaries(b->back, b, i));
+	else if (b->bottom->is_in_obj(i, (t_object*)b->bottom))
+		return (is_in_boundaries(b->bottom, b, i));
+	else if (b->top->is_in_obj(i, (t_object*)b->top))
+		return (is_in_boundaries(b->top, b, i));
+	else if (b->left->is_in_obj(i, (t_object*)b->left))
+		return (is_in_boundaries(b->left, b, i));
+	else if (b->right->is_in_obj(i, (t_object*)b->right))
+		return (is_in_boundaries(b->right, b, i));
+	return (0);
+}
 void					transform_plane(t_box *box, t_dot *size, t_trans_data *trs)
 {
 	t_dot	t;
@@ -107,8 +146,8 @@ t_box					*new_box(t_objs_comp args, t_dot *size, t_trans_data *trs)
 	box->right = new_plane(args, (t_vector){0, 0, 1}, 0);
 	transform_plane(box, size, trs);
 	box->intersect = &box_intersect;
-	box->is_in_obj = NULL;
-	box->get_normal = NULL;
+	box->is_in_obj = &is_in_box;
+	box->get_normal = &get_box_normal;
 	return (box);
 }
 
