@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/15 08:46:19 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/15 09:05:12 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void				box_plane_intersect(t_ray *ray, const t_plane *p,
 			}
 			else if (its->i == 2 && gt(t, its->t))
 			{
+				its->p = (t_plane*)p;
 				its->inter = ray->inter;
 				its->t = t;
 			}
