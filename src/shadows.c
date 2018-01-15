@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/12 12:20:43 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/15 12:07:44 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs,
 		return (1);
 	tmp_ray = *light_ray;
 	tmp = check_intersect(&tmp_ray, l_objs);
-	if (gt(tmp, 0))
+	if (gt(tmp, 0) && lt(tmp, 1))
 		return (1);
 	return (0);
 }

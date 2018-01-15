@@ -1,6 +1,6 @@
 <scene>
 	<brightness>75</brightness>
-	
+
 	<camera>
 		<origin>
 			<x>-200</x>
@@ -12,7 +12,7 @@
 			<y>0</y>
 			<z>0</z>
 		</angle>
-	</camera>	
+	</camera>
 
 	<object>
 		<type>cone</type>
