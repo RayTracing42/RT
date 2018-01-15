@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/15 14:20:51 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/15 14:36:34 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	double		dist;
 	double		neg_dist;
 	double		tmp;
-//	double		tmp2;
+	double		tmp2;
 	t_ray		tmp_ray;
-//	t_ray		tmp_ray2;
+	t_ray		tmp_ray2;
 	t_ray		res_ray;
 
 	dist = 0;
@@ -98,11 +98,6 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 /**/
 			// EMERIC
 			neg_dist = dist;
-			limit(&res_ray, tmp_ray, tmp, &neg_dist, 1);
-			if (!(neg_dist == 0))
-				dist = neg_dist;
-
-			/*neg_dist = dist;
 			limit(&tmp_ray, tmp_ray, tmp, &neg_dist, 1);
 			if (gt(neg_dist, 0) && l_objs->obj->negative_obj)
 			{
@@ -122,7 +117,7 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 			{
 				res_ray = tmp_ray;
 				dist = neg_dist;
-			}*/
+			}
 			// EMERIC
 /**/
 		}
