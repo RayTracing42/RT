@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/16 15:18:16 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/16 16:41:55 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int		empty_limit(t_ray tmp_ray, t_object *father)
 	return (0);
 }
 
-static int		full_limit(t_ray tmp_ray, t_object *father, double t, int i)
+static int		full_limit(t_ray tmp_ray, t_object *father, double t)
 {
 	if (is_in_limit(&tmp_ray, father))
 	{
@@ -63,7 +63,7 @@ static int		full_limit(t_ray tmp_ray, t_object *father, double t, int i)
 }
 
 
-static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, int i)
+static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, double filter)
 {
 	double		tmp;
 	t_ray		tmp_ray;
@@ -76,12 +76,12 @@ static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, i
 	while (l)
 	{
 		p = (t_plane *)l->obj;
-		tmp_ray = (p->status || i == 2) ? first_intersect(ray, l->obj, &tmp) : second_intersect(ray, father, &tmp);
-		if (gt(tmp, 0) && (eq(*dist, 0) || (gt(*dist, 0) && ((i == 1 && lt(tmp, *dist)) || (i == 2 && (gt(tmp, *dist) || res_ray.limit_status == NONE))))))
+		tmp_ray = (p->status || filter > 0) ? first_intersect(ray, l->obj, &tmp) : second_intersect(ray, father, &tmp);
+		if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && (filter < 0 || !eq(tmp, filter)))))
 		{
 			transform_inter(&tmp_ray, tmp_ray.obj);
 			if ((p->status == EMPTY && empty_limit(tmp_ray, father)) ||
-				(p->status == FULL && full_limit(tmp_ray, father, tmp, i)))
+				(p->status == FULL && full_limit(tmp_ray, father, tmp)))
 			{
 				res_ray = tmp_ray;
 				res_ray.limit_status = p->status;
@@ -93,7 +93,7 @@ static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, i
 	return (res_ray);
 }
 
-void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, int i)
+void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, double filter)
 {
 	t_object	*obj;
 	double		tmp_dist;
@@ -105,7 +105,7 @@ void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, int i)
 		*dist = tmp;
 	else
 	{
-		tmp_ray = check_limit_intersect(ray, obj, &tmp_dist, i);
+		tmp_ray = check_limit_intersect(ray, obj, &tmp_dist, filter);
 		if (!eq(tmp_dist, *dist))
 			*dist = tmp_dist;
 		else
