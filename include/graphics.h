@@ -52,4 +52,21 @@ SDL_Color			pixels_merger(SDL_Color pixel1, SDL_Color pixel2);
 void		x4_antia(SDL_Surface *screen, int x, int y);
 int		antia(void);
 
+int		gray(void);
+void		apply_gray(SDL_Surface *screen, int x, int y);
+
+int		sepia(void);
+void		apply_sepia(SDL_Surface *screen, int x, int y);
+
+int		lofi(void);
+void		apply_lofi(SDL_Surface *screen, int x, int y);
+
+int anaglyph(void);
+void		apply_anaglyph(SDL_Surface *screen, int x, int y);
+
+int		negative(void);
+void		apply_negative(SDL_Surface *screen, int x, int y);
+
+void		refresh_win_effect(int (*f)());
+
 #endif
