@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/15 16:50:23 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/16 13:46:52 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,12 @@ int		is_in_obj(double t, t_ray *ray, t_object *obj)
 
 
 	first_intersect(ray, obj, &tmp);
-	//printf("%f, %f\n", tmp, t);
 	if (lt(tmp, t))
 	{
 		second_intersect(ray, obj, &tmp);
 		if (lt(t, tmp))
 			return (1);
 	}
-	/*second_intersect(ray, obj, &tmp);
-	printf("%f, %f\n\n", tmp, t);*/
 	return (0);
 }
 
@@ -80,6 +77,8 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	while (l_objs != NULL)
 	{
 		tmp_ray = first_intersect(ray, l_objs->obj, &tmp);
+		if (lt(tmp, 0))
+			tmp_ray = second_intersect(ray, l_objs->obj, &tmp);
 		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
 			transform_inter(&tmp_ray, tmp_ray.obj);

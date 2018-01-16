@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/15 15:52:03 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/16 13:45:09 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, i
 	while (l)
 	{
 		p = (t_plane *)l->obj;
-		tmp_ray = (p->status || i == 2) ? first_intersect(ray, l->obj, &tmp) :
-			second_intersect(ray, father, &tmp);
+		tmp_ray = (p->status || i == 2) ? first_intersect(ray, l->obj, &tmp) : second_intersect(ray, father, &tmp);
 		if (gt(tmp, 0) && (eq(*dist, 0) || (gt(*dist, 0) && ((i == 1 && lt(tmp, *dist)) || (i == 2 && gt(tmp, *dist))))))
 		{
 			transform_inter(&tmp_ray, tmp_ray.obj);

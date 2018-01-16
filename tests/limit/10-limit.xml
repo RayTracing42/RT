@@ -27,7 +27,7 @@
 			<b>255</b>
 		</color>
 		<physic>
-			<reflexion_amount>0</reflexion_amount>
+			<reflexion_amount>0.7</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
 			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>

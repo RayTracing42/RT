@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/15 16:52:19 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/16 13:51:21 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,9 @@ void			scanning(t_scene *scn)
 	ray.actual_refractive_i = 1;
 	ray.limit = 1;
 	ray.tree = add_new_leaf(NULL, NULL, NULL, 0);
-	/*y = 600;
-	while (++y < 602)*/
 	y = -1;
 	while (++y < WIN_HEIGHT)
 	{
-		/*x = 200;
-		while (++x < 202)//WIN_WIDTH)*/
 		x = -1;
 		while (++x < WIN_WIDTH)
 		{
