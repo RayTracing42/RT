@@ -12,20 +12,20 @@
 
 #include "rt.h"
 
-void		apply_gray(SDL_Surface *screen, int x, int y)
+void		apply_bwnoise(SDL_Surface *screen, int x, int y)
 {
 	SDL_Color curr;
-	SDL_Color c;
+	unsigned char n;
 
 	while (y < WIN_HEIGHT)
 	{
   	while (x < WIN_WIDTH)
   	{
 			curr = get_pixel_colors(screen, x, y);
-			c = curr;
-			curr = (SDL_Color){(c.r+c.g+c.b)/3,
-			 	(c.r+c.g+c.b)/3,
-			 	(c.r+c.g+c.b)/3, 255};
+			n = (unsigned char)rand();
+			curr = (SDL_Color){((curr.r * 3) + n) / 4,
+			 	((curr.g * 3) + n) / 4,
+			 	((curr.b * 3) + n) / 4, 255};
 			put_pixel(x, y, &curr);
 			x++;
   	}
@@ -34,7 +34,7 @@ void		apply_gray(SDL_Surface *screen, int x, int y)
 	}
 }
 
-int		gray(void)
+int		bwnoise(void)
 {
 	SDL_Surface			*screen;
 
@@ -45,6 +45,6 @@ int		gray(void)
 				SDL_GetWindowPixelFormat(get_sdl_core()->window),
 				screen->pixels, screen->pitch) != 0)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
-	apply_gray(screen, 0, 0);
+	apply_bwnoise(screen, 0, 0);
 	return (0);
 }

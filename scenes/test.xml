@@ -4,12 +4,12 @@
 	<camera>
 		<origin>
 			<x>-100</x>
-			<y>50</y>
-			<z>90</z>
+			<y>0</y>
+			<z>0</z>
 		</origin>
 		<angle>
 			<x>0</x>
-			<y>20</y>
+			<y>0</y>
 			<z>0</z>
 		</angle>
 	</camera>
@@ -17,24 +17,24 @@
 	<object>
 		<type>sphere</type>
 		<origin>
-			<x>200</x>
+			<x>0</x>
 			<y>0</y>
 			<z>0</z>
 		</origin>
 		<color>
-			<r>110</r>
-			<g>110</g>
-			<b>110</b>
+			<r>150</r>
+			<g>150</g>
+			<b>150</b>
 		</color>
 		<physic>
 			<reflexion_amount>0</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
-			<refraction_index>1.5</refraction_index>
-			<shininess>30</shininess>
+			<refraction_index>0</refraction_index>
+			<shininess>10</shininess>
 		</physic>
 		<transformations>
 			<rotation>
-				<x>-10</x>
+				<x>0</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>
@@ -44,63 +44,46 @@
 				<z>1</z>
 			</scale>
 			<translation>
-				<x>0</x>
+				<x>200</x>
 				<y>0</y>
 				<z>0</z>
 			</translation>
 		</transformations>
-		<limit>
-			<local>
-				<origin><x>200</x><y>0</y><z>20</z></origin>
-				<normal><x>0</x><y>0</y><z>1</z></normal>
-				<status>full</status>
-			</local>
-			<local>
-				<origin><x>200</x><y>0</y><z>20</z></origin>
-				<normal><x>0</x><y>-1</y><z>1</z></normal>
-				<status>full</status>
-			</local>
-			<global>
-				<origin><x>170</x><y>0</y><z>0</z></origin>
-				<normal><x>-1</x><y>0</y><z>0</z></normal>
-				<status>full</status>
-			</global>
-		</limit>
 		<radius>40</radius>
 	</object>
 
 	<object>
 		<type>sphere</type>
 		<origin>
-			<x>200</x>
-			<y>0</y>
-			<z>0</z>
+			<x>150</x>
+			<y>30</y>
+			<z>127</z>
 		</origin>
 		<color>
-			<r>255</r>
-			<g>110</g>
-			<b>110</b>
+			<r>125</r>
+			<g>200</g>
+			<b>255</b>
 		</color>
 		<physic>
 			<reflexion_amount>0</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
-			<refraction_index>1.5</refraction_index>
+			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>
 		</physic>
 		<transformations>
 			<rotation>
-				<x>-45</x>
+				<x>0</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>
 			<scale>
-				<x>1.5</x>
-				<y>1.5</y>
-				<z>1.5</z>
+				<x>1.2</x>
+				<y>1.2</y>
+				<z>1.2</z>
 			</scale>
 			<translation>
-				<x>150</x>
-				<y>150</y>
+				<x>0</x>
+				<y>0</y>
 				<z>0</z>
 			</translation>
 		</transformations>
@@ -108,6 +91,7 @@
 	</object>
 
 
-	<light><type>orb</type><origin><x>200</x><y>70</y><z>0</z></origin><color><r>100</r><g>100</g><b>100</b></color><power>0.3</power></light>
+	<light><type>orb</type><origin><x>400</x><y>200</y><z>60</z></origin><color><r>100</r><g>100</g><b>100</b></color><power>1</power></light>
+	<light><type>orb</type><origin><x>100</x><y>20</y><z>70</z></origin><color><r>255</r><g>0</g><b>0</b></color><power>0.8</power></light>
 
 </scene>

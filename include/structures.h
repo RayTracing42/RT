@@ -432,4 +432,10 @@ typedef struct				s_blur
 	SDL_Color				curr;
 }							t_blur;
 
+typedef struct				s_duotone
+{
+	SDL_Color				c1;
+	SDL_Color				c2;
+}							t_duotone;
+
 #endif

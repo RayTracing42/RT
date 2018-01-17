@@ -67,6 +67,25 @@ void		apply_anaglyph(SDL_Surface *screen, int x, int y);
 int		negative(void);
 void		apply_negative(SDL_Surface *screen, int x, int y);
 
+int		pop(void);
+void		apply_pop(SDL_Surface *screen, int x, int y);
+
+int		noise(void);
+void		apply_noise(SDL_Surface *screen, int x, int y);
+
+t_blur 	surrounding_pixels(SDL_Surface *screen, int x, int y);
+int		laplacian(void);
+void		apply_laplacian(SDL_Surface *screen, int x, int y);
+
+int		prewitt(void);
+void		apply_prewitt(SDL_Surface *screen, int x, int y);
+
+int		bwnoise(void);
+void		apply_bwnoise(SDL_Surface *screen, int x, int y);
+
+int		duotone(SDL_Color col1, SDL_Color col2);
+void		apply_duotone(SDL_Surface *screen, int x, int y, t_duotone t);
+
 void		refresh_win_effect(int (*f)());
 
 #endif

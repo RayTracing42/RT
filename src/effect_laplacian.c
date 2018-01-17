@@ -12,20 +12,39 @@
 
 #include "rt.h"
 
-void		apply_gray(SDL_Surface *screen, int x, int y)
+t_blur 	surrounding_pixels(SDL_Surface *screen, int x, int y)
 {
+	t_blur 		b;
 	SDL_Color curr;
-	SDL_Color c;
 
+	curr = get_pixel_colors(screen, x, y);
+	b = (t_blur){get_pixel_colors(screen, x - 1, y - 1),
+		get_pixel_colors(screen, x + 1, y - 1),
+		get_pixel_colors(screen, x - 1, y + 1),
+		get_pixel_colors(screen, x + 1, y + 1),
+		get_pixel_colors(screen, x, y - 1),
+		get_pixel_colors(screen, x, y + 1),
+		get_pixel_colors(screen, x - 1, y),
+		get_pixel_colors(screen, x + 1, y), curr};
+		return (b);
+}
+
+void		apply_laplacian(SDL_Surface *screen, int x, int y)
+{
+	SDL_Color 	curr;
+	t_blur			b;
+	SDL_Surface *screensav;
+
+	screensav = screen;
 	while (y < WIN_HEIGHT)
 	{
   	while (x < WIN_WIDTH)
   	{
 			curr = get_pixel_colors(screen, x, y);
-			c = curr;
-			curr = (SDL_Color){(c.r+c.g+c.b)/3,
-			 	(c.r+c.g+c.b)/3,
-			 	(c.r+c.g+c.b)/3, 255};
+			b = surrounding_pixels(screensav, x ,y);
+			curr = (SDL_Color){(curr.r * 4) - (b.tl1.r + b.tr1.r + b.bl1.r + b.br1.r),
+			 	(curr.g * 4) - (b.tl1.g + b.tr1.g + b.bl1.g + b.br1.g),
+			 	(curr.b * 4) - (b.tl1.b + b.tr1.b + b.bl1.b + b.br1.b), 255};
 			put_pixel(x, y, &curr);
 			x++;
   	}
@@ -34,7 +53,7 @@ void		apply_gray(SDL_Surface *screen, int x, int y)
 	}
 }
 
-int		gray(void)
+int		laplacian(void)
 {
 	SDL_Surface			*screen;
 
@@ -45,6 +64,6 @@ int		gray(void)
 				SDL_GetWindowPixelFormat(get_sdl_core()->window),
 				screen->pixels, screen->pitch) != 0)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
-	apply_gray(screen, 0, 0);
+	apply_laplacian(screen, 0, 0);
 	return (0);
 }

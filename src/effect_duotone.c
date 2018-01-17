@@ -12,20 +12,18 @@
 
 #include "rt.h"
 
-void		apply_gray(SDL_Surface *screen, int x, int y)
+void		apply_duotone(SDL_Surface *screen, int x, int y, t_duotone t)
 {
 	SDL_Color curr;
-	SDL_Color c;
 
 	while (y < WIN_HEIGHT)
 	{
   	while (x < WIN_WIDTH)
   	{
 			curr = get_pixel_colors(screen, x, y);
-			c = curr;
-			curr = (SDL_Color){(c.r+c.g+c.b)/3,
-			 	(c.r+c.g+c.b)/3,
-			 	(c.r+c.g+c.b)/3, 255};
+			curr = (SDL_Color){((curr.r * t.c1.r) + ((256 - curr.r) * t.c2.r))/256,
+				((curr.g * t.c1.g) + ((256 - curr.g) * t.c2.g))/256,
+				((curr.b * t.c1.b) + ((256 - curr.b) * t.c2.b))/256, 255};
 			put_pixel(x, y, &curr);
 			x++;
   	}
@@ -34,10 +32,15 @@ void		apply_gray(SDL_Surface *screen, int x, int y)
 	}
 }
 
-int		gray(void)
+/*
+** have to be preceded by the gray() function to work properly.
+*/
+int		duotone(SDL_Color col1, SDL_Color col2)
 {
 	SDL_Surface			*screen;
+	t_duotone				tones;
 
+	tones = (t_duotone){col1, col2};
 	if ((screen = SDL_CreateRGBSurface(0,
 					WIN_WIDTH, WIN_HEIGHT, 32, 0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
@@ -45,6 +48,6 @@ int		gray(void)
 				SDL_GetWindowPixelFormat(get_sdl_core()->window),
 				screen->pixels, screen->pitch) != 0)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
-	apply_gray(screen, 0, 0);
+	apply_duotone(screen, 0, 0, tones);
 	return (0);
 }
