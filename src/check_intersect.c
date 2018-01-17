@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/17 14:21:07 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/17 15:09:15 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,9 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 		}
 		l_objs = l_objs->next;
 	}
+	if (!is_in_front_of_vector(*(t_dot*)&res_ray.equ.vc, res_ray.inter, res_ray.normal))
+		res_ray.normal = (t_vector){-res_ray.normal.x, -res_ray.normal.y,
+			-res_ray.normal.z};
 	*ray = res_ray;
 	return (dist);
 }

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 14:45:00 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/11 02:53:38 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/17 15:04:45 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,18 @@ void		vect_normalize(t_vector *v)
 
 	len = get_vect_lenght(v);
 	*v = (t_vector){v->x / len, v->y / len, v->z / len};
+}
+
+int			is_in_front_of_vector(t_dot dot, t_dot inter, t_vector normal)
+{
+	double	d1;
+	double	d2;
+
+	d1 = get_dot_dist(&dot, &(t_dot){inter.x + normal.x,
+											inter.y + normal.y,
+											inter.z + normal.z});
+	d2 = get_dot_dist(&dot, &(t_dot){inter.x - normal.x,
+											inter.y - normal.y,
+											inter.z - normal.z});
+	return (lt(d1, d2));
 }
