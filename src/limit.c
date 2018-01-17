@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/16 16:41:55 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/17 14:36:13 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, d
 	while (l)
 	{
 		p = (t_plane *)l->obj;
-		tmp_ray = (p->status || filter > 0) ? first_intersect(ray, l->obj, &tmp) : second_intersect(ray, father, &tmp);
+		tmp_ray = (p->status == FULL || filter > 0) ? first_intersect(ray, l->obj, &tmp) : second_intersect(ray, father, &tmp);
 		if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && (filter < 0 || !eq(tmp, filter)))))
 		{
 			transform_inter(&tmp_ray, tmp_ray.obj);
@@ -99,18 +99,18 @@ void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, double fil
 	double		tmp_dist;
 
 	obj = tmp_ray.obj;
-	tmp_dist = *dist;
 	tmp_ray.limit_status = NONE;
 	if (is_in_limit(&tmp_ray, obj))
 		*dist = tmp;
 	else
 	{
+		tmp_dist = *dist;
 		tmp_ray = check_limit_intersect(ray, obj, &tmp_dist, filter);
 		if (!eq(tmp_dist, *dist))
 			*dist = tmp_dist;
 		else
 		{
-			ray->nb_intersect = 0;
+			tmp_ray.nb_intersect = 0;
 			*dist = 0;
 		}
 	}
