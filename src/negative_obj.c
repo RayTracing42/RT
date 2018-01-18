@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/17 14:47:26 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 12:51:49 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,40 +46,3 @@ double	check_negative_intersect(t_ray *ray, t_list_objs *objs, const double t, d
 	}
 	return (t);
 }
-/*
-void	check_negative_obj_intersect(t_ray *ray, t_object *father, double *dist)
-{
-	t_list_objs	*n;
-	t_ray		secnd_neg;
-	double		tmp;
-	int			reset;
-	int			res;
-
-	n = father->negative_obj;
-	while (n)
-	{
-		if (is_in_obj(&ray->inter, ray, n->obj))
-		{
-			secnd_neg = second_intersect(ray, n->obj, &tmp);
-			transform_inter(&secnd_neg, n->obj);
-			if ((res = is_in_obj(&secnd_neg.inter, &secnd_neg, father)))
-			{
-				*dist = tmp;
-				*ray = secnd_neg;
-				reset = 1;
-			}
-			if (res == 0)
-			{
-				*dist = 0;
-				return ;
-			}
-		}
-		n = n->next;
-		if (reset)
-		{
-			reset = 0;
-			n = father->negative_obj;
-		}
-	}
-}
-*/

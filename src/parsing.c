@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 12:49:23 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 13:19:49 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int			parsing_color(char *data_color, SDL_Color *c)
 	return (0);
 }
 
-void		parsing_physic(char *data_physic, t_objs_comp *args)
+int			parsing_physic(char *data_physic, t_objs_comp *args)
 {
 	char	*data[4];
 
@@ -89,6 +89,7 @@ void		parsing_physic(char *data_physic, t_objs_comp *args)
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
+	return (0);
 }
 
 t_scene		*parsing(int argc, char **argv)

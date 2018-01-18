@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_interval.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 02:24:44 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/12 01:38:24 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/18 12:50:49 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*get_stop_ptr(const char *src, const char *buffer, const char *start,
 	int		len_stop;
 	int		status;
 	int		n;
-	
+
 	status = -1;
 	n = 0;
 	len_start = ft_strlen(start);
@@ -129,7 +129,7 @@ char	*get_interval(char *src, const char *start, const char *stop)
 			if ((dst = (char *)ft_memalloc(ft_strlen(ptr_start +
 				ft_strlen(start)) - ft_strlen(ptr_stop) + 1)))
 			{
-				dst = ft_strncpy(dst, ptr_start + ft_strlen(start), 
+				dst = ft_strncpy(dst, ptr_start + ft_strlen(start),
 					ft_strlen(ptr_start + ft_strlen(start)) -
 					ft_strlen(ptr_stop));
 				clear_interval(src, ft_strlen(src) - ft_strlen(ptr_start),

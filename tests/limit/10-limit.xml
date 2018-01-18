@@ -32,23 +32,6 @@
 			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>
 		</physic>
-		<transformations>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
-		</transformations>
 		<limit>
 			<local>
 				<origin><x>200</x><y>0</y><z>-50</z></origin>
@@ -104,6 +87,6 @@
 
 
 
-	<light><type>orb</type><origin><x>200</x><y>0</y><z>10</z></origin><color><r>100</r><g>100</g><b>100</b></color><power>0.3</power></light>
+	<light><type>orb</type><origin><x>200</x><y>70</y><z>10</z></origin><color><r>100</r><g>100</g><b>100</b></color><power>0.3</power></light>
 
 </scene>

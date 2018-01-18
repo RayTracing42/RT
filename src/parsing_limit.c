@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 12:49:23 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 13:19:42 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 
 	p = new_plane((t_objs_comp){origin, o->color,
 		o->obj_light.reflection_amount, o->obj_light.refraction_amount,
-		o->obj_light.refractive_index, o->obj_light.shininess}, normal);
+		o->obj_light.refractive_index, o->obj_light.shininess}, normal, 0);
 	p->status = status;
 	new_cell_obj(&o->limit, (t_object *)p);
 }
@@ -38,7 +38,7 @@ void	parsing_local_limit(t_object *o, t_dot origin, t_vector normal,
 	origin.z += o->origin.z;
 	p = new_plane((t_objs_comp){origin, o->color,
 		o->obj_light.reflection_amount, o->obj_light.refraction_amount,
-		o->obj_light.refractive_index, o->obj_light.shininess}, normal);
+		o->obj_light.refractive_index, o->obj_light.shininess}, normal, 0);
 	p->status = status;
 	new_cell_obj(&o->limit, (t_object *)p);
 }
@@ -91,14 +91,11 @@ void	local_loop(t_object *obj, char *limit)
 	}
 }
 
-void	parsing_limit(t_object *obj, char *object)
+void	parsing_limit(t_object *obj, char *limit)
 {
-	char	*data;
-
-	if ((data = get_interval(object, "<limit>", "</limit>")))
+	if (limit)
 	{
-		local_loop(obj, data);
-		global_loop(obj, data);
-		free(data);
+		local_loop(obj, limit);
+		global_loop(obj, limit);
 	}
 }

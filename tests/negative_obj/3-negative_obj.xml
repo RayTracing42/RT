@@ -1,5 +1,5 @@
 <scene>
-	<brightness>75</brightness>
+	<brightness>20</brightness>
 
 	<camera>
 		<origin>
@@ -26,13 +26,6 @@
 			<g>100</g>
 			<b>100</b>
 		</color>
-		<transformations>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-		</transformations>
 		<radius>40</radius>
 		<negative_obj>
 			<object>
@@ -72,7 +65,6 @@
 				<radius>20</radius>
 				<status>full</status>
 			</object>
-
 		</negative_obj>
 	</object>
 

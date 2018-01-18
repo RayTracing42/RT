@@ -6,16 +6,11 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:25:07 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 12:49:23 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 12:56:01 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-/*
-**	Si tu viens a rejouter negatif un jour, pense aux limites a faire gaffe
-**	car elles pourraient buger avec ce status
-*/
 
 int			get_status(char *status)
 {

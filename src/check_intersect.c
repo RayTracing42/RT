@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 12:49:23 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 12:50:29 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,41 +26,6 @@ int		is_in_obj(double t, t_ray *ray, t_object *obj)
 	}
 	return (0);
 }
-
-/*
-int		is_in_obj(t_dot *inter, t_ray *ray, t_object *obj)
-{
-	t_ray	first;
-	t_ray	second;
-	double	a;
-	double	b;
-	double	c;
-	double	tmp;
-
-	if (ray->obj != obj)
-	{
-		first = first_intersect(ray, obj, &tmp);
-		if (tmp)
-		{
-			transform_inter(&first, obj);
-			c = get_dot_dist(inter, (t_dot*)&ray->equ.vc);
-			a = get_dot_dist(&first.inter, (t_dot*)&ray->equ.vc);
-			if (a <= c)
-			{
-				second = second_intersect(ray, obj, &tmp);
-				if (tmp)
-				{
-					transform_inter(&second, obj);
-					b = get_dot_dist(&second.inter, (t_dot*)&ray->equ.vc);
-					if (c <= b)
-						return (1);
-				}
-			}
-		}
-	}
-	return (0);
-}
-*/
 
 double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 {
@@ -83,18 +48,6 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
 			transform_inter(&tmp_ray, tmp_ray.obj);
-/*
-			// FLAVIAN
-			neg_dist = dist;
-			limit(&res_ray, &tmp_ray, &tmp, &neg_dist);
-			check_negative_obj_intersect(&res_ray, l_objs->obj, &neg_dist);
-			if (!(neg_dist == 0))
-				dist = neg_dist;
-			// FLAVIAN
-*/
-
-/**/
-			// EMERIC
 			neg_dist = dist;
 			limit(&tmp_ray, tmp_ray, tmp, &neg_dist, -1);
 			if (gt(neg_dist, 0) && l_objs->obj->negative_obj)
@@ -116,8 +69,6 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 				res_ray = tmp_ray;
 				dist = neg_dist;
 			}
-			// EMERIC
-/**/
 		}
 		l_objs = l_objs->next;
 	}
