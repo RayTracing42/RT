@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 17:35:10 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 17:41:48 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,9 @@ SDL_Color	add_colors(SDL_Color dst, SDL_Color src)
 {
 	SDL_Color res;
 
-	if ((dst.r + src.r) < 255 && (dst.g + src.g) < 255 && (dst.b + src.b) < 255)
-	{
-		res.r = dst.r + src.r;
-		res.g = dst.g + src.g;
-		res.b = dst.b + src.b;
-	}
-	else
-		return (dst);
+	res.r = (dst.r + src.r) <= 255 ? dst.r + src.r : 255;
+	res.g = (dst.g + src.g) <= 255 ? dst.g + src.g : 255;
+	res.b = (dst.b + src.b) <= 255 ? dst.b + src.b : 255;
 	return (res);
 }
 
