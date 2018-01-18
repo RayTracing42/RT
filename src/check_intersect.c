@@ -6,22 +6,23 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 12:50:29 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 17:15:56 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		is_in_obj(double t, t_ray *ray, t_object *obj)
+int		is_in_obj(const double t, const t_dot inter, t_object *obj)
 {
 	double	tmp;
+	t_ray	ray;
 
-
-	first_intersect(ray, obj, &tmp);
-	if (lt(tmp, t))
+	ray.equ = (t_parequation){*(t_vector*)&inter, (t_vector){0, 0, 0.01}};
+	first_intersect(&ray, obj, &tmp);
+	if (le(tmp, t))
 	{
-		second_intersect(ray, obj, &tmp);
-		if (lt(t, tmp))
+		second_intersect(&ray, obj, &tmp);
+		if (le(t, tmp))
 			return (1);
 	}
 	return (0);
@@ -44,7 +45,9 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	{
 		tmp_ray = first_intersect(ray, l_objs->obj, &tmp);
 		if (lt(tmp, 0))
+		{
 			tmp_ray = second_intersect(ray, l_objs->obj, &tmp);
+		}
 		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
 			transform_inter(&tmp_ray, tmp_ray.obj);

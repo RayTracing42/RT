@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:25:07 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 12:56:01 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 17:12:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ int		gt(double nb1, double nb2)
 int		lt(double nb1, double nb2)
 {
 	return ((long)(nb1 * POW) < (long)(nb2 * POW));
+}
+
+int		ge(double nb1, double nb2)
+{
+	return ((long)(nb1 * POW) >= (long)(nb2 * POW));
+}
+
+int		le(double nb1, double nb2)
+{
+	return ((long)(nb1 * POW) <= (long)(nb2 * POW));
 }
 
 int		eq(double nb1, double nb2)

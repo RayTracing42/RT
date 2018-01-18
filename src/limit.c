@@ -6,29 +6,29 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 13:18:41 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 17:10:45 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int		is_in_right_side_of_limit(t_dot *i, t_object *p)
+static int		is_in_right_side_of_limit(t_dot i, t_object *p)
 {
 	double	distance_1;
 	double	distance_2;
 
-	distance_1 = get_dot_dist(i,
+	distance_1 = get_dot_dist(&i,
 			&(t_dot){(p->origin.x + p->normal.x),
 			(p->origin.y + p->normal.y),
 			(p->origin.z + p->normal.z)});
-	distance_2 = get_dot_dist(i,
+	distance_2 = get_dot_dist(&i,
 			&(t_dot){(p->origin.x - p->normal.x),
 			(p->origin.y - p->normal.y),
 			(p->origin.z - p->normal.z)});
 	return ((distance_1 >= distance_2));
 }
 
-static int		is_in_limit(t_ray *ray, t_object *father)
+static int		is_in_limit(const t_ray *ray, t_object *father)
 {
 	t_list_objs	*l;
 
@@ -37,7 +37,7 @@ static int		is_in_limit(t_ray *ray, t_object *father)
 	{
 		if (ray->obj != l->obj)
 		{
-			if (!is_in_right_side_of_limit(&ray->inter, l->obj))
+			if (!is_in_right_side_of_limit(ray->inter, l->obj))
 				return (0);
 		}
 		l = l->next;
@@ -56,7 +56,7 @@ static int		full_limit(t_ray tmp_ray, t_object *father, double t)
 {
 	if (is_in_limit(&tmp_ray, father))
 	{
-		if (is_in_obj(t, &tmp_ray, father))
+		if (is_in_obj(t, tmp_ray.inter, father))
 			return (1);
 	}
 	return (0);

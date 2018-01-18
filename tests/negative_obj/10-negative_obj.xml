@@ -27,28 +27,11 @@
 			<b>255</b>
 		</color>
 		<physic>
-			<reflexion_amount>0.7</reflexion_amount>
+			<reflexion_amount>0</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
 			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>
 		</physic>
-		<transformations>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
-		</transformations>
 		<limit>
 			<local>
 				<origin><x>200</x><y>0</y><z>-50</z></origin>
@@ -84,20 +67,19 @@
 		<angle>60</angle>
 	</object>
 
-
 #	SCENE CUBIQUE
 
-	<object><type>plane</type><origin><x>500</x><y>0</y><z>0</z></origin><normal><x>-1</x><y>0</y><z>0</z></normal><color><r>150</r><g>100</g><b>100</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic><transformations><rotation><x>0</x><y>0</y><z>0</z></rotation><scale><x>1</x><y>1</y><z>1</z></scale><translation><x>0</x><y>0</y><z>0</z></translation></transformations></object>
+	<!object><type>plane</type><origin><x>500</x><y>0</y><z>0</z></origin><normal><x>-1</x><y>0</y><z>0</z></normal><color><r>150</r><g>100</g><b>100</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic><transformations><rotation><x>0</x><y>0</y><z>0</z></rotation><scale><x>1</x><y>1</y><z>1</z></scale><translation><x>0</x><y>0</y><z>0</z></translation></transformations></object>
 
-	<object><type>plane</type><origin><x>-300</x><y>0</y><z>0</z></origin><normal><x>1</x><y>0</y><z>0</z></normal><color><r>100</r><g>150</g><b>100</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic><transformations><rotation><x>0</x><y>0</y><z>0</z></rotation><scale><x>1</x><y>1</y><z>1</z></scale><translation><x>0</x><y>0</y><z>0</z></translation></transformations></object>
+	<!object><type>plane</type><origin><x>-300</x><y>0</y><z>0</z></origin><normal><x>1</x><y>0</y><z>0</z></normal><color><r>100</r><g>150</g><b>100</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic><transformations><rotation><x>0</x><y>0</y><z>0</z></rotation><scale><x>1</x><y>1</y><z>1</z></scale><translation><x>0</x><y>0</y><z>0</z></translation></transformations></object>
 
 	<object><type>plane</type><origin><x>500</x><y>-50</y><z>0</z></origin><normal><x>0</x><y>1</y><z>0</z></normal><color><r>100</r><g>100</g><b>150</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic><transformations><rotation><x>0</x><y>0</y><z>0</z></rotation><scale><x>1</x><y>1</y><z>1</z></scale><translation><x>0</x><y>0</y><z>0</z></translation></transformations></object>
 
-	<object><type>plane</type><origin><x>500</x><y>200</y><z>0</z></origin><normal><x>0</x><y>-1</y><z>0</z></normal><color><r>100</r><g>150</g><b>150</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic><transformations><rotation><x>0</x><y>0</y><z>0</z></rotation><scale><x>1</x><y>1</y><z>1</z></scale><translation><x>0</x><y>0</y><z>0</z></translation></transformations></object>
+	<!object><type>plane</type><origin><x>500</x><y>200</y><z>0</z></origin><normal><x>0</x><y>-1</y><z>0</z></normal><color><r>100</r><g>150</g><b>150</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic><transformations><rotation><x>0</x><y>0</y><z>0</z></rotation><scale><x>1</x><y>1</y><z>1</z></scale><translation><x>0</x><y>0</y><z>0</z></translation></transformations></object>
 
-	<object><type>plane</type><origin><x>500</x><y>0</y><z>200</z></origin><normal><x>0</x><y>0</y><z>-1</z></normal><color><r>150</r><g>100</g><b>150</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic><transformations><rotation><x>0</x><y>0</y><z>0</z></rotation><scale><x>1</x><y>1</y><z>1</z></scale><translation><x>0</x><y>0</y><z>0</z></translation></transformations></object>
+	<!object><type>plane</type><origin><x>500</x><y>0</y><z>200</z></origin><normal><x>0</x><y>0</y><z>-1</z></normal><color><r>150</r><g>100</g><b>150</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic><transformations><rotation><x>0</x><y>0</y><z>0</z></rotation><scale><x>1</x><y>1</y><z>1</z></scale><translation><x>0</x><y>0</y><z>0</z></translation></transformations></object>
 
-	<object><type>plane</type><origin><x>500</x><y>0</y><z>-200</z></origin><normal><x>0</x><y>0</y><z>1</z></normal><color><r>150</r><g>150</g><b>100</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic><transformations><rotation><x>0</x><y>0</y><z>0</z></rotation><scale><x>1</x><y>1</y><z>1</z></scale><translation><x>0</x><y>0</y><z>0</z></translation></transformations></object>
+	<!object><type>plane</type><origin><x>500</x><y>0</y><z>-200</z></origin><normal><x>0</x><y>0</y><z>1</z></normal><color><r>150</r><g>150</g><b>100</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic><transformations><rotation><x>0</x><y>0</y><z>0</z></rotation><scale><x>1</x><y>1</y><z>1</z></scale><translation><x>0</x><y>0</y><z>0</z></translation></transformations></object>
 
 
 #	LIGHTS

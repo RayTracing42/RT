@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/18 12:49:23 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 17:12:30 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int				get_quad_equation_sol(double *res, double fac[4], int i);
 int				gt(double nb1, double nb2);
 int				lt(double nb1, double nb2);
 int				eq(double nb1, double nb2);
+int				ge(double nb1, double nb2);
+int				le(double nb1, double nb2);
 
 /*
 **	vectors.c
@@ -119,8 +121,7 @@ double	check_negative_intersect(t_ray *ray, t_list_objs *objs, const double t, d
 
 
 
-int		is_in_obj(double t, t_ray *ray, t_object *obj);
-//int					is_in_obj(t_dot *inter, t_ray *ray, t_object *obj);
+int		is_in_obj(const double t, const t_dot inter, t_object *obj);
 
 
 
