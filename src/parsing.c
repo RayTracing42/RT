@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/05 20:59:08 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 12:49:23 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int			parsing_color(char *data_color, SDL_Color *c)
 	return (0);
 }
 
-int			parsing_physic(char *data_physic, t_objs_comp *args)
+void		parsing_physic(char *data_physic, t_objs_comp *args)
 {
 	char	*data[4];
 
@@ -89,7 +89,6 @@ int			parsing_physic(char *data_physic, t_objs_comp *args)
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
-	return (0);
 }
 
 t_scene		*parsing(int argc, char **argv)
@@ -109,9 +108,9 @@ t_scene		*parsing(int argc, char **argv)
 		if (!(scene = get_interval(file, "<scene>", "</scene>"))
 			|| !(scn = parsing_scene(scene)))
 			exit_custom_error("rt", ":parsing_scene() failed");
-		if ((parsing_light(scene, scn) == -1))
+		if (!(scn->lights = parsing_light(scene)))
 			exit_custom_error("rt", ":parsing_light() failed");
-		if ((parsing_object(scene, scn) == -1))
+		if (!(scn->objects = parsing_object(scene)))
 			exit_custom_error("rt", ":parsing_object() failed");
 		if (close(fd) == -1)
 			exit_custom_error("rt", ":close() failed");

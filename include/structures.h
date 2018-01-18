@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 17:28:06 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 12:49:23 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,11 @@ typedef struct		s_ray
 	struct s_light			*light;
 	struct s_objs_tree		*tree;
 	double					shad_opacity;
+	double					limit;
 	double					actual_refractive_i;
 	double					percuted_refractive_i;
-	double					limit;
 	int						nb_intersect;
+	int						limit_status;
 }					t_ray;
 
 typedef enum				e_type
@@ -151,6 +152,8 @@ typedef struct				s_object
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+	struct s_list_objs		*negative_obj;
+	int						status;
 }							t_object;
 
 typedef struct				s_objs_comp
@@ -178,6 +181,8 @@ typedef struct				s_sphere
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+	struct s_list_objs		*negative_obj;
+	int						status;
 	double					radius;
 	double					r2;
 }							t_sphere;
@@ -197,6 +202,8 @@ typedef struct				s_cylinder
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+	struct s_list_objs		*negative_obj;
+	int						status;
 	double					radius;
 	double					r2;
 }							t_cylinder;
@@ -216,6 +223,8 @@ typedef struct				s_cone
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+	struct s_list_objs		*negative_obj;
+	int						status;
 	double					angle;
 	double					tanalpha2;
 }							t_cone;
@@ -235,7 +244,8 @@ typedef struct				s_plane
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 
-	struct s_list_obs		*limit;
+	struct s_list_objs		*limit;
+	struct s_list_objs		*negative_obj;
 	int						status;
 
 	double					a;
@@ -366,6 +376,16 @@ typedef struct				s_orb_light
 	t_dot					orig;
 	double					aperture;
 }							t_orb_light;
+
+typedef struct				s_intervaL_ray
+{
+	t_object 				*obj;
+	t_ray					first;
+	t_ray					secnd;
+	double					f_dist;
+	double					s_dist;
+}							t_interval_ray;
+
 
 //	ecran imaginaire qui permet de definir le vecteur camera -> pixel;
 typedef struct				s_view_plane

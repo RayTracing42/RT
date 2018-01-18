@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 17:56:53 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 12:49:23 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ int			main(int ac, char **av)
 		wait_events(events);
 		SDL_WaitThread(t, NULL);
 		delete_sdl_core();
+		delete_scene(scn);
 	}
 	exit(0);
+
 }

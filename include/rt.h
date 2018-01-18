@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/06 14:42:06 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 12:49:23 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 
 # define TITLE			"RT"
 # define POW			10000000000
+# define EMPTY			0
+# define FULL			1
+# define NONE			2
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -102,7 +105,23 @@ int					get_status(char *status);
 **	limit.c
 */
 
-int					is_in_limit(t_ray *ray, t_object *father);
-void				check_limit_intersect(t_ray *ray, t_object *father, double *dist);
+void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, double filter);
+
+/*
+**	negative_obj.c
+*/
+
+void				check_negative_obj_intersect(t_ray *ray, t_object *father,
+		double *dist);
+
+
+double	check_negative_intersect(t_ray *ray, t_list_objs *objs, const double t, double t2);
+
+
+
+int		is_in_obj(double t, t_ray *ray, t_object *obj);
+//int					is_in_obj(t_dot *inter, t_ray *ray, t_object *obj);
+
+
 
 #endif
