@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 17:46:47 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 18:31:58 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,7 @@ t_ray	second_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	tmp_ray.color = obj->color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
 	tmp_ray.obj = obj;
+	if (gt(*tmp, 0))
+		tmp_ray.shad_opacity += (1 - tmp_ray.obj->obj_light.refraction_amount);
 	return (tmp_ray);
 }

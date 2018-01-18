@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/18 13:29:15 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 18:23:58 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ typedef struct		s_ray
 	int						nb_intersect;
 	int						limit_status;
 }					t_ray;
-
 typedef enum				e_type
 {
 //	BOX, pour plus tard
