@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 16:18:51 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 17:21:35 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 
 	if (check_intersect(ray, scn->objects) > 0)
 	{
-		//printf("\nshadows\n");
 		ray->color = shadows(ray, scn);
 		reflect_ray = reflect(ray, scn);
 		refract_ray = refract(ray, scn);
@@ -61,13 +60,9 @@ void			scanning(t_scene *scn)
 	ray.tree = add_new_leaf(NULL, NULL, NULL, 0);
 	y = -1;
 	while (++y < WIN_HEIGHT)
-	/*y = 589;
-	while (++y < 591)*/
 	{
 		x = -1;
 		while (++x < WIN_WIDTH)
-		/*x = 419;
-		while (++x < 421)*/
 		{
 			view_plane_vector(x, y, scn->cam, &ray.equ.vd);
 			effects(&ray, scn);

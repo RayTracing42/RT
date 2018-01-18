@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 14:06:16 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/18 17:35:10 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ SDL_Color	add_colors(SDL_Color dst, SDL_Color src)
 {
 	SDL_Color res;
 
-	if (dst.r < 255 && dst.g < 255 && dst.b < 255)
+	if ((dst.r + src.r) < 255 && (dst.g + src.g) < 255 && (dst.b + src.b) < 255)
 	{
-		res.r = (dst.r + src.r) < 255 ? dst.r + src.r : 255;
-		res.g = (dst.g + src.g) < 255 ? dst.g + src.g : 255;
-		res.b = (dst.b + src.b) < 255 ? dst.b + src.b : 255;
+		res.r = dst.r + src.r;
+		res.g = dst.g + src.g;
+		res.b = dst.b + src.b;
 	}
 	else
 		return (dst);
@@ -75,15 +75,13 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 		light_ray.equ.vd = tmp->light->get_ray_vect(&ray->inter, tmp->light);
 		light_ray.equ.vc = *(t_vector*)&ray->inter;
 		light_ray.color = ray->color;
-		if (!(check_objs_on_ray(&light_ray, scn->objects, tmp->light)))
-		{
-			//opacify_color(&light_ray.color, light_ray.shad_opacity);
-			light_ray.normal = ray->normal;
-			light_ray.light = tmp->light;
-			multi_lights = add_colors(multi_lights,
-										add_colors(get_shade_col(&light_ray),
-											get_specular_col(ray, &light_ray)));
-		}
+		if (check_objs_on_ray(&light_ray, scn->objects, tmp->light))
+			opacify_color(&light_ray.color, light_ray.shad_opacity);
+		light_ray.normal = ray->normal;
+		light_ray.light = tmp->light;
+		multi_lights = add_colors(multi_lights,
+									add_colors(get_shade_col(&light_ray),
+										get_specular_col(ray, &light_ray)));
 		tmp = tmp->next;
 	}
 	return (multi_lights);
