@@ -438,4 +438,12 @@ typedef struct				s_duotone
 	SDL_Color				c2;
 }							t_duotone;
 
+typedef struct				s_perlin
+{
+	SDL_Surface				*perlin;
+	int								r;
+	int								tmp[512];
+	unsigned char			size;
+}							t_perlin;
+
 #endif

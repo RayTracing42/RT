@@ -20,9 +20,37 @@ int			key_management(SDL_Event *current, t_event *evt)
 	(void)data;
 	if (current->key.keysym.sym == SDLK_ESCAPE)
 		return (0);
-	if (current->key.keysym.sym == SDLK_e)
+		if (current->key.keysym.sym == SDLK_q)
+		{
+			refresh_win_effect(gray);
+		}
+		if (current->key.keysym.sym == SDLK_w)
+		{
+			refresh_win_effect(sepia);
+		}
+		if (current->key.keysym.sym == SDLK_e)
+		{
+			refresh_win_effect(anaglyph);
+		}
+		if (current->key.keysym.sym == SDLK_r)
+		{
+			refresh_win_effect(lofi);
+		}
+		if (current->key.keysym.sym == SDLK_t)
+		{
+			refresh_win_effect(pop);
+		}
+		if (current->key.keysym.sym == SDLK_y)
+		{
+			refresh_win_effect(laplacian);
+		}
+		if (current->key.keysym.sym == SDLK_u)
+		{
+			refresh_win_effect(prewitt);
+		}
+	if (current->key.keysym.sym == SDLK_m)
 	{
-		refresh_win_effect(laplacian);
+		perlin_pinpin(0, 0);
 	}
 	if (current->key.keysym.sym == SDLK_s)
 	{

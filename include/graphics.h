@@ -86,6 +86,15 @@ void		apply_bwnoise(SDL_Surface *screen, int x, int y);
 int		duotone(SDL_Color col1, SDL_Color col2);
 void		apply_duotone(SDL_Surface *screen, int x, int y, t_duotone t);
 
+int		set_color(unsigned char a, unsigned char r, \
+		unsigned char v, unsigned char b);
+void put_pixel32(SDL_Surface *surface, int x, int y, Uint32 colors);
+
+int 		rand_between(int min, int max);
+int randbet255(int r, int c, int val);
+void perlinmaker(t_perlin *p, int x, int y);
+void		perlin_pinpin(int x, int y);
+
 void		refresh_win_effect(int (*f)());
 
 #endif
