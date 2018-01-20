@@ -23,7 +23,7 @@ LFT_INCLUDE = $(LFT_PATH)/includes
 SRC = camera.c cone.c cylinder.c events.c graphics.c key_functions.c light.c \
 light_shading.c main.c matrice_rotation.c objects.c equations.c orb_light.c \
 parallel_light.c plane.c reflexion.c refract_list.c refraction.c scanning.c \
-scene.c scene_lights.c scene_objs.c shadows.c sphere.c spotlight.c \
+scene.c scene_lights.c scene_objs.c shadows.c sphere.c spotlight.c box.c \
 utils.c vectors.c view_plane.c parsing.c parsing_tools.c parsing_camera.c \
 parsing_scene.c parsing_lights.c parsing_objects.c parsing_transformations.c \
 transformations.c matrix_ops.c matrix.c check_intersect.c parsing_limit.c \
