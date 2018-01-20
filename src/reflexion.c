@@ -33,7 +33,7 @@ void		get_reflected_col(t_ray *ray, t_object *src,
 			(reflected_obj_col.b * src->obj_light.reflection_amount);
 }
 
-SDL_Color	reflect(t_ray *ray, t_scene *scn)
+SDL_Color	reflect(t_ray *ray, t_scene *scn, SDL_mutex *mutex_leaf)
 {
 	t_ray		reflected_ray;
 
@@ -44,12 +44,16 @@ SDL_Color	reflect(t_ray *ray, t_scene *scn)
 			return ((SDL_Color){0, 0, 0, 255});
 		reflected_ray.limit = reflected_ray.limit -
 			(1 - ray->obj->obj_light.reflection_amount) / 100;
-		reflected_ray.tree = add_new_leaf(ray->tree, &ray->tree->reflected,
-			ray->obj, ray->tree->lvl);
+		//if (SDL_LockMutex(mutex_leaf) == 0)
+			reflected_ray.tree = add_new_leaf(ray->tree, &ray->tree->reflected,
+				ray->obj, ray->tree->lvl);
+		//SDL_UnlockMutex(mutex_leaf);
 		reflected_ray.equ.vc = vector(ray->inter.x, ray->inter.y, ray->inter.z);
 		reflected_ray.equ.vd = get_reflected_vect(&ray->equ.vd, &ray->normal);
-		effects(&reflected_ray, scn);
-		remove_leaf(reflected_ray.tree);
+		effects(&reflected_ray, scn, mutex_leaf);
+		//if (SDL_LockMutex(mutex_leaf) == 0)
+			//remove_leaf(reflected_ray.tree);
+		//SDL_UnlockMutex(mutex_leaf);
 	}
 	return (reflected_ray.color);
 }

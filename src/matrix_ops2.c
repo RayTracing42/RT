@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 16:30:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 03:29:06 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/12/22 11:18:33 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ t_matrix	*get_inv_4x4mat(t_matrix *res, t_matrix *m)
 	delete_matrix(r_abcd[1]);
 	delete_matrix(r_abcd[2]);
 	delete_matrix(r_abcd[3]);
-	delete_matrix(inv_a);
-	delete_matrix(inv_d);
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/18 17:12:30 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/06 14:42:06 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@
 
 # define TITLE			"RT"
 # define POW			10000000000
-# define EMPTY			0
-# define FULL			1
-# define NONE			2
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -45,6 +42,7 @@
 # include "structures.h"
 # include "vectors.h"
 # include "parsing.h"
+# include "thread_data.h"
 
 t_vector		matrice_rotation_x(t_vector *m, double angle);
 t_vector		matrice_rotation_y(t_vector *m, double angle);
@@ -61,10 +59,10 @@ void			scanning(t_scene *scn);
 t_parequation	transform_equ(t_ray *ray, t_object *obj);
 void			transform_inter(t_ray *ray, t_object *obj);
 
-SDL_Color		effects(t_ray *ray, t_scene *scn);
+SDL_Color		effects(t_ray *ray, t_scene *scn, SDL_mutex *mutex_leaf);
 SDL_Color		shadows(t_ray *ray, t_scene *scn);
-SDL_Color		reflect(t_ray *ray, t_scene *scn);
-SDL_Color		refract(t_ray *ray, t_scene *scn);
+SDL_Color		reflect(t_ray *ray, t_scene *scn, SDL_mutex *mutex_leaf);
+SDL_Color		refract(t_ray *ray, t_scene *scn, SDL_mutex *mutex_leaf);
 
 /*
 **	refract_list.c
@@ -83,8 +81,6 @@ int				get_quad_equation_sol(double *res, double fac[4], int i);
 int				gt(double nb1, double nb2);
 int				lt(double nb1, double nb2);
 int				eq(double nb1, double nb2);
-int				ge(double nb1, double nb2);
-int				le(double nb1, double nb2);
 
 /*
 **	vectors.c
@@ -107,22 +103,13 @@ int					get_status(char *status);
 **	limit.c
 */
 
-void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, double filter);
+int					is_in_limit(t_ray *ray, t_object *father);
+void				check_limit_intersect(t_ray *ray, t_object *father, double *dist);
 
 /*
-**	negative_obj.c
+** thread_data.c
 */
 
-void				check_negative_obj_intersect(t_ray *ray, t_object *father,
-		double *dist);
-
-
-double	check_negative_intersect(t_ray *ray, t_list_objs *objs, const double t, double t2);
-
-
-
-int		is_in_obj(const double t, const t_dot inter, t_object *obj);
-
-
+t_thread_data thread_data(int y_begin, int y_end, t_scene *scn, t_ray ray);
 
 #endif

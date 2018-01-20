@@ -25,7 +25,7 @@
 void		delete_sdl_core();
 Uint32		get_color(int r, int g, int b);
 t_sdl_core	*get_sdl_core();
-void		put_pixel(int x, int y, SDL_Color *color);
+void		put_pixel(int x, int y, SDL_Color *color, SDL_mutex *mutex);
 void		refresh_win();
 
 #endif

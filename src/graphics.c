@@ -56,10 +56,12 @@ Uint32		get_color(int r, int g, int b)
 	return (col);
 }
 
-void		put_pixel(int x, int y, SDL_Color *color)
+void		put_pixel(int x, int y, SDL_Color *color, SDL_mutex	*mutex)
 {
+	SDL_LockMutex(mutex);
 	if (color)
 		SDL_SetRenderDrawColor(get_sdl_core()->renderer, color->r, color->g,
 								color->b, color->a);
 	SDL_RenderDrawPoint(get_sdl_core()->renderer, x, y);
+	SDL_UnlockMutex(mutex);
 }

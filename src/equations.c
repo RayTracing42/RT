@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 15:36:36 by shiro             #+#    #+#             */
-/*   Updated: 2018/01/18 14:18:15 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/08 17:23:32 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,11 @@ int		get_quad_equation_sol(double *res, double fac[3], int i)
 		return (0);
 	s1 = (-fac[_B] - sqrt(delta)) / (2 * fac[_A]);
 	s2 = (-fac[_B] + sqrt(delta)) / (2 * fac[_A]);
-	if (lt(s1, 0) && lt(s2, 0))
+	if (gt(s1, 0) && gt(s2, 0))
+		*res = (i == 1) ? ft_dmin(s1, s2) : ft_dmax(s1, s2);
+	else if (gt(s1, 0) || gt(s2, 0))
+		*res = (i == 2) ? ft_dmin(s1, s2) : ft_dmax(s1, s2);
+	else
 		return (0);
-	*res = (i == 1) ? ft_dmin(s1, s2) : ft_dmax(s1, s2);
 	return (gt(s1, 0) + gt(s2, 0));
 }

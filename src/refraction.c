@@ -101,7 +101,7 @@ static int	update_tree_out(t_ray *ray, t_ray *ref_ray)
 	return (1);
 }
 
-SDL_Color	refract(t_ray *ray, t_scene *scn)
+SDL_Color	refract(t_ray *ray, t_scene *scn, SDL_mutex *mutex_leaf)
 {
 	t_ray		ref_ray;
 	SDL_Color	ret;
@@ -119,7 +119,7 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 	ref_ray.equ.vc = vector(ray->inter.x + (1 / POW) * ray->equ.vd.x,
 			ray->inter.y + (1 / POW) * ray->equ.vd.y,
 			ray->inter.z + (1 / POW) * ray->equ.vd.z);
-	ret = effects(&ref_ray, scn);
+	ret = effects(&ref_ray, scn, mutex_leaf);
 	remove_leaf(ref_ray.tree);
 	return (ret);
 }

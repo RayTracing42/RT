@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/09 17:14:48 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 03:24:56 by fcecilie         ###   ########.fr       */
+/*   Updated: 2017/11/20 17:01:00 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,5 @@ t_matrix	*mult_matrix(t_matrix **res, t_matrix *m1, t_matrix *m2)
 				tmp->mat[r][c] += m1->mat[r][i] * m2->mat[i][c];
 		}
 	}
-	copy_matrix(*res, tmp);
-	delete_matrix(tmp);
-	return (*res);
+	return (copy_matrix(*res, tmp));
 }
