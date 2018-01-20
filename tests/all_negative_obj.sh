@@ -6,15 +6,11 @@ elif [ -e ../rt ]
 then
 	EXE="$PWD"/../rt
 	echo $EXE
-elif [ -e ../debug ]
-then
-	EXE="$PWD"/../debug
-	echo $EXE
 else
 	echo Pas d\'exécutable.
 	exit
 fi
-for map in complex/*$1*.xml
+for map in negative_obj/*.xml
 do
 	echo "$PWD/$map"
 	"$EXE" "$PWD/$map"

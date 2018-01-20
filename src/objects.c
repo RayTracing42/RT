@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/10 17:47:26 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/20 16:23:09 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,15 @@ t_object		*new_object(t_type type, t_objs_comp args)
 								args.shininess};
 	obj->get_normal = NULL;
 	obj->intersect = NULL;
+	obj->is_in_obj = NULL;
 	obj->limit = NULL;
+	obj->negative_obj = NULL;
+	obj->status = FULL;
 	obj->trans_const = create_identity(4);
 	obj->trans_iconst = create_identity(4);
 	obj->trans_idir = create_identity(4);
 	obj->trans_norm = create_identity(4);
+
 	return (obj);
 }
 
@@ -71,6 +75,17 @@ void			delete_object(t_object *obj)
 		delete_matrix(obj->trans_iconst);
 		delete_matrix(obj->trans_idir);
 		delete_matrix(obj->trans_norm);
+		while (obj->limit)
+			delete_cell_obj(&obj->limit);
+		while (obj->negative_obj)
+			delete_cell_obj(&obj->negative_obj);
 		free(obj);
 	}
+}
+
+void		set_object_color(t_object *obj, int r, int g, int b)
+{
+	obj->color.r = r;
+	obj->color.g = g;
+	obj->color.b = b;
 }

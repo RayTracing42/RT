@@ -15,47 +15,37 @@
 		</angle>
 	</camera>
 
-<object>
-	<type>box</type>
-	<origin>
-		<x>100</x>
-		<y>0</y>
-		<z>50</z>
-	</origin>
-	<color>
-		<r>255</r>
-		<g>255</g>
-		<b>255</b>
-	</color>
-	<size>
-		<x>40</x>
-		<y>40</y>
-		<z>40</z>
-	</size>
-	<transformations>
-		<rotation>
-			<x>60</x>
-			<y>45</y>
-			<z>20</z>
-		</rotation>
-		<translation>
-			<x>0</x>
+	<object>
+		<type>box</type>
+		<origin>
+			<x>100</x>
 			<y>0</y>
-			<z>0</z>
-		</translation>
-		<scale>
-			<x>1</x>
-			<y>1</y>
-			<z>1</z>
-		</scale>
-	</transformations>
-	<physic>
-		<refraction_amount>0</refraction_amount>
-		<reflexion_amount>0</reflexion_amount>
-		<refraction_index>1.5</refraction_index>
-		<shininess>30</shininess>
-	</physic>
-</object>
+			<z>50</z>
+		</origin>
+		<color>
+			<r>255</r>
+			<g>255</g>
+			<b>255</b>
+		</color>
+		<size>
+			<x>40</x>
+			<y>40</y>
+			<z>40</z>
+		</size>
+		<transformations>
+			<rotation>
+				<x>60</x>
+				<y>45</y>
+				<z>20</z>
+			</rotation>
+		</transformations>
+		<physic>
+			<refraction_amount>0</refraction_amount>
+			<reflexion_amount>0</reflexion_amount>
+			<refraction_index>1.5</refraction_index>
+			<shininess>30</shininess>
+		</physic>
+	</object>
 
 <object>
 	<type>sphere</type>
@@ -94,4 +84,3 @@
 	</light>
 
 </scene>
-

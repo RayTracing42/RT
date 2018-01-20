@@ -6,12 +6,11 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 14:45:00 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/09 14:22:35 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/20 13:41:39 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#include <math.h>
 
 t_vector	dots_to_vect(t_dot d1, t_dot d2)
 {
@@ -39,4 +38,18 @@ t_vector	vect_cross_product(const t_vector v1, const t_vector v2)
 	return ((t_vector){v1.y * v2.z - v1.z * v2.y,
 					v1.z * v2.x - v1.x * v2.z,
 					v1.x * v2.y - v1.y * v2.x});
+}
+
+int			is_in_front_of_vector(t_dot dot, t_dot inter, t_vector normal)
+{
+	double	d1;
+	double	d2;
+
+	d1 = get_dot_dist(&dot, &(t_dot){inter.x + normal.x,
+											inter.y + normal.y,
+											inter.z + normal.z});
+	d2 = get_dot_dist(&dot, &(t_dot){inter.x - normal.x,
+											inter.y - normal.y,
+											inter.z - normal.z});
+	return (lt(d1, d2));
 }

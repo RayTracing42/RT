@@ -87,6 +87,6 @@
 
 
 
-	<light><type>orb</type><origin><x>200</x><y>70</y><z>0</z></origin><color><r>100</r><g>100</g><b>100</b></color><power>0.3</power></light>
+	<light><type>orb</type><origin><x>200</x><y>70</y><z>10</z></origin><color><r>100</r><g>100</g><b>100</b></color><power>0.3</power></light>
 
 </scene>

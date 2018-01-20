@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/15 09:58:14 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/20 14:44:24 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ t_plane		*parsing_plane(char *object)
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
 		|| !(data[1] = get_interval(object, "<color>", "</color>"))
-		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
 		|| !(data[3] = get_interval(object, "<normal>", "</normal>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
 		|| (parsing_color(data[1], &args.col) == -1)
-		|| (parsing_physic(data[2], &args) == -1)
 		|| (parsing_vector(data[3], &normal) == -1))
 		return (NULL);
+	data[2] = get_interval(object, "<physic>", "</physic>");
+	parsing_physic(data[2], &args);
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);
@@ -42,12 +42,12 @@ t_sphere	*parsing_sphere(char *object)
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
 		|| !(data[1] = get_interval(object, "<color>", "</color>"))
-		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
 		|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
-		|| (parsing_color(data[1], &args.col) == -1)
-		|| (parsing_physic(data[2], &args) == -1))
+		|| (parsing_color(data[1], &args.col) == -1))
 		return (NULL);
+	data[2] = get_interval(object, "<physic>", "</physic>");
+	parsing_physic(data[2], &args);
 	radius = atod(data[3]);
 	free(data[0]);
 	free(data[1]);
@@ -64,12 +64,12 @@ t_cylinder	*parsing_cylinder(char *object)
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
 		|| !(data[1] = get_interval(object, "<color>", "</color>"))
-		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
 		|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
-		|| (parsing_color(data[1], &args.col) == -1)
-		|| (parsing_physic(data[2], &args) == -1))
+		|| (parsing_color(data[1], &args.col) == -1))
 		return (NULL);
+	data[2] = get_interval(object, "<physic>", "</physic>");
+	parsing_physic(data[2], &args);
 	radius = atod(data[3]);
 	free(data[0]);
 	free(data[1]);
@@ -86,12 +86,12 @@ t_cone		*parsing_cone(char *object)
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
 		|| !(data[1] = get_interval(object, "<color>", "</color>"))
-		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
 		|| !(data[3] = get_interval(object, "<angle>", "</angle>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
-		|| (parsing_color(data[1], &args.col) == -1)
-		|| (parsing_physic(data[2], &args) == -1))
+		|| (parsing_color(data[1], &args.col) == -1))
 		return (NULL);
+	data[2] = get_interval(object, "<physic>", "</physic>");
+	parsing_physic(data[2], &args);
 	angle = atod(data[3]);
 	free(data[0]);
 	free(data[1]);
@@ -100,7 +100,7 @@ t_cone		*parsing_cone(char *object)
 	return (new_cone(args, angle));
 }
 
-t_box		*parsing_box(char *object, t_trans_data *trs)
+t_box		*parsing_box(char *object)
 {
 	t_dot	size;
 	char		*data[4];
@@ -108,50 +108,64 @@ t_box		*parsing_box(char *object, t_trans_data *trs)
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
 		|| !(data[1] = get_interval(object, "<color>", "</color>"))
-		|| !(data[2] = get_interval(object, "<physic>", "</physic>"))
 		|| !(data[3] = get_interval(object, "<size>", "</size>"))
 		|| (parsing_dot(data[0], &args.orig) == -1)
 		|| (parsing_color(data[1], &args.col) == -1)
-		|| (parsing_physic(data[2], &args) == -1)
 		|| (parsing_dot(data[3], &size) == -1))
 		return (NULL);
+	data[2] = get_interval(object, "<physic>", "</physic>");
+	parsing_physic(data[2], &args);
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
-	return (new_box(args, &size, trs));
+	return (new_box(args, size));
 }
 
-int			parsing_object(char *scene, t_scene *scn)
+t_object	*parsing_object2(char *object)
 {
-	char			*data[2];
-	t_object		*obj;
-	t_trans_data	trans;
+	t_object	*obj;
+	char		*data;
 
+	obj = NULL;
+	if (!(data = get_interval(object, "<type>", "</type>")))
+		return (NULL);
+	if (!(ft_strcmp(data, "sphere")))
+		obj = (t_object *)parsing_sphere(object);
+	else if (!(ft_strcmp(data, "plane")))
+		obj = (t_object *)parsing_plane(object);
+	else if (!(ft_strcmp(data, "cylinder")))
+		obj = (t_object *)parsing_cylinder(object);
+	else if (!(ft_strcmp(data, "cone")))
+		obj = (t_object *)parsing_cone(object);
+	else if (!(ft_strcmp(data, "box")))
+		obj = (t_object *)parsing_box(object);
+	free(data);
+	return (obj);
+}
+
+t_list_objs	*parsing_object(char *scene)
+{
+	char			*data[4];
+	t_object		*obj;
+	t_list_objs		*l;
+
+	l = NULL;
 	while ((data[0] = get_interval(scene, "<object>", "</object>")))
 	{
-		obj = NULL;
-		trans = parsing_transformations(data[0]);
-		if (!(data[1] = get_interval(data[0], "<type>", "</type>")))
-			return (-1);
-		if (!(ft_strcmp(data[1], "sphere")))
-			obj = (t_object *)parsing_sphere(data[0]);
-		else if (!(ft_strcmp(data[1], "plane")))
-			obj = (t_object *)parsing_plane(data[0]);
-		else if (!(ft_strcmp(data[1], "cylinder")))
-			obj = (t_object *)parsing_cylinder(data[0]);
-		else if (!(ft_strcmp(data[1], "cone")))
-			obj = (t_object *)parsing_cone(data[0]);
-		else if (!(ft_strcmp(data[1], "box")))
-			obj = (t_object *)parsing_box(data[0], &trans);
-		if (!obj)
-			return (-1);
-		set_all_matrix(obj, trans);
-		parsing_limit(obj, data[0]);
-		scene = ft_strstr(scene, "</object>") + ft_strlen("</object>");
-		free(data[1]);
+		data[1] = get_interval(data[0], "<negative_obj>", "</negative_obj>");
+		data[2] = get_interval(data[0], "<limit>", "</limit>");
+		data[3] = get_interval(data[0], "<transformations>", "</transformations>");
+		if (!(obj = parsing_object2(data[0])))
+			return (NULL);
+		parsing_transformations(obj, data[3]);
+		parsing_limit(obj, data[2]);
+		parsing_negative_obj(obj, data[1]);
 		free(data[0]);
-		scene_add_object(obj, scn);
+		free(data[1]);
+		free(data[2]);
+		free(data[3]);
+		new_cell_obj(&l, obj);
 	}
-	return (0);
+	return (l);
 }

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/15 10:22:23 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/20 14:49:15 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,41 +110,39 @@ static int				is_in_box(t_dot *i, t_object *obj)
 		return (is_in_boundaries(b->right, b, i));
 	return (0);
 }
-void					transform_plane(t_box *box, t_dot *size, t_trans_data *trs)
+void				box_transform_planes(t_box *box, t_trans_data trs)
 {
 	t_dot	t;
 
-	t = trs->trans;
-	trs->trans = (t_dot){t.x - (size->x / 2), t.y, t.z};
-	set_all_matrix((t_object *)box->front, *trs);
-	trs->trans = (t_dot){t.x, t.y - (size->y / 2), t.z};
-	set_all_matrix((t_object *)box->bottom, *trs);
-	trs->trans = (t_dot){t.x, t.y, t.z - (size->z / 2)};
-	set_all_matrix((t_object *)box->left, *trs);
-	trs->trans = (t_dot){t.x + (size->x / 2), t.y, t.z};
-	set_all_matrix((t_object *)box->back, *trs);
-	trs->trans = (t_dot){t.x, t.y + (size->y / 2), t.z};
-	set_all_matrix((t_object *)box->top, *trs);
-	trs->trans = (t_dot){t.x, t.y, t.z + (size->z / 2)};
-	set_all_matrix((t_object *)box->right, *trs);
-	trs->trans = t;
-
+	t = trs.trans;
+	trs.trans = (t_dot){t.x - (box->size.x / 2), t.y, t.z};
+	set_all_matrix((t_object *)box->front, trs);
+	trs.trans = (t_dot){t.x, t.y - (box->size.y / 2), t.z};
+	set_all_matrix((t_object *)box->bottom, trs);
+	trs.trans = (t_dot){t.x, t.y, t.z - (box->size.z / 2)};
+	set_all_matrix((t_object *)box->left, trs);
+	trs.trans = (t_dot){t.x + (box->size.x / 2), t.y, t.z};
+	set_all_matrix((t_object *)box->back, trs);
+	trs.trans = (t_dot){t.x, t.y + (box->size.y / 2), t.z};
+	set_all_matrix((t_object *)box->top, trs);
+	trs.trans = (t_dot){t.x, t.y, t.z + (box->size.z / 2)};
+	set_all_matrix((t_object *)box->right, trs);
 }
 
-t_box					*new_box(t_objs_comp args, t_dot *size, t_trans_data *trs)
+t_box					*new_box(t_objs_comp args, t_dot size)
 {
 	t_box	*box;
 
 	box = (t_box*)new_object(BOX, args);
-	box->fbl_corner = (t_dot){-(size->x / 2), -(size->y / 2), -(size->z / 2)};
-	box->btr_corner = (t_dot){(size->x / 2), (size->y / 2), (size->z / 2)};
+	box->size = size;
+	box->fbl_corner = (t_dot){-(size.x / 2), -(size.y / 2), -(size.z / 2)};
+	box->btr_corner = (t_dot){(size.x / 2), (size.y / 2), (size.z / 2)};
 	box->front = new_plane(args, (t_vector){-1, 0, 0}, 0);
 	box->bottom = new_plane(args, (t_vector){0, -1, 0}, 0);
 	box->left = new_plane(args, (t_vector){0, 0, -1}, 0);
 	box->back = new_plane(args, (t_vector){1, 0, 0}, 0);
 	box->top = new_plane(args, (t_vector){0, 1, 0}, 0);
 	box->right = new_plane(args, (t_vector){0, 0, 1}, 0);
-	transform_plane(box, size, trs);
 	box->intersect = &box_intersect;
 	box->is_in_obj = &is_in_box;
 	box->get_normal = &get_box_normal;

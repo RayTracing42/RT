@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/15 09:42:02 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/20 14:48:49 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void		translate_object(t_object *obj, double x, double y, double z);
 /*
 ** box.c
 */
-t_box		*new_box(t_objs_comp args, t_dot *size, t_trans_data *trs);
+void		box_transform_planes(t_box *box, t_trans_data trs);
+t_box		*new_box(t_objs_comp args, t_dot size);
 void		delete_box(t_box *box);
 
 /*

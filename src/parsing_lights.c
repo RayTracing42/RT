@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:30:32 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/26 15:42:34 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/08 03:02:35 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,31 +79,36 @@ t_orb_light			*parsing_orb_light(char *light)
 	return (new_orb_light(origin, color, power));
 }
 
-int					parsing_light(char *scene, t_scene *scn)
+t_light				*parsing_light2(char *light, char *light_type)
 {
-	char		*data[2];
 	t_light		*lux;
 
+	lux = NULL;
+	if (!(ft_strcmp(light_type, "orb")))
+		lux = (t_light *)parsing_orb_light(light);
+	else if (!(ft_strcmp(light_type, "parallel")))
+		lux = (t_light *)parsing_parallel_light(light);
+	else if (!(ft_strcmp(light_type, "spot")))
+		lux = (t_light *)parsing_spotlight(light);
+	return (lux);
+}
+
+t_list_lights		*parsing_light(char *scene)
+{
+	char			*data[2];
+	t_light			*lux;
+	t_list_lights	*l;
+
+	l = NULL;
 	while ((data[0] = get_interval(scene, "<light>", "</light>")))
 	{
-		lux = NULL;
 		if (!(data[1] = get_interval(data[0], "<type>", "</type>")))
-			return (-1);
-		if (!(ft_strcmp(data[1], "orb")) || !(ft_strcmp(data[1], "ORB")))
-			lux = (t_light *)parsing_orb_light(data[0]);
-		else if (!(ft_strcmp(data[1], "parallel"))
-			|| !(ft_strcmp(data[1], "PARALLEL")))
-			lux = (t_light *)parsing_parallel_light(data[0]);
-		else if (!(ft_strcmp(data[1], "spot")) || !(ft_strcmp(data[1], "SPOT")))
-			lux = (t_light *)parsing_spotlight(data[0]);
-		else
-			return (-1);
-		if (!lux)
-			return (-1);
-		scene = ft_strstr(scene, "</light>") + ft_strlen("</light>");
+			return (NULL);
+		if (!(lux = parsing_light2(data[0], data[1])))
+			return (NULL);
 		free(data[1]);
 		free(data[0]);
-		scene_add_light(lux, scn);
+		new_cell_light(&l, lux);
 	}
-	return (0);
+	return (l);
 }
