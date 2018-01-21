@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/21 15:07:11 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/21 17:48:31 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ static int		full_limit(t_ray tmp_ray, t_object *father, double t)
 }
 
 
-static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, double filter)
+
+static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, const double *filter)
 {
 	double		tmp;
 	t_ray		tmp_ray;
@@ -76,8 +77,8 @@ static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, d
 	while (l)
 	{
 		p = (t_plane *)l->obj;
-		tmp_ray = (p->status == FULL || filter > 0) ? first_intersect(ray, l->obj, &tmp) : second_intersect(ray, father, &tmp);
-		if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && (filter < 0 || !eq(tmp, filter)))))
+		tmp_ray = (p->status == FULL || filter) ? first_intersect(ray, l->obj, &tmp) : second_intersect(ray, father, &tmp);
+		if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && (!filter || !eq(tmp, *filter)))))
 		{
 			transform_inter(&tmp_ray, tmp_ray.obj);
 			if ((p->status == EMPTY && empty_limit(tmp_ray, father)) ||
@@ -93,11 +94,10 @@ static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, d
 	return (res_ray);
 }
 
-void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, double filter)
+void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, const double *filter)
 {
 	t_object	*obj;
 	double		tmp_dist;
-
 	obj = tmp_ray.obj;
 	tmp_ray.limit_status = NONE;
 	if (is_in_limit(&tmp_ray, obj))

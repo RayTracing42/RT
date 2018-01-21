@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/21 01:01:16 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/21 17:25:05 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,17 @@ double	check_negative_intersect(t_ray *ray, t_list_objs *objs, const double t, d
 	while (list)
 	{
 		tmp_ray = first_intersect(ray, list->obj, &tmp);
-		transform_inter(&tmp_ray, list->obj);
+		transform_inter(&tmp_ray, tmp_ray.obj);
 		tmp_dist = tmp;
 		tmp = 0;
-		limit(&tmp_ray, tmp_ray, tmp_dist, &tmp, -1);
+		tmp_ray.obj = list->obj;
+		limit(&tmp_ray, tmp_ray, tmp_dist, &tmp, NULL);
 		if (tmp_ray.nb_intersect && lt(tmp, t))
 		{
 			tmp_ray = second_intersect(ray, list->obj, &tmp);
-			transform_inter(&tmp_ray, list->obj);
-			limit(&tmp_ray, tmp_ray, tmp, &tmp, tmp);
+			transform_inter(&tmp_ray, tmp_ray.obj);
+			tmp_ray.obj = list->obj;
+			limit(&tmp_ray, tmp_ray, tmp, &tmp, &tmp);
 			if (gt(tmp, 0) && gt(tmp, t) && lt(tmp, t2))
 			{
 				if (list->obj->status == EMPTY)
