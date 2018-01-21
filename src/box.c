@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/21 01:05:07 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/21 03:29:47 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,29 @@ static int				is_in_box(t_dot *i, t_object *obj)
 		return (is_in_boundaries(b->right, b, i));
 	return (0);
 }
+
+void				box_dependency_lists(t_box *box)
+{
+	if (box->limit)
+	{
+		box->front->limit = box->limit;
+		box->back->limit = box->limit;
+		box->bottom->limit = box->limit;
+		box->top->limit = box->limit;
+		box->left->limit = box->limit;
+		box->right->limit = box->limit;
+	}
+	if (box->negative_obj)
+	{
+		box->front->negative_obj = box->negative_obj;
+		box->back->negative_obj = box->negative_obj;
+		box->bottom->negative_obj = box->negative_obj;
+		box->top->negative_obj = box->negative_obj;
+		box->left->negative_obj = box->negative_obj;
+		box->right->negative_obj = box->negative_obj;
+	}
+}
+
 void				box_transform_planes(t_box *box, t_trans_data trs)
 {
 	t_dot	t;

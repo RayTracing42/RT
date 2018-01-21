@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/20 14:44:24 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/21 03:29:44 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,8 @@ t_list_objs	*parsing_object(char *scene)
 		free(data[1]);
 		free(data[2]);
 		free(data[3]);
+		if (obj->obj_type == BOX)
+			box_dependency_lists((t_box*)obj);
 		new_cell_obj(&l, obj);
 	}
 	return (l);
