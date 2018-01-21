@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/21 01:01:12 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/21 15:28:07 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ int		is_in_obj(const double t, const t_dot inter, t_object *obj)
 	{
 		second_intersect(&ray, obj, &tmp);
 		if (le(t, tmp))
-		{
 			return (1);
-		}
 	}
 	return (0);
 }
@@ -52,7 +50,10 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 		{
 			transform_inter(&tmp_ray, tmp_ray.obj);
 			neg_dist = dist;
+			tmp_ray2.obj = tmp_ray.obj;
+			tmp_ray.obj = l_objs->obj;
 			limit(&tmp_ray, tmp_ray, tmp, &neg_dist, -1);
+			tmp_ray.obj = tmp_ray2.obj;
 			if (gt(neg_dist, 0) && l_objs->obj->negative_obj)
 			{
 				tmp_ray2 = second_intersect(&tmp_ray, l_objs->obj, &tmp2);

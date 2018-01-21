@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/21 03:29:47 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/21 15:30:42 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,34 +32,27 @@ static void				box_plane_intersect(t_ray *ray, const t_plane *p,
 	double		t;
 
 	e = transform_equ(ray, (t_object *)p);
-	if (gt(t = p->intersect(ray, e, (t_object*)p, 0), 0))
-		if (is_in_boundaries(p, its->box, &ray->inter))
+	t = p->intersect(ray, e, (t_object*)p, 0);
+	if (is_in_boundaries(p, its->box, &ray->inter))
+	{
+		if (its->t == -1)
+			ray->nb_intersect = 1;
+		else
+			ray->nb_intersect = 2;
+		if ((its->i == 1 && (lt(t, its->t) || eq(its->t, 0))) ||
+			(its->i == 2 && (gt(t, its->t) || eq(its->t, 0))))
 		{
-			if (its->t == -1)
-				ray->nb_intersect = 1;
-			else
-				ray->nb_intersect = 2;
-			if (its->i == 1 && (lt(t, its->t) || its->t < 0))
-			{
-				its->p = (t_plane*)p;
-				its->inter = ray->inter;
-				its->t = t;
-			}
-			else if (its->i == 2 && gt(t, its->t))
-			{
-				its->p = (t_plane*)p;
-				its->inter = ray->inter;
-				its->t = t;
-			}
+			its->p = (t_plane*)p;
+			its->inter = ray->inter;
+			its->t = t;
 		}
+	}
 }
 
-static double			box_intersect(t_ray *ray, t_parequation e, t_object *obj,
-		int i)
+static double			box_intersect(t_ray *ray, t_parequation e, t_object *obj, int i)
 {
 	t_box_intersect	its;
-
-	its = (t_box_intersect){(t_box*)obj, (t_dot){0, 0, 0}, i, -1, NULL};
+	its = (t_box_intersect){(t_box*)obj, (t_dot){0, 0, 0}, i, 0, NULL};
 	box_plane_intersect(ray, its.box->back, e, &its);
 	box_plane_intersect(ray, its.box->front, e, &its);
 	box_plane_intersect(ray, its.box->bottom, e, &its);

@@ -6,12 +6,11 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/20 15:28:20 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/21 15:28:46 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#include <math.h>
 
 double					plane_intersect(t_ray *ray, t_parequation e,
 	t_object *obj, int i)
@@ -27,12 +26,9 @@ double					plane_intersect(t_ray *ray, t_parequation e,
 	if (!(denom = p->a * e.vd.x + p->b * e.vd.y + p->c * e.vd.z))
 		return (-1);
 	t = -((p->a * e.vc.x + p->b * e.vc.y + p->c * e.vc.z + p->d) / denom);
-	if (gt(t, 0))
-	{
-		ray->nb_intersect = 2;
-		ray->inter = equation_get_dot(&e, t);
-		ray->obj = obj;
-	}
+	ray->nb_intersect = 2;
+	ray->inter = equation_get_dot(&e, t);
+	ray->obj = obj;
 	return (t);
 }
 
