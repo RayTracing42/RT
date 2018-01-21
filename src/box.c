@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/20 14:49:15 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/21 01:05:07 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ static double			box_intersect(t_ray *ray, t_parequation e, t_object *obj,
 	box_plane_intersect(ray, its.box->left, e, &its);
 	box_plane_intersect(ray, its.box->right, e, &its);
 	ray->inter = its.inter;
-	ray->obj = (t_object *)its.p;
+	if (its.p)
+		ray->obj = (t_object *)its.p;
 	return (its.t);
 }
 

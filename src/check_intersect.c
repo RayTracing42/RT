@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/20 16:14:45 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/21 01:01:12 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,15 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 {
 	t_ray	tmp_ray;
+
 	tmp_ray = *ray;
-	tmp_ray.obj = NULL;
+	tmp_ray.obj = obj;
 	*tmp = obj->intersect(&tmp_ray, transform_equ(&tmp_ray, obj), obj, 1);
 	tmp_ray.color = obj->color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
-	if (tmp_ray.obj)
-	{
-		tmp_ray.normal = *tmp_ray.obj->get_normal(&tmp_ray.inter, tmp_ray.obj);
-		if (gt(*tmp, 0))
-			tmp_ray.shad_opacity += (1 - tmp_ray.obj->obj_light.refraction_amount);
-	}
+	tmp_ray.normal = *tmp_ray.obj->get_normal(&tmp_ray.inter, tmp_ray.obj);
+	if (gt(*tmp, 0))
+		tmp_ray.shad_opacity += (1 - tmp_ray.obj->obj_light.refraction_amount);
 	return (tmp_ray);
 }
 
@@ -104,17 +102,14 @@ t_ray	second_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	t_ray	tmp_ray;
 
 	tmp_ray = *ray;
-	tmp_ray.obj = NULL;
+	tmp_ray.obj = obj;
 	*tmp = obj->intersect(&tmp_ray, transform_equ(&tmp_ray, obj), obj, 2);
 	tmp_ray.color = obj->color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
-	if (tmp_ray.obj)
-	{
-		tmp_ray.normal = *tmp_ray.obj->get_normal(&tmp_ray.inter, tmp_ray.obj);
-		tmp_ray.normal = (t_vector){-tmp_ray.normal.x, -tmp_ray.normal.y,
-			-tmp_ray.normal.z};
-		if (gt(*tmp, 0))
-			tmp_ray.shad_opacity += (1 - tmp_ray.obj->obj_light.refraction_amount);
-	}
+	tmp_ray.normal = *tmp_ray.obj->get_normal(&tmp_ray.inter, tmp_ray.obj);
+	tmp_ray.normal = (t_vector){-tmp_ray.normal.x, -tmp_ray.normal.y,
+		-tmp_ray.normal.z};
+	if (gt(*tmp, 0))
+		tmp_ray.shad_opacity += (1 - tmp_ray.obj->obj_light.refraction_amount);
 	return (tmp_ray);
 }

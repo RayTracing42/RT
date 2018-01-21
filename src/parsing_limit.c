@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/20 13:48:21 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/21 00:30:58 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	parsing_local_limit(t_object *o, t_dot origin, t_vector normal,
 		o->obj_light.reflection_amount, o->obj_light.refraction_amount,
 		o->obj_light.refractive_index, o->obj_light.shininess}, normal, 0);
 	p->status = status;
-	p->d = 0;
 	new_cell_obj(&o->limit, (t_object *)p);
 }
 

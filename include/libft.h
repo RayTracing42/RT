@@ -1,1 +1,0 @@
-/home/shiro/Bureau/RT 42/RT/libraries/libft/includes/libft.h
