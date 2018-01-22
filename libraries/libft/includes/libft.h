@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:22:29 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/06 15:00:39 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/22 17:02:43 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,9 @@ void			exit_custom_error(char *prog, char *err);
 void			*galloc(size_t size);
 void			gexit(int status);
 void			gfree(void *ptr);
-
+/*
 # define malloc galloc
 # define free gfree
 # define exit gexit
-
+*/
 #endif

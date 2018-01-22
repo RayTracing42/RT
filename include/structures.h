@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 17:28:06 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/22 17:14:07 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ typedef struct		s_thread
 	t_thread_state	state;
 }					t_thread;
 */
+
+typedef struct	s_mutexes
+{
+	SDL_mutex	*intersect;
+}				t_mutexes;
 
 typedef struct				s_sdl_core
 {

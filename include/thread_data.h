@@ -8,6 +8,8 @@
 
 #ifndef thread_data_h
 #define thread_data_h
+#include "structures.h"
 
+t_mutexes	*get_mutexes();
 
 #endif /* thread_data_h */
