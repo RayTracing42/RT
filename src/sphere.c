@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/06 14:37:42 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/22 18:00:59 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,10 @@ static double			sphere_intersect(t_ray *ray, t_parequation e,
 	return (t);
 }
 
-static const t_vector	*get_sphere_normal(t_dot *inter, t_object *obj)
+static t_vector	get_sphere_normal(t_dot *inter, t_object *obj)
 {
-	t_sphere	*s;
-
-	s = (t_sphere*)obj;
-	s->normal = (t_vector){2 * inter->x, 2 * inter->y, 2 * inter->z};
-	return (&s->normal);
+	(void)obj;
+	return ((t_vector){2 * inter->x, 2 * inter->y, 2 * inter->z});
 }
 
 static int				is_in_sphere(t_dot *i, t_object *obj)

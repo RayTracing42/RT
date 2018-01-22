@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   limit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/02 17:05:16 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/22 17:59:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		is_in_right_side_of_limit(t_dot *i, t_object *p)
+int		is_in_right_side_of_limit(t_dot *i, t_plane *p)
 {
 	double	distance_1;
 	double	distance_2;
@@ -37,7 +37,7 @@ int		is_in_limit(t_ray *ray, t_object *father)
 	{
 		if (ray->obj != l->obj)
 		{
-			if (!is_in_right_side_of_limit(&ray->inter, l->obj))
+			if (!is_in_right_side_of_limit(&ray->inter, (t_plane*)l->obj))
 				return (0);
 		}
 		l = l->next;

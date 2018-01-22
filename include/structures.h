@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/22 17:14:07 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/22 17:56:50 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,9 +146,8 @@ typedef struct				s_object
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
 	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
-	const t_vector			*(*get_normal)(t_dot *inter, struct s_object *obj);
+	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
-	t_vector				normal;
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
@@ -173,9 +172,8 @@ typedef struct				s_sphere
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
 	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
-	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
+	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
-	t_vector				normal;
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
@@ -192,9 +190,8 @@ typedef struct				s_cylinder
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
 	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
-	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
+	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
-	t_vector				normal;
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
@@ -211,9 +208,8 @@ typedef struct				s_cone
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
 	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
-	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
+	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
-	t_vector				normal;
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
@@ -230,19 +226,19 @@ typedef struct				s_plane
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
 	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
-	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
+	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
-	t_vector				normal;
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
+	struct s_list_objs		*limit;
 
-	struct s_list_obs		*limit;
 	int						status;
 
+	t_vector				normal;
 	double					a;
 	double					b;
 	double					c;
@@ -258,19 +254,19 @@ typedef struct				s_triangle
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
 	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
-	const t_vector			*(*get_normal)(t_dot *inter, t_object *obj);
+	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
-	t_vector				normal;
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	t_obj_phys				obj_light;
+	struct s_list_objs		*limit;
 
-	struct s_list_obs		*limit;
 	int						status;
 
+	t_vector				normal;
 	double					a;
 	double					b;
 	double					c;
