@@ -6,7 +6,7 @@
 /*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:47:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/26 14:48:05 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/06 02:32:42 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,4 @@ double	atod(char *src)
 		decimal_part = int_to_decimal(tmp_decimal);
 	}
 	return (integer_part + decimal_part);
-}
-
-char	*get_interval(const char *src, const char *start, const char *stop)
-{
-	const char	*ptr_start;
-	const char	*ptr_stop;
-	char		*dst;
-	int			len_dst;
-
-	dst = NULL;
-	if (src && ft_strcmp(src, "") && start && ft_strcmp(start, "")
-		&& stop && ft_strcmp(stop, ""))
-	{
-		if ((ptr_start = ft_strstr(src, start)))
-		{
-			ptr_start = ptr_start + ft_strlen(start);
-			if ((ptr_stop = ft_strstr(ptr_start, stop))
-				&& (len_dst = ft_strlen(ptr_start) - ft_strlen(ptr_stop)) > 0)
-			{
-				if ((dst = (char *)ft_memalloc(len_dst + 1)))
-					dst = ft_strncpy(dst, ptr_start, len_dst);
-			}
-		}
-	}
-	return (dst);
 }

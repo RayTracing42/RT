@@ -50,6 +50,8 @@ void		gexit(int status)
 	t_gb_cell	**list;
 	t_gb_cell	*tmp;
 
+	if (status)
+		exit(status);
 	list = get_list();
 	while (*list)
 	{

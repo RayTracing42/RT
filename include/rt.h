@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/02 17:05:26 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/18 17:12:30 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 
 # define TITLE			"RT"
 # define POW			10000000000
+# define EMPTY			0
+# define FULL			1
+# define NONE			2
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -50,8 +53,8 @@ t_vector		matrice_rotation_z(t_vector *m, double angle);
 void			view_plane(t_camera *cam, t_view_plane *vp);
 void			view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 
-t_ray			first_intersect(t_ray *ray, t_object *obj, double *tmp);
-t_ray			second_intersect(t_ray *ray, t_object *obj, double *tmp);
+t_ray			first_intersect(const t_ray *ray, t_object *obj, double *tmp);
+t_ray			second_intersect(const t_ray *ray, t_object *obj, double *tmp);
 double			check_intersect(t_ray *ray, t_list_objs *l_objs);
 
 void			scanning(t_scene *scn);
@@ -76,10 +79,12 @@ int				if_node_exist(t_list_objs *l, t_object *obj);
 **	tools.c
 */
 t_dot			equation_get_dot(t_parequation *eq, double t);
-int				get_quad_equation_sol(double *res, int i);
+int				get_quad_equation_sol(double *res, double fac[4], int i);
 int				gt(double nb1, double nb2);
 int				lt(double nb1, double nb2);
 int				eq(double nb1, double nb2);
+int				ge(double nb1, double nb2);
+int				le(double nb1, double nb2);
 
 /*
 **	vectors.c
@@ -102,7 +107,22 @@ int					get_status(char *status);
 **	limit.c
 */
 
-int					is_in_limit(t_ray *ray, t_object *father);
-void				check_limit_intersect(t_ray *ray, t_object *father, double *dist);
+void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, double filter);
+
+/*
+**	negative_obj.c
+*/
+
+void				check_negative_obj_intersect(t_ray *ray, t_object *father,
+		double *dist);
+
+
+double	check_negative_intersect(t_ray *ray, t_list_objs *objs, const double t, double t2);
+
+
+
+int		is_in_obj(const double t, const t_dot inter, t_object *obj);
+
+
 
 #endif

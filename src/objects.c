@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/17 12:18:38 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/18 18:31:18 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static size_t	get_type_size(t_type type)
 {
-	const size_t	sizes[4] = {sizeof(t_cone), sizeof(t_cylinder),
-								sizeof(t_plane), sizeof(t_sphere)};
-
+	const size_t	sizes[5] = {sizeof(t_cone), sizeof(t_cylinder),
+								sizeof(t_plane), sizeof(t_sphere),
+								sizeof(t_triangle)};
 	return (sizes[type]);
 }
 
@@ -35,6 +35,8 @@ t_object		*new_object(t_type type, t_objs_comp args)
 	obj->get_normal = NULL;
 	obj->intersect = NULL;
 	obj->limit = NULL;
+	obj->negative_obj = NULL;
+	obj->status = FULL;
 	obj->trans_const = create_identity(4);
 	obj->trans_iconst = create_identity(4);
 	obj->trans_idir = create_identity(4);
@@ -70,6 +72,17 @@ void			delete_object(t_object *obj)
 		delete_matrix(obj->trans_iconst);
 		delete_matrix(obj->trans_idir);
 		delete_matrix(obj->trans_norm);
+		while (obj->limit)
+			delete_cell_obj(&obj->limit);
+		while (obj->negative_obj)
+			delete_cell_obj(&obj->negative_obj);
 		free(obj);
 	}
+}
+
+void		set_object_color(t_object *obj, int r, int g, int b)
+{
+	obj->color.r = r;
+	obj->color.g = g;
+	obj->color.b = b;
 }

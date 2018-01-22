@@ -6,12 +6,16 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 14:45:00 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/27 21:07:33 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/01/18 12:56:12 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#include <math.h>
+
+t_vector	dots_to_vect(t_dot d1, t_dot d2)
+{
+	return ((t_vector){d2.x - d1.x, d2.y - d1.y, d2.z - d1.z});
+}
 
 double		get_vect_lenght(const t_vector *vect)
 {
@@ -29,10 +33,23 @@ double		vect_dot_product(const t_vector *v1, const t_vector *v2)
 	return (v1->x * v2->x + v1->y * v2->y + v1->z * v2->z);
 }
 
-void		vect_normalize(t_vector *v)
+t_vector	vect_cross_product(const t_vector v1, const t_vector v2)
 {
-	double	len;
+	return ((t_vector){v1.y * v2.z - v1.z * v2.y,
+					v1.z * v2.x - v1.x * v2.z,
+					v1.x * v2.y - v1.y * v2.x});
+}
 
-	len = get_vect_lenght(v);
-	*v = (t_vector){v->x / len, v->y / len, v->z / len};
+int			is_in_front_of_vector(t_dot dot, t_dot inter, t_vector normal)
+{
+	double	d1;
+	double	d2;
+
+	d1 = get_dot_dist(&dot, &(t_dot){inter.x + normal.x,
+											inter.y + normal.y,
+											inter.z + normal.z});
+	d2 = get_dot_dist(&dot, &(t_dot){inter.x - normal.x,
+											inter.y - normal.y,
+											inter.z - normal.z});
+	return (lt(d1, d2));
 }

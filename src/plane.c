@@ -6,14 +6,14 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/02 17:09:10 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/18 13:00:11 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			plane_intersect(t_ray *ray, t_parequation e,
+double					plane_intersect(t_ray *ray, t_parequation e,
 	t_object *obj, int i)
 {
 	double			t;
@@ -52,11 +52,14 @@ static int				is_in_plane(t_dot *i, t_object *obj)
 	return (!((long)res > 0 || (long)res < 0));
 }
 
-t_plane					*new_plane(t_objs_comp args, t_vector normal)
+t_plane					*new_plane(t_objs_comp args, t_vector normal, int tgl)
 {
 	t_plane		*plane;
 
-	plane = (t_plane*)new_object(PLANE, args);
+	if (tgl)
+		plane = (t_plane*)new_object(TRIANGLE, args);
+	else
+		plane = (t_plane*)new_object(PLANE, args);
 	vect_normalize(&normal);
 	plane->normal = normal;
 	plane->get_normal = get_plane_normal;

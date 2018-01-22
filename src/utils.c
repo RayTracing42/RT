@@ -3,62 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:25:07 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/21 12:30:57 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/18 17:12:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double		angle_between_vectors(t_vector a, t_vector b)
-{
-	double	angle;
-	double	pdt_scalaire;
-	double	dist_a;
-	double	dist_b;
-
-	dist_a = sqrt(pow(a.x, 2) + pow(a.y, 2) + pow(a.z, 2));
-	dist_b = sqrt(pow(b.x, 2) + pow(b.y, 2) + pow(b.z, 2));
-	if (!(dist_a && dist_b))
-		return (0);
-	pdt_scalaire = (a.x * b.x + a.y * b.y + a.z * b.z);
-	angle = acos(pdt_scalaire / (dist_a * dist_b)) * 180 / M_PI;
-	return (angle);
-}
-
-/*
-**	Si tu viens a rejouter negatif un jour, pense aux limites a faire gaffe
-**	car elles pourraient buger avec ce status
-*/
-
 int			get_status(char *status)
 {
 	if (ft_strcmp("empty", status) == 0)
-		return (0);
+		return (EMPTY);
 	else if (ft_strcmp("full", status) == 0)
-		return (1);
+		return (FULL);
+	else if (ft_strcmp("none", status) == 0)
+		return (NONE);
 	else
 		return (-1);
 }
 
-t_vector	vector(double x, double y, double z)
+int		gt(double nb1, double nb2)
 {
-	t_vector	vec;
-
-	vec.x = x;
-	vec.y = y;
-	vec.z = z;
-	return (vec);
+	return ((long)(nb1 * POW) > (long)(nb2 * POW));
 }
 
-t_dot		dot(double x, double y, double z)
+int		lt(double nb1, double nb2)
 {
-	t_dot	d;
+	return ((long)(nb1 * POW) < (long)(nb2 * POW));
+}
 
-	d.x = x;
-	d.y = y;
-	d.z = z;
-	return (d);
+int		ge(double nb1, double nb2)
+{
+	return ((long)(nb1 * POW) >= (long)(nb2 * POW));
+}
+
+int		le(double nb1, double nb2)
+{
+	return ((long)(nb1 * POW) <= (long)(nb2 * POW));
+}
+
+int		eq(double nb1, double nb2)
+{
+	return ((long)(nb1 * POW) == (long)(nb2 * POW));
 }

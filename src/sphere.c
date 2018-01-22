@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/16 11:27:42 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/06 14:37:42 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@ static double			sphere_intersect(t_ray *ray, t_parequation e,
 	t_object *obj, int i)
 {
 	t_sphere		*s;
-	double			t[4];
+	double			t;
+	double			fac[3];
 
 	s = (t_sphere*)obj;
-	t[0] = -1;
-	t[1] = pow(e.vd.x, 2) + pow(e.vd.y, 2) + pow(e.vd.z, 2);
-	t[2] = 2 * (e.vd.x * e.vc.x + e.vd.y * e.vc.y + e.vd.z * e.vc.z);
-	t[3] = pow(e.vc.x, 2) + pow(e.vc.y, 2) + pow(e.vc.z, 2) - s->r2;
-	if ((ray->nb_intersect = get_quad_equation_sol(t, i)))
-		ray->inter = equation_get_dot(&e, t[0]);
-	return (t[0]);
+	t = -1;
+	fac[_A] = pow(e.vd.x, 2) + pow(e.vd.y, 2) + pow(e.vd.z, 2);
+	fac[_B] = 2 * (e.vd.x * e.vc.x + e.vd.y * e.vc.y + e.vd.z * e.vc.z);
+	fac[_C] = pow(e.vc.x, 2) + pow(e.vc.y, 2) + pow(e.vc.z, 2) - s->r2;
+	if ((ray->nb_intersect = get_quad_equation_sol(&t, fac, i)))
+		ray->inter = equation_get_dot(&e, t);
+	return (t);
 }
 
 static const t_vector	*get_sphere_normal(t_dot *inter, t_object *obj)
