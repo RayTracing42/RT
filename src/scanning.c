@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 18:02:20 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/22 15:29:57 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,30 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 	return (ray->color = (SDL_Color){0, 0, 0, 255});
 }
 
+static void		randomize_cam_orig(t_camera *cam)
+{
+	if (rand() % 2)
+		cam->origin.x += (cam->depth * (rand() % 2001 / 1000));
+	else
+		cam->origin.x -= (cam->depth * (rand() % 2001 / 1000));
+	if (rand() % 2)
+		cam->origin.y += (cam->depth * (rand() % 2001 / 1000));
+	else
+		cam->origin.y -= (cam->depth * (rand() % 2001 / 1000));
+	if (rand() % 2)
+		cam->origin.z += (cam->depth * (rand() % 2001 / 1000));
+	else
+		cam->origin.z -= (cam->depth * (rand() % 2001 / 1000));
+}
+
 void			scanning(t_scene *scn)
 {
 	int			x;
 	int			y;
 	t_ray		ray;
+	t_dot		cam_orig;
 
-	ray.equ.vc = *(t_vector*)&scn->cam->origin;
+	cam_orig = scn->cam->origin;
 	ray.actual_refractive_i = 1;
 	ray.limit = 1;
 	ray.tree = add_new_leaf(NULL, NULL, NULL, 0);
@@ -64,6 +81,9 @@ void			scanning(t_scene *scn)
 		x = -1;
 		while (++x < WIN_WIDTH)
 		{
+			scn->cam->origin = cam_orig;
+			randomize_cam_orig(scn->cam);
+			ray.equ.vc = *(t_vector*)&scn->cam->origin;
 			view_plane_vector(x, y, scn->cam, &ray.equ.vd);
 			effects(&ray, scn);
 			put_pixel(x, y, &ray.color);

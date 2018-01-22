@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   view_plane.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/16 11:22:26 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/22 15:22:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,15 @@ void	view_plane_rotation(t_view_plane *vp, double x, double y, double z)
 	vp->right = matrice_rotation_z(&vp->right, z);
 }
 
-void	view_plane(t_camera *cam, t_view_plane *vp)
+void	view_plane(t_camera *cam)
 {
-	double	dist_cam_vp;
-
-	dist_cam_vp = (WIN_WIDTH / 2) / tan((vp->fov / 2) * M_PI / 180);
-	vp->size = vector(dist_cam_vp, WIN_HEIGHT, WIN_WIDTH);
-	view_plane_rotation(vp, (cam->angle_x * M_PI / 180),
-		(cam->angle_y * M_PI / 180), (cam->angle_z * M_PI / 180));
-	vp->up_left.x = cam->origin.x + ((vp->front.x * vp->size.x) +
-		(vp->up.x * (vp->size.y / 2)) - (vp->right.x * (vp->size.z / 2)));
-	vp->up_left.y = cam->origin.y + ((vp->front.y * vp->size.x) +
-		(vp->up.y * (vp->size.y / 2)) - (vp->right.y * (vp->size.z / 2)));
-	vp->up_left.z = cam->origin.z + ((vp->front.z * vp->size.x) +
-		(vp->up.z * (vp->size.y / 2)) - (vp->right.z * (vp->size.z / 2)));
+	cam->vp->size = vector(cam->focal, WIN_HEIGHT, WIN_WIDTH);
+	view_plane_rotation(cam->vp, (cam->angle.x * M_PI / 180),
+		(cam->angle.y * M_PI / 180), (cam->angle.z * M_PI / 180));
+	cam->vp->up_left.x = cam->origin.x + (cam->vp->front.x * cam->vp->size.x +
+		cam->vp->up.x * cam->vp->size.y / 2 - cam->vp->right.x * cam->vp->size.z / 2);
+	cam->vp->up_left.y = cam->origin.y + (cam->vp->front.y * cam->vp->size.x +
+		cam->vp->up.y * cam->vp->size.y / 2 - cam->vp->right.y * cam->vp->size.z / 2);
+	cam->vp->up_left.z = cam->origin.z + (cam->vp->front.z * cam->vp->size.x +
+		cam->vp->up.z * cam->vp->size.y / 2 - cam->vp->right.z * cam->vp->size.z / 2);
 }
