@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/22 17:06:55 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/23 15:23:28 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int				scanning_multi(void *data_void)
 		{
 			view_plane_vector(x, y, data->scn->cam, &ray.equ.vd);
 			effects(&ray, data->scn, data->mutex_leaf);
-			put_pixel(x, y, &ray.color, data->mutex_put_pixel);
+			put_pixel((int)data->ray.limit, x, y, &ray.color);
 		}
 	}
 	remove_leaf(ray.tree);
@@ -92,7 +92,7 @@ void			scanning(t_scene *scn)
 
 	ray.equ.vc = *(t_vector*)&scn->cam->origin;
 	ray.actual_refractive_i = 1;
-	ray.limit = 1;
+	ray.limit = 0;
 	ray.tree = add_new_leaf(NULL, NULL, NULL, 0);
 
 	//y = -1;
@@ -100,8 +100,11 @@ void			scanning(t_scene *scn)
 	clock_t debut = clock();
 
 	thread_debut = thread_data(-1, WIN_HEIGHT/4, scn, ray);
+	ray.limit = 1;
 	thread_milieu_haut = thread_data(WIN_HEIGHT / 4 - 1, 2 * WIN_HEIGHT / 4, scn, ray);
+	ray.limit = 2;
 	thread_milieu_bas = thread_data(2 * WIN_HEIGHT / 4 - 1, 3 * WIN_HEIGHT / 4, scn, ray);
+	ray.limit = 3;
 	thread_fin = thread_data(3 * WIN_HEIGHT / 4 - 1, WIN_HEIGHT, scn, ray);
 
 	thread_debut.thread = SDL_CreateThread(scanning_multi, "thread 1", (void *)&thread_debut);

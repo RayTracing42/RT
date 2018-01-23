@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 17:10:36 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/05 23:50:23 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/23 15:05:59 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 /*
 ** graphics.c
 */
-void		delete_sdl_core();
+void		delete_sdl_cores();
 Uint32		get_color(int r, int g, int b);
-t_sdl_core	*get_sdl_core();
-void		put_pixel(int x, int y, SDL_Color *color, SDL_mutex *mutex);
+t_sdl_core	*get_sdl_core(int n);
+void		put_pixel(int n_thread, int x, int y, SDL_Color *color);
 void		refresh_win();
 
 #endif

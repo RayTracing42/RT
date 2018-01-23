@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/22 17:56:50 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/23 14:28:16 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct				s_sdl_core
 {
 	SDL_Window				*window;
 	SDL_Renderer			*renderer;
+	int						nb_threads;
 	int						width;
 	int						height;
 	int						fullscreen;
