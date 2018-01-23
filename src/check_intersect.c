@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/21 18:14:51 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/23 04:46:21 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,9 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	t_ray		tmp_ray;
 	t_ray		tmp_ray2;
 	t_ray		tmp_ray3;
-	t_ray		res_ray;
 
 	dist = 0;
 	tmp_ray.shad_opacity = 0;
-	res_ray = *ray;
 	while (l_objs != NULL)
 	{
 		tmp_ray = first_intersect(ray, l_objs->obj, &tmp);
@@ -49,42 +47,36 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 			tmp_ray = second_intersect(ray, l_objs->obj, &tmp);
 		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 		{
-			transform_inter(&tmp_ray, tmp_ray.obj);
 			neg_dist = dist;
-			tmp_ray.obj = l_objs->obj;
+			transform_inter(&tmp_ray, l_objs->obj);
+			limit(&tmp_ray, tmp_ray, tmp, &neg_dist, NULL);
 			tmp_ray3 = tmp_ray;
-			limit(&tmp_ray3, tmp_ray, tmp, &neg_dist, NULL);
 			if (gt(neg_dist, 0) && l_objs->obj->negative_obj)
 			{
-				neg_dist = dist;
-				limit(&tmp_ray, tmp_ray, tmp, &neg_dist, &(double){-1});
-				tmp_ray.obj = NULL;
 				tmp_ray2 = second_intersect(ray, l_objs->obj, &tmp2);
-				transform_inter(&tmp_ray2, tmp_ray2.obj);
-				tmp_ray2.obj = l_objs->obj;
+				transform_inter(&tmp_ray2, l_objs->obj);
 				limit(&tmp_ray2, tmp_ray2, tmp2, &tmp2, &neg_dist);
 				if ((neg_dist = check_negative_intersect(&tmp_ray, l_objs->obj->negative_obj, neg_dist, tmp2) > 0))
 				{
 					if (!(eq(neg_dist, tmp2) && tmp_ray2.limit_status == EMPTY))
 						dist = neg_dist;
 					if (eq(neg_dist, tmp2) && tmp_ray2.limit_status != EMPTY)
-						res_ray = tmp_ray2;
+						*ray = tmp_ray2;
 					else if (!eq(neg_dist, tmp2))
-						res_ray = tmp_ray.obj ? tmp_ray : tmp_ray3;
+						*ray = tmp_ray.obj ? tmp_ray : tmp_ray3;
 				}
 			}
 			else if (gt(neg_dist, 0))
 			{
-				res_ray = tmp_ray3;
+				*ray = tmp_ray3;
 				dist = neg_dist;
 			}
 		}
 		l_objs = l_objs->next;
 	}
-	if (!is_in_front_of_vector(*(t_dot*)&res_ray.equ.vc, res_ray.inter, res_ray.normal))
-		res_ray.normal = (t_vector){-res_ray.normal.x, -res_ray.normal.y,
-			-res_ray.normal.z};
-	*ray = res_ray;
+	if (!is_in_front_of_vector(*(t_dot*)&ray->equ.vc, ray->inter, ray->normal))
+		ray->normal = (t_vector){-ray->normal.x, -ray->normal.y,
+			-ray->normal.z};
 	return (dist);
 }
 

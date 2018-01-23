@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/21 15:28:28 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/23 04:42:27 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ t_parequation	transform_equ(t_ray *ray, t_object *obj)
 
 void			transform_inter(t_ray *ray, t_object *obj)
 {
-	mult_vect(&ray->normal, obj->trans_norm, &ray->normal);
-	mult_vect((t_vector*)&ray->inter, obj->trans_const, (t_vector*)&ray->inter);
+	mult_vect(&ray->normal, ray->obj->trans_norm, &ray->normal);
+	mult_vect((t_vector*)&ray->inter, ray->obj->trans_const, (t_vector*)&ray->inter);
 	ray->inter = (t_dot){ray->inter.x + ray->obj->origin.x,
 		ray->inter.y + ray->obj->origin.y, ray->inter.z + ray->obj->origin.z};
+	ray->obj = obj;
 }
 
 SDL_Color		effects(t_ray *ray, t_scene *scn)

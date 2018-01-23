@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/21 15:30:42 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/23 04:46:23 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static const t_vector	*get_box_normal(t_dot *inter, t_object *obj)
 	t_box	*b;
 
 	b = (t_box*)obj;
-
 	if (b->front->is_in_obj(inter, (t_object*)b->front))
 		return (&b->front->normal);
 	else if (b->back->is_in_obj(inter, (t_object*)b->back))

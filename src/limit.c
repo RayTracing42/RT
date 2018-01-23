@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/21 17:48:31 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/23 04:46:22 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, const doub
 {
 	t_object	*obj;
 	double		tmp_dist;
+
 	obj = tmp_ray.obj;
 	tmp_ray.limit_status = NONE;
 	if (is_in_limit(&tmp_ray, obj))
