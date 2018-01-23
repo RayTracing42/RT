@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/23 15:18:17 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/23 19:02:51 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,9 @@ t_scene		*parsing(int argc, char **argv)
 			exit_custom_error("rt", ":parsing_object() failed");
 		if (close(fd) == -1)
 			exit_custom_error("rt", ":close() failed");
-		get_sdl_core(argc == 3 ? ft_atoi(argv[2]) : 1);
+		fd = (argc == 3 ? ft_atoi(argv[2]) : 1);
+		get_sdl_core()->nb_threads = fd;
+		get_pxl_queue(fd);
 		free(scene);
 		free(file);
 	}
