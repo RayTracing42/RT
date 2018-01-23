@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/23 18:56:04 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/23 19:37:20 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct	s_pxl_queue
 	int	x;
 	int	y;
 	SDL_Color	col;
-	struct s_pxl_queue	*next;
 }				t_pxl_queue;
 
 typedef struct				s_sdl_core

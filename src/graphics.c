@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:52:28 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/23 19:15:01 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/23 22:30:28 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_pxl_queue	**get_pxl_queue(int n)
 	nb_threads = n;
 	return (queue);
 }
-
-t_pxl_queue	*add_pxl_to_queue(int x, int y, SDL_Color col, t_pxl_queue **last)
+/*
+void	add_pxl_to_queue(int x, int y, SDL_Color col, t_pxl_queue **last)
 {
 	t_pxl_queue	*tmp;
 
@@ -58,7 +58,7 @@ void		add_end_pxl_to_queue(t_pxl_queue **last)
 	else
 		*last = tmp;
 }
-
+*/
 t_sdl_core	*get_sdl_core(void)
 {
 	static t_sdl_core	*core = NULL;
@@ -125,41 +125,35 @@ int			rendering_thread(void* data)
 	const int	n = get_sdl_core()->nb_threads;
 	int	i;
 	int	nb_ended_threads;
-	t_pxl_queue	**tmp;
-	t_pxl_queue	*tmp_free;
+	t_pxl_queue	**list_queue;
 
 	(void)data;
+	if (!(list_queue = malloc(n * sizeof(t_pxl_queue*))))
+		exit_error("rt", "malloc");
+	i = 0;
+	while (++i <= n)
+		list_queue[i - 1] = *get_pxl_queue(i);
 	nb_ended_threads = 0;
 	while (nb_ended_threads != n)
 	{
-		i = 0;
-		while (++i <= n)
+		i = -1;
+		while (++i < n)
 		{
-			tmp = get_pxl_queue(i);
-			if (*tmp && !(*tmp)->rendered)
+			if (!list_queue[i]->rendered)
 			{
-				put_pixel((*tmp)->x, (*tmp)->y, &(*tmp)->col);
-				if ((*tmp)->next)
-				{
-					tmp_free = *tmp;
-					(*tmp) = (*tmp)->next;
-					free(tmp_free);
-				}
+				put_pixel(list_queue[i]->x, list_queue[i]->y, &list_queue[i]->col);
+				if ((list_queue[i] + 1)->rendered >= -1)
+					list_queue[i]++;
 				else
-					(*tmp)->rendered = 1;
+					list_queue[i]->rendered = 1;
 			}
-			else if ((*tmp) && (*tmp)->rendered == -1)
+			else if (list_queue[i]->rendered == -1)
 			{
 				nb_ended_threads++;
-				free(*tmp);
-				*tmp = NULL;
+				list_queue[i]->rendered = -3;
 			}
-			else if ((*tmp) && (*tmp)->rendered && (*tmp)->next)
-			{
-				tmp_free = *tmp;
-				(*tmp) = (*tmp)->next;
-				free(tmp_free);
-			}
+			else if (list_queue[i]->rendered && list_queue[i]->rendered != -3 && !(list_queue[i] + 1)->rendered)
+				list_queue[i]++;
 		}
 	}
 	return (0);
