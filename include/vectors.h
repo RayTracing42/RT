@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 12:52:00 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/20 13:41:39 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/23 05:41:12 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ t_vector	vect_cross_product(const t_vector v1, const t_vector v2);
 double		vect_dot_product(const t_vector v1, const t_vector v2);
 void		vect_normalize(t_vector *v);
 t_vector	vector_inv(t_vector	v);
-int			is_in_front_of_vector(t_dot dot, t_dot inter, t_vector normal);
+void		is_in_front_of_vector(t_dot dot, t_dot inter, t_vector *normal);
 
 #endif
