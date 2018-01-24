@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/24 12:46:46 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/24 12:49:00 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ void			scanning(t_scene *scn)
 	int	i;
 
 
-	threads = init_thread_array(scn, 4);
+	threads = init_thread_array(scn, get_sdl_core()->nb_threads);
 	(void)threads;
 	i = 0;
 	clock_t debut = clock();
-	while (i < 4)
+	while (i < get_sdl_core()->nb_threads)
 	{
 		threads[i].thread = SDL_CreateThread(scanning_multi, "thread", (void *)&threads[i]);
 		i++;
@@ -97,7 +97,7 @@ void			scanning(t_scene *scn)
 	if (!(rendering = SDL_CreateThread(rendering_thread, "", NULL)))
 		exit_custom_error("rt: SDL2: SDL_CreateThread: ", (char*)SDL_GetError());
 	i = 0;
-	while (i < 4)
+	while (i < get_sdl_core()->nb_threads)
 	{
 		SDL_WaitThread(threads[i].thread, NULL);
 		printf("%d - done\n", i + 1);
