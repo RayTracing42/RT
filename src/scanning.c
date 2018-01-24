@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/23 22:36:40 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/24 11:16:11 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,25 @@ void			scanning(t_scene *scn)
 	thread_debut.thread = SDL_CreateThread(scanning_multi, "thread 1", (void *)&thread_debut);
 	SDL_WaitThread(thread_debut.thread, &ret);*/
 
+	t_thread_data *threads;
+	int ret;
+	int i;
+	clock_t debut = clock();
+
+	threads = init_thread_array(scn, 4);
+	i = 0;
+	while (i < 4)
+	{
+		threads[i].thread = SDL_CreateThread(scanning_multi, "thread", (void *)&threads[i]);
+		i++;
+	}
+	i = 0;
+	while (i < 4)
+	{
+		SDL_WaitThread(threads[i].thread, &ret);
+		printf("%d - done\n", i);
+		i++;
+	}
 	clock_t fin = clock();
 	printf("%f\n", (double)(fin - debut)/CLOCKS_PER_SEC);
 

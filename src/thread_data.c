@@ -8,6 +8,35 @@
 
 #include "rt.h"
 
+
+/*
+** La hauteur n'étant pas forcément un multiple de 4, il manque 1 ou 2 pixels
+** à la fin. Ainsi, le dernier thread aura 1 ou 2 lignes en plus
+*/
+t_thread_data *init_thread_array(t_scene *scn, int nb_thread)
+{
+	t_thread_data	*threads;
+	int				i;
+	int				height_thread;
+	t_ray			ray;
+	
+	threads = (t_thread_data *)malloc(sizeof(t_thread_data) * nb_thread);
+	ray.equ.vc = *(t_vector*)&scn->cam->origin;
+	ray.actual_refractive_i = 1;
+	height_thread = WIN_HEIGHT/nb_thread;
+	i = 0;
+	while (i < nb_thread)
+	{
+		ray.limit = i;
+		if (i == nb_thread - 1)
+			threads[i] = thread_data((height_thread * i) - 1, WIN_HEIGHT, scn, ray);
+		else
+			threads[i] = thread_data((height_thread * i) - 1, height_thread * (i + 1), scn, ray);
+		i++;
+	}
+	return threads;
+}
+
 t_thread_data thread_data(int y_begin, int y_end, t_scene *scn, t_ray ray)
 {
 	t_thread_data toRet;
@@ -26,6 +55,7 @@ t_thread_data thread_data(int y_begin, int y_end, t_scene *scn, t_ray ray)
 	toRet.y_end = y_end;
 	toRet.scn = scn;
 	toRet.ray = ray;
+	toRet.ray.tree = add_new_leaf(NULL, NULL, NULL, 0);
 
 	return (toRet);
 }

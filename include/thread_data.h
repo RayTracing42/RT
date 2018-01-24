@@ -10,6 +10,7 @@
 #define thread_data_h
 #include "structures.h"
 
+t_thread_data *init_thread_array(t_scene *scn, int nb_thread);
 t_mutexes	*get_mutexes();
 
 #endif /* thread_data_h */
