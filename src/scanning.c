@@ -80,12 +80,14 @@ void			scanning(t_scene *scn)
 {
 	t_thread_data	*threads;
 	SDL_Thread		*rendering;
-	int	i;
+	int				i;
+	struct timeb	debut;
+	struct timeb	fin;
 
 
 	threads = init_thread_array(scn, get_sdl_core()->nb_threads);
 	i = -1;
-	clock_t debut = clock();
+	ftime(&debut);
 	while (++i < get_sdl_core()->nb_threads)
 	{
 		if (!(threads[i].thread = SDL_CreateThread(scanning_multi, "thread", (void*)&threads[i])))
@@ -98,6 +100,7 @@ void			scanning(t_scene *scn)
 		SDL_WaitThread(threads[i].thread, NULL);
 	SDL_WaitThread(rendering, NULL);
 	free(threads);
-	clock_t fin = clock();
-	printf("total time: %fs\n", (double)(fin - debut)/CLOCKS_PER_SEC);
+	ftime(&fin);
+	
+	printf("total time: %fs\n", (fin.time + (fin.millitm)/1000.0 - debut.time - debut.millitm/1000.0));
 }
