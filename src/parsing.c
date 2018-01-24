@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/24 13:20:14 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/24 15:29:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,10 @@ t_scene		*parsing(int argc, char **argv)
 			exit_custom_error("rt", ":parsing_object() failed");
 		if (close(fd) == -1)
 			exit_custom_error("rt", ":close() failed");
-		fd = (argc == 3 ? ft_atoi(argv[2]) : 1);
+		if (argc == 3 && (fd = ft_atoi(argv[2])) > WIN_HEIGHT)
+			fd = WIN_HEIGHT;
+		else if (argc != 3)
+			fd = 1;
 		get_sdl_core()->nb_threads = fd;
 		get_pxl_queue(fd);
 		free(scene);
