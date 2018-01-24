@@ -17,22 +17,31 @@ t_thread_data *init_thread_array(t_scene *scn, int nb_thread)
 {
 	t_thread_data	*threads;
 	int				i;
+	int				j;
 	int				height_thread;
 	t_ray			ray;
-	
+	t_pxl_queue		**tmp;
+
 	threads = (t_thread_data *)malloc(sizeof(t_thread_data) * nb_thread);
-	ray.equ.vc = *(t_vector*)&scn->cam->origin;
-	ray.actual_refractive_i = 1;
-	height_thread = WIN_HEIGHT/nb_thread;
+	height_thread = WIN_HEIGHT / nb_thread;
 	i = 0;
 	while (i < nb_thread)
 	{
-		ray.limit = i;
+		ray.limit = i + 1;
 		if (i == nb_thread - 1)
 			threads[i] = thread_data((height_thread * i) - 1, WIN_HEIGHT, scn, ray);
 		else
 			threads[i] = thread_data((height_thread * i) - 1, height_thread * (i + 1), scn, ray);
-		i++;
+
+		tmp = get_pxl_queue(i + 1);
+		if (!((*tmp) = malloc(((threads[i].y_end - threads[i].y_begin - 1) * WIN_WIDTH + 1) * sizeof(t_pxl_queue))))
+			exit_error("rt", "malloc");
+		j = -1;
+		while (++j < (threads[i].y_end - threads[i].y_begin - 1) * WIN_WIDTH)
+			(*tmp)[j].rendered = -2;
+		(*tmp)[j].rendered = -1;
+
+		++i;
 	}
 	return threads;
 }

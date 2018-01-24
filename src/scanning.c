@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/24 11:16:11 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/24 12:46:46 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int				scanning_multi(void *data_void)
 	ray.limit = 1;
 	ray.tree = add_new_leaf(NULL, NULL, NULL, 0);
 	q = -1;
-	(void)q;
 	y = data->y_begin;
 	while (++y < data->y_end)
 	{
@@ -81,115 +80,30 @@ int				scanning_multi(void *data_void)
 
 void			scanning(t_scene *scn)
 {
-	//int			x;
-	//int			y;
-	t_ray		ray;
+	t_thread_data	*threads;
+	SDL_Thread		*rendering;
+	int	i;
 
-	t_thread_data thread_debut;
-	t_thread_data thread_milieu_haut;
-	t_thread_data thread_milieu_bas;
-	t_thread_data thread_fin;
-
-	SDL_Thread	*rendering;
-
-	int ret;
-
-	ray.equ.vc = *(t_vector*)&scn->cam->origin;
-	ray.actual_refractive_i = 1;
-	ray.tree = add_new_leaf(NULL, NULL, NULL, 0);
-
-	//y = -1;
-
-	ray.limit = 1;
-	thread_debut = thread_data(-1, WIN_HEIGHT/4, scn, ray);
-	ray.limit = 2;
-	thread_milieu_haut = thread_data(WIN_HEIGHT / 4 - 1, 2 * WIN_HEIGHT / 4, scn, ray);
-	ray.limit = 3;
-	thread_milieu_bas = thread_data(2 * WIN_HEIGHT / 4 - 1, 3 * WIN_HEIGHT / 4, scn, ray);
-	ray.limit = 4;
-	thread_fin = thread_data(3 * WIN_HEIGHT / 4 - 1, WIN_HEIGHT, scn, ray);
-
-	t_pxl_queue	**tmp;
-	int i;
-
-	tmp = get_pxl_queue(1);
-	if (!((*tmp) = malloc(((thread_debut.y_end - thread_debut.y_begin - 1) * WIN_WIDTH + 1) * sizeof(t_pxl_queue))))
-		exit_error("rt", "malloc");
-	i = -1;
-	while (++i < (thread_debut.y_end - thread_debut.y_begin - 1) * WIN_WIDTH)
-		(*tmp)[i].rendered = -2;
-	(*tmp)[i].rendered = -1;
-
-	tmp = get_pxl_queue(2);
-	if (!((*tmp) = malloc(((thread_milieu_haut.y_end - thread_milieu_haut.y_begin - 1) * WIN_WIDTH + 1) * sizeof(t_pxl_queue))))
-		exit_error("rt", "malloc");
-	i = -1;
-	while (++i < (thread_milieu_haut.y_end - thread_milieu_haut.y_begin - 1) * WIN_WIDTH)
-		(*tmp)[i].rendered = -2;
-	(*tmp)[i].rendered = -1;
-
-	tmp = get_pxl_queue(3);
-	if (!((*tmp) = malloc(((thread_milieu_bas.y_end - thread_milieu_bas.y_begin - 1) * WIN_WIDTH + 1) * sizeof(t_pxl_queue))))
-		exit_error("rt", "malloc");
-	i = -1;
-	while (++i < (thread_milieu_bas.y_end - thread_milieu_bas.y_begin - 1) * WIN_WIDTH)
-		(*tmp)[i].rendered = -2;
-	(*tmp)[i].rendered = -1;
-
-	tmp = get_pxl_queue(4);
-	if (!((*tmp) = malloc(((thread_fin.y_end - thread_fin.y_begin - 1) * WIN_WIDTH + 1) * sizeof(t_pxl_queue))))
-		exit_error("rt", "malloc");
-	i = -1;
-	while (++i < (thread_fin.y_end - thread_fin.y_begin - 1) * WIN_WIDTH)
-		(*tmp)[i].rendered = -2;
-	(*tmp)[i].rendered = -1;
-
-	clock_t debut = clock();
-
-	thread_debut.thread = SDL_CreateThread(scanning_multi, "thread 1", (void *)&thread_debut);
-	thread_milieu_haut.thread = SDL_CreateThread(scanning_multi, "thread 2", (void *)&thread_milieu_haut);
-	thread_milieu_bas.thread = SDL_CreateThread(scanning_multi, "thread 3", (void *)&thread_milieu_bas);
-	thread_fin.thread = SDL_CreateThread(scanning_multi, "thread 4", (void *)&thread_fin);
-
-	rendering = SDL_CreateThread(rendering_thread, "", NULL);
-
-	SDL_WaitThread(thread_debut.thread, &ret);
-	//printf("1 - done\n");
-	SDL_WaitThread(thread_milieu_haut.thread, &ret);
-	//printf("2 - done\n");
-	SDL_WaitThread(thread_milieu_bas.thread, &ret);
-	//printf("3 - done\n");
-	SDL_WaitThread(thread_fin.thread, &ret);
-	//printf("4 - done\n");
-	SDL_WaitThread(rendering, NULL);
-	//printf("rendering - done\n");
-
-	/*thread_debut = thread_data(-1, WIN_HEIGHT, scn, ray);
-	thread_debut.thread = SDL_CreateThread(scanning_multi, "thread 1", (void *)&thread_debut);
-	SDL_WaitThread(thread_debut.thread, &ret);*/
-
-	t_thread_data *threads;
-	int ret;
-	int i;
-	clock_t debut = clock();
 
 	threads = init_thread_array(scn, 4);
+	(void)threads;
 	i = 0;
+	clock_t debut = clock();
 	while (i < 4)
 	{
 		threads[i].thread = SDL_CreateThread(scanning_multi, "thread", (void *)&threads[i]);
 		i++;
 	}
+	if (!(rendering = SDL_CreateThread(rendering_thread, "", NULL)))
+		exit_custom_error("rt: SDL2: SDL_CreateThread: ", (char*)SDL_GetError());
 	i = 0;
 	while (i < 4)
 	{
-		SDL_WaitThread(threads[i].thread, &ret);
-		printf("%d - done\n", i);
+		SDL_WaitThread(threads[i].thread, NULL);
+		printf("%d - done\n", i + 1);
 		i++;
 	}
+	SDL_WaitThread(rendering, NULL);
 	clock_t fin = clock();
 	printf("%f\n", (double)(fin - debut)/CLOCKS_PER_SEC);
-
-
-//	remove_leaf(ray.tree);
 }

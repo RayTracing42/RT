@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:52:28 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/24 11:15:53 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/24 12:45:31 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_sdl_core	*get_sdl_core(void)
 										SDL_WINDOW_SHOWN)) ||
 		!(core->renderer = SDL_CreateRenderer(core->window, -1,
 											SDL_RENDERER_ACCELERATED)))
-		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
+		exit_custom_error("rt: SDL2: ", (char*)SDL_GetError());
 	return (core);
 }
 
