@@ -71,6 +71,7 @@ int				scanning_multi(void *data_void)
 			view_plane_vector(x, y, data->scn->cam, &ray.equ.vd);
 			effects(&ray, data->scn, data->mutex_leaf);
 			put_pixel((int)data->ray.limit, x, y, &ray.color);
+			SDL_UnlockMutex(data->mutex_put_pixel);
 		}
 	}
 	remove_leaf(ray.tree);
@@ -79,52 +80,25 @@ int				scanning_multi(void *data_void)
 
 void			scanning(t_scene *scn)
 {
-	//int			x;
-	//int			y;
-	t_ray		ray;
-
-	t_thread_data thread_debut;
-	t_thread_data thread_milieu_haut;
-	t_thread_data thread_milieu_bas;
-	t_thread_data thread_fin;
-
+	t_thread_data *threads;
 	int ret;
-
-	ray.equ.vc = *(t_vector*)&scn->cam->origin;
-	ray.actual_refractive_i = 1;
-	ray.limit = 0;
-	ray.tree = add_new_leaf(NULL, NULL, NULL, 0);
-
-	//y = -1;
-
+	int i;
 	clock_t debut = clock();
-
-	thread_debut = thread_data(-1, WIN_HEIGHT/4, scn, ray);
-	ray.limit = 1;
-	thread_milieu_haut = thread_data(WIN_HEIGHT / 4 - 1, 2 * WIN_HEIGHT / 4, scn, ray);
-	ray.limit = 2;
-	thread_milieu_bas = thread_data(2 * WIN_HEIGHT / 4 - 1, 3 * WIN_HEIGHT / 4, scn, ray);
-	ray.limit = 3;
-	thread_fin = thread_data(3 * WIN_HEIGHT / 4 - 1, WIN_HEIGHT, scn, ray);
-
-	thread_debut.thread = SDL_CreateThread(scanning_multi, "thread 1", (void *)&thread_debut);
-	thread_milieu_haut.thread = SDL_CreateThread(scanning_multi, "thread 2", (void *)&thread_milieu_haut);
-	thread_milieu_bas.thread = SDL_CreateThread(scanning_multi, "thread 3", (void *)&thread_milieu_bas);
-	thread_fin.thread = SDL_CreateThread(scanning_multi, "thread 4", (void *)&thread_fin);
-
-	SDL_WaitThread(thread_debut.thread, &ret);
-	printf("1 - done\n");
-	SDL_WaitThread(thread_milieu_haut.thread, &ret);
-	printf("2 - done\n");
-	SDL_WaitThread(thread_milieu_bas.thread, &ret);
-	printf("3 - done\n");
-	SDL_WaitThread(thread_fin.thread, &ret);
-	printf("4 - done\n");
-
-	/*thread_debut = thread_data(-1, WIN_HEIGHT, scn, ray);
-	thread_debut.thread = SDL_CreateThread(scanning_multi, "thread 1", (void *)&thread_debut);
-	SDL_WaitThread(thread_debut.thread, &ret);*/
-
+	
+	threads = init_thread_array(scn, 4);
+	i = 0;
+	while (i < 4)
+	{
+		threads[i].thread = SDL_CreateThread(scanning_multi, "thread", (void *)&threads[i]);
+		i++;
+	}
+	i = 0;
+	while (i < 4)
+	{
+		SDL_WaitThread(threads[i].thread, &ret);
+		printf("%d - done\n", i);
+		i++;
+	}
 	clock_t fin = clock();
 	printf("%f\n", (double)(fin - debut)/CLOCKS_PER_SEC);
 

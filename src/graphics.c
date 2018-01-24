@@ -78,9 +78,7 @@ Uint32		get_color(int r, int g, int b)
 
 void		put_pixel(int n_thread, int x, int y, SDL_Color *color)
 {
-	//SDL_LockMutex(mutex);
 	if (color)
 		SDL_SetRenderDrawColor(get_sdl_core(n_thread)->renderer, color->r, color->g, color->b, color->a);
 	SDL_RenderDrawPoint(get_sdl_core(n_thread)->renderer, x, y);
-	//SDL_UnlockMutex(mutex);
 }
