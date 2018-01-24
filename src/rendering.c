@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 10:59:52 by shiro             #+#    #+#             */
-/*   Updated: 2018/01/24 13:14:31 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/24 14:20:18 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ t_pxl_queue	**get_pxl_queue(int n)
 	nb_threads = n;
 	return (queue);
 }
+
+void		delete_pxl_queues()
+{
+	int	i;
+
+	i = 0;
+	while (++i < get_sdl_core()->nb_threads)
+		free(*get_pxl_queue(i));
+	free(get_pxl_queue(0));
+}
+
 void		put_pixel(int x, int y, SDL_Color *color)
 {
 	if (color)

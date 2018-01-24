@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/23 17:40:50 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/24 14:21:51 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	main_display(void *scene)
 	view_plane(scn->cam, scn->cam->vp);
 	scanning(scn);
 	refresh_win();
+	delete_pxl_queues();
 	return (1);
 }
 

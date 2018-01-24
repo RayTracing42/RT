@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/24 13:30:51 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/24 14:38:11 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void			scanning(t_scene *scn)
 	while (++i < get_sdl_core()->nb_threads)
 		SDL_WaitThread(threads[i].thread, NULL);
 	SDL_WaitThread(rendering, NULL);
+	free(threads);
 	clock_t fin = clock();
 	printf("total time: %fs\n", (double)(fin - debut)/CLOCKS_PER_SEC);
 }
