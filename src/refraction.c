@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   refraction.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:57:01 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/22 10:59:06 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/24 13:16:59 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static int	update_tree_out(t_ray *ray, t_ray *ref_ray)
 	return (1);
 }
 
-SDL_Color	refract(t_ray *ray, t_scene *scn, SDL_mutex *mutex_leaf)
+SDL_Color	refract(t_ray *ray, t_scene *scn)
 {
 	t_ray		ref_ray;
 	SDL_Color	ret;
@@ -119,7 +119,7 @@ SDL_Color	refract(t_ray *ray, t_scene *scn, SDL_mutex *mutex_leaf)
 	ref_ray.equ.vc = vector(ray->inter.x + (1 / POW) * ray->equ.vd.x,
 			ray->inter.y + (1 / POW) * ray->equ.vd.y,
 			ray->inter.z + (1 / POW) * ray->equ.vd.z);
-	ret = effects(&ref_ray, scn, mutex_leaf);
+	ret = effects(&ref_ray, scn);
 	remove_leaf(ref_ray.tree);
 	return (ret);
 }

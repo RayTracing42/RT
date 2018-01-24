@@ -6,12 +6,11 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:52:28 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/24 12:45:31 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/24 13:37:16 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
 
 t_sdl_core	*get_sdl_core(void)
 {
@@ -35,11 +34,6 @@ t_sdl_core	*get_sdl_core(void)
 
 void		delete_sdl_core()
 {
-	/*int i;
-
-	i = -1;
-	while (++i < get_sdl_core(0)->nb_threads)
-		SDL_DestroyTexture(get_sdl_core(i)->target);*/
 	SDL_DestroyRenderer(get_sdl_core()->renderer);
 	SDL_DestroyWindow(get_sdl_core()->window);
 	SDL_Quit();
@@ -48,10 +42,7 @@ void		delete_sdl_core()
 
 void		refresh_win(void)
 {
-	/*SDL_SetRenderTarget(get_sdl_core(0)->renderer, NULL);
-	SDL_RenderCopy(get_sdl_core(0)->renderer, get_sdl_core(0)->target, NULL, NULL);*/
 	SDL_RenderPresent(get_sdl_core()->renderer);
-	//SDL_SetRenderTarget(get_sdl_core(0)->renderer, get_sdl_core(0)->target);
 }
 
 Uint32		get_color(int r, int g, int b)

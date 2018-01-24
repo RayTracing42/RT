@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_data.h                                      :+:      :+:    :+:   */
+/*   rendering.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llellouc <llellouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/24 13:32:58 by llellouc          #+#    #+#             */
-/*   Updated: 2018/01/24 13:36:53 by shiro            ###   ########.fr       */
+/*   Created: 2018/01/24 13:38:08 by shiro             #+#    #+#             */
+/*   Updated: 2018/01/24 13:39:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef THREAD_DATA_h
-#define THREAD_DATA_h
+#ifndef RENDERING_H
+#define RENDERING_H
 #include "structures.h"
 
-t_thread_data	*init_thread_array(t_scene *scn, int nb_thread);
-t_mutexes		*get_mutexes();
+t_pxl_queue	**get_pxl_queue(int n);
+void		put_pixel(int x, int y, SDL_Color *color);
+int			rendering_thread(void* data);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/23 19:37:20 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/24 13:29:26 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,6 @@
 #  include "SDL2/SDL.h"
 # endif
 
-/*
-	Structures pour gestion des threads avec la SDL, pê pas nécessaires
-typedef enum		e_thread_state
-{
-	RUN,
-	PAUSE,
-	STOP
-}					t_thread_state;
-typedef struct		s_thread
-{
-	SDL_Thread		*ptr;
-	SDL_mutex		*mutex;
-	t_thread_state	state;
-}					t_thread;
-*/
-
 typedef struct	s_mutexes
 {
 	SDL_mutex	*intersect;
@@ -51,6 +35,13 @@ typedef struct	s_pxl_queue
 	int	y;
 	SDL_Color	col;
 }				t_pxl_queue;
+
+typedef struct	s_scanning_index
+{
+	int	x;
+	int	y;
+	int	q;
+}				t_scanning_index;
 
 typedef struct				s_sdl_core
 {
@@ -431,13 +422,11 @@ typedef struct				s_scene
 
 typedef struct				s_thread_data
 {
-	SDL_Thread *thread;
-	int y_begin;
-	int y_end;
-	t_scene *scn;
-	t_ray ray;
-	SDL_mutex *mutex_put_pixel;
-	SDL_mutex *mutex_leaf;
+	SDL_Thread	*thread;
+	t_scene		*scn;
+	int			n_thread;
+	int			y_begin;
+	int			y_end;
 }							t_thread_data;
 
 #endif

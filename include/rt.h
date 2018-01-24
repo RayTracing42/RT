@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/06 14:42:06 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/24 13:40:56 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # include "vectors.h"
 # include "parsing.h"
 # include "thread_data.h"
+# include "rendering.h"
 
 t_vector		matrice_rotation_x(t_vector *m, double angle);
 t_vector		matrice_rotation_y(t_vector *m, double angle);
@@ -59,10 +60,10 @@ void			scanning(t_scene *scn);
 t_parequation	transform_equ(t_ray *ray, t_object *obj);
 void			transform_inter(t_ray *ray, t_object *obj);
 
-SDL_Color		effects(t_ray *ray, t_scene *scn, SDL_mutex *mutex_leaf);
+SDL_Color		effects(t_ray *ray, t_scene *scn);
 SDL_Color		shadows(t_ray *ray, t_scene *scn);
-SDL_Color		reflect(t_ray *ray, t_scene *scn, SDL_mutex *mutex_leaf);
-SDL_Color		refract(t_ray *ray, t_scene *scn, SDL_mutex *mutex_leaf);
+SDL_Color		reflect(t_ray *ray, t_scene *scn);
+SDL_Color		refract(t_ray *ray, t_scene *scn);
 
 /*
 **	refract_list.c
@@ -105,11 +106,5 @@ int					get_status(char *status);
 
 int					is_in_limit(t_ray *ray, t_object *father);
 void				check_limit_intersect(t_ray *ray, t_object *father, double *dist);
-
-/*
-** thread_data.c
-*/
-
-t_thread_data thread_data(int y_begin, int y_end, t_scene *scn, t_ray ray);
 
 #endif

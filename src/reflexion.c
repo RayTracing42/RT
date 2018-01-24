@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:08:20 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/22 16:47:42 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/24 13:16:38 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		get_reflected_col(t_ray *ray, t_object *src,
 			(reflected_obj_col.b * src->obj_light.reflection_amount);
 }
 
-SDL_Color	reflect(t_ray *ray, t_scene *scn, SDL_mutex *mutex_leaf)
+SDL_Color	reflect(t_ray *ray, t_scene *scn)
 {
 	t_ray		reflected_ray;
 
@@ -44,16 +44,12 @@ SDL_Color	reflect(t_ray *ray, t_scene *scn, SDL_mutex *mutex_leaf)
 			return ((SDL_Color){0, 0, 0, 255});
 		reflected_ray.limit = reflected_ray.limit -
 			(1 - ray->obj->obj_light.reflection_amount) / 100;
-		//if (SDL_LockMutex(mutex_leaf) == 0)
 		reflected_ray.tree = add_new_leaf(ray->tree, &ray->tree->reflected,
 				ray->obj, ray->tree->lvl);
-		//SDL_UnlockMutex(mutex_leaf);
 		reflected_ray.equ.vc = vector(ray->inter.x, ray->inter.y, ray->inter.z);
 		reflected_ray.equ.vd = get_reflected_vect(&ray->equ.vd, &ray->normal);
-		effects(&reflected_ray, scn, mutex_leaf);
-		//if (SDL_LockMutex(mutex_leaf) == 0)
+		effects(&reflected_ray, scn);
 		remove_leaf(reflected_ray.tree);
-		//SDL_UnlockMutex(mutex_leaf);
 	}
 	return (reflected_ray.color);
 }
