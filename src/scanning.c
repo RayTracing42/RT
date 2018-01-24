@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/23 22:32:15 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/23 22:36:40 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ SDL_Color		effects(t_ray *ray, t_scene *scn, SDL_mutex *mutex_leaf)
 	}
 	return (ray->color = (SDL_Color){0, 0, 0, 255});
 }
-int	bidon(){printf("TEST2\n");return (0);}
 
 int				scanning_multi(void *data_void)
 {
