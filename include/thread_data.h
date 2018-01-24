@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_lights.h                                     :+:      :+:    :+:   */
+/*   thread_data.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: llellouc <llellouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/22 13:04:14 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/22 13:11:32 by edescoin         ###   ########.fr       */
+/*   Created: 2018/01/24 13:32:58 by llellouc          #+#    #+#             */
+/*   Updated: 2018/01/24 13:36:53 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_LIGHTS_H
-# define SCENE_LIGHTS_H
-# include "structures.h"
+#ifndef THREAD_DATA_h
+#define THREAD_DATA_h
+#include "structures.h"
 
-void	delete_cell_light(t_list_lights **cell);
-void	scene_add_light(t_light *light, t_scene *scene);
+t_thread_data	*init_thread_array(t_scene *scn, int nb_thread);
+t_mutexes		*get_mutexes();
 
 #endif

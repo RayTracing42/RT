@@ -6,11 +6,12 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 18:02:20 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/24 13:30:51 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <time.h>
 
 t_parequation	transform_equ(t_ray *ray, t_object *obj)
 {
@@ -48,26 +49,54 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 	return (ray->color = (SDL_Color){0, 0, 0, 255});
 }
 
-void			scanning(t_scene *scn)
+static int		scanning_multi(void *data_void)
 {
-	int			x;
-	int			y;
-	t_ray		ray;
+	t_thread_data		*data;
+	t_scanning_index	i;
+	t_ray				ray;
 
-	ray.equ.vc = *(t_vector*)&scn->cam->origin;
+	data = (t_thread_data *)data_void;
+	ray.equ.vc = *(t_vector*)&data->scn->cam->origin;
 	ray.actual_refractive_i = 1;
 	ray.limit = 1;
 	ray.tree = add_new_leaf(NULL, NULL, NULL, 0);
-	y = -1;
-	while (++y < WIN_HEIGHT)
+	i.q = -1;
+	i.y = data->y_begin;
+	while (++i.y < data->y_end)
 	{
-		x = -1;
-		while (++x < WIN_WIDTH)
+		i.x = -1;
+		while (++i.x < WIN_WIDTH)
 		{
-			view_plane_vector(x, y, scn->cam, &ray.equ.vd);
-			effects(&ray, scn);
-			put_pixel(x, y, &ray.color);
+			view_plane_vector(i.x, i.y, data->scn->cam, &ray.equ.vd);
+			effects(&ray, data->scn);
+			(*get_pxl_queue(data->n_thread))[++i.q] = (t_pxl_queue){0, i.x, i.y, ray.color};
 		}
 	}
 	remove_leaf(ray.tree);
+	return (0);
+}
+
+void			scanning(t_scene *scn)
+{
+	t_thread_data	*threads;
+	SDL_Thread		*rendering;
+	int	i;
+
+
+	threads = init_thread_array(scn, get_sdl_core()->nb_threads);
+	i = -1;
+	clock_t debut = clock();
+	while (++i < get_sdl_core()->nb_threads)
+	{
+		if (!(threads[i].thread = SDL_CreateThread(scanning_multi, "thread", (void*)&threads[i])))
+			exit_custom_error("rt: SDL2: SDL_CreateThread: ", (char*)SDL_GetError());;
+	}
+	if (!(rendering = SDL_CreateThread(rendering_thread, "", NULL)))
+		exit_custom_error("rt: SDL2: SDL_CreateThread: ", (char*)SDL_GetError());
+	i = -1;
+	while (++i < get_sdl_core()->nb_threads)
+		SDL_WaitThread(threads[i].thread, NULL);
+	SDL_WaitThread(rendering, NULL);
+	clock_t fin = clock();
+	printf("total time: %fs\n", (double)(fin - debut)/CLOCKS_PER_SEC);
 }

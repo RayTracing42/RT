@@ -6,11 +6,12 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 12:42:42 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/18 17:50:50 by shiro            ###   ########.fr       */
+/*   Updated: 2017/12/21 12:28:23 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <math.h>
 
 SDL_Color	get_shade_col(t_ray *ray)
 {

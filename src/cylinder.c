@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/18 12:49:23 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/22 18:00:38 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,10 @@ static double			cylinder_intersect(t_ray *ray, t_parequation e,
 	return (t);
 }
 
-static const t_vector	*get_cylinder_normal(t_dot *inter, t_object *obj)
+static t_vector	get_cylinder_normal(t_dot *inter, t_object *obj)
 {
-	t_cylinder	*c;
-
-	c = (t_cylinder *)obj;
-	c->normal = (t_vector){2 * inter->x, 0, 2 * inter->z};
-	return (&c->normal);
+	(void)obj;
+	return ((t_vector){2 * inter->x, 0, 2 * inter->z});
 }
 
 static int				is_in_cylinder(t_dot *i, t_object *obj)

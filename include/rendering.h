@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_lights.h                                     :+:      :+:    :+:   */
+/*   rendering.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/22 13:04:14 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/22 13:11:32 by edescoin         ###   ########.fr       */
+/*   Created: 2018/01/24 13:38:08 by shiro             #+#    #+#             */
+/*   Updated: 2018/01/24 13:39:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_LIGHTS_H
-# define SCENE_LIGHTS_H
-# include "structures.h"
+#ifndef RENDERING_H
+#define RENDERING_H
+#include "structures.h"
 
-void	delete_cell_light(t_list_lights **cell);
-void	scene_add_light(t_light *light, t_scene *scene);
+t_pxl_queue	**get_pxl_queue(int n);
+void		put_pixel(int x, int y, SDL_Color *color);
+int			rendering_thread(void* data);
 
 #endif
