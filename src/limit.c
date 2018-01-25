@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/25 16:25:46 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 17:06:43 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,21 @@ static int		is_in_limit(const t_ray *ray, t_object *father)
 	return (1);
 }
 
+static t_ray	empty_limit(const t_ray *ray, t_object *father, double *t_tmp,
+	t_object *empty_limit, t_couple_ray *basic)
+{
+	t_ray	tmp;
+
+	tmp = *ray;
+	if (is_in_right_side_of_limit(basic->a.inter, empty_limit))
+		tmp = first_intersect(ray, father, t_tmp);
+	else if (is_in_right_side_of_limit(basic->b.inter, empty_limit))
+		tmp = second_intersect(ray, father, t_tmp);
+	else
+		*t_tmp = -1;
+	return (tmp);
+}
+
 int		limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
 {
 	t_couple_ray	limited;
@@ -61,7 +76,7 @@ int		limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
 	while (l)
 	{
 		tmp = (l->obj->status == FULL) ? first_intersect(ray, l->obj, &t_tmp) :
-			second_intersect(ray, father, &t_tmp);
+			empty_limit(ray, father, &t_tmp, l->obj, basic);
 		if (t_tmp != -1 && le(basic->ta, t_tmp) && le(t_tmp, basic->tb))
 		{
 			transform_inter(&tmp, l->obj);
