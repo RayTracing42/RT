@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/25 14:34:54 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 15:42:17 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ double	check_intersect(t_ray *ray, t_list_objs *l)
 	t_couple_ray	basic;
 
 	dist = 0;
-	basic.a.shad_opacity = 0;
-	basic.b.shad_opacity = 0;
 	while (l)
 	{
 		basic.a = first_intersect(ray, l->obj, &basic.ta);
