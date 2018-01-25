@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/23 04:46:23 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 12:05:07 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void				box_plane_intersect(t_ray *ray, const t_plane *p,
 	t = p->intersect(ray, e, (t_object*)p, 0);
 	if (is_in_boundaries(p, its->box, &ray->inter))
 	{
-		if (its->t == -1)
+		if (its->t == 0)
 			ray->nb_intersect = 1;
 		else
 			ray->nb_intersect = 2;

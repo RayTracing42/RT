@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/23 04:46:22 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:33:37 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,75 +45,37 @@ static int		is_in_limit(const t_ray *ray, t_object *father)
 	return (1);
 }
 
-static int		empty_limit(t_ray tmp_ray, t_object *father)
+int		limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
 {
-	if (is_in_limit(&tmp_ray, father))
-		return (1);
-	return (0);
-}
-
-static int		full_limit(t_ray tmp_ray, t_object *father, double t)
-{
-	if (is_in_limit(&tmp_ray, father))
-	{
-		if (is_in_obj(t, tmp_ray.inter, father))
-			return (1);
-	}
-	return (0);
-}
-
-
-
-static t_ray	check_limit_intersect(t_ray *ray, t_object *father, double *dist, const double *filter)
-{
-	double		tmp;
-	t_ray		tmp_ray;
-	t_ray		res_ray;
-	t_list_objs	*l;
-	t_plane		*p;
+	t_couple_ray	limited;
+	t_list_objs		*l;
+	t_ray			tmp;
+	double			t_tmp;
+	int				check_a;
+	int				check_b;
 
 	l = father->limit;
-	res_ray = *ray;
+	limited = *basic;
+	check_a = is_in_limit(&basic->a, father);
+	check_b = is_in_limit(&basic->b, father);
 	while (l)
 	{
-		p = (t_plane *)l->obj;
-		tmp_ray = (p->status == FULL || filter) ? first_intersect(ray, l->obj, &tmp) : second_intersect(ray, father, &tmp);
-		if (gt(tmp, 0) && (eq(*dist, 0) || (lt(tmp, *dist) && (!filter || !eq(tmp, *filter)))))
+		tmp = first_intersect(ray, l->obj, &t_tmp);
+		if (!eq(t_tmp, 0) && lt(basic->ta, t_tmp) && lt(t_tmp, basic->tb))
 		{
-			transform_inter(&tmp_ray, tmp_ray.obj);
-			if ((p->status == EMPTY && empty_limit(tmp_ray, father)) ||
-				(p->status == FULL && full_limit(tmp_ray, father, tmp)))
+			transform_inter(&tmp, l->obj);
+			if (is_in_limit(&tmp, father))
 			{
-				res_ray = tmp_ray;
-				res_ray.limit_status = p->status;
-				*dist = tmp;
+				if (!check_a && (t_tmp < limited.ta || limited.ta == basic->ta))
+					valid_ray(&limited.a, &limited.ta, &tmp, &t_tmp);
+				if (!check_b && (t_tmp > limited.tb	|| limited.tb == basic->tb))
+					valid_ray(&limited.b, &limited.tb, &tmp, &t_tmp);
 			}
 		}
 		l = l->next;
 	}
-	return (res_ray);
-}
-
-void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, const double *filter)
-{
-	t_object	*obj;
-	double		tmp_dist;
-
-	obj = tmp_ray.obj;
-	tmp_ray.limit_status = NONE;
-	if (is_in_limit(&tmp_ray, obj))
-		*dist = tmp;
-	else
-	{
-		tmp_dist = *dist;
-		tmp_ray = check_limit_intersect(ray, obj, &tmp_dist, filter);
-		if (!eq(tmp_dist, *dist))
-			*dist = tmp_dist;
-		else
-		{
-			tmp_ray.nb_intersect = 0;
-			*dist = 0;
-		}
-	}
-	*ray = tmp_ray;
+	if ((!check_a && limited.ta == basic->ta)
+		|| (!check_b && limited.tb == basic->tb))
+		return (non_inverted_intersect(basic, &limited, 1));
+	return (non_inverted_intersect(basic, &limited, 0));
 }

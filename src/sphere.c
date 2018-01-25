@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/15 08:37:09 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 12:04:25 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static double			sphere_intersect(t_ray *ray, t_parequation e,
 	double			fac[3];
 
 	s = (t_sphere*)obj;
-	t = -1;
+	t = 0;
 	fac[_A] = e.vd.x * e.vd.x + e.vd.y * e.vd.y + e.vd.z * e.vd.z;
 	fac[_B] = 2 * (e.vd.x * e.vc.x + e.vd.y * e.vc.y + e.vd.z * e.vc.z);
 	fac[_C] = e.vc.x * e.vc.x + e.vc.y * e.vc.y + e.vc.z * e.vc.z - s->r2;

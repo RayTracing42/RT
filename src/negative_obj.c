@@ -6,41 +6,42 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/23 05:35:48 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:34:55 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double	check_negative_intersect(t_ray *ray, t_list_objs *objs, const double t, double t2)
+int		negative_obj(t_couple_ray *basic, t_object *father, const t_ray *ray)
 {
-	t_ray		tmp_ray;
-	t_list_objs	*list;
-	double		tmp;
-	double		tmp_dist;
+	t_couple_ray	neg;
+	t_couple_ray	tmp;
+	t_list_objs		*l;
 
-	list = objs;
-	while (list)
+	l = father->negative_obj;
+	neg = *basic;
+	while (l)
 	{
-		tmp_ray = first_intersect(ray, list->obj, &tmp);
-		transform_inter(&tmp_ray, list->obj);
-		limit(&tmp_ray, tmp_ray, tmp, &tmp_dist, NULL);
-		if (tmp_ray.nb_intersect && lt(tmp_dist, t))
+		tmp.a = first_intersect(ray, l->obj, &tmp.ta);
+		tmp.b = second_intersect(ray, l->obj, &tmp.tb);
+		if (!eq(tmp.ta, 0) && !eq(tmp.tb, 0))
 		{
-			tmp_ray = second_intersect(ray, list->obj, &tmp);
-			transform_inter(&tmp_ray, list->obj);
-			limit(&tmp_ray, tmp_ray, tmp, &tmp, &tmp);
-			if (gt(tmp, 0) && gt(tmp, t) && lt(tmp, t2))
+			transform_inter(&tmp.a, l->obj);
+			transform_inter(&tmp.b, l->obj);
+			if (l->obj->limit)
+				limit(&tmp, l->obj, ray);
+			if (tmp.ta < neg.ta && neg.ta < tmp.tb)
 			{
-				if (list->obj->status == EMPTY)
-					return (t2);
-				*ray = tmp_ray;
-				return (check_negative_intersect(ray, objs, tmp, t2));
+				valid_ray(&neg.a, &neg.ta, &tmp.b, &tmp.tb);
+				negative_obj(&neg, father, ray);
 			}
-			else if (gt(tmp, 0) && gt(tmp, t))
-				return (0);
+			if (tmp.ta < neg.tb && neg.tb < tmp.tb)
+			{
+				valid_ray(&neg.b, &neg.tb, &tmp.a, &tmp.ta);
+				negative_obj(&neg, father, ray);
+			}
 		}
-		list = list->next;
+		l = l->next;
 	}
-	return (t);
+	return (non_inverted_intersect(basic, &neg, 0));
 }

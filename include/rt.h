@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/23 04:46:29 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:24:56 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ double			check_intersect(t_ray *ray, t_list_objs *l_objs);
 void			scanning(t_scene *scn);
 t_parequation	transform_equ(t_ray *ray, t_object *obj);
 void			transform_inter(t_ray *ray, t_object *obj);
+void			valid_ray(t_ray *r1, double *t_r1, t_ray *r2, double *t_r2);
 
 SDL_Color		effects(t_ray *ray, t_scene *scn);
 SDL_Color		shadows(t_ray *ray, t_scene *scn);
@@ -99,21 +100,19 @@ int					get_status(char *status);
 **	limit.c
 */
 
-void	limit(t_ray *ray, t_ray tmp_ray, const double tmp, double *dist, const double *filter);
+int		limit(t_couple_ray *basic, t_object *father, const t_ray *ray);
 
 /*
 **	negative_obj.c
 */
 
-void				check_negative_obj_intersect(t_ray *ray, t_object *father,
-		double *dist);
-
-
-double	check_negative_intersect(t_ray *ray, t_list_objs *objs, const double t, double t2);
+int		negative_obj(t_couple_ray *basic, t_object *father, const t_ray *ray);
 
 
 
 int		is_in_obj(const double t, const t_dot inter, t_object *obj);
+int		non_inverted_intersect(t_couple_ray *basic, t_couple_ray *modified,
+	int check);
 
 
 

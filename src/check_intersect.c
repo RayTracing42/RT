@@ -6,12 +6,12 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/23 05:41:14 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:34:54 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
+/*
 int		is_in_obj(const double t, const t_dot inter, t_object *obj)
 {
 	double	tmp;
@@ -27,52 +27,56 @@ int		is_in_obj(const double t, const t_dot inter, t_object *obj)
 	}
 	return (0);
 }
+*/
 
-double	check_intersect(t_ray *ray, t_list_objs *l_objs)
+int		non_inverted_intersect(t_couple_ray *basic, t_couple_ray *modified,
+		int check)
 {
-	double		dist;
-	double		neg_dist;
-	double		tmp;
-	double		tmp2;
-	t_ray		tmp_ray;
-	t_ray		tmp_ray2;
-	t_ray		tmp_ray3;
+	if (modified->ta <= modified->tb && check == 0)
+	{
+		*basic = *modified;
+		return (1);
+	}
+	else
+	{
+		basic->ta = 0;
+		basic->tb = 0;
+		return (0);
+	}
+}
+
+double	check_intersect(t_ray *ray, t_list_objs *l)
+{
+	double			dist;
+	t_couple_ray	basic;
 
 	dist = 0;
-	tmp_ray.shad_opacity = 0;
-	while (l_objs != NULL)
+	basic.a.shad_opacity = 0;
+	basic.b.shad_opacity = 0;
+	while (l)
 	{
-		tmp_ray = first_intersect(ray, l_objs->obj, &tmp);
-		if (lt(tmp, 0))
-			tmp_ray = second_intersect(ray, l_objs->obj, &tmp);
-		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
+		basic.a = first_intersect(ray, l->obj, &basic.ta);
+		basic.b = second_intersect(ray, l->obj, &basic.tb);
+		if (!eq(basic.ta, 0) && !eq(basic.tb, 0))
 		{
-			neg_dist = dist;
-			transform_inter(&tmp_ray, l_objs->obj);
-			limit(&tmp_ray, tmp_ray, tmp, &neg_dist, NULL);
-			tmp_ray3 = tmp_ray;
-			if (gt(neg_dist, 0) && l_objs->obj->negative_obj)
+			transform_inter(&basic.a, l->obj);
+			transform_inter(&basic.b, l->obj);
+			if (l->obj->limit)
+				limit(&basic, l->obj, ray);
+			if (l->obj->negative_obj)
+				negative_obj(&basic, l->obj, ray);
+			if (gt(basic.ta, 0) && gt(basic.tb, 0))
 			{
-				tmp_ray2 = second_intersect(ray, l_objs->obj, &tmp2);
-				transform_inter(&tmp_ray2, l_objs->obj);
-				limit(&tmp_ray2, tmp_ray2, tmp2, &tmp2, &neg_dist);
-				if ((neg_dist = check_negative_intersect(&tmp_ray, l_objs->obj->negative_obj, neg_dist, tmp2) > 0))
-				{
-					if (!(eq(neg_dist, tmp2) && tmp_ray2.limit_status == EMPTY))
-						dist = neg_dist;
-					if (eq(neg_dist, tmp2) && tmp_ray2.limit_status != EMPTY)
-						*ray = tmp_ray2;
-					else if (!eq(neg_dist, tmp2))
-						*ray = tmp_ray.obj ? tmp_ray : tmp_ray3;
-				}
+				if (eq(dist, 0) || (gt(dist, 0) && lt(basic.ta, dist)))
+					valid_ray(ray, &dist, &basic.a, &basic.ta);
 			}
-			else if (gt(neg_dist, 0))
+			else if (le(basic.ta, 0) && gt(basic.tb, 0))
 			{
-				*ray = tmp_ray3;
-				dist = neg_dist;
+				if (eq(dist, 0) || (gt(dist, 0) && lt(basic.tb, dist)))
+					valid_ray(ray, &dist, &basic.b, &basic.tb);
 			}
 		}
-		l_objs = l_objs->next;
+		l = l->next;
 	}
 	is_in_front_of_vector(*(t_dot*)&ray->equ.vc, ray->inter, &ray->normal);
 	return (dist);

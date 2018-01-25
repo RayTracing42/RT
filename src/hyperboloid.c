@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 16:57:05 by shiro             #+#    #+#             */
-/*   Updated: 2018/01/15 08:35:48 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 12:05:39 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static double			hyperboloid_intersection(t_ray *ray, t_parequation e,
 	double			fac[3];
 
 	h = (t_hyperboloid*)obj;
+	t = 0;
 	fac[_A] = (e.vd.x * e.vd.x) / h->a2 - (e.vd.y * e.vd.y) / h->b2 + (e.vd.z * e.vd.z) / h->c2;
 	fac[_B] = 2 * ((e.vd.x * e.vc.x) / h->a2 - (e.vd.y * e.vc.y) / h->b2 + (e.vd.z * e.vc.z) / h->c2);
 	fac[_C] = (e.vc.x * e.vc.x) / h->a2 - (e.vc.y * e.vc.y) / h->b2 + (e.vc.z * e.vc.z) / h->c2 + h->d;

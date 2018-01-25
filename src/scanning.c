@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/23 04:42:27 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 14:34:53 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ void			transform_inter(t_ray *ray, t_object *obj)
 	ray->inter = (t_dot){ray->inter.x + ray->obj->origin.x,
 		ray->inter.y + ray->obj->origin.y, ray->inter.z + ray->obj->origin.z};
 	ray->obj = obj;
+}
+
+void			valid_ray(t_ray *r1, double *t_r1, t_ray *r2, double *t_r2)
+{
+	*r1 = *r2;
+	*t_r1 = *t_r2;
 }
 
 SDL_Color		effects(t_ray *ray, t_scene *scn)
