@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 17:16:14 by shiro             #+#    #+#             */
-/*   Updated: 2018/01/25 12:05:20 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 16:05:11 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static double			triangle_intersect(t_ray *ray, t_parequation e,
 		if (gt(angle_between_vectors(tgl->vAB, dots_to_vect(tgl->dA, itmp)), tgl->aA) ||
 			gt(angle_between_vectors(tgl->vBA, dots_to_vect(tgl->dB, itmp)), tgl->aB) ||
 			gt(angle_between_vectors(tgl->vBC, dots_to_vect(tgl->dB, itmp)), tgl->aB))
-			t = 0;
+			t = -1;
 	}
 	return (t);
 }

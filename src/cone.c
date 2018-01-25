@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/25 12:04:46 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 16:05:00 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static double			cone_intersection(t_ray *ray, t_parequation e,
 	double			fac[3];
 
 	c = (t_cone*)obj;
-	t = 0;
+	t = -1;
 	fac[_A] = e.vd.x * e.vd.x + e.vd.z * e.vd.z - e.vd.y * e.vd.y * c->tanalpha2;
 	fac[_B] = 2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z - e.vd.y *
 		e.vc.y * c->tanalpha2);

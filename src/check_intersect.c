@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/25 15:59:24 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 16:25:47 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ double	check_intersect(t_ray *ray, t_list_objs *l)
 	{
 		basic.a = first_intersect(ray, l->obj, &basic.ta);
 		basic.b = second_intersect(ray, l->obj, &basic.tb);
-		if (!eq(basic.ta, 0) && !eq(basic.tb, 0))
+		if (basic.ta != -1 && basic.tb != -1)
 		{
 			transform_inter(&basic.a, l->obj);
 			transform_inter(&basic.b, l->obj);

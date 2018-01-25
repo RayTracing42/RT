@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/25 14:38:18 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 16:03:39 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ double					plane_intersect(t_ray *ray, t_parequation e,
 	t_plane			*p;
 
 	(void)i;
-	t = 0;
+	t = -1;
 	ray->nb_intersect = 0;
 	p = (t_plane*)obj;
 	if (!(denom = p->a * e.vd.x + p->b * e.vd.y + p->c * e.vd.z))
-		return (0);
+		return (-1);
 	t = -((p->a * e.vc.x + p->b * e.vc.y + p->c * e.vc.z + p->d) / denom);
 	ray->nb_intersect = 2;
 	ray->inter = equation_get_dot(&e, t);

@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/25 15:59:25 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 16:13:58 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		negative_obj(t_couple_ray *basic, t_object *father, const t_ray *ray)
 	{
 		tmp.a = first_intersect(ray, l->obj, &tmp.ta);
 		tmp.b = second_intersect(ray, l->obj, &tmp.tb);
-		if (tmp.ta != 0 && tmp.tb != 0) // ici imprecision (changer le code d'erreur du coup ?);
+		if (tmp.ta != -1 && tmp.tb != -1)
 		{
 			transform_inter(&tmp.a, l->obj);
 			transform_inter(&tmp.b, l->obj);

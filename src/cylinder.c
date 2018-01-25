@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/25 12:04:37 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 16:04:51 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static double			cylinder_intersect(t_ray *ray, t_parequation e,
 	double			fac[3];
 
 	c = (t_cylinder *)obj;
-	t = 0;
+	t = -1;
 	fac[_A] = e.vd.x * e.vd.x + e.vd.z * e.vd.z;
 	fac[_B] = 2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z);
 	fac[_C] = e.vc.x * e.vc.x + e.vc.z * e.vc.z - c->r2;
