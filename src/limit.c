@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/25 15:42:24 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 15:59:27 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
 	while (l)
 	{
 		tmp = first_intersect(ray, l->obj, &t_tmp);
-		if (!eq(t_tmp, 0) && lt(basic->ta, t_tmp) && lt(t_tmp, basic->tb))
+		if (t_tmp != 0 && lt(basic->ta, t_tmp) && lt(t_tmp, basic->tb))
 		{
 			transform_inter(&tmp, l->obj);
 			if (is_in_limit(&tmp, father))

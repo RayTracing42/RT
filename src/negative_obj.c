@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/25 15:42:23 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/25 15:59:25 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,15 @@ int		negative_obj(t_couple_ray *basic, t_object *father, const t_ray *ray)
 			if (l->obj->limit)
 				limit(&tmp, l->obj, ray);
 			if (tmp.ta < neg.ta && neg.ta < tmp.tb)
+			{
 				valid_ray(&neg.a, &neg.ta, &tmp.b, &tmp.tb);
-			if (tmp.ta < neg.tb && neg.tb < tmp.tb)
-				valid_ray(&neg.b, &neg.tb, &tmp.a, &tmp.ta);
-			if ((tmp.ta < neg.ta && neg.ta < tmp.tb)
-				|| (tmp.ta < neg.tb && neg.tb < tmp.tb))
 				negative_obj(&neg, father, ray);
+			}
+			if (tmp.ta < neg.tb && neg.tb < tmp.tb)
+			{
+				valid_ray(&neg.b, &neg.tb, &tmp.a, &tmp.ta);
+				negative_obj(&neg, father, ray);
+			}
 		}
 		l = l->next;
 	}
