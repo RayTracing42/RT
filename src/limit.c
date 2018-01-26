@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/26 14:25:47 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/26 17:14:30 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ static int		is_in_limit(const t_ray *ray, t_object *father)
 	return (1);
 }
 
-static t_ray	empty_limit(const t_ray *ray, t_object *father, double *t_tmp,
+static t_ray	empty_limit(const t_ray *ray, double *t_tmp,
 	t_object *empty_limit, t_couple_ray *basic)
 {
-	t_ray	tmp;
+	t_ray		tmp;
+	t_object	*father;
 
 	tmp = *ray;
+	father = ray->obj;
 	if (is_in_right_side_of_limit(basic->a.inter, empty_limit))
 		tmp = first_intersect(ray, father, t_tmp);
 	else if (is_in_right_side_of_limit(basic->b.inter, empty_limit))
@@ -58,6 +60,11 @@ static t_ray	empty_limit(const t_ray *ray, t_object *father, double *t_tmp,
 	else
 		tmp.nb_intersect = 0;
 	return (tmp);
+}
+
+void	valid_limit(t_couple_ray *basic, t_couple_ray *limited,
+		t_ray *tmp, double *t_tmp, int check_a, int check_b)
+{
 }
 
 int		limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
@@ -76,16 +83,22 @@ int		limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
 	while (l)
 	{
 		tmp = (l->obj->status == FULL) ? first_intersect(ray, l->obj, &t_tmp) :
-			empty_limit(ray, father, &t_tmp, l->obj, basic);
-		if (tmp.nb_intersect > 0 && le(basic->ta, t_tmp) && le(t_tmp, basic->tb))
+			empty_limit(ray, &t_tmp, l->obj, basic);
+		if (tmp.nb_intersect > 0/* && le(basic->ta, t_tmp) && le(t_tmp, basic->tb)*/)
 		{
 			transform_inter(&tmp, l->obj);
 			if (is_in_limit(&tmp, father))
 			{
-				if (!check_a && (t_tmp < limited.ta || limited.ta == basic->ta))
-					valid_ray(&limited.a, &limited.ta, &tmp, &t_tmp);
-				if (!check_b && (t_tmp > limited.tb || limited.tb == basic->tb))
-					valid_ray(&limited.b, &limited.tb, &tmp, &t_tmp);
+				if (is_in_obj(t_tmp, tmp.inter, father))
+				{
+					if (!check_a &&
+						(limited.ta == basic->ta || lt(t_tmp, limited.ta)))
+						valid_ray(&limited.a, &limited.ta, &tmp, &t_tmp);
+					if (!check_b &&
+						(limited.tb == basic->tb || gt(t_tmp, limited.tb)))
+						valid_ray(&limited.b, &limited.tb, &tmp, &t_tmp);
+				}
+				valid_limit(basic, &limited, &tmp, &t_tmp, check_a, check_b);
 			}
 		}
 		l = l->next;

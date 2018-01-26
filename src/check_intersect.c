@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/26 14:14:58 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/26 17:14:18 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ double	check_intersect(t_ray *ray, t_list_objs *l)
 				limit(&basic, l->obj, ray);
 			if (l->obj->negative_obj)
 				negative_obj(&basic, l->obj, ray);
-			if (gt(basic.ta, 0) && gt(basic.tb, 0) && basic.a.obj->status != EMPTY)
+			if (gt(basic.ta, 0) && basic.a.obj->status != EMPTY)
 			{
 				if (eq(dist, 0) || (gt(dist, 0) && lt(basic.ta, dist)))
 					valid_ray(ray, &dist, &basic.a, &basic.ta);
