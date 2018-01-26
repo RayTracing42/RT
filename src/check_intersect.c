@@ -6,12 +6,12 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/25 17:06:42 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/26 14:14:58 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-/*
+
 int		is_in_obj(const double t, const t_dot inter, t_object *obj)
 {
 	double	tmp;
@@ -27,7 +27,6 @@ int		is_in_obj(const double t, const t_dot inter, t_object *obj)
 	}
 	return (0);
 }
-*/
 
 int		non_inverted_intersect(t_couple_ray *basic, t_couple_ray *modified,
 		int check)
@@ -41,6 +40,8 @@ int		non_inverted_intersect(t_couple_ray *basic, t_couple_ray *modified,
 	{
 		basic->ta = 0;
 		basic->tb = 0;
+		basic->a.nb_intersect = 0;
+		basic->b.nb_intersect = 0;
 		return (0);
 	}
 }
@@ -55,7 +56,7 @@ double	check_intersect(t_ray *ray, t_list_objs *l)
 	{
 		basic.a = first_intersect(ray, l->obj, &basic.ta);
 		basic.b = second_intersect(ray, l->obj, &basic.tb);
-		if (basic.ta != -1 && basic.tb != -1)
+		if (basic.a.nb_intersect > 0 && basic.b.nb_intersect > 0)
 		{
 			transform_inter(&basic.a, l->obj);
 			transform_inter(&basic.b, l->obj);
@@ -63,12 +64,12 @@ double	check_intersect(t_ray *ray, t_list_objs *l)
 				limit(&basic, l->obj, ray);
 			if (l->obj->negative_obj)
 				negative_obj(&basic, l->obj, ray);
-			if (gt(basic.ta, 0) && gt(basic.tb, 0))
+			if (gt(basic.ta, 0) && gt(basic.tb, 0) && basic.a.obj->status != EMPTY)
 			{
 				if (eq(dist, 0) || (gt(dist, 0) && lt(basic.ta, dist)))
 					valid_ray(ray, &dist, &basic.a, &basic.ta);
 			}
-			else if (le(basic.ta, 0) && gt(basic.tb, 0))
+			else if (gt(basic.tb, 0) && basic.b.obj->status != EMPTY)
 			{
 				if (eq(dist, 0) || (gt(dist, 0) && lt(basic.tb, dist)))
 					valid_ray(ray, &dist, &basic.b, &basic.tb);
