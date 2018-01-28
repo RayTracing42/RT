@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_intersect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aancel <aancel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/22 17:55:08 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/26 20:16:36 by aancel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,38 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	return (dist);
 }
 
+Uint32 GetPixel32(SDL_Surface* image,int i,int j)
+{
+    if (i<0 || i>image->w-1 || j<0 || j>image->h-1)
+        return 0;
+    return ((Uint32*)(image->pixels))[j*(image->pitch/4)+i];
+}
+
+SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
+{
+	t_dot pt;
+
+	pt.x = e.vc.x + e.vd.x * t;
+	pt.y = e.vc.y + e.vd.y * t;
+	pt.z = e.vc.z + e.vd.z * t;
+
+	pt.x = (int)pt.x % (int)e->text->x;
+	pt.y = (int)pt.y % (int)e->text->y;
+
+}
+
 t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 {
 	t_ray	tmp_ray;
+	t_parequation e;
 
 	tmp_ray = *ray;
-	*tmp = obj->intersect(&tmp_ray, transform_equ(&tmp_ray, obj), obj, 1);
+	e = transform_equ(&tmp_ray, obj);
+	*tmp = obj->intersect(&tmp_ray, e, obj, 1);
 	tmp_ray.normal = obj->get_normal(&tmp_ray.inter, obj);
 	//SDL_LockMutex(get_mutexes()->intersect);
 	tmp_ray.color = obj->color;
+	tmp_ray.color = getTextColor(e, *tmp, obj)
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
 	tmp_ray.obj = obj;
 	//SDL_UnlockMutex(get_mutexes()->intersect);
