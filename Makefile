@@ -13,7 +13,7 @@ LIB_DIR = libraries/libft
 
 ## Compilating Utilities
 
-FLAGS = -Wall -Wextra -Werror -D_REENTRANT
+FLAGS = -Wall -Wextra -Werror -D_REENTRANT -Ofast
 INC = $(INC_DIR:%=-I./%)
 LIB = -L$(LIB_DIR) -lft
 #INC_SDL2 = `sdl2-config --cflags`
@@ -90,12 +90,12 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(CC) $(INC_SDL2) -c $< -o $@
-	@echo "$(COLOR)Compilating : \0033[0;32m$(@:$(OBJ_DIR)/%=%)\0033[1;37m"
+	@echo "$(COLOR)Compiling : \0033[0;32m$(@:$(OBJ_DIR)/%=%)\0033[1;37m"
 
 $(NAME): $(OBJ_DIR) $(SRC)
-	@$(MAKE) $(OBJ)
+	@$(MAKE) -j -s $(OBJ)
 	@echo "$(COLOR)Objects\t\t\0033[0;32m[Created]\0033[1;37m"
-	@make -j -C $(LIB_DIR)
+	@make -j -s -C $(LIB_DIR)
 	@$(CC) $(LIB) $(SDL2) $(OBJ) -o $@
 	@echo "$(COLOR)$(NAME)\t\t\0033[0;32m[Created]\0033[1;37m"
 

@@ -17,6 +17,7 @@
 # define _A			0
 # define _B			1
 # define _C			2
+# define DEBUG		1
 # ifndef __APPLE__
 #  include <SDL2/SDL.h>
 # else

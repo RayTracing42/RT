@@ -47,11 +47,23 @@ int			main(int ac, char **av)
 		ft_putendl("usage : ./rt file.xml");
 	else
 	{
+		if (DEBUG)
+			ft_putstr("start ok\n");
 		init_list_evts(&events, NULL);
+		if (DEBUG)
+			ft_putstr("init ok\n");
 		t = SDL_CreateThread(main_display, "", scn);
-		wait_events(events);
+		if (DEBUG)
+			ft_putstr("thread instanced\n");
+		// wait_events(events);
+		if (DEBUG)
+			ft_putstr("wait event\n");		
 		SDL_WaitThread(t, NULL);
+		if (DEBUG)
+			ft_putstr("delete loading\n");
 		delete_sdl_core();
+		if (DEBUG)
+			ft_putstr("delete ok\n");
 	}
 	exit(0);
 }
