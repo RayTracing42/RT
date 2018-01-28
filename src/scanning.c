@@ -12,6 +12,7 @@
 
 #include "rt.h"
 #include <time.h>
+#include <sys/timeb.h>
 
 t_parequation	transform_equ(t_ray *ray, t_object *obj)
 {

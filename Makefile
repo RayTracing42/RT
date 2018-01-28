@@ -1,74 +1,131 @@
-# ============================================================================ #
-#                                                                              #
-#         fichier :   Makefile                                                 #
-#                                                                              #
-#         auteur  :   fcecilie                                                 #
-#         adresse :   fcecilie@student.42.fr                                   #
-#                                                                              #
-# ============================================================================ #
-
-CC = gcc
-CFLAGS = -Wall -Wextra
 NAME = rt
 
+## Color for compilating (pink)
+
+COLOR = \0033[1;35m
+
+## List of Directories
+
+INC_DIR = include
+OBJ_DIR = objs
 SRC_DIR = src
-LIB_DIR = libraries
-INCLUDE_DIR = include
+LIB_DIR = libraries/libft
 
-LFT_PATH = "$$(pwd)/libraries/libft"
-SDL_PATH = "$$(pwd)/libraries/SDL"
+## Compilating Utilities
 
-LFT_INCLUDE = $(LFT_PATH)/includes
+FLAGS = -Wall -Wextra -Werror -D_REENTRANT
+INC = $(INC_DIR:%=-I./%)
+LIB = -L$(LIB_DIR) -lft
+#INC_SDL2 = `sdl2-config --cflags`
+INC_SDL2 = -I./SDL2/include -D_THREAD_SAFE
+#SDL2 = `sdl2-config --libs`
+SDL2 = -L./SDL2/lib -lSDL2
 
-SRC = camera.c cone.c cylinder.c events.c graphics.c key_functions.c light.c \
-light_shading.c main.c matrice_rotation.c objects.c equations.c orb_light.c \
-parallel_light.c plane.c reflexion.c refract_list.c refraction.c scanning.c \
-scene.c scene_lights.c scene_objs.c shadows.c sphere.c spotlight.c \
-utils.c vectors.c view_plane.c parsing.c parsing_tools.c parsing_camera.c \
-parsing_scene.c parsing_lights.c parsing_objects.c parsing_transformations.c \
-transformations.c matrix_ops.c matrix.c check_intersect.c parsing_limit.c \
-limit.c reflect_refract_tree.c matrix_ops2.c parsing_negative_obj.c \
-negative_obj.c get_interval.c triangle.c vectors2.c \
+CC = clang $(FLAGS) $(INC)
 
-SRC:= $(addprefix $(SRC_DIR)/, $(SRC))
-OBJ = $(SRC:.c=.o)
+## List of Functions
 
-LFT = -lft -lm
-SDL = `$(SDL_PATH)/build/bin/sdl2-config --cflags --libs`
+SRC_FT = camera \
+		 check_intersect \
+		 cone \
+		 cylinder \
+		 equations \
+		 events \
+		 graphics \
+		 key_functions \
+		 light \
+		 light_shading \
+		 limit \
+		 main \
+		 matrice_rotation \
+		 matrix \
+		 matrix_ops \
+		 matrix_ops2 \
+		 objects \
+		 objects2 \
+		 orb_light \
+		 parallel_light \
+		 parsing \
+		 parsing_camera \
+		 parsing_lights \
+		 parsing_limit \
+		 parsing_objects \
+		 parsing_scene \
+		 parsing_tools \
+		 parsing_transformations \
+		 plane \
+		 reflect_refract_tree \
+		 reflexion \
+		 refract_list \
+		 refraction \
+		 rendering \
+		 scanning \
+		 scene \
+		 scene_lights \
+		 scene_objs \
+		 shadows \
+		 sphere \
+		 spotlight \
+		 thread_data \
+		 transformations \
+		 triangle \
+		 utils \
+		 vectors \
+		 vectors2 \
+		 view_plane
 
+## List of Utilities
 
-all: libft sdl $(NAME)
+OBJ = $(SRC_FT:%=$(OBJ_DIR)/%.o)
+SRC = $(SRC_FT:%=$(SRC_DIR)/%.c)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $^ $(SDL) -L $(LIB_DIR) $(LFT) -o $@
+## Rules of Makefile
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $^ -I $(INCLUDE_DIR) -o $@
+all: $(NAME)
+	@echo "$(COLOR)$(NAME)\t\t\0033[1;30m[All OK]\0033[1;37m"
 
-libft:
-	make -C $(LFT_PATH)
-	ln -fs $(LFT_PATH)/libft.a $(LIB_DIR)
-	ln -fs $(LFT_INCLUDE)/libft.h $(INCLUDE_DIR)
+$(OBJ_DIR):
+	@mkdir -p $@
+	@echo "$(COLOR)Creating    : \0033[0;32m$@\0033[1;37m"
 
-sdl:
-	if [ ! -e $(SDL_PATH)/build ]; then mkdir $(SDL_PATH)/build; \
-	cd $(SDL_PATH) && ./configure -q --prefix=$$(pwd)/build && make && make install; \
-	cd ../..; \
-	ln -fs $(SDL_PATH)/build/lib/libSDL2.a $(LIB_DIR); \
-	ln -fs $(SDL_PATH)/build/include/SDL2 $(INCLUDE_DIR); \
-	fi
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@$(CC) $(INC_SDL2) -c $< -o $@
+	@echo "$(COLOR)Compilating : \0033[0;32m$(@:$(OBJ_DIR)/%=%)\0033[1;37m"
+
+$(NAME): $(OBJ_DIR) $(SRC)
+	@$(MAKE) $(OBJ)
+	@echo "$(COLOR)Objects\t\t\0033[0;32m[Created]\0033[1;37m"
+	@make -j -C $(LIB_DIR)
+	@$(CC) $(LIB) $(SDL2) $(OBJ) -o $@
+	@echo "$(COLOR)$(NAME)\t\t\0033[0;32m[Created]\0033[1;37m"
 
 clean:
-	rm -rf $(OBJ)
-	make clean -C $(LFT_PATH)
-
+	@rm -rf $(OBJ_DIR)
+	@make clean -C $(LIB_DIR)
+	@echo "$(COLOR)Objects\t\t\0033[0;31m[Deleted]\0033[1;37m"
 
 fclean: clean
-	rm -rf $(NAME)
-	make fclean -C $(LFT_PATH)
-	rm -rf $(SDL_PATH)/build
+	@rm -f $(NAME)
+	@make fclean -C $(LIB_DIR)
+	@echo "$(COLOR)$(NAME)\t\t\0033[0;31m[Deleted]\0033[1;37m"
 
 re: fclean all
 
-debug: $(SRC_DIR)/*.c
-	$(CC) $(CFLAGS) -g -I $(INCLUDE_DIR) $^ $(SDL) -L $(LIB_DIR) $(LFT) -o $@
+norme:
+	@norminette $(SRC) $(INC_DIR)/
+	@make norme -C $(LIB_DIR)
+
+sdl2_clean:
+	@rm -rf ./SDL2
+
+sdl2:
+	@rm -rf ./SDL2
+	curl -o SDL2 https://www.libsdl.org/release/SDL2-2.0.5.tar.gz
+	gunzip -c SDL2 | tar xopf -
+	rm -rf SDL2
+	mv -f ./SDL2-2.0.5 ./SDL2
+	(cd ./SDL2 && ./configure)
+	(cd ./SDL2 && sed -i.bak 's/^\prefix =.*/\prefix = $$(srcdir)/' Makefile)
+	(cd ./SDL2 && make && make install)
+
+.PHONY: all clean fclean re norme sdl2 sdl2_clean

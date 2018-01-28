@@ -46,17 +46,34 @@ Uint32 GetPixel32(SDL_Surface* image,int i,int j)
     return ((Uint32*)(image->pixels))[j*(image->pitch/4)+i];
 }
 
+SDL_Color        get_sdlcolor(int i)
+{
+    SDL_Color    z;
+
+    z.r = (i & 0xff0000) / 65536;
+  	z.g = (i & 0x00ff00) / 256;
+ 	z.b = (i & 0x0000ff);
+    z.a = 255;
+    return (z);
+}
+
 SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
 {
 	t_dot pt;
+	Uint32 color;
 
 	pt.x = e.vc.x + e.vd.x * t;
 	pt.y = e.vc.y + e.vd.y * t;
 	pt.z = e.vc.z + e.vd.z * t;
 
-	pt.x = (int)pt.x % (int)e->text->x;
-	pt.y = (int)pt.y % (int)e->text->y;
-
+	while (pt.x < 0)
+		pt.x = pt.x + obj->texture->w;
+	pt.x = (int)pt.x % (int)obj->texture->w;
+	while (pt.y < 0)
+		pt.y = pt.y + obj->texture->h;
+	pt.y = (int)pt.y % (int)obj->texture->h;
+	color = GetPixel32(obj->texture, pt.x, pt.y);
+	return (get_sdlcolor((int)color));
 }
 
 t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
@@ -70,7 +87,7 @@ t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	tmp_ray.normal = obj->get_normal(&tmp_ray.inter, obj);
 	//SDL_LockMutex(get_mutexes()->intersect);
 	tmp_ray.color = obj->color;
-	tmp_ray.color = getTextColor(e, *tmp, obj)
+	// tmp_ray.color = getTextColor(e, *tmp, obj);
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
 	tmp_ray.obj = obj;
 	//SDL_UnlockMutex(get_mutexes()->intersect);
