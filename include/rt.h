@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/24 13:40:56 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/28 05:17:57 by joinacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include "camera.h"
 # include "events.h"
 # include "graphics.h"
-# include "libft.h"
+# include "../libraries/libft/includes/libft.h"
 # include "lights.h"
 # include "light_physic.h"
 # include "light_shading.h"

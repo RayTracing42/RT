@@ -1,1 +1,0 @@
-/Users/aancel/project/rt/libraries/libft/includes/libft.h
