@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/24 14:38:11 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/30 16:17:25 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void			scanning(t_scene *scn)
 	while (++i < get_sdl_core()->nb_threads)
 	{
 		if (!(threads[i].thread = SDL_CreateThread(scanning_multi, "thread", (void*)&threads[i])))
-			exit_custom_error("rt: SDL2: SDL_CreateThread: ", (char*)SDL_GetError());;
+			exit_custom_error("rt: SDL2: SDL_CreateThread: ", (char*)SDL_GetError());
 	}
 	if (!(rendering = SDL_CreateThread(rendering_thread, "", NULL)))
 		exit_custom_error("rt: SDL2: SDL_CreateThread: ", (char*)SDL_GetError());
@@ -102,6 +102,6 @@ void			scanning(t_scene *scn)
 	SDL_WaitThread(rendering, NULL);
 	free(threads);
 	ftime(&fin);
-	
+
 	printf("total time: %fs\n", (fin.time + (fin.millitm)/1000.0 - debut.time - debut.millitm/1000.0));
 }

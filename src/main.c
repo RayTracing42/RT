@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aancel <aancel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/30 08:43:13 by aancel           ###   ########.fr       */
+/*   Updated: 2018/01/30 16:15:50 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,11 @@ int			main(int ac, char **av)
 		ft_putendl("usage : ./rt file.xml");
 	else
 	{
-		if (DEBUG)
-			ft_putstr("start ok\n");
 		init_list_evts(&events, NULL);
-		if (DEBUG)
-			ft_putstr("init ok\n");
 		t = SDL_CreateThread(main_display, "", scn);
-		if (DEBUG)
-			ft_putstr("thread instanced\n");
 		wait_events(events);
-		if (DEBUG)
-			ft_putstr("wait event\n");		
 		SDL_WaitThread(t, NULL);
-		if (DEBUG)
-			ft_putstr("delete loading\n");
 		delete_sdl_core();
-		if (DEBUG)
-			ft_putstr("delete ok\n");
 	}
 	exit(0);
 }

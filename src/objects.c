@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aancel <aancel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/26 19:43:58 by aancel           ###   ########.fr       */
+/*   Updated: 2018/01/30 16:20:29 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ t_object		*new_object(t_type type, t_objs_comp args)
 	*(t_type*)&obj->obj_type = type;
 	obj->origin = args.orig;
 	obj->color = args.col;
-	obj->texture = SDL_LoadBMP("./file/tiles.bmp");
+	obj->texture = NULL;
+	/*if (!(obj->texture = SDL_LoadBMP("./file/tiles.bmp")))
+		exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());*/
 	obj->obj_light = (t_obj_phys){args.reflection_amount,
 								args.refraction_amount, args.refractive_index,
 								args.shininess};

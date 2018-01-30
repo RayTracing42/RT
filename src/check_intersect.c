@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_intersect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aancel <aancel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/26 20:16:36 by aancel           ###   ########.fr       */
+/*   Updated: 2018/01/30 16:21:22 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,9 @@ t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	e = transform_equ(&tmp_ray, obj);
 	*tmp = obj->intersect(&tmp_ray, e, obj, 1);
 	tmp_ray.normal = obj->get_normal(&tmp_ray.inter, obj);
-	//SDL_LockMutex(get_mutexes()->intersect);
 	tmp_ray.color = obj->color;
-	// tmp_ray.color = getTextColor(e, *tmp, obj);
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
 	tmp_ray.obj = obj;
-	//SDL_UnlockMutex(get_mutexes()->intersect);
 	if (gt(*tmp, 0))
 		tmp_ray.shad_opacity += (1 - tmp_ray.obj->obj_light.refraction_amount);
 	return (tmp_ray);
@@ -103,10 +100,8 @@ t_ray	second_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	tmp_ray = *ray;
 	*tmp = obj->intersect(&tmp_ray, transform_equ(&tmp_ray, obj), obj, 2);
 	tmp_ray.normal = obj->get_normal(&tmp_ray.inter, obj);
-	//SDL_LockMutex(get_mutexes()->intersect);
 	tmp_ray.color = obj->color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
 	tmp_ray.obj = obj;
-	//SDL_UnlockMutex(get_mutexes()->intersect);
 	return (tmp_ray);
 }

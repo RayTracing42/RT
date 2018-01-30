@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aancel <aancel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/26 19:40:40 by aancel           ###   ########.fr       */
+/*   Updated: 2018/01/30 16:22:03 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,10 @@ typedef struct				s_sphere
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	SDL_Color				color;
+	SDL_Surface				*texture;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+
 	double					radius;
 	double					r2;
 }							t_sphere;
@@ -200,8 +202,10 @@ typedef struct				s_cylinder
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	SDL_Color				color;
+	SDL_Surface				*texture;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+
 	double					radius;
 	double					r2;
 }							t_cylinder;
@@ -218,8 +222,10 @@ typedef struct				s_cone
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	SDL_Color				color;
+	SDL_Surface				*texture;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+
 	double					angle;
 	double					tanalpha2;
 }							t_cone;
@@ -236,6 +242,7 @@ typedef struct				s_plane
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	SDL_Color				color;
+	SDL_Surface				*texture;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
 
@@ -264,6 +271,7 @@ typedef struct				s_triangle
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	SDL_Color				color;
+	SDL_Surface				*texture;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
 
