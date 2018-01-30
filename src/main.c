@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aancel <aancel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/24 14:21:51 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/30 08:43:13 by aancel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int			main(int ac, char **av)
 		t = SDL_CreateThread(main_display, "", scn);
 		if (DEBUG)
 			ft_putstr("thread instanced\n");
-		// wait_events(events);
+		wait_events(events);
 		if (DEBUG)
 			ft_putstr("wait event\n");		
 		SDL_WaitThread(t, NULL);
