@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/25 11:05:00 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/30 02:01:20 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,13 @@ typedef struct		s_couple_ray
 	double					ta;
 	double					tb;
 }					t_couple_ray;
+
+typedef struct		s_list_ray
+{
+	t_ray					r;
+	double					t;
+	struct s_list_ray		*next;
+}					t_list_ray;
 
 typedef enum				e_type
 {

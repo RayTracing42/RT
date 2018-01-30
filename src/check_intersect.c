@@ -3,10 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   check_intersect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/30 05:26:14 by fcecilie          #+#    #+#             */
+/*   Updated: 2018/01/30 05:57:15 by fcecilie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_intersect.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/26 17:14:18 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/30 05:25:47 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,34 +58,59 @@ int		non_inverted_intersect(t_couple_ray *basic, t_couple_ray *modified,
 	}
 }
 
+void	choice_intersect(t_list_ray *l, t_ray *ray, double *dist)
+{
+	while (l)
+	{
+		if (eq(*dist, 0) || (gt(*dist, 0) && lt(l->t, *dist)))
+		{
+			if (l->r.obj->status != EMPTY)
+			{
+				*dist = l->t;
+				*ray = l->r;
+			}
+		}
+		delete_cell_ray(&l);
+//		l = l->next;
+	}
+}
+
 double	check_intersect(t_ray *ray, t_list_objs *l)
 {
 	double			dist;
 	t_couple_ray	basic;
-
+	t_couple_ray	lim;
+	t_couple_ray	neg;
+	t_list_ray		*l_ray;
+	
 	dist = 0;
 	while (l)
 	{
+	basic.a.nb_intersect = 0;
+	basic.b.nb_intersect = 0;
+	lim.a.nb_intersect = 0;
+	lim.b.nb_intersect = 0;
+	neg.a.nb_intersect = 0;
+	neg.b.nb_intersect = 0;
 		basic.a = first_intersect(ray, l->obj, &basic.ta);
 		basic.b = second_intersect(ray, l->obj, &basic.tb);
 		if (basic.a.nb_intersect > 0 && basic.b.nb_intersect > 0)
 		{
+			l_ray = NULL;
 			transform_inter(&basic.a, l->obj);
 			transform_inter(&basic.b, l->obj);
 			if (l->obj->limit)
-				limit(&basic, l->obj, ray);
+				lim = limit(l->obj, ray);
 			if (l->obj->negative_obj)
-				negative_obj(&basic, l->obj, ray);
-			if (gt(basic.ta, 0) && basic.a.obj->status != EMPTY)
-			{
-				if (eq(dist, 0) || (gt(dist, 0) && lt(basic.ta, dist)))
-					valid_ray(ray, &dist, &basic.a, &basic.ta);
-			}
-			else if (gt(basic.tb, 0) && basic.b.obj->status != EMPTY)
-			{
-				if (eq(dist, 0) || (gt(dist, 0) && lt(basic.tb, dist)))
-					valid_ray(ray, &dist, &basic.b, &basic.tb);
-			}
+				neg = negative_obj(&basic, l->obj, ray);
+			unvalid_point_in_limit(&basic, l->obj);
+			unvalid_point_in_negative_obj(&basic, l->obj, ray);
+			if (l->obj->limit)
+				unvalid_point_in_negative_obj(&lim, l->obj, ray);
+			add_cell_ray(&l_ray, &basic);
+			add_cell_ray(&l_ray, &lim);
+			add_cell_ray(&l_ray, &neg);
+			choice_intersect(l_ray, ray, &dist);
 		}
 		l = l->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/25 14:24:56 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/30 05:57:20 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,14 @@ int					get_status(char *status);
 **	limit.c
 */
 
-int		limit(t_couple_ray *basic, t_object *father, const t_ray *ray);
+t_couple_ray	limit(t_object *father, const t_ray *ray);
+int				is_in_limit(const t_ray *ray, t_object *father);
 
 /*
 **	negative_obj.c
 */
 
-int		negative_obj(t_couple_ray *basic, t_object *father, const t_ray *ray);
+t_couple_ray	negative_obj(t_couple_ray *basic, t_object *father, const t_ray *ray);
 
 
 
@@ -114,6 +115,11 @@ int		is_in_obj(const double t, const t_dot inter, t_object *obj);
 int		non_inverted_intersect(t_couple_ray *basic, t_couple_ray *modified,
 	int check);
 
+void	unvalid_point_in_limit(t_couple_ray *basic, t_object *father);
+void	unvalid_point_in_negative_obj(t_couple_ray *couple, t_object *father,
+	t_ray *ray);
 
+void	add_cell_ray(t_list_ray **head, t_couple_ray *couple);
+void	delete_cell_ray(t_list_ray **cell);
 
 #endif

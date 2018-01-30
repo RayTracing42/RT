@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/26 17:14:30 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/30 05:57:17 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int		is_in_right_side_of_limit(t_dot i, t_object *p)
 	return ((distance_1 >= distance_2));
 }
 
-static int		is_in_limit(const t_ray *ray, t_object *father)
+int				is_in_limit(const t_ray *ray, t_object *father)
 {
 	t_list_objs	*l;
 
@@ -45,66 +45,94 @@ static int		is_in_limit(const t_ray *ray, t_object *father)
 	return (1);
 }
 
-static t_ray	empty_limit(const t_ray *ray, double *t_tmp,
-	t_object *empty_limit, t_couple_ray *basic)
+void	unvalid_point_in_limit(t_couple_ray *basic, t_object *father)
 {
-	t_ray		tmp;
-	t_object	*father;
+	if (father->limit)
+	{
+		if (!is_in_limit(&basic->a, father))
+		{
+			basic->ta = 0;
+			basic->a.nb_intersect = 0;
+		}
+		if (!is_in_limit(&basic->b, father))
+		{
+			basic->tb = 0;
+			basic->b.nb_intersect = 0;
+		}
+	}
+}
 
-	tmp = *ray;
-	father = ray->obj;
-	if (is_in_right_side_of_limit(basic->a.inter, empty_limit))
-		tmp = first_intersect(ray, father, t_tmp);
-	else if (is_in_right_side_of_limit(basic->b.inter, empty_limit))
-		tmp = second_intersect(ray, father, t_tmp);
+void			a_b_exist(t_couple_ray *couple, t_ray *tmp, double *t_tmp)
+{
+	if (couple->ta < *t_tmp && *t_tmp < couple->tb)
+		valid_ray(&couple->b, &couple->tb, tmp, t_tmp);
+	else if (*t_tmp < couple->ta && *t_tmp < couple->tb)
+	{
+		valid_ray(&couple->b, &couple->tb, &couple->a, &couple->ta);
+		valid_ray(&couple->a, &couple->ta, tmp, t_tmp);
+	}
+}
+
+void			a_exist(t_couple_ray *couple, t_ray *tmp, double *t_tmp)
+{
+	if (*t_tmp > couple->ta)
+		valid_ray(&couple->b, &couple->tb, tmp, t_tmp);
 	else
-		tmp.nb_intersect = 0;
-	return (tmp);
+	{
+		valid_ray(&couple->b, &couple->tb, &couple->a, &couple->ta);
+		valid_ray(&couple->a, &couple->ta, tmp, t_tmp);
+	}
 }
 
-void	valid_limit(t_couple_ray *basic, t_couple_ray *limited,
-		t_ray *tmp, double *t_tmp, int check_a, int check_b)
+void			b_exist(t_couple_ray *couple, t_ray *tmp, double *t_tmp)
 {
+	if (*t_tmp < couple->tb)
+		valid_ray(&couple->a, &couple->ta, tmp, t_tmp);
+	else
+	{
+		valid_ray(&couple->a, &couple->ta, &couple->b, &couple->tb);
+		valid_ray(&couple->b, &couple->tb, tmp, t_tmp);
+	}
 }
 
-int		limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
+void			no_one_exist(t_couple_ray *couple, t_ray *tmp, double *t_tmp)
+{
+	valid_ray(&couple->a, &couple->ta, tmp, t_tmp);
+}
+
+
+t_couple_ray	limit(t_object *father, const t_ray *ray)
 {
 	t_couple_ray	limited;
 	t_list_objs		*l;
 	t_ray			tmp;
 	double			t_tmp;
-	int				check_a;
-	int				check_b;
 
 	l = father->limit;
-	limited = *basic;
-	check_a = is_in_limit(&basic->a, father);
-	check_b = is_in_limit(&basic->b, father);
+	limited.a.nb_intersect = 0;
+	limited.b.nb_intersect = 0;
 	while (l)
 	{
-		tmp = (l->obj->status == FULL) ? first_intersect(ray, l->obj, &t_tmp) :
-			empty_limit(ray, &t_tmp, l->obj, basic);
-		if (tmp.nb_intersect > 0/* && le(basic->ta, t_tmp) && le(t_tmp, basic->tb)*/)
+		tmp = first_intersect(ray, l->obj, &t_tmp);
+		if (tmp.nb_intersect > 0)
 		{
 			transform_inter(&tmp, l->obj);
 			if (is_in_limit(&tmp, father))
 			{
 				if (is_in_obj(t_tmp, tmp.inter, father))
 				{
-					if (!check_a &&
-						(limited.ta == basic->ta || lt(t_tmp, limited.ta)))
-						valid_ray(&limited.a, &limited.ta, &tmp, &t_tmp);
-					if (!check_b &&
-						(limited.tb == basic->tb || gt(t_tmp, limited.tb)))
-						valid_ray(&limited.b, &limited.tb, &tmp, &t_tmp);
+					if (limited.a.nb_intersect > 0 && limited.b.nb_intersect > 0)
+						a_b_exist(&limited, &tmp, &t_tmp);
+					else if (limited.a.nb_intersect > 0)
+						a_exist(&limited, &tmp, &t_tmp);
+					else if (limited.b.nb_intersect > 0)
+						b_exist(&limited, &tmp, &t_tmp);
+					else
+						no_one_exist(&limited, &tmp, &t_tmp);
 				}
-				valid_limit(basic, &limited, &tmp, &t_tmp, check_a, check_b);
 			}
 		}
 		l = l->next;
 	}
-	if ((!check_a && limited.ta == basic->ta)
-		|| (!check_b && limited.tb == basic->tb))
-		return (non_inverted_intersect(basic, &limited, 1));
-	return (non_inverted_intersect(basic, &limited, 0));
+	return (limited);
 }
