@@ -6,13 +6,13 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/22 17:55:08 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/31 13:23:29 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double	check_intersect(t_ray *ray, t_list_objs *l_objs)
+double	check_intersect(t_ray *ray, t_list_objs *l_objs, int check_lights)
 {
 	double		dist;
 	double		tmp;
@@ -22,17 +22,20 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	tmp_ray.shad_opacity = 0;
 	while (l_objs != NULL)
 	{
-		tmp_ray = first_intersect(ray, l_objs->obj, &tmp);
-		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
+		if (!l_objs->obj->is_light || check_lights)
 		{
-			transform_inter(&tmp_ray, tmp_ray.obj);
-			if (is_in_limit(&tmp_ray, l_objs->obj))
+			tmp_ray = first_intersect(ray, l_objs->obj, &tmp);
+			if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
 			{
-				dist = tmp;
-				*ray = tmp_ray;
+				transform_inter(&tmp_ray, tmp_ray.obj);
+				if (is_in_limit(&tmp_ray, l_objs->obj))
+				{
+					dist = tmp;
+					*ray = tmp_ray;
+				}
+				else
+					check_limit_intersect(ray, l_objs->obj, &dist);
 			}
-			else
-				check_limit_intersect(ray, l_objs->obj, &dist);
 		}
 		l_objs = l_objs->next;
 	}

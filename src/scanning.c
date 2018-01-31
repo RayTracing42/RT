@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/31 10:41:53 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/31 13:25:17 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 	SDL_Color	reflect_ray;
 	SDL_Color	refract_ray;
 
-	if (check_intersect(ray, scn->objects) > 0)
+	if (check_intersect(ray, scn->objects, 1) > 0)
 	{
+		if (ray->obj->is_light)
+			return (ray->color);
 		ray->color = shadows(ray, scn);
 		reflect_ray = reflect(ray, scn);
 		refract_ray = refract(ray, scn);

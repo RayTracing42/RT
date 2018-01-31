@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 11:53:24 by shiro             #+#    #+#             */
-/*   Updated: 2018/01/31 12:42:25 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/31 13:15:13 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_obj_light		*new_obj_light(double power, t_object *obj)
 	t_obj_light	*obl;
 
 	obl = (t_obj_light*)new_light(OBJECT, (t_vector){0, 0, 0}, obj->color, power);
+	obj->is_light = 1;
 	obl->shape = obj;
 	obl->is_in_light = is_in_obj_light;
 	obl->get_ray_vect = get_obj_ray_vect;

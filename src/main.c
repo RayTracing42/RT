@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/31 13:07:00 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/31 13:55:40 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int			main(int ac, char **av)
 	else
 	{
 
-		scene_add_light((t_light*)new_obj_light(1, (t_object*)new_sphere((t_objs_comp){(t_dot){0, 40, 0}, (SDL_Color){255, 255, 255, 255}, 0, 0, 0, 0}, 10)), scn);
+		scene_add_light((t_light*)new_obj_light(1, (t_object*)new_sphere((t_objs_comp){(t_dot){0, 50, 0}, (SDL_Color){255, 255, 255, 255}, 0, 0, 0, 0}, 10)), scn);
+		scene_add_object(((t_obj_light*)scn->lights->light)->shape, scn);
 
 		init_list_evts(&events, NULL);
 		t = SDL_CreateThread(main_display, "", scn);

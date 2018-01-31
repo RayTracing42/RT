@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/31 12:03:46 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/31 13:53:55 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs,
 		return (1);
 	tmp_ray = *light_ray;
 	tmp_ray.shad_opacity = 0;
-	tmp = check_intersect(&tmp_ray, l_objs);
+	tmp = check_intersect(&tmp_ray, l_objs, 0);
 	light_ray->shad_opacity = tmp_ray.shad_opacity;
 	if (gt(tmp, 0) && lt(tmp, 1))
 		return (1);
@@ -54,12 +54,14 @@ static SDL_Color	div_colors(SDL_Color src, t_scene *scn)
 	return (dst);
 }
 
-static void	opacify_color(SDL_Color *color, double opacity)
+static void	opacify_color(t_ray *light_ray)
 {
-	opacity = 1 - ft_dmin(opacity, 1);
-	color->r *= opacity;
-	color->g *= opacity;
-	color->b *= opacity;
+	double	opacity;
+
+	opacity = 1 - ft_dmin(light_ray->shad_opacity, 1);
+	light_ray->color.r *= opacity;
+	light_ray->color.g *= opacity;
+	light_ray->color.b *= opacity;
 }
 
 SDL_Color	shadows(t_ray *ray, t_scene *scn)
@@ -76,7 +78,7 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 		light_ray.equ.vc = *(t_vector*)&ray->inter;
 		light_ray.color = ray->color;
 		if ((check_objs_on_ray(&light_ray, scn->objects, tmp->light)))
-			opacify_color(&light_ray.color, light_ray.shad_opacity);
+			opacify_color(&light_ray);
 		light_ray.normal = ray->normal;
 		light_ray.light = tmp->light;
 		multi_lights = add_colors(multi_lights,

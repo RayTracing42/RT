@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/31 12:03:46 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/31 13:14:18 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ typedef struct				s_object
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+	int						is_light;
 }							t_object;
 
 typedef struct				s_objs_comp
@@ -182,6 +183,7 @@ typedef struct				s_sphere
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+	int						is_light;
 	double					radius;
 	double					r2;
 }							t_sphere;
@@ -200,6 +202,7 @@ typedef struct				s_cylinder
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+	int						is_light;
 	double					radius;
 	double					r2;
 }							t_cylinder;
@@ -218,6 +221,7 @@ typedef struct				s_cone
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+	int						is_light;
 	double					angle;
 	double					tanalpha2;
 }							t_cone;
@@ -236,6 +240,7 @@ typedef struct				s_plane
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+	int						is_light;
 
 	int						status;
 
@@ -264,6 +269,7 @@ typedef struct				s_triangle
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
+	int						is_light;
 
 	int						status;
 

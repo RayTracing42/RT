@@ -39,6 +39,27 @@
 	<object>
 		<type>sphere</type>
 		<origin>
+			<x>10</x>
+			<y>30</y>
+			<z>0</z>
+		</origin>
+		<color>
+			<r>70</r>
+			<g>70</g>
+			<b>70</b>
+		</color>
+		<physic>
+			<reflexion_amount>0</reflexion_amount>
+			<refraction_amount>0</refraction_amount>
+			<refraction_index>0</refraction_index>
+			<shininess>30</shininess>
+		</physic>
+		<radius>5</radius>
+	</object>
+
+	<object>
+		<type>sphere</type>
+		<origin>
 			<x>40</x>
 			<y>30</y>
 			<z>-30</z>
@@ -57,11 +78,11 @@
 		<radius>15</radius>
 	</object>
 
-	<light>
+	<!light>
 		<type>orb</type>
 		<origin>
 			<x>0</x>
-			<y>100</y>
+			<y>45</y>
 			<z>0</z>
 		</origin>
 		<color>
