@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/06 14:50:17 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/31 12:03:46 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 	tmp = scn->lights;
 	while (tmp != NULL)
 	{
-		light_ray.equ.vd = tmp->light->get_ray_vect(&ray->inter, tmp->light);
+		light_ray.equ.vd = tmp->light->get_ray_vect(ray->inter, tmp->light);
 		light_ray.equ.vc = *(t_vector*)&ray->inter;
 		light_ray.color = ray->color;
 		if ((check_objs_on_ray(&light_ray, scn->objects, tmp->light)))

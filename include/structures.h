@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/24 13:29:26 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/31 12:03:46 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,6 +305,7 @@ typedef struct		s_box
 
 typedef enum				e_light_type
 {
+	OBJECT,
 	ORB,
 	PARALLEL,
 	SPOT
@@ -321,7 +322,7 @@ typedef struct				s_light
 	const t_light_type		type;
 	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)(t_dot *pos, struct s_light *light);
+	t_vector				(*get_ray_vect)(t_dot pos, struct s_light *light);
 	int						(*is_in_light)(struct s_light *light, t_ray *light_ray);
 	double					power;
 }							t_light;
@@ -334,7 +335,7 @@ typedef struct				s_parallel_light
 	const t_light_type		type;
 	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)(t_dot *pos, t_light *light);
+	t_vector				(*get_ray_vect)(t_dot pos, t_light *light);
 	int						(*is_in_light)(t_light *light, t_ray *light_ray);
 	double					power;
 }							t_parallel_light;
@@ -347,7 +348,7 @@ typedef struct				s_spotlight
 	const t_light_type		type;
 	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)(t_dot *pos, t_light *light);
+	t_vector				(*get_ray_vect)(t_dot pos, t_light *light);
 	int						(*is_in_light)(t_light *light, t_ray *light_ray);
 	double					power;
 	t_dot					orig;
@@ -362,12 +363,24 @@ typedef struct				s_orb_light
 	const t_light_type		type;
 	SDL_Color				color;
 	t_vector				direction;
-	t_vector				(*get_ray_vect)(t_dot *pos, t_light *light);
+	t_vector				(*get_ray_vect)(t_dot pos, t_light *light);
 	int						(*is_in_light)(t_light *light, t_ray *light_ray);
 	double					power;
 	t_dot					orig;
 	double					aperture;
 }							t_orb_light;
+
+typedef struct	s_obj_light
+{
+	const t_light_type		type;
+	SDL_Color				color;
+	t_vector				direction;
+	t_vector				(*get_ray_vect)(t_dot pos, struct s_light *light);
+	int						(*is_in_light)(struct s_light *light, t_ray *light_ray);
+	double					power;
+
+	t_object				*shape;
+}				t_obj_light;
 
 //	ecran imaginaire qui permet de definir le vecteur camera -> pixel;
 typedef struct				s_view_plane
