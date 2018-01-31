@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/30 05:57:17 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/31 05:47:00 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,59 +49,16 @@ void	unvalid_point_in_limit(t_couple_ray *basic, t_object *father)
 {
 	if (father->limit)
 	{
-		if (!is_in_limit(&basic->a, father))
-		{
-			basic->ta = 0;
+		if (basic->a.nb_intersect > 0
+			&& !is_in_limit(&basic->a, father))
 			basic->a.nb_intersect = 0;
-		}
-		if (!is_in_limit(&basic->b, father))
-		{
-			basic->tb = 0;
+		if (basic->b.nb_intersect > 0
+			&& !is_in_limit(&basic->b, father))
 			basic->b.nb_intersect = 0;
-		}
 	}
 }
 
-void			a_b_exist(t_couple_ray *couple, t_ray *tmp, double *t_tmp)
-{
-	if (couple->ta < *t_tmp && *t_tmp < couple->tb)
-		valid_ray(&couple->b, &couple->tb, tmp, t_tmp);
-	else if (*t_tmp < couple->ta && *t_tmp < couple->tb)
-	{
-		valid_ray(&couple->b, &couple->tb, &couple->a, &couple->ta);
-		valid_ray(&couple->a, &couple->ta, tmp, t_tmp);
-	}
-}
-
-void			a_exist(t_couple_ray *couple, t_ray *tmp, double *t_tmp)
-{
-	if (*t_tmp > couple->ta)
-		valid_ray(&couple->b, &couple->tb, tmp, t_tmp);
-	else
-	{
-		valid_ray(&couple->b, &couple->tb, &couple->a, &couple->ta);
-		valid_ray(&couple->a, &couple->ta, tmp, t_tmp);
-	}
-}
-
-void			b_exist(t_couple_ray *couple, t_ray *tmp, double *t_tmp)
-{
-	if (*t_tmp < couple->tb)
-		valid_ray(&couple->a, &couple->ta, tmp, t_tmp);
-	else
-	{
-		valid_ray(&couple->a, &couple->ta, &couple->b, &couple->tb);
-		valid_ray(&couple->b, &couple->tb, tmp, t_tmp);
-	}
-}
-
-void			no_one_exist(t_couple_ray *couple, t_ray *tmp, double *t_tmp)
-{
-	valid_ray(&couple->a, &couple->ta, tmp, t_tmp);
-}
-
-
-t_couple_ray	limit(t_object *father, const t_ray *ray)
+t_couple_ray	limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
 {
 	t_couple_ray	limited;
 	t_list_objs		*l;
@@ -118,21 +75,11 @@ t_couple_ray	limit(t_object *father, const t_ray *ray)
 		{
 			transform_inter(&tmp, l->obj);
 			if (is_in_limit(&tmp, father))
-			{
 				if (is_in_obj(t_tmp, tmp.inter, father))
-				{
-					if (limited.a.nb_intersect > 0 && limited.b.nb_intersect > 0)
-						a_b_exist(&limited, &tmp, &t_tmp);
-					else if (limited.a.nb_intersect > 0)
-						a_exist(&limited, &tmp, &t_tmp);
-					else if (limited.b.nb_intersect > 0)
-						b_exist(&limited, &tmp, &t_tmp);
-					else
-						no_one_exist(&limited, &tmp, &t_tmp);
-				}
-			}
+					limit2(&limited, &tmp, &t_tmp);
 		}
 		l = l->next;
 	}
+//	unvalid_point_in_limit(basic, father);
 	return (limited);
 }

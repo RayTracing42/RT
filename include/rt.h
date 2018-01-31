@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/30 05:57:20 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/31 05:47:03 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,11 @@ double				angle_between_vectors(t_vector a, t_vector b);
 int					get_status(char *status);
 
 /*
-**	limit.c
+**	limit.c // limit2.c
 */
 
-t_couple_ray	limit(t_object *father, const t_ray *ray);
+t_couple_ray	limit(t_couple_ray *basic, t_object *father, const t_ray *ray);
+void			limit2(t_couple_ray *limited, t_ray *tmp, double *t_tmp);
 int				is_in_limit(const t_ray *ray, t_object *father);
 
 /*
@@ -112,8 +113,6 @@ t_couple_ray	negative_obj(t_couple_ray *basic, t_object *father, const t_ray *ra
 
 
 int		is_in_obj(const double t, const t_dot inter, t_object *obj);
-int		non_inverted_intersect(t_couple_ray *basic, t_couple_ray *modified,
-	int check);
 
 void	unvalid_point_in_limit(t_couple_ray *basic, t_object *father);
 void	unvalid_point_in_negative_obj(t_couple_ray *couple, t_object *father,
