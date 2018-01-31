@@ -6,12 +6,13 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/24 14:38:11 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/31 10:41:53 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <time.h>
+#include <sys/timeb.h>
 
 t_parequation	transform_equ(t_ray *ray, t_object *obj)
 {
@@ -101,6 +102,6 @@ void			scanning(t_scene *scn)
 	SDL_WaitThread(rendering, NULL);
 	free(threads);
 	ftime(&fin);
-	
+
 	printf("total time: %fs\n", (fin.time + (fin.millitm)/1000.0 - debut.time - debut.millitm/1000.0));
 }
