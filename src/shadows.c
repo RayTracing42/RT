@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/31 13:53:55 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/31 15:12:56 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs,
 	double	tmp;
 	t_ray	tmp_ray;
 
-	if (!light->is_in_light(light, light_ray))
+	if (!light->is_in_light(light, light_ray) || (!light_ray->equ.vd.x && !light_ray->equ.vd.y && !light_ray->equ.vd.z))
 		return (1);
 	tmp_ray = *light_ray;
 	tmp_ray.shad_opacity = 0;
@@ -69,7 +69,7 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 	t_list_lights	*tmp;
 	t_ray			light_ray;
 	SDL_Color		multi_lights;
-
+(void)opacify_color;
 	multi_lights = div_colors(ray->color, scn);
 	tmp = scn->lights;
 	while (tmp != NULL)
@@ -77,13 +77,15 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 		light_ray.equ.vd = tmp->light->get_ray_vect(ray->inter, tmp->light);
 		light_ray.equ.vc = *(t_vector*)&ray->inter;
 		light_ray.color = ray->color;
-		if ((check_objs_on_ray(&light_ray, scn->objects, tmp->light)))
-			opacify_color(&light_ray);
-		light_ray.normal = ray->normal;
-		light_ray.light = tmp->light;
-		multi_lights = add_colors(multi_lights,
-									add_colors(get_shade_col(&light_ray),
-										get_specular_col(ray, &light_ray)));
+		if (!(check_objs_on_ray(&light_ray, scn->objects, tmp->light)))
+			//opacify_color(&light_ray);
+		{
+			light_ray.normal = ray->normal;
+			light_ray.light = tmp->light;
+			multi_lights = add_colors(multi_lights,
+										add_colors(get_shade_col(&light_ray),
+											get_specular_col(ray, &light_ray)));
+		}
 		tmp = tmp->next;
 	}
 	return (multi_lights);

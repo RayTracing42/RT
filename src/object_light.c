@@ -6,20 +6,77 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 11:53:24 by shiro             #+#    #+#             */
-/*   Updated: 2018/01/31 13:15:13 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/31 16:46:18 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static t_vector	get_obj_ray_vect(t_dot pos, t_light *light)
+static t_vector	get_cone_ray_vect(t_dot pos, t_obj_light *obl)
 {
-	t_obj_light	*obl;
+	t_dot		res;
+	double		tanalpha2;
+	double		t;
+
+	res = (t_dot){pos.x - obl->shape->origin.x, pos.y - obl->shape->origin.y,
+				pos.z - obl->shape->origin.z};
+	mult_vect((t_vector*)&res, obl->shape->trans_iconst, (t_vector*)&res);
+	tanalpha2 = ((t_cone*)obl->shape)->tanalpha2;
+	t = sqrt(tanalpha2 * (res.x * res.x + res.z * res.z));
+	mult_vect((t_vector*)&res, obl->shape->trans_const, &(t_vector){res.x / (3 * t), res.y / (-tanalpha2 * t), res.z / (3 * t)});
+	res = (t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
+			res.z + obl->shape->origin.z};
+	return ((t_vector){res.x - pos.x, res.y - pos.y, res.z - pos.z});
+}
+
+static t_vector	get_cylinder_ray_vect(t_dot pos, t_obj_light *obl)
+{
 	t_dot		res;
 	double		t;
 	double		r;
 
-	obl = (t_obj_light*)light;
+	res = (t_dot){pos.x - obl->shape->origin.x, pos.y - obl->shape->origin.y,
+				pos.z - obl->shape->origin.z};
+	mult_vect((t_vector*)&res, obl->shape->trans_iconst, (t_vector*)&res);
+	if (eq(res.x, 0) && eq(res.y, 0) && eq(res.z, 0))
+		return ((t_vector){0, 0, 0});
+
+	r = ((t_sphere*)obl->shape)->radius;
+	t = sqrt(res.x * res.x + res.z * res.z) / (3 * r);
+
+	mult_vect((t_vector*)&res, obl->shape->trans_const, &(t_vector){res.x / (3 * t), res.y, res.z / (3 * t)});
+	res = (t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
+			res.z + obl->shape->origin.z};
+	return ((t_vector){res.x - pos.x, res.y - pos.y, res.z - pos.z});
+}
+
+static t_vector	get_plane_ray_vect(t_dot pos, t_obj_light *obl)
+{
+	t_dot		res;
+	t_vector	n;
+	double		t;
+
+	res = (t_dot){pos.x - obl->shape->origin.x, pos.y - obl->shape->origin.y,
+				pos.z - obl->shape->origin.z};
+	mult_vect((t_vector*)&res, obl->shape->trans_iconst, (t_vector*)&res);
+	if (eq(res.x, 0) && eq(res.y, 0) && eq(res.z, 0))
+		return ((t_vector){0, 0, 0});
+	n = ((t_plane*)obl->shape)->normal;
+	t = (n.x * res.x + n.y * res.y + n.z * res.z) /
+		(n.x * n.x + n.y * n.y + n.z * n.z);
+
+	mult_vect((t_vector*)&res, obl->shape->trans_const, &(t_vector){res.x - n.x * t, res.y - n.y * t, res.z - n.z * t});
+	res = (t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
+			res.z + obl->shape->origin.z};
+	return ((t_vector){res.x - pos.x, res.y - pos.y, res.z - pos.z});
+}
+
+static t_vector	get_sphere_ray_vect(t_dot pos, t_obj_light *obl)
+{
+	t_dot		res;
+	double		t;
+	double		r;
+
 	res = (t_dot){pos.x - obl->shape->origin.x, pos.y - obl->shape->origin.y,
 				pos.z - obl->shape->origin.z};
 	mult_vect((t_vector*)&res, obl->shape->trans_iconst, (t_vector*)&res);
@@ -33,6 +90,25 @@ static t_vector	get_obj_ray_vect(t_dot pos, t_light *light)
 	res = (t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
 			res.z + obl->shape->origin.z};
 	return ((t_vector){res.x - pos.x, res.y - pos.y, res.z - pos.z});
+}
+
+static t_vector	get_obj_ray_vect(t_dot pos, t_light *light)
+{
+	t_obj_light	*obl;
+
+	obl = (t_obj_light*)light;
+	if (obl->shape->obj_type == SPHERE)
+		return (get_sphere_ray_vect(pos, obl));
+	else if (obl->shape->obj_type == CONE)
+		return (get_cone_ray_vect(pos, obl));
+	else if (obl->shape->obj_type == CYLINDER)
+		return (get_cylinder_ray_vect(pos, obl));
+	else if (obl->shape->obj_type == PLANE)
+		return (get_plane_ray_vect(pos, obl));
+	else
+		return ((t_vector){obl->shape->origin.x - pos.x,
+							obl->shape->origin.y - pos.y,
+							obl->shape->origin.z - pos.z});
 }
 
 static int		is_in_obj_light(t_light *light, t_ray *light_ray)
