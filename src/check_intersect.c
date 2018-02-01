@@ -32,12 +32,15 @@ void	choice_intersect(t_list_ray *l, t_ray *ray, double *dist)
 {
 	while (l)
 	{
-		if (eq(*dist, 0) || (gt(*dist, 0) && lt(l->t, *dist)))
+		if (l->r.nb_intersect > 0)
 		{
-			if (l->r.obj->status != EMPTY)
+			if (eq(*dist, 0) || (gt(*dist, 0) && lt(l->t, *dist)))
 			{
-				*dist = l->t;
-				*ray = l->r;
+				if (l->r.obj->status != EMPTY)
+				{
+					*dist = l->t;
+					*ray = l->r;
+				}
 			}
 		}
 		delete_cell_ray(&l);
@@ -48,19 +51,11 @@ double	check_intersect(t_ray *ray, t_list_objs *l)
 {
 	double			dist;
 	t_couple_ray	basic;
-	t_couple_ray	lim;
-	t_couple_ray	neg;
 	t_list_ray		*l_ray;
 	
 	dist = 0;
 	while (l)
 	{
-		basic.a.nb_intersect = 0;
-		basic.b.nb_intersect = 0;
-		lim.a.nb_intersect = 0;
-		lim.b.nb_intersect = 0;
-		neg.a.nb_intersect = 0;
-		neg.b.nb_intersect = 0;
 		basic.a = first_intersect(ray, l->obj, &basic.ta);
 		basic.b = second_intersect(ray, l->obj, &basic.tb);
 		if (basic.a.nb_intersect > 0 && basic.b.nb_intersect > 0)
@@ -69,17 +64,11 @@ double	check_intersect(t_ray *ray, t_list_objs *l)
 			transform_inter(&basic.a, l->obj);
 			transform_inter(&basic.b, l->obj);
 			if (l->obj->limit)
-				lim = limit(&basic, l->obj, ray);
+				limit(&basic, l->obj, ray);
 			if (l->obj->negative_obj)
-				neg = negative_obj(&basic, l->obj, ray);
-			unvalid_point_in_negative_obj(&lim, l->obj, ray);
-			unvalid_point_in_negative_obj(&basic, l->obj, ray);
-			unvalid_point_in_limit(&basic, l->obj);
-			unvalid_point_in_limit(&neg, l->obj);
-			
-			add_cell_ray(&l_ray, &basic);
-			add_cell_ray(&l_ray, &lim);
-			add_cell_ray(&l_ray, &neg);
+				negative_obj(&basic, l->obj, ray);
+			add_cell_ray(&l_ray, &basic.a, &basic.ta);
+			add_cell_ray(&l_ray, &basic.b, &basic.tb);
 			choice_intersect(l_ray, ray, &dist);
 		}
 		l = l->next;

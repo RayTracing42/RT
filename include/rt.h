@@ -100,7 +100,7 @@ int					get_status(char *status);
 **	limit.c // limit2.c
 */
 
-t_couple_ray	limit(t_couple_ray *basic, t_object *father, const t_ray *ray);
+void			limit(t_couple_ray *basic, t_object *father, const t_ray *ray);
 void			limit2(t_couple_ray *limited, t_ray *tmp, double *t_tmp);
 int				is_in_limit(const t_ray *ray, t_object *father);
 
@@ -108,7 +108,7 @@ int				is_in_limit(const t_ray *ray, t_object *father);
 **	negative_obj.c
 */
 
-t_couple_ray	negative_obj(t_couple_ray *basic, t_object *father, const t_ray *ray);
+void			negative_obj(t_couple_ray *basic, t_object *father, const t_ray *ray);
 
 
 
@@ -118,7 +118,7 @@ void	unvalid_point_in_limit(t_couple_ray *basic, t_object *father);
 void	unvalid_point_in_negative_obj(t_couple_ray *couple, t_object *father,
 	t_ray *ray);
 
-void	add_cell_ray(t_list_ray **head, t_couple_ray *couple);
+void	add_cell_ray(t_list_ray **head, t_ray *ray, double *dist);
 void	delete_cell_ray(t_list_ray **cell);
 
 #endif

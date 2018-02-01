@@ -58,7 +58,7 @@ void	unvalid_point_in_limit(t_couple_ray *basic, t_object *father)
 	}
 }
 
-t_couple_ray	limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
+void	limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
 {
 	t_couple_ray	limited;
 	t_list_objs		*l;
@@ -68,6 +68,14 @@ t_couple_ray	limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
 	l = father->limit;
 	limited.a.nb_intersect = 0;
 	limited.b.nb_intersect = 0;
+	if (is_in_limit(&basic->a, father))
+		limit2(&limited, &basic->a, &basic->ta);
+	else
+		basic->a.nb_intersect = 0;
+	if (is_in_limit(&basic->b, father))
+		limit2(&limited, &basic->b, &basic->tb);
+	else
+		basic->b.nb_intersect = 0;
 	while (l)
 	{
 		tmp = first_intersect(ray, l->obj, &t_tmp);
@@ -80,6 +88,6 @@ t_couple_ray	limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
 		}
 		l = l->next;
 	}
-//	unvalid_point_in_limit(basic, father);
-	return (limited);
+	if (limited.a.nb_intersect > 0 && limited.b.nb_intersect > 0)
+		*basic = limited;
 }
