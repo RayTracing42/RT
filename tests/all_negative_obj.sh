@@ -13,5 +13,5 @@ fi
 for map in negative_obj/*.xml
 do
 	echo "$PWD/$map"
-	"$EXE" "$PWD/$map" 128
+	"$EXE" "$PWD/$map"
 done

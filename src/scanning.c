@@ -43,6 +43,7 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 {
 	SDL_Color	reflect_ray;
 	SDL_Color	refract_ray;
+
 	if (check_intersect(ray, scn->objects) > 0)
 	{
 		ray->color = shadows(ray, scn);
@@ -106,6 +107,6 @@ void			scanning(t_scene *scn)
 	SDL_WaitThread(rendering, NULL);
 	free(threads);
 	ftime(&fin);
-	
+
 	printf("total time: %fs\n", (fin.time + (fin.millitm)/1000.0 - debut.time - debut.millitm/1000.0));
 }
