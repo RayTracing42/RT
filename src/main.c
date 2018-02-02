@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/02 14:44:59 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/02 15:31:32 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ int			main(int ac, char **av)
 	{
 
 		//scene_add_light((t_light*)new_obj_light(1, (t_object*)new_sphere((t_objs_comp){(t_dot){0, 50, -10}, (SDL_Color){255, 255, 120, 255}, 0, 0, 0, 0}, 10)), scn);
-		t_cone *c = new_cone((t_objs_comp){(t_dot){0, 20, -10}, (SDL_Color){255, 120, 255, 255}, 0, 0, 0, 0}, 10);
+		/*t_cone *c = new_cone((t_objs_comp){(t_dot){0, 20, -10}, (SDL_Color){255, 120, 255, 255}, 0, 0, 0, 0}, 10);
 		c->upper = 1;
 		scene_add_light((t_light*)new_obj_light(1, (t_object*)c), scn);
 
 		c = new_cone((t_objs_comp){(t_dot){0, 20, -10}, (SDL_Color){255, 120, 255, 255}, 0, 0, 0, 0}, 10);
 		c->upper = 0;
-		scene_add_light((t_light*)new_obj_light(1, (t_object*)c), scn);
+		scene_add_light((t_light*)new_obj_light(1, (t_object*)c), scn);*/
 		//scene_add_light((t_light*)new_obj_light(1, (t_object*)new_cylinder((t_objs_comp){(t_dot){10, 20, -10}, (SDL_Color){120, 255, 255, 255}, 0, 0, 0, 0}, 5)), scn);
 		//scene_add_light((t_light*)new_obj_light(1, (t_object*)new_plane((t_objs_comp){(t_dot){10, 20, 20}, (SDL_Color){255, 255, 255, 255}, 0, 0, 0, 0}, (t_vector){0, 0, -1}, 0)), scn);
-		scene_add_object(((t_obj_light*)scn->lights->light)->shape, scn);
+		//scene_add_object(((t_obj_light*)scn->lights->light)->shape, scn);
 
 		init_list_evts(&events, NULL);
 		t = SDL_CreateThread(main_display, "", scn);
