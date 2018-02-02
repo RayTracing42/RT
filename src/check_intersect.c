@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/31 05:46:55 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/02 17:30:17 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		is_in_obj(const double t, const t_dot inter, t_object *obj)
 	double	tmp;
 	t_ray	ray;
 
-	ray.equ = (t_parequation){*(t_vector*)&inter, (t_vector){0, 0, 0.01}};
+	ray.equ = (t_parequation){*(t_vector*)&inter, (t_vector){0.01, 0, 0.01}};
 	first_intersect(&ray, obj, &tmp);
 	if (le(tmp, t))
 	{
