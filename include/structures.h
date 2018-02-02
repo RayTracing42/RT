@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/31 13:14:18 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/02 14:39:31 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,7 @@ typedef struct				s_cone
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
 	int						is_light;
+	int						upper;
 	double					angle;
 	double					tanalpha2;
 }							t_cone;

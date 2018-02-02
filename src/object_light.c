@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 11:53:24 by shiro             #+#    #+#             */
-/*   Updated: 2018/01/31 16:46:18 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/02 14:43:26 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,23 @@
 static t_vector	get_cone_ray_vect(t_dot pos, t_obj_light *obl)
 {
 	t_dot		res;
-	double		tanalpha2;
+	double		tana2;
 	double		t;
 
 	res = (t_dot){pos.x - obl->shape->origin.x, pos.y - obl->shape->origin.y,
 				pos.z - obl->shape->origin.z};
 	mult_vect((t_vector*)&res, obl->shape->trans_iconst, (t_vector*)&res);
-	tanalpha2 = ((t_cone*)obl->shape)->tanalpha2;
-	t = sqrt(tanalpha2 * (res.x * res.x + res.z * res.z));
-	mult_vect((t_vector*)&res, obl->shape->trans_const, &(t_vector){res.x / (3 * t), res.y / (-tanalpha2 * t), res.z / (3 * t)});
+	tana2 = ((t_cone*)obl->shape)->tanalpha2;
+	t = (pos.x * pos.x + pos.z * pos.z) / (pos.y * pos.y * tana2);
+
+	if (((t_cone*)obl->shape)->upper)
+		t = (-1 - t * tana2 + sqrt(t * (2 * tana2 + tana2 * tana2 + 1))) / (2 * (1 - t * tana2 * tana2));
+	else
+		t = (-1 - t * tana2 - sqrt(t * (2 * tana2 + tana2 * tana2 + 1))) / (2 * (1 - t * tana2 * tana2));
+	if (eq(t, 1 / (2 * tana2)))
+		return ((t_vector){0, 0, 0});
+
+	mult_vect((t_vector*)&res, obl->shape->trans_const, &(t_vector){res.x / (1 + 2 * t), res.y / (1 - 2 * tana2 * t), res.z / (1 + 2 * t)});
 	res = (t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
 			res.z + obl->shape->origin.z};
 	return ((t_vector){res.x - pos.x, res.y - pos.y, res.z - pos.z});
@@ -42,9 +50,9 @@ static t_vector	get_cylinder_ray_vect(t_dot pos, t_obj_light *obl)
 		return ((t_vector){0, 0, 0});
 
 	r = ((t_sphere*)obl->shape)->radius;
-	t = sqrt(res.x * res.x + res.z * res.z) / (3 * r);
+	t = -0.5 + sqrt(res.x * res.x + res.z * res.z) / (2 * r);
 
-	mult_vect((t_vector*)&res, obl->shape->trans_const, &(t_vector){res.x / (3 * t), res.y, res.z / (3 * t)});
+	mult_vect((t_vector*)&res, obl->shape->trans_const, &(t_vector){res.x / (1 + 2 * t), res.y, res.z / (1 + 2 * t)});
 	res = (t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
 			res.z + obl->shape->origin.z};
 	return ((t_vector){res.x - pos.x, res.y - pos.y, res.z - pos.z});
@@ -84,9 +92,9 @@ static t_vector	get_sphere_ray_vect(t_dot pos, t_obj_light *obl)
 		return ((t_vector){0, 0, 0});
 
 	r = ((t_sphere*)obl->shape)->radius;
-	t = sqrt(res.x * res.x + res.y * res.y + res.z * res.z) / (3 * r);
+	t =  -0.5 + sqrt(res.x * res.x + res.y * res.y + res.z * res.z) / (2 * r);
 
-	mult_vect((t_vector*)&res, obl->shape->trans_const, &(t_vector){res.x / (3 * t), res.y / (3 * t), res.z / (3 * t)});
+	mult_vect((t_vector*)&res, obl->shape->trans_const, &(t_vector){res.x / (1 + 2 * t), res.y / (1 + 2 * t), res.z / (1 + 2 * t)});
 	res = (t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
 			res.z + obl->shape->origin.z};
 	return ((t_vector){res.x - pos.x, res.y - pos.y, res.z - pos.z});
