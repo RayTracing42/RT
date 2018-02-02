@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 14:45:00 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 17:41:21 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/09 11:34:33 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ double		angle_between_vectors(t_vector a, t_vector b)
 	dist_b = get_vect_lenght(&b);
 	if (!(dist_a && dist_b))
 		return (0);
-	pdt_scalaire = vect_dot_product(&a, &b);
+	pdt_scalaire = vect_dot_product(a, b);
 	angle = acos(pdt_scalaire / (dist_a * dist_b)) * 180 / M_PI;
 	return (angle);
 }
@@ -54,4 +54,9 @@ t_dot		dot(double x, double y, double z)
 	d.y = y;
 	d.z = z;
 	return (d);
+}
+
+t_vector	vector_inv(t_vector	v)
+{
+	return ((t_vector){-v.x, -v.y, -v.z});
 }

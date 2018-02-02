@@ -15,6 +15,6 @@
 # include "structures.h"
 
 void	delete_cell_light(t_list_lights **cell);
-void	scene_add_light(t_light *light, t_scene *scene);
+void	new_cell_light(t_list_lights **head, t_light *light);
 
 #endif

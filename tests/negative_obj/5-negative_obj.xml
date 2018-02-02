@@ -26,23 +26,12 @@
 			<g>0</g>
 			<b>0</b>
 		</color>
-		<physic>
-			<reflexion_amount>0</reflexion_amount>
-			<refraction_amount>0</refraction_amount>
-			<refraction_index>1.5</refraction_index>
-			<shininess>30</shininess>
-		</physic>
 		<transformations>
 			<rotation>
 				<x>-45</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
 			<translation>
 				<x>0</x>
 				<y>0</y>
@@ -61,15 +50,36 @@
 				<status>full</status>
 			</global>
 			<global>
-				<origin><x>270</x><y>-20</y><z>-20</z></origin>
+				<origin><x>270</x><y>-20</y><z>-25</z></origin>
 				<normal><x>0</x><y>1</y><z>1</z></normal>
 				<status>full</status>
 			</global>
 		</limit>
+		<negative_obj>
+			<object>
+				<type>sphere</type>
+				<origin><x>170</x><y>-10</y><z>-20</z></origin>
+				<color><r>100</r><g>200</g><b>100</b></color>
+				<radius>25</radius>
+				<status>full</status>
+				<limit>
+					<local>
+						<origin><x>170</x><y>-30</y><z>-20</z></origin>
+						<normal><x>0</x><y>-1</y><z>0</z></normal>
+						<status>full</status>
+					</local>
+				</limit>
+			</object>
+		</negative_obj>
 		<radius>40</radius>
 	</object>
 
-
+	<object>
+		<type>sphere</type>
+		<origin><x>170</x><y>-10</y><z>-20</z></origin>
+		<color><r>200</r><g>200</g><b>200</b></color>
+		<radius>25</radius>
+	</object>
 
 	<object>
 		<type>plane</type>
@@ -90,23 +100,6 @@
 			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
-		<transformations>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
-		</transformations>
 	</object>
 
 
@@ -114,8 +107,8 @@
 		<type>orb</type>
 		<origin>
 			<x>-200</x>
-			<y>-180</y>
-			<z>200</z>
+			<y>80</y>
+			<z>0</z>
 		</origin>
 		<color>
 			<r>100</r>

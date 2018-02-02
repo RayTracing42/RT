@@ -52,7 +52,11 @@
 		<limit>
 			<local>
 				<origin><x>200</x><y>0</y><z>-70</z></origin>
-				<normal><x>0</x><y>50</y><z>50</z></normal>
+				<normal>
+					<x>0</x>
+					<y>50</y>
+					<z>50</z>
+				</normal>
 				<status>full</status>
 			</local>
 			<local>

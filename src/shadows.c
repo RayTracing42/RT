@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/06 14:50:17 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/26 16:57:31 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static SDL_Color	div_colors(SDL_Color src, t_scene *scn)
 
 static void	opacify_color(SDL_Color *color, double opacity)
 {
+	
 	opacity = 1 - ft_dmin(opacity, 1);
 	color->r *= opacity;
 	color->g *= opacity;

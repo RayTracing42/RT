@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/24 14:38:11 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/30 01:23:20 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,23 @@ t_parequation	transform_equ(t_ray *ray, t_object *obj)
 
 void			transform_inter(t_ray *ray, t_object *obj)
 {
-	mult_vect(&ray->normal, obj->trans_norm, &ray->normal);
-	mult_vect((t_vector*)&ray->inter, obj->trans_const, (t_vector*)&ray->inter);
-	ray->inter = (t_dot){ray->inter.x + obj->origin.x,
-		ray->inter.y + obj->origin.y, ray->inter.z + obj->origin.z};
+	mult_vect(&ray->normal, ray->obj->trans_norm, &ray->normal);
+	mult_vect((t_vector*)&ray->inter, ray->obj->trans_const, (t_vector*)&ray->inter);
+	ray->inter = (t_dot){ray->inter.x + ray->obj->origin.x,
+		ray->inter.y + ray->obj->origin.y, ray->inter.z + ray->obj->origin.z};
+	ray->obj = obj;
+}
+
+void			valid_ray(t_ray *r1, double *t_r1, t_ray *r2, double *t_r2)
+{
+	*r1 = *r2;
+	*t_r1 = *t_r2;
 }
 
 SDL_Color		effects(t_ray *ray, t_scene *scn)
 {
 	SDL_Color	reflect_ray;
 	SDL_Color	refract_ray;
-
 	if (check_intersect(ray, scn->objects) > 0)
 	{
 		ray->color = shadows(ray, scn);
@@ -83,7 +89,6 @@ void			scanning(t_scene *scn)
 	int				i;
 	struct timeb	debut;
 	struct timeb	fin;
-
 
 	threads = init_thread_array(scn, get_sdl_core()->nb_threads);
 	i = -1;
