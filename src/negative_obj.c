@@ -22,14 +22,14 @@
  **	valide;
  */
 
-int		is_in_negative_obj(const double *t, const t_ray *ray, t_object *father)
+int		is_in_negative_obj(const double *t, const t_ray *ray, t_object *father, t_object *except)
 {
 	t_list_objs	*l;
 
 	l = father->negative_obj;
 	while (l)
 	{
-		if (ray->obj != l->obj)
+		if (ray->obj != l->obj && (!except || l->obj != except))
 			if (is_in_limited_obj(t, ray, l->obj))
 				return (1);
 		l = l->next;
@@ -37,7 +37,7 @@ int		is_in_negative_obj(const double *t, const t_ray *ray, t_object *father)
 	return (0);
 }
 
-static void	list_is_not_in_negative_obj(t_list_ray **l_ray, t_couple_ray *neg)
+static void	list_is_not_in_negative_obj(t_list_ray **l_ray, t_couple_ray *neg, t_object *neg_obj)
 {
 	t_list_ray *l;
 
@@ -45,18 +45,19 @@ static void	list_is_not_in_negative_obj(t_list_ray **l_ray, t_couple_ray *neg)
 	while (l)
 	{
 		if (l->r.nb_intersect > 0 && lt(neg->ta, l->t) && lt(l->t, neg->tb))
-			l->r.nb_intersect = 0;
+			if (is_in_limit(&l->r, neg_obj))
+				l->r.nb_intersect = 0;
 		l = l->next;
 	}
 }
 
-static void	valid_negative_points(t_list_ray **l_ray, t_couple_ray *neg, t_object *father)
+static void	valid_negative_points(t_list_ray **l_ray, t_couple_ray *neg, t_object *father, t_object *except)
 {
 	if (is_in_limited_obj(&neg->ta, &neg->a, father))
-		if (!is_in_negative_obj(&neg->ta, &neg->a, father))
+		if (!is_in_negative_obj(&neg->ta, &neg->a, father, except))
 			add_cell_ray(l_ray, &neg->a, &neg->ta);
 	if (is_in_limited_obj(&neg->tb, &neg->b, father))
-		if (!is_in_negative_obj(&neg->tb, &neg->b, father))
+		if (!is_in_negative_obj(&neg->tb, &neg->b, father, except))
 			add_cell_ray(l_ray, &neg->b, &neg->tb);
 }
 
@@ -66,6 +67,10 @@ void	negative_obj(t_list_ray **l_ray, t_couple_ray *basic, t_object *father, con
 	t_list_objs		*l;
 
 	l = father->negative_obj;
+	if (is_in_negative_obj(&basic->ta, &basic->a, father, NULL))
+		basic->a.nb_intersect = 0;
+	if (is_in_negative_obj(&basic->tb, &basic->b, father, NULL))
+		basic->b.nb_intersect = 0;
 	while (l)
 	{
 		neg.a = first_intersect(ray, l->obj, &neg.ta);
@@ -75,18 +80,12 @@ void	negative_obj(t_list_ray **l_ray, t_couple_ray *basic, t_object *father, con
 			transform_inter(&neg.a, l->obj);
 			transform_inter(&neg.b, l->obj);
 			if (l->obj->limit)
-				limit3(&neg, l->obj, ray);
+				limit(&neg, l->obj, ray);
 			if (neg.a.nb_intersect > 0 && neg.b.nb_intersect > 0)
 			{
-				list_is_not_in_negative_obj(l_ray, &neg);
-				valid_negative_points(l_ray, &neg, father);
+				list_is_not_in_negative_obj(l_ray, &neg, l->obj);
+				valid_negative_points(l_ray, &neg, father, l->obj);
 			}
-			if (basic->a.nb_intersect > 0 && lt(neg.ta, basic->ta)
-					&& lt(basic->ta, neg.tb))
-				basic->a.nb_intersect = 0;
-			if (basic->b.nb_intersect > 0 && lt(neg.ta, basic->tb)
-					&& lt(basic->tb, neg.tb))
-				basic->b.nb_intersect = 0;
 		}
 		l = l->next;
 	}

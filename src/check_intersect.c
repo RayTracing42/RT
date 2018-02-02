@@ -88,7 +88,7 @@ double	check_intersect(t_ray *ray, t_list_objs *l)
 			transform_inter(&basic.a, l->obj);
 			transform_inter(&basic.b, l->obj);
 			if (l->obj->limit)
-				limit3(&basic, l->obj, ray);
+				limit(&basic, l->obj, ray);
 			if (l->obj->negative_obj)
 				negative_obj(&l_ray, &basic, l->obj, ray);
 			add_cell_ray(&l_ray, &basic.a, &basic.ta);
