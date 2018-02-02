@@ -45,20 +45,31 @@ int				is_in_limit(const t_ray *ray, t_object *father)
 	return (1);
 }
 
-void	unvalid_point_in_limit(t_couple_ray *basic, t_object *father)
+void	limit(t_list_ray **l_ray, t_couple_ray *basic, t_object *father, const t_ray *ray)
 {
-	if (father->limit)
+	t_list_objs		*l;
+	t_ray			lim;
+	double			t_lim;
+
+	l = father->limit;
+	if (!is_in_limit(&basic->a, father))
+		basic->a.nb_intersect = 0;
+	if (!is_in_limit(&basic->b, father))
+		basic->b.nb_intersect = 0;
+	while (l)
 	{
-		if (basic->a.nb_intersect > 0
-			&& !is_in_limit(&basic->a, father))
-			basic->a.nb_intersect = 0;
-		if (basic->b.nb_intersect > 0
-			&& !is_in_limit(&basic->b, father))
-			basic->b.nb_intersect = 0;
+		lim = first_intersect(ray, l->obj, &t_lim);
+		if (lim.nb_intersect > 0)
+		{
+			transform_inter(&lim, l->obj);
+			if (is_in_limited_obj(&t_lim, &lim, father))
+				add_cell_ray(l_ray, &lim, &t_lim);
+		}
+		l = l->next;
 	}
 }
 
-void	limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
+void	limit3(t_couple_ray *basic, t_object *father, const t_ray *ray)
 {
 	t_couple_ray	limited;
 	t_list_objs		*l;

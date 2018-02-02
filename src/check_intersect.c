@@ -28,6 +28,30 @@ int		is_in_obj(const double t, const t_dot inter, t_object *obj)
 	return (0);
 }
 
+int		is_in_limited_obj(const double *t, const t_ray *ray, t_object *obj)
+{
+	double	t_tmp;
+	t_ray	tmp;
+
+	tmp.equ = (t_parequation){*(t_vector*)&ray->inter, (t_vector){0, 0, 0.01}};
+	first_intersect(&tmp, obj, &t_tmp);
+	if (le(t_tmp, *t))
+	{
+		second_intersect(&tmp, obj, &t_tmp);
+		if (le(*t, t_tmp))
+		{
+			if (obj->limit)
+			{
+				if (is_in_limit(ray, obj))
+					return (1);
+			}
+			else
+				return (1);
+		}
+	}
+	return (0);
+}
+
 void	choice_intersect(t_list_ray *l, t_ray *ray, double *dist)
 {
 	while (l)
@@ -52,7 +76,7 @@ double	check_intersect(t_ray *ray, t_list_objs *l)
 	double			dist;
 	t_couple_ray	basic;
 	t_list_ray		*l_ray;
-	
+
 	dist = 0;
 	while (l)
 	{
@@ -64,9 +88,9 @@ double	check_intersect(t_ray *ray, t_list_objs *l)
 			transform_inter(&basic.a, l->obj);
 			transform_inter(&basic.b, l->obj);
 			if (l->obj->limit)
-				limit(&basic, l->obj, ray);
+				limit3(&basic, l->obj, ray);
 			if (l->obj->negative_obj)
-				negative_obj(&basic, l->obj, ray);
+				negative_obj(&l_ray, &basic, l->obj, ray);
 			add_cell_ray(&l_ray, &basic.a, &basic.ta);
 			add_cell_ray(&l_ray, &basic.b, &basic.tb);
 			choice_intersect(l_ray, ray, &dist);

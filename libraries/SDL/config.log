@@ -53,7 +53,7 @@ configure:2955: found /usr/bin/gcc
 configure:2966: result: gcc
 configure:3195: checking for C compiler version
 configure:3204: gcc --version >&5
-gcc (Ubuntu 5.4.0-6ubuntu1~16.04.5) 5.4.0 20160609
+gcc (Ubuntu 5.4.0-6ubuntu1~16.04.6) 5.4.0 20160609
 Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -64,9 +64,9 @@ Using built-in specs.
 COLLECT_GCC=gcc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper
 Target: x86_64-linux-gnu
-Configured with: ../src/configure -v --with-pkgversion='Ubuntu 5.4.0-6ubuntu1~16.04.5' --with-bugurl=file:///usr/share/doc/gcc-5/README.Bugs --enable-languages=c,ada,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-5 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-libmpx --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-5-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-5-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-5-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 5.4.0-6ubuntu1~16.04.6' --with-bugurl=file:///usr/share/doc/gcc-5/README.Bugs --enable-languages=c,ada,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-5 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-libmpx --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-5-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-5-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-5-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
 Thread model: posix
-gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.5) 
+gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.6) 
 configure:3215: $? = 0
 configure:3204: gcc -V >&5
 gcc: error: unrecognized command line option '-V'
@@ -325,7 +325,7 @@ configure:11507: checking for gcc
 configure:11534: result: gcc
 configure:11763: checking for C compiler version
 configure:11772: gcc --version >&5
-gcc (Ubuntu 5.4.0-6ubuntu1~16.04.5) 5.4.0 20160609
+gcc (Ubuntu 5.4.0-6ubuntu1~16.04.6) 5.4.0 20160609
 Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -336,9 +336,9 @@ Using built-in specs.
 COLLECT_GCC=gcc
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper
 Target: x86_64-linux-gnu
-Configured with: ../src/configure -v --with-pkgversion='Ubuntu 5.4.0-6ubuntu1~16.04.5' --with-bugurl=file:///usr/share/doc/gcc-5/README.Bugs --enable-languages=c,ada,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-5 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-libmpx --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-5-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-5-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-5-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 5.4.0-6ubuntu1~16.04.6' --with-bugurl=file:///usr/share/doc/gcc-5/README.Bugs --enable-languages=c,ada,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-5 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-libmpx --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-5-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-5-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-5-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
 Thread model: posix
-gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.5) 
+gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.6) 
 configure:11783: $? = 0
 configure:11772: gcc -V >&5
 gcc: error: unrecognized command line option '-V'
@@ -361,7 +361,7 @@ configure:12072: found /usr/bin/g++
 configure:12083: result: g++
 configure:12110: checking for C++ compiler version
 configure:12119: g++ --version >&5
-g++ (Ubuntu 5.4.0-6ubuntu1~16.04.5) 5.4.0 20160609
+g++ (Ubuntu 5.4.0-6ubuntu1~16.04.6) 5.4.0 20160609
 Copyright (C) 2015 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -372,9 +372,9 @@ Using built-in specs.
 COLLECT_GCC=g++
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/5/lto-wrapper
 Target: x86_64-linux-gnu
-Configured with: ../src/configure -v --with-pkgversion='Ubuntu 5.4.0-6ubuntu1~16.04.5' --with-bugurl=file:///usr/share/doc/gcc-5/README.Bugs --enable-languages=c,ada,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-5 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-libmpx --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-5-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-5-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-5-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
+Configured with: ../src/configure -v --with-pkgversion='Ubuntu 5.4.0-6ubuntu1~16.04.6' --with-bugurl=file:///usr/share/doc/gcc-5/README.Bugs --enable-languages=c,ada,c++,java,go,d,fortran,objc,obj-c++ --prefix=/usr --program-suffix=-5 --enable-shared --enable-linker-build-id --libexecdir=/usr/lib --without-included-gettext --enable-threads=posix --libdir=/usr/lib --enable-nls --with-sysroot=/ --enable-clocale=gnu --enable-libstdcxx-debug --enable-libstdcxx-time=yes --with-default-libstdcxx-abi=new --enable-gnu-unique-object --disable-vtable-verify --enable-libmpx --enable-plugin --with-system-zlib --disable-browser-plugin --enable-java-awt=gtk --enable-gtk-cairo --with-java-home=/usr/lib/jvm/java-1.5.0-gcj-5-amd64/jre --enable-java-home --with-jvm-root-dir=/usr/lib/jvm/java-1.5.0-gcj-5-amd64 --with-jvm-jar-dir=/usr/lib/jvm-exports/java-1.5.0-gcj-5-amd64 --with-arch-directory=amd64 --with-ecj-jar=/usr/share/java/eclipse-ecj.jar --enable-objc-gc --enable-multiarch --disable-werror --with-arch-32=i686 --with-abi=m64 --with-multilib-list=m32,m64,mx32 --enable-multilib --with-tune=generic --enable-checking=release --build=x86_64-linux-gnu --host=x86_64-linux-gnu --target=x86_64-linux-gnu
 Thread model: posix
-gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.5) 
+gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.6) 
 configure:12130: $? = 0
 configure:12119: g++ -V >&5
 g++: error: unrecognized command line option '-V'
@@ -852,7 +852,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for strlcpy
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccbYS1xY.o: In function `main':
+/tmp/ccQ5phmM.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:98: undefined reference to `strlcpy'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -961,7 +961,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for strlcat
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccKVxl24.o: In function `main':
+/tmp/ccHjj0NN.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:98: undefined reference to `strlcat'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1077,7 +1077,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for _strrev
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccupLjm9.o: In function `main':
+/tmp/ccLlh0XY.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:99: undefined reference to `_strrev'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1187,7 +1187,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for _strupr
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/cc89iwvf.o: In function `main':
+/tmp/cckSPfp3.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:99: undefined reference to `_strupr'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1297,7 +1297,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for _strlwr
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccW83ecg.o: In function `main':
+/tmp/ccYc01C4.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:99: undefined reference to `_strlwr'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1428,7 +1428,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for itoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/cc5s2c3k.o: In function `main':
+/tmp/ccJVq9qb.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:102: undefined reference to `itoa'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1541,7 +1541,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for _ltoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccWqGMfq.o: In function `main':
+/tmp/ccJ2tKpi.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:102: undefined reference to `_ltoa'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1654,7 +1654,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for _uitoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccIyDH8r.o: In function `main':
+/tmp/cc5hWMnj.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:102: undefined reference to `_uitoa'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1767,7 +1767,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for _ultoa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccu0kCXu.o: In function `main':
+/tmp/ccLGYZ7n.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:102: undefined reference to `_ultoa'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -1888,7 +1888,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for _i64toa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/cct1Ls9J.o: In function `main':
+/tmp/cccrLUFB.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:104: undefined reference to `_i64toa'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -2003,7 +2003,7 @@ configure: failed program was:
 configure:16641: result: no
 configure:16641: checking for _ui64toa
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccdTtaRO.o: In function `main':
+/tmp/ccmQonRC.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:104: undefined reference to `_ui64toa'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -2148,7 +2148,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for _stricmp
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccTrmIBf.o: In function `main':
+/tmp/cc8RaYp4.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:110: undefined reference to `_stricmp'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -2276,7 +2276,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for _strnicmp
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccZDPAgn.o: In function `main':
+/tmp/ccVvIJx4.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:111: undefined reference to `_strnicmp'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -2447,7 +2447,7 @@ configure:16641: $? = 0
 configure:16641: result: yes
 configure:16641: checking for sysctlbyname
 configure:16641: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c  >&5
-/tmp/ccsy7J1R.o: In function `main':
+/tmp/ccNnsgWH.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:121: undefined reference to `sysctlbyname'
 collect2: error: ld returned 1 exit status
 configure:16641: $? = 1
@@ -3428,7 +3428,7 @@ configure:23130: $? = 0
 configure:23136: result: yes
 configure:23140: checking for dlopen in -lc
 configure:23165: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos    conftest.c -lc   -lm >&5
-/tmp/ccmtlogG.o: In function `main':
+/tmp/ccX4CAXC.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:126: undefined reference to `dlopen'
 collect2: error: ld returned 1 exit status
 configure:23165: $? = 1
@@ -5877,7 +5877,7 @@ configure:22789: $? = 0
 configure:22803: result: yes
 configure:22806: checking for pthread_set_name_np
 configure:22826: gcc -o conftest -g -O2 -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos   -D_REENTRANT  -Iinclude -I/home/flavian/Rendus/rt/libraries/SDL/include -idirafter /home/flavian/Rendus/rt/libraries/SDL/src/video/khronos     conftest.c  -lm -lpthread >&5
-/tmp/ccZCN2yf.o: In function `main':
+/tmp/ccMyXLXN.o: In function `main':
 /home/flavian/Rendus/rt/libraries/SDL/conftest.c:176: undefined reference to `pthread_set_name_np'
 collect2: error: ld returned 1 exit status
 configure:22826: $? = 1
@@ -6473,6 +6473,7 @@ config.status:1339: creating sdl2-config.cmake
 config.status:1339: creating SDL2.spec
 config.status:1339: creating sdl2.pc
 config.status:1339: creating include/SDL_config.h
+config.status:1499: include/SDL_config.h is unchanged
 config.status:1513: executing libtool commands
 config.status:1513: executing sdl2_config commands
 config.status:1513: executing summary commands
