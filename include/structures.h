@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 14:30:02 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 16:09:05 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct				s_evt_data
 {
 }							t_evt_data;
 
-/*	Mes propre matrices, à changer si besoin est*/
 typedef struct				s_matrix
 {
 	double					**mat;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_intersect.c                                  :+:      :+:    :+:   */
+/*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/03 12:43:08 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 16:06:47 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ double			check_intersect(t_ray *ray, t_list_objs *l, int check_lights)
 		}
 		l = l->next;
 	}
-	is_in_front_of_vector(*(t_dot*)&ray->equ.vc, ray->inter, &ray->normal);
+	correct_normal(*(t_dot*)&ray->equ.vc, ray->inter, &ray->normal);
 	return (dist);
 }
 

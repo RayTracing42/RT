@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/03 14:28:30 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 15:11:01 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs,
 	return (0);
 }
 
-SDL_Color	add_colors(SDL_Color dst, SDL_Color src)
+static SDL_Color	add_colors(SDL_Color dst, SDL_Color src)
 {
 	SDL_Color res;
 

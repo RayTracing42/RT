@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 14:45:00 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/23 05:41:10 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/03 16:06:05 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_vector	vect_cross_product(const t_vector v1, const t_vector v2)
 					v1.x * v2.y - v1.y * v2.x});
 }
 
-void		is_in_front_of_vector(t_dot dot, t_dot inter, t_vector *normal)
+void		correct_normal(t_dot dot, t_dot inter, t_vector *normal)
 {
 	double	d1;
 	double	d2;
