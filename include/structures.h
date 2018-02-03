@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 13:25:22 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 14:19:28 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -471,7 +471,7 @@ typedef struct				s_camera
 	t_dot					angle;
 	double					depth;
 	double					focal;
-	t_view_plane			*vp;
+	t_view_plane			vp;
 }							t_camera;
 
 typedef struct				s_list_objs
@@ -498,7 +498,7 @@ typedef struct				s_list_lights
 typedef struct				s_scene
 {
 	double					brightness;
-	t_camera				*cam;
+	t_camera				cam;
 	t_list_lights			*lights;
 	t_list_objs				*objects;
 }							t_scene;
@@ -506,7 +506,7 @@ typedef struct				s_scene
 typedef struct				s_thread_data
 {
 	SDL_Thread	*thread;
-	t_scene		*scn;
+	t_scene		scn;
 	int			n_thread;
 	int			y_begin;
 	int			y_end;

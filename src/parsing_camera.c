@@ -6,18 +6,17 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:28:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/03 13:24:40 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 14:22:53 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_camera	*parsing_camera(char *scene)
+int	parsing_camera(char *scene, t_camera *cam)
 {
 	char		*data[5];
 	t_dot		angle;
 	t_dot		origin;
-	t_camera	*cam;
 
 	if (!(data[0] = get_interval(scene, "<camera>", "</camera>"))
 		|| !(data[1] = get_interval(data[0], "<origin>", "</origin>"))
@@ -26,12 +25,12 @@ t_camera	*parsing_camera(char *scene)
 		|| !(data[4] = get_interval(data[0], "<dof>", "</dof>"))
 		|| (parsing_dot(data[1], &origin) == -1)
 		|| (parsing_dot(data[2], &angle) == -1))
-		return (NULL);
-	cam = new_camera(origin, angle, fabs(atod(data[3])), fabs(atod(data[4])));
+		return (1);
+	*cam = new_camera(origin, angle, fabs(atod(data[3])), fabs(atod(data[4])));
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
 	free(data[4]);
-	return (cam);
+	return (0);
 }

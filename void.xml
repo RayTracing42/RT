@@ -2,7 +2,8 @@
 	<brightness>30</brightness>
 
 	<camera>
-		<focal>60</focal>
+		<dof>2</dof>
+		<fov>60</fov>
 		<origin>
 			<x>-100</x>
 			<y>20</y>
@@ -78,7 +79,7 @@
 		<radius>15</radius>
 	</object>
 
-	<!light>
+	<light>
 		<type>orb</type>
 		<origin>
 			<x>0</x>

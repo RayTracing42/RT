@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 17:10:39 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/22 13:12:13 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/03 14:14:53 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** scene.c
 */
 void		delete_scene(t_scene *scene);
-t_scene		*new_scene(t_camera *cam, double brightness);
+t_scene		*new_scene(t_camera cam, double brightness);
 t_scene		*parsing_scene(char *file);
 
 #endif

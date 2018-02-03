@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 13:24:40 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 14:22:12 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ static int	main_display(void *scene)
 {
 	t_scene	*scn;
 
-	srand(time(&(time_t){0}));
 	scn = (t_scene*)scene;
-	view_plane(scn->cam);
+	view_plane(&scn->cam);
 	scanning(scn);
 	refresh_win();
 	delete_pxl_queues();

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/20 14:44:20 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 14:12:46 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_scene				*parsing_scene(char *scene);
 **	parsing_camera.c
 */
 
-t_camera			*parsing_camera(char *scene);
+int					parsing_camera(char *scene, t_camera *cam);
 
 /*
 **	parsing_lights.c
