@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/26 12:55:35 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/03 12:20:48 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_scene		*parsing(int argc, char **argv)
 	int		fd;
 
 	scn = NULL;
-	if (argc == 2 && argv[1] && ft_strstr(argv[1], ".xml"))
+	if ((argc == 2 || (argc == 3 && ft_atoi(argv[2]) > 0)) && argv[1] && ft_strstr(argv[1], ".xml"))
 	{
 		if ((fd = open(argv[1], O_RDONLY)) == -1)
 			exit_custom_error("rt", ":open() failed");
@@ -116,6 +116,9 @@ t_scene		*parsing(int argc, char **argv)
 			exit_custom_error("rt", ":parsing_object() failed");
 		if (close(fd) == -1)
 			exit_custom_error("rt", ":close() failed");
+		fd = (argc == 3 ? ft_atoi(argv[2]) : 1);
+		get_sdl_core()->nb_threads = fd;
+		get_pxl_queue(fd);
 		free(scene);
 		free(file);
 	}

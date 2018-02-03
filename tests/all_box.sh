@@ -17,5 +17,5 @@ fi
 for map in box/*$1*.xml
 do
 	echo "$PWD/$map"
-	"$EXE" "$PWD/$map"
+	"$EXE" "$PWD/$map" 128
 done
