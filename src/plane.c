@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/30 04:11:31 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/03 12:36:52 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ double					plane_intersect(t_ray *ray, t_parequation e,
 
 static t_vector	get_plane_normal(t_dot *inter, t_object *obj)
 {
-	(void)inter;
 	t_plane	*p;
 
+	(void)inter;
 	p = (t_plane*)obj;
 	return (p->normal);
 }

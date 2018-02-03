@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:46:09 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 20:18:32 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/01/31 12:03:46 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int			is_in_parallel_light(t_light *light, t_ray *light_ray)
 	return (1);
 }
 
-static t_vector		get_par_ray_vect(t_dot *pos, t_light *light)
+static t_vector		get_par_ray_vect(t_dot pos, t_light *light)
 {
 	(void)pos;
 	return ((t_vector){-light->direction.x, -light->direction.y,

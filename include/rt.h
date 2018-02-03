@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/31 05:47:03 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/03 12:43:19 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void			view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 
 t_ray			first_intersect(const t_ray *ray, t_object *obj, double *tmp);
 t_ray			second_intersect(const t_ray *ray, t_object *obj, double *tmp);
-double			check_intersect(t_ray *ray, t_list_objs *l_objs);
+double			check_intersect(t_ray *ray, t_list_objs *l, int check_lights);
 
 void			scanning(t_scene *scn);
 t_parequation	transform_equ(t_ray *ray, t_object *obj);

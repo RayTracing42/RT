@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/02 17:49:40 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 12:43:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	choice_intersect(t_list_ray *l, t_ray *ray, double *dist)
 	}
 }
 
-double	check_intersect(t_ray *ray, t_list_objs *l)
+double			check_intersect(t_ray *ray, t_list_objs *l, int check_lights)
 {
 	double			dist;
 	t_couple_ray	basic;
@@ -80,20 +80,23 @@ double	check_intersect(t_ray *ray, t_list_objs *l)
 	dist = 0;
 	while (l)
 	{
-		basic.a = first_intersect(ray, l->obj, &basic.ta);
-		basic.b = second_intersect(ray, l->obj, &basic.tb);
-		if (basic.a.nb_intersect > 0 && basic.b.nb_intersect > 0)
+		if (!l->obj->is_light || check_lights)
 		{
-			l_ray = NULL;
-			transform_inter(&basic.a, l->obj);
-			transform_inter(&basic.b, l->obj);
-			if (l->obj->limit)
-				limit(&basic, l->obj, ray);
-			if (l->obj->negative_obj)
-				negative_obj(&l_ray, &basic, l->obj, ray);
-			add_cell_ray(&l_ray, &basic.a, &basic.ta);
-			add_cell_ray(&l_ray, &basic.b, &basic.tb);
-			choice_intersect(l_ray, ray, &dist);
+			basic.a = first_intersect(ray, l->obj, &basic.ta);
+			basic.b = second_intersect(ray, l->obj, &basic.tb);
+			if (basic.a.nb_intersect > 0 && basic.b.nb_intersect > 0)
+			{
+				l_ray = NULL;
+				transform_inter(&basic.a, l->obj);
+				transform_inter(&basic.b, l->obj);
+				if (l->obj->limit)
+					limit(&basic, l->obj, ray);
+				if (l->obj->negative_obj)
+					negative_obj(&l_ray, &basic, l->obj, ray);
+				add_cell_ray(&l_ray, &basic.a, &basic.ta);
+				add_cell_ray(&l_ray, &basic.b, &basic.tb);
+				choice_intersect(l_ray, ray, &dist);
+			}
 		}
 		l = l->next;
 	}

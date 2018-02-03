@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 13:51:24 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/26 19:22:05 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/01/31 11:53:05 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static size_t	get_type_size(t_light_type type)
 {
-	const size_t	sizes[3] = {sizeof(t_orb_light),
+	const size_t	sizes[4] = {sizeof(t_obj_light),
+								sizeof(t_orb_light),
 								sizeof(t_parallel_light),
 								sizeof(t_spotlight)};
-
 	return (sizes[type]);
 }
 
