@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/03 12:36:52 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 13:07:23 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,12 @@ static SDL_Color	div_colors(SDL_Color src, t_scene *scn)
 	return (dst);
 }
 
-static void	opacify_color(t_ray *light_ray)
+static void	opacify_color(t_ray *light_ray, double *opacity)
 {
-	double	opacity;
-
-	opacity = 1 - ft_dmin(light_ray->shad_opacity, 1);
-	light_ray->color.r *= opacity;
-	light_ray->color.g *= opacity;
-	light_ray->color.b *= opacity;
+	*opacity = 1 - ft_dmin(light_ray->shad_opacity, 1);
+	light_ray->color.r *= *opacity;
+	light_ray->color.g *= *opacity;
+	light_ray->color.b *= *opacity;
 }
 
 SDL_Color	shadows(t_ray *ray, t_scene *scn)
@@ -64,7 +62,8 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 	t_list_lights	*tmp;
 	t_ray			light_ray;
 	SDL_Color		multi_lights;
-(void)opacify_color;
+	double			opacity;
+
 	multi_lights = div_colors(ray->color, scn);
 	tmp = scn->lights;
 	while (tmp != NULL)
@@ -72,15 +71,14 @@ SDL_Color	shadows(t_ray *ray, t_scene *scn)
 		light_ray.equ.vd = tmp->light->get_ray_vect(ray->inter, tmp->light);
 		light_ray.equ.vc = *(t_vector*)&ray->inter;
 		light_ray.color = ray->color;
-		if (!check_objs_on_ray(&light_ray, scn->objects, tmp->light))
-//			opacify_color(&light_ray);
-		{
-			light_ray.normal = ray->normal;
-			light_ray.light = tmp->light;
-			multi_lights = add_colors(multi_lights,
-										add_colors(get_shade_col(&light_ray),
-											get_specular_col(ray, &light_ray)));
-		}
+		opacity = 1;
+		if (check_objs_on_ray(&light_ray, scn->objects, tmp->light))
+			opacify_color(&light_ray, &opacity);
+		light_ray.normal = ray->normal;
+		light_ray.light = tmp->light;
+		multi_lights = add_colors(multi_lights,
+									add_colors(get_shade_col(&light_ray, opacity),
+										get_specular_col(ray, &light_ray, opacity)));
 		tmp = tmp->next;
 	}
 	return (multi_lights);
