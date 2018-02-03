@@ -23,12 +23,13 @@ LFT_INCLUDE = $(LFT_PATH)/includes
 SRC = camera.c cone.c cylinder.c events.c graphics.c key_functions.c light.c \
 light_shading.c main.c matrice_rotation.c objects.c equations.c orb_light.c \
 parallel_light.c plane.c reflexion.c refract_list.c refraction.c scanning.c \
-scene.c scene_lights.c scene_objs.c shadows.c sphere.c spotlight.c \
+scene.c scene_lights.c scene_objs.c shadows.c sphere.c spotlight.c box.c \
 utils.c vectors.c view_plane.c parsing.c parsing_tools.c parsing_camera.c \
 parsing_scene.c parsing_lights.c parsing_objects.c parsing_transformations.c \
 transformations.c matrix_ops.c matrix.c check_intersect.c parsing_limit.c \
-limit.c reflect_refract_tree.c matrix_ops2.c parsing_negative_obj.c \
-negative_obj.c get_interval.c triangle.c vectors2.c \
+limit.c limit2.c reflect_refract_tree.c matrix_ops2.c parsing_negative_obj.c \
+negative_obj.c get_interval.c triangle.c vectors2.c list_ray.c hyperboloid.c \
+thread_data.c rendering.c objects2.c
 
 SRC:= $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)
@@ -61,12 +62,16 @@ sdl:
 clean:
 	rm -rf $(OBJ)
 	make clean -C $(LFT_PATH)
+	rm -rf $(INCLUDE_DIR)/libft.h
+	rm -rf $(LIB_DIR)/libft.a
 
 
 fclean: clean
 	rm -rf $(NAME)
 	make fclean -C $(LFT_PATH)
 	rm -rf $(SDL_PATH)/build
+	rm -rf $(INCLUDE_DIR)/SDL2
+	rm -rf $(LIB_DIR)/libSDL2.a
 
 re: fclean all
 

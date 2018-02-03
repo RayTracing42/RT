@@ -35,6 +35,8 @@ void	delete_scene(t_scene *scene)
 	{
 		while (scene->objects)
 			delete_cell_obj(&scene->objects);
+		while (scene->lights)
+			delete_cell_light(&scene->lights);
 		delete_camera(scene->cam);
 		free(scene);
 	}

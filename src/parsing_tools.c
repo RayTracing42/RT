@@ -12,13 +12,6 @@
 
 #include "rt.h"
 
-/*
-**	get_interval() retourne l'intervalle alloué entre deux strings valides;
-**	Retourne NULL si l'un des parametres n'est pas valide;
-**	Retourne NULL si l'intervalle est inexistant : "";
-**	Retourne NULL si start et stop ne sont pas trouvés dans src;
-*/
-
 int		between(double value, double low_limit, double height_limit)
 {
 	if (value < low_limit || value > height_limit)
@@ -50,29 +43,4 @@ double	atod(char *src)
 		decimal_part = int_to_decimal(tmp_decimal);
 	}
 	return (integer_part + decimal_part);
-}
-
-char	*get_interval(const char *src, const char *start, const char *stop)
-{
-	const char	*ptr_start;
-	const char	*ptr_stop;
-	char		*dst;
-	int			len_dst;
-
-	dst = NULL;
-	if (src && ft_strcmp(src, "") && start && ft_strcmp(start, "")
-		&& stop && ft_strcmp(stop, ""))
-	{
-		if ((ptr_start = ft_strstr(src, start)))
-		{
-			ptr_start = ptr_start + ft_strlen(start);
-			if ((ptr_stop = ft_strstr(ptr_start, stop))
-				&& (len_dst = ft_strlen(ptr_start) - ft_strlen(ptr_stop)) > 0)
-			{
-				if ((dst = (char *)ft_memalloc(len_dst + 1)))
-					dst = ft_strncpy(dst, ptr_start, len_dst);
-			}
-		}
-	}
-	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/31 13:23:25 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 12:33:00 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@
 
 # define TITLE			"RT"
 # define POW			10000000000
+# define EMPTY			0
+# define FULL			1
+# define NONE			2
 
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <math.h>
 # include <fcntl.h>
+# include <sys/timeb.h>
 # include "camera.h"
 # include "events.h"
 # include "graphics.h"
@@ -59,6 +63,7 @@ double			check_intersect(t_ray *ray, t_list_objs *l_objs, int check_lights);
 void			scanning(t_scene *scn);
 t_parequation	transform_equ(t_ray *ray, t_object *obj);
 void			transform_inter(t_ray *ray, t_object *obj);
+void			valid_ray(t_ray *r1, double *t_r1, t_ray *r2, double *t_r2);
 
 SDL_Color		effects(t_ray *ray, t_scene *scn);
 SDL_Color		shadows(t_ray *ray, t_scene *scn);
@@ -81,30 +86,40 @@ t_dot			equation_get_dot(t_parequation *eq, double t);
 int				get_quad_equation_sol(double *res, double fac[4], int i);
 int				gt(double nb1, double nb2);
 int				lt(double nb1, double nb2);
+int				ge(double nb1, double nb2);
+int				le(double nb1, double nb2);
 int				eq(double nb1, double nb2);
-
-/*
-**	vectors.c
-*/
-
-double				vect_dot_product(const t_vector *v1, const t_vector *v2);
-double				get_vect_lenght(const t_vector *vect);
-double				get_dot_dist(t_dot *d1, t_dot *d2);
 
 /*
 **	utils.c
 */
 
-t_vector			vector(double x, double y, double z);
-t_dot				dot(double x, double y, double z);
-double				angle_between_vectors(t_vector a, t_vector b);
-int					get_status(char *status);
+t_vector		vector(double x, double y, double z);
+t_dot			dot(double x, double y, double z);
+double			angle_between_vectors(t_vector a, t_vector b);
+int				get_status(char *status);
 
 /*
-**	limit.c
+**	limit.c // limit2.c
 */
 
-int					is_in_limit(t_ray *ray, t_object *father);
-void				check_limit_intersect(t_ray *ray, t_object *father, double *dist);
+void			limit(t_couple_ray *basic, t_object *father, const t_ray *ray);
+void			limit2(t_couple_ray *limited, t_ray *tmp, double *t_tmp);
+int				is_in_limit(const t_ray *ray, t_object *father);
+
+/*
+**	negative_obj.c
+*/
+
+void			negative_obj(t_list_ray **l_ray, t_couple_ray *basic, t_object *father, const t_ray *ray);
+
+
+
+int				is_in_obj(const double t, const t_dot inter, t_object *obj);
+int				is_in_limited_obj(const double *t, const t_ray *ray, t_object *obj);
+
+
+void			add_cell_ray(t_list_ray **head, t_ray *ray, double *dist);
+void			delete_cell_ray(t_list_ray **cell);
 
 #endif

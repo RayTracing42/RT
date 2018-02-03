@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 17:44:00 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/21 03:28:48 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void		translate_object(t_object *obj, double x, double y, double z);
 /*
 ** box.c
 */
-/*t_box		*new_box(t_dot fbl_corner, double x_width, double y_width,
-					double z_width);*/
+void		box_transform_planes(t_box *box, t_trans_data trs);
+void		box_dependency_lists(t_box *box);
+t_box		*new_box(t_objs_comp args, t_dot size);
+void		delete_box(t_box *box);
 
 /*
 ** cone.c
@@ -44,6 +46,12 @@ t_cone		*new_cone(t_objs_comp args, double angle);
 */
 void		delete_cylinder(t_cylinder *cylinder);
 t_cylinder	*new_cylinder(t_objs_comp args, double radius);
+
+/*
+** hyperboloid.c
+*/
+t_hyperboloid			*new_hyperboloid(t_objs_comp args, double a, double b, double c, double d);
+void					delete_hyperboloid(t_hyperboloid *h);
 
 /*
 ** plane.c

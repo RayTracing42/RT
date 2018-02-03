@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-#include <math.h>
 
 t_camera	*new_camera(const t_dot origin, double angle_x, double angle_y,
 	double angle_z)
