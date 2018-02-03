@@ -2,7 +2,7 @@
 	<brightness>30</brightness>
 
 	<camera>
-		<dof>2</dof>
+		<depth>2</depth>
 		<fov>60</fov>
 		<origin>
 			<x>-100</x>
@@ -11,7 +11,7 @@
 		</origin>
 		<angle>
 			<x>0</x>
-			<y>00</y>
+			<y>0</y>
 			<z>0</z>
 		</angle>
 	</camera>

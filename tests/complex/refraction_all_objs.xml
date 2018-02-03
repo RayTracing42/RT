@@ -5,7 +5,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 
 	<camera>
 		<fov>60</fov>
-		<dof>0</dof>
+		<depth>0</depth>
 		<origin>
 			<x>-100</x>
 			<y>20</y>

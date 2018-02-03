@@ -3,7 +3,7 @@
 
 	<camera>
 		<fov>60</fov>
-		<dof>2</dof>
+		<depth>2</depth>
 		<origin>
 			<x>-100</x>
 			<y>20</y>

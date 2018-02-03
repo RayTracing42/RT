@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:28:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/03 14:22:53 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 14:39:59 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	parsing_camera(char *scene, t_camera *cam)
 		|| !(data[1] = get_interval(data[0], "<origin>", "</origin>"))
 		|| !(data[2] = get_interval(data[0], "<angle>", "</angle>"))
 		|| !(data[3] = get_interval(data[0], "<fov>", "</fov>"))
-		|| !(data[4] = get_interval(data[0], "<dof>", "</dof>"))
+		|| !(data[4] = get_interval(data[0], "<depth>", "</depth>"))
 		|| (parsing_dot(data[1], &origin) == -1)
 		|| (parsing_dot(data[2], &angle) == -1))
 		return (1);

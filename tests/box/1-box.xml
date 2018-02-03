@@ -2,7 +2,8 @@
 	<brightness>20</brightness>
 
 	<camera>
-		<focal>60</focal>
+		<fov>60</fov>
+		<depth>0</depth>
 		<origin>
 			<x>-100</x>
 			<y>20</y>
