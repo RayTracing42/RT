@@ -1,7 +1,9 @@
 <scene>
 	<brightness>75</brightness>
-	
+
 	<camera>
+		<fov>60</fov>
+		<dof>0</dof>
 		<origin>
 			<x>-100</x>
 			<y>50</y>
@@ -12,7 +14,7 @@
 			<y>20</y>
 			<z>0</z>
 		</angle>
-	</camera>	
+	</camera>
 
 	<object>
 		<type>sphere</type>

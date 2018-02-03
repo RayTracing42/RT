@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 12:43:19 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 13:25:22 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_vector		matrice_rotation_x(t_vector *m, double angle);
 t_vector		matrice_rotation_y(t_vector *m, double angle);
 t_vector		matrice_rotation_z(t_vector *m, double angle);
 
-void			view_plane(t_camera *cam, t_view_plane *vp);
+void			view_plane(t_camera *cam);
 void			view_plane_vector(int x, int y, t_camera *cam, t_vector *vd);
 
 t_ray			first_intersect(const t_ray *ray, t_object *obj, double *tmp);

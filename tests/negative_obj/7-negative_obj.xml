@@ -2,6 +2,8 @@
 	<brightness>75</brightness>
 
 	<camera>
+		<fov>60</fov>
+		<dof>0</dof>
 		<origin>
 			<x>-40</x>
 			<y>50</y>

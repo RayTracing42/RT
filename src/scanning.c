@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/03 12:36:52 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 13:25:05 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,31 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 	return (ray->color = (SDL_Color){0, 0, 0, 255});
 }
 
+static void		randomize_cam_orig(t_camera *cam)
+{
+	if (rand() % 2)
+		cam->origin.x += (cam->depth * (rand() % 2001 / 1000));
+	else
+		cam->origin.x -= (cam->depth * (rand() % 2001 / 1000));
+	if (rand() % 2)
+		cam->origin.y += (cam->depth * (rand() % 2001 / 1000));
+	else
+		cam->origin.y -= (cam->depth * (rand() % 2001 / 1000));
+	if (rand() % 2)
+		cam->origin.z += (cam->depth * (rand() % 2001 / 1000));
+	else
+		cam->origin.z -= (cam->depth * (rand() % 2001 / 1000));
+}
+
 static int		scanning_multi(void *data_void)
 {
 	t_thread_data		*data;
 	t_scanning_index	i;
 	t_ray				ray;
+	t_dot				cam_orig;
 
 	data = (t_thread_data *)data_void;
+	cam_orig = data->scn->cam->origin;
 	ray.equ.vc = *(t_vector*)&data->scn->cam->origin;
 	ray.actual_refractive_i = 1;
 	ray.limit = 1;
@@ -77,6 +95,9 @@ static int		scanning_multi(void *data_void)
 		i.x = -1;
 		while (++i.x < WIN_WIDTH)
 		{
+			data->scn->cam->origin = cam_orig;
+			randomize_cam_orig(data->scn->cam);
+			ray.equ.vc = *(t_vector*)&data->scn->cam->origin;
 			view_plane_vector(i.x, i.y, data->scn->cam, &ray.equ.vd);
 			effects(&ray, data->scn);
 			(*get_pxl_queue(data->n_thread))[++i.q] = (t_pxl_queue){0, i.x, i.y, ray.color};
