@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 14:19:28 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 14:28:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct				s_evt_data
 {
 }							t_evt_data;
 
-/*	Mes propre matrices, à changer si besoin est*/
 typedef struct				s_matrix
 {
 	double					**mat;
@@ -174,8 +173,8 @@ typedef struct				s_object
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
-	int						is_light;
 	struct s_list_objs		*negative_obj;
+	int						is_light;
 	int						status;
 }							t_object;
 
@@ -203,9 +202,10 @@ typedef struct				s_sphere
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
-	int						is_light;
 	struct s_list_objs		*negative_obj;
+	int						is_light;
 	int						status;
+
 	double					radius;
 	double					r2;
 }							t_sphere;
@@ -224,9 +224,10 @@ typedef struct				s_cylinder
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
-	int						is_light;
 	struct s_list_objs		*negative_obj;
+	int						is_light;
 	int						status;
+
 	double					radius;
 	double					r2;
 }							t_cylinder;
@@ -245,10 +246,11 @@ typedef struct				s_cone
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
-	int						is_light;
-	int						upper;
 	struct s_list_objs		*negative_obj;
+	int						is_light;
 	int						status;
+
+	int						upper;
 	double					angle;
 	double					tanalpha2;
 }							t_cone;
@@ -267,10 +269,10 @@ typedef struct				s_plane
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
-	int						is_light;
-
 	struct s_list_objs		*negative_obj;
+	int						is_light;
 	int						status;
+
 	t_vector				normal;
 	double					a;
 	double					b;
@@ -296,10 +298,10 @@ typedef struct				s_triangle
 	SDL_Color				color;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
-	int						is_light;
-
 	struct s_list_objs		*negative_obj;
+	int						is_light;
 	int						status;
+
 	t_vector				normal;
 	double					a;
 	double					b;
@@ -321,9 +323,8 @@ typedef struct		s_box
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
 	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
-	const t_vector			*(*get_normal)(t_dot *inter, struct s_object *obj);
+	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
-	t_vector				normal;
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
@@ -332,7 +333,9 @@ typedef struct		s_box
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
+	int						is_light;
 	int						status;
+
 	t_dot					size;
 	t_dot					fbl_corner;
 	t_dot					btr_corner;
@@ -358,9 +361,8 @@ typedef struct	s_hyperboloid
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
 	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
-	const t_vector			*(*get_normal)(t_dot *inter, struct s_object *obj);
+	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
-	t_vector				normal;
 	t_matrix				*trans_const;
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
@@ -369,7 +371,9 @@ typedef struct	s_hyperboloid
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
+	int						is_light;
 	int						status;
+
 	double					a2;
 	double					b2;
 	double					c2;
