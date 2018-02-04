@@ -6,7 +6,7 @@
 /*   By: llellouc <llellouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:32:58 by llellouc          #+#    #+#             */
-/*   Updated: 2018/01/24 13:33:43 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 14:19:39 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_thread_data	thread_data(int y_begin, int y_end, t_scene *scn, int n_thr
 
 	toRet.y_begin = y_begin;
 	toRet.y_end = y_end;
-	toRet.scn = scn;
+	toRet.scn = *scn;
 	toRet.n_thread = n_thread;
 
 	return (toRet);

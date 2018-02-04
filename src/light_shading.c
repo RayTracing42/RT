@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 12:42:42 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 13:07:47 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/04 16:30:02 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,20 @@
 SDL_Color	get_shade_col(t_ray *light_ray, double opacity)
 {
 	double		coef;
-	SDL_Color	*col;
+	SDL_Color	col;
 	t_vector	tmp_col;
 
-	col = &light_ray->color;
-	coef = (vect_dot_product(light_ray->equ.vd, light_ray->normal) /
-			(get_vect_lenght(&light_ray->equ.vd) *
-				get_vect_lenght(&light_ray->normal)));
+	col = light_ray->color;
+	coef = (vect_dot_product(light_ray->equ.vd, light_ray->normal) / (get_vect_lenght(&light_ray->equ.vd) * get_vect_lenght(&light_ray->normal)));
 	if (coef < 0)
 		coef = 0;
-	tmp_col.x = col->r * coef * opacity;
-	tmp_col.y = col->g * coef * opacity;
-	tmp_col.z = col->b * coef * opacity;
-	return ((SDL_Color){tmp_col.x > 255 ? 255 : tmp_col.x,
-						tmp_col.y > 255 ? 255 : tmp_col.y,
-						tmp_col.z > 255 ? 255 : tmp_col.z, 255});
+	tmp_col.x = col.r * coef * opacity;
+	tmp_col.y = col.g * coef * opacity;
+	tmp_col.z = col.b * coef * opacity;
+	col = (SDL_Color){tmp_col.x > 255 ? 255 : tmp_col.x,
+					tmp_col.y > 255 ? 255 : tmp_col.y,
+					tmp_col.z > 255 ? 255 : tmp_col.z, 255};
+	return (col);
 }
 
 SDL_Color	get_specular_col(t_ray *ray, t_ray *light_ray, double opacity)

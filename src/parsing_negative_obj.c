@@ -23,7 +23,7 @@ void	parsing_negative_obj(t_object *obj, char *neg)
 		{
 			data[1] = get_interval(data[0], "<limit>", "</limit>");
 			data[2] = get_interval(data[0], "<transformations>", "</transformations>");
-			if (!(neg_obj = parsing_object2(data[0]))
+			if (!(neg_obj = parsing_object2(data[0], 0))
 					|| !(data[3] = get_interval(data[0], "<status>", "</status>"))
 					|| (neg_obj->status = get_status(data[3])) == -1)
 				exit_custom_error("rt", ":parsing_negative_obj() failed");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_tools.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:47:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/26 14:48:05 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/04 13:36:30 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		between(double value, double low_limit, double height_limit)
 		return (-1);
 	return (1);
 }
-
+/*
 double	int_to_decimal(int n)
 {
 	double	d;
@@ -43,4 +43,26 @@ double	atod(char *src)
 		decimal_part = int_to_decimal(tmp_decimal);
 	}
 	return (integer_part + decimal_part);
+}
+*/
+double	atod(char *src)
+{
+	double	integer;
+	double	decimal;
+	char	*tmp;
+	int		i;
+
+	integer = abs(atoi(src));
+	decimal = 0;
+	if (ft_strchr(src, '.'))
+	{
+		i = 0;
+		decimal = 1;
+		ft_strncpy((tmp = ft_strnew(7)), ft_strchr(src, '.'), 7);
+		while (*(tmp + (++i)))
+			decimal *= 10;
+		decimal = atoi(tmp + 1) / decimal;
+		free(tmp);
+	}
+	return ((integer + decimal) * (*src == '-' ? -1 : 1));
 }

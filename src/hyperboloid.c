@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 16:57:05 by shiro             #+#    #+#             */
-/*   Updated: 2018/01/25 16:05:21 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/03 14:33:04 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,12 @@ static double			hyperboloid_intersection(t_ray *ray, t_parequation e,
 	return (t);
 }
 
-static const t_vector	*get_hyperboloid_normal(t_dot *inter, t_object *obj)
+static t_vector	get_hyperboloid_normal(t_dot *inter, t_object *obj)
 {
 	t_hyperboloid	*h;
 
 	h = (t_hyperboloid*)obj;
-	h->normal = (t_vector){(2 * inter->x) / h->a2, -(2 * inter->y) / h->b2, (2 * inter->z) / h->c2};
-	return (&h->normal);
+	return ((t_vector){(2 * inter->x) / h->a2, -(2 * inter->y) / h->b2, (2 * inter->z) / h->c2});
 }
 
 static int				is_in_hyperboloid(t_dot *i, t_object *obj)

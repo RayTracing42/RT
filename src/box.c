@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/25 16:05:40 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/03 14:32:43 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,23 @@ static double			box_intersect(t_ray *ray, t_parequation e, t_object *obj, int i)
 	return (its.t);
 }
 
-static const t_vector	*get_box_normal(t_dot *inter, t_object *obj)
+static t_vector	get_box_normal(t_dot *inter, t_object *obj)
 {
 	t_box	*b;
 
 	b = (t_box*)obj;
 	if (b->front->is_in_obj(inter, (t_object*)b->front))
-		return (&b->front->normal);
+		return (b->front->normal);
 	else if (b->back->is_in_obj(inter, (t_object*)b->back))
-		return (&b->back->normal);
+		return (b->back->normal);
 	else if (b->bottom->is_in_obj(inter, (t_object*)b->bottom))
-		return (&b->bottom->normal);
+		return (b->bottom->normal);
 	else if (b->top->is_in_obj(inter, (t_object*)b->top))
-		return (&b->top->normal);
+		return (b->top->normal);
 	else if (b->left->is_in_obj(inter, (t_object*)b->left))
-		return (&b->left->normal);
+		return (b->left->normal);
 	else
-		return (&b->right->normal);
+		return (b->right->normal);
 }
 
 static int				is_in_box(t_dot *i, t_object *obj)

@@ -6,11 +6,12 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 13:11:01 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/04 13:36:18 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <time.h>
 
 int			force_exit(void)
 {
@@ -29,7 +30,7 @@ static int	main_display(void *scene)
 	t_scene	*scn;
 
 	scn = (t_scene*)scene;
-	view_plane(scn->cam, scn->cam->vp);
+	view_plane(&scn->cam);
 	scanning(scn);
 	refresh_win();
 	delete_pxl_queues();
@@ -47,18 +48,6 @@ int			main(int ac, char **av)
 		ft_putendl("usage : ./rt file.xml");
 	else
 	{
-		//new_cell_light(&scn->lights, (t_light*)new_obj_light(1, (t_object*)new_sphere((t_objs_comp){(t_dot){0, 50, -10}, (SDL_Color){255, 255, 120, 255}, 0, 0, 0, 0}, 10)));
-
-		/*t_cone *c = new_cone((t_objs_comp){(t_dot){0, 20, -10}, (SDL_Color){255, 120, 255, 255}, 0, 0, 0, 0}, 10);
-		c->upper = 1;
-		scene_add_light((t_light*)new_obj_light(1, (t_object*)c), scn);
-
-		c = new_cone((t_objs_comp){(t_dot){0, 20, -10}, (SDL_Color){255, 120, 255, 255}, 0, 0, 0, 0}, 10);
-		c->upper = 0;
-		scene_add_light((t_light*)new_obj_light(1, (t_object*)c), scn);*/
-
-		//new_cell_obj(&scn->objects, ((t_obj_light*)scn->lights->light)->shape);
-
 		init_list_evts(&events, NULL);
 		t = SDL_CreateThread(main_display, "", scn);
 		wait_events(events);

@@ -6,13 +6,13 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/31 05:46:57 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/03 15:24:34 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		is_in_negative_obj(const double *t, const t_ray *ray, t_object *father, t_object *except)
+static int	is_in_negative_obj(const double *t, const t_ray *ray, t_object *father, t_object *except)
 {
 	t_list_objs	*l;
 
