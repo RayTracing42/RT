@@ -45,10 +45,10 @@ int					parsing_camera(char *scene, t_camera *cam);
 /*
 **	parsing_lights.c
 */
-t_list_lights		*parsing_light(char *scene, t_list_objs **l_objs);
+t_list_lights		*parsing_light(char *scene);
 t_orb_light			*parsing_orb_light(char *light);
 t_parallel_light	*parsing_parallel_light(char *light);
-t_obj_light			*parsing_obj_light(char *light, t_list_lights **l);
+t_obj_light			*parsing_obj_light(char *light);
 t_spotlight			*parsing_spotlight(char *light);
 
 /*
@@ -60,9 +60,9 @@ t_cylinder			*parsing_cylinder(char *object);
 t_plane				*parsing_plane(char *object);
 t_sphere			*parsing_sphere(char *object);
 t_triangle			*parsing_triangle(char *object);
-t_hyperboloid		*parsing_hyperboloid(char *object);
-t_list_objs			*parsing_object(char *scene, t_list_objs *l);
-t_object			*parsing_object2(char *object, int obj_light);
+t_hyperboloid			*parsing_hyperboloid(char *object);
+t_list_objs			*parsing_object(char *scene);
+t_object			*parsing_object2(char *object);
 
 /*
 **	parsing_transformations.c

@@ -110,10 +110,9 @@ t_scene		*parsing(int argc, char **argv)
 		if (!(scene = get_interval(file, "<scene>", "</scene>"))
 				|| !(scn = parsing_scene(scene)))
 			exit_custom_error("rt", ":parsing_scene() failed");
-		/*if (!(scn->lights = parsing_light(scene)))
-			exit_custom_error("rt", ":parsing_light() failed");*/
-		scn->lights = parsing_light(scene);
-		if (!(scn->objects = parsing_object(scene)))
+		if (!(scn->lights = parsing_light(scene, &scn->objects)))
+			exit_custom_error("rt", ":parsing_light() failed");
+		if (!(scn->objects = parsing_object(scene, scn->objects)))
 			exit_custom_error("rt", ":parsing_object() failed");
 		if (close(fd) == -1)
 			exit_custom_error("rt", ":close() failed");
