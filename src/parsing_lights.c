@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_lights.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:30:32 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/26 15:42:34 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/04 12:13:50 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_obj_light			*parsing_obj_light(char *light, t_list_lights **l)
 	t_object	*obj;
 	double		power;
 	char		*data[5];
-	
+
 	if ((data[0] = get_interval(light, "<object>", "</object>"))
 		&& (data[4] = get_interval(light, "<power>", "</power>")))
 	{

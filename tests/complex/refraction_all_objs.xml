@@ -22,7 +22,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 		<type>plane</type>
 		<origin>
 			<x>0</x>
-			<y>-100</y>
+			<y>100</y>
 			<z>0</z>
 		</origin>
 		<normal>
@@ -31,8 +31,8 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<z>0</z>
 		</normal>
 		<color>
-			<r>255</r>
-			<g>0</g>
+			<r>200</r>
+			<g>100</g>
 			<b>0</b>
 		</color>
 		<transformations>
@@ -148,7 +148,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<g>255</g>
 			<b>255</b>
 		</color>
-		<power>0.8</power>
+		<power>0.5</power>
 	</light>
 
 	<light>
@@ -163,7 +163,7 @@ Ici on peut foutre du merdier, tout ce qui est en dehors des balises "scene" n'e
 			<g>255</g>
 			<b>255</b>
 		</color>
-		<power>0.8</power>
+		<power>0.5</power>
 	</light>
 
 </scene>
