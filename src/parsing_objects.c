@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/26 12:57:35 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/05 17:31:44 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ t_triangle	*parsing_triangle(char *object)
 	char		*data[5];
 	t_objs_comp args;
 	t_dot		d[3];
-	
+
 	if (!(data[0] = get_interval(object, "<color>", "</color>"))
 			|| !(data[1] = get_interval(object, "<dot_a>", "</dot_a>"))
 			|| !(data[3] = get_interval(object, "<dot_b>", "</dot_b>"))
@@ -190,15 +190,15 @@ t_object	*parsing_object2(char *object, int obj_light)
 	obj = NULL;
 	if (!(data = get_interval(object, "<type>", "</type>")))
 		return (NULL);
-	if (!(ft_strcmp(data, "sphere")) && (obj_light == 0 || obj_light == 1))
+	if (!(ft_strcmp(data, "sphere")))
 		obj = (t_object *)parsing_sphere(object);
-	else if (!(ft_strcmp(data, "plane")) && (obj_light == 0 || obj_light == 1))
+	else if (!(ft_strcmp(data, "plane")))
 		obj = (t_object *)parsing_plane(object);
-	else if (!(ft_strcmp(data, "cylinder")) && (obj_light == 0 || obj_light == 1))
+	else if (!(ft_strcmp(data, "cylinder")))
 		obj = (t_object *)parsing_cylinder(object);
-	else if (!(ft_strcmp(data, "cone")) && (obj_light == 0 || obj_light == 1))
+	else if (!(ft_strcmp(data, "cone")))
 		obj = (t_object *)parsing_cone(object);
-	else if (!(ft_strcmp(data, "box")) && obj_light == 0)
+	else if (!(ft_strcmp(data, "box")))
 		obj = (t_object *)parsing_box(object);
 	else if (!(ft_strcmp(data, "hyperboloid")) && obj_light == 0)
 		obj = (t_object *)parsing_hyperboloid(object);

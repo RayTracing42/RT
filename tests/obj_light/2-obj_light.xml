@@ -17,7 +17,7 @@
 	</camera>
 
 <light>
-	<type>obj_light</type>
+	<type>object</type>
 	<object>
 		<type>cone</type>
 		<origin>

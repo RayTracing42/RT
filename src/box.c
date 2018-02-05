@@ -6,13 +6,13 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 14:32:43 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/05 12:41:32 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int				is_in_boundaries(const t_plane *p, t_box *b, t_dot *d)
+int						is_in_box_boundaries(const t_plane *p, t_box *b, t_dot *d)
 {
 	if (p == b->front || p == b->back)
 		return (d->z <= b->btr_corner.z && d->z >= b->fbl_corner.z &&
@@ -33,7 +33,7 @@ static void				box_plane_intersect(t_ray *ray, const t_plane *p,
 
 	e = transform_equ(ray, (t_object *)p);
 	t = p->intersect(ray, e, (t_object*)p, 0);
-	if (is_in_boundaries(p, its->box, &ray->inter))
+	if (is_in_box_boundaries(p, its->box, &ray->inter))
 	{
 		if (its->t == -1)
 			ray->nb_intersect = 1;
@@ -90,17 +90,17 @@ static int				is_in_box(t_dot *i, t_object *obj)
 
 	b = (t_box*)obj;
 	if (b->front->is_in_obj(i, (t_object*)b->front))
-		return (is_in_boundaries(b->front, b, i));
+		return (is_in_box_boundaries(b->front, b, i));
 	else if (b->back->is_in_obj(i, (t_object*)b->back))
-		return (is_in_boundaries(b->back, b, i));
+		return (is_in_box_boundaries(b->back, b, i));
 	else if (b->bottom->is_in_obj(i, (t_object*)b->bottom))
-		return (is_in_boundaries(b->bottom, b, i));
+		return (is_in_box_boundaries(b->bottom, b, i));
 	else if (b->top->is_in_obj(i, (t_object*)b->top))
-		return (is_in_boundaries(b->top, b, i));
+		return (is_in_box_boundaries(b->top, b, i));
 	else if (b->left->is_in_obj(i, (t_object*)b->left))
-		return (is_in_boundaries(b->left, b, i));
+		return (is_in_box_boundaries(b->left, b, i));
 	else if (b->right->is_in_obj(i, (t_object*)b->right))
-		return (is_in_boundaries(b->right, b, i));
+		return (is_in_box_boundaries(b->right, b, i));
 	return (0);
 }
 

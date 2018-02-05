@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:30:32 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/04 12:13:50 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/05 17:29:26 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_obj_light			*parsing_obj_light(char *light, t_list_lights **l)
 	double		power;
 	char		*data[5];
 
-	if ((data[0] = get_interval(light, "<object>", "</object>"))
+	if ((data[0] = get_interval(light, "<shape>", "</shape>"))
 		&& (data[4] = get_interval(light, "<power>", "</power>")))
 	{
 		data[1] = get_interval(data[0], "<negative_obj>", "</negative_obj>");
@@ -134,7 +134,7 @@ t_light				*parsing_light2(char *light, char *light_type, t_list_lights **l)
 		lux = (t_light *)parsing_parallel_light(light);
 	else if (!(ft_strcmp(light_type, "spot")))
 		lux = (t_light *)parsing_spotlight(light);
-	else if (!(ft_strcmp(light_type, "obj_light")))
+	else if (!(ft_strcmp(light_type, "object")))
 		lux = (t_light *)parsing_obj_light(light, l);
 	return (lux);
 }

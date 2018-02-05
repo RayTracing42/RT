@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/03 12:53:07 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/05 17:35:20 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,9 @@ t_scene		*parsing(int argc, char **argv)
 				|| !(scn = parsing_scene(scene)))
 			exit_custom_error("rt", ":parsing_scene() failed");
 		if (!(scn->lights = parsing_light(scene, &scn->objects)))
-			exit_custom_error("rt", ":parsing_light() failed");
+			ft_putstr_fd("\nWarning: no light found!\n", 2);
 		if (!(scn->objects = parsing_object(scene, scn->objects)))
-			exit_custom_error("rt", ":parsing_object() failed");
+			ft_putstr_fd("\nWarning: no object found!\n", 2);
 		if (close(fd) == -1)
 			exit_custom_error("rt", ":close() failed");
 		fd = (argc == 3 ? ft_atoi(argv[2]) : 1);

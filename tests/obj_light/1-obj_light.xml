@@ -17,8 +17,8 @@
 	</camera>
 
 <light>
-	<type>obj_light</type>
-	<object>
+	<type>object</type>
+	<shape>
 		<type>sphere</type>
 		<origin>
 			<x>100</x>
@@ -31,13 +31,13 @@
 			<b>255</b>
 		</color>
 		<radius>10</radius>
-	</object>
+	</shape>
 	<power>0.5</power>
 </light>
 
 <light>
-	<type>obj_light</type>
-	<object>
+	<type>object</type>
+	<shape>
 		<type>sphere</type>
 		<origin>
 			<x>100</x>
@@ -50,7 +50,7 @@
 			<b>100</b>
 		</color>
 		<radius>10</radius>
-	</object>
+	</shape>
 	<power>0.5</power>
 </light>
 

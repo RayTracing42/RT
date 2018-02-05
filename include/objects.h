@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 15:58:10 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/05 12:40:33 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		set_all_matrix(t_object *object, t_trans_data data);
 void		box_dependency_lists(t_box *box);
 void		box_transform_planes(t_box *box, t_trans_data trs);
 void		delete_box(t_box *box);
+int			is_in_box_boundaries(const t_plane *p, t_box *b, t_dot *d);
 t_box		*new_box(t_objs_comp args, t_dot size);
 
 /*
