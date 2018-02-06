@@ -6,6 +6,10 @@ elif [ -e ../rt ]
 then
 	EXE="$PWD"/../rt
 	echo $EXE
+elif [ -e ../debug ]
+then
+	EXE="$PWD"/../debug
+	echo $EXE
 else
 	echo Pas d\'exécutable.
 	exit
@@ -13,5 +17,5 @@ fi
 for map in simple/*$1*.xml
 do
 	echo "$PWD/$map"
-	"$EXE" "$PWD/$map"
+	"$EXE" "$PWD/$map" 128
 done

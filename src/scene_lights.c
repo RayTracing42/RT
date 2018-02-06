@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-static void	new_cell_light(t_list_lights **head, t_light *light)
+void		new_cell_light(t_list_lights **head, t_light *light)
 {
 	t_list_lights	*tmp;
 
@@ -31,9 +31,4 @@ void		delete_cell_light(t_list_lights **cell)
 	*cell = (*cell)->next;
 	free(tmp->light);
 	free(tmp);
-}
-
-void		scene_add_light(t_light *light, t_scene *scene)
-{
-	new_cell_light(&scene->lights, light);
 }

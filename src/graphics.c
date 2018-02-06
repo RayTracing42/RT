@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:52:28 by edescoin          #+#    #+#             */
-/*   Updated: 2017/09/01 13:44:19 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/01/24 13:37:16 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_sdl_core	*get_sdl_core(void)
 		return (core);
 	if (!(core = malloc(sizeof(t_sdl_core))))
 		exit_error("rt", "malloc");
-	*core = (t_sdl_core){NULL, NULL, NULL, WIN_WIDTH, WIN_HEIGHT, 0};
+	*core = (t_sdl_core){NULL, NULL, NULL, WIN_WIDTH, WIN_HEIGHT, 0, 0};
 	if (SDL_Init(SDL_VIDEO) ||
 		!(core->window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED,
 										SDL_WINDOWPOS_CENTERED,
@@ -35,11 +35,10 @@ t_sdl_core	*get_sdl_core(void)
 	return (core);
 }
 
-void		delete_sdl_core(void)
+void		delete_sdl_core()
 {
-	SDL_DestroyTexture(get_sdl_core()->target);
-	SDL_DestroyWindow(get_sdl_core()->window);
 	SDL_DestroyRenderer(get_sdl_core()->renderer);
+	SDL_DestroyWindow(get_sdl_core()->window);
 	SDL_Quit();
 	free(get_sdl_core());
 }
@@ -61,12 +60,4 @@ Uint32		get_color(int r, int g, int b)
 	col = SDL_MapRGB(f, r, g, b);
 	SDL_FreeFormat(f);
 	return (col);
-}
-
-void		put_pixel(int x, int y, SDL_Color *color)
-{
-	if (color)
-		SDL_SetRenderDrawColor(get_sdl_core()->renderer, color->r, color->g,
-								color->b, color->a);
-	SDL_RenderDrawPoint(get_sdl_core()->renderer, x, y);
 }

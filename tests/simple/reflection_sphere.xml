@@ -3,7 +3,8 @@
 	<brightness>70</brightness>
 
 	<camera>
-		<focal>60</focal>
+		<fov>60</fov>
+		<depth>0</depth>
 		<origin>
 			<x>-100</x>
 			<y>20</y>
@@ -22,6 +23,27 @@
 			<x>400</x>
 			<y>0</y>
 			<z>0</z>
+		</origin>
+		<color>
+			<r>100</r>
+			<g>0</g>
+			<b>0</b>
+		</color>
+		<physic>
+			<refraction_amount>0</refraction_amount>
+			<reflexion_amount>0.6</reflexion_amount>
+			<refraction_index>0</refraction_index>
+			<shininess>30</shininess>
+		</physic>
+		<radius>50</radius>
+	</object>
+
+	<object>
+		<type>sphere</type>
+		<origin>
+			<x>400</x>
+			<y>0</y>
+			<z>350</z>
 		</origin>
 		<color>
 			<r>100</r>

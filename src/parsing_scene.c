@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_scene.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:48:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/26 15:28:22 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/03 14:15:09 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 t_scene		*parsing_scene(char *scene)
 {
 	char		*data;
-	t_camera	*cam;
+	t_camera	cam;
 	int			brightness;
 
-	if (!(cam = parsing_camera(scene)))
+	if (parsing_camera(scene, &cam))
 		exit_custom_error("rt", ":parsing_camera() failed");
 	if (!(data = get_interval(scene, "<brightness>", "</brightness>")))
 		return (NULL);

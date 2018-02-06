@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/06 14:34:49 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/25 16:05:00 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,25 @@ static double			cone_intersection(t_ray *ray, t_parequation e,
 
 	c = (t_cone*)obj;
 	t = -1;
-	fac[_A] = pow(e.vd.x, 2) + pow(e.vd.z, 2) - pow(e.vd.y, 2) * c->tanalpha2;
+	fac[_A] = e.vd.x * e.vd.x + e.vd.z * e.vd.z - e.vd.y * e.vd.y * c->tanalpha2;
 	fac[_B] = 2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z - e.vd.y *
 		e.vc.y * c->tanalpha2);
-	fac[_C] = pow(e.vc.x, 2) + pow(e.vc.z, 2) - pow(e.vc.y, 2) * c->tanalpha2;
+	fac[_C] = e.vc.x * e.vc.x + e.vc.z * e.vc.z - e.vc.y * e.vc.y * c->tanalpha2;
 	if ((ray->nb_intersect = get_quad_equation_sol(&t, fac, i)))
+	{
 		ray->inter = equation_get_dot(&e, t);
+		ray->obj = obj;
+	}
 	return (t);
 }
 
-static const t_vector	*get_cone_normal(t_dot *inter, t_object *obj)
+static t_vector	get_cone_normal(t_dot *inter, t_object *obj)
 {
 	t_cone	*c;
 
 	c = (t_cone*)obj;
-	c->normal = (t_vector){2 * inter->x, -2 * c->tanalpha2 * inter->y,
-							2 * inter->z};
-	return (&c->normal);
+	return ((t_vector){2 * inter->x, -2 * c->tanalpha2 * inter->y,
+							2 * inter->z});
 }
 
 static int				is_in_cone(t_dot *i, t_object *obj)

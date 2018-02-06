@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_tools.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:47:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/11/26 14:48:05 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/04 13:36:30 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-/*
-**	get_interval() retourne l'intervalle alloué entre deux strings valides;
-**	Retourne NULL si l'un des parametres n'est pas valide;
-**	Retourne NULL si l'intervalle est inexistant : "";
-**	Retourne NULL si start et stop ne sont pas trouvés dans src;
-*/
 
 int		between(double value, double low_limit, double height_limit)
 {
@@ -25,7 +18,7 @@ int		between(double value, double low_limit, double height_limit)
 		return (-1);
 	return (1);
 }
-
+/*
 double	int_to_decimal(int n)
 {
 	double	d;
@@ -51,28 +44,25 @@ double	atod(char *src)
 	}
 	return (integer_part + decimal_part);
 }
-
-char	*get_interval(const char *src, const char *start, const char *stop)
+*/
+double	atod(char *src)
 {
-	const char	*ptr_start;
-	const char	*ptr_stop;
-	char		*dst;
-	int			len_dst;
+	double	integer;
+	double	decimal;
+	char	*tmp;
+	int		i;
 
-	dst = NULL;
-	if (src && ft_strcmp(src, "") && start && ft_strcmp(start, "")
-		&& stop && ft_strcmp(stop, ""))
+	integer = abs(atoi(src));
+	decimal = 0;
+	if (ft_strchr(src, '.'))
 	{
-		if ((ptr_start = ft_strstr(src, start)))
-		{
-			ptr_start = ptr_start + ft_strlen(start);
-			if ((ptr_stop = ft_strstr(ptr_start, stop))
-				&& (len_dst = ft_strlen(ptr_start) - ft_strlen(ptr_stop)) > 0)
-			{
-				if ((dst = (char *)ft_memalloc(len_dst + 1)))
-					dst = ft_strncpy(dst, ptr_start, len_dst);
-			}
-		}
+		i = 0;
+		decimal = 1;
+		ft_strncpy((tmp = ft_strnew(7)), ft_strchr(src, '.'), 7);
+		while (*(tmp + (++i)))
+			decimal *= 10;
+		decimal = atoi(tmp + 1) / decimal;
+		free(tmp);
 	}
-	return (dst);
+	return ((integer + decimal) * (*src == '-' ? -1 : 1));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reflexion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:08:20 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/22 11:09:41 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/09 11:33:25 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_vector	get_reflected_vect(const t_vector *dir, const t_vector *norm)
 {
 	double	cos_theta1;
 
-	cos_theta1 = vect_dot_product(norm, &(t_vector){-dir->x, -dir->y, -dir->z});
+	cos_theta1 = vect_dot_product(*norm, vector_inv(*dir));
 	return ((t_vector){dir->x + 2 * cos_theta1 * norm->x,
 						dir->y + 2 * cos_theta1 * norm->y,
 						dir->z + 2 * cos_theta1 * norm->z});
@@ -45,7 +45,7 @@ SDL_Color	reflect(t_ray *ray, t_scene *scn)
 		reflected_ray.limit = reflected_ray.limit -
 			(1 - ray->obj->obj_light.reflection_amount) / 100;
 		reflected_ray.tree = add_new_leaf(ray->tree, &ray->tree->reflected,
-			ray->obj, ray->tree->lvl);
+				ray->obj, ray->tree->lvl);
 		reflected_ray.equ.vc = vector(ray->inter.x, ray->inter.y, ray->inter.z);
 		reflected_ray.equ.vd = get_reflected_vect(&ray->equ.vd, &ray->normal);
 		effects(&reflected_ray, scn);

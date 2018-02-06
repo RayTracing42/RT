@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 17:10:42 by edescoin          #+#    #+#             */
-/*   Updated: 2017/11/20 17:22:32 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 15:56:10 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		mult_vect(t_vector *dest, const t_matrix *mtx,
 					const t_vector *vect);
 
 /*
-** transformations.c
+** matrix_transformations.c
 */
 void		translation(t_matrix **mtx, double x, double y, double z);
 void		x_rotation(t_matrix **mtx, double theta);

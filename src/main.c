@@ -6,11 +6,12 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/08 17:56:53 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/04 13:36:18 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <time.h>
 
 int			force_exit(void)
 {
@@ -29,9 +30,10 @@ static int	main_display(void *scene)
 	t_scene	*scn;
 
 	scn = (t_scene*)scene;
-	view_plane(scn->cam, scn->cam->vp);
+	view_plane(&scn->cam);
 	scanning(scn);
 	refresh_win();
+	delete_pxl_queues();
 	return (1);
 }
 
@@ -46,7 +48,6 @@ int			main(int ac, char **av)
 		ft_putendl("usage : ./rt file.xml");
 	else
 	{
-		get_sdl_core();
 		init_list_evts(&events, NULL);
 		t = SDL_CreateThread(main_display, "", scn);
 		wait_events(events);
