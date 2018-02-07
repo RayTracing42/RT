@@ -57,30 +57,56 @@ SDL_Color        get_sdlcolor(int i)
     return (z);
 }
 
+double	do_dist(t_dot a)
+{
+	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
+}
 
+t_dot	norma(t_dot a)
+{
+	double	dist;
 
+	dist = do_dist(a);
+	a.x = a.x / dist;
+	a.y = a.y / dist;
+	a.z = a.z / dist;
+	return (a);
+}
 
 SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
 {
 	t_dot pt;
+	t_dot vct;
 	Uint32 color;
-	int u;
-	int v;
+	float u;
+	float v;
 
 	pt.x = e.vc.x + e.vd.x * t;
 	pt.y = e.vc.y + e.vd.y * t;
 	pt.z = e.vc.z + e.vd.z * t;
 
-	u = 0.5 + atan2(pt.x - obj->origin.x,  pt.z - obj->origin.z) / (2 * M_PI);
-	// u = (u / 2 * M_PI) * obj->texture->h;
-	v = 0.5 - asin(pt.y - obj->origin.y) / M_PI;
-	// v = (v / M_PI) * obj->texture->w;
-	if (t > 0 && t < 2000 && (u > 0 && u < 1 && v > 0 && v < 1))
-	{
-		printf("%f, %f, %f\n", e.vd.x, e.vd.y, e.vd.z);
-		printf("%f, %f, %f\n", pt.x - obj->origin.x, pt.y - obj->origin.y, pt.z - obj->origin.z);
-		printf("%d, %d\n", u, v);
-	}
+	vct.x = pt.x - obj->origin.x;
+	vct.y = pt.y - obj->origin.y;
+	vct.z = pt.z - obj->origin.z;
+	vct = norma(vct);
+
+	u = 0.5 + (atan2(vct.z,  vct.x) / (2 * M_PI));
+	u = u * obj->texture->w * 15;
+	v = 0.5 - (asin(vct.y) / M_PI);
+	v = v * obj->texture->h * 15;
+	while (u < 0)
+		u = u + obj->texture->w;
+	while (v < 0)
+		v = v + obj->texture->h;
+	while (u > obj->texture->w)
+		u = u - obj->texture->w;
+	while (v > obj->texture->h)
+		v = v - obj->texture->h;
+	// if (u > 0 && u < 1)
+	// {
+	// 	printf("%f, %f\n", u, v);
+	// 	printf("%d, %d\n", obj->texture->w, obj->texture->h);
+	// }
 	// while (pt.x < 0)
 	// 	pt.x = pt.x + obj->texture->w;
 	// pt.x = (int)pt.x % (int)obj->texture->w;
