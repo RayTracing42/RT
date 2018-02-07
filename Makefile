@@ -122,7 +122,7 @@ sdl2:
 	@rm -rf ./SDL2
 	curl -o SDL2 https://www.libsdl.org/release/SDL2-2.0.5.tar.gz
 	gunzip -c SDL2 | tar xopf -
-	rm -rf SDL2
+	@rm -rf SDL2
 	mv -f ./SDL2-2.0.5 ./SDL2
 	(cd ./SDL2 && ./configure)
 	(cd ./SDL2 && sed -i.bak 's/^\prefix =.*/\prefix = $$(srcdir)/' Makefile)

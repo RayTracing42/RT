@@ -39,11 +39,11 @@ double	check_intersect(t_ray *ray, t_list_objs *l_objs)
 	return (dist);
 }
 
-Uint32 GetPixel32(SDL_Surface* image,int i,int j)
+Uint32 GetPixel32(SDL_Surface *image, int i, int j)
 {
-    if (i<0 || i>image->w-1 || j<0 || j>image->h-1)
+    if (i < 0 || i > image-> w - 1 || j < 0 || j > image-> h - 1)
         return 0;
-    return ((Uint32*)(image->pixels))[j*(image->pitch/4)+i];
+    return ((Uint32 *)(image->pixels))[j * (image->pitch / 4) + i];
 }
 
 SDL_Color        get_sdlcolor(int i)
@@ -57,22 +57,38 @@ SDL_Color        get_sdlcolor(int i)
     return (z);
 }
 
+
+
+
 SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
 {
 	t_dot pt;
 	Uint32 color;
+	int u;
+	int v;
 
 	pt.x = e.vc.x + e.vd.x * t;
 	pt.y = e.vc.y + e.vd.y * t;
 	pt.z = e.vc.z + e.vd.z * t;
 
-	while (pt.x < 0)
-		pt.x = pt.x + obj->texture->w;
-	pt.x = (int)pt.x % (int)obj->texture->w;
-	while (pt.y < 0)
-		pt.y = pt.y + obj->texture->h;
-	pt.y = (int)pt.y % (int)obj->texture->h;
-	color = GetPixel32(obj->texture, pt.x, pt.y);
+	u = 0.5 + atan2(pt.x - obj->origin.x,  pt.z - obj->origin.z) / (2 * M_PI);
+	// u = (u / 2 * M_PI) * obj->texture->h;
+	v = 0.5 - asin(pt.y - obj->origin.y) / M_PI;
+	// v = (v / M_PI) * obj->texture->w;
+	if (t > 0 && t < 2000 && (u > 0 && u < 1 && v > 0 && v < 1))
+	{
+		printf("%f, %f, %f\n", e.vd.x, e.vd.y, e.vd.z);
+		printf("%f, %f, %f\n", pt.x - obj->origin.x, pt.y - obj->origin.y, pt.z - obj->origin.z);
+		printf("%d, %d\n", u, v);
+	}
+	// while (pt.x < 0)
+	// 	pt.x = pt.x + obj->texture->w;
+	// pt.x = (int)pt.x % (int)obj->texture->w;
+	// while (pt.y < 0)
+	// 	pt.y = pt.y + obj->texture->h;
+	// pt.y = (int)pt.y % (int)obj->texture->h;
+	// color = GetPixel32(obj->texture, pt.x, pt.y);
+	color = GetPixel32(obj->texture, u, v);
 	return (get_sdlcolor((int)color));
 }
 
@@ -85,7 +101,10 @@ t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	e = transform_equ(&tmp_ray, obj);
 	*tmp = obj->intersect(&tmp_ray, e, obj, 1);
 	tmp_ray.normal = obj->get_normal(&tmp_ray.inter, obj);
-	tmp_ray.color = obj->color;
+	if (obj->texture == NULL)
+		tmp_ray.color = obj->color;
+	else
+		tmp_ray.color = getTextColor(e, *tmp, obj);
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
 	tmp_ray.obj = obj;
 	if (gt(*tmp, 0))

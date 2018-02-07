@@ -68,6 +68,8 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal, int tgl)
 	plane->get_normal = get_plane_normal;
 	plane->is_in_obj = is_in_plane;
 	plane->intersect = plane_intersect;
+	// if (!(plane->texture = SDL_LoadBMP("./file/tiles.bmp")))
+	// 	exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());
 	plane->a = normal.x;
 	plane->b = normal.y;
 	plane->c = normal.z;

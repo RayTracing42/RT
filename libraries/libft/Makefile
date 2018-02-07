@@ -94,16 +94,16 @@ OBJ = $(SRC_LIBFT:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 %.o: %.c $(INCLUDE)
-	$(CC) -Wall -Wextra -Werror -o $@ -c $< -I includes/
+	@$(CC) -Wall -Wextra -Werror -o $@ -c $< -I includes/
 
 clean:
-	rm -rf $(OBJ)
+	@rm -rf $(OBJ)
 
 fclean: clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
