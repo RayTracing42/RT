@@ -8,7 +8,7 @@
 # ============================================================================ #
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra
 NAME = rt
 
 SRC_DIR = src
