@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:52:28 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/24 13:37:16 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/07 10:26:40 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ t_sdl_core	*get_sdl_core(void)
 		!(core->renderer = SDL_CreateRenderer(core->window, -1,
 											SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE)))
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
-		core->target = SDL_CreateTexture(core->renderer,
-			SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, WIN_WIDTH, WIN_HEIGHT);
-		SDL_SetRenderTarget(core->renderer, core->target);
+	core->target = SDL_CreateTexture(core->renderer,
+		SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, WIN_WIDTH, WIN_HEIGHT);
+	SDL_SetRenderTarget(core->renderer, core->target);
 	return (core);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   blur_effect.c                                      :+:      :+:    :+:   */
+/*   perlin.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joinacio <joinacio@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:27:44 by joinacio          #+#    #+#             */
-/*   Updated: 2017/12/07 04:18:03 by joinacio         ###   ########.fr       */
+/*   Updated: 2018/02/07 10:26:39 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void perlinmaker(t_perlin *p, int x, int y)
 	while (x < 512)
 	{
 		if (x > 0 && x < 511)
-		p->r = randbet255(p->r, (p->tmp[x] + p->tmp[x-1] + p->tmp[x+1]) / 3, p->size);
+			p->r = randbet255(p->r, (p->tmp[x] + p->tmp[x-1] + p->tmp[x+1]) / 3, p->size);
 		else
-		p->r = randbet255(p->r, p->tmp[x], p->size);
+			p->r = randbet255(p->r, p->tmp[x], p->size);
 		p->tmp[x] = p->r;
 		put_pixel32(p->perlin, x, y, set_color(255, p->r, p->r, p->r));
 		x++;
@@ -61,13 +61,13 @@ void		perlin_pinpin(int x, int y)
 	p.r = rand_between(0, 255);
 	p.size = 40;
 	if ((p.perlin = SDL_CreateRGBSurface(0, 512, 512, 32, 0, 0, 0, 0)) == NULL)
-			exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
-			while (y < 512)
-			{
-				perlinmaker(&p, x, y);
-				x = 0;
-				y++;
-			}
+		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
+	while (y < 512)
+	{
+		perlinmaker(&p, x, y);
+		x = 0;
+		y++;
+	}
 	if (SDL_SaveBMP(p.perlin, "perlin.bmp") != 0)
-			exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
+		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 }
