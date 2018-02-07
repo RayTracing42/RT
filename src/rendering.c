@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 10:59:52 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/07 10:34:17 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/07 10:38:13 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,9 @@ static void	update_pxl_queue(t_pxl_queue **list_queue, int nb_threads, int *nb_e
 		if (!rendered)
 		{
 			put_pixel(list_queue[i]->x, list_queue[i]->y, &list_queue[i]->col);
+			list_queue[i]->rendered = 1;
 			if ((list_queue[i] + 1)->rendered >= -1)
 				list_queue[i]++;
-			else
-				list_queue[i]->rendered = 1;
 		}
 		else if (rendered == -1)
 		{
