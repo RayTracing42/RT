@@ -53,7 +53,7 @@ t_sphere				*new_sphere(t_objs_comp args, double radius)
 	sphere->get_normal = get_sphere_normal;
 	sphere->is_in_obj = is_in_sphere;
 	sphere->intersect = sphere_intersect;
-	if (!(sphere->texture = SDL_LoadBMP("./file/wall.bmp")))
+	if (!(sphere->texture = SDL_LoadBMP("./file/tiles.bmp")))
 		exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());
 	sphere->r2 = pow(radius, 2);
 	return (sphere);
