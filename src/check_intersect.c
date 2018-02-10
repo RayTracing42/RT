@@ -98,9 +98,9 @@ t_dot	norma(t_dot a)
 void	spherical_mapping(t_dot i, double *u, double *v, t_object *obj)
 {
 	*u = 1 + (atan2(i.x,  i.z) / (M_PI));
-	*u = *u * obj->texture->w * obj->txt_streching;
+	*u = *u * obj->texture->w * obj->txt_streching * 3;
 	*v = 0.5 - (asin(i.y) / M_PI);
-	*v = *v * obj->texture->h * obj->txt_streching;
+	*v = *v * obj->texture->h * obj->txt_streching * 3;
 }
 
 void	cylindrical_mapping(t_dot i, double *u, double *v, t_object *obj)
@@ -113,7 +113,7 @@ void	cylindrical_mapping(t_dot i, double *u, double *v, t_object *obj)
 
 void	planar_mapping(t_dot i, double *u, double *v, t_object *obj)
 {
-	(void)obj;
+	// (void)obj;
 	*u = mod(i.z * obj->texture->w * obj->txt_streching, obj->texture->w);
 	*v = mod(i.y * obj->texture->h * obj->txt_streching, obj->texture->h);
 }
@@ -135,7 +135,7 @@ SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
 	vct.y = pt.y - obj->origin.y;
 	vct.z = pt.z - obj->origin.z;
 	vct = norma(vct);
-	cylindrical_mapping(vct, &u, &v, obj);
+	planar_mapping(vct, &u, &v, obj);
 
 	/*while (u < 0)
 		u = u + obj->texture->w;
