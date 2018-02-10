@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/30 16:17:25 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/10 12:45:31 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,5 @@ void			scanning(t_scene *scn)
 	SDL_WaitThread(rendering, NULL);
 	free(threads);
 	ftime(&fin);
-
 	printf("total time: %fs\n", (fin.time + (fin.millitm)/1000.0 - debut.time - debut.millitm/1000.0));
 }

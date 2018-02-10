@@ -4,8 +4,8 @@
 	<camera>
 		<focal>60</focal>
 		<origin>
-			<x>-100</x>
-			<y>20</y>
+			<x>-10</x>
+			<y>0</y>
 			<z>0</z>
 		</origin>
 		<angle>
@@ -14,6 +14,27 @@
 			<z>0</z>
 		</angle>
 	</camera>
+
+	<object>
+		<type>sphere</type>
+		<origin>
+			<x>0</x>
+			<y>0</y>
+			<z>0</z>
+		</origin>
+		<color>
+			<r>255</r>
+			<g>255</g>
+			<b>255</b>
+		</color>
+		<physic>
+			<refraction_amount>0</refraction_amount>
+			<reflexion_amount>0</reflexion_amount>
+			<refraction_index>0</refraction_index>
+			<shininess>30</shininess>
+		</physic>
+		<radius>5</radius>
+	</object>
 
 	<light>
 		<type>orb</type>
