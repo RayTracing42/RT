@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/10 13:16:28 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/10 13:36:40 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
 	vct.y = pt.y - obj->origin.y;
 	vct.z = pt.z - obj->origin.z;
 	vct = norma(vct);
-	u = 0.5 + (atan2(vct.z,  vct.x) / (2 * M_PI));
-	u = u * obj->texture->w * 15;
-	v = 0.5 - (asin(vct.y) / M_PI);
-	v = v * obj->texture->h * 15;
+	u = 1 - (atan2(vct.z,  vct.x) / (M_PI));
+	u = u * obj->texture->w * obj->txt_streching;
+	v = 0.5 + (asin(vct.y) / M_PI);
+	v = v * obj->texture->h * obj->txt_streching;
 
 	/*while (u < 0)
 		u = u + obj->texture->w;

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/30 16:20:29 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/10 13:36:24 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_object		*new_object(t_type type, t_objs_comp args)
 	obj->trans_iconst = create_identity(4);
 	obj->trans_idir = create_identity(4);
 	obj->trans_norm = create_identity(4);
+	obj->txt_streching = 16;
 	return (obj);
 }
 

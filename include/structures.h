@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/30 16:22:03 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/10 13:35:49 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ typedef struct				s_object
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	SDL_Surface				*texture;
+	int						txt_streching;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
 }							t_object;
@@ -183,6 +184,7 @@ typedef struct				s_sphere
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	SDL_Surface				*texture;
+	int						txt_streching;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
 
@@ -203,6 +205,7 @@ typedef struct				s_cylinder
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	SDL_Surface				*texture;
+	int						txt_streching;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
 
@@ -223,6 +226,7 @@ typedef struct				s_cone
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	SDL_Surface				*texture;
+	int						txt_streching;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
 
@@ -243,6 +247,7 @@ typedef struct				s_plane
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	SDL_Surface				*texture;
+	int						txt_streching;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
 
@@ -272,6 +277,7 @@ typedef struct				s_triangle
 	t_matrix				*trans_norm;
 	SDL_Color				color;
 	SDL_Surface				*texture;
+	int						txt_streching;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
 
