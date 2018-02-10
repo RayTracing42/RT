@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/10 14:53:02 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/10 15:50:04 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,14 @@ void	spherical_mapping(t_dot i, double *u, double *v, t_object *obj)
 	*v = *v * obj->texture->h * obj->txt_streching;
 }
 
+void	cylindrical_mapping(t_dot i, double *u, double *v, t_object *obj)
+{
+	*u = 1 + (atan2(i.x,  i.z) / (M_PI));
+	*u = *u * obj->texture->w * obj->txt_streching;
+	i.y /= sqrt(i.x * i.x + i.z * i.z);
+	*v = mod(i.y * obj->texture->h * (obj->txt_streching / M_PI), obj->texture->h);
+}
+
 void	planar_mapping(t_dot i, double *u, double *v, t_object *obj)
 {
 	(void)obj;
@@ -127,7 +135,7 @@ SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
 	vct.y = pt.y - obj->origin.y;
 	vct.z = pt.z - obj->origin.z;
 	vct = norma(vct);
-	spherical_mapping(vct, &u, &v, obj);
+	cylindrical_mapping(vct, &u, &v, obj);
 
 	/*while (u < 0)
 		u = u + obj->texture->w;

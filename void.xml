@@ -4,7 +4,7 @@
 	<camera>
 		<focal>60</focal>
 		<origin>
-			<x>-10</x>
+			<x>-300</x>
 			<y>0</y>
 			<z>0</z>
 		</origin>
@@ -27,13 +27,20 @@
 			<g>255</g>
 			<b>255</b>
 		</color>
+		<transformations>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+		</transformations>
 		<physic>
 			<refraction_amount>0</refraction_amount>
 			<reflexion_amount>0</reflexion_amount>
 			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>
 		</physic>
-		<radius>5</radius>
+		<radius>50</radius>
 	</object>
 
 	<light>
