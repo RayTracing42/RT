@@ -6,7 +6,7 @@
 #    By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/09 15:55:46 by fcecilie          #+#    #+#              #
-#    Updated: 2018/01/03 18:43:25 by shiro            ###   ########.fr        #
+#    Updated: 2018/02/10 14:32:17 by shiro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,8 @@ SRC_LIBFT = ft_memset.c \
 			errors.c \
 			ft_angles.c \
 			ft_minmax.c \
-			garbage_collector.c
+			garbage_collector.c\
+			ft_mod.c
 
 INCLUDE = libft.h \
 

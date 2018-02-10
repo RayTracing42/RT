@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/10 13:36:40 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/10 14:53:02 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,28 @@ t_dot	norma(t_dot a)
 	return (a);
 }
 
+void	spherical_mapping(t_dot i, double *u, double *v, t_object *obj)
+{
+	*u = 1 + (atan2(i.x,  i.z) / (M_PI));
+	*u = *u * obj->texture->w * obj->txt_streching;
+	*v = 0.5 - (asin(i.y) / M_PI);
+	*v = *v * obj->texture->h * obj->txt_streching;
+}
+
+void	planar_mapping(t_dot i, double *u, double *v, t_object *obj)
+{
+	(void)obj;
+	*u = mod(i.z * obj->texture->w * obj->txt_streching, obj->texture->w);
+	*v = mod(i.y * obj->texture->h * obj->txt_streching, obj->texture->h);
+}
+
 SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
 {
 	t_dot pt;
 	t_dot vct;
 	Uint32 color;
-	float u;
-	float v;
+	double u;
+	double v;
 	SDL_Color	ret;
 
 	pt.x = e.vc.x + e.vd.x * t;
@@ -112,10 +127,7 @@ SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
 	vct.y = pt.y - obj->origin.y;
 	vct.z = pt.z - obj->origin.z;
 	vct = norma(vct);
-	u = 1 - (atan2(vct.z,  vct.x) / (M_PI));
-	u = u * obj->texture->w * obj->txt_streching;
-	v = 0.5 + (asin(vct.y) / M_PI);
-	v = v * obj->texture->h * obj->txt_streching;
+	spherical_mapping(vct, &u, &v, obj);
 
 	/*while (u < 0)
 		u = u + obj->texture->w;
@@ -138,7 +150,7 @@ SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
 	// pt.y = (int)pt.y % (int)obj->texture->h;
 	// color = GetPixel32(obj->texture, pt.x, pt.y);
 
-	color = GetPixel32(obj->texture, (int)u % obj->texture->w, (int)v %  obj->texture->h);
+	color = GetPixel32(obj->texture, mod(u, obj->texture->w), mod(v, obj->texture->h));
 	//color = getpixel(obj->texture, (int)u % obj->texture->w, (int)v %  obj->texture->h);
 	ret.a = 255;
 	SDL_GetRGB(color, obj->texture->format, &ret.r, &ret.g, &ret.b);

@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:22:29 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/22 17:02:43 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/10 14:31:46 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ int				get_next_line(const int fd, char **line);
 int				get_file_to_string(int fd, char **file);
 char			*ft_itoa_base(long long int n, int base, int maj);
 char			*ft_utoa_base(unsigned long long int n, int base, int maj);
+
+int				mod(int x, int y);
 
 void			exit_error(char *prog, char *err);
 void			exit_custom_error(char *prog, char *err);
