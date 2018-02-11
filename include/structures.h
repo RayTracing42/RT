@@ -6,11 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/02/10 13:35:49 by shiro            ###   ########.fr       */
-=======
-/*   Updated: 2018/02/03 16:09:05 by shiro            ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2018/02/11 11:36:42 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,12 +207,9 @@ typedef struct				s_sphere
 	int						txt_streching;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
-<<<<<<< HEAD
-=======
 	struct s_list_objs		*negative_obj;
 	int						is_light;
 	int						status;
->>>>>>> master
 
 	double					radius;
 	double					r2;
@@ -238,12 +231,9 @@ typedef struct				s_cylinder
 	int						txt_streching;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
-<<<<<<< HEAD
-=======
 	struct s_list_objs		*negative_obj;
 	int						is_light;
 	int						status;
->>>>>>> master
 
 	double					radius;
 	double					r2;
@@ -265,15 +255,12 @@ typedef struct				s_cone
 	int						txt_streching;
 	t_obj_phys				obj_light;
 	struct s_list_objs		*limit;
-<<<<<<< HEAD
 
-=======
 	struct s_list_objs		*negative_obj;
 	int						is_light;
 	int						status;
 
 	int						upper;
->>>>>>> master
 	double					angle;
 	double					tanalpha2;
 }							t_cone;

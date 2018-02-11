@@ -6,11 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/01/28 05:17:57 by joinacio         ###   ########.fr       */
-=======
-/*   Updated: 2018/02/03 15:48:47 by shiro            ###   ########.fr       */
->>>>>>> master
+/*   Updated: 2018/02/11 11:36:45 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +37,8 @@
 # include "equations.h"
 # include "events.h"
 # include "graphics.h"
-<<<<<<< HEAD
 # include "../libraries/libft/includes/libft.h"
-=======
 # include "intersections.h"
-# include "libft.h"
->>>>>>> master
 # include "lights.h"
 # include "light_shading.h"
 # include "limit.h"
