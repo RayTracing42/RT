@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/11 12:09:35 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/11 13:54:54 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ typedef struct	s_obj_texture
 {
 	SDL_Color				color;
 	SDL_Surface				*texture;
-	int						txt_streching;
+	double					txt_streching;
 	void					(*texture_mapping)(t_dot i, double *u, double *v, struct s_object *obj);
 }				t_obj_texture;
 
@@ -190,7 +190,7 @@ typedef struct				s_object
 typedef struct				s_objs_comp
 {
 	t_dot					orig;
-	SDL_Color				col;
+	t_obj_texture			txt_data;
 	double					reflection_amount;
 	double					refraction_amount;
 	double					refractive_index;

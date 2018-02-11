@@ -23,11 +23,16 @@
 			<y>0</y>
 			<z>0</z>
 		</origin>
-		<color>
-			<r>255</r>
-			<g>255</g>
-			<b>255</b>
-		</color>
+		<texture>
+			<color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+			</color>
+			<file>./file/tiles.bmp</file>
+			<scale>1</scale>
+			<mapping>spherical</mapping>
+		</texture>
 		<transformations>
 			<rotation>
 				<x>0</x>

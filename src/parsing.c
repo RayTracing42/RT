@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/05 17:35:20 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/11 12:53:23 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,6 @@ int			parsing_dot(char *data_dot, t_dot *d)
 	free(x);
 	free(y);
 	free(z);
-	return (0);
-}
-
-int			parsing_color(char *data_color, SDL_Color *c)
-{
-	char	*r;
-	char	*g;
-	char	*b;
-
-	if (!(r = get_interval(data_color, "<r>", "</r>"))
-			|| !(g = get_interval(data_color, "<g>", "</g>"))
-			|| !(b = get_interval(data_color, "<b>", "</b>")))
-		return (-1);
-	*c = (SDL_Color){atoi(r), atoi(g), atoi(b), 255};
-	free(r);
-	free(g);
-	free(b);
 	return (0);
 }
 
