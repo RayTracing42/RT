@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/11 11:28:52 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/11 12:16:04 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ t_object		*new_object(t_type type, t_objs_comp args)
 		exit_error("rt", "malloc");
 	*(t_type*)&obj->obj_type = type;
 	obj->origin = args.orig;
-	obj->color = args.col;
-	obj->texture = NULL;
-	/*if (!(obj->texture = SDL_LoadBMP("./file/tiles.bmp")))
-		exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());*/
+	obj->txt_data = (t_obj_texture){args.col, NULL, 5, NULL};
 	obj->obj_light = (t_obj_phys){args.reflection_amount,
 		args.refraction_amount, args.refractive_index,
 		args.shininess};
@@ -46,7 +43,6 @@ t_object		*new_object(t_type type, t_objs_comp args)
 	obj->trans_iconst = create_identity(4);
 	obj->trans_idir = create_identity(4);
 	obj->trans_norm = create_identity(4);
-	obj->txt_streching = 5;
 	obj->is_light = 0;
 	return (obj);
 }

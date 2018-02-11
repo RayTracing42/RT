@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/21 00:30:58 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/11 12:28:18 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 {
 	t_plane	*p;
 
-	p = new_plane((t_objs_comp){origin, o->color,
+	p = new_plane((t_objs_comp){origin, o->txt_data.color,
 			o->obj_light.reflection_amount, o->obj_light.refraction_amount,
 			o->obj_light.refractive_index, o->obj_light.shininess}, normal, 0);
 	p->status = status;
@@ -36,7 +36,7 @@ void	parsing_local_limit(t_object *o, t_dot origin, t_vector normal,
 	origin.x += o->origin.x;
 	origin.y += o->origin.y;
 	origin.z += o->origin.z;
-	p = new_plane((t_objs_comp){origin, o->color,
+	p = new_plane((t_objs_comp){origin, o->txt_data.color,
 			o->obj_light.reflection_amount, o->obj_light.refraction_amount,
 			o->obj_light.refractive_index, o->obj_light.shininess}, normal, 0);
 	p->status = status;

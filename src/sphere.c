@@ -6,11 +6,12 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/11 11:28:52 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/11 12:22:04 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include "texture_mapping.h"
 #include <math.h>
 
 static double			sphere_intersect(t_ray *ray, t_parequation e,
@@ -56,8 +57,9 @@ t_sphere				*new_sphere(t_objs_comp args, double radius)
 	sphere->get_normal = get_sphere_normal;
 	sphere->is_in_obj = is_in_sphere;
 	sphere->intersect = sphere_intersect;
-	if (!(sphere->texture = SDL_LoadBMP("./file/wall.bmp")))
+	if (!(sphere->txt_data.texture = SDL_LoadBMP("./file/wall.bmp")))
 		exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());
+	sphere->txt_data.texture_mapping = spherical_mapping;
 	sphere->r2 = pow(radius, 2);
 	return (sphere);
 }

@@ -6,11 +6,12 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/11 11:28:52 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/11 12:19:24 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include "texture_mapping.h"
 #include <math.h>
 
 static double			cylinder_intersect(t_ray *ray, t_parequation e,
@@ -56,8 +57,9 @@ t_cylinder				*new_cylinder(t_objs_comp args, double radius)
 	c->get_normal = get_cylinder_normal;
 	c->is_in_obj = is_in_cylinder;
 	c->intersect = cylinder_intersect;
-	if (!(c->texture = SDL_LoadBMP("./file/tiles.bmp")))
+	if (!(c->txt_data.texture = SDL_LoadBMP("./file/tiles.bmp")))
 		exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());
+	c->txt_data.texture_mapping = cylindrical_mapping;
 	c->r2 = pow(radius, 2);
 	return (c);
 }

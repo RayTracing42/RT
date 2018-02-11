@@ -6,11 +6,12 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 12:36:52 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/11 12:21:13 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include "texture_mapping.h"
 
 double					plane_intersect(t_ray *ray, t_parequation e,
 	t_object *obj, int i)
@@ -64,8 +65,9 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal, int tgl)
 	plane->get_normal = get_plane_normal;
 	plane->is_in_obj = is_in_plane;
 	plane->intersect = plane_intersect;
-	// if (!(plane->texture = SDL_LoadBMP("./file/tiles.bmp")))
-	// 	exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());
+	/*if (!(plane->txt_data.texture = SDL_LoadBMP("./file/tiles.bmp")))
+		exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());
+	plane->txt_data.texture_mapping = planar_mapping;*/
 	plane->a = normal.x;
 	plane->b = normal.y;
 	plane->c = normal.z;

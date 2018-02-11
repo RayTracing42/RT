@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/11 11:36:42 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/11 12:09:35 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,14 @@ typedef struct				s_obj_phys
 	double					shininess;
 }							t_obj_phys;
 
+typedef struct	s_obj_texture
+{
+	SDL_Color				color;
+	SDL_Surface				*texture;
+	int						txt_streching;
+	void					(*texture_mapping)(t_dot i, double *u, double *v, struct s_object *obj);
+}				t_obj_texture;
+
 typedef struct				s_object
 {
 	const t_type			obj_type;
@@ -171,10 +179,8 @@ typedef struct				s_object
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
-	SDL_Color				color;
-	SDL_Surface				*texture;
-	int						txt_streching;
 	t_obj_phys				obj_light;
+	t_obj_texture			txt_data;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
@@ -202,10 +208,8 @@ typedef struct				s_sphere
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
-	SDL_Color				color;
-	SDL_Surface				*texture;
-	int						txt_streching;
 	t_obj_phys				obj_light;
+	t_obj_texture			txt_data;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
@@ -226,10 +230,8 @@ typedef struct				s_cylinder
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
-	SDL_Color				color;
-	SDL_Surface				*texture;
-	int						txt_streching;
 	t_obj_phys				obj_light;
+	t_obj_texture			txt_data;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
@@ -250,12 +252,9 @@ typedef struct				s_cone
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
-	SDL_Color				color;
-	SDL_Surface				*texture;
-	int						txt_streching;
 	t_obj_phys				obj_light;
+	t_obj_texture			txt_data;
 	struct s_list_objs		*limit;
-
 	struct s_list_objs		*negative_obj;
 	int						is_light;
 	int						status;
@@ -276,10 +275,8 @@ typedef struct				s_plane
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
-	SDL_Color				color;
-	SDL_Surface				*texture;
-	int						txt_streching;
 	t_obj_phys				obj_light;
+	t_obj_texture			txt_data;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
@@ -307,10 +304,8 @@ typedef struct				s_triangle
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
-	SDL_Color				color;
-	SDL_Surface				*texture;
-	int						txt_streching;
 	t_obj_phys				obj_light;
+	t_obj_texture			txt_data;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
@@ -343,8 +338,8 @@ typedef struct		s_box
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
-	SDL_Color				color;
 	t_obj_phys				obj_light;
+	t_obj_texture			txt_data;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
@@ -381,8 +376,8 @@ typedef struct	s_hyperboloid
 	t_matrix				*trans_iconst;
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
-	SDL_Color				color;
 	t_obj_phys				obj_light;
+	t_obj_texture			txt_data;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
