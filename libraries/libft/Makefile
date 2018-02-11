@@ -6,7 +6,7 @@
 #    By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/09 15:55:46 by fcecilie          #+#    #+#              #
-#    Updated: 2018/02/10 14:32:17 by shiro            ###   ########.fr        #
+#    Updated: 2018/02/11 11:28:52 by shiro            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC_LIBFT = ft_memset.c \
 			ft_strcmp.c \
 			ft_strncmp.c \
 			ft_atoi.c \
+			ft_intlen.c \
 			ft_isalpha.c \
 			ft_isdigit.c \
 			ft_isalnum.c \

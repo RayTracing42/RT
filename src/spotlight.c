@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:04:25 by edescoin          #+#    #+#             */
-/*   Updated: 2017/12/21 12:29:47 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/01/31 12:03:46 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static int		is_in_spotlight(t_light *light, t_ray *light_ray)
 	return (1);
 }
 
-static t_vector	get_spot_ray_vect(t_dot *pos, t_light *light)
+static t_vector	get_spot_ray_vect(t_dot pos, t_light *light)
 {
-	return ((t_vector){((t_spotlight*)light)->orig.x - pos->x,
-						((t_spotlight*)light)->orig.y - pos->y,
-						((t_spotlight*)light)->orig.z - pos->z});
+	return ((t_vector){((t_spotlight*)light)->orig.x - pos.x,
+						((t_spotlight*)light)->orig.y - pos.y,
+						((t_spotlight*)light)->orig.z - pos.z});
 }
 
 t_spotlight		*new_spotlight(t_light_crd coords, SDL_Color color,

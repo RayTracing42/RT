@@ -1,7 +1,9 @@
 <scene>
 	<brightness>75</brightness>
-	
+
 	<camera>
+		<fov>60</fov>
+		<depth>0</depth>
 		<origin>
 			<x>-200</x>
 			<y>50</y>
@@ -12,7 +14,7 @@
 			<y>0</y>
 			<z>0</z>
 		</angle>
-	</camera>	
+	</camera>
 
 	<ambient_light>
 		<direction>
@@ -88,7 +90,7 @@
 	<object>
 		<type>plane</type>
 		<origin>
-			<x>1500</x>
+			<x>500</x>
 			<y>0</y>
 			<z>0</z>
 		</origin>
@@ -99,7 +101,7 @@
 			<b>100</b>
 		</color>
 		<physic>
-			<reflexion_amount>0</reflexion_amount>
+			<reflexion_amount>0.5</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
 			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>

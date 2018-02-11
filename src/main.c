@@ -6,11 +6,12 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/10 14:41:04 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/11 11:28:52 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <time.h>
 
 int			force_exit(void)
 {
@@ -29,7 +30,7 @@ static int	main_display(void *scene)
 	t_scene	*scn;
 
 	scn = (t_scene*)scene;
-	view_plane(scn->cam, scn->cam->vp);
+	view_plane(&scn->cam);
 	scanning(scn);
 	refresh_win();
 	delete_pxl_queues();

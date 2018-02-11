@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/10 15:39:50 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/11 11:28:52 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static size_t	get_type_size(t_type type)
 {
-	const size_t	sizes[5] = {sizeof(t_cone), sizeof(t_cylinder),
+	const size_t	sizes[7] = {sizeof(t_box), sizeof(t_cone),
+								sizeof(t_cylinder), sizeof(t_hyperboloid),
 								sizeof(t_plane), sizeof(t_sphere),
 								sizeof(t_triangle)};
 	return (sizes[type]);
@@ -33,16 +34,20 @@ t_object		*new_object(t_type type, t_objs_comp args)
 	/*if (!(obj->texture = SDL_LoadBMP("./file/tiles.bmp")))
 		exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());*/
 	obj->obj_light = (t_obj_phys){args.reflection_amount,
-								args.refraction_amount, args.refractive_index,
-								args.shininess};
+		args.refraction_amount, args.refractive_index,
+		args.shininess};
 	obj->get_normal = NULL;
 	obj->intersect = NULL;
+	obj->is_in_obj = NULL;
 	obj->limit = NULL;
+	obj->negative_obj = NULL;
+	obj->status = FULL;
 	obj->trans_const = create_identity(4);
 	obj->trans_iconst = create_identity(4);
 	obj->trans_idir = create_identity(4);
 	obj->trans_norm = create_identity(4);
 	obj->txt_streching = 5;
+	obj->is_light = 0;
 	return (obj);
 }
 
@@ -74,6 +79,10 @@ void			delete_object(t_object *obj)
 		delete_matrix(obj->trans_iconst);
 		delete_matrix(obj->trans_idir);
 		delete_matrix(obj->trans_norm);
+		while (obj->limit)
+			delete_cell_obj(&obj->limit);
+		while (obj->negative_obj)
+			delete_cell_obj(&obj->negative_obj);
 		free(obj);
 	}
 }

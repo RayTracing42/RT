@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:57:01 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/24 13:16:59 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/09 11:34:15 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int		get_refracted_vect(t_vector *dir, const t_vector *norm,
 	cos_t2 = get_vect_lenght(norm);
 	u_dir = vector(dir->x / cos_t1, dir->y / cos_t1, dir->z / cos_t1);
 	u_norm = vector(norm->x / cos_t2, norm->y / cos_t2, norm->z / cos_t2);
-	cos_t1 = vect_dot_product(&u_norm,
-							&(t_vector){-u_dir.x, -u_dir.y, -u_dir.z});
+	cos_t1 = vect_dot_product(u_norm, vector_inv(u_dir));
 	n1_n2 = n1 / n2;
 	if ((cos_t2 = (1 - pow(n1_n2, 2) * (1 - pow(cos_t1, 2)))) < 0)
 	{

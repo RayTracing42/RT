@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:08:20 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/24 13:16:38 by shiro            ###   ########.fr       */
+/*   Updated: 2018/01/09 11:33:25 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_vector	get_reflected_vect(const t_vector *dir, const t_vector *norm)
 {
 	double	cos_theta1;
 
-	cos_theta1 = vect_dot_product(norm, &(t_vector){-dir->x, -dir->y, -dir->z});
+	cos_theta1 = vect_dot_product(*norm, vector_inv(*dir));
 	return ((t_vector){dir->x + 2 * cos_theta1 * norm->x,
 						dir->y + 2 * cos_theta1 * norm->y,
 						dir->z + 2 * cos_theta1 * norm->z});

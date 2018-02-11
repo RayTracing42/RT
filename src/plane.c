@@ -6,12 +6,11 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/22 17:57:16 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/03 12:36:52 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#include <math.h>
 
 double					plane_intersect(t_ray *ray, t_parequation e,
 	t_object *obj, int i)
@@ -27,19 +26,17 @@ double					plane_intersect(t_ray *ray, t_parequation e,
 	if (!(denom = p->a * e.vd.x + p->b * e.vd.y + p->c * e.vd.z))
 		return (-1);
 	t = -((p->a * e.vc.x + p->b * e.vc.y + p->c * e.vc.z + p->d) / denom);
-	if (gt(t, 0))
-	{
-		ray->nb_intersect = 2;
-		ray->inter = equation_get_dot(&e, t);
-	}
+	ray->nb_intersect = 2;
+	ray->inter = equation_get_dot(&e, t);
+	ray->obj = obj;
 	return (t);
 }
 
 static t_vector	get_plane_normal(t_dot *inter, t_object *obj)
 {
-	(void)inter;
 	t_plane	*p;
 
+	(void)inter;
 	p = (t_plane*)obj;
 	return (p->normal);
 }
@@ -51,8 +48,7 @@ static int				is_in_plane(t_dot *i, t_object *obj)
 
 	p = (t_plane *)obj;
 	res = p->a * i->x + p->b * i->y + p->c * i->z + p->d;
-	res *= pow(10, 12);
-	return (!((long)res > 0 || (long)res < 0));
+	return (!(gt(res, 0) || lt(res, 0)));
 }
 
 t_plane					*new_plane(t_objs_comp args, t_vector normal, int tgl)
