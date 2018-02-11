@@ -1,44 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_intersect.c                                  :+:      :+:    :+:   */
+/*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/10 15:50:04 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/11 11:43:21 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
-
-double	check_intersect(t_ray *ray, t_list_objs *l_objs)
-{
-	double		dist;
-	double		tmp;
-	t_ray		tmp_ray;
-
-	dist = 0;
-	tmp_ray.shad_opacity = 0;
-	while (l_objs != NULL)
-	{
-		tmp_ray = first_intersect(ray, l_objs->obj, &tmp);
-		if (gt(tmp, 0) && (eq(dist, 0) || (lt(tmp, dist) && gt(dist, 0))))
-		{
-			transform_inter(&tmp_ray, tmp_ray.obj);
-			if (is_in_limit(&tmp_ray, l_objs->obj))
-			{
-				dist = tmp;
-				*ray = tmp_ray;
-			}
-			else
-				check_limit_intersect(ray, l_objs->obj, &dist);
-		}
-		l_objs = l_objs->next;
-	}
-	return (dist);
-}
 
 Uint32 GetPixel32(SDL_Surface *image, int i, int j)
 {
@@ -113,7 +86,6 @@ void	cylindrical_mapping(t_dot i, double *u, double *v, t_object *obj)
 
 void	planar_mapping(t_dot i, double *u, double *v, t_object *obj)
 {
-	// (void)obj;
 	*u = mod(i.z * obj->texture->w * obj->txt_streching, obj->texture->w);
 	*v = mod(i.y * obj->texture->h * obj->txt_streching, obj->texture->h);
 }
@@ -164,37 +136,4 @@ SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
 	SDL_GetRGB(color, obj->texture->format, &ret.r, &ret.g, &ret.b);
 	return (ret);
 	//return (get_sdlcolor(color));
-}
-
-t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
-{
-	t_ray	tmp_ray;
-	t_parequation e;
-
-	tmp_ray = *ray;
-	e = transform_equ(&tmp_ray, obj);
-	*tmp = obj->intersect(&tmp_ray, e, obj, 1);
-	tmp_ray.normal = obj->get_normal(&tmp_ray.inter, obj);
-	if (obj->texture == NULL)
-		tmp_ray.color = obj->color;
-	else
-		tmp_ray.color = getTextColor(e, *tmp, obj);
-	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
-	tmp_ray.obj = obj;
-	if (gt(*tmp, 0))
-		tmp_ray.shad_opacity += (1 - tmp_ray.obj->obj_light.refraction_amount);
-	return (tmp_ray);
-}
-
-t_ray	second_intersect(const t_ray *ray, t_object *obj, double *tmp)
-{
-	t_ray	tmp_ray;
-
-	tmp_ray = *ray;
-	*tmp = obj->intersect(&tmp_ray, transform_equ(&tmp_ray, obj), obj, 2);
-	tmp_ray.normal = obj->get_normal(&tmp_ray.inter, obj);
-	tmp_ray.color = obj->color;
-	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
-	tmp_ray.obj = obj;
-	return (tmp_ray);
 }
