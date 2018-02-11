@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/11 12:24:10 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/11 12:38:25 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,6 @@ SDL_Color        get_sdlcolor(Uint32 i)
     return (z);
 }
 
-double	do_dist(t_dot a)
-{
-	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
-}
-
-t_dot	norma(t_dot a)
-{
-	double	dist;
-
-	dist = do_dist(a);
-	a.x = a.x / dist;
-	a.y = a.y / dist;
-	a.z = a.z / dist;
-	return (a);
-}
-
 void	spherical_mapping(t_dot i, double *u, double *v, t_object *obj)
 {
 	*u = 1 + (atan2(i.x,  i.z) / (M_PI));
@@ -93,47 +77,20 @@ void	planar_mapping(t_dot i, double *u, double *v, t_object *obj)
 SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
 {
 	t_dot pt;
-	t_dot vct;
 	Uint32 color;
 	double u;
 	double v;
 	SDL_Color	ret;
 
-	pt.x = e.vc.x + e.vd.x * t;
-	pt.y = e.vc.y + e.vd.y * t;
-	pt.z = e.vc.z + e.vd.z * t;
-
-	vct.x = pt.x - obj->origin.x;
-	vct.y = pt.y - obj->origin.y;
-	vct.z = pt.z - obj->origin.z;
-	vct = norma(vct);
-	planar_mapping(vct, &u, &v, obj);
-
-	/*while (u < 0)
-		u = u + obj->texture->w;
-	while (v < 0)
-		v = v + obj->texture->h;
-	while (u > obj->texture->w)
-		u = u - obj->texture->w;
-	while (v > obj->texture->h)
-		v = v - obj->texture->h;*/
-	// if (u > 0 && u < 1)
-	// {
-	// 	printf("%f, %f\n", u, v);
-	// 	printf("%d, %d\n", obj->texture->w, obj->texture->h);
-	// }
-	// while (pt.x < 0)
-	// 	pt.x = pt.x + obj->texture->w;
-	// pt.x = (int)pt.x % (int)obj->texture->w;
-	// while (pt.y < 0)
-	// 	pt.y = pt.y + obj->texture->h;
-	// pt.y = (int)pt.y % (int)obj->texture->h;
-	// color = GetPixel32(obj->texture, pt.x, pt.y);
-
+	pt = equation_get_dot(&e, t);
+	pt.x -= obj->origin.x;
+	pt.y -= obj->origin.y;
+	pt.z -= obj->origin.z;
+	vect_normalize((t_vector*)&pt);
+	obj->txt_data.texture_mapping(pt, &u, &v, obj);
 	color = GetPixel32(obj->txt_data.texture, mod(u, obj->txt_data.texture->w), mod(v, obj->txt_data.texture->h));
 	//color = getpixel(obj->texture, (int)u % obj->texture->w, (int)v %  obj->texture->h);
 	ret.a = 255;
 	SDL_GetRGB(color, obj->txt_data.texture->format, &ret.r, &ret.g, &ret.b);
 	return (ret);
-	//return (get_sdlcolor(color));
 }
