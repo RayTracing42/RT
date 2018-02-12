@@ -16,45 +16,49 @@
 		</angle>
 	</camera>
 
-<light>
-	<type>object</type>
+	<light>
+		<type>object</type>
+		<shape>
+			<type>cone</type>
+			<origin>
+				<x>100</x>
+				<y>20</y>
+				<z>-20</z>
+			</origin>
+			<texture>
+				<color>
+					<r>255</r>
+					<g>155</g>
+					<b>155</b>
+				</color>
+			</texture>
+			<angle>25</angle>
+		</shape>
+		<power>0.5</power>
+	</light>
+
 	<object>
-		<type>cone</type>
+		<type>sphere</type>
 		<origin>
 			<x>100</x>
-			<y>20</y>
-			<z>-20</z>
+			<y>0</y>
+			<z>50</z>
 		</origin>
-		<color>
-			<r>255</r>
-			<g>155</g>
-			<b>155</b>
-		</color>
-		<angle>25</angle>
+		<texture>
+			<color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+			</color>
+		</texture>
+		<physic>
+			<refraction_amount>0</refraction_amount>
+			<reflexion_amount>0</reflexion_amount>
+			<refraction_index>1.5</refraction_index>
+			<shininess>30</shininess>
+		</physic>
+		<radius>25</radius>
 	</object>
-	<power>0.5</power>
-</light>
-
-<object>
-	<type>sphere</type>
-	<origin>
-		<x>100</x>
-		<y>0</y>
-		<z>50</z>
-	</origin>
-	<color>
-		<r>255</r>
-		<g>255</g>
-		<b>255</b>
-	</color>
-	<physic>
-		<refraction_amount>0</refraction_amount>
-		<reflexion_amount>0</reflexion_amount>
-		<refraction_index>1.5</refraction_index>
-		<shininess>30</shininess>
-	</physic>
-	<radius>25</radius>
-</object>
 
 
 </scene>

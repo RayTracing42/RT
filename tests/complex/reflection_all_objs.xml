@@ -23,34 +23,19 @@
 			<y>0</y>
 			<z>0</z>
 		</origin>
-		<color>
-			<r>255</r>
-			<g>0</g>
-			<b>0</b>
-		</color>
+		<texture>
+			<color>
+				<r>255</r>
+				<g>0</g>
+				<b>0</b>
+			</color>
+		</texture>
 		<physic>
 			<reflexion_amount>0.5</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
 			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
-		<transformations>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
-		</transformations>
 		<radius>40</radius>
 	</object>
 
@@ -61,34 +46,19 @@
 			<y>0</y>
 			<z>-100</z>
 		</origin>
-		<color>
-			<r>0</r>
-			<g>255</g>
-			<b>0</b>
-		</color>
+		<texture>
+			<color>
+				<r>0</r>
+				<g>255</g>
+				<b>0</b>
+			</color>
+		</texture>
 		<physic>
 			<reflexion_amount>0.5</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
 			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
-		<transformations>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
-		</transformations>
 		<radius>50</radius>
 	</object>
 
@@ -99,34 +69,19 @@
 			<y>0</y>
 			<z>100</z>
 		</origin>
-		<color>
-			<r>0</r>
-			<g>0</g>
-			<b>255</b>
-		</color>
+		<texture>
+			<color>
+				<r>0</r>
+				<g>0</g>
+				<b>255</b>
+			</color>
+		</texture>
 		<physic>
 			<reflexion_amount>0.5</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
 			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>
 		</physic>
-		<transformations>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
-		</transformations>
 		<angle>50</angle>
 	</object>
 
@@ -142,34 +97,19 @@
 			<y>1</y>
 			<z>0</z>
 		</normal>
-		<color>
-			<r>100</r>
-			<g>100</g>
-			<b>100</b>
-		</color>
+		<texture>
+			<color>
+				<r>100</r>
+				<g>100</g>
+				<b>100</b>
+			</color>
+		</texture>
 		<physic>
 			<reflexion_amount>0.5</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
 			<refraction_index>0</refraction_index>
 			<shininess>30</shininess>
 		</physic>
-		<transformations>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
-		</transformations>
 	</object>
 
 	<light>

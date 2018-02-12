@@ -28,11 +28,13 @@
 			<y>1</y>
 			<z>0</z>
 		</normal>
-		<color>
-			<r>20</r>
-			<g>20</g>
-			<b>20</b>
-		</color>
+		<texture>
+			<color>
+				<r>20</r>
+				<g>20</g>
+				<b>20</b>
+			</color>
+		</texture>
 		<physic>
 			<reflexion_amount>0</reflexion_amount>
 			<refraction_amount>0.6</refraction_amount>
@@ -48,11 +50,13 @@
 			<y>0</y>
 			<z>-100</z>
 		</origin>
-		<color>
-			<r>100</r>
-			<g>0</g>
-			<b>0</b>
-		</color>
+		<texture>
+			<color>
+				<r>100</r>
+				<g>0</g>
+				<b>0</b>
+			</color>
+		</texture>
 		<physic>
 			<refraction_amount>0.9</refraction_amount>
 			<reflexion_amount>0</reflexion_amount>
@@ -69,11 +73,13 @@
 			<y>0</y>
 			<z>0</z>
 		</origin>
-		<color>
-			<r>0</r>
-			<g>0</g>
-			<b>100</b>
-		</color>
+		<texture>
+			<color>
+				<r>0</r>
+				<g>0</g>
+				<b>100</b>
+			</color>
+		</texture>
 		<physic>
 			<refraction_amount>0.9</refraction_amount>
 			<reflexion_amount>0</reflexion_amount>
@@ -90,11 +96,13 @@
 			<y>0</y>
 			<z>100</z>
 		</origin>
-		<color>
-			<r>0</r>
-			<g>100</g>
-			<b>0</b>
-		</color>
+		<texture>
+			<color>
+				<r>0</r>
+				<g>100</g>
+				<b>0</b>
+			</color>
+		</texture>
 		<physic>
 			<refraction_amount>0.9</refraction_amount>
 			<reflexion_amount>0</reflexion_amount>

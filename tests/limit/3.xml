@@ -23,11 +23,13 @@
 			<y>0</y>
 			<z>0</z>
 		</origin>
-		<color>
-			<r>255</r>
-			<g>0</g>
-			<b>0</b>
-		</color>
+		<texture>
+			<color>
+				<r>255</r>
+				<g>0</g>
+				<b>0</b>
+			</color>
+		</texture>
 		<physic>
 			<reflexion_amount>0</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
@@ -69,11 +71,13 @@
 			<z>0</z>
 		</origin>
 		<normal><x>-1</x><y>0</y><z>0</z></normal>
-		<color>
-			<r>155</r>
-			<g>0</g>
-			<b>100</b>
-		</color>
+		<texture>
+			<color>
+				<r>155</r>
+				<g>0</g>
+				<b>100</b>
+			</color>
+		</texture>
 		<physic>
 			<reflexion_amount>0.5</reflexion_amount>
 			<refraction_amount>0</refraction_amount>

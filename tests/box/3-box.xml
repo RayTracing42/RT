@@ -23,11 +23,13 @@
 			<y>0</y>
 			<z>50</z>
 		</origin>
-		<color>
-			<r>255</r>
-			<g>255</g>
-			<b>255</b>
-		</color>
+		<texture>
+			<color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+			</color>
+		</texture>
 		<size>
 			<x>40</x>
 			<y>40</y>

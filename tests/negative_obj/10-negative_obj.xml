@@ -23,11 +23,13 @@
 			<y>0</y>
 			<z>-70</z>
 		</origin>
-		<color>
-			<r>255</r>
-			<g>255</g>
-			<b>255</b>
-		</color>
+		<texture>
+			<color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+			</color>
+		</texture>
 		<physic>
 			<reflexion_amount>0.7</reflexion_amount>
 			<refraction_amount>0</refraction_amount>
@@ -71,23 +73,24 @@
 
 #	SCENE CUBIQUE
 
-	<object><type>plane</type><origin><x>500</x><y>0</y><z>0</z></origin><normal><x>-1</x><y>0</y><z>0</z></normal><color><r>150</r><g>100</g><b>100</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic></object>
+	<object><type>plane</type><origin><x>500</x><y>0</y><z>0</z></origin><normal><x>-1</x><y>0</y><z>0</z></normal><texture><color><r>150</r><g>100</g><b>100</b></color></texture><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic></object>
 
-	<object><type>plane</type><origin><x>-300</x><y>0</y><z>0</z></origin><normal><x>1</x><y>0</y><z>0</z></normal><color><r>100</r><g>150</g><b>100</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic></object>
+	<object><type>plane</type><origin><x>-300</x><y>0</y><z>0</z></origin><normal><x>1</x><y>0</y><z>0</z></normal><texture><color><r>100</r><g>150</g><b>100</b></color></texture><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic></object>
 
-	<object><type>plane</type><origin><x>500</x><y>-50</y><z>0</z></origin><normal><x>0</x><y>1</y><z>0</z></normal><color><r>100</r><g>100</g><b>150</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic></object>
+	<object><type>plane</type><origin><x>500</x><y>-50</y><z>0</z></origin><normal><x>0</x><y>1</y><z>0</z></normal><texture><color><r>100</r><g>100</g><b>150</b></color></texture><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic></object>
 
-	<object><type>plane</type><origin><x>500</x><y>200</y><z>0</z></origin><normal><x>0</x><y>-1</y><z>0</z></normal><color><r>100</r><g>150</g><b>150</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic></object>
+	<object><type>plane</type><origin><x>500</x><y>200</y><z>0</z></origin><normal><x>0</x><y>-1</y><z>0</z></normal><texture><color><r>100</r><g>150</g><b>150</b></color></texture><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic></object>
 
-	<object><type>plane</type><origin><x>500</x><y>0</y><z>200</z></origin><normal><x>0</x><y>0</y><z>-1</z></normal><color><r>150</r><g>100</g><b>150</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic></object>
+	<object><type>plane</type><origin><x>500</x><y>0</y><z>200</z></origin><normal><x>0</x><y>0</y><z>-1</z></normal><texture><color><r>150</r><g>100</g><b>150</b></color></texture><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic></object>
 
-	<object><type>plane</type><origin><x>500</x><y>0</y><z>-200</z></origin><normal><x>0</x><y>0</y><z>1</z></normal><color><r>150</r><g>150</g><b>100</b></color><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic></object>
+	<object><type>plane</type><origin><x>500</x><y>0</y><z>-200</z></origin><normal><x>0</x><y>0</y><z>1</z></normal><texture><color><r>150</r><g>150</g><b>100</b></color></texture><physic><reflexion_amount>0</reflexion_amount><refraction_amount>0</refraction_amount><refraction_index>0</refraction_index><shininess>30</shininess></physic></object>
+
 
 
 #	LIGHTS
 
 
 
-	<light><type>orb</type><origin><x>200</x><y>70</y><z>0</z></origin><color><r>100</r><g>100</g><b>100</b></color><power>0.3</power></light>
+		<light><type>orb</type><origin><x>200</x><y>70</y><z>10</z></origin><texture><color><r>100</r><g>100</g><b>100</b></color></texture><power>0.3</power></light>
 
 </scene>

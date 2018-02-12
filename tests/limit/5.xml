@@ -29,6 +29,13 @@
 			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
+		<texture>
+			<color>
+				<r>255</r>
+				<g>0</g>
+				<b>0</b>
+			</color>
+		</texture>
 		<transformations>
 			<rotation>
 				<x>-45</x>

@@ -23,11 +23,13 @@
 			<y>0</y>
 			<z>50</z>
 		</origin>
-		<color>
-			<r>255</r>
-			<g>255</g>
-			<b>255</b>
-		</color>
+		<texture>
+			<color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+			</color>
+		</texture>
 		<size>
 			<x>40</x>
 			<y>40</y>
@@ -48,20 +50,22 @@
 		</physic>
 	</object>
 
-<object>
-	<type>sphere</type>
-	<origin>
-		<x>100</x>
-		<y>0</y>
-		<z>50</z>
-	</origin>
-	<color>
-		<r>250</r>
-		<g>150</g>
-		<b>150</b>
-	</color>
-	<radius>25</radius>
-</object>
+	<object>
+		<type>sphere</type>
+		<origin>
+			<x>100</x>
+			<y>0</y>
+			<z>50</z>
+		</origin>
+		<texture>
+			<color>
+				<r>250</r>
+				<g>150</g>
+				<b>150</b>
+			</color>
+		</texture>
+		<radius>25</radius>
+	</object>
 
 	<light>
 		<type>orb</type>

@@ -23,11 +23,13 @@
 			<y>0</y>
 			<z>0</z>
 		</origin>
-		<color>
-			<r>200</r>
-			<g>100</g>
-			<b>100</b>
-		</color>
+		<texture>
+			<color>
+				<r>200</r>
+				<g>100</g>
+				<b>100</b>
+			</color>
+		</texture>
 		<radius>40</radius>
 		<negative_obj>
 			<object>
@@ -37,11 +39,13 @@
 					<y>30</y>
 					<z>-20</z>
 				</origin>
-				<color>
-					<r>100</r>
-					<g>100</g>
-					<b>200</b>
-				</color>
+				<texture>
+					<color>
+						<r>100</r>
+						<g>100</g>
+						<b>200</b>
+					</color>
+				</texture>
 				<radius>60</radius>
 				<status>full</status>
 			</object>
@@ -52,11 +56,13 @@
 					<y>110</y>
 					<z>0</z>
 				</origin>
-				<color>
-					<r>200</r>
-					<g>200</g>
-					<b>100</b>
-				</color>
+				<texture>
+					<color>
+						<r>200</r>
+						<g>200</g>
+						<b>100</b>
+					</color>
+				</texture>
 				<transformations>
 					<rotation>
 						<x>0</x>
