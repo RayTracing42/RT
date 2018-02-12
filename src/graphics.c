@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:52:28 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/24 13:37:16 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 13:15:29 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,9 @@ Uint32		get_color(int r, int g, int b)
 	col = SDL_MapRGB(f, r, g, b);
 	SDL_FreeFormat(f);
 	return (col);
+}
+
+int			coloreq(SDL_Color c1, SDL_Color c2)
+{
+	return (c1.r == c2.r && c1.g == c2.g && c1.b == c2.b);
 }

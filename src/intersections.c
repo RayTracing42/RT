@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/12 13:00:31 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 13:25:09 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ void	choice_intersect(t_list_ray *l, t_ray *ray, double *dist)
 {
 	while (l)
 	{
-		if (l->r.nb_intersect > 0 && !(!l->r.color.r && l->r.color.g == 255 && !l->r.color.b))
+		if (l->r.nb_intersect > 0 &&
+			(!l->r.obj->txt_data.transparency ||
+				!coloreq(l->r.color, l->r.obj->txt_data.transparent_color)))
 		{
 			if (eq(*dist, 0) || (gt(*dist, 0) && lt(l->t, *dist)))
 			{

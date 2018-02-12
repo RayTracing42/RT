@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:52:29 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/11 14:01:04 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 13:28:33 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	parsing_mapping(char *mapping_method, t_obj_texture *txt_data)
 
 int			parsing_texture(char *data_txt, t_obj_texture *txt_data)
 {
-	char	*tmp[4];
+	char	*tmp[5];
 
 	if ((tmp[0] = get_interval(data_txt, "<color>", "</color>")) && parsing_color(tmp[0], &txt_data->color) == -1)
 		return (-1);
@@ -60,6 +60,10 @@ int			parsing_texture(char *data_txt, t_obj_texture *txt_data)
 			return (-1);
 		if (!(tmp[3] = get_interval(data_txt, "<mapping>", "</mapping>")) || parsing_mapping(tmp[3], txt_data) == -1)
 			return (-1);
+		if (!(tmp[4] = get_interval(data_txt, "<transparency>", "</transparency>")) || parsing_color(tmp[4], &txt_data->transparent_color) == -1)
+			txt_data->transparency = 0;
+		else
+			txt_data->transparency = 1;
 		free(tmp[2]);
 		free(tmp[3]);
 	}

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 17:10:36 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/24 13:39:00 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 13:15:26 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 /*
 ** graphics.c
 */
+int			coloreq(SDL_Color c1, SDL_Color c2);
 void		delete_sdl_core();
 Uint32		get_color(int r, int g, int b);
 t_sdl_core	*get_sdl_core();

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/11 13:54:54 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 13:23:39 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,9 @@ typedef struct				s_obj_phys
 typedef struct	s_obj_texture
 {
 	SDL_Color				color;
+	SDL_Color				transparent_color;
 	SDL_Surface				*texture;
+	int						transparency;
 	double					txt_streching;
 	void					(*texture_mapping)(t_dot i, double *u, double *v, struct s_object *obj);
 }				t_obj_texture;

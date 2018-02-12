@@ -32,6 +32,11 @@
 			<file>./file/tiles2.bmp</file>
 			<scale>1</scale>
 			<mapping>spherical</mapping>
+			<transparency>
+				<r>0</r>
+				<g>255</g>
+				<b>0</b>
+			</transparency>
 		</texture>
 		<transformations>
 			<rotation>
