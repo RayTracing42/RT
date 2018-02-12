@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:52:29 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/12 14:28:35 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 15:05:41 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int			parsing_color(char *data_color, SDL_Color *c)
 	return (0);
 }
 
-static int	parsing_mapping(char *mapping_method, void (**fct)(t_dot i, double *u, double *v, struct s_object *obj))
+static int	parsing_mapping(char *mapping_method, void (**fct)(t_dot i, t_dot *textel, double streching, SDL_Surface *texture))
 {
 	if (ft_strequ(mapping_method, "spherical"))
 		*fct = spherical_mapping;

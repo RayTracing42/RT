@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/11 14:02:56 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 20:38:19 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,24 @@ static double			sphere_intersect(t_ray *ray, t_parequation e,
 
 static t_vector	get_sphere_normal(t_dot *inter, t_object *obj)
 {
-	(void)obj;
+	t_vector	tmp;
+	t_dot		pt;
+	double		theta;
+	double		phi;
+
+	if (obj->material.normal_map)
+	{
+		tmp = getMapVector(*inter, obj);
+		pt.x = inter->x - obj->origin.x;
+		pt.y = inter->y - obj->origin.y;
+		pt.z = inter->z - obj->origin.z;
+		vect_normalize((t_vector*)&pt);
+		theta = asin(pt.y);
+		phi = atan2(pt.x, pt.z);
+		tmp = vector_rotation_x(&tmp, theta);
+		tmp = vector_rotation_y(&tmp, phi);
+		return (tmp);
+	}
 	return ((t_vector){2 * inter->x, 2 * inter->y, 2 * inter->z});
 }
 

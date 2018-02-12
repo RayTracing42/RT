@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 12:42:42 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/04 16:30:02 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 16:31:01 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ SDL_Color	get_shade_col(t_ray *light_ray, double opacity)
 
 	col = light_ray->color;
 	coef = (vect_dot_product(light_ray->equ.vd, light_ray->normal) / (get_vect_lenght(&light_ray->equ.vd) * get_vect_lenght(&light_ray->normal)));
-	if (coef < 0)
+	if (lt(coef, 0))
 		coef = 0;
 	tmp_col.x = col.r * coef * opacity;
 	tmp_col.y = col.g * coef * opacity;

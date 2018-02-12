@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/12 14:20:21 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 20:44:51 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,8 +169,8 @@ typedef struct	s_obj_material
 	int						transparency;
 	double					txt_streching;
 	double					map_streching;
-	void					(*texture_mapping)(t_dot i, double *u, double *v, struct s_object *obj);
-	void					(*map_mapping)(t_dot i, double *u, double *v, struct s_object *obj);
+	void					(*texture_mapping)(t_dot i, t_dot *textel, double streching, SDL_Surface *texture);
+	void					(*map_mapping)(t_dot i, t_dot *textel, double streching, SDL_Surface *texture);
 }				t_obj_material;
 
 typedef struct				s_object

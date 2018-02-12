@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:17:00 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/11 12:18:03 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 15:04:58 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define TEXTURE_MAPPING_H
 # include "structures.h"
 
-void	spherical_mapping(t_dot i, double *u, double *v, t_object *obj);
-void	cylindrical_mapping(t_dot i, double *u, double *v, t_object *obj);
-void	planar_mapping(t_dot i, double *u, double *v, t_object *obj);
+void	spherical_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *texture);
+void	cylindrical_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *texture);
+void	planar_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *texture);
 
 #endif

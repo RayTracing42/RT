@@ -25,20 +25,18 @@
 		</origin>
 		<material>
 			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>255</b>
+				<r>180</r>
+				<g>180</g>
+				<b>180</b>
 			</color>
 			<texture>
-				<file>./file/tiles2.bmp</file>
-				<scale>1</scale>
+				<file>./file/gravels.bmp</file>
+				<scale>3</scale>
 				<mapping>spherical</mapping>
-				<transparency>
-					<r>0</r>
-					<g>255</g>
-					<b>0</b>
-				</transparency>
 			</texture>
+			<normal_map>
+				<file>./file/gravel_normal_map.bmp</file>
+			</normal_map>
 		</material>
 		<transformations>
 			<rotation>
@@ -51,16 +49,16 @@
 			<refraction_amount>0</refraction_amount>
 			<reflexion_amount>0</reflexion_amount>
 			<refraction_index>0</refraction_index>
-			<shininess>30</shininess>
+			<shininess>0</shininess>
 		</physic>
-		<radius>50</radius>
+		<radius>40</radius>
 	</object>
 
 	<light>
 		<type>orb</type>
 		<origin>
-			<x>40</x>
-			<y>10</y>
+			<x>-150</x>
+			<y>0</y>
 			<z>0</z>
 		</origin>
 		<color>
