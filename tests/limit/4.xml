@@ -16,20 +16,6 @@
 		</angle>
 	</camera>
 
-	<ambient_light>
-		<direction>
-			<x>0</x>
-			<y>0</y>
-			<z>-1</z>
-		</direction>
-		<color>
-			<r>100</r>
-			<g>100</g>
-			<b>100</b>
-		</color>
-		<power>0.5</power>
-	</ambient_light>
-
 	<object>
 		<type>sphere</type>
 		<origin>
@@ -50,40 +36,38 @@
 		</physic>
 		<limit>
 			<local>
-				<origin><x>220</x><y>0</y><z>0</z></origin>
+				<origin><x>20</x><y>0</y><z>0</z></origin>
 				<normal><x>1</x><y>0</y><z>0</z></normal>
 				<status>full</status>
 			</local>
 			<local>
-				<origin><x>200</x><y>20</y><z>0</z></origin>
+				<origin><x>0</x><y>20</y><z>0</z></origin>
 				<normal><x>0</x><y>1</y><z>0</z></normal>
 				<status>full</status>
 			</local>
 			<local>
-				<origin><x>200</x><y>0</y><z>20</z></origin>
+				<origin><x>0</x><y>0</y><z>20</z></origin>
 				<normal><x>0</x><y>0</y><z>1</z></normal>
 				<status>full</status>
 			</local>
 			<local>
-				<origin><x>180</x><y>0</y><z>0</z></origin>
+				<origin><x>-20</x><y>0</y><z>0</z></origin>
 				<normal><x>-1</x><y>0</y><z>0</z></normal>
 				<status>full</status>
 			</local>
 			<local>
-				<origin><x>200</x><y>-20</y><z>0</z></origin>
+				<origin><x>0</x><y>-20</y><z>0</z></origin>
 				<normal><x>0</x><y>-1</y><z>0</z></normal>
 				<status>full</status>
 			</local>
 			<local>
-				<origin><x>200</x><y>0</y><z>-20</z></origin>
+				<origin><x>0</x><y>0</y><z>-20</z></origin>
 				<normal><x>0</x><y>0</y><z>-1</z></normal>
 				<status>full</status>
 			</local>
 		</limit>
 		<radius>40</radius>
 	</object>
-
-
 
 	<object>
 		<type>plane</type>

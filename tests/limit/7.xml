@@ -16,20 +16,6 @@
 		</angle>
 	</camera>
 
-	<ambient_light>
-		<direction>
-			<x>0</x>
-			<y>0</y>
-			<z>-1</z>
-		</direction>
-		<color>
-			<r>100</r>
-			<g>100</g>
-			<b>100</b>
-		</color>
-		<power>0.5</power>
-	</ambient_light>
-
 	<object>
 		<type>sphere</type>
 		<origin>
@@ -48,11 +34,6 @@
 				<y>0</y>
 				<z>0</z>
 			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
 			<translation>
 				<x>0</x>
 				<y>0</y>
@@ -61,12 +42,12 @@
 		</transformations>
 		<limit>
 			<local>
-				<origin><x>200</x><y>0</y><z>20</z></origin>
+				<origin><x>0</x><y>0</y><z>20</z></origin>
 				<normal><x>0</x><y>0</y><z>1</z></normal>
 				<status>full</status>
 			</local>
 			<local>
-				<origin><x>200</x><y>0</y><z>20</z></origin>
+				<origin><x>0</x><y>0</y><z>20</z></origin>
 				<normal><x>0</x><y>-1</y><z>1</z></normal>
 				<status>full</status>
 			</local>
@@ -84,8 +65,6 @@
 		</physic>
 		<radius>40</radius>
 	</object>
-
-
 
 	<object>
 		<type>plane</type>
@@ -106,23 +85,6 @@
 			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
-		<transformations>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
-		</transformations>
 	</object>
 
 

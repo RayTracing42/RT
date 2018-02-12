@@ -36,7 +36,7 @@
 		<negative_obj>
 			<object>
 				<type>sphere</type>
-				<origin><x>90</x><y>20</y><z>60</z></origin>
+				<origin><x>-10</x><y>20</y><z>10</z></origin>
 				<color><r>255</r><g>155</g><b>255</b></color>
 				<radius>20</radius>
 				<status>full</status>

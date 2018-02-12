@@ -14,7 +14,7 @@
 			<y>-40</y>
 			<z>0</z>
 		</angle>
-	</camera>	
+	</camera>
 
 	<object>
 		<type>sphere</type>
@@ -37,12 +37,12 @@
 		</transformations>
 		<limit>
 			<local>
-				<origin><x>200</x><y>0</y><z>20</z></origin>
+				<origin><x>0</x><y>0</y><z>20</z></origin>
 				<normal><x>0</x><y>0</y><z>1</z></normal>
 				<status>full</status>
 			</local>
 			<local>
-				<origin><x>200</x><y>0</y><z>20</z></origin>
+				<origin><x>0</x><y>0</y><z>20</z></origin>
 				<normal><x>0</x><y>-1</y><z>1</z></normal>
 				<status>full</status>
 			</local>

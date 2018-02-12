@@ -40,25 +40,15 @@
 				<y>0</y>
 				<z>0</z>
 			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
 		</transformations>
 		<limit>
 			<local>
-				<origin><x>200</x><y>0</y><z>20</z></origin>
+				<origin><x>0</x><y>0</y><z>20</z></origin>
 				<normal><x>0</x><y>0</y><z>1</z></normal>
 				<status>full</status>
 			</local>
 			<local>
-				<origin><x>200</x><y>0</y><z>20</z></origin>
+				<origin><x>0</x><y>0</y><z>20</z></origin>
 				<normal><x>0</x><y>-1</y><z>1</z></normal>
 				<status>full</status>
 			</local>
@@ -70,8 +60,6 @@
 		</limit>
 		<radius>40</radius>
 	</object>
-
-
 
 	<object>
 		<type>plane</type>
@@ -92,23 +80,6 @@
 			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
-		<transformations>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<scale>
-				<x>1</x>
-				<y>1</y>
-				<z>1</z>
-			</scale>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
-		</transformations>
 	</object>
 
 

@@ -1,6 +1,6 @@
 <scene>
 	<brightness>75</brightness>
-	
+
 	<camera>
 		<fov>60</fov>
 		<depth>0</depth>
@@ -14,7 +14,7 @@
 			<y>30</y>
 			<z>0</z>
 		</angle>
-	</camera>	
+	</camera>
 
 	<object>
 		<type>sphere</type>
@@ -42,7 +42,7 @@
 		</transformations>
 		<limit>
 			<local>
-				<origin><x>200</x><y>-10</y><z>20</z></origin>
+				<origin><x>0</x><y>-10</y><z>20</z></origin>
 				<normal><x>0</x><y>9</y><z>9</z></normal>
 				<status>full</status>
 			</local>
@@ -66,7 +66,7 @@
 				<status>full</status>
 				<limit>
 					<local>
-						<origin><x>170</x><y>-30</y><z>-20</z></origin>
+						<origin><x>0</x><y>-20</y><z>0</z></origin>
 						<normal><x>0</x><y>-1</y><z>0</z></normal>
 						<status>full</status>
 					</local>
