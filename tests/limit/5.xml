@@ -29,13 +29,13 @@
 			<refraction_index>1.5</refraction_index>
 			<shininess>30</shininess>
 		</physic>
-		<texture>
+		<material>
 			<color>
 				<r>255</r>
 				<g>0</g>
 				<b>0</b>
 			</color>
-		</texture>
+		</material>
 		<transformations>
 			<rotation>
 				<x>-45</x>
@@ -76,13 +76,13 @@
 			<z>0</z>
 		</origin>
 		<normal><x>-1</x><y>0</y><z>0</z></normal>
-		<texture>
+		<material>
 			<color>
 				<r>155</r>
 				<g>0</g>
 				<b>100</b>
 			</color>
-		</texture>
+		</material>
 		<physic>
 			<reflexion_amount>0.7</reflexion_amount>
 			<refraction_amount>0</refraction_amount>

@@ -25,13 +25,13 @@
 				<y>20</y>
 				<z>-20</z>
 			</origin>
-			<texture>
+			<material>
 				<color>
 					<r>255</r>
 					<g>155</g>
 					<b>155</b>
 				</color>
-			</texture>
+			</material>
 			<angle>25</angle>
 		</shape>
 		<power>0.5</power>
@@ -44,13 +44,13 @@
 			<y>0</y>
 			<z>50</z>
 		</origin>
-		<texture>
+		<material>
 			<color>
 				<r>255</r>
 				<g>255</g>
 				<b>255</b>
 			</color>
-		</texture>
+		</material>
 		<physic>
 			<refraction_amount>0</refraction_amount>
 			<reflexion_amount>0</reflexion_amount>

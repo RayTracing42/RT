@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:52:29 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/12 14:20:47 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 14:28:35 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,10 @@ int			parsing_material(char *data_mat, t_obj_material *material)
 
 	if ((tmp[0] = get_interval(data_mat, "<color>", "</color>")) && parsing_color(tmp[0], &material->color) == -1)
 		return (-1);
+	material->texture = NULL;
 	if ((tmp[1] = get_interval(data_mat, "<texture>", "</texture>")) && parsing_texture(tmp[1], material) == -1 && !tmp[0])
 		return (-1);
+	material->normal_map = NULL;
 	if ((tmp[2] = get_interval(data_mat, "<normal_map>", "</normal_map>")) && parsing_normal_map(tmp[2], material) == -1)
 	free(tmp[0]);
 	free(tmp[1]);

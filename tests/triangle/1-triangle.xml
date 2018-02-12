@@ -33,13 +33,13 @@
 			<y>30</y>
 			<z>150</z>
 		</dot_c>
-		<texture>
+		<material>
 			<color>
 				<r>255</r>
 				<g>255</g>
 				<b>255</b>
 			</color>
-		</texture>
+		</material>
 	</object>
 
 	<object>
@@ -49,13 +49,13 @@
 			<y>0</y>
 			<z>50</z>
 		</origin>
-		<texture>
+		<material>
 			<color>
 				<r>255</r>
 				<g>255</g>
 				<b>255</b>
 			</color>
-		</texture>
+		</material>
 		<physic>
 			<refraction_amount>0</refraction_amount>
 			<reflexion_amount>0</reflexion_amount>

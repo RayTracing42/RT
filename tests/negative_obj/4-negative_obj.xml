@@ -23,13 +23,13 @@
 			<y>0</y>
 			<z>0</z>
 		</origin>
-		<texture>
+		<material>
 			<color>
 				<r>200</r>
 				<g>100</g>
 				<b>100</b>
 			</color>
-		</texture>
+		</material>
 		<radius>40</radius>
 		<limit>
 			<local>
@@ -71,13 +71,13 @@
 					<y>0</y>
 					<z>20</z>
 				</origin>
-				<texture>
+				<material>
 					<color>
 						<r>200</r>
 						<g>100</g>
 						<b>0</b>
 					</color>
-				</texture>
+				</material>
 				<limit>
 					<local>
 						<origin><x>-10</x><y>0</y><z>0</z></origin>
@@ -99,13 +99,13 @@
 			<z>0</z>
 		</origin>
 		<normal><x>-1</x><y>0</y><z>0</z></normal>
-		<texture>
+		<material>
 			<color>
 				<r>100</r>
 				<g>100</g>
 				<b>200</b>
 			</color>
-		</texture>
+		</material>
 		<physic>
 			<reflexion_amount>0.5</reflexion_amount>
 			<refraction_amount>0</refraction_amount>

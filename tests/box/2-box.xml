@@ -23,13 +23,13 @@
 			<y>0</y>
 			<z>50</z>
 		</origin>
-		<texture>
+		<material>
 			<color>
 				<r>255</r>
 				<g>255</g>
 				<b>255</b>
 			</color>
-		</texture>
+		</material>
 		<size>
 			<x>40</x>
 			<y>40</y>
@@ -57,13 +57,13 @@
 			<y>0</y>
 			<z>50</z>
 		</origin>
-		<texture>
+		<material>
 			<color>
 				<r>250</r>
 				<g>150</g>
 				<b>150</b>
 			</color>
-		</texture>
+		</material>
 		<radius>25</radius>
 	</object>
 
