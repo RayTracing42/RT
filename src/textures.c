@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/12 12:49:58 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 13:41:48 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,23 @@ Uint32 getpixel(SDL_Surface *surface, int x, int y)
 void	spherical_mapping(t_dot i, double *u, double *v, t_object *obj)
 {
 	*u = 1 + (atan2(i.x,  i.z) / (M_PI));
-	*u *= obj->txt_data.texture->w * obj->txt_data.txt_streching;
+	*u *= obj->material.texture->w * obj->material.txt_streching;
 	*v = 0.5 - (asin(i.y) / M_PI);
-	*v *= obj->txt_data.texture->h * obj->txt_data.txt_streching;
+	*v *= obj->material.texture->h * obj->material.txt_streching;
 }
 
 void	cylindrical_mapping(t_dot i, double *u, double *v, t_object *obj)
 {
 	*u = 1 + (atan2(i.x,  i.z) / (M_PI));
-	*u *= obj->txt_data.texture->w * obj->txt_data.txt_streching;
+	*u *= obj->material.texture->w * obj->material.txt_streching;
 	i.y /= sqrt(i.x * i.x + i.z * i.z);
-	*v = mod(i.y * obj->txt_data.texture->h * (obj->txt_data.txt_streching / M_PI), obj->txt_data.texture->h);
+	*v = mod(i.y * obj->material.texture->h * (obj->material.txt_streching / M_PI), obj->material.texture->h);
 }
 
 void	planar_mapping(t_dot i, double *u, double *v, t_object *obj)
 {
-	*u = mod(i.z * obj->txt_data.texture->w * obj->txt_data.txt_streching / M_PI, obj->txt_data.texture->w);
-	*v = mod(i.y * obj->txt_data.texture->h * obj->txt_data.txt_streching / M_PI, obj->txt_data.texture->h);
+	*u = mod(i.z * obj->material.texture->w * obj->material.txt_streching / M_PI, obj->material.texture->w);
+	*v = mod(i.y * obj->material.texture->h * obj->material.txt_streching / M_PI, obj->material.texture->h);
 }
 
 SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
@@ -75,10 +75,10 @@ SDL_Color getTextColor(t_parequation e, double t, t_object *obj)
 	pt.y -= obj->origin.y;
 	pt.z -= obj->origin.z;
 	vect_normalize((t_vector*)&pt);
-	obj->txt_data.texture_mapping(pt, &textel.x, &textel.y, obj);
-	color = GetPixel32(obj->txt_data.texture, mod(textel.x, obj->txt_data.texture->w), mod(textel.y, obj->txt_data.texture->h));
+	obj->material.texture_mapping(pt, &textel.x, &textel.y, obj);
+	color = GetPixel32(obj->material.texture, mod(textel.x, obj->material.texture->w), mod(textel.y, obj->material.texture->h));
 	//color = getpixel(obj->texture, (int)u % obj->texture->w, (int)v %  obj->texture->h);
 	ret.a = 255;
-	SDL_GetRGB(color, obj->txt_data.texture->format, &ret.r, &ret.g, &ret.b);
+	SDL_GetRGB(color, obj->material.texture->format, &ret.r, &ret.g, &ret.b);
 	return (ret);
 }

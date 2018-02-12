@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:30:32 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/11 13:38:13 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 14:23:49 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static	void	cone_obj_light(double power, t_cone *obj, t_list_lights **l)
 {
 	t_cone *c;
 
-	c = new_cone((t_objs_comp){obj->origin, obj->txt_data,
+	c = new_cone((t_objs_comp){obj->origin, obj->material,
 		obj->obj_light.reflection_amount, obj->obj_light.refraction_amount,
 		obj->obj_light.refractive_index, obj->obj_light.shininess}, obj->angle);
 	c->upper = 1;

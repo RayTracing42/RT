@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/12 12:39:24 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 14:20:25 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ t_plane		*parsing_plane(char *object)
 	t_vector	normal;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-			|| !(data[1] = get_interval(object, "<texture>", "</texture>"))
+			|| !(data[1] = get_interval(object, "<material>", "</material>"))
 			|| !(data[3] = get_interval(object, "<normal>", "</normal>"))
 			|| (parsing_dot(data[0], &args.orig) == -1)
-			|| (parsing_texture(data[1], &args.txt_data) == -1)
+			|| (parsing_material(data[1], &args.material) == -1)
 			|| (parsing_vector(data[3], &normal) == -1))
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
@@ -41,10 +41,10 @@ t_sphere	*parsing_sphere(char *object)
 	double		radius;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-			|| !(data[1] = get_interval(object, "<texture>", "</texture>"))
+			|| !(data[1] = get_interval(object, "<material>", "</material>"))
 			|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
 			|| (parsing_dot(data[0], &args.orig) == -1)
-			|| (parsing_texture(data[1], &args.txt_data) == -1))
+			|| (parsing_material(data[1], &args.material) == -1))
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
@@ -63,10 +63,10 @@ t_cylinder	*parsing_cylinder(char *object)
 	double		radius;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-			|| !(data[1] = get_interval(object, "<texture>", "</texture>"))
+			|| !(data[1] = get_interval(object, "<material>", "</material>"))
 			|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
 			|| (parsing_dot(data[0], &args.orig) == -1)
-			|| (parsing_texture(data[1], &args.txt_data) == -1))
+			|| (parsing_material(data[1], &args.material) == -1))
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
@@ -85,10 +85,10 @@ t_cone		*parsing_cone(char *object)
 	double		angle;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-			|| !(data[1] = get_interval(object, "<texture>", "</texture>"))
+			|| !(data[1] = get_interval(object, "<material>", "</material>"))
 			|| !(data[3] = get_interval(object, "<angle>", "</angle>"))
 			|| (parsing_dot(data[0], &args.orig) == -1)
-			|| (parsing_texture(data[1], &args.txt_data) == -1))
+			|| (parsing_material(data[1], &args.material) == -1))
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
@@ -107,10 +107,10 @@ t_box		*parsing_box(char *object)
 	t_objs_comp args;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-			|| !(data[1] = get_interval(object, "<texture>", "</texture>"))
+			|| !(data[1] = get_interval(object, "<material>", "</material>"))
 			|| !(data[3] = get_interval(object, "<size>", "</size>"))
 			|| (parsing_dot(data[0], &args.orig) == -1)
-			|| (parsing_texture(data[1], &args.txt_data) == -1)
+			|| (parsing_material(data[1], &args.material) == -1)
 			|| (parsing_dot(data[3], &size) == -1))
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
@@ -129,13 +129,13 @@ t_hyperboloid	*parsing_hyperboloid(char *object)
 	double		d[4];
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-			|| !(data[1] = get_interval(object, "<texture>", "</texture>"))
+			|| !(data[1] = get_interval(object, "<material>", "</material>"))
 			|| !(data[3] = get_interval(object, "<a>", "</a>"))
 			|| !(data[4] = get_interval(object, "<b>", "</b>"))
 			|| !(data[5] = get_interval(object, "<c>", "</c>"))
 			|| !(data[6] = get_interval(object, "<d>", "</d>"))
 			|| (parsing_dot(data[0], &args.orig) == -1)
-			|| (parsing_texture(data[1], &args.txt_data) == -1))
+			|| (parsing_material(data[1], &args.material) == -1))
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
@@ -160,11 +160,11 @@ t_triangle	*parsing_triangle(char *object)
 	t_objs_comp args;
 	t_dot		d[3];
 
-	if (!(data[0] = get_interval(object, "<texture>", "</texture>"))
+	if (!(data[0] = get_interval(object, "<material>", "</material>"))
 			|| !(data[1] = get_interval(object, "<dot_a>", "</dot_a>"))
 			|| !(data[3] = get_interval(object, "<dot_b>", "</dot_b>"))
 			|| !(data[4] = get_interval(object, "<dot_c>", "</dot_c>"))
-			|| (parsing_texture(data[0], &args.txt_data) == -1)
+			|| (parsing_material(data[0], &args.material) == -1)
 			|| (parsing_dot(data[1], &d[_A]) == -1)
 			|| (parsing_dot(data[3], &d[_B]) == -1)
 			|| (parsing_dot(data[4], &d[_B]) == -1))

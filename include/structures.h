@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/12 13:23:39 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 14:20:21 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,15 +160,18 @@ typedef struct				s_obj_phys
 	double					shininess;
 }							t_obj_phys;
 
-typedef struct	s_obj_texture
+typedef struct	s_obj_material
 {
 	SDL_Color				color;
 	SDL_Color				transparent_color;
 	SDL_Surface				*texture;
+	SDL_Surface				*normal_map;
 	int						transparency;
 	double					txt_streching;
+	double					map_streching;
 	void					(*texture_mapping)(t_dot i, double *u, double *v, struct s_object *obj);
-}				t_obj_texture;
+	void					(*map_mapping)(t_dot i, double *u, double *v, struct s_object *obj);
+}				t_obj_material;
 
 typedef struct				s_object
 {
@@ -182,7 +185,7 @@ typedef struct				s_object
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	t_obj_phys				obj_light;
-	t_obj_texture			txt_data;
+	t_obj_material			material;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
@@ -192,7 +195,7 @@ typedef struct				s_object
 typedef struct				s_objs_comp
 {
 	t_dot					orig;
-	t_obj_texture			txt_data;
+	t_obj_material			material;
 	double					reflection_amount;
 	double					refraction_amount;
 	double					refractive_index;
@@ -211,7 +214,7 @@ typedef struct				s_sphere
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	t_obj_phys				obj_light;
-	t_obj_texture			txt_data;
+	t_obj_material			material;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
@@ -233,7 +236,7 @@ typedef struct				s_cylinder
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	t_obj_phys				obj_light;
-	t_obj_texture			txt_data;
+	t_obj_material			material;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
@@ -255,7 +258,7 @@ typedef struct				s_cone
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	t_obj_phys				obj_light;
-	t_obj_texture			txt_data;
+	t_obj_material			material;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
@@ -278,7 +281,7 @@ typedef struct				s_plane
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	t_obj_phys				obj_light;
-	t_obj_texture			txt_data;
+	t_obj_material			material;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
@@ -307,7 +310,7 @@ typedef struct				s_triangle
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	t_obj_phys				obj_light;
-	t_obj_texture			txt_data;
+	t_obj_material			material;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
@@ -341,7 +344,7 @@ typedef struct		s_box
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	t_obj_phys				obj_light;
-	t_obj_texture			txt_data;
+	t_obj_material			material;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;
@@ -379,7 +382,7 @@ typedef struct	s_hyperboloid
 	t_matrix				*trans_idir;
 	t_matrix				*trans_norm;
 	t_obj_phys				obj_light;
-	t_obj_texture			txt_data;
+	t_obj_material			material;
 	struct s_list_objs		*limit;
 	struct s_list_objs		*negative_obj;
 	int						is_light;

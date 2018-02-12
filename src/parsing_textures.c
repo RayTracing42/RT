@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:52:29 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/12 13:28:33 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 14:20:47 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,46 +30,81 @@ int			parsing_color(char *data_color, SDL_Color *c)
 	return (0);
 }
 
-static int	parsing_mapping(char *mapping_method, t_obj_texture *txt_data)
+static int	parsing_mapping(char *mapping_method, void (**fct)(t_dot i, double *u, double *v, struct s_object *obj))
 {
 	if (ft_strequ(mapping_method, "spherical"))
-		txt_data->texture_mapping = spherical_mapping;
+		*fct = spherical_mapping;
 	else if (ft_strequ(mapping_method, "cylindrical"))
-		txt_data->texture_mapping = cylindrical_mapping;
+		*fct = cylindrical_mapping;
 	else if (ft_strequ(mapping_method, "planar"))
-		txt_data->texture_mapping = planar_mapping;
+		*fct = planar_mapping;
 	else
 		return (-1);
 	return (0);
 }
 
-int			parsing_texture(char *data_txt, t_obj_texture *txt_data)
+static int	parsing_texture(char *data_txt, t_obj_material *material)
 {
-	char	*tmp[5];
+	char	*tmp[4];
 
-	if ((tmp[0] = get_interval(data_txt, "<color>", "</color>")) && parsing_color(tmp[0], &txt_data->color) == -1)
+	if (!(tmp[0] = get_interval(data_txt, "<file>", "</file>")))
 		return (-1);
-	txt_data->texture = NULL;
-	if ((tmp[1] = get_interval(data_txt, "<file>", "</file>")))
-	{
-		if (!(txt_data->texture = SDL_LoadBMP(tmp[1])))
-			exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());
-		if (!(tmp[2] = get_interval(data_txt, "<scale>", "</scale>")))
-			return (-1);
-		if (!(txt_data->txt_streching = atod(tmp[2])))
-			return (-1);
-		if (!(tmp[3] = get_interval(data_txt, "<mapping>", "</mapping>")) || parsing_mapping(tmp[3], txt_data) == -1)
-			return (-1);
-		if (!(tmp[4] = get_interval(data_txt, "<transparency>", "</transparency>")) || parsing_color(tmp[4], &txt_data->transparent_color) == -1)
-			txt_data->transparency = 0;
-		else
-			txt_data->transparency = 1;
-		free(tmp[2]);
-		free(tmp[3]);
-	}
-	else if (!tmp[0])
+	if (!(material->texture = SDL_LoadBMP(tmp[0])))
+		exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());
+	if (!(tmp[1] = get_interval(data_txt, "<scale>", "</scale>")))
+		return (-1);
+	if (!(material->txt_streching = atod(tmp[1])))
+		return (-1);
+	if (!(tmp[2] = get_interval(data_txt, "<mapping>", "</mapping>")) || parsing_mapping(tmp[2], &material->texture_mapping) == -1)
+		return (-1);
+	if (!(tmp[3] = get_interval(data_txt, "<transparency>", "</transparency>")) || parsing_color(tmp[3], &material->transparent_color) == -1)
+		material->transparency = 0;
+	else
+		material->transparency = 1;
+	free(tmp[0]);
+	free(tmp[1]);
+	free(tmp[2]);
+	free(tmp[3]);
+	return (0);
+}
+
+static int	parsing_normal_map(char *data_map, t_obj_material *material)
+{
+	char	*tmp[3];
+
+	if (!(tmp[0] = get_interval(data_map, "<file>", "</file>")))
+		return (-1);
+	if (!(material->normal_map = SDL_LoadBMP(tmp[0])))
+		exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());
+	if (!(tmp[1] = get_interval(data_map, "<scale>", "</scale>")) && !material->texture)
+		return (-1);
+	else if (!tmp[1] && material->texture)
+			material->map_streching = material->txt_streching;
+	else if (!(material->map_streching = atod(tmp[1])))
+		return (-1);
+	if (!(tmp[2] = get_interval(data_map, "<mapping>", "</mapping>")) && !material->texture)
+		return (-1);
+	else if (!tmp[2] && material->texture)
+		material->map_mapping = material->texture_mapping;
+	else if (parsing_mapping(tmp[2], &material->map_mapping) == -1)
 		return (-1);
 	free(tmp[0]);
 	free(tmp[1]);
+	free(tmp[2]);
+	return (0);
+}
+
+int			parsing_material(char *data_mat, t_obj_material *material)
+{
+	char	*tmp[3];
+
+	if ((tmp[0] = get_interval(data_mat, "<color>", "</color>")) && parsing_color(tmp[0], &material->color) == -1)
+		return (-1);
+	if ((tmp[1] = get_interval(data_mat, "<texture>", "</texture>")) && parsing_texture(tmp[1], material) == -1 && !tmp[0])
+		return (-1);
+	if ((tmp[2] = get_interval(data_mat, "<normal_map>", "</normal_map>")) && parsing_normal_map(tmp[2], material) == -1)
+	free(tmp[0]);
+	free(tmp[1]);
+	free(tmp[2]);
 	return (0);
 }

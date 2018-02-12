@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/11 13:17:25 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 14:23:09 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_object		*new_object(t_type type, t_objs_comp args)
 		exit_error("rt", "malloc");
 	*(t_type*)&obj->obj_type = type;
 	obj->origin = args.orig;
-	obj->txt_data = args.txt_data;
+	obj->material = args.material;
 	obj->obj_light = (t_obj_phys){args.reflection_amount,
 		args.refraction_amount, args.refractive_index,
 		args.shininess};
@@ -79,8 +79,8 @@ void			delete_object(t_object *obj)
 			delete_cell_obj(&obj->limit);
 		while (obj->negative_obj)
 			delete_cell_obj(&obj->negative_obj);
-		if (obj->txt_data.texture)
-			SDL_FreeSurface(obj->txt_data.texture);
+		if (obj->material.texture)
+			SDL_FreeSurface(obj->material.texture);
 		free(obj);
 	}
 }

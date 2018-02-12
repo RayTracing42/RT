@@ -23,21 +23,23 @@
 			<y>0</y>
 			<z>0</z>
 		</origin>
-		<texture>
+		<material>
 			<color>
 				<r>255</r>
 				<g>255</g>
 				<b>255</b>
 			</color>
-			<file>./file/tiles2.bmp</file>
-			<scale>1</scale>
-			<mapping>spherical</mapping>
-			<transparency>
-				<r>0</r>
-				<g>255</g>
-				<b>0</b>
-			</transparency>
-		</texture>
+			<texture>
+				<file>./file/tiles2.bmp</file>
+				<scale>1</scale>
+				<mapping>spherical</mapping>
+				<transparency>
+					<r>0</r>
+					<g>255</g>
+					<b>0</b>
+				</transparency>
+			</texture>
+		</material>
 		<transformations>
 			<rotation>
 				<x>0</x>
