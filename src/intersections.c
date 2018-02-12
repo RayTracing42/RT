@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/11 12:41:00 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/12 13:00:31 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	choice_intersect(t_list_ray *l, t_ray *ray, double *dist)
 {
 	while (l)
 	{
-		if (l->r.nb_intersect > 0)
+		if (l->r.nb_intersect > 0 && !(!l->r.color.r && l->r.color.g == 255 && !l->r.color.b))
 		{
 			if (eq(*dist, 0) || (gt(*dist, 0) && lt(l->t, *dist)))
 			{
@@ -113,7 +113,14 @@ t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	tmp_ray.obj = obj;
 	e = transform_equ(&tmp_ray, obj);
 	*tmp = obj->intersect(&tmp_ray, e, obj, 1);
-	tmp_ray.color = obj->txt_data.texture ? getTextColor(e, *tmp, obj) : obj->txt_data.color;
+	if (obj->txt_data.texture)
+	{
+		tmp_ray.color = getTextColor(e, *tmp, obj);
+		/*if (!tmp_ray.color.r && tmp_ray.color.g == 255 && !tmp_ray.color.b)
+			tmp_ray.nb_intersect = -1;*/
+	}
+	else
+		tmp_ray.color = obj->txt_data.color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
 	tmp_ray.normal = tmp_ray.obj->get_normal(&tmp_ray.inter, tmp_ray.obj);
 	if (gt(*tmp, 0))
@@ -130,7 +137,14 @@ t_ray	second_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	tmp_ray.obj = obj;
 	e = transform_equ(&tmp_ray, obj);
 	*tmp = obj->intersect(&tmp_ray, e, obj, 2);
-	tmp_ray.color = obj->txt_data.texture ? getTextColor(e, *tmp, obj) : obj->txt_data.color;
+	if (obj->txt_data.texture)
+	{
+		tmp_ray.color = getTextColor(e, *tmp, obj);
+		/*if (!tmp_ray.color.r && tmp_ray.color.g == 255 && !tmp_ray.color.b)
+			tmp_ray.nb_intersect = -1;*/
+	}
+	else
+		tmp_ray.color = obj->txt_data.color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
 	tmp_ray.normal = tmp_ray.obj->get_normal(&tmp_ray.inter, tmp_ray.obj);
 	tmp_ray.normal = (t_vector){-tmp_ray.normal.x, -tmp_ray.normal.y,
