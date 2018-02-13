@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/11 14:03:07 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/13 13:54:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,17 @@ double					plane_intersect(t_ray *ray, t_parequation e,
 static t_vector	get_plane_normal(t_dot *inter, t_object *obj)
 {
 	t_plane	*p;
+	t_vector	tmp;
 
-	(void)inter;
 	p = (t_plane*)obj;
+	if (obj->material.normal_map)
+	{
+		tmp = getMapVector(*inter, obj);
+		tmp.x *= p->normal.x;
+		tmp.y *= p->normal.y;
+		tmp.z *= p->normal.z;
+		return (tmp);
+	}
 	return (p->normal);
 }
 

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/11 14:03:20 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/13 13:55:55 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ static double			cylinder_intersect(t_ray *ray, t_parequation e,
 static t_vector	get_cylinder_normal(t_dot *inter, t_object *obj)
 {
 	(void)obj;
+	t_vector	tmp;
+
+	if (obj->material.normal_map)
+	{
+		tmp = getMapVector(*inter, obj);
+		tmp.x *= 2 * inter->x;
+		tmp.z *= 2 * inter->z;
+		return (tmp);
+	}
 	return ((t_vector){2 * inter->x, 0, 2 * inter->z});
 }
 

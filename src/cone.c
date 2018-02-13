@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/25 16:05:00 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/13 13:56:43 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,19 @@ static double			cone_intersection(t_ray *ray, t_parequation e,
 static t_vector	get_cone_normal(t_dot *inter, t_object *obj)
 {
 	t_cone	*c;
+	t_vector	tmp;
 
 	c = (t_cone*)obj;
+	if (obj->material.normal_map)
+	{
+		tmp = getMapVector(*inter, obj);
+		tmp.x *= 2 * inter->x;
+		tmp.y *= -2 * c->tanalpha2 * inter->y;
+		tmp.z *= 2 * inter->z;
+		return (tmp);
+	}
 	return ((t_vector){2 * inter->x, -2 * c->tanalpha2 * inter->y,
-							2 * inter->z});
+						2 * inter->z});
 }
 
 static int				is_in_cone(t_dot *i, t_object *obj)

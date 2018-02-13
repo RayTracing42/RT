@@ -5,7 +5,7 @@
 		<depth>0</depth>
 		<fov>60</fov>
 		<origin>
-			<x>-150</x>
+			<x>-200</x>
 			<y>0</y>
 			<z>0</z>
 		</origin>
@@ -30,13 +30,13 @@
 				<b>180</b>
 			</color>
 			<texture>
-				<file>./file/gravels.bmp</file>
-				<scale>3</scale>
+				<file>./file/wood.bmp</file>
+				<scale>1</scale>
 				<mapping>spherical</mapping>
 			</texture>
 			<normal_map>
-				<file>./file/gravel_normal_map.bmp</file>
-				<scale>3</scale>
+				<file>./file/wood_map.bmp</file>
+				<scale>1</scale>
 				<mapping>spherical</mapping>
 			</normal_map>
 		</material>
@@ -59,7 +59,7 @@
 	<light>
 		<type>orb</type>
 		<origin>
-			<x>-150</x>
+			<x>-100</x>
 			<y>200</y>
 			<z>0</z>
 		</origin>

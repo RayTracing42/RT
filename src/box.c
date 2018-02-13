@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/05 12:41:32 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/13 13:48:35 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,17 @@ static t_vector	get_box_normal(t_dot *inter, t_object *obj)
 
 	b = (t_box*)obj;
 	if (b->front->is_in_obj(inter, (t_object*)b->front))
-		return (b->front->normal);
+		return (b->front->get_normal(inter, (t_object*)b->front));
 	else if (b->back->is_in_obj(inter, (t_object*)b->back))
-		return (b->back->normal);
+		return (b->back->get_normal(inter, (t_object*)b->back));
 	else if (b->bottom->is_in_obj(inter, (t_object*)b->bottom))
-		return (b->bottom->normal);
+		return (b->bottom->get_normal(inter, (t_object*)b->bottom));
 	else if (b->top->is_in_obj(inter, (t_object*)b->top))
-		return (b->top->normal);
+		return (b->top->get_normal(inter, (t_object*)b->top));
 	else if (b->left->is_in_obj(inter, (t_object*)b->left))
-		return (b->left->normal);
+		return (b->left->get_normal(inter, (t_object*)b->left));
 	else
-		return (b->right->normal);
+		return (b->right->get_normal(inter, (t_object*)b->right));
 }
 
 static int				is_in_box(t_dot *i, t_object *obj)

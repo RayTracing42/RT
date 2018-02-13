@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/13 13:05:27 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/13 14:57:02 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ SDL_Color			shadows(t_ray *ray, t_scene *scn)
 	t_ray			light_ray;
 	SDL_Color		multi_lights;
 	double			opacity;
+	double			shade;
 
 	multi_lights = div_colors(ray->color, scn);
 	tmp = scn->lights;
@@ -83,8 +84,7 @@ SDL_Color			shadows(t_ray *ray, t_scene *scn)
 			opacify_color(&light_ray, &opacity);
 		light_ray.normal = ray->normal;
 		light_ray.light = tmp->light;
-		multi_lights = add_colors(color_mod(multi_lights, light_ray.light->color), add_colors(get_shade_col(&light_ray, opacity),
-									get_specular_col(ray, &light_ray, opacity)));
+		multi_lights = add_colors(color_mod(multi_lights, light_ray.light->color), add_colors(get_specular_col(ray, &light_ray, opacity, shade), get_shade_col(&light_ray, opacity, &shade)));
 		tmp = tmp->next;
 	}
 	return (multi_lights);
