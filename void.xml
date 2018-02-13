@@ -30,12 +30,12 @@
 				<b>180</b>
 			</color>
 			<texture>
-				<file>./file/wood.bmp</file>
+				<file>./files/wood.bmp</file>
 				<scale>1</scale>
 				<mapping>spherical</mapping>
 			</texture>
 			<normal_map>
-				<file>./file/wood_map.bmp</file>
+				<file>./files/wood_map.bmp</file>
 				<scale>1</scale>
 				<mapping>spherical</mapping>
 			</normal_map>
