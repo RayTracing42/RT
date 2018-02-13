@@ -36,6 +36,8 @@
 			</texture>
 			<normal_map>
 				<file>./file/gravel_normal_map.bmp</file>
+				<scale>3</scale>
+				<mapping>spherical</mapping>
 			</normal_map>
 		</material>
 		<transformations>
@@ -58,7 +60,7 @@
 		<type>orb</type>
 		<origin>
 			<x>-150</x>
-			<y>0</y>
+			<y>200</y>
 			<z>0</z>
 		</origin>
 		<color>

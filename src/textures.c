@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/12 20:30:48 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/13 11:33:34 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,6 @@ t_vector	getMapVector(t_dot pt, t_object *obj)
 	color = GetPixel32(obj->material.normal_map, mod(textel.x, obj->material.normal_map->w), mod(textel.y, obj->material.normal_map->h));
 	//color = getpixel(obj->texture, (int)u % obj->texture->w, (int)v %  obj->texture->h);
 	SDL_GetRGB(color, obj->material.normal_map->format, &tmp.r, &tmp.g, &tmp.b);
-	return ((t_vector){((int)(tmp.r - 128)) / 255.0, ((int)(tmp.g - 128)) / 255.0, (((int)tmp.b - 128)) / 255.0});
-	//return ((t_vector){((int)(tmp.r)) / 255.0, ((int)(tmp.g)) / 255.0, (((int)tmp.b)) / 255.0});
+	//return ((t_vector){((int)(tmp.r - 128)) / 255.0, ((int)(tmp.g - 128)) / 255.0, (((int)tmp.b - 128)) / 255.0});
+	return ((t_vector){((int)(tmp.r)) / 255.0, ((int)(tmp.g)) / 255.0, (((int)tmp.b)) / 255.0});
 }

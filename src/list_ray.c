@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   list_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 01:23:38 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/31 02:01:44 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/13 12:42:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	add_cell_ray(t_list_ray **head, t_ray *ray, double *dist)
+void	add_cell_ray(t_list_ray **head, t_ray *ray, double *dist, int i)
 {
 	t_list_ray	*tmp;
 
@@ -22,6 +22,7 @@ void	add_cell_ray(t_list_ray **head, t_ray *ray, double *dist)
 			exit_error("rt", "malloc");
 		tmp->r = *ray;
 		tmp->t = *dist;
+		tmp->i = i;
 		tmp->next = *head;
 		*head = tmp;
 	}

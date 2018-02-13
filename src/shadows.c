@@ -6,14 +6,14 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/12 16:36:57 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/13 13:05:27 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
 static int	check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs,
-	t_light *light)
+	t_light *light, t_object *filter)
 {
 	double	tmp;
 	t_ray	tmp_ray;
@@ -22,7 +22,7 @@ static int	check_objs_on_ray(t_ray *light_ray, t_list_objs *l_objs,
 		return (1);
 	tmp_ray = *light_ray;
 	tmp_ray.shad_opacity = 0;
-	tmp = check_intersect(&tmp_ray, l_objs, 0);
+	tmp = check_intersect(&tmp_ray, l_objs, 0, filter);
 	light_ray->shad_opacity = tmp_ray.shad_opacity;
 	if (gt(tmp, 0) && lt(tmp, 1))
 		return (1);
@@ -79,7 +79,7 @@ SDL_Color			shadows(t_ray *ray, t_scene *scn)
 		light_ray.equ.vc = *(t_vector*)&ray->inter;
 		light_ray.color = ray->color;
 		opacity = 1;
-		if (check_objs_on_ray(&light_ray, scn->objects, tmp->light))
+		if (check_objs_on_ray(&light_ray, scn->objects, tmp->light, ray->i_intersect == 1 ? ray->obj : NULL))
 			opacify_color(&light_ray, &opacity);
 		light_ray.normal = ray->normal;
 		light_ray.light = tmp->light;

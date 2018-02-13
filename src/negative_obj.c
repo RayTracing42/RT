@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/03 15:24:34 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/13 12:44:02 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static void	valid_negative_points(t_list_ray **l_ray, t_couple_ray *neg, t_objec
 {
 	if (is_in_limited_obj(&neg->ta, &neg->a, father))
 		if (!is_in_negative_obj(&neg->ta, &neg->a, father, except))
-			add_cell_ray(l_ray, &neg->a, &neg->ta);
+			add_cell_ray(l_ray, &neg->a, &neg->ta, 1);
 	if (is_in_limited_obj(&neg->tb, &neg->b, father))
 		if (!is_in_negative_obj(&neg->tb, &neg->b, father, except))
-			add_cell_ray(l_ray, &neg->b, &neg->tb);
+			add_cell_ray(l_ray, &neg->b, &neg->tb, 2);
 }
 
 void	negative_obj(t_list_ray **l_ray, t_couple_ray *basic, t_object *father, const t_ray *ray)

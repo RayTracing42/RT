@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/12 20:44:51 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/13 12:41:18 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct		s_ray
 	double					percuted_refractive_i;
 	double					limit;
 	int						nb_intersect;
+	int						i_intersect;
 
 	int						debug;
 }					t_ray;
@@ -138,6 +139,7 @@ typedef struct		s_list_ray
 {
 	t_ray					r;
 	double					t;
+	int						i;
 	struct s_list_ray		*next;
 }					t_list_ray;
 

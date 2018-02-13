@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/12 15:54:27 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/13 13:14:35 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	choice_intersect(t_list_ray *l, t_ray *ray, double *dist)
 				{
 					*dist = l->t;
 					*ray = l->r;
+					ray->i_intersect = l->i;
 				}
 			}
 		}
@@ -73,7 +74,7 @@ void	choice_intersect(t_list_ray *l, t_ray *ray, double *dist)
 	}
 }
 
-double			check_intersect(t_ray *ray, t_list_objs *l, int check_lights)
+double			check_intersect(t_ray *ray, t_list_objs *l, int check_lights, t_object *filter)
 {
 	double			dist;
 	t_couple_ray	basic;
@@ -82,7 +83,8 @@ double			check_intersect(t_ray *ray, t_list_objs *l, int check_lights)
 	dist = 0;
 	while (l)
 	{
-		if (!l->obj->is_light || check_lights)
+		if ((!l->obj->is_light || check_lights) &&
+			(!filter || l->obj != filter))
 		{
 			basic.a = first_intersect(ray, l->obj, &basic.ta);
 			basic.b = second_intersect(ray, l->obj, &basic.tb);
@@ -95,14 +97,15 @@ double			check_intersect(t_ray *ray, t_list_objs *l, int check_lights)
 					limit(&basic, l->obj, ray);
 				if (l->obj->negative_obj)
 					negative_obj(&l_ray, &basic, l->obj, ray);
-				add_cell_ray(&l_ray, &basic.a, &basic.ta);
-				add_cell_ray(&l_ray, &basic.b, &basic.tb);
+				add_cell_ray(&l_ray, &basic.a, &basic.ta, 1);
+				add_cell_ray(&l_ray, &basic.b, &basic.tb, 2);
 				choice_intersect(l_ray, ray, &dist);
 			}
 		}
 		l = l->next;
 	}
-	correct_normal(*(t_dot*)&ray->equ.vc, ray->inter, &ray->normal);
+	if (ray->obj && !ray->obj->material.normal_map)
+		correct_normal(*(t_dot*)&ray->equ.vc, ray->inter, &ray->normal);
 	return (dist);
 }
 
