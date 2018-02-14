@@ -22,15 +22,10 @@ int			key_management(SDL_Event *current, t_event *evt)
 		return (0);
 	if (current->key.keysym.sym == SDLK_s)
 		{
-			gray();
-			blur();
-			blur();
-			prewitt();
-			negative();
+			motionblur();
 			antia();
 			antia();
 			screenshot();
-			perlin_pinpin(0,0);
 			refresh_win();
 		}
 	return (1);

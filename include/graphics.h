@@ -119,6 +119,18 @@ int		duotone(SDL_Color col1, SDL_Color col2);
 void		apply_duotone(SDL_Surface *screen, int x, int y, t_duotone t);
 
 /*
+** effect_cartoon.c
+*/
+int		cartoon(void);
+void		apply_cartoon(SDL_Surface *screen, SDL_Surface *cartoon, int x, int y);
+
+/*
+** effect_motionblur.c
+*/
+int		motionblur(void);
+void		apply_motionblur(SDL_Surface *screen, int x, int y);
+
+/*
 ** pixel_utils.c
 */
 int		set_color(unsigned char a, unsigned char r, \

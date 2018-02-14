@@ -33,7 +33,7 @@ triangle.c utils.c vectors2.c vectors.c vectors_transformations.c view_plane.c \
 effect_blur.c antialiasing.c effect_anaglyph.c effect_bwnoise.c effect_duotone.c \
 effect_gray.c effect_laplacian.c effect_lofi.c effect_negative.c effect_noise.c \
 effect_pop.c effect_prewitt.c effect_sepia.c effect_utils.c effect_blur.c perlin.c \
-pixel_utils.c screenshot.c
+pixel_utils.c screenshot.c effect_cartoon.c effect_motionblur.c
 
 SRC:= $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)
