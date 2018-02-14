@@ -1,5 +1,6 @@
 <scene>
-	<brightness>30</brightness>
+	<brightness>10</brightness>
+	<background>./files/space.bmp</background>
 
 	<camera>
 		<depth>0</depth>
@@ -7,68 +8,80 @@
 		<origin>
 			<x>-200</x>
 			<y>0</y>
-			<z>0</z>
+			<z>-150</z>
 		</origin>
 		<angle>
 			<x>0</x>
-			<y>0</y>
+			<y>-45</y>
 			<z>0</z>
 		</angle>
 	</camera>
 
+	<light>
+		<type>object</type>
+		<shape>
+			<type>sphere</type>
+			<origin>
+				<x>100</x>
+				<y>0</y>
+				<z>-50</z>
+			</origin>
+			<material>
+				<color>
+					<r>255</r>
+					<g>200</g>
+					<b>150</b>
+				</color>
+				<texture>
+					<file>./files/sun.bmp</file>
+					<scale>1</scale>
+					<mapping>spherical</mapping>
+				</texture>
+			</material>
+			<radius>50</radius>
+		</shape>
+		<power>1</power>
+	</light>
+
 	<object>
 		<type>sphere</type>
 		<origin>
-			<x>0</x>
+			<x>-120</x>
 			<y>0</y>
-			<z>0</z>
+			<z>10</z>
 		</origin>
-		<material>
-			<color>
-				<r>180</r>
-				<g>180</g>
-				<b>180</b>
-			</color>
-			<texture>
-				<file>./files/wood.bmp</file>
-				<scale>1</scale>
-				<mapping>spherical</mapping>
-			</texture>
-			<normal_map>
-				<file>./files/wood_map.bmp</file>
-				<scale>1</scale>
-				<mapping>spherical</mapping>
-			</normal_map>
-		</material>
 		<transformations>
 			<rotation>
 				<x>0</x>
-				<y>0</y>
+				<y>6</y>
 				<z>0</z>
 			</rotation>
 		</transformations>
-		<physic>
-			<refraction_amount>0</refraction_amount>
-			<reflexion_amount>0</reflexion_amount>
-			<refraction_index>0</refraction_index>
-			<shininess>0</shininess>
-		</physic>
-		<radius>40</radius>
+		<material>
+			<texture>
+				<file>./files/earth_day_night.bmp</file>
+				<scale>1</scale>
+				<mapping>spherical</mapping>
+			</texture>
+		</material>
+		<radius>20</radius>
 	</object>
 
-	<light>
-		<type>orb</type>
+	<object>
+		<type>sphere</type>
 		<origin>
-			<x>-100</x>
-			<y>200</y>
-			<z>0</z>
+			<x>-90</x>
+			<y>10</y>
+			<z>-15</z>
 		</origin>
-		<color>
-			<r>255</r>
-			<g>255</g>
-			<b>255</b>
-		</color>
-		<power>1</power>
-	</light>
+		<material>
+			<texture>
+				<file>./files/moon.bmp</file>
+				<scale>1</scale>
+				<mapping>spherical</mapping>
+			</texture>
+		</material>
+		<radius>3</radius>
+	</object>
 
 </scene>

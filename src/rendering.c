@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 10:59:52 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/06 13:47:26 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 12:35:45 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,11 @@ void		delete_pxl_queues()
 
 void		put_pixel(int x, int y, SDL_Color *color)
 {
-	if (color)
+	if (color && color->a)
+	{
 		SDL_SetRenderDrawColor(get_sdl_core()->renderer, color->r, color->g, color->b, color->a);
-	SDL_RenderDrawPoint(get_sdl_core()->renderer, x, y);
+		SDL_RenderDrawPoint(get_sdl_core()->renderer, x, y);
+	}
 }
 
 static void	update_pxl_queue(t_pxl_queue **list_queue, int nb_threads, int *nb_ended_threads)

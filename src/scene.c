@@ -6,13 +6,13 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 14:41:24 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 14:14:55 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 12:49:22 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_scene	*new_scene(t_camera cam, double brightness)
+t_scene		*new_scene(t_camera cam, double brightness, SDL_Texture *bg)
 {
 	t_scene	*scene;
 
@@ -26,6 +26,7 @@ t_scene	*new_scene(t_camera cam, double brightness)
 	scene->cam = cam;
 	scene->lights = NULL;
 	scene->objects = NULL;
+	scene->background = bg;
 	return (scene);
 }
 
@@ -37,6 +38,7 @@ void	delete_scene(t_scene *scene)
 			delete_cell_obj(&scene->objects);
 		while (scene->lights)
 			delete_cell_light(&scene->lights);
+		SDL_DestroyTexture(scene->background);
 		free(scene);
 	}
 }

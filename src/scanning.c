@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/13 12:52:27 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 12:35:54 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 		get_refracted_col(ray, ray->obj, refract_ray);
 		return (ray->color);
 	}
-	return (ray->color = (SDL_Color){0, 0, 0, 255});
+	return (ray->color = (SDL_Color){0, 0, 0, 0});
 }
 
 static void		randomize_cam_orig(t_camera *cam, struct drand48_data *buff)

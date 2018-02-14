@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/12 19:57:11 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 12:53:02 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	main_display(void *scene)
 	t_scene	*scn;
 
 	scn = (t_scene*)scene;
+	if (scn->background)
+		SDL_RenderCopy(get_sdl_core()->renderer, scn->background, NULL, NULL);
 	view_plane(&scn->cam);
 	scanning(scn);
 	refresh_win();

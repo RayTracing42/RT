@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/13 14:21:15 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 12:38:34 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,24 @@ Uint32 getpixel(SDL_Surface *surface, int x, int y)
 
 void	spherical_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *texture)
 {
-	textel->x = 1 + (atan2(i.x,  i.z) / (M_PI));
+	textel->x = 0.5 + ((atan2(-i.x,  -i.z)) / (2 * M_PI));
+	textel->y = (acos(i.y)) / (M_PI);
 	textel->x *= texture->w * streching;
-	textel->y = 0.5 - (asin(i.y) / M_PI);
 	textel->y *= texture->h * streching;
 }
 
 void	cylindrical_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *texture)
 {
-	textel->x = 1 + (atan2(i.x,  i.z) / (M_PI));
+	textel->x = 0.5 + (atan2(i.x,  i.z) / (2 * M_PI));
 	textel->x *= texture->w * streching;
 	i.y /= sqrt(i.x * i.x + i.z * i.z);
-	textel->y = mod(i.y * texture->h * (streching / M_PI), texture->h);
+	textel->y = mod(i.y * texture->h * streching, texture->h);
 }
 
 void	planar_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *texture)
 {
-	textel->x = mod(i.z * texture->w * streching / M_PI, texture->w);
-	textel->y = mod(i.y * texture->h * streching / M_PI, texture->h);
+	textel->x = mod(i.z * texture->w * streching, texture->w);
+	textel->y = mod(i.y * texture->h * streching, texture->h);
 }
 
 SDL_Color getTextColor(t_dot pt, t_object *obj)
@@ -69,15 +69,11 @@ SDL_Color getTextColor(t_dot pt, t_object *obj)
 	Uint32 color;
 	SDL_Color	ret;
 
-	pt.x -= obj->origin.x;
-	pt.y -= obj->origin.y;
-	pt.z -= obj->origin.z;
 	vect_normalize((t_vector*)&pt);
 	obj->material.texture_mapping(pt, &textel, obj->material.txt_streching, obj->material.texture);
-	color = GetPixel32(obj->material.texture, mod(textel.x, obj->material.texture->w), mod(textel.y, obj->material.texture->h));
-	//color = getpixel(obj->texture, (int)u % obj->texture->w, (int)v %  obj->texture->h);
-	ret.a = 255;
+	color = getpixel(obj->material.texture, mod(textel.x, obj->material.texture->w), mod(textel.y, obj->material.texture->h));
 	SDL_GetRGB(color, obj->material.texture->format, &ret.r, &ret.g, &ret.b);
+	ret.a = 255;
 	return (ret);
 }
 
