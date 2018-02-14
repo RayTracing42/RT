@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/14 12:43:57 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 14:18:00 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ typedef struct	s_obj_material
 	SDL_Color				transparent_color;
 	SDL_Surface				*texture;
 	SDL_Surface				*normal_map;
+	int						chess;
 	int						transparency;
 	double					txt_streching;
 	double					map_streching;

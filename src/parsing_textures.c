@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:52:29 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/14 13:56:46 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 14:43:42 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ static int	parsing_texture(char *data_txt, t_obj_material *material)
 
 	if (!(tmp[0] = get_interval(data_txt, "<file>", "</file>")))
 		return (-1);
-	if (!(material->texture = SDL_LoadBMP(tmp[0])))
+	if (ft_strequ(tmp[0], "chess"))
+		material->chess = 1;
+	else if (!(material->texture = SDL_LoadBMP(tmp[0])))
 		exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());
 	if (!(tmp[1] = get_interval(data_txt, "<scale>", "</scale>")))
 		return (-1);

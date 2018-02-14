@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/13 14:18:25 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 14:18:26 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	tmp_ray.obj = obj;
 	e = transform_equ(&tmp_ray, obj);
 	*tmp = obj->intersect(&tmp_ray, e, obj, 1);
-	if (obj->material.texture)
+	if (obj->material.texture || obj->material.chess)
 		tmp_ray.color = getTextColor(tmp_ray.inter, obj);
 	else
 		tmp_ray.color = obj->material.color;
@@ -138,7 +138,7 @@ t_ray	second_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	tmp_ray.obj = obj;
 	e = transform_equ(&tmp_ray, obj);
 	*tmp = obj->intersect(&tmp_ray, e, obj, 2);
-	if (obj->material.texture)
+	if (obj->material.texture || obj->material.chess)
 		tmp_ray.color = getTextColor(tmp_ray.inter, obj);
 	else
 		tmp_ray.color = obj->material.color;

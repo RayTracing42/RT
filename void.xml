@@ -5,7 +5,7 @@
 		<depth>0</depth>
 		<fov>60</fov>
 		<origin>
-			<x>0</x>
+			<x>-100</x>
 			<y>0</y>
 			<z>0</z>
 		</origin>
@@ -21,46 +21,20 @@
 		<shape>
 			<type>sphere</type>
 			<origin>
-				<x>100</x>
+				<x>0</x>
 				<y>0</y>
-				<z>-100</z>
+				<z>0</z>
 			</origin>
 			<material>
-				<color>
-					<r>255</r>
-					<g>200</g>
-					<b>150</b>
-				</color>
 				<texture>
-					<file>./files/sun.bmp</file>
-					<scale>1</scale>
+					<file>chess</file>
+					<scale>20</scale>
 					<mapping>spherical</mapping>
 				</texture>
 			</material>
-			<radius>50</radius>
+			<radius>20</radius>
 		</shape>
 		<power>1</power>
 	</light>
-
-	<object>
-		<type>plane</type>
-		<origin>
-			<x>0</x>
-			<y>0</y>
-			<z>100</z>
-		</origin>
-		<normal>
-			<x>-1</x>
-			<y>0</y>
-			<z>-1</z>
-		</normal>
-		<material>
-			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>255</b>
-			</color>
-		</material>
-	</object>
 
 </scene>

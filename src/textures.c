@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/14 13:48:43 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 14:41:22 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,50 @@ Uint32 getpixel(SDL_Surface *surface, int x, int y)
 
 void	spherical_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *texture)
 {
+	int w;
+	int h;
+
+	w = texture ? texture->w : 2;
+	h = texture ? texture->h : 1;
 	textel->x = 0.5 + ((atan2(-i.x,  -i.z)) / (2 * M_PI));
 	textel->y = (acos(i.y)) / (M_PI);
-	textel->x *= texture->w * streching;
-	textel->y *= texture->h * streching;
+	textel->x *= w * streching;
+	textel->y *= h * streching;
 }
 
 void	cylindrical_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *texture)
 {
-	textel->x = 0.5 + (atan2(i.x,  i.z) / (2 * M_PI));
-	textel->x *= texture->w * streching;
+	int w;
+	int h;
+
+	w = texture ? texture->w : 2;
+	h = texture ? texture->h : 1;
+	textel->x = 0.5 + (atan2(-i.x,  -i.z) / (2 * M_PI));
+	textel->x *= w * streching;
 	i.y /= sqrt(i.x * i.x + i.z * i.z);
-	textel->y = mod(i.y * texture->h * streching, texture->h);
+	if (texture)
+		textel->y = mod(i.y * h * streching, h);
+	else
+		textel->y = i.y * streching;
 }
 
 void	planar_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *texture)
 {
-	textel->x = mod(i.z * texture->w * streching, texture->w);
-	textel->y = mod(i.y * texture->h * streching, texture->h);
+	int w;
+	int h;
+
+	w = texture ? texture->w : 1;
+	h = texture ? texture->h : 1;
+	if (texture)
+	{
+		textel->x = mod(i.z * w * streching, w);
+		textel->y = mod(i.y * h * streching, h);
+	}
+	else
+	{
+		textel->x = i.z * streching;
+		textel->y = i.y * streching;
+	}
 }
 
 SDL_Color getTextColor(t_dot pt, t_object *obj)
@@ -71,8 +97,13 @@ SDL_Color getTextColor(t_dot pt, t_object *obj)
 
 	vect_normalize((t_vector*)&pt);
 	obj->material.texture_mapping(pt, &textel, obj->material.txt_streching, obj->material.texture);
-	color = getpixel(obj->material.texture, mod(textel.x, obj->material.texture->w), mod(textel.y, obj->material.texture->h));
-	SDL_GetRGB(color, obj->material.texture->format, &ret.r, &ret.g, &ret.b);
+	if (obj->material.texture)
+	{
+		color = getpixel(obj->material.texture, mod(textel.x, obj->material.texture->w), mod(textel.y, obj->material.texture->h));
+		SDL_GetRGB(color, obj->material.texture->format, &ret.r, &ret.g, &ret.b);
+	}
+	else
+		ret = (mod(textel.x, 2) && !mod(textel.y, 2)) || (!mod(textel.x, 2) && mod(textel.y, 2)) ? (SDL_Color){0, 0, 0, 255} : (SDL_Color){255, 255, 255, 255};
 	ret.a = 255;
 	return (ret);
 }
