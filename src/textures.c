@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/14 15:26:14 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 19:28:56 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	cylindrical_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *
 		textel->y = i.y * streching;
 }
 
-void	planar_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *texture)
+void	planar_mapping_x(t_dot i, t_dot *textel, double streching, SDL_Surface *texture)
 {
 	int w;
 	int h;
@@ -80,18 +80,43 @@ void	planar_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *textu
 	w = texture ? texture->w : 1;
 	h = texture ? texture->h : 1;
 	if (texture)
-	{
-		textel->x = i.z * w * (streching / (2 * M_PI));
-		textel->y = -i.y * h * (streching / (2 * M_PI));
-	}
+		*textel = (t_dot){i.z * w * (streching / (2 * M_PI)), -i.y * h * (streching / (2 * M_PI)), 0};
 	else
-	{
-		textel->x = i.z * streching;
-		textel->y = i.y * streching;
-	}
+		*textel = (t_dot){i.z * streching, i.y * streching, 0};
 }
 
-SDL_Color getTextColor(t_dot pt, t_object *obj)
+void	planar_mapping_y(t_dot i, t_dot *textel, double streching, SDL_Surface *texture)
+{
+	int w;
+	int h;
+
+	w = texture ? texture->w : 1;
+	h = texture ? texture->h : 1;
+	if (texture)
+		*textel = (t_dot){i.x * w * (streching / (2 * M_PI)), -i.z * h * (streching / (2 * M_PI)), 0};
+	else
+		*textel = (t_dot){i.x * streching, i.z * streching, 0};
+}
+
+void	planar_mapping_z(t_dot i, t_dot *textel, double streching, SDL_Surface *texture)
+{
+	int w;
+	int h;
+
+	w = texture ? texture->w : 1;
+	h = texture ? texture->h : 1;
+	if (texture)
+		*textel = (t_dot){i.y * w * (streching / (2 * M_PI)), -i.x * h * (streching / (2 * M_PI)), 0};
+	else
+		*textel = (t_dot){i.y * streching, i.x * streching, 0};
+}
+
+void	planar_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *texture)
+{
+	planar_mapping_x(i, textel, streching, texture);
+}
+
+SDL_Color	getTextColor(t_dot pt, t_object *obj)
 {
 	t_dot	textel;
 	Uint32 color;

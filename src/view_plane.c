@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/03 15:47:43 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 16:41:05 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ void	view_plane_vector(int x, int y, t_camera *cam, t_vector *vd)
 
 void	view_plane_rotation(t_view_plane *vp, double x, double y, double z)
 {
-	vp->front = vector_rotation_x(&vp->front, x);
-	vp->front = vector_rotation_y(&vp->front, y);
 	vp->front = vector_rotation_z(&vp->front, z);
-	vp->up = vector_rotation_x(&vp->up, x);
-	vp->up = vector_rotation_y(&vp->up, y);
+	vp->front = vector_rotation_y(&vp->front, y);
+	vp->front = vector_rotation_x(&vp->front, x);
 	vp->up = vector_rotation_z(&vp->up, z);
-	vp->right = vector_rotation_x(&vp->right, x);
-	vp->right = vector_rotation_y(&vp->right, y);
+	vp->up = vector_rotation_y(&vp->up, y);
+	vp->up = vector_rotation_x(&vp->up, x);
 	vp->right = vector_rotation_z(&vp->right, z);
+	vp->right = vector_rotation_y(&vp->right, y);
+	vp->right = vector_rotation_x(&vp->right, x);
 }
 
 void	view_plane(t_camera *cam)

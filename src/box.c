@@ -6,11 +6,12 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/13 13:48:35 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 19:38:39 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include "texture_mapping.h"
 
 int						is_in_box_boundaries(const t_plane *p, t_box *b, t_dot *d)
 {
@@ -143,6 +144,16 @@ void				box_transform_planes(t_box *box, t_trans_data trs)
 	set_all_matrix((t_object *)box->top, trs);
 	trs.trans = (t_dot){t.x, t.y, t.z + (box->size.z / 2)};
 	set_all_matrix((t_object *)box->right, trs);
+	if ((box->material.texture || box->material.chess) &&
+		box->material.texture_mapping == planar_mapping)
+	{
+		box->front->material.texture_mapping = planar_mapping_x;
+		box->bottom->material.texture_mapping = planar_mapping_y;
+		box->left->material.texture_mapping = planar_mapping_z;
+		box->back->material.texture_mapping = planar_mapping_x;
+		box->top->material.texture_mapping = planar_mapping_y;
+		box->right->material.texture_mapping = planar_mapping_z;
+	}
 }
 
 t_box					*new_box(t_objs_comp args, t_dot size)
