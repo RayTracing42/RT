@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/12 14:24:09 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 15:01:09 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	parsing_local_limit(t_object *o, t_dot origin, t_vector normal,
 {
 	t_plane	*p;
 
-	/*origin = (t_dot){origin.x - o->origin.x, origin.y - o->origin.y,
-		origin.z - o->origin.z};*/
 	mult_vect((t_vector*)&origin, o->trans_const, (t_vector*)&origin);
 	mult_vect(&normal, o->trans_norm, &normal);
 	origin.x += o->origin.x;

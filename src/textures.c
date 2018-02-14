@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/14 14:41:22 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 15:26:14 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	spherical_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *te
 	int w;
 	int h;
 
+	vect_normalize((t_vector*)&i);
 	w = texture ? texture->w : 2;
 	h = texture ? texture->h : 1;
 	textel->x = 0.5 + ((atan2(-i.x,  -i.z)) / (2 * M_PI));
@@ -61,11 +62,12 @@ void	cylindrical_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *
 
 	w = texture ? texture->w : 2;
 	h = texture ? texture->h : 1;
+	vect_normalize((t_vector*)&i);
 	textel->x = 0.5 + (atan2(-i.x,  -i.z) / (2 * M_PI));
 	textel->x *= w * streching;
 	i.y /= sqrt(i.x * i.x + i.z * i.z);
 	if (texture)
-		textel->y = mod(i.y * h * streching, h);
+		textel->y = -i.y * h * (streching / (2 * M_PI));
 	else
 		textel->y = i.y * streching;
 }
@@ -79,8 +81,8 @@ void	planar_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *textu
 	h = texture ? texture->h : 1;
 	if (texture)
 	{
-		textel->x = mod(i.z * w * streching, w);
-		textel->y = mod(i.y * h * streching, h);
+		textel->x = i.z * w * (streching / (2 * M_PI));
+		textel->y = -i.y * h * (streching / (2 * M_PI));
 	}
 	else
 	{
@@ -95,7 +97,6 @@ SDL_Color getTextColor(t_dot pt, t_object *obj)
 	Uint32 color;
 	SDL_Color	ret;
 
-	vect_normalize((t_vector*)&pt);
 	obj->material.texture_mapping(pt, &textel, obj->material.txt_streching, obj->material.texture);
 	if (obj->material.texture)
 	{
