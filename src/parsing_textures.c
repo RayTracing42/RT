@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:52:29 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/12 15:05:41 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 13:56:46 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ int			parsing_material(char *data_mat, t_obj_material *material)
 
 	if ((tmp[0] = get_interval(data_mat, "<color>", "</color>")) && parsing_color(tmp[0], &material->color) == -1)
 		return (-1);
+	else if (!tmp[0])
+		material->color = (SDL_Color){0, 0, 0, 0};
 	material->texture = NULL;
 	if ((tmp[1] = get_interval(data_mat, "<texture>", "</texture>")) && parsing_texture(tmp[1], material) == -1 && !tmp[0])
 		return (-1);

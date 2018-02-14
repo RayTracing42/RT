@@ -1,18 +1,17 @@
 <scene>
 	<brightness>10</brightness>
-	<background>./files/space.bmp</background>
 
 	<camera>
 		<depth>0</depth>
 		<fov>60</fov>
 		<origin>
-			<x>-200</x>
+			<x>0</x>
 			<y>0</y>
-			<z>-150</z>
+			<z>0</z>
 		</origin>
 		<angle>
 			<x>0</x>
-			<y>-45</y>
+			<y>0</y>
 			<z>0</z>
 		</angle>
 	</camera>
@@ -24,7 +23,7 @@
 			<origin>
 				<x>100</x>
 				<y>0</y>
-				<z>-50</z>
+				<z>-100</z>
 			</origin>
 			<material>
 				<color>
@@ -44,44 +43,24 @@
 	</light>
 
 	<object>
-		<type>sphere</type>
+		<type>plane</type>
 		<origin>
-			<x>-120</x>
+			<x>0</x>
 			<y>0</y>
-			<z>10</z>
+			<z>100</z>
 		</origin>
-		<transformations>
-			<rotation>
-				<x>0</x>
-				<y>6</y>
-				<z>0</z>
-			</rotation>
-		</transformations>
+		<normal>
+			<x>-1</x>
+			<y>0</y>
+			<z>-1</z>
+		</normal>
 		<material>
-			<texture>
-				<file>./files/earth_day_night.bmp</file>
-				<scale>1</scale>
-				<mapping>spherical</mapping>
-			</texture>
+			<color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+			</color>
 		</material>
-		<radius>20</radius>
-	</object>
-
-	<object>
-		<type>sphere</type>
-		<origin>
-			<x>-90</x>
-			<y>10</y>
-			<z>-15</z>
-		</origin>
-		<material>
-			<texture>
-				<file>./files/moon.bmp</file>
-				<scale>1</scale>
-				<mapping>spherical</mapping>
-			</texture>
-		</material>
-		<radius>3</radius>
 	</object>
 
 </scene>

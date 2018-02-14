@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 11:53:24 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/12 14:22:26 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/14 14:08:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ static t_dot	get_cone_ray_vect(t_dot pos, t_obj_light *obl)
 		t = (-1 - t * tana2 - sqrt(t * (2 * tana2 + tana2 * tana2 + 1))) / (2 * (1 - t * tana2 * tana2));
 	if (eq(t, 1 / (2 * tana2)))
 		return (pos);
-	mult_vect((t_vector*)&res, obl->shape->trans_const, &(t_vector){res.x / (1 + 2 * t), res.y / (1 - 2 * tana2 * t), res.z / (1 + 2 * t)});
+	res = (t_dot){res.x / (1 + 2 * t), res.y / (1 - 2 * tana2 * t), res.z / (1 + 2 * t)};
+	if (obl->shape->material.texture && !obl->shape->material.color.a)
+		obl->color = getTextColor(res, obl->shape);
+	mult_vect((t_vector*)&res, obl->shape->trans_const, (t_vector*)&res);
 	return ((t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
 			res.z + obl->shape->origin.z});
 }
@@ -49,7 +52,10 @@ static t_dot	get_cylinder_ray_vect(t_dot pos, t_obj_light *obl)
 
 	r = ((t_cylinder*)obl->shape)->radius;
 	t = -0.5 + sqrt(res.x * res.x + res.z * res.z) / (2 * r);
-	mult_vect((t_vector*)&res, obl->shape->trans_const, &(t_vector){res.x / (1 + 2 * t), res.y, res.z / (1 + 2 * t)});
+	res = (t_dot){res.x / (1 + 2 * t), res.y, res.z / (1 + 2 * t)};
+	if (obl->shape->material.texture && !obl->shape->material.color.a)
+		obl->color = getTextColor(res, obl->shape);
+	mult_vect((t_vector*)&res, obl->shape->trans_const, (t_vector*)&res);
 	return ((t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
 			res.z + obl->shape->origin.z});
 }
@@ -68,7 +74,10 @@ static t_dot	get_plane_ray_vect(t_dot pos, t_obj_light *obl)
 	n = ((t_plane*)obl->shape)->normal;
 	t = (n.x * res.x + n.y * res.y + n.z * res.z) /
 		(n.x * n.x + n.y * n.y + n.z * n.z);
-	mult_vect((t_vector*)&res, obl->shape->trans_const, &(t_vector){res.x - n.x * t, res.y - n.y * t, res.z - n.z * t});
+	res = (t_dot){res.x - n.x * t, res.y - n.y * t, res.z - n.z * t};
+	if (obl->shape->material.texture && !obl->shape->material.color.a)
+		obl->color = getTextColor(res, obl->shape);
+	mult_vect((t_vector*)&res, obl->shape->trans_const, (t_vector*)&res);
 	return ((t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
 			res.z + obl->shape->origin.z});
 }
@@ -89,6 +98,8 @@ static int	get_box_plane_vect(t_dot *dst, t_dot pos, t_plane *p, t_box *b)
 	res = (t_dot){res.x - n.x * t, res.y - n.y * t, res.z - n.z * t};
 	if (!is_in_box_boundaries(p, b, &res))
 		return (0);
+	if (p->material.texture && !p->material.color.a)
+		b->material.color = getTextColor(res, (t_object*)p);
 	mult_vect((t_vector*)&res, p->trans_const, (t_vector*)&res);
 	*dst = (t_dot){res.x + p->origin.x, res.y + p->origin.y,
 			res.z + p->origin.z};
@@ -101,18 +112,16 @@ static t_dot	get_box_ray_vect(t_dot pos, t_obj_light *obl)
 	t_box		*box;
 
 	box = (t_box*)obl->shape;
-	if (get_box_plane_vect(&res, pos, box->front, box))
+	if (get_box_plane_vect(&res, pos, box->front, box) ||
+		get_box_plane_vect(&res, pos, box->back, box) ||
+		get_box_plane_vect(&res, pos, box->top, box) ||
+		get_box_plane_vect(&res, pos, box->bottom, box) ||
+		get_box_plane_vect(&res, pos, box->left, box) ||
+		get_box_plane_vect(&res, pos, box->right, box))
+	{
+		obl->color = box->material.color;
 		return (res);
-	else if (get_box_plane_vect(&res, pos, box->back, box))
-		return (res);
-	else if (get_box_plane_vect(&res, pos, box->top, box))
-		return (res);
-	else if (get_box_plane_vect(&res, pos, box->bottom, box))
-		return (res);
-	else if (get_box_plane_vect(&res, pos, box->left, box))
-		return (res);
-	else if (get_box_plane_vect(&res, pos, box->right, box))
-		return (res);
+	}
 	else
 		return (pos);
 }
@@ -132,7 +141,10 @@ static t_dot	get_sphere_ray_vect(t_dot pos, t_obj_light *obl)
 	r = ((t_sphere*)obl->shape)->radius;
 	t = -0.5 + sqrt(res.x * res.x + res.y * res.y + res.z * res.z) / (2 * r);
 
-	mult_vect((t_vector*)&res, obl->shape->trans_const, &(t_vector){res.x / (1 + 2 * t), res.y / (1 + 2 * t), res.z / (1 + 2 * t)});
+	res = (t_dot){res.x / (1 + 2 * t), res.y / (1 + 2 * t), res.z / (1 + 2 * t)};
+	if (obl->shape->material.texture && !obl->shape->material.color.a)
+		obl->color = getTextColor(res, obl->shape);
+	mult_vect((t_vector*)&res, obl->shape->trans_const, (t_vector*)&res);
 	return ((t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
 			res.z + obl->shape->origin.z});
 }
