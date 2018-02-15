@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:47:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/11 12:51:58 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 15:29:48 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,16 @@ double	atod(char *src)
 		free(tmp);
 	}
 	return ((integer + decimal) * (*src == '-' ? -1 : 1));
+}
+
+int			get_status(char *status)
+{
+	if (ft_strcmp("empty", status) == 0)
+		return (EMPTY);
+	else if (ft_strcmp("full", status) == 0)
+		return (FULL);
+	else if (ft_strcmp("none", status) == 0)
+		return (NONE);
+	else
+		return (-1);
 }

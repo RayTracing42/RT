@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:04:49 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 15:55:44 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 15:10:59 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ t_light				*new_light(t_light_type type, t_vector direction, SDL_Color color, do
 */
 void				delete_obj_light(t_obj_light *obl);
 t_obj_light			*new_obj_light(double power, t_object *obj);
+t_dot				get_cone_ray_vect(t_dot pos, t_obj_light *obl);
+t_dot				get_cylinder_ray_vect(t_dot pos, t_obj_light *obl);
+t_dot				get_plane_ray_vect(t_dot pos, t_obj_light *obl);
+t_dot				get_box_ray_vect(t_dot pos, t_obj_light *obl);
 
 /*
 **orb_light.c

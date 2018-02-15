@@ -6,23 +6,11 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:25:07 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/08 17:41:55 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 15:29:28 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-int			get_status(char *status)
-{
-	if (ft_strcmp("empty", status) == 0)
-		return (EMPTY);
-	else if (ft_strcmp("full", status) == 0)
-		return (FULL);
-	else if (ft_strcmp("none", status) == 0)
-		return (NONE);
-	else
-		return (-1);
-}
 
 int		gt(double nb1, double nb2)
 {

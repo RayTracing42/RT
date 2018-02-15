@@ -6,7 +6,7 @@
 /*   By: llellouc <llellouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:32:58 by llellouc          #+#    #+#             */
-/*   Updated: 2018/02/03 14:19:39 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 15:31:06 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ static void		init_pxl_queue(t_thread_data *threads, int i)
 	(*tmp)[j].rendered = -1;
 }
 
-/*
-** La hauteur n'étant pas forcément un multiple de 4, il manque 1 ou 2 pixels
-** à la fin. Ainsi, le dernier thread aura 1 ou 2 lignes en plus
-*/
 t_thread_data	*init_thread_array(t_scene *scn, int nb_thread)
 {
 	t_thread_data	*threads;

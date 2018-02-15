@@ -6,17 +6,11 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/14 16:41:05 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 15:33:13 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-/*
-**	t_dot pixel correspond au point sur le view_plane
-**	t_dot diff corresppond au vecteur cam > pixel non normé
-**	on divise donc diff par sa longueur afin d'obtenir le vecteur normé
-*/
 
 void	view_plane_vector(int x, int y, t_camera *cam, t_vector *vd)
 {

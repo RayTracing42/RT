@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 14:45:00 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/11 12:37:15 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 15:31:53 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,4 @@ t_vector	vect_cross_product(const t_vector v1, const t_vector v2)
 	return ((t_vector){v1.y * v2.z - v1.z * v2.y,
 					v1.z * v2.x - v1.x * v2.z,
 					v1.x * v2.y - v1.y * v2.x});
-}
-
-void		correct_normal(t_dot dot, t_dot inter, t_vector *normal)
-{
-	double	d1;
-	double	d2;
-
-	d1 = get_dot_dist(&dot, &(t_dot){inter.x + normal->x,
-		inter.y + normal->y,
-		inter.z + normal->z});
-	d2 = get_dot_dist(&dot, &(t_dot){inter.x - normal->x,
-		inter.y - normal->y,
-		inter.z - normal->z});
-	if (!lt(d1, d2))
-		*normal = (t_vector){-normal->x, -normal->y, -normal->z};
 }

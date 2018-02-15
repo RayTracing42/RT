@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 12:52:00 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 16:06:34 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 15:32:28 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include "structures.h"
 
 double		angle_between_vectors(t_vector a, t_vector b);
-void		correct_normal(t_dot dot, t_dot inter, t_vector *normal);
 t_dot		dot(double x, double y, double z);
 t_vector	dots_to_vect(t_dot d1, t_dot d2);
 double		get_vect_lenght(const t_vector *vect);

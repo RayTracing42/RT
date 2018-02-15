@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/12 14:19:18 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 15:30:52 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ int					parsing_material(char *data_mat, t_obj_material *material);
 double				atod(char *src);
 int					between(double value, double low_limit, double height_limit);
 char				*get_interval(char *src, const char *start, const char *stop);
-int					get_nb_occ(const char *src, const char *occ, int lim);
-double				int_to_decimal(int n);
+int					get_status(char *status);
 
 /*
 **	parsing_scene.c

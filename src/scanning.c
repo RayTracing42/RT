@@ -6,33 +6,13 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/14 13:39:59 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 15:22:28 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <time.h>
 #include <sys/timeb.h>
-
-t_parequation	transform_equ(t_ray *ray, t_object *obj)
-{
-	t_parequation	trs;
-
-	trs.vc = (t_vector){ray->equ.vc.x - obj->origin.x,
-		ray->equ.vc.y - obj->origin.y, ray->equ.vc.z - obj->origin.z};
-	mult_vect(&trs.vc, obj->trans_iconst, &trs.vc);
-	mult_vect(&trs.vd, obj->trans_idir, &ray->equ.vd);
-	return (trs);
-}
-
-void			transform_inter(t_ray *ray, t_object *obj)
-{
-	mult_vect(&ray->normal, ray->obj->trans_norm, &ray->normal);
-	mult_vect((t_vector*)&ray->inter, ray->obj->trans_const, (t_vector*)&ray->inter);
-	ray->inter = (t_dot){ray->inter.x + ray->obj->origin.x,
-		ray->inter.y + ray->obj->origin.y, ray->inter.z + ray->obj->origin.z};
-	ray->obj = obj;
-}
 
 void			valid_ray(t_ray *r1, double *t_r1, t_ray *r2, double *t_r2)
 {

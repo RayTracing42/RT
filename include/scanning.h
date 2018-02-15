@@ -5,6 +5,7 @@
 /*
 **scanning.c
 */
+void			correct_normal(t_dot dot, t_dot inter, t_vector *normal);
 SDL_Color		effects(t_ray *ray, t_scene *scn);
 void			scanning(t_scene *scn);
 t_parequation	transform_equ(t_ray *ray, t_object *obj);

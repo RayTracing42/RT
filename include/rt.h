@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/11 11:45:32 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 15:30:37 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@
 */
 int				eq(double nb1, double nb2);
 int				ge(double nb1, double nb2);
-int				get_status(char *status);
 int				gt(double nb1, double nb2);
 int				le(double nb1, double nb2);
 int				lt(double nb1, double nb2);
