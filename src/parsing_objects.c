@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 15:19:04 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 16:07:51 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ t_hyperboloid	*parsing_hyperboloid(char *object)
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
-	d[0] = atod(data[3]);
+	/*d[0] = atod(data[3]);
 	d[1] = atod(data[4]);
 	d[2] = atod(data[5]);
-	d[3] = atod(data[6]);
-//	*d = (double){atod(data[3]), atod(data[4]), atod(data[5]), atod(data[6])};
+	d[3] = atod(data[6]);*/
+	d = (double[4]){atod(data[3]), atod(data[4]), atod(data[5]), atod(data[6])};
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);

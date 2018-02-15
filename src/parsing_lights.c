@@ -6,31 +6,11 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:30:32 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 15:16:00 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 16:06:33 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-t_orb_light			*parsing_orb_light(char *light)
-{
-	char		*data[3];
-	t_dot		origin;
-	SDL_Color	color;
-	double		power;
-
-	if (!(data[0] = get_interval(light, "<origin>", "</origin>"))
-			|| !(data[1] = get_interval(light, "<color>", "</color>"))
-			|| !(data[2] = get_interval(light, "<power>", "</power>"))
-			|| (parsing_dot(data[0], &origin) == -1)
-			|| (parsing_color(data[1], &color) == -1))
-		return (NULL);
-	power = atod(data[2]);
-	free(data[0]);
-	free(data[1]);
-	free(data[2]);
-	return (new_orb_light(origin, color, power));
-}
 
 static	void	cone_obj_light(double power, t_cone *obj, t_list_lights **l)
 {
@@ -42,6 +22,15 @@ static	void	cone_obj_light(double power, t_cone *obj, t_list_lights **l)
 	c->upper = 1;
 	obj->upper = 0;
 	new_cell_light(l, (t_light*)new_obj_light(power, (t_object*)c));
+}
+
+static void			free_data_norme(char *data[5])
+{
+	free(data[0]);
+	free(data[1]);
+	free(data[2]);
+	free(data[3]);
+	free(data[4]);
 }
 
 t_obj_light			*parsing_obj_light(char *light, t_list_lights **l)
@@ -66,11 +55,7 @@ t_obj_light			*parsing_obj_light(char *light, t_list_lights **l)
 			box_dependency_lists((t_box*)obj);
 		if (obj->obj_type == CONE)
 			cone_obj_light(power, (t_cone*)obj, l);
-		free(data[0]);
-		free(data[1]);
-		free(data[2]);
-		free(data[3]);
-		free(data[4]);
+		free_data_norme(data);
 	}
 	else
 		return (NULL);

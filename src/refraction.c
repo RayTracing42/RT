@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:57:01 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/09 11:34:15 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 16:32:01 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,29 @@
 int		get_refracted_vect(t_vector *dir, const t_vector *norm,
 			double n1, double n2)
 {
-	double		cos_t1;
-	double		cos_t2;
+	double		cos_t[3];
 	double		n1_n2;
 	t_vector	u_dir;
 	t_vector	u_norm;
 
-	cos_t1 = get_vect_lenght(dir);
-	cos_t2 = get_vect_lenght(norm);
-	u_dir = vector(dir->x / cos_t1, dir->y / cos_t1, dir->z / cos_t1);
-	u_norm = vector(norm->x / cos_t2, norm->y / cos_t2, norm->z / cos_t2);
-	cos_t1 = vect_dot_product(u_norm, vector_inv(u_dir));
+	cos_t[1] = get_vect_lenght(dir);
+	cos_t[2] = get_vect_lenght(norm);
+	u_dir = vector(dir->x / cos_t[1], dir->y / cos_t[1], dir->z / cos_t[1]);
+	u_norm = vector(norm->x / cos_t[2], norm->y / cos_t[2], norm->z / cos_t[2]);
+	cos_t[1] = vect_dot_product(u_norm, vector_inv(u_dir));
 	n1_n2 = n1 / n2;
-	if ((cos_t2 = (1 - pow(n1_n2, 2) * (1 - pow(cos_t1, 2)))) < 0)
+	if ((cos_t[2] = (1 - pow(n1_n2, 2) * (1 - pow(cos_t[1], 2)))) < 0)
 	{
 		*dir = get_reflected_vect(dir, norm);
 		return (1);
 	}
 	else
-		cos_t2 = sqrt(cos_t2);
-	if (cos_t1 > 0)
-		cos_t2 = -cos_t2;
-	*dir = (t_vector){n1_n2 * u_dir.x + (n1_n2 * cos_t1 + cos_t2) * u_norm.x,
-					n1_n2 * u_dir.y + (n1_n2 * cos_t1 + cos_t2) * u_norm.y,
-					n1_n2 * u_dir.z + (n1_n2 * cos_t1 + cos_t2) * u_norm.z};
+		cos_t[2] = sqrt(cos_t[2]);
+	if (cos_t[1] > 0)
+		cos_t[2] = -cos_t[2];
+	dir->x = n1_n2 * u_dir.x + (n1_n2 * cos_t[1] + cos_t[2]) * u_norm.x;
+	dir->y = n1_n2 * u_dir.y + (n1_n2 * cos_t[1] + cos_t[2]) * u_norm.y;
+	dir->z = n1_n2 * u_dir.z + (n1_n2 * cos_t[1] + cos_t[2]) * u_norm.z;
 	return (0);
 }
 
@@ -86,14 +85,9 @@ static int	update_tree_out(t_ray *ray, t_ray *ref_ray)
 		n2 = first->root->obj ?
 			first->root->obj->obj_light.refractive_index : 1;
 	if (!(t_ref = get_refracted_vect(&ref_ray->equ.vd, &ray->normal, n1, n2)))
-	{
-		if (first->lvl < ray->tree->lvl)
-			ref_ray->tree = add_new_leaf(first->root, NULL, ray->tree->obj,
-				ray->tree->lvl);
-		else
-			ref_ray->tree = add_new_leaf(first->root, NULL, first->root->obj,
-				first->root->lvl);
-	}
+		ref_ray->tree = (first->lvl < ray->tree->lvl) ?
+			add_new_leaf(first->root, NULL, ray->tree->obj, ray->tree->lvl) :
+			add_new_leaf(first->root, NULL, first->root->obj, first->root->lvl);
 	else
 		ref_ray->tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->obj,
 			ray->tree->lvl);

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/15 15:30:52 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 16:14:20 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int					parsing_vector(char *data_vector, t_vector *d);
 */
 int					parsing_color(char *data_color, SDL_Color *c);
 int					parsing_material(char *data_mat, t_obj_material *material);
+int					parsing_texture(char *data_txt, t_obj_material *material);
+int					parsing_normal_map(char *data_map, t_obj_material *material);
+int					parsing_repeat(char *data, int *repeat);
 
 /*
 **	parsing_tools.c

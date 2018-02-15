@@ -6,44 +6,18 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 11:24:43 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 16:24:05 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			parsing_vector(char *data_vector, t_vector *d)
+static void	free_data_norme(char *data[4])
 {
-	char	*x;
-	char	*y;
-	char	*z;
-
-	if (!(x = get_interval(data_vector, "<x>", "</x>"))
-			|| !(y = get_interval(data_vector, "<y>", "</y>"))
-			|| !(z = get_interval(data_vector, "<z>", "</z>")))
-		return (-1);
-	*d = vector(atod(x), atod(y), atod(z));
-	free(x);
-	free(y);
-	free(z);
-	return (0);
-}
-
-int			parsing_dot(char *data_dot, t_dot *d)
-{
-	char	*x;
-	char	*y;
-	char	*z;
-
-	if (!(x = get_interval(data_dot, "<x>", "</x>"))
-			|| !(y = get_interval(data_dot, "<y>", "</y>"))
-			|| !(z = get_interval(data_dot, "<z>", "</z>")))
-		return (-1);
-	*d = dot(atod(x), atod(y), atod(z));
-	free(x);
-	free(y);
-	free(z);
-	return (0);
+	free(data[0]);
+	free(data[1]);
+	free(data[2]);
+	free(data[3]);
 }
 
 void		parsing_physic(char *data_physic, t_objs_comp *args)
@@ -70,10 +44,15 @@ void		parsing_physic(char *data_physic, t_objs_comp *args)
 	if ((data[3] = get_interval(data_physic, "<shininess>", "</shininess>")))
 		if (between(args->shininess = atod(data[3]), 0, 100) == -1)
 			exit_custom_error("rt", ":shininess must be between <0 - 100>");
-	free(data[0]);
-	free(data[1]);
-	free(data[2]);
-	free(data[3]);
+	free_data_norme(data);
+}
+
+static void	end_fct_norme(int fd, char *file, char *scene)
+{
+	get_sdl_core()->nb_threads = fd;
+	get_pxl_queue(fd);
+	free(scene);
+	free(file);
 }
 
 t_scene		*parsing(int argc, char **argv)
@@ -100,10 +79,7 @@ t_scene		*parsing(int argc, char **argv)
 		if (close(fd) == -1)
 			exit_custom_error("rt", ":close() failed");
 		fd = (argc == 3 ? ft_atoi(argv[2]) : 1);
-		get_sdl_core()->nb_threads = fd;
-		get_pxl_queue(fd);
-		free(scene);
-		free(file);
+		end_fct_norme(fd, file, scene);
 	}
 	return (scn);
 }

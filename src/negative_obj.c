@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 03:59:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/13 12:44:02 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 16:01:07 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void	negative_obj(t_list_ray **l_ray, t_couple_ray *basic, t_object *father, con
 	t_couple_ray	neg;
 	t_list_objs		*l;
 
-	l = father->negative_obj;
+	l = &(t_list_objs){NULL, father->negative_obj};
 	if (is_in_negative_obj(&basic->ta, &basic->a, father, NULL))
 		basic->a.nb_intersect = 0;
 	if (is_in_negative_obj(&basic->tb, &basic->b, father, NULL))
 		basic->b.nb_intersect = 0;
-	while (l)
+	while ((l = l->next))
 	{
 		neg.a = first_intersect(ray, l->obj, &neg.ta);
 		neg.b = second_intersect(ray, l->obj, &neg.tb);
@@ -77,6 +77,5 @@ void	negative_obj(t_list_ray **l_ray, t_couple_ray *basic, t_object *father, con
 				valid_negative_points(l_ray, &neg, father, l->obj);
 			}
 		}
-		l = l->next;
 	}
 }

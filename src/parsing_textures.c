@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:52:29 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/15 15:20:14 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 16:14:24 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,16 @@ static int	parsing_mapping(char *mapping_method, void (**fct)(t_dot i, t_dot *te
 	return (0);
 }
 
-static int	parsing_repeat(char *data, int *repeat)
+static void	free_data_norme2(char *tmp[4])
 {
-	if (!ft_strequ(data, "true") && !ft_strequ(data, "false"))
-		return (-1);
-	*repeat = ft_strequ(data, "true");
-	return (0);
+	free(tmp[0]);
+	free(tmp[1]);
+	free(tmp[2]);
+	free(tmp[3]);
+	free(tmp[4]);
 }
 
-static int	parsing_texture(char *data_txt, t_obj_material *material)
+int	parsing_texture(char *data_txt, t_obj_material *material)
 {
 	char	*tmp[5];
 
@@ -56,15 +57,19 @@ static int	parsing_texture(char *data_txt, t_obj_material *material)
 		material->transparency = 1;
 	if (!(tmp[4] = get_interval(data_txt, "<repeat>", "</repeat>")) || parsing_repeat(tmp[4], &material->txt_repeat) == -1)
 		return (-1);
+	free_data_norme2(tmp);
+	return (0);
+}
+
+static void	free_data_norme(char *tmp[4])
+{
 	free(tmp[0]);
 	free(tmp[1]);
 	free(tmp[2]);
 	free(tmp[3]);
-	free(tmp[4]);
-	return (0);
 }
 
-static int	parsing_normal_map(char *data_map, t_obj_material *material)
+int	parsing_normal_map(char *data_map, t_obj_material *material)
 {
 	char	*tmp[4];
 
@@ -86,29 +91,6 @@ static int	parsing_normal_map(char *data_map, t_obj_material *material)
 		return (-1);
 	if (!(tmp[3] = get_interval(data_map, "<repeat>", "</repeat>")) || parsing_repeat(tmp[3], &material->map_repeat) == -1)
 		return (-1);
-	free(tmp[0]);
-	free(tmp[1]);
-	free(tmp[2]);
-	free(tmp[3]);
-	return (0);
-}
-
-int			parsing_material(char *data_mat, t_obj_material *material)
-{
-	char	*tmp[3];
-
-	if ((tmp[0] = get_interval(data_mat, "<color>", "</color>")) && parsing_color(tmp[0], &material->color) == -1)
-		return (-1);
-	else if (!tmp[0])
-		material->color = (SDL_Color){0, 0, 0, 255};
-	material->chess = 0;
-	material->texture = NULL;
-	if ((tmp[1] = get_interval(data_mat, "<texture>", "</texture>")) && parsing_texture(tmp[1], material) == -1 && !tmp[0])
-		return (-1);
-	material->normal_map = NULL;
-	if ((tmp[2] = get_interval(data_mat, "<normal_map>", "</normal_map>")) && parsing_normal_map(tmp[2], material) == -1)
-	free(tmp[0]);
-	free(tmp[1]);
-	free(tmp[2]);
+	free_data_norme(tmp);
 	return (0);
 }
