@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 12:34:35 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 13:13:15 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,5 +169,5 @@ t_vector	getMapVector(t_dot pt, t_object *obj)
 	if (err)
 		return ((t_vector){1, 1, 1});
 	SDL_GetRGB(color, obj->material.normal_map->format, &tmp.r, &tmp.g, &tmp.b);
-	return ((t_vector){((int)(tmp.r)) / 255.0, ((int)(tmp.g)) / 255.0, (((int)tmp.b)) / 255.0});
+	return ((t_vector){((int)(tmp.r)) / 255.0, ((int)(tmp.g)) / 255.0, (((int)(tmp.b - 128))) / 255.0});
 }
