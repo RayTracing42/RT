@@ -1,72 +1,51 @@
 <scene>
-	<brightness>3</brightness>
+	<brightness>20</brightness>
 
 	<camera>
 		<depth>0</depth>
 		<fov>60</fov>
 		<origin>
-			<x>0</x>
-			<y>0</y>
+			<x>-5</x>
+			<y>-15</y>
 			<z>0</z>
 		</origin>
 		<angle>
 			<x>0</x>
 			<y>0</y>
-			<z>0</z>
+			<z>45</z>
 		</angle>
 	</camera>
 
 	<object>
-		<type>plane</type>
+		<type>box</type>
 		<origin>
-			<x>22</x>
-			<y>6</y>
-			<z>-7</z>
+			<x>10</x>
+			<y>0</y>
+			<z>0</z>
 		</origin>
 		<material>
 			<texture>
-				<file>./files/bureau.bmp</file>
+				<file>chess</file>
+				<scale>2</scale>
 				<mapping>planar</mapping>
-				<scale>0.45</scale>
 				<repeat>false</repeat>
 			</texture>
 		</material>
-		<normal>
-			<x>-1</x>
-			<y>0</y>
-			<z>0</z>
-		</normal>
+		<transformations>
+			<rotation>
+				<x>0.1</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+		</transformations>
+		<size>
+			<x>1</x>
+			<y>10</y>
+			<z>10</z>
+		</size>
 	</object>
 
 	<!object>
-		<type>box</type>
-		<origin>
-			<x>30</x>
-			<y>-3</y>
-			<z>4</z>
-		</origin>
-		<material>
-			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>255</b>
-			</color>
-		</material>
-		<size>
-			<x>0</x>
-			<y>6</y>
-			<z>8</z>
-		</size>
-		<transformations>
-			<rotation>
-				<x>1</x>
-				<y>3</y>
-				<z>-7</z>
-			</rotation>
-		</transformations>
-	</object>
-
-	<object>
 		<type>sphere</type>
 		<origin>
 			<x>20.3</x>
@@ -85,47 +64,23 @@
 				<mapping>spherical</mapping>
 				<repeat>true</repeat>
 			</texture>
-			<!normal_map>
-				<file>./files/wood_map.bmp</file>
-			</normal_map>
 		</material>
 		<radius>1.7</radius>
 	</object>
 
-	<!light>
-		<type>object</type>
-		<shape>
-			<type>sphere</type>
-			<origin>
-				<x>16.5</x>
-				<y>-2</y>
-				<z>6</z>
-			</origin>
-			<material>
-				<color>
-					<r>255</r>
-					<g>0</g>
-					<b>0</b>
-				</color>
-			</material>
-			<radius>1</radius>
-		</shape>
-		<power>1</power>
-	</light>
-
 	<light>
 		<type>orb</type>
 		<origin>
-			<x>16.5</x>
-			<y>-2</y>
-			<z>6</z>
+			<x>-20</x>
+			<y>0</y>
+			<z>0</z>
 		</origin>
 		<color>
-			<r>230</r>
-			<g>180</g>
-			<b>240</b>
+			<r>255</r>
+			<g>255</g>
+			<b>255</b>
 		</color>
-		<power>0.4</power>
+		<power>1</power>
 	</light>
 
 </scene>

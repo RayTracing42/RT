@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 11:00:14 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 12:34:35 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,12 @@ SDL_Color	getTextColor(t_dot pt, t_object *obj)
 			SDL_GetRGB(color, obj->material.texture->format, &ret.r, &ret.g, &ret.b);
 	}
 	else
-		ret = (mod(textel.x, 2) && !mod(textel.y, 2)) || (!mod(textel.x, 2) && mod(textel.y, 2)) ? (SDL_Color){0, 0, 0, 255} : (SDL_Color){255, 255, 255, 255};
+	{
+		if ((textel.x < 0 && textel.y >= 0) || (textel.y <= 0 && textel.x > 0))
+			ret = (mod(textel.x, 2) && !mod(textel.y, 2)) || (!mod(textel.x, 2) && mod(textel.y, 2)) ? (SDL_Color){255, 255, 255, 255} : (SDL_Color){0, 0, 0, 255};
+		else
+			ret = (mod(textel.x, 2) && !mod(textel.y, 2)) || (!mod(textel.x, 2) && mod(textel.y, 2)) ? (SDL_Color){0, 0, 0, 255} : (SDL_Color){255, 255, 255, 255};
+	}
 	ret.a = 255;
 	return (ret);
 }

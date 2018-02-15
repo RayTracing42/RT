@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/14 19:38:39 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 12:00:28 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 int						is_in_box_boundaries(const t_plane *p, t_box *b, t_dot *d)
 {
 	if (p == b->front || p == b->back)
-		return (d->z <= b->btr_corner.z && d->z >= b->fbl_corner.z &&
-				d->y <= b->btr_corner.y && d->y >= b->fbl_corner.y);
+		return (le(d->z, b->btr_corner.z) && gt(d->z, b->fbl_corner.z) &&
+				le(d->y, b->btr_corner.y) && gt(d->y, b->fbl_corner.y));
 	else if (p == b->top || p == b->bottom)
-		return (d->x <= b->btr_corner.x && d->x >= b->fbl_corner.x &&
-				d->z <= b->btr_corner.z && d->z >= b->fbl_corner.z);
+		return (le(d->x, b->btr_corner.x) && gt(d->x, b->fbl_corner.x) &&
+				le(d->z, b->btr_corner.z) && gt(d->z, b->fbl_corner.z));
 	else if (p == b->left || p == b->right)
-		return (d->y <= b->btr_corner.y && d->y >= b->fbl_corner.y &&
-				d->x <= b->btr_corner.x && d->x >= b->fbl_corner.x);
+		return (le(d->y, b->btr_corner.y) && gt(d->y, b->fbl_corner.y) &&
+				le(d->x, b->btr_corner.x) && gt(d->x, b->fbl_corner.x));
 	return (0);
 }
 
