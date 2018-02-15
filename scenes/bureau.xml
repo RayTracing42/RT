@@ -1,5 +1,5 @@
 <scene>
-	<brightness>3</brightness>
+	<brightness>5</brightness>
 
 	<camera>
 		<depth>0</depth>
@@ -57,6 +57,9 @@
 				<mapping>spherical</mapping>
 				<repeat>true</repeat>
 			</texture>
+			<normal_map>
+				<file>./files/wood_map.bmp</file>
+			</normal_map>
 		</material>
 		<radius>1.7</radius>
 	</object>
