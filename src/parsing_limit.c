@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/14 15:01:09 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 10:22:54 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	parsing_global_limit(t_object *o, t_dot origin, t_vector normal,
 			o->obj_light.reflection_amount, o->obj_light.refraction_amount,
 			o->obj_light.refractive_index, o->obj_light.shininess}, normal, 0);
 	p->status = status;
-	p->material.texture_mapping = planar_mapping;
 	new_cell_obj(&o->limit, (t_object *)p);
 }
 
@@ -39,7 +38,6 @@ void	parsing_local_limit(t_object *o, t_dot origin, t_vector normal,
 	p = new_plane((t_objs_comp){origin, o->material,
 			o->obj_light.reflection_amount, o->obj_light.refraction_amount,
 			o->obj_light.refractive_index, o->obj_light.shininess}, normal, 0);
-	p->material.texture_mapping = planar_mapping;
 	p->status = status;
 	new_cell_obj(&o->limit, (t_object *)p);
 }

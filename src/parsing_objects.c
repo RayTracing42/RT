@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/12 14:20:25 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 10:39:54 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,18 +218,19 @@ t_list_objs	*parsing_object(char *scene, t_list_objs *l)
 		data[1] = get_interval(data[0], "<negative_obj>", "</negative_obj>");
 		data[2] = get_interval(data[0], "<limit>", "</limit>");
 		data[3] = get_interval(data[0], "<transformations>", "</transformations>");
-		if (!(obj = parsing_object2(data[0], 0)))
-			return (NULL);
-		parsing_transformations(obj, data[3]);
-		parsing_limit(obj, data[2]);
-		parsing_negative_obj(obj, data[1]);
-		free(data[0]);
-		free(data[1]);
-		free(data[2]);
-		free(data[3]);
-		if (obj->obj_type == BOX)
-			box_dependency_lists((t_box*)obj);
-		new_cell_obj(&l, obj);
+		if ((obj = parsing_object2(data[0], 0)))
+		{
+			parsing_transformations(obj, data[3]);
+			parsing_limit(obj, data[2]);
+			parsing_negative_obj(obj, data[1]);
+			free(data[0]);
+			free(data[1]);
+			free(data[2]);
+			free(data[3]);
+			if (obj->obj_type == BOX)
+				box_dependency_lists((t_box*)obj);
+			new_cell_obj(&l, obj);
+		}
 	}
 	return (l);
 }

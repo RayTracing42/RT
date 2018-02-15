@@ -6,25 +6,32 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/14 19:28:56 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 11:00:14 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-Uint32 GetPixel32(SDL_Surface *image, int i, int j)
+/*Uint32 GetPixel32(SDL_Surface *image, int i, int j)
 {
 	if (i < 0 || i > image-> w - 1 || j < 0 || j > image-> h - 1)
 		return 0;
 	return (((Uint32*)(image->pixels))[j * (image->pitch / 4) + i]);
-}
+}*/
 
-Uint32 getpixel(SDL_Surface *surface, int x, int y)
+static Uint32	getpixel(SDL_Surface *surface, int x, int y, int *err)
 {
 	int		bpp;
 	Uint8	*p;
 
+	if (x >= surface->w ||  y >= surface->h || x < 0 || y < 0)
+	{
+		*err = 1;
+		return (0);
+	}
+	else
+		*err = 0;
 	bpp = surface->format->BytesPerPixel;
 	p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 	if (bpp == 1)
@@ -38,6 +45,7 @@ Uint32 getpixel(SDL_Surface *surface, int x, int y)
 			return (p[0] | p[1] << 8 | p[2] << 16);
 	else if (bpp == 4)
 		return (*(Uint32 *)p);
+	*err = 1;
 	return (0);
 }
 
@@ -118,15 +126,22 @@ void	planar_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *textu
 
 SDL_Color	getTextColor(t_dot pt, t_object *obj)
 {
-	t_dot	textel;
-	Uint32 color;
+	t_dot		textel;
+	Uint32		color;
 	SDL_Color	ret;
+	int			err;
 
 	obj->material.texture_mapping(pt, &textel, obj->material.txt_streching, obj->material.texture);
 	if (obj->material.texture)
 	{
-		color = getpixel(obj->material.texture, mod(textel.x, obj->material.texture->w), mod(textel.y, obj->material.texture->h));
-		SDL_GetRGB(color, obj->material.texture->format, &ret.r, &ret.g, &ret.b);
+		if (obj->material.txt_repeat)
+			textel = (t_dot){mod(textel.x, obj->material.texture->w),
+							mod(textel.y, obj->material.texture->h), 0};
+		color = getpixel(obj->material.texture, textel.x, textel.y, &err);
+		if (err)
+			ret = obj->material.color;
+		else
+			SDL_GetRGB(color, obj->material.texture->format, &ret.r, &ret.g, &ret.b);
 	}
 	else
 		ret = (mod(textel.x, 2) && !mod(textel.y, 2)) || (!mod(textel.x, 2) && mod(textel.y, 2)) ? (SDL_Color){0, 0, 0, 255} : (SDL_Color){255, 255, 255, 255};
@@ -139,10 +154,15 @@ t_vector	getMapVector(t_dot pt, t_object *obj)
 	t_dot		textel;
 	SDL_Color	tmp;
 	Uint32		color;
+	int			err;
 
-	vect_normalize((t_vector*)&pt);
 	obj->material.map_mapping(pt, &textel, obj->material.map_streching, obj->material.normal_map);
-	color = getpixel(obj->material.normal_map, mod(textel.x, obj->material.normal_map->w), mod(textel.y, obj->material.normal_map->h));
+	if (obj->material.map_repeat)
+		textel = (t_dot){mod(textel.x, obj->material.normal_map->w),
+						mod(textel.y, obj->material.normal_map->h), 0};
+	color = getpixel(obj->material.normal_map, textel.x, textel.y, &err);
+	if (err)
+		return ((t_vector){1, 1, 1});
 	SDL_GetRGB(color, obj->material.normal_map->format, &tmp.r, &tmp.g, &tmp.b);
 	return ((t_vector){((int)(tmp.r)) / 255.0, ((int)(tmp.g)) / 255.0, (((int)tmp.b)) / 255.0});
 }

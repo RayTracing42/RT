@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/11 12:53:23 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 11:24:43 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void		parsing_physic(char *data_physic, t_objs_comp *args)
 	args->refraction_amount = 0;
 	args->refractive_index = 0;
 	args->reflection_amount = 0;
-	args->shininess = 30;
+	args->shininess = 0;
 	if ((data[0] = get_interval(data_physic, "<refraction_amount>",
 					"</refraction_amount>")))
 		if (between(args->refraction_amount = atod(data[0]), 0, 1) == -1)

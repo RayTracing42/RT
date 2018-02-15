@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:52:29 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/14 14:57:17 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 10:53:39 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,17 @@ static int	parsing_mapping(char *mapping_method, void (**fct)(t_dot i, t_dot *te
 	return (0);
 }
 
+static int	parsing_repeat(char *data, int *repeat)
+{
+	if (!ft_strequ(data, "true") && !ft_strequ(data, "false"))
+		return (-1);
+	*repeat = ft_strequ(data, "true");
+	return (0);
+}
+
 static int	parsing_texture(char *data_txt, t_obj_material *material)
 {
-	char	*tmp[4];
+	char	*tmp[5];
 
 	if (!(tmp[0] = get_interval(data_txt, "<file>", "</file>")))
 		return (-1);
@@ -63,16 +71,19 @@ static int	parsing_texture(char *data_txt, t_obj_material *material)
 		material->transparency = 0;
 	else
 		material->transparency = 1;
+	if (!(tmp[4] = get_interval(data_txt, "<repeat>", "</repeat>")) || parsing_repeat(tmp[4], &material->txt_repeat) == -1)
+		return (-1);
 	free(tmp[0]);
 	free(tmp[1]);
 	free(tmp[2]);
 	free(tmp[3]);
+	free(tmp[4]);
 	return (0);
 }
 
 static int	parsing_normal_map(char *data_map, t_obj_material *material)
 {
-	char	*tmp[3];
+	char	*tmp[4];
 
 	if (!(tmp[0] = get_interval(data_map, "<file>", "</file>")))
 		return (-1);
@@ -90,9 +101,12 @@ static int	parsing_normal_map(char *data_map, t_obj_material *material)
 		material->map_mapping = material->texture_mapping;
 	else if (parsing_mapping(tmp[2], &material->map_mapping) == -1)
 		return (-1);
+	if (!(tmp[3] = get_interval(data_map, "<repeat>", "</repeat>")) || parsing_repeat(tmp[3], &material->map_repeat) == -1)
+		return (-1);
 	free(tmp[0]);
 	free(tmp[1]);
 	free(tmp[2]);
+	free(tmp[3]);
 	return (0);
 }
 
@@ -103,7 +117,7 @@ int			parsing_material(char *data_mat, t_obj_material *material)
 	if ((tmp[0] = get_interval(data_mat, "<color>", "</color>")) && parsing_color(tmp[0], &material->color) == -1)
 		return (-1);
 	else if (!tmp[0])
-		material->color = (SDL_Color){0, 0, 0, 0};
+		material->color = (SDL_Color){0, 0, 0, 255};
 	material->chess = 0;
 	material->texture = NULL;
 	if ((tmp[1] = get_interval(data_mat, "<texture>", "</texture>")) && parsing_texture(tmp[1], material) == -1 && !tmp[0])

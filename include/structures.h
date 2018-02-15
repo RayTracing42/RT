@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/14 14:18:00 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/15 10:52:39 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,8 @@ typedef struct	s_obj_material
 	SDL_Surface				*normal_map;
 	int						chess;
 	int						transparency;
+	int						txt_repeat;
+	int						map_repeat;
 	double					txt_streching;
 	double					map_streching;
 	void					(*texture_mapping)(t_dot i, t_dot *textel, double streching, SDL_Surface *texture);
