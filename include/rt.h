@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/15 15:30:37 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/16 10:05:27 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 # define EMPTY			0
 # define FULL			1
 # define NONE			2
+# define WIN_WIDTH	1200
+# define WIN_HEIGHT	650
+# define _A			0
+# define _B			1
+# define _C			2
+# define DEBUG		1
 
 # include <stdlib.h>
 # include <stdio.h>
