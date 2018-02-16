@@ -16,16 +16,16 @@ void		apply_anaglyph(SDL_Surface *screen, int x, int y)
 {
 	SDL_Color curr;
 
-	while (y < WIN_HEIGHT)
+	while (y < get_sdl_core()->height)
 	{
-  	while (x < WIN_WIDTH)
+  	while (x < get_sdl_core()->width)
   	{
 			curr = get_pixel_colors(screen, x - 15, y);
 			SDL_Color r;
 			r = get_pixel_colors(screen, x + 15, y);
 			if (x < 15)
 			curr = (SDL_Color){r.r, 0, 0, 255};
-			if (x > WIN_WIDTH - 15)
+			if (x > get_sdl_core()->width - 15)
 			curr = (SDL_Color){0, curr.g, curr.b, 255};
 			else
 			curr = (SDL_Color){r.r, curr.g, curr.b, 255};
@@ -42,7 +42,7 @@ int		anaglyph(void)
 	SDL_Surface			*screen;
 
 	if ((screen = SDL_CreateRGBSurface(0,
-					WIN_WIDTH, WIN_HEIGHT, 32, 0, 0, 0, 0)) == NULL)
+					get_sdl_core()->width, get_sdl_core()->height, 32, 0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	if (SDL_RenderReadPixels(get_sdl_core()->renderer, NULL,
 				SDL_GetWindowPixelFormat(get_sdl_core()->window),

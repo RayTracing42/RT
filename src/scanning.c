@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/07 10:46:04 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/16 10:28:49 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static int		scanning_multi(void *data_void)
 	while (++i.y < data->y_end)
 	{
 		i.x = -1;
-		while (++i.x < WIN_WIDTH)
+		while (++i.x < get_sdl_core()->width)
 		{
 			data->scn.cam.origin = cam_orig;
 			// randomize_cam_orig(&data->scn.cam, &buff);

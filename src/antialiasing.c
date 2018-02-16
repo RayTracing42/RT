@@ -24,9 +24,9 @@ void		x4_antia(SDL_Surface *screen, int x, int y)
 	SDL_Color pixel1;
 	SDL_Color pixel2;
 
-	while (y < WIN_HEIGHT)
+	while (y < get_sdl_core()->height)
 	{
-  	while (x < WIN_WIDTH)
+  	while (x < get_sdl_core()->width)
   	{
   		pixel1 = pixels_merger(get_pixel_colors(screen, x, y),
         get_pixel_colors(screen, x + 1, y));
@@ -46,7 +46,7 @@ int		antia(void)
 	SDL_Surface			*screen;
 
 	if ((screen = SDL_CreateRGBSurface(0,
-					WIN_WIDTH, WIN_HEIGHT, 32, 0, 0, 0, 0)) == NULL)
+					get_sdl_core()->width, get_sdl_core()->height, 32, 0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	if (SDL_RenderReadPixels(get_sdl_core()->renderer, NULL,
 				SDL_GetWindowPixelFormat(get_sdl_core()->window),

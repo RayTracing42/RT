@@ -17,22 +17,22 @@ void		apply_pop(SDL_Surface *screen, int x, int y)
 	SDL_Color curr;
 	SDL_Color b;
 
-	while (y < WIN_HEIGHT)
+	while (y < get_sdl_core()->height)
 	{
-  	while (x < WIN_WIDTH)
+  	while (x < get_sdl_core()->width)
   	{
 			curr = get_pixel_colors(screen, x, y);
 			b = curr;
 			curr = (SDL_Color){(b.r+b.g+b.b)/3,
 			 	(b.r+b.g+b.b)/3,
 			 	(b.r+b.g+b.b)/3, 255};
-			if (x <= WIN_WIDTH/2 && y <= WIN_HEIGHT/2)
+			if (x <= get_sdl_core()->width/2 && y <= get_sdl_core()->height/2)
 				curr = (SDL_Color){255 - curr.r, curr.g, curr.b, 255};
-			if (x > WIN_WIDTH/2 && y <= WIN_HEIGHT/2)
+			if (x > get_sdl_core()->width/2 && y <= get_sdl_core()->height/2)
 				curr = (SDL_Color){curr.r, 255 - curr.g, curr.b, 255};
-			if (x <= WIN_WIDTH/2 && y > WIN_HEIGHT/2)
+			if (x <= get_sdl_core()->width/2 && y > get_sdl_core()->height/2)
 				curr = (SDL_Color){curr.r, curr.g, 255 - curr.b, 255};
-			if (x > WIN_WIDTH/2 && y > WIN_HEIGHT/2)
+			if (x > get_sdl_core()->width/2 && y > get_sdl_core()->height/2)
 				curr = (SDL_Color){255 - curr.r, curr.g, 255 - curr.b, 255};
 			put_pixel(x, y, &curr);
 			x++;
@@ -47,7 +47,7 @@ int		pop(void)
 	SDL_Surface			*screen;
 
 	if ((screen = SDL_CreateRGBSurface(0,
-					WIN_WIDTH, WIN_HEIGHT, 32, 0, 0, 0, 0)) == NULL)
+					get_sdl_core()->width, get_sdl_core()->height, 32, 0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	if (SDL_RenderReadPixels(get_sdl_core()->renderer, NULL,
 				SDL_GetWindowPixelFormat(get_sdl_core()->window),

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/07 10:34:17 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/16 10:36:39 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -476,6 +476,7 @@ typedef struct				s_camera
 	t_dot					angle;
 	double					depth;
 	double					focal;
+	double					fov;
 	t_view_plane			vp;
 }							t_camera;
 

@@ -17,14 +17,14 @@ SDL_Color 	get_pixel_colors(SDL_Surface *screen, int x, int y)
 	SDL_Color				rgba;
 
 	rgba = (SDL_Color){0, 0, 0, 0};
-	SDL_GetRGBA(((int*)screen->pixels)[x + (y * WIN_WIDTH)],
+	SDL_GetRGBA(((int*)screen->pixels)[x + (y * get_sdl_core()->width)],
 	screen->format, &rgba.r, &rgba.g, &rgba.b, &rgba.a);
 	return (rgba);
 }
 
 SDL_Color		pixelaccess(SDL_Surface *s, int x, int y, SDL_Color curr)
 {
-	if (x - 1 < 0 || y - 1 < 0 || x + 1 > WIN_WIDTH || y + 1 > WIN_HEIGHT)
+	if (x - 1 < 0 || y - 1 < 0 || x + 1 > get_sdl_core()->width || y + 1 > get_sdl_core()->height)
 		return(curr);
 	return (get_pixel_colors(s, x, y));
 }
@@ -47,9 +47,9 @@ void		apply_blur(SDL_Surface *screen, int x, int y)
 	SDL_Color curr;
 	t_blur colors;
 
-	while (y < WIN_HEIGHT)
+	while (y < get_sdl_core()->height)
 	{
-  	while (x < WIN_WIDTH)
+  	while (x < get_sdl_core()->width)
   	{
   		curr = get_pixel_colors(screen, x, y);
 			colors = (t_blur){pixelaccess(screen, x, y + 2, curr), pixelaccess(screen, x + 2, y, curr),
@@ -70,7 +70,7 @@ int		blur(void)
 	SDL_Surface			*screen;
 
 	if ((screen = SDL_CreateRGBSurface(0,
-					WIN_WIDTH, WIN_HEIGHT, 32, 0, 0, 0, 0)) == NULL)
+					get_sdl_core()->width, get_sdl_core()->height, 32, 0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	if (SDL_RenderReadPixels(get_sdl_core()->renderer, NULL,
 				SDL_GetWindowPixelFormat(get_sdl_core()->window),

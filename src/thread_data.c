@@ -6,7 +6,7 @@
 /*   By: llellouc <llellouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:32:58 by llellouc          #+#    #+#             */
-/*   Updated: 2018/02/03 14:19:39 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/16 10:26:48 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void		init_pxl_queue(t_thread_data *threads, int i)
 	t_pxl_queue		**tmp;
 
 	tmp = get_pxl_queue(i + 1);
-	if (!((*tmp) = malloc(((threads[i].y_end - threads[i].y_begin - 1) * WIN_WIDTH + 1) * sizeof(t_pxl_queue))))
+	if (!((*tmp) = malloc(((threads[i].y_end - threads[i].y_begin - 1) * get_sdl_core()->width + 1) * sizeof(t_pxl_queue))))
 		exit_error("rt", "malloc");
 	j = -1;
-	while (++j < (threads[i].y_end - threads[i].y_begin - 1) * WIN_WIDTH)
+	while (++j < (threads[i].y_end - threads[i].y_begin - 1) * get_sdl_core()->width)
 		(*tmp)[j].rendered = -2;
 	(*tmp)[j].rendered = -1;
 }
@@ -50,14 +50,14 @@ t_thread_data	*init_thread_array(t_scene *scn, int nb_thread)
 
 	if (!(threads = (t_thread_data*)malloc(sizeof(t_thread_data) * nb_thread)))
 		exit_error("rt", "malloc");
-	height_thread = WIN_HEIGHT / nb_thread;
+	height_thread = get_sdl_core()->height / nb_thread;
 	i = -1;
 	while (++i < nb_thread - 1)
 	{
 		threads[i] = thread_data((height_thread * i) - 1, height_thread * (i + 1), scn, i + 1);
 		init_pxl_queue(threads, i);
 	}
-	threads[i] = thread_data((height_thread * i) - 1, WIN_HEIGHT, scn, i + 1);
+	threads[i] = thread_data((height_thread * i) - 1, get_sdl_core()->height, scn, i + 1);
 	init_pxl_queue(threads, i);
 	return (threads);
 }

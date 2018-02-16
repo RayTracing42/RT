@@ -71,7 +71,7 @@ int		screenshot(void)
 
 	renderer = get_sdl_core()->renderer;
 	if ((surface = SDL_CreateRGBSurface(0,
-					WIN_WIDTH, WIN_HEIGHT, 32, 0, 0, 0, 0)) == NULL)
+					get_sdl_core()->width, get_sdl_core()->height, 32, 0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	if (SDL_RenderReadPixels(renderer, NULL,
 				SDL_GetWindowPixelFormat(get_sdl_core()->window),

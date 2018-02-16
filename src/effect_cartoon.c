@@ -17,9 +17,9 @@ void		apply_cartoon(SDL_Surface *screen, SDL_Surface *cartoon, int x, int y)
 	SDL_Color curr;
 	SDL_Color	tmp;
 
-	while (y < WIN_HEIGHT)
+	while (y < get_sdl_core()->height)
 	{
-  	while (x < WIN_WIDTH)
+  	while (x < get_sdl_core()->width)
   	{
 			curr = get_pixel_colors(screen, x, y);
 			curr = (SDL_Color){(curr.r/32)*32,
@@ -43,7 +43,7 @@ int		cartoon(void)
 	SDL_Surface			*cartoon;
 
 	if ((screen = SDL_CreateRGBSurface(0,
-					WIN_WIDTH, WIN_HEIGHT, 32, 0, 0, 0, 0)) == NULL)
+					get_sdl_core()->width, get_sdl_core()->height, 32, 0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	if (SDL_RenderReadPixels(get_sdl_core()->renderer, NULL,
 				SDL_GetWindowPixelFormat(get_sdl_core()->window),
@@ -54,7 +54,7 @@ int		cartoon(void)
 	prewitt();
 	negative();
 	if ((cartoon = SDL_CreateRGBSurface(0,
-					WIN_WIDTH, WIN_HEIGHT, 32, 0, 0, 0, 0)) == NULL)
+					get_sdl_core()->width, get_sdl_core()->height, 32, 0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	if (SDL_RenderReadPixels(get_sdl_core()->renderer, NULL,
 				SDL_GetWindowPixelFormat(get_sdl_core()->window),

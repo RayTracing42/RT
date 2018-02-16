@@ -17,9 +17,9 @@ void		apply_motionblur(SDL_Surface *screen, int x, int y)
 	SDL_Color curr;
 	t_blur colors;
 
-	while (y < WIN_HEIGHT)
+	while (y < get_sdl_core()->height)
 	{
-  	while (x < WIN_WIDTH)
+  	while (x < get_sdl_core()->width)
   	{
   		curr = get_pixel_colors(screen, x, y);
 			colors = (t_blur){pixelaccess(screen, x + 8, y, curr), pixelaccess(screen, x + 12, y, curr),
@@ -40,7 +40,7 @@ int		motionblur(void)
 	SDL_Surface			*screen;
 
 	if ((screen = SDL_CreateRGBSurface(0,
-					WIN_WIDTH, WIN_HEIGHT, 32, 0, 0, 0, 0)) == NULL)
+					get_sdl_core()->width, get_sdl_core()->height, 32, 0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	if (SDL_RenderReadPixels(get_sdl_core()->renderer, NULL,
 				SDL_GetWindowPixelFormat(get_sdl_core()->window),

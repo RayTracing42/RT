@@ -26,9 +26,9 @@ void		apply_prewitt(SDL_Surface *screen, int x, int y)
 	SDL_Color 	curr;
 	t_blur			b;
 
-	while (y < WIN_HEIGHT)
+	while (y < get_sdl_core()->height)
 	{
-  	while (x < WIN_WIDTH)
+  	while (x < get_sdl_core()->width)
   	{
 			b = surrounding_pixels(screen, x ,y);
 			curr = (SDL_Color){(b.tr1.r + b.br1.r + b.br2.r) - (b.tl1.r + b.bl1.r + b.bl2.r),
@@ -50,7 +50,7 @@ int		prewitt(void)
 	SDL_Surface			*screen;
 
 	if ((screen = SDL_CreateRGBSurface(0,
-					WIN_WIDTH, WIN_HEIGHT, 32, 0, 0, 0, 0)) == NULL)
+					get_sdl_core()->width, get_sdl_core()->height, 32, 0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	if (SDL_RenderReadPixels(get_sdl_core()->renderer, NULL,
 				SDL_GetWindowPixelFormat(get_sdl_core()->window),
