@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/31 05:47:00 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/16 20:41:38 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,18 @@ int				is_in_limit(const t_ray *ray, t_object *father)
 	return (1);
 }
 
+static void	init_limit_norme(t_couple_ray *basic, t_object *father, t_couple_ray *limited)
+{
+	if (is_in_limit(&basic->a, father))
+		limit2(limited, &basic->a, &basic->ta);
+	else
+		basic->a.nb_intersect = 0;
+	if (is_in_limit(&basic->b, father))
+		limit2(limited, &basic->b, &basic->tb);
+	else
+		basic->b.nb_intersect = 0;
+}
+
 void	limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
 {
 	t_couple_ray	limited;
@@ -55,23 +67,16 @@ void	limit(t_couple_ray *basic, t_object *father, const t_ray *ray)
 	l = father->limit;
 	limited.a.nb_intersect = 0;
 	limited.b.nb_intersect = 0;
-	if (is_in_limit(&basic->a, father))
-		limit2(&limited, &basic->a, &basic->ta);
-	else
-		basic->a.nb_intersect = 0;
-	if (is_in_limit(&basic->b, father))
-		limit2(&limited, &basic->b, &basic->tb);
-	else
-		basic->b.nb_intersect = 0;
+	init_limit_norme(basic, father, &limited);
 	while (l)
 	{
 		tmp = first_intersect(ray, l->obj, &t_tmp);
 		if (tmp.nb_intersect > 0)
 		{
 			transform_inter(&tmp, l->obj);
-			if (is_in_limit(&tmp, father))
-				if (is_in_obj(t_tmp, tmp.inter, father))
-					limit2(&limited, &tmp, &t_tmp);
+			if (is_in_limit(&tmp, father) &&
+				is_in_obj(t_tmp, tmp.inter, father))
+				limit2(&limited, &tmp, &t_tmp);
 		}
 		l = l->next;
 	}

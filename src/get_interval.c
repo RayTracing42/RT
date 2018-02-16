@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 02:24:44 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/18 12:50:49 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/16 14:23:00 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,33 +80,42 @@ char	*get_stop_ptr(const char *src, const char *buffer, const char *start,
 		const char *stop)
 {
 	char	*ptr;
-	int		len_start;
-	int		len_stop;
+	int		lenght[2];
 	int		status;
 	int		n;
 
 	status = -1;
 	n = 0;
-	len_start = ft_strlen(start);
-	len_stop = ft_strlen(stop);
-	ptr = (char *)src;
-	while (status)
+	lenght = (int[2]){ft_strlen(start), ft_strlen(stop)};
+	ptr = (char*)src;
+	while (status && ++n)
 	{
 		if (status == -1)
 			status++;
-		if (buffer[n] == '1')
+		if (buffer[n - 1] == '1')
 		{
-			ptr = ft_strstr(ptr, start) + len_start;
+			ptr = ft_strstr(ptr, start) + lenght[0];
 			status++;
 		}
-		if (buffer[n] == '2')
+		if (buffer[n - 1] == '2')
 		{
-			ptr = ft_strstr(ptr, stop) + len_stop;
+			ptr = ft_strstr(ptr, stop) + lenght[1];
 			status--;
 		}
-		n++;
 	}
 	return (ptr);
+}
+
+static char	*get_dst_norme(char *dst, char *ptr_start, char *ptr_stop, const char *start)
+{
+	return (ft_strncpy(dst, ptr_start + ft_strlen(start),
+				ft_strlen(ptr_start + ft_strlen(start)) - ft_strlen(ptr_stop)));
+}
+
+static void	clear_interval_norme(char *src, char *ptr_start, char *ptr_stop, const char *stop)
+{
+	clear_interval(src, ft_strlen(src) - ft_strlen(ptr_start),
+				ft_strlen(ptr_start) - ft_strlen(ptr_stop) + ft_strlen(stop));
 }
 
 char	*get_interval(char *src, const char *start, const char *stop)
@@ -129,12 +138,8 @@ char	*get_interval(char *src, const char *start, const char *stop)
 			if ((dst = (char *)ft_memalloc(ft_strlen(ptr_start +
 								ft_strlen(start)) - ft_strlen(ptr_stop) + 1)))
 			{
-				dst = ft_strncpy(dst, ptr_start + ft_strlen(start),
-						ft_strlen(ptr_start + ft_strlen(start)) -
-						ft_strlen(ptr_stop));
-				clear_interval(src, ft_strlen(src) - ft_strlen(ptr_start),
-						ft_strlen(ptr_start) - ft_strlen(ptr_stop) +
-						ft_strlen(stop));
+				dst = get_dst_norme(dst, ptr_start, ptr_stop, start);
+				clear_interval_norme(src, ptr_start, ptr_stop, stop);
 			}
 			free(buffer);
 		}

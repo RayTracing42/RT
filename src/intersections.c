@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 15:38:28 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/16 20:35:14 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,34 +34,38 @@ void	choice_intersect(t_list_ray *l, t_ray *ray, double *dist)
 	}
 }
 
+static void	check_intersect2(t_ray *ray, t_list_objs *l, double *dist)
+{
+	t_couple_ray	basic;
+	t_list_ray		*l_ray;
+
+	basic.a = first_intersect(ray, l->obj, &basic.ta);
+	basic.b = second_intersect(ray, l->obj, &basic.tb);
+	if (basic.a.nb_intersect > 0 && basic.b.nb_intersect > 0)
+	{
+		l_ray = NULL;
+		transform_inter(&basic.a, l->obj);
+		transform_inter(&basic.b, l->obj);
+		if (l->obj->limit)
+			limit(&basic, l->obj, ray);
+		if (l->obj->negative_obj)
+			negative_obj(&l_ray, &basic, l->obj, ray);
+		add_cell_ray(&l_ray, &basic.a, &basic.ta, 1);
+		add_cell_ray(&l_ray, &basic.b, &basic.tb, 2);
+		choice_intersect(l_ray, ray, dist);
+	}
+}
+
 double			check_intersect(t_ray *ray, t_list_objs *l, int check_lights, t_object *filter)
 {
 	double			dist;
-	t_couple_ray	basic;
-	t_list_ray		*l_ray;
 
 	dist = 0;
 	while (l)
 	{
 		if ((!l->obj->is_light || check_lights) &&
 			(!filter || l->obj != filter))
-		{
-			basic.a = first_intersect(ray, l->obj, &basic.ta);
-			basic.b = second_intersect(ray, l->obj, &basic.tb);
-			if (basic.a.nb_intersect > 0 && basic.b.nb_intersect > 0)
-			{
-				l_ray = NULL;
-				transform_inter(&basic.a, l->obj);
-				transform_inter(&basic.b, l->obj);
-				if (l->obj->limit)
-					limit(&basic, l->obj, ray);
-				if (l->obj->negative_obj)
-					negative_obj(&l_ray, &basic, l->obj, ray);
-				add_cell_ray(&l_ray, &basic.a, &basic.ta, 1);
-				add_cell_ray(&l_ray, &basic.b, &basic.tb, 2);
-				choice_intersect(l_ray, ray, &dist);
-			}
-		}
+			check_intersect2(ray, l, &dist);
 		l = l->next;
 	}
 	if (ray->obj && !ray->obj->material.normal_map)
