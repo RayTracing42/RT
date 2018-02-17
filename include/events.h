@@ -26,6 +26,6 @@
 void	clear_events(t_event **head);
 void	delete_event(t_event **head);
 void	new_event(t_event **head, SDL_EventType type, void *data, int (*fct)());
-void	wait_events(t_event *list_evts);
+void	wait_events(t_event *list_evts, t_scene *scn);
 
 #endif

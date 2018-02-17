@@ -34,7 +34,7 @@ void	clear_events(t_event **head)
 		delete_event(head);
 }
 
-void	wait_events(t_event *list_evts)
+void	wait_events(t_event *list_evts, t_scene *scn)
 {
 	SDL_Event	evt;
 	t_event		*tmp;
@@ -49,5 +49,7 @@ void	wait_events(t_event *list_evts)
 			tmp = tmp->next;
 		if (tmp)
 			flag = tmp->fct(&evt, tmp);
+		if (get_sdl_core()->aa == 10)
+			main_display(scn);
 	}
 }

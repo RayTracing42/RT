@@ -134,6 +134,7 @@ void			scanning(t_scene *scn)
 	while (++i < get_sdl_core()->nb_threads)
 		SDL_WaitThread(threads[i].thread, NULL);
 	SDL_WaitThread(rendering, NULL);
+	get_sdl_core()->event = 1;
 	free(threads);
 	ftime(&fin);
 

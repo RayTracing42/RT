@@ -52,6 +52,7 @@ typedef struct				s_sdl_core
 	int						height;
 	int						nb_threads;
 	int						fullscreen;
+	int						aa;
 }							t_sdl_core;
 
 typedef struct				s_event
