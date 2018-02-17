@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:47:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 16:03:42 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 14:12:48 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,10 @@ int			get_status(char *status)
 		return (NONE);
 	else
 		return (-1);
+}
+
+void		free_tab(char **data, int size)
+{
+	while (--size > -1)
+		free(data[size]);
 }

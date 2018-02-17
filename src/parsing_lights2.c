@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:30:32 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 16:06:30 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 14:04:56 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ t_spotlight			*parsing_spotlight(char *light)
 	char		*data[5];
 	t_light_crd	coords;
 	SDL_Color	color;
-	double		power;
-	double		aperture;
+	double		power_aperture[2];
 
 	if (!(data[0] = get_interval(light, "<origin>", "</origin>"))
 			|| !(data[1] = get_interval(light, "<direction>", "</direction>"))
@@ -49,14 +48,14 @@ t_spotlight			*parsing_spotlight(char *light)
 			|| (parsing_vector(data[1], &coords.direction) == -1)
 			|| (parsing_color(data[2], &color) == -1))
 		return (NULL);
-	power = atod(data[3]);
-	aperture = atod(data[4]);
+	power_aperture[0] = atod(data[3]);
+	power_aperture[1] = atod(data[4]);
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);
 	free(data[3]);
 	free(data[4]);
-	return (new_spotlight(coords, color, aperture, power));
+	return (new_spotlight(coords, color, power_aperture[1], power_aperture[0]));
 }
 
 t_orb_light			*parsing_orb_light(char *light)

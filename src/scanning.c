@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 16:42:19 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 14:35:59 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ static void		randomize_cam_orig(t_camera *cam, struct drand48_data *buff)
 	cam->origin.z += s * r * cam->depth;
 }
 
-static void		scan_pixel(t_ray *ray, t_thread_data *data, t_scanning_index i)
+static void		scan_pixel(t_ray *ray, t_thread_data *data, t_scanning_index *i)
 {
 	ray->equ.vc = *(t_vector*)&data->scn.cam.origin;
-	view_plane_vector(i.x, i.y, &data->scn.cam, &ray->equ.vd);
+	view_plane_vector(i->x, i->y, &data->scn.cam, &ray->equ.vd);
 	effects(ray, &data->scn);
-	(*get_pxl_queue(data->n_thread))[++i.q] = (t_pxl_queue){-2, i.x, i.y, ray->color};
-	(*get_pxl_queue(data->n_thread))[i.q].rendered = 0;
+	(*get_pxl_queue(data->n_thread))[++i->q] = (t_pxl_queue){-2, i->x, i->y, ray->color};
+	(*get_pxl_queue(data->n_thread))[i->q].rendered = 0;
 }
 
 static int		scanning_multi(void *data_void)
@@ -90,7 +90,7 @@ static int		scanning_multi(void *data_void)
 		{
 			data->scn.cam.origin = cam_orig;
 			randomize_cam_orig(&data->scn.cam, &buff);
-			scan_pixel(&ray, data, i);
+			scan_pixel(&ray, data, &i);
 		}
 	}
 	remove_leaf(ray.tree);

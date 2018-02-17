@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:52:29 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/15 16:14:24 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 14:15:10 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,12 @@ static int	parsing_mapping(char *mapping_method, void (**fct)(t_dot i, t_dot *te
 	return (0);
 }
 
-static void	free_data_norme2(char *tmp[4])
+static int	parsing_repeat(char *data, int *repeat)
 {
-	free(tmp[0]);
-	free(tmp[1]);
-	free(tmp[2]);
-	free(tmp[3]);
-	free(tmp[4]);
+	if (!ft_strequ(data, "true") && !ft_strequ(data, "false"))
+		return (-1);
+	*repeat = ft_strequ(data, "true");
+	return (0);
 }
 
 int	parsing_texture(char *data_txt, t_obj_material *material)
@@ -57,16 +56,8 @@ int	parsing_texture(char *data_txt, t_obj_material *material)
 		material->transparency = 1;
 	if (!(tmp[4] = get_interval(data_txt, "<repeat>", "</repeat>")) || parsing_repeat(tmp[4], &material->txt_repeat) == -1)
 		return (-1);
-	free_data_norme2(tmp);
+	free_tab(tmp, 5);
 	return (0);
-}
-
-static void	free_data_norme(char *tmp[4])
-{
-	free(tmp[0]);
-	free(tmp[1]);
-	free(tmp[2]);
-	free(tmp[3]);
 }
 
 int	parsing_normal_map(char *data_map, t_obj_material *material)
@@ -91,6 +82,6 @@ int	parsing_normal_map(char *data_map, t_obj_material *material)
 		return (-1);
 	if (!(tmp[3] = get_interval(data_map, "<repeat>", "</repeat>")) || parsing_repeat(tmp[3], &material->map_repeat) == -1)
 		return (-1);
-	free_data_norme(tmp);
+	free_tab(tmp, 4);
 	return (0);
 }

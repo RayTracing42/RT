@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:52:29 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/15 16:14:07 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 14:02:27 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,5 @@ int			parsing_material(char *data_mat, t_obj_material *material)
 	free(tmp[0]);
 	free(tmp[1]);
 	free(tmp[2]);
-	return (0);
-}
-
-int	parsing_repeat(char *data, int *repeat)
-{
-	if (!ft_strequ(data, "true") && !ft_strequ(data, "false"))
-		return (-1);
-	*repeat = ft_strequ(data, "true");
 	return (0);
 }

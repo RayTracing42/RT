@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 16:07:51 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 14:26:17 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_box		*parsing_box(char *object)
 t_hyperboloid	*parsing_hyperboloid(char *object)
 {
 	char		*data[7];
-	t_objs_comp args;
+	t_objs_comp	args;
 	double		d[4];
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
@@ -51,18 +51,11 @@ t_hyperboloid	*parsing_hyperboloid(char *object)
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
-	/*d[0] = atod(data[3]);
+	d[0] = atod(data[3]);
 	d[1] = atod(data[4]);
 	d[2] = atod(data[5]);
-	d[3] = atod(data[6]);*/
-	d = (double[4]){atod(data[3]), atod(data[4]), atod(data[5]), atod(data[6])};
-	free(data[0]);
-	free(data[1]);
-	free(data[2]);
-	free(data[3]);
-	free(data[4]);
-	free(data[5]);
-	free(data[6]);
+	d[3] = atod(data[6]);
+	free_tab(data, 7);
 	return (new_hyperboloid(args, d[0], d[1], d[2], d[3]));
 }
 

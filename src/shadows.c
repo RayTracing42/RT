@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 16:45:51 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 14:43:26 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ SDL_Color			shadows(t_ray *ray, t_scene *scn)
 	t_list_lights	*tmp;
 	t_ray			light_ray;
 	SDL_Color		multi_lights;
-	double			opacity[2];
+	t_saloperie_de_norme_de_merde	so;
 
 	multi_lights = div_colors(ray->color, scn);
 	tmp = scn->lights;
@@ -61,15 +61,15 @@ SDL_Color			shadows(t_ray *ray, t_scene *scn)
 		light_ray.equ.vd = tmp->light->get_ray_vect(ray->inter, tmp->light);
 		light_ray.equ.vc = *(t_vector*)&ray->inter;
 		light_ray.color = ray->color;
-		opacity[0] = 1;
+		so.opacity = 1;
 		if (check_objs_on_ray(&light_ray, scn->objects, tmp->light, ray->i_intersect == 1 ? ray->obj : NULL))
-			opacify_color(&light_ray, &opacity[0]);
+			opacify_color(&light_ray, &so.opacity);
 		light_ray.normal = ray->normal;
 		light_ray.light = tmp->light;
 		multi_lights = add_colors(color_mod(multi_lights,
 			light_ray.light->color), add_colors(get_specular_col(ray,
-				&light_ray, opacity[0], opacity[1]),
-				get_shade_col(&light_ray, opacity[0], &opacity[1])));
+				&light_ray, so.opacity, so.shade),
+				get_shade_col(&light_ray, so.opacity, &so.shade)));
 		tmp = tmp->next;
 	}
 	multi_lights.a = 255;

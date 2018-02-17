@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 02:24:44 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/16 14:23:00 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 13:54:38 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ char	*get_stop_ptr(const char *src, const char *buffer, const char *start,
 
 	status = -1;
 	n = 0;
-	lenght = (int[2]){ft_strlen(start), ft_strlen(stop)};
+	lenght[0] = ft_strlen(start);
+	lenght[1] = ft_strlen(stop);
 	ptr = (char*)src;
 	while (status && ++n)
 	{
-		if (status == -1)
-			status++;
+		status += (status == -1) ? 1 : 0;
 		if (buffer[n - 1] == '1')
 		{
 			ptr = ft_strstr(ptr, start) + lenght[0];

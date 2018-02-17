@@ -6,13 +6,11 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 15:32:10 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 14:34:10 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#include <time.h>
-#include <sys/timeb.h>
 
 t_parequation	transform_equ(t_ray *ray, t_object *obj)
 {

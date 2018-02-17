@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/16 10:05:27 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 14:42:40 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,12 @@ typedef struct	s_la_norme_ce_putain_de_cancer
 	t_matrix		*comp1;
 	t_matrix		*comp2;
 }				t_la_norme_ce_putain_de_cancer;
+
+typedef struct	s_saloperie_de_norme_de_merde
+{
+	double			shade;
+	double			opacity;
+}				t_saloperie_de_norme_de_merde;
 
 /*	Vecteur représentés sous la forme de vecteurs colonnes,
 	si plus pratique utiliser 2 points*/

@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:30:32 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 16:06:33 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 14:00:13 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,6 @@ static	void	cone_obj_light(double power, t_cone *obj, t_list_lights **l)
 	c->upper = 1;
 	obj->upper = 0;
 	new_cell_light(l, (t_light*)new_obj_light(power, (t_object*)c));
-}
-
-static void			free_data_norme(char *data[5])
-{
-	free(data[0]);
-	free(data[1]);
-	free(data[2]);
-	free(data[3]);
-	free(data[4]);
 }
 
 t_obj_light			*parsing_obj_light(char *light, t_list_lights **l)
@@ -55,7 +46,7 @@ t_obj_light			*parsing_obj_light(char *light, t_list_lights **l)
 			box_dependency_lists((t_box*)obj);
 		if (obj->obj_type == CONE)
 			cone_obj_light(power, (t_cone*)obj, l);
-		free_data_norme(data);
+		free_tab(data, 5);
 	}
 	else
 		return (NULL);
