@@ -6,24 +6,24 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 14:26:17 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 16:43:57 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_box		*parsing_box(char *object)
+t_box			*parsing_box(char *object)
 {
-	t_dot	size;
+	t_dot		size;
 	char		*data[4];
-	t_objs_comp args;
+	t_objs_comp	args;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-			|| !(data[1] = get_interval(object, "<material>", "</material>"))
-			|| !(data[3] = get_interval(object, "<size>", "</size>"))
-			|| (parsing_dot(data[0], &args.orig) == -1)
-			|| (parsing_material(data[1], &args.material) == -1)
-			|| (parsing_dot(data[3], &size) == -1))
+		|| !(data[1] = get_interval(object, "<material>", "</material>"))
+		|| !(data[3] = get_interval(object, "<size>", "</size>"))
+		|| (parsing_dot(data[0], &args.orig) == -1)
+		|| (parsing_material(data[1], &args.material) == -1)
+		|| (parsing_dot(data[3], &size) == -1))
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
@@ -41,13 +41,13 @@ t_hyperboloid	*parsing_hyperboloid(char *object)
 	double		d[4];
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-			|| !(data[1] = get_interval(object, "<material>", "</material>"))
-			|| !(data[3] = get_interval(object, "<a>", "</a>"))
-			|| !(data[4] = get_interval(object, "<b>", "</b>"))
-			|| !(data[5] = get_interval(object, "<c>", "</c>"))
-			|| !(data[6] = get_interval(object, "<d>", "</d>"))
-			|| (parsing_dot(data[0], &args.orig) == -1)
-			|| (parsing_material(data[1], &args.material) == -1))
+		|| !(data[1] = get_interval(object, "<material>", "</material>"))
+		|| !(data[3] = get_interval(object, "<a>", "</a>"))
+		|| !(data[4] = get_interval(object, "<b>", "</b>"))
+		|| !(data[5] = get_interval(object, "<c>", "</c>"))
+		|| !(data[6] = get_interval(object, "<d>", "</d>"))
+		|| (parsing_dot(data[0], &args.orig) == -1)
+		|| (parsing_material(data[1], &args.material) == -1))
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
@@ -59,20 +59,20 @@ t_hyperboloid	*parsing_hyperboloid(char *object)
 	return (new_hyperboloid(args, d[0], d[1], d[2], d[3]));
 }
 
-t_triangle	*parsing_triangle(char *object)
+t_triangle		*parsing_triangle(char *object)
 {
 	char		*data[5];
-	t_objs_comp args;
+	t_objs_comp	args;
 	t_dot		d[3];
 
 	if (!(data[0] = get_interval(object, "<material>", "</material>"))
-			|| !(data[1] = get_interval(object, "<dot_a>", "</dot_a>"))
-			|| !(data[3] = get_interval(object, "<dot_b>", "</dot_b>"))
-			|| !(data[4] = get_interval(object, "<dot_c>", "</dot_c>"))
-			|| (parsing_material(data[0], &args.material) == -1)
-			|| (parsing_dot(data[1], &d[_A]) == -1)
-			|| (parsing_dot(data[3], &d[_B]) == -1)
-			|| (parsing_dot(data[4], &d[_B]) == -1))
+		|| !(data[1] = get_interval(object, "<dot_a>", "</dot_a>"))
+		|| !(data[3] = get_interval(object, "<dot_b>", "</dot_b>"))
+		|| !(data[4] = get_interval(object, "<dot_c>", "</dot_c>"))
+		|| (parsing_material(data[0], &args.material) == -1)
+		|| (parsing_dot(data[1], &d[_A]) == -1)
+		|| (parsing_dot(data[3], &d[_B]) == -1)
+		|| (parsing_dot(data[4], &d[_B]) == -1))
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
@@ -87,7 +87,7 @@ t_triangle	*parsing_triangle(char *object)
 	return (new_triangle(args, d[_A], d[_B], d[_C]));
 }
 
-t_object	*parsing_object2(char *object, int obj_light)
+t_object		*parsing_object2(char *object, int obj_light)
 {
 	t_object	*obj;
 	char		*data;
@@ -113,16 +113,17 @@ t_object	*parsing_object2(char *object, int obj_light)
 	return (obj);
 }
 
-t_list_objs	*parsing_object(char *scene, t_list_objs *l)
+t_list_objs		*parsing_object(char *scene, t_list_objs *l)
 {
-	char			*data[4];
-	t_object		*obj;
+	char		*data[4];
+	t_object	*obj;
 
 	while ((data[0] = get_interval(scene, "<object>", "</object>")))
 	{
 		data[1] = get_interval(data[0], "<negative_obj>", "</negative_obj>");
 		data[2] = get_interval(data[0], "<limit>", "</limit>");
-		data[3] = get_interval(data[0], "<transformations>", "</transformations>");
+		data[3] = get_interval(data[0], "<transformations>",
+										"</transformations>");
 		if ((obj = parsing_object2(data[0], 0)))
 		{
 			parsing_transformations(obj, data[3]);

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:04:25 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/31 12:03:46 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 18:01:22 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_vector	get_spot_ray_vect(t_dot pos, t_light *light)
 }
 
 t_spotlight		*new_spotlight(t_light_crd coords, SDL_Color color,
-	double aperture, double power)
+								double aperture, double power)
 {
 	t_spotlight	*spot;
 

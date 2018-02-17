@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 17:10:29 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 15:08:11 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 18:38:05 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 /*
 ** camera.c
 */
-t_camera	new_camera(const t_dot origin, const t_dot angle, double field_of_view, double depth_of_field);
+t_camera	new_camera(const t_dot origin, const t_dot angle,
+						double field_of_view, double depth_of_field);
 
 /*
 ** view_plane.c

@@ -6,14 +6,14 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 13:45:37 by shiro             #+#    #+#             */
-/*   Updated: 2017/12/22 10:59:47 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/17 17:05:51 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
 t_objs_tree	*add_new_leaf(t_objs_tree *root, t_objs_tree **branch,
-	t_object *obj, int lvl)
+						t_object *obj, int lvl)
 {
 	t_objs_tree	*new;
 

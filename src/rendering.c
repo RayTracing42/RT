@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 10:59:52 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/14 12:35:45 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 17:25:07 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_pxl_queue	**get_pxl_queue(int n)
 {
 	static t_pxl_queue	**queue = NULL;
-	static int nb_threads = 0;
+	static int			nb_threads = 0;
 
 	if (queue)
 	{
@@ -79,9 +79,9 @@ static void	update_pxl_queue(t_pxl_queue **list_queue, int nb_threads, int *nb_e
 
 int			rendering_thread(void* data)
 {
-	int	i;
-	int	n;
-	int	nb_ended_threads;
+	int			i;
+	int			n;
+	int			nb_ended_threads;
 	t_pxl_queue	**list_queue;
 
 	(void)data;

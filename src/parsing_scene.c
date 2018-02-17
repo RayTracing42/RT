@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:48:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/14 12:52:00 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 16:45:51 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ static SDL_Texture	*parsing_background(char *file)
 	if (!(tmp = SDL_LoadBMP(file)))
 		exit_custom_error("rt: SDL2: SDL_LoadBMP: ", (char*)SDL_GetError());
 	if (!(bg = SDL_CreateTextureFromSurface(get_sdl_core()->renderer, tmp)))
-		exit_custom_error("rt: SDL2: SDL_CreateTextureFromSurface: ", (char*)SDL_GetError());
+		exit_custom_error("rt: SDL2: SDL_CreateTextureFromSurface: ",
+						(char*)SDL_GetError());
 	SDL_FreeSurface(tmp);
 	return (bg);
 }

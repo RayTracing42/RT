@@ -6,14 +6,14 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:57:01 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 16:32:01 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 17:22:43 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		get_refracted_vect(t_vector *dir, const t_vector *norm,
-			double n1, double n2)
+int			get_refracted_vect(t_vector *dir, const t_vector *norm,
+								double n1, double n2)
 {
 	double		cos_t[3];
 	double		n1_n2;
@@ -41,15 +41,15 @@ int		get_refracted_vect(t_vector *dir, const t_vector *norm,
 	return (0);
 }
 
-void	get_refracted_col(t_ray *ray, t_object *src,
-			SDL_Color refracted_obj_col)
+void		get_refracted_col(t_ray *ray, t_object *src,
+							SDL_Color refracted_obj_col)
 {
 	ray->color.r = (ray->color.r * (1 - src->obj_light.refraction_amount)) +
-			(refracted_obj_col.r * src->obj_light.refraction_amount);
+					(refracted_obj_col.r * src->obj_light.refraction_amount);
 	ray->color.g = (ray->color.g * (1 - src->obj_light.refraction_amount)) +
-			(refracted_obj_col.g * src->obj_light.refraction_amount);
+					(refracted_obj_col.g * src->obj_light.refraction_amount);
 	ray->color.b = (ray->color.b * (1 - src->obj_light.refraction_amount)) +
-			(refracted_obj_col.b * src->obj_light.refraction_amount);
+					(refracted_obj_col.b * src->obj_light.refraction_amount);
 }
 
 static void	update_tree_in(t_ray *ray, t_ray *ref_ray)
@@ -62,10 +62,10 @@ static void	update_tree_in(t_ray *ray, t_ray *ref_ray)
 	n2 = ray->obj->obj_light.refractive_index;
 	if (!(t_ref = get_refracted_vect(&ref_ray->equ.vd, &ray->normal, n1, n2)))
 		ref_ray->tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->obj,
-			ray->tree->lvl + 1);
+									ray->tree->lvl + 1);
 	else
 		ref_ray->tree = add_new_leaf(ray->tree, &ray->tree->refracted,
-			ray->tree->obj, ray->tree->lvl);
+									ray->tree->obj, ray->tree->lvl);
 }
 
 static int	update_tree_out(t_ray *ray, t_ray *ref_ray)
@@ -82,15 +82,15 @@ static int	update_tree_out(t_ray *ray, t_ray *ref_ray)
 	if (!first->root)
 		return (0);
 	if (first->lvl >= ray->tree->lvl)
-		n2 = first->root->obj ?
-			first->root->obj->obj_light.refractive_index : 1;
+		n2 = first->root->obj ? first->root->obj->obj_light.refractive_index :
+								1;
 	if (!(t_ref = get_refracted_vect(&ref_ray->equ.vd, &ray->normal, n1, n2)))
 		ref_ray->tree = (first->lvl < ray->tree->lvl) ?
 			add_new_leaf(first->root, NULL, ray->tree->obj, ray->tree->lvl) :
 			add_new_leaf(first->root, NULL, first->root->obj, first->root->lvl);
 	else
 		ref_ray->tree = add_new_leaf(ray->tree, &ray->tree->refracted, ray->obj,
-			ray->tree->lvl);
+									ray->tree->lvl);
 	return (1);
 }
 
@@ -110,8 +110,8 @@ SDL_Color	refract(t_ray *ray, t_scene *scn)
 	else if (!(update_tree_out(ray, &ref_ray)))
 		return ((SDL_Color){0, 0, 0, 255});
 	ref_ray.equ.vc = vector(ray->inter.x + (1 / POW) * ray->equ.vd.x,
-			ray->inter.y + (1 / POW) * ray->equ.vd.y,
-			ray->inter.z + (1 / POW) * ray->equ.vd.z);
+							ray->inter.y + (1 / POW) * ray->equ.vd.y,
+							ray->inter.z + (1 / POW) * ray->equ.vd.z);
 	ret = effects(&ref_ray, scn);
 	remove_leaf(ref_ray.tree);
 	return (ret);

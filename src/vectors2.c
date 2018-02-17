@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 14:45:00 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/09 11:34:33 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 18:33:16 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_dot		dot(double x, double y, double z)
 	return (d);
 }
 
-t_vector	vector_inv(t_vector	v)
+t_vector	vector_inv(t_vector v)
 {
 	return ((t_vector){-v.x, -v.y, -v.z});
 }

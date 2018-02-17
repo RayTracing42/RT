@@ -6,14 +6,14 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:56:42 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/15 14:58:47 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 15:16:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include "texture_mapping.h"
 
-void				box_dependency_lists(t_box *box)
+void	box_dependency_lists(t_box *box)
 {
 	if (box->limit)
 	{
@@ -35,7 +35,7 @@ void				box_dependency_lists(t_box *box)
 	}
 }
 
-void				box_transform_planes(t_box *box, t_trans_data trs)
+void	box_transform_planes(t_box *box, t_trans_data trs)
 {
 	t_dot	t;
 
@@ -64,7 +64,7 @@ void				box_transform_planes(t_box *box, t_trans_data trs)
 	}
 }
 
-int						is_in_box_boundaries(const t_plane *p, t_box *b, t_dot *d)
+int		is_in_box_boundaries(const t_plane *p, t_box *b, t_dot *d)
 {
 	if (p == b->front || p == b->back)
 		return (le(d->z, b->btr_corner.z) && gt(d->z, b->fbl_corner.z) &&

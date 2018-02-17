@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/15 15:18:43 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 16:45:10 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 t_plane		*parsing_plane(char *object)
 {
 	char		*data[4];
-	t_objs_comp args;
+	t_objs_comp	args;
 	t_vector	normal;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-			|| !(data[1] = get_interval(object, "<material>", "</material>"))
-			|| !(data[3] = get_interval(object, "<normal>", "</normal>"))
-			|| (parsing_dot(data[0], &args.orig) == -1)
-			|| (parsing_material(data[1], &args.material) == -1)
-			|| (parsing_vector(data[3], &normal) == -1))
+		|| !(data[1] = get_interval(object, "<material>", "</material>"))
+		|| !(data[3] = get_interval(object, "<normal>", "</normal>"))
+		|| (parsing_dot(data[0], &args.orig) == -1)
+		|| (parsing_material(data[1], &args.material) == -1)
+		|| (parsing_vector(data[3], &normal) == -1))
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
@@ -37,14 +37,14 @@ t_plane		*parsing_plane(char *object)
 t_sphere	*parsing_sphere(char *object)
 {
 	char		*data[4];
-	t_objs_comp args;
+	t_objs_comp	args;
 	double		radius;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-			|| !(data[1] = get_interval(object, "<material>", "</material>"))
-			|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
-			|| (parsing_dot(data[0], &args.orig) == -1)
-			|| (parsing_material(data[1], &args.material) == -1))
+		|| !(data[1] = get_interval(object, "<material>", "</material>"))
+		|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
+		|| (parsing_dot(data[0], &args.orig) == -1)
+		|| (parsing_material(data[1], &args.material) == -1))
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
@@ -59,14 +59,14 @@ t_sphere	*parsing_sphere(char *object)
 t_cylinder	*parsing_cylinder(char *object)
 {
 	char		*data[4];
-	t_objs_comp args;
+	t_objs_comp	args;
 	double		radius;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-			|| !(data[1] = get_interval(object, "<material>", "</material>"))
-			|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
-			|| (parsing_dot(data[0], &args.orig) == -1)
-			|| (parsing_material(data[1], &args.material) == -1))
+		|| !(data[1] = get_interval(object, "<material>", "</material>"))
+		|| !(data[3] = get_interval(object, "<radius>", "</radius>"))
+		|| (parsing_dot(data[0], &args.orig) == -1)
+		|| (parsing_material(data[1], &args.material) == -1))
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);
@@ -81,14 +81,14 @@ t_cylinder	*parsing_cylinder(char *object)
 t_cone		*parsing_cone(char *object)
 {
 	char		*data[4];
-	t_objs_comp args;
+	t_objs_comp	args;
 	double		angle;
 
 	if (!(data[0] = get_interval(object, "<origin>", "</origin>"))
-			|| !(data[1] = get_interval(object, "<material>", "</material>"))
-			|| !(data[3] = get_interval(object, "<angle>", "</angle>"))
-			|| (parsing_dot(data[0], &args.orig) == -1)
-			|| (parsing_material(data[1], &args.material) == -1))
+		|| !(data[1] = get_interval(object, "<material>", "</material>"))
+		|| !(data[3] = get_interval(object, "<angle>", "</angle>"))
+		|| (parsing_dot(data[0], &args.orig) == -1)
+		|| (parsing_material(data[1], &args.material) == -1))
 		return (NULL);
 	data[2] = get_interval(object, "<physic>", "</physic>");
 	parsing_physic(data[2], &args);

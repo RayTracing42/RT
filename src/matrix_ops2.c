@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 16:30:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/15 15:57:56 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 16:08:09 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static double	**set_2x2mat_tab(double **dst, t_matrix *m, int i, int j)
 	return (dst);
 }
 
-static void	set_2x2tab_mat(t_matrix *dst, double **tab, int i, int j)
+static void		set_2x2tab_mat(t_matrix *dst, double **tab, int i, int j)
 {
 	if (i < dst->r && (i + 1) < dst->r && j < dst->c && (j + 1) < dst->c)
 	{
@@ -42,15 +42,19 @@ static void	set_2x2tab_mat(t_matrix *dst, double **tab, int i, int j)
 	}
 }
 
-static void	init_norme(t_la_norme_ce_putain_de_cancer *a, t_matrix *m)
+static void		init_norme(t_la_norme_ce_putain_de_cancer *a, t_matrix *m)
 {
 	a->abcd[0] = new_matrix(set_2x2mat_tab(NULL, m, 0, 0), 2, 2);
 	a->abcd[1] = new_matrix(set_2x2mat_tab(NULL, m, 0, 2), 2, 2);
 	a->abcd[2] = new_matrix(set_2x2mat_tab(NULL, m, 2, 0), 2, 2);
 	a->abcd[3] = new_matrix(set_2x2mat_tab(NULL, m, 2, 2), 2, 2);
+	a->inv_a = NULL;
+	a->inv_d = NULL;
+	a->comp1 = NULL;
+	a->comp2 = NULL;
 }
 
-static void	free_norme(t_la_norme_ce_putain_de_cancer *a)
+static void		free_norme(t_la_norme_ce_putain_de_cancer *a)
 {
 	delete_matrix(a->abcd[0]);
 	delete_matrix(a->abcd[1]);
@@ -62,26 +66,26 @@ static void	free_norme(t_la_norme_ce_putain_de_cancer *a)
 	delete_matrix(a->r_abcd[3]);
 }
 
-t_matrix	*get_inv_4x4mat(t_matrix *res, t_matrix *m)
+t_matrix		*get_inv_4x4mat(t_matrix *res, t_matrix *m)
 {
 	t_la_norme_ce_putain_de_cancer	a;
 
 	init_norme(&a, m);
-	a.inv_a = NULL;
-	a.inv_d = NULL;
 	get_inv_2x2mat(&a.inv_a, a.abcd[0]);
 	get_inv_2x2mat(&a.inv_d, a.abcd[3]);
-	a.comp1 = NULL;
-	a.comp2 = NULL;
-	get_inv_2x2mat(&a.comp1, sub_matrix(&a.comp1, a.abcd[3], mult_matrix(&a.comp1, a.abcd[2], mult_matrix(&a.comp1, a.inv_a, a.abcd[1]))));
-	get_inv_2x2mat(&a.comp2, sub_matrix(&a.comp2, a.abcd[0], mult_matrix(&a.comp2, a.abcd[1], mult_matrix(&a.comp2, a.inv_d, a.abcd[2]))));
+	get_inv_2x2mat(&a.comp1, sub_matrix(&a.comp1, a.abcd[3],
+				mult_matrix(&a.comp1, a.abcd[2],
+							mult_matrix(&a.comp1, a.inv_a, a.abcd[1]))));
+	get_inv_2x2mat(&a.comp2, sub_matrix(&a.comp2, a.abcd[0],
+				mult_matrix(&a.comp2, a.abcd[1],
+							mult_matrix(&a.comp2, a.inv_d, a.abcd[2]))));
 	a.r_abcd[1] = NULL;
 	a.r_abcd[2] = NULL;
 	a.r_abcd[0] = a.comp2;
 	neg_matrix(&a.r_abcd[1], mult_matrix(&a.r_abcd[1], a.inv_a,
-		mult_matrix(&a.r_abcd[1], a.abcd[1], a.comp1)));
+								mult_matrix(&a.r_abcd[1], a.abcd[1], a.comp1)));
 	neg_matrix(&a.r_abcd[2], mult_matrix(&a.r_abcd[2], a.comp1,
-		mult_matrix(&a.r_abcd[2], a.abcd[2], a.inv_a)));
+								mult_matrix(&a.r_abcd[2], a.abcd[2], a.inv_a)));
 	a.r_abcd[3] = a.comp1;
 	set_2x2tab_mat(res, a.r_abcd[0]->mat, 0, 0);
 	set_2x2tab_mat(res, a.r_abcd[1]->mat, 0, 2);

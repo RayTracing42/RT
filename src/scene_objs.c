@@ -6,13 +6,13 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 14:41:24 by edescoin          #+#    #+#             */
-/*   Updated: 2018/01/30 05:57:24 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/17 17:37:45 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			new_cell_obj(t_list_objs **head, t_object *obj)
+void	new_cell_obj(t_list_objs **head, t_object *obj)
 {
 	t_list_objs	*tmp;
 
@@ -23,7 +23,7 @@ void			new_cell_obj(t_list_objs **head, t_object *obj)
 	*head = tmp;
 }
 
-void			delete_cell_obj(t_list_objs **cell)
+void	delete_cell_obj(t_list_objs **cell)
 {
 	t_list_objs	*tmp;
 

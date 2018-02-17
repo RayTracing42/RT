@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   refract_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:33:41 by fcecilie          #+#    #+#             */
-/*   Updated: 2017/12/16 11:33:46 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/17 17:11:04 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	add_node(t_list_objs **l, t_object *obj)
 {
-	t_list_objs *new;
+	t_list_objs	*new;
 
 	if (!(new = ft_memalloc(sizeof(t_list_objs))))
 		exit_error("rt", "malloc");
@@ -31,7 +31,7 @@ void	add_node(t_list_objs **l, t_object *obj)
 
 void	remove_node(t_list_objs **l, t_object *obj)
 {
-	t_list_objs *tmp;
+	t_list_objs	*tmp;
 
 	while (*l)
 	{

@@ -6,16 +6,16 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/15 14:58:51 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 15:15:34 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void				box_plane_intersect(t_ray *ray, const t_plane *p,
-		t_parequation e, t_box_intersect *its)
+static void			box_plane_intersect(t_ray *ray, const t_plane *p,
+										t_parequation e, t_box_intersect *its)
 {
-	double		t;
+	double	t;
 
 	e = transform_equ(ray, (t_object *)p);
 	t = p->intersect(ray, e, (t_object*)p, 0);
@@ -35,9 +35,10 @@ static void				box_plane_intersect(t_ray *ray, const t_plane *p,
 	}
 }
 
-static double			box_intersect(t_ray *ray, t_parequation e, t_object *obj, int i)
+static double	box_intersect(t_ray *ray, t_parequation e, t_object *obj, int i)
 {
 	t_box_intersect	its;
+
 	its = (t_box_intersect){(t_box*)obj, (t_dot){0, 0, 0}, i, 0, NULL};
 	box_plane_intersect(ray, its.box->back, e, &its);
 	box_plane_intersect(ray, its.box->front, e, &its);
@@ -70,7 +71,7 @@ static t_vector	get_box_normal(t_dot *inter, t_object *obj)
 		return (b->right->get_normal(inter, (t_object*)b->right));
 }
 
-static int				is_in_box(t_dot *i, t_object *obj)
+static int		is_in_box(t_dot *i, t_object *obj)
 {
 	t_box	*b;
 
@@ -90,7 +91,7 @@ static int				is_in_box(t_dot *i, t_object *obj)
 	return (0);
 }
 
-t_box					*new_box(t_objs_comp args, t_dot size)
+t_box			*new_box(t_objs_comp args, t_dot size)
 {
 	t_box	*box;
 

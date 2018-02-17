@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/17 14:42:40 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 19:14:01 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,28 @@
 # else
 #  include "SDL2/SDL.h"
 # endif
+# include <time.h>
+# include <sys/timeb.h>
 
-typedef struct	s_mutexes
+typedef struct				s_mutexes
 {
-	SDL_mutex	*intersect;
-}				t_mutexes;
+	SDL_mutex				*intersect;
+}							t_mutexes;
 
-typedef struct	s_pxl_queue
+typedef struct				s_pxl_queue
 {
-	int	rendered;
-	int	x;
-	int	y;
-	SDL_Color	col;
-}				t_pxl_queue;
+	int						rendered;
+	int						x;
+	int						y;
+	SDL_Color				col;
+}							t_pxl_queue;
 
-typedef struct	s_scanning_index
+typedef struct				s_scanning_index
 {
-	int	x;
-	int	y;
-	int	q;
-}				t_scanning_index;
+	int						x;
+	int						y;
+	int						q;
+}							t_scanning_index;
 
 typedef struct				s_sdl_core
 {
@@ -61,6 +63,12 @@ typedef struct				s_evt_data
 {
 }							t_evt_data;
 
+typedef struct				s_time
+{
+	struct timeb			debut;
+	struct timeb			fin;
+}							t_time;
+
 typedef struct				s_matrix
 {
 	double					**mat;
@@ -68,24 +76,22 @@ typedef struct				s_matrix
 	int						c;
 }							t_matrix;
 
-typedef struct	s_la_norme_ce_putain_de_cancer
+typedef struct				s_la_norme_ce_putain_de_cancer
 {
-	t_matrix		*abcd[4];
-	t_matrix		*r_abcd[4];
-	t_matrix		*inv_a;
-	t_matrix		*inv_d;
-	t_matrix		*comp1;
-	t_matrix		*comp2;
-}				t_la_norme_ce_putain_de_cancer;
+	t_matrix				*abcd[4];
+	t_matrix				*r_abcd[4];
+	t_matrix				*inv_a;
+	t_matrix				*inv_d;
+	t_matrix				*comp1;
+	t_matrix				*comp2;
+}							t_la_norme_ce_putain_de_cancer;
 
-typedef struct	s_saloperie_de_norme_de_merde
+typedef struct				s_saloperie_de_norme_de_merde
 {
-	double			shade;
-	double			opacity;
-}				t_saloperie_de_norme_de_merde;
+	double					shade;
+	double					opacity;
+}							t_saloperie_de_norme_de_merde;
 
-/*	Vecteur représentés sous la forme de vecteurs colonnes,
-	si plus pratique utiliser 2 points*/
 typedef struct				s_vector
 {
 	double					x;
@@ -93,11 +99,6 @@ typedef struct				s_vector
 	double					z;
 }							t_vector;
 
-
-/*	Oui c'est la même chose que le vecteur, on peut du coup soit ignorer le
-	vecteur complètement et utiliser que des points, soit utiliser les points
-	et les vecteurs pour plus de clareté, soit changer la forme des
-	vecteurs*/
 typedef struct				s_dot
 {
 	double					x;
@@ -107,9 +108,9 @@ typedef struct				s_dot
 
 typedef struct				s_trans_data
 {
-	t_dot						trans;
-	t_dot						rot;
-	t_dot						scale;
+	t_dot					trans;
+	t_dot					rot;
+	t_dot					scale;
 }							t_trans_data;
 
 typedef struct				s_parequation
@@ -118,7 +119,7 @@ typedef struct				s_parequation
 	t_vector				vd;
 }							t_parequation;
 
-typedef struct		s_ray
+typedef struct				s_ray
 {
 	t_parequation			equ;
 	t_dot					inter;
@@ -133,25 +134,23 @@ typedef struct		s_ray
 	double					limit;
 	int						nb_intersect;
 	int						i_intersect;
+}							t_ray;
 
-	int						debug;
-}					t_ray;
-
-typedef struct		s_couple_ray
+typedef struct				s_couple_ray
 {
 	t_ray					a;
 	t_ray					b;
 	double					ta;
 	double					tb;
-}					t_couple_ray;
+}							t_couple_ray;
 
-typedef struct		s_list_ray
+typedef struct				s_list_ray
 {
 	t_ray					r;
 	double					t;
 	int						i;
 	struct s_list_ray		*next;
-}					t_list_ray;
+}							t_list_ray;
 
 typedef enum				e_type
 {
@@ -172,7 +171,7 @@ typedef struct				s_obj_phys
 	double					shininess;
 }							t_obj_phys;
 
-typedef struct	s_obj_material
+typedef struct				s_obj_material
 {
 	SDL_Color				color;
 	SDL_Color				transparent_color;
@@ -184,15 +183,20 @@ typedef struct	s_obj_material
 	int						map_repeat;
 	double					txt_streching;
 	double					map_streching;
-	void					(*texture_mapping)(t_dot i, t_dot *textel, double streching, SDL_Surface *texture);
-	void					(*map_mapping)(t_dot i, t_dot *textel, double streching, SDL_Surface *texture);
-}				t_obj_material;
+	void					(*texture_mapping)(t_dot i, t_dot *textel,
+												double streching,
+												SDL_Surface *texture);
+	void					(*map_mapping)(t_dot i, t_dot *textel,
+											double streching,
+											SDL_Surface *texture);
+}							t_obj_material;
 
 typedef struct				s_object
 {
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
-	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
+	double					(*intersect)(t_ray *ray, t_parequation e,
+										struct s_object *obj, int i);
 	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
 	t_matrix				*trans_const;
@@ -221,7 +225,8 @@ typedef struct				s_sphere
 {
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
-	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
+	double					(*intersect)(t_ray *ray, t_parequation e,
+										struct s_object *obj, int i);
 	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
 	t_matrix				*trans_const;
@@ -243,7 +248,8 @@ typedef struct				s_cylinder
 {
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
-	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
+	double					(*intersect)(t_ray *ray, t_parequation e,
+										struct s_object *obj, int i);
 	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
 	t_matrix				*trans_const;
@@ -265,7 +271,8 @@ typedef struct				s_cone
 {
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
-	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
+	double					(*intersect)(t_ray *ray, t_parequation e,
+										struct s_object *obj, int i);
 	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
 	t_matrix				*trans_const;
@@ -288,7 +295,8 @@ typedef struct				s_plane
 {
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
-	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
+	double					(*intersect)(t_ray *ray, t_parequation e,
+										struct s_object *obj, int i);
 	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
 	t_matrix				*trans_const;
@@ -317,7 +325,8 @@ typedef struct				s_triangle
 {
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
-	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
+	double					(*intersect)(t_ray *ray, t_parequation e,
+										struct s_object *obj, int i);
 	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
 	t_matrix				*trans_const;
@@ -347,11 +356,12 @@ typedef struct				s_triangle
 	t_vector				vBC;
 }							t_triangle;
 
-typedef struct		s_box
+typedef struct				s_box
 {
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
-	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
+	double					(*intersect)(t_ray *ray, t_parequation e,
+										struct s_object *obj, int i);
 	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
 	t_matrix				*trans_const;
@@ -374,22 +384,23 @@ typedef struct		s_box
 	t_plane					*bottom;
 	t_plane					*left;
 	t_plane					*right;
-}					t_box;
+}							t_box;
 
-typedef struct		s_box_intersect
+typedef struct				s_box_intersect
 {
-	t_box			*box;
-	t_dot			inter;
-	int				i;
-	double			t;
-	t_plane			*p;
-}					t_box_intersect;
+	t_box					*box;
+	t_dot					inter;
+	int						i;
+	double					t;
+	t_plane					*p;
+}							t_box_intersect;
 
-typedef struct	s_hyperboloid
+typedef struct				s_hyperboloid
 {
 	const t_type			obj_type;
 	int						(*is_in_obj)(t_dot *i, struct s_object *obj);
-	double					(*intersect)(t_ray *ray, t_parequation e, struct s_object *obj, int i);
+	double					(*intersect)(t_ray *ray, t_parequation e,
+										struct s_object *obj, int i);
 	t_vector				(*get_normal)(t_dot *inter, struct s_object *obj);
 	t_dot					origin;
 	t_matrix				*trans_const;
@@ -408,7 +419,7 @@ typedef struct	s_hyperboloid
 	double					b2;
 	double					c2;
 	double					d;
-}				t_hyperboloid;
+}							t_hyperboloid;
 
 typedef enum				e_light_type
 {
@@ -418,11 +429,11 @@ typedef enum				e_light_type
 	SPOT
 }							t_light_type;
 
-typedef struct	s_light_crd
+typedef struct				s_light_crd
 {
-	t_dot		orig;
-	t_vector	direction;
-}				t_light_crd;
+	t_dot					orig;
+	t_vector				direction;
+}							t_light_crd;
 
 typedef struct				s_light
 {
@@ -430,7 +441,8 @@ typedef struct				s_light
 	SDL_Color				color;
 	t_vector				direction;
 	t_vector				(*get_ray_vect)(t_dot pos, struct s_light *light);
-	int						(*is_in_light)(struct s_light *light, t_ray *light_ray);
+	int						(*is_in_light)(struct s_light *light,
+										t_ray *light_ray);
 	double					power;
 }							t_light;
 
@@ -458,6 +470,7 @@ typedef struct				s_spotlight
 	t_vector				(*get_ray_vect)(t_dot pos, t_light *light);
 	int						(*is_in_light)(t_light *light, t_ray *light_ray);
 	double					power;
+
 	t_dot					orig;
 	double					aperture;
 }							t_spotlight;
@@ -473,23 +486,23 @@ typedef struct				s_orb_light
 	t_vector				(*get_ray_vect)(t_dot pos, t_light *light);
 	int						(*is_in_light)(t_light *light, t_ray *light_ray);
 	double					power;
+
 	t_dot					orig;
 	double					aperture;
 }							t_orb_light;
 
-typedef struct	s_obj_light
+typedef struct				s_obj_light
 {
 	const t_light_type		type;
 	SDL_Color				color;
 	t_vector				direction;
 	t_vector				(*get_ray_vect)(t_dot pos, struct s_light *light);
-	int						(*is_in_light)(struct s_light *light, t_ray *light_ray);
+	int						(*is_in_light)(t_light *light, t_ray *light_ray);
 	double					power;
 
 	t_object				*shape;
-}				t_obj_light;
+}							t_obj_light;
 
-//	ecran imaginaire qui permet de definir le vecteur camera -> pixel;
 typedef struct				s_view_plane
 {
 	t_dot					up_left;
@@ -540,11 +553,11 @@ typedef struct				s_scene
 
 typedef struct				s_thread_data
 {
-	SDL_Thread	*thread;
-	t_scene		scn;
-	int			n_thread;
-	int			y_begin;
-	int			y_end;
+	SDL_Thread				*thread;
+	t_scene					scn;
+	int						n_thread;
+	int						y_begin;
+	int						y_end;
 }							t_thread_data;
 
 #endif

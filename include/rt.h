@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/16 10:05:27 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 18:48:23 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@
 /*
 **	utils.c
 */
-int				eq(double nb1, double nb2);
-int				ge(double nb1, double nb2);
-int				gt(double nb1, double nb2);
-int				le(double nb1, double nb2);
-int				lt(double nb1, double nb2);
+int	eq(double nb1, double nb2);
+int	ge(double nb1, double nb2);
+int	gt(double nb1, double nb2);
+int	le(double nb1, double nb2);
+int	lt(double nb1, double nb2);
 
 #endif

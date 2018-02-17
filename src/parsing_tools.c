@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:47:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 14:12:48 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 16:52:15 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	atod(char *src)
 	return ((integer + decimal) * (*src == '-' ? -1 : 1));
 }
 
-int			get_status(char *status)
+int		get_status(char *status)
 {
 	if (ft_strcmp("empty", status) == 0)
 		return (EMPTY);
@@ -53,7 +53,7 @@ int			get_status(char *status)
 		return (-1);
 }
 
-void		free_tab(char **data, int size)
+void	free_tab(char **data, int size)
 {
 	while (--size > -1)
 		free(data[size]);

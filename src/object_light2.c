@@ -6,17 +6,17 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 11:53:24 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/15 15:11:45 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 16:21:11 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_dot	get_cone_ray_vect(t_dot pos, t_obj_light *obl)
+t_dot		get_cone_ray_vect(t_dot pos, t_obj_light *obl)
 {
-	t_dot		res;
-	double		tana2;
-	double		t;
+	t_dot	res;
+	double	tana2;
+	double	t;
 
 	res = (t_dot){pos.x - obl->shape->origin.x, pos.y - obl->shape->origin.y,
 				pos.z - obl->shape->origin.z};
@@ -24,24 +24,27 @@ t_dot	get_cone_ray_vect(t_dot pos, t_obj_light *obl)
 	tana2 = ((t_cone*)obl->shape)->tanalpha2;
 	t = (pos.x * pos.x + pos.z * pos.z) / (pos.y * pos.y * tana2);
 	if (((t_cone*)obl->shape)->upper)
-		t = (-1 - t * tana2 + sqrt(t * (2 * tana2 + tana2 * tana2 + 1))) / (2 * (1 - t * tana2 * tana2));
+		t = (-1 - t * tana2 + sqrt(t * (2 * tana2 + tana2 * tana2 + 1))) /
+			(2 * (1 - t * tana2 * tana2));
 	else
-		t = (-1 - t * tana2 - sqrt(t * (2 * tana2 + tana2 * tana2 + 1))) / (2 * (1 - t * tana2 * tana2));
+		t = (-1 - t * tana2 - sqrt(t * (2 * tana2 + tana2 * tana2 + 1))) /
+			(2 * (1 - t * tana2 * tana2));
 	if (eq(t, 1 / (2 * tana2)))
 		return (pos);
-	res = (t_dot){res.x / (1 + 2 * t), res.y / (1 - 2 * tana2 * t), res.z / (1 + 2 * t)};
+	res = (t_dot){res.x / (1 + 2 * t), res.y / (1 - 2 * tana2 * t),
+				res.z / (1 + 2 * t)};
 	if (obl->shape->material.texture && !obl->shape->material.color.a)
 		obl->color = getTextColor(res, obl->shape);
 	mult_vect((t_vector*)&res, obl->shape->trans_const, (t_vector*)&res);
 	return ((t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
-			res.z + obl->shape->origin.z});
+					res.z + obl->shape->origin.z});
 }
 
-t_dot	get_cylinder_ray_vect(t_dot pos, t_obj_light *obl)
+t_dot		get_cylinder_ray_vect(t_dot pos, t_obj_light *obl)
 {
-	t_dot		res;
-	double		t;
-	double		r;
+	t_dot	res;
+	double	t;
+	double	r;
 
 	res = (t_dot){pos.x - obl->shape->origin.x, pos.y - obl->shape->origin.y,
 				pos.z - obl->shape->origin.z};
@@ -55,10 +58,10 @@ t_dot	get_cylinder_ray_vect(t_dot pos, t_obj_light *obl)
 		obl->color = getTextColor(res, obl->shape);
 	mult_vect((t_vector*)&res, obl->shape->trans_const, (t_vector*)&res);
 	return ((t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
-			res.z + obl->shape->origin.z});
+					res.z + obl->shape->origin.z});
 }
 
-t_dot	get_plane_ray_vect(t_dot pos, t_obj_light *obl)
+t_dot		get_plane_ray_vect(t_dot pos, t_obj_light *obl)
 {
 	t_dot		res;
 	t_vector	n;
@@ -77,7 +80,7 @@ t_dot	get_plane_ray_vect(t_dot pos, t_obj_light *obl)
 		obl->color = getTextColor(res, obl->shape);
 	mult_vect((t_vector*)&res, obl->shape->trans_const, (t_vector*)&res);
 	return ((t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
-			res.z + obl->shape->origin.z});
+					res.z + obl->shape->origin.z});
 }
 
 static int	get_box_plane_vect(t_dot *dst, t_dot pos, t_plane *p, t_box *b)
@@ -86,7 +89,8 @@ static int	get_box_plane_vect(t_dot *dst, t_dot pos, t_plane *p, t_box *b)
 	t_vector	n;
 	double		t;
 
-	res = (t_dot){pos.x - p->origin.x, pos.y - p->origin.y, pos.z - p->origin.z};
+	res = (t_dot){pos.x - p->origin.x, pos.y - p->origin.y,
+				pos.z - p->origin.z};
 	mult_vect((t_vector*)&res, p->trans_iconst, (t_vector*)&res);
 	if (eq(res.x, 0) && eq(res.y, 0) && eq(res.z, 0))
 		return (0);
@@ -100,14 +104,14 @@ static int	get_box_plane_vect(t_dot *dst, t_dot pos, t_plane *p, t_box *b)
 		b->material.color = getTextColor(res, (t_object*)p);
 	mult_vect((t_vector*)&res, p->trans_const, (t_vector*)&res);
 	*dst = (t_dot){res.x + p->origin.x, res.y + p->origin.y,
-			res.z + p->origin.z};
+				res.z + p->origin.z};
 	return (1);
 }
 
-t_dot	get_box_ray_vect(t_dot pos, t_obj_light *obl)
+t_dot		get_box_ray_vect(t_dot pos, t_obj_light *obl)
 {
-	t_dot		res;
-	t_box		*box;
+	t_dot	res;
+	t_box	*box;
 
 	box = (t_box*)obl->shape;
 	if (get_box_plane_vect(&res, pos, box->front, box) ||

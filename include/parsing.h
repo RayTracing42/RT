@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/17 14:02:35 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 18:46:58 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,26 @@ int					parsing_vector(char *data_vector, t_vector *d);
 int					parsing_color(char *data_color, SDL_Color *c);
 int					parsing_material(char *data_mat, t_obj_material *material);
 int					parsing_texture(char *data_txt, t_obj_material *material);
-int					parsing_normal_map(char *data_map, t_obj_material *material);
+int					parsing_normal_map(char *data_map,
+										t_obj_material *material);
 
 /*
 **	parsing_tools.c
 */
 double				atod(char *src);
-int					between(double value, double low_limit, double height_limit);
-char				*get_interval(char *src, const char *start, const char *stop);
+int					between(double value, double low_limit,
+							double height_limit);
 int					get_status(char *status);
 void				free_tab(char **data, int size);
+
+/*
+**	parsing_interval.c
+*/
+void				clear_interval(char *src, const int start, const int len);
+char				*get_interval(char *src, const char *start, const char *stop);
+char				*get_dst_norme(char *dst, char *ptr_start, char *ptr_stop,
+									const char *start);
+void				clear_interval_norme(char *src, char *ptr_start, char *ptr_stop, const char *stop);
 
 /*
 **	parsing_scene.c

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/12 14:23:09 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 16:22:40 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ t_object		*new_object(t_type type, t_objs_comp args)
 	obj->origin = args.orig;
 	obj->material = args.material;
 	obj->obj_light = (t_obj_phys){args.reflection_amount,
-		args.refraction_amount, args.refractive_index,
-		args.shininess};
+								args.refraction_amount, args.refractive_index,
+								args.shininess};
 	obj->get_normal = NULL;
 	obj->intersect = NULL;
 	obj->is_in_obj = NULL;

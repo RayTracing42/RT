@@ -6,13 +6,13 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 14:33:42 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 15:46:57 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	choice_intersect(t_list_ray *l, t_ray *ray, double *dist)
+void		choice_intersect(t_list_ray *l, t_ray *ray, double *dist)
 {
 	while (l)
 	{
@@ -56,9 +56,10 @@ static void	check_intersect2(t_ray *ray, t_list_objs *l, double *dist)
 	}
 }
 
-double			check_intersect(t_ray *ray, t_list_objs *l, int check_lights, t_object *filter)
+double		check_intersect(t_ray *ray, t_list_objs *l, int check_lights,
+							t_object *filter)
 {
-	double			dist;
+	double	dist;
 
 	dist = 0;
 	while (l)
@@ -73,7 +74,7 @@ double			check_intersect(t_ray *ray, t_list_objs *l, int check_lights, t_object 
 	return (dist);
 }
 
-t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
+t_ray		first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 {
 	t_ray			tmp_ray;
 	t_parequation	e;
@@ -93,7 +94,7 @@ t_ray	first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	return (tmp_ray);
 }
 
-t_ray	second_intersect(const t_ray *ray, t_object *obj, double *tmp)
+t_ray		second_intersect(const t_ray *ray, t_object *obj, double *tmp)
 {
 	t_ray	tmp_ray;
 	t_parequation	e;
@@ -108,8 +109,6 @@ t_ray	second_intersect(const t_ray *ray, t_object *obj, double *tmp)
 		tmp_ray.color = obj->material.color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
 	tmp_ray.normal = tmp_ray.obj->get_normal(&tmp_ray.inter, tmp_ray.obj);
-	tmp_ray.normal = (t_vector){-tmp_ray.normal.x, -tmp_ray.normal.y,
-		-tmp_ray.normal.z};
 	if (gt(*tmp, 0))
 		tmp_ray.shad_opacity += (1 - tmp_ray.obj->obj_light.refraction_amount);
 	return (tmp_ray);

@@ -6,13 +6,14 @@
 /*   By: llellouc <llellouc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:32:58 by llellouc          #+#    #+#             */
-/*   Updated: 2018/02/15 15:31:06 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 18:25:34 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static t_thread_data	thread_data(int y_begin, int y_end, t_scene *scn, int n_thread)
+static t_thread_data	thread_data(int y_begin, int y_end, t_scene *scn,
+									int n_thread)
 {
 	t_thread_data	toRet;
 
@@ -24,13 +25,14 @@ static t_thread_data	thread_data(int y_begin, int y_end, t_scene *scn, int n_thr
 	return (toRet);
 }
 
-static void		init_pxl_queue(t_thread_data *threads, int i)
+static void				init_pxl_queue(t_thread_data *threads, int i)
 {
-	int				j;
-	t_pxl_queue		**tmp;
+	int			j;
+	t_pxl_queue	**tmp;
 
 	tmp = get_pxl_queue(i + 1);
-	if (!((*tmp) = malloc(((threads[i].y_end - threads[i].y_begin - 1) * WIN_WIDTH + 1) * sizeof(t_pxl_queue))))
+	if (!((*tmp) = malloc(sizeof(t_pxl_queue) *
+				((threads[i].y_end - threads[i].y_begin - 1) * WIN_WIDTH + 1))))
 		exit_error("rt", "malloc");
 	j = -1;
 	while (++j < (threads[i].y_end - threads[i].y_begin - 1) * WIN_WIDTH)
@@ -38,7 +40,7 @@ static void		init_pxl_queue(t_thread_data *threads, int i)
 	(*tmp)[j].rendered = -1;
 }
 
-t_thread_data	*init_thread_array(t_scene *scn, int nb_thread)
+t_thread_data			*init_thread_array(t_scene *scn, int nb_thread)
 {
 	t_thread_data	*threads;
 	int				i;
@@ -50,7 +52,8 @@ t_thread_data	*init_thread_array(t_scene *scn, int nb_thread)
 	i = -1;
 	while (++i < nb_thread - 1)
 	{
-		threads[i] = thread_data((height_thread * i) - 1, height_thread * (i + 1), scn, i + 1);
+		threads[i] = thread_data((height_thread * i) - 1,
+								height_thread * (i + 1), scn, i + 1);
 		init_pxl_queue(threads, i);
 	}
 	threads[i] = thread_data((height_thread * i) - 1, WIN_HEIGHT, scn, i + 1);
@@ -58,7 +61,7 @@ t_thread_data	*init_thread_array(t_scene *scn, int nb_thread)
 	return (threads);
 }
 
-t_mutexes	*get_mutexes()
+t_mutexes				*get_mutexes()
 {
 	static t_mutexes	*mutex = NULL;
 

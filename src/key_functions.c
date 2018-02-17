@@ -6,13 +6,13 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:48:19 by edescoin          #+#    #+#             */
-/*   Updated: 2017/10/25 14:41:44 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/17 15:48:15 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			key_management(SDL_Event *current, t_event *evt)
+int	key_management(SDL_Event *current, t_event *evt)
 {
 	t_evt_data	*data;
 

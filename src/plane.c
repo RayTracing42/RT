@@ -6,19 +6,19 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/13 13:54:08 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 17:05:24 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include "texture_mapping.h"
 
-double					plane_intersect(t_ray *ray, t_parequation e,
-	t_object *obj, int i)
+double			plane_intersect(t_ray *ray, t_parequation e, t_object *obj,
+								int i)
 {
-	double			t;
-	double			denom;
-	t_plane			*p;
+	double	t;
+	double	denom;
+	t_plane	*p;
 
 	(void)i;
 	t = -1;
@@ -35,7 +35,7 @@ double					plane_intersect(t_ray *ray, t_parequation e,
 
 static t_vector	get_plane_normal(t_dot *inter, t_object *obj)
 {
-	t_plane	*p;
+	t_plane		*p;
 	t_vector	tmp;
 
 	p = (t_plane*)obj;
@@ -50,19 +50,19 @@ static t_vector	get_plane_normal(t_dot *inter, t_object *obj)
 	return (p->normal);
 }
 
-static int				is_in_plane(t_dot *i, t_object *obj)
+static int		is_in_plane(t_dot *i, t_object *obj)
 {
 	double	res;
-	t_plane *p;
+	t_plane	*p;
 
 	p = (t_plane *)obj;
 	res = p->a * i->x + p->b * i->y + p->c * i->z + p->d;
 	return (!(gt(res, 0) || lt(res, 0)));
 }
 
-t_plane					*new_plane(t_objs_comp args, t_vector normal, int tgl)
+t_plane			*new_plane(t_objs_comp args, t_vector normal, int tgl)
 {
-	t_plane		*plane;
+	t_plane	*plane;
 
 	if (tgl)
 		plane = (t_plane*)new_object(TRIANGLE, args);
@@ -81,7 +81,7 @@ t_plane					*new_plane(t_objs_comp args, t_vector normal, int tgl)
 	return (plane);
 }
 
-void					delete_plane(t_plane *plane)
+void			delete_plane(t_plane *plane)
 {
 	delete_object((t_object*)plane);
 }

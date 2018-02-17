@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/15 13:04:12 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 17:59:51 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "texture_mapping.h"
 #include <math.h>
 
-static double			sphere_intersect(t_ray *ray, t_parequation e,
-	t_object *obj, int i)
+static double	sphere_intersect(t_ray *ray, t_parequation e, t_object *obj,
+								int i)
 {
-	t_sphere		*s;
-	double			t;
-	double			fac[3];
+	t_sphere	*s;
+	double		t;
+	double		fac[3];
 
 	s = (t_sphere*)obj;
 	t = -1;
@@ -49,7 +49,7 @@ static t_vector	get_sphere_normal(t_dot *inter, t_object *obj)
 	return ((t_vector){2 * inter->x, 2 * inter->y, 2 * inter->z});
 }
 
-static int				is_in_sphere(t_dot *i, t_object *obj)
+static int		is_in_sphere(t_dot *i, t_object *obj)
 {
 	t_sphere	*s;
 
@@ -57,7 +57,7 @@ static int				is_in_sphere(t_dot *i, t_object *obj)
 	return ((pow(i->x, 2) + pow(i->y, 2) + pow(i->z, 2) <= s->r2));
 }
 
-t_sphere				*new_sphere(t_objs_comp args, double radius)
+t_sphere		*new_sphere(t_objs_comp args, double radius)
 {
 	t_sphere	*sphere;
 
@@ -70,7 +70,7 @@ t_sphere				*new_sphere(t_objs_comp args, double radius)
 	return (sphere);
 }
 
-void					delete_sphere(t_sphere *sphere)
+void			delete_sphere(t_sphere *sphere)
 {
 	delete_object((t_object*)sphere);
 }

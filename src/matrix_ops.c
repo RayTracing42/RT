@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 16:30:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/15 15:57:09 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 16:00:59 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,11 @@ t_matrix	*add_matrix(t_matrix **res, t_matrix *m1, t_matrix *m2)
 
 t_matrix	*get_inv_2x2mat(t_matrix **res, t_matrix *m)
 {
-	double			tmp[2][2];
-	double			d;
+	double	tmp[2][2];
+	double	d;
 
-	if (!res || !(d = (m->mat[0][0] * m->mat[1][1] - m->mat[0][1] *
-		m->mat[1][0])))
+	if (!res ||
+		!(d = (m->mat[0][0] * m->mat[1][1] - m->mat[0][1] * m->mat[1][0])))
 		return (NULL);
 	d = 1 / d;
 	if (!*res)

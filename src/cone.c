@@ -6,15 +6,15 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/13 13:56:43 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 15:18:58 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-static double			cone_intersection(t_ray *ray, t_parequation e,
-	t_object *obj, int i)
+static double	cone_intersection(t_ray *ray, t_parequation e, t_object *obj,
+								int i)
 {
 	t_cone			*c;
 	double			t;
@@ -22,10 +22,12 @@ static double			cone_intersection(t_ray *ray, t_parequation e,
 
 	c = (t_cone*)obj;
 	t = -1;
-	fac[_A] = e.vd.x * e.vd.x + e.vd.z * e.vd.z - e.vd.y * e.vd.y * c->tanalpha2;
-	fac[_B] = 2 * (e.vd.x * e.vc.x + e.vd.z * e.vc.z - e.vd.y *
-		e.vc.y * c->tanalpha2);
-	fac[_C] = e.vc.x * e.vc.x + e.vc.z * e.vc.z - e.vc.y * e.vc.y * c->tanalpha2;
+	fac[_A] = e.vd.x * e.vd.x + e.vd.z * e.vd.z -
+			e.vd.y * e.vd.y * c->tanalpha2;
+	fac[_B] = 2 *
+		(e.vd.x * e.vc.x + e.vd.z * e.vc.z - e.vd.y * e.vc.y * c->tanalpha2);
+	fac[_C] = e.vc.x * e.vc.x + e.vc.z * e.vc.z -
+			e.vc.y * e.vc.y * c->tanalpha2;
 	if ((ray->nb_intersect = get_quad_equation_sol(&t, fac, i)))
 	{
 		ray->inter = equation_get_dot(&e, t);
@@ -36,7 +38,7 @@ static double			cone_intersection(t_ray *ray, t_parequation e,
 
 static t_vector	get_cone_normal(t_dot *inter, t_object *obj)
 {
-	t_cone	*c;
+	t_cone		*c;
 	t_vector	tmp;
 
 	c = (t_cone*)obj;
@@ -52,7 +54,7 @@ static t_vector	get_cone_normal(t_dot *inter, t_object *obj)
 						2 * inter->z});
 }
 
-static int				is_in_cone(t_dot *i, t_object *obj)
+static int		is_in_cone(t_dot *i, t_object *obj)
 {
 	t_cone	*c;
 
@@ -60,7 +62,7 @@ static int				is_in_cone(t_dot *i, t_object *obj)
 	return ((pow(i->x, 2) + pow(i->z, 2) <= pow(i->y, 2) * c->tanalpha2));
 }
 
-t_cone					*new_cone(t_objs_comp args, double angle)
+t_cone			*new_cone(t_objs_comp args, double angle)
 {
 	t_cone	*c;
 
@@ -73,7 +75,7 @@ t_cone					*new_cone(t_objs_comp args, double angle)
 	return (c);
 }
 
-void					delete_cone(t_cone *cone)
+void			delete_cone(t_cone *cone)
 {
 	delete_object((t_object*)cone);
 }

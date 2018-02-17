@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 15:55:50 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/15 15:57:53 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 16:11:42 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void		mult_vect(t_vector *dest, const t_matrix *mtx, const t_vector *vect)
 	if (mtx->r >= 3 || mtx->c >= 4)
 	{
 		x = mtx->mat[0][0] * vect->x + mtx->mat[0][1] * vect->y +
-				mtx->mat[0][2] * vect->z + mtx->mat[0][3];
+			mtx->mat[0][2] * vect->z + mtx->mat[0][3];
 		y = mtx->mat[1][0] * vect->x + mtx->mat[1][1] * vect->y +
-				mtx->mat[1][2] * vect->z + mtx->mat[1][3];
+			mtx->mat[1][2] * vect->z + mtx->mat[1][3];
 		z = mtx->mat[2][0] * vect->x + mtx->mat[2][1] * vect->y +
-				mtx->mat[2][2] * vect->z + mtx->mat[2][3];
+			mtx->mat[2][2] * vect->z + mtx->mat[2][3];
 		dest->x = x;
 		dest->y = y;
 		dest->z = z;

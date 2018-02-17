@@ -6,13 +6,14 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 13:12:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 14:08:47 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 15:17:00 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_camera	new_camera(const t_dot origin, const t_dot angle, double field_of_view, double depth_of_field)
+t_camera	new_camera(const t_dot origin, const t_dot angle,
+					double field_of_view, double depth_of_field)
 {
 	t_camera	cam;
 

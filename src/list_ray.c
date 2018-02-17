@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 01:23:38 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/13 12:42:08 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 15:57:15 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	add_cell_ray(t_list_ray **head, t_ray *ray, double *dist, int i)
 	}
 }
 
-void			delete_cell_ray(t_list_ray **cell)
+void	delete_cell_ray(t_list_ray **cell)
 {
 	t_list_ray	*tmp;
 

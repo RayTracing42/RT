@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/13 13:55:55 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 15:19:40 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "texture_mapping.h"
 #include <math.h>
 
-static double			cylinder_intersect(t_ray *ray, t_parequation e,
-	t_object *obj, int i)
+static double	cylinder_intersect(t_ray *ray, t_parequation e,
+								t_object *obj, int i)
 {
-	t_cylinder		*c;
-	double			t;
-	double			fac[3];
+	t_cylinder	*c;
+	double		t;
+	double		fac[3];
 
 	c = (t_cylinder *)obj;
 	t = -1;
@@ -36,7 +36,6 @@ static double			cylinder_intersect(t_ray *ray, t_parequation e,
 
 static t_vector	get_cylinder_normal(t_dot *inter, t_object *obj)
 {
-	(void)obj;
 	t_vector	tmp;
 
 	if (obj->material.normal_map)
@@ -49,7 +48,7 @@ static t_vector	get_cylinder_normal(t_dot *inter, t_object *obj)
 	return ((t_vector){2 * inter->x, 0, 2 * inter->z});
 }
 
-static int				is_in_cylinder(t_dot *i, t_object *obj)
+static int		is_in_cylinder(t_dot *i, t_object *obj)
 {
 	t_cylinder	*c;
 
@@ -57,7 +56,7 @@ static int				is_in_cylinder(t_dot *i, t_object *obj)
 	return ((pow(i->x, 2) + pow(i->z, 2) <= c->r2));
 }
 
-t_cylinder				*new_cylinder(t_objs_comp args, double radius)
+t_cylinder		*new_cylinder(t_objs_comp args, double radius)
 {
 	t_cylinder	*c;
 
@@ -70,7 +69,7 @@ t_cylinder				*new_cylinder(t_objs_comp args, double radius)
 	return (c);
 }
 
-void					delete_cylinder(t_cylinder *cylinder)
+void			delete_cylinder(t_cylinder *cylinder)
 {
 	delete_object((t_object*)cylinder);
 }

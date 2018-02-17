@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 00:21:37 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/26 13:00:53 by fcecilie         ###   ########.fr       */
+/*   Updated: 2018/02/17 16:41:14 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	parsing_negative_obj(t_object *obj, char *neg)
 		while ((data[0] = get_interval(neg, "<object>", "</object>")))
 		{
 			data[1] = get_interval(data[0], "<limit>", "</limit>");
-			data[2] = get_interval(data[0], "<transformations>", "</transformations>");
+			data[2] = get_interval(data[0], "<transformations>",
+											"</transformations>");
 			if (!(neg_obj = parsing_object2(data[0], 0))
-					|| !(data[3] = get_interval(data[0], "<status>", "</status>"))
-					|| (neg_obj->status = get_status(data[3])) == -1)
+				|| !(data[3] = get_interval(data[0], "<status>", "</status>"))
+				|| (neg_obj->status = get_status(data[3])) == -1)
 				exit_custom_error("rt", ":parsing_negative_obj() failed");
 			parsing_transformations(neg_obj, data[2]);
 			parsing_limit(neg_obj, data[1]);

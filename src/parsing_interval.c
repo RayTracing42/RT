@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_interval.c                                     :+:      :+:    :+:   */
+/*   parsing_interval.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 02:24:44 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 13:54:38 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 16:30:38 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	clear_interval(char *src, const int start, const int len)
+void		clear_interval(char *src, const int start, const int len)
 {
 	int	n;
 
@@ -24,7 +24,8 @@ void	clear_interval(char *src, const int start, const int len)
 	}
 }
 
-int		get_order_of_apparition(const char *src, const char *s1, const char *s2)
+static int	get_order_of_apparition(const char *src, const char *s1,
+									const char *s2)
 {
 	char	*str1;
 	char	*str2;
@@ -49,7 +50,8 @@ int		get_order_of_apparition(const char *src, const char *s1, const char *s2)
 		return (2);
 }
 
-char	*get_order_buffer(const char *src, const char *start, const char *stop)
+static char	*get_order_buffer(const char *src, const char *start,
+							const char *stop)
 {
 	char	*buffer;
 	int		n;
@@ -76,8 +78,8 @@ char	*get_order_buffer(const char *src, const char *start, const char *stop)
 	return (buffer);
 }
 
-char	*get_stop_ptr(const char *src, const char *buffer, const char *start,
-		const char *stop)
+static char	*get_stop_ptr(const char *src, const char *buffer,
+						const char *start, const char *stop)
 {
 	char	*ptr;
 	int		lenght[2];
@@ -106,40 +108,28 @@ char	*get_stop_ptr(const char *src, const char *buffer, const char *start,
 	return (ptr);
 }
 
-static char	*get_dst_norme(char *dst, char *ptr_start, char *ptr_stop, const char *start)
+char		*get_interval(char *s, const char *start, const char *stop)
 {
-	return (ft_strncpy(dst, ptr_start + ft_strlen(start),
-				ft_strlen(ptr_start + ft_strlen(start)) - ft_strlen(ptr_stop)));
-}
-
-static void	clear_interval_norme(char *src, char *ptr_start, char *ptr_stop, const char *stop)
-{
-	clear_interval(src, ft_strlen(src) - ft_strlen(ptr_start),
-				ft_strlen(ptr_start) - ft_strlen(ptr_stop) + ft_strlen(stop));
-}
-
-char	*get_interval(char *src, const char *start, const char *stop)
-{
-	char		*dst;
-	char		*buffer;
-	char		*ptr_stop;
-	char		*ptr_start;
+	char	*dst;
+	char	*buffer;
+	char	*ptr_stop;
+	char	*ptr_start;
 
 	dst = NULL;
-	if (src && ft_strcmp(src, "") && start && ft_strcmp(start, "")
-			&& stop && ft_strcmp(stop, ""))
+	if (s && ft_strcmp(s, "") && ft_strcmp(start, "") && ft_strcmp(stop, ""))
 	{
-		ptr_start = ft_strstr(src, start);
-		ptr_stop = ft_strstr(src, stop);
-		if (ptr_start && ptr_stop && (buffer = get_order_buffer(src, start, stop)))
+		ptr_start = ft_strstr(s, start);
+		ptr_stop = ft_strstr(s, stop);
+		if (ptr_start && ptr_stop &&
+			(buffer = get_order_buffer(s, start, stop)))
 		{
-			ptr_stop = get_stop_ptr(src, buffer, start, stop) - ft_strlen(stop);
-			ptr_start = ft_strstr(src, start);
-			if ((dst = (char *)ft_memalloc(ft_strlen(ptr_start +
-								ft_strlen(start)) - ft_strlen(ptr_stop) + 1)))
+			ptr_stop = get_stop_ptr(s, buffer, start, stop) - ft_strlen(stop);
+			ptr_start = ft_strstr(s, start);
+			if ((dst = ft_memalloc(ft_strlen(ptr_start + ft_strlen(start)) -
+									ft_strlen(ptr_stop) + 1)))
 			{
 				dst = get_dst_norme(dst, ptr_start, ptr_stop, start);
-				clear_interval_norme(src, ptr_start, ptr_stop, stop);
+				clear_interval_norme(s, ptr_start, ptr_stop, stop);
 			}
 			free(buffer);
 		}

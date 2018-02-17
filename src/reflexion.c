@@ -6,7 +6,7 @@
 /*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 11:08:20 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/01/09 11:33:25 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/17 17:08:33 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,24 @@ t_vector	get_reflected_vect(const t_vector *dir, const t_vector *norm)
 
 	cos_theta1 = vect_dot_product(*norm, vector_inv(*dir));
 	return ((t_vector){dir->x + 2 * cos_theta1 * norm->x,
-						dir->y + 2 * cos_theta1 * norm->y,
-						dir->z + 2 * cos_theta1 * norm->z});
+					dir->y + 2 * cos_theta1 * norm->y,
+					dir->z + 2 * cos_theta1 * norm->z});
 }
 
 void		get_reflected_col(t_ray *ray, t_object *src,
-				SDL_Color reflected_obj_col)
+							SDL_Color reflected_obj_col)
 {
 	ray->color.r = (ray->color.r * (1 - src->obj_light.reflection_amount)) +
-			(reflected_obj_col.r * src->obj_light.reflection_amount);
+				(reflected_obj_col.r * src->obj_light.reflection_amount);
 	ray->color.g = (ray->color.g * (1 - src->obj_light.reflection_amount)) +
-			(reflected_obj_col.g * src->obj_light.reflection_amount);
+				(reflected_obj_col.g * src->obj_light.reflection_amount);
 	ray->color.b = (ray->color.b * (1 - src->obj_light.reflection_amount)) +
-			(reflected_obj_col.b * src->obj_light.reflection_amount);
+				(reflected_obj_col.b * src->obj_light.reflection_amount);
 }
 
 SDL_Color	reflect(t_ray *ray, t_scene *scn)
 {
-	t_ray		reflected_ray;
+	t_ray	reflected_ray;
 
 	reflected_ray = *ray;
 	if (ray->obj->obj_light.reflection_amount != 0 && ray->nb_intersect == 2)
