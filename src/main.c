@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 17:48:19 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 18:30:08 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	main_display(void *scene)
 {
 	t_scene	*scn;
 
+	get_pxl_queue(get_sdl_core()->nb_threads);
 	scn = (t_scene*)scene;
 	view_plane(&scn->cam);
 	scanning(scn);
@@ -53,6 +54,8 @@ int			main(int ac, char **av)
 		ft_putendl("usage : ./rt file.xml");
 	else
 	{
+		srand(time(NULL));
+		srand48(time(NULL));
 		data = new_evt_data(scn, SDL_CreateThread(main_display, "", scn));
 		init_list_evts(&events, data);
 		wait_events(events);

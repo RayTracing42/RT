@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/16 10:28:49 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 18:35:29 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,24 +59,24 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 	return (ray->color = (SDL_Color){0, 0, 0, 255});
 }
 
-// static void		randomize_cam_orig(t_camera *cam, struct drand48_data *buff)
-// {
-// 	double	r;
-// 	int		s;
-//
-// 	drand48_r(buff, &r);
-// 	s = (int)(r * 10) % 2 ? -1 : 1;
-// 	drand48_r(buff, &r);
-// 	cam->origin.x += s * r * cam->depth;
-// 	drand48_r(buff, &r);
-// 	s = (int)(r * 10) % 2 ? -1 : 1;
-// 	drand48_r(buff, &r);
-// 	cam->origin.y += s * r * cam->depth;
-// 	drand48_r(buff, &r);
-// 	s = (int)(r * 10) % 2 ? -1 : 1;
-// 	drand48_r(buff, &r);
-// 	cam->origin.z += s * r * cam->depth;
-// }
+static void		randomize_cam_orig(t_camera *cam)
+{
+	double	r;
+	int		s;
+
+	r = drand48();
+	s = (int)(r * 10) % 2 ? -1 : 1;
+	r = drand48();
+	cam->origin.x += s * r * cam->depth;
+	r = drand48();
+	s = (int)(r * 10) % 2 ? -1 : 1;
+	r = drand48();
+	cam->origin.y += s * r * cam->depth;
+	r = drand48();
+	s = (int)(r * 10) % 2 ? -1 : 1;
+	r = drand48();
+	cam->origin.z += s * r * cam->depth;
+}
 
 static int		scanning_multi(void *data_void)
 {
@@ -84,10 +84,8 @@ static int		scanning_multi(void *data_void)
 	t_scanning_index	i;
 	t_ray				ray;
 	t_dot				cam_orig;
-	// struct drand48_data	buff;
 
 	data = (t_thread_data *)data_void;
-	// srand48_r(time(NULL) * data->n_thread, &buff);
 	cam_orig = data->scn.cam.origin;
 	ray.actual_refractive_i = 1;
 	ray.limit = 1;
@@ -100,7 +98,7 @@ static int		scanning_multi(void *data_void)
 		while (++i.x < get_sdl_core()->width)
 		{
 			data->scn.cam.origin = cam_orig;
-			// randomize_cam_orig(&data->scn.cam, &buff);
+			randomize_cam_orig(&data->scn.cam);
 			ray.equ.vc = *(t_vector*)&data->scn.cam.origin;
 			view_plane_vector(i.x, i.y, &data->scn.cam, &ray.equ.vd);
 			effects(&ray, &data->scn);

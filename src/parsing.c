@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/18 12:29:15 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 18:30:19 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,7 @@ t_scene		*parsing(int argc, char **argv)
 			ft_putstr_fd("\nWarning: no object found!\n", 2);
 		if (close(fd) == -1)
 			exit_custom_error("rt", ":close() failed");
-		fd = (argc == 3 ? ft_atoi(argv[2]) : 1);
-		get_sdl_core()->nb_threads = fd;
-		get_pxl_queue(fd);
+		get_sdl_core()->nb_threads = (argc == 3 ? ft_atoi(argv[2]) : 1);
 		free(scene);
 		free(file);
 	}

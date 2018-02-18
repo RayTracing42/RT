@@ -1,6 +1,5 @@
 <scene>
 	<brightness>30</brightness>
-	<effects>blur</effects>
 
 	<camera>
 		<depth>0</depth>
