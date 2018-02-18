@@ -547,4 +547,12 @@ typedef struct				s_perlin
 	unsigned char			size;
 }							t_perlin;
 
+typedef struct				s_screenshot
+{
+	SDL_Renderer		*renderer;
+	SDL_Surface			*surface;
+	char						*name;
+	SDL_Rect				winsize;
+}							t_screenshot;
+
 #endif

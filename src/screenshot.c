@@ -65,24 +65,21 @@ char	*name_screen(void)
 
 int		screenshot(void)
 {
-	SDL_Renderer		*renderer;
-	SDL_Surface			*surface;
-	char				*name;
-	SDL_Rect winsize;
+	t_screenshot	s;
 
-	winsize = (SDL_Rect){0, 0, WIN_WIDTH, WIN_HEIGHT};
-	renderer = get_sdl_core()->renderer;
-	if ((surface = SDL_CreateRGBSurface(0,
+	s.winsize = (SDL_Rect){0, 0, WIN_WIDTH, WIN_HEIGHT};
+	s.renderer = get_sdl_core()->renderer;
+	if ((s.surface = SDL_CreateRGBSurface(0,
 					WIN_WIDTH, WIN_HEIGHT, 32, 0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
-	if (SDL_RenderReadPixels(renderer, &winsize,
+	if (SDL_RenderReadPixels(s.renderer, &s.winsize,
 				SDL_GetWindowPixelFormat(get_sdl_core()->window),
-				surface->pixels, surface->pitch) != 0)
+				s.surface->pixels, s.surface->pitch) != 0)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
-	name = name_screen();
-	if (SDL_SaveBMP(surface, name) != 0)
+	s.name = name_screen();
+	if (SDL_SaveBMP(s.surface, s.name) != 0)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
-	free(name);
-	SDL_FreeSurface(surface);
+	free(s.name);
+	SDL_FreeSurface(s.surface);
 	return (0);
 }
