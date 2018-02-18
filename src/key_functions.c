@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/25 14:48:19 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 20:26:31 by edescoin         ###   ########.fr       */
+/*   Created: 2018/02/18 22:12:52 by edescoin          #+#    #+#             */
+/*   Updated: 2018/02/18 22:34:30 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	key_management(SDL_Event *current, t_event *evt)
 		get_sdl_core()->width *= 4;
 		get_sdl_core()->height *= 4;
 		SDL_DestroyTexture(get_sdl_core()->target);
-		get_sdl_core()->target = SDL_CreateTexture(get_sdl_core()->renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, WIN_WIDTH * 4, WIN_HEIGHT * 4);
+		get_sdl_core()->target = SDL_CreateTexture(get_sdl_core()->renderer,
+												SDL_PIXELFORMAT_RGBA32,
+												SDL_TEXTUREACCESS_TARGET,
+												WIN_WIDTH * 4, WIN_HEIGHT * 4);
 		SDL_SetRenderTarget(get_sdl_core()->renderer, get_sdl_core()->target);
 		get_sdl_core()->aa = 1;
 		reset_camera(&data->scn->cam);

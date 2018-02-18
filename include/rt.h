@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 20:18:55 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 21:36:45 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 #  define SDL_VIDEO		SDL_VIDEO_DRIVER_COCOA
 # endif
 
-# define TITLE			"RT"
-# define POW			10000000000
-# define EMPTY			0
-# define FULL			1
-# define NONE			2
+# define TITLE		"RT"
+# define POW		10000000000
+# define EMPTY		0
+# define FULL		1
+# define NONE		2
 # define WIN_WIDTH	1200
 # define WIN_HEIGHT	650
 # define _A			0

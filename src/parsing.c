@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/18 20:24:58 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 22:14:54 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,11 @@ static void	end_fct_norme(int nb, char *file, char *scene)
 
 t_scene		*parsing(int argc, char **argv)
 {
-	t_scene	*scn;
-	char	*file;
-	char	*scene;
-	int		fd;
+	static t_scene	*scn = NULL;
+	char			*file;
+	char			*scene;
+	int				fd;
 
-	scn = NULL;
 	if ((argc == 2 || (argc == 3 && ft_atoi(argv[2]) > 0)) && argv[1] &&
 		ft_strstr(argv[1], ".xml"))
 	{

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 20:16:50 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 21:44:37 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -350,14 +350,14 @@ typedef struct				s_triangle
 	double					c;
 	double					d;
 	double					z;
-	double					aA;
-	double					aB;
-	t_dot					dA;
-	t_dot					dB;
-	t_dot					dC;
-	t_vector				vAB;
-	t_vector				vBA;
-	t_vector				vBC;
+	double					a_a;
+	double					a_b;
+	t_dot					d_a;
+	t_dot					d_b;
+	t_dot					d_c;
+	t_vector				v_ab;
+	t_vector				v_ba;
+	t_vector				v_bc;
 }							t_triangle;
 
 typedef struct				s_box
@@ -598,16 +598,16 @@ typedef struct				s_duotone
 typedef struct				s_perlin
 {
 	SDL_Surface				*perlin;
-	int								r;
-	int								tmp[512];
+	int						r;
+	int						tmp[512];
 	unsigned char			size;
 }							t_perlin;
 
 typedef struct				s_screenshot
 {
-	SDL_Renderer		*renderer;
-	SDL_Surface			*surface;
-	char						*name;
+	SDL_Renderer			*renderer;
+	SDL_Surface				*surface;
+	char					*name;
 	SDL_Rect				winsize;
 }							t_screenshot;
 

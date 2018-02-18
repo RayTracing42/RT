@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   view_plane.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:05 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 18:36:02 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 22:22:08 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	view_plane_rotation(t_view_plane *vp, double x, double y, double z)
 
 void	view_plane(t_camera *cam)
 {
-	cam->vp.size = vector(cam->focal, get_sdl_core()->height, get_sdl_core()->width);
+	cam->vp.size = vector(cam->focal, get_sdl_core()->height,
+						get_sdl_core()->width);
 	view_plane_rotation(&cam->vp, ft_to_rad(cam->angle.x),
 						ft_to_rad(cam->angle.y), ft_to_rad(cam->angle.z));
 	cam->vp.up_left.x = cam->origin.x + cam->vp.front.x * cam->vp.size.x +

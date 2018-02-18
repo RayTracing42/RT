@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:22:29 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/18 20:18:38 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 21:42:13 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,8 @@ void			*galloc(size_t size);
 void			gexit(int status);
 void			gfree(void *ptr);
 /*
-# define malloc galloc
-# define free gfree
-# define exit gexit
+**# define malloc galloc
+**# define free gfree
+**# define exit gexit
 */
 #endif

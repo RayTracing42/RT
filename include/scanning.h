@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 20:10:43 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 20:10:46 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 21:36:52 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void			valid_ray(t_ray *r1, double *t_r1, t_ray *r2, double *t_r2);
 /*
 ** main.c
 */
-int	main_display(void *scene);
+int				main_display(void *scene);
 
 #endif

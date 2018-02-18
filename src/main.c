@@ -6,11 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/02/17 19:15:48 by shiro            ###   ########.fr       */
-=======
-/*   Updated: 2018/02/18 18:30:08 by edescoin         ###   ########.fr       */
->>>>>>> AAliasing
+/*   Updated: 2018/02/18 22:23:50 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +25,7 @@ static void	init_list_evts(t_event **head, t_evt_data *data)
 	new_event(head, SDL_QUIT, NULL, &force_exit);
 }
 
-int	main_display(void *scene)
+int			main_display(void *scene)
 {
 	t_scene	*scn;
 

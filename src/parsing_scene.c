@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:48:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/18 20:22:04 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 22:36:20 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,9 @@ static SDL_Texture	*parsing_background(char *file)
 	return (bg);
 }
 
-t_scene				*parsing_scene(char *scene)
+static void			parsing_effects(char *data, t_scene *scn)
 {
-	char		*data[2];
-	t_camera	cam;
-	int			brightness;
-	SDL_Texture	*bg;
-static void	parsing_effects(char *data, t_scene *scn)
-{
-	int	i;
+	int		i;
 	char	*tmp;
 
 	i = -1;
@@ -61,7 +55,7 @@ static void	parsing_effects(char *data, t_scene *scn)
 	}
 }
 
-t_scene		*parsing_scene(char *scene)
+t_scene				*parsing_scene(char *scene)
 {
 	int			brightness;
 	char		*data[3];
@@ -75,10 +69,10 @@ t_scene		*parsing_scene(char *scene)
 		return (NULL);
 	if (between(brightness = atod(data[0]), 0, 100) == -1)
 		exit_custom_error("rt", ":brightness must be between <0 - 100>");
-	if ((data[1] = get_interval(scene, "<background>", "</background>")))
-		bg = parsing_background(data[1]);
 	return (new_scene(cam, brightness, bg));
 	scn = new_scene(cam, brightness);
+	if ((data[1] = get_interval(scene, "<background>", "</background>")))
+		scn->background = parsing_background(data[1]);
 	if ((data[2] = get_interval(scene, "<effects>", "</effects>")))
 		parsing_effects(data, scn);
 	free(data[0]);

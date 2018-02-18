@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenshot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joinacio <joinacio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:27:44 by joinacio          #+#    #+#             */
-/*   Updated: 2017/12/07 04:18:03 by joinacio         ###   ########.fr       */
+/*   Updated: 2018/02/18 22:28:49 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,10 @@
 
 int		ft_access(const char *path)
 {
-	int fd;
+	int	fd;
 
-	if ((fd = open(path, O_RDONLY)))
-	{
-		if (fd == -1)
-		{
-			return (-1);
-		}
-	}
+	if ((fd = open(path, O_RDONLY) && fd == -1))
+		return (-1);
 	close(fd);
 	return (0);
 }
@@ -69,12 +64,12 @@ int		screenshot(void)
 
 	s.winsize = (SDL_Rect){0, 0, WIN_WIDTH, WIN_HEIGHT};
 	s.renderer = get_sdl_core()->renderer;
-	if ((s.surface = SDL_CreateRGBSurface(0,
-					WIN_WIDTH, WIN_HEIGHT, 32, 0, 0, 0, 0)) == NULL)
+	if ((s.surface = SDL_CreateRGBSurface(0, WIN_WIDTH, WIN_HEIGHT, 32,
+										0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	if (SDL_RenderReadPixels(s.renderer, &s.winsize,
-				SDL_GetWindowPixelFormat(get_sdl_core()->window),
-				s.surface->pixels, s.surface->pitch) != 0)
+							SDL_GetWindowPixelFormat(get_sdl_core()->window),
+							s.surface->pixels, s.surface->pitch) != 0)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	s.name = name_screen();
 	if (SDL_SaveBMP(s.surface, s.name) != 0)

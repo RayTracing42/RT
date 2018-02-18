@@ -6,11 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:52:28 by edescoin          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/02/18 19:05:28 by edescoin         ###   ########.fr       */
-=======
-/*   Updated: 2018/02/18 17:02:46 by edescoin         ###   ########.fr       */
->>>>>>> AAliasing
+/*   Updated: 2018/02/18 22:10:19 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +27,12 @@ t_sdl_core	*get_sdl_core(void)
 										WIN_WIDTH, WIN_HEIGHT,
 										SDL_WINDOW_SHOWN)) ||
 		!(core->renderer = SDL_CreateRenderer(core->window, -1,
-											SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE)))
+											SDL_RENDERER_ACCELERATED |
+											SDL_RENDERER_TARGETTEXTURE)))
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
-	core->target = SDL_CreateTexture(core->renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, WIN_WIDTH, WIN_HEIGHT);
+	core->target = SDL_CreateTexture(core->renderer, SDL_PIXELFORMAT_RGBA32,
+									SDL_TEXTUREACCESS_TARGET,
+									WIN_WIDTH, WIN_HEIGHT);
 	SDL_SetRenderTarget(core->renderer, core->target);
 	return (core);
 }
@@ -47,7 +46,7 @@ void		delete_sdl_core(void)
 	free(get_sdl_core());
 }
 
-static void		apply_effects(t_scene *scn)
+static void	apply_effects(t_scene *scn)
 {
 	int	i;
 
@@ -64,17 +63,6 @@ void		refresh_win(t_scene *scn)
 	apply_effects(scn);
 	SDL_RenderPresent(get_sdl_core()->renderer);
 	SDL_SetRenderTarget(get_sdl_core()->renderer, get_sdl_core()->target);
-}
-
-Uint32		get_color(int r, int g, int b)
-{
-	SDL_PixelFormat	*f;
-	Uint32			col;
-
-	f = SDL_AllocFormat(SDL_GetWindowPixelFormat(get_sdl_core()->window));
-	col = SDL_MapRGB(f, r, g, b);
-	SDL_FreeFormat(f);
-	return (col);
 }
 
 int			coloreq(SDL_Color c1, SDL_Color c2)

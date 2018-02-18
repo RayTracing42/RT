@@ -6,13 +6,14 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 12:21:27 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 11:17:59 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 22:09:44 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	new_event(t_event **head, SDL_EventType type, void *data, int (*fct)())
+void		new_event(t_event **head, SDL_EventType type, void *data,
+					int (*fct)())
 {
 	t_event	*event;
 
@@ -22,7 +23,7 @@ void	new_event(t_event **head, SDL_EventType type, void *data, int (*fct)())
 	*head = event;
 }
 
-void	clear_events(t_event **head)
+void		clear_events(t_event **head)
 {
 	t_event	*tmp;
 
@@ -46,7 +47,7 @@ t_evt_data	*new_evt_data(t_scene *scn, SDL_Thread *t)
 	return (data);
 }
 
-void	wait_events(t_event *list_evts)
+void		wait_events(t_event *list_evts)
 {
 	SDL_Event	evt;
 	t_event		*tmp;

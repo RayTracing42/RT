@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 14:41:24 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 20:26:24 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 22:28:22 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	init_scn_tab(t_scene *scn)
 	int	i;
 
 	i = -1;
-	while(++i < 14)
+	while (++i < 14)
 		scn->effects[i] = NULL;
 }
 
-t_scene	*new_scene(t_camera cam, double brightness, SDL_Texture *bg)
+t_scene		*new_scene(t_camera cam, double brightness, SDL_Texture *bg)
 {
 	t_scene	*scene;
 
@@ -42,7 +42,7 @@ t_scene	*new_scene(t_camera cam, double brightness, SDL_Texture *bg)
 	return (scene);
 }
 
-void	delete_scene(t_scene *scene)
+void		delete_scene(t_scene *scene)
 {
 	if (scene)
 	{
