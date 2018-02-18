@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:52:28 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/14 12:32:49 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:05:28 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_sdl_core	*get_sdl_core(void)
 	return (core);
 }
 
-void		delete_sdl_core()
+void		delete_sdl_core(void)
 {
 	SDL_DestroyRenderer(get_sdl_core()->renderer);
 	SDL_DestroyWindow(get_sdl_core()->window);

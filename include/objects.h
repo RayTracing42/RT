@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/17 18:45:12 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 20:10:14 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ t_cylinder		*new_cylinder(t_objs_comp args, double radius);
 /*
 ** hyperboloid.c
 */
-t_hyperboloid	*new_hyperboloid(t_objs_comp args, double a, double b,
-								double c, double d);
+t_hyperboloid	*new_hyperboloid(t_objs_comp args, t_hyperboloid_args a);
 void			delete_hyperboloid(t_hyperboloid *h);
 
 /*
@@ -67,6 +66,7 @@ t_sphere		*new_sphere(t_objs_comp args, double rad);
 ** triangle.c
 */
 void			delete_triangle(t_triangle	*triangle);
-t_triangle		*new_triangle(t_objs_comp args, t_dot dA, t_dot dB, t_dot dC);
+t_triangle		*new_triangle(t_objs_comp args, t_dot d_a, t_dot d_b,
+							t_dot d_c);
 
 #endif

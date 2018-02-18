@@ -6,13 +6,13 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/05 17:09:17 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/17 15:15:34 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:14:06 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void			box_plane_intersect(t_ray *ray, const t_plane *p,
+static void		box_plane_intersect(t_ray *ray, const t_plane *p,
 										t_parequation e, t_box_intersect *its)
 {
 	double	t;

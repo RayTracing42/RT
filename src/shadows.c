@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 17:57:31 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:44:35 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,6 @@ static void			opacify_color(t_ray *light_ray, double *opacity)
 	light_ray->color.r *= (*opacity);
 	light_ray->color.g *= (*opacity);
 	light_ray->color.b *= (*opacity);
-}
-
-static SDL_Color	color_mod(SDL_Color src1, SDL_Color src2)
-{
-	return ((SDL_Color){src1.r * src2.r / 255,
-						src1.g * src2.g / 255,
-						src1.b * src2.b / 255, 255});
 }
 
 static void			set_multi_light_norme(t_ray *light_ray, t_ray *ray,

@@ -6,12 +6,12 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 14:04:49 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/17 18:43:07 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 20:07:16 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIGHT_H
-# define LIGHT_H
+#ifndef LIGHTS_H
+# define LIGHTS_H
 # include "structures.h"
 
 /*

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/17 15:19:40 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 20:03:22 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_vector	get_cylinder_normal(t_dot *inter, t_object *obj)
 
 	if (obj->material.normal_map)
 	{
-		tmp = getMapVector(*inter, obj);
+		tmp = get_map_vector(*inter, obj);
 		tmp.x *= 2 * inter->x;
 		tmp.z *= 2 * inter->z;
 		return (tmp);

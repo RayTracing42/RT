@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_textures2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:52:29 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/17 16:50:40 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:23:29 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	parsing_material(char *data_mat, t_obj_material *material)
 	material->normal_map = NULL;
 	if ((tmp[2] = get_interval(data_mat, "<normal_map>", "</normal_map>")) &&
 		parsing_normal_map(tmp[2], material) == -1)
+		return (-1);
 	free(tmp[0]);
 	free(tmp[1]);
 	free(tmp[2]);

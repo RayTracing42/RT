@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 10:59:52 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/17 17:25:07 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:39:48 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_pxl_queue	**get_pxl_queue(int n)
 	return (queue);
 }
 
-void		delete_pxl_queues()
+void		delete_pxl_queues(void)
 {
 	int	i;
 
@@ -45,12 +45,14 @@ void		put_pixel(int x, int y, SDL_Color *color)
 {
 	if (color && color->a)
 	{
-		SDL_SetRenderDrawColor(get_sdl_core()->renderer, color->r, color->g, color->b, color->a);
+		SDL_SetRenderDrawColor(get_sdl_core()->renderer, color->r, color->g,
+							color->b, color->a);
 		SDL_RenderDrawPoint(get_sdl_core()->renderer, x, y);
 	}
 }
 
-static void	update_pxl_queue(t_pxl_queue **list_queue, int nb_threads, int *nb_ended_threads)
+static void	update_pxl_queue(t_pxl_queue **list_queue, int nb_threads,
+							int *nb_ended_threads)
 {
 	int	i;
 	int	rendered;
@@ -77,7 +79,7 @@ static void	update_pxl_queue(t_pxl_queue **list_queue, int nb_threads, int *nb_e
 	}
 }
 
-int			rendering_thread(void* data)
+int			rendering_thread(void *data)
 {
 	int			i;
 	int			n;

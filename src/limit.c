@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   limit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/22 10:27:56 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 15:55:51 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:16:06 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int			is_in_limit(const t_ray *ray, t_object *father)
 	{
 		if (ray->obj != l->obj &&
 			!is_in_right_side_of_limit(&ray->inter, (t_plane*)l->obj))
-				return (0);
+			return (0);
 		l = l->next;
 	}
 	return (1);

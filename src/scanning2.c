@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanning2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 17:37:18 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:41:29 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_parequation	transform_equ(t_ray *ray, t_object *obj)
 void			transform_inter(t_ray *ray, t_object *obj)
 {
 	mult_vect(&ray->normal, ray->obj->trans_norm, &ray->normal);
-	mult_vect((t_vector*)&ray->inter, ray->obj->trans_const, (t_vector*)&ray->inter);
+	mult_vect((t_vector*)&ray->inter, ray->obj->trans_const,
+			(t_vector*)&ray->inter);
 	ray->inter = (t_dot){ray->inter.x + ray->obj->origin.x,
 						ray->inter.y + ray->obj->origin.y,
 						ray->inter.z + ray->obj->origin.z};

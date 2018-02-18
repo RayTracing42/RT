@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/11 18:05:50 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/17 15:18:58 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:57:15 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_vector	get_cone_normal(t_dot *inter, t_object *obj)
 	c = (t_cone*)obj;
 	if (obj->material.normal_map)
 	{
-		tmp = getMapVector(*inter, obj);
+		tmp = get_map_vector(*inter, obj);
 		tmp.x *= 2 * inter->x;
 		tmp.y *= -2 * c->tanalpha2 * inter->y;
 		tmp.z *= 2 * inter->z;

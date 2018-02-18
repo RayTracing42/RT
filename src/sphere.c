@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:33:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/17 17:59:51 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 20:03:29 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_vector	get_sphere_normal(t_dot *inter, t_object *obj)
 
 	if (obj->material.normal_map)
 	{
-		tmp = getMapVector(*inter, obj);
+		tmp = get_map_vector(*inter, obj);
 		tmp.x *= 2 * inter->x;
 		tmp.y *= 2 * inter->y;
 		tmp.z *= 2 * inter->z;

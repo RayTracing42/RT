@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triangle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 17:16:14 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/17 18:29:52 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 20:04:45 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,29 @@ static int		is_in_triangle(t_dot *i, t_object *obj)
 	return (0);
 }
 
-t_triangle		*new_triangle(t_objs_comp args, t_dot dA, t_dot dB, t_dot dC)
+t_triangle		*new_triangle(t_objs_comp args, t_dot d_a, t_dot d_b, t_dot d_c)
 {
 	t_triangle	*triangle;
 
 	triangle = (t_triangle*)new_plane(args,
-									vect_cross_product(dots_to_vect(dA, dB),
-													dots_to_vect(dA, dC)), 1);
-	triangle->vAB = dots_to_vect(dA, dB);
-	triangle->vBA = dots_to_vect(dB, dA);
-	triangle->vBC = dots_to_vect(dB, dC);
+									vect_cross_product(dots_to_vect(d_a, d_b),
+													dots_to_vect(d_a, d_c)), 1);
+	triangle->vAB = dots_to_vect(d_a, d_b);
+	triangle->vBA = dots_to_vect(d_b, d_a);
+	triangle->vBC = dots_to_vect(d_b, d_c);
 	triangle->aA = fabs(angle_between_vectors(triangle->vAB,
-											dots_to_vect(dA, dC)));
+											dots_to_vect(d_a, d_c)));
 	triangle->aB = fabs(angle_between_vectors(triangle->vBA,
-											dots_to_vect(dB, dC)));
-	triangle->dA = dA;
-	triangle->dB = dB;
-	triangle->dC = dC;
+											dots_to_vect(d_b, d_c)));
+	triangle->dA = d_a;
+	triangle->dB = d_b;
+	triangle->dC = d_c;
 	triangle->intersect = &triangle_intersect;
 	triangle->is_in_obj = &is_in_triangle;
 	return (triangle);
 }
 
-void			delete_triangle(t_triangle	*triangle)
+void			delete_triangle(t_triangle *triangle)
 {
 	delete_plane((t_plane*)triangle);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 18:20:33 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:45:51 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	spherical_mapping(t_dot i, t_dot *textel, double streching,
 	vect_normalize((t_vector*)&i);
 	w = texture ? texture->w : 2;
 	h = texture ? texture->h : 1;
-	textel->x = 0.5 + ((atan2(-i.x,  -i.z)) / (2 * M_PI));
+	textel->x = 0.5 + ((atan2(-i.x, -i.z)) / (2 * M_PI));
 	textel->y = (acos(i.y)) / (M_PI);
 	textel->x *= w * streching;
 	textel->y *= h * streching;
@@ -37,7 +37,7 @@ void	cylindrical_mapping(t_dot i, t_dot *textel, double streching,
 	w = texture ? texture->w : 2;
 	h = texture ? texture->h : 1;
 	vect_normalize((t_vector*)&i);
-	textel->x = 0.5 + (atan2(-i.x,  -i.z) / (2 * M_PI));
+	textel->x = 0.5 + (atan2(-i.x, -i.z) / (2 * M_PI));
 	textel->x *= w * streching;
 	i.y /= sqrt(i.x * i.x + i.z * i.z);
 	if (texture)

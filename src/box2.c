@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   box2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:56:42 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/17 15:16:08 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:09:55 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		is_in_box_boundaries(const t_plane *p, t_box *b, t_dot *d)
 	else if (p == b->left || p == b->right)
 		return (le(d->y, b->btr_corner.y) && gt(d->y, b->fbl_corner.y) &&
 				le(d->x, b->btr_corner.x) && gt(d->x, b->fbl_corner.x));
-	return (0);
+		return (0);
 }
 
 void	delete_box(t_box *box)

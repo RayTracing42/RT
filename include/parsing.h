@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/17 18:46:58 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 20:12:38 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,12 @@ void				free_tab(char **data, int size);
 **	parsing_interval.c
 */
 void				clear_interval(char *src, const int start, const int len);
-char				*get_interval(char *src, const char *start, const char *stop);
+char				*get_interval(char *src, const char *start,
+								const char *stop);
 char				*get_dst_norme(char *dst, char *ptr_start, char *ptr_stop,
 									const char *start);
-void				clear_interval_norme(char *src, char *ptr_start, char *ptr_stop, const char *stop);
+void				clear_interval_norme(char *src, char *ptr_start,
+										char *ptr_stop, const char *stop);
 
 /*
 **	parsing_scene.c

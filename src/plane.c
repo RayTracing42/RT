@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 12:35:04 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/17 17:05:24 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:57:15 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_vector	get_plane_normal(t_dot *inter, t_object *obj)
 	p = (t_plane*)obj;
 	if (obj->material.normal_map)
 	{
-		tmp = getMapVector(*inter, obj);
+		tmp = get_map_vector(*inter, obj);
 		tmp.x *= p->normal.x;
 		tmp.y *= p->normal.y;
 		tmp.z *= p->normal.z;

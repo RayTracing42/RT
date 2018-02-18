@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   equations.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/08 15:36:36 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/17 15:20:24 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:05:02 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_dot	equation_get_dot(t_parequation *eq, double t)
 					eq->vd.y * t + eq->vc.y,
 					eq->vd.z * t + eq->vc.z});
 }
-
 
 int		get_quad_equation_sol(double *res, double fac[3], int i)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 18:18:44 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:55:22 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static Uint32		getpixel(SDL_Surface *surface, int x, int y, int *err)
 	int		bpp;
 	Uint8	*p;
 
-	if (x >= surface->w ||  y >= surface->h || x < 0 || y < 0)
+	if (x >= surface->w || y >= surface->h || x < 0 || y < 0)
 	{
 		*err = 1;
 		return (0);
@@ -33,7 +33,7 @@ static Uint32		getpixel(SDL_Surface *surface, int x, int y, int *err)
 	else if (bpp == 2)
 		return (*(Uint16 *)p);
 	else if (bpp == 3)
-		if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
 			return (p[0] << 16 | p[1] << 8 | p[2]);
 		else
 			return (p[0] | p[1] << 8 | p[2] << 16);
@@ -43,7 +43,8 @@ static Uint32		getpixel(SDL_Surface *surface, int x, int y, int *err)
 	return (0);
 }
 
-void				planar_mapping(t_dot i, t_dot *textel, double streching, SDL_Surface *texture)
+void				planar_mapping(t_dot i, t_dot *textel, double streching,
+									SDL_Surface *texture)
 {
 	planar_mapping_x(i, textel, streching, texture);
 }
@@ -66,12 +67,13 @@ static SDL_Color	get_text_norme(t_object *obj, t_dot textel)
 	return (ret);
 }
 
-SDL_Color			getTextColor(t_dot pt, t_object *obj)
+SDL_Color			get_text_color(t_dot pt, t_object *obj)
 {
 	t_dot		textel;
 	SDL_Color	ret;
 
-	obj->material.texture_mapping(pt, &textel, obj->material.txt_streching, obj->material.texture);
+	obj->material.texture_mapping(pt, &textel, obj->material.txt_streching,
+								obj->material.texture);
 	if (obj->material.texture)
 		ret = get_text_norme(obj, textel);
 	else
@@ -89,14 +91,15 @@ SDL_Color			getTextColor(t_dot pt, t_object *obj)
 	return (ret);
 }
 
-t_vector			getMapVector(t_dot pt, t_object *obj)
+t_vector			get_map_vector(t_dot pt, t_object *obj)
 {
 	t_dot		textel;
 	SDL_Color	tmp;
 	Uint32		color;
 	int			err;
 
-	obj->material.map_mapping(pt, &textel, obj->material.map_streching, obj->material.normal_map);
+	obj->material.map_mapping(pt, &textel, obj->material.map_streching,
+							obj->material.normal_map);
 	if (obj->material.map_repeat)
 		textel = (t_dot){mod(textel.x, obj->material.normal_map->w),
 						mod(textel.y, obj->material.normal_map->h), 0};

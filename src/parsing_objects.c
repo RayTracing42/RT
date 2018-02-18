@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_objects.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 15:25:52 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 16:43:57 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 20:05:32 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ t_hyperboloid	*parsing_hyperboloid(char *object)
 	d[2] = atod(data[5]);
 	d[3] = atod(data[6]);
 	free_tab(data, 7);
-	return (new_hyperboloid(args, d[0], d[1], d[2], d[3]));
+	return (new_hyperboloid(args,
+			(t_hyperboloid_args){d[0], d[1], d[2], d[3]}));
 }
 
 t_triangle		*parsing_triangle(char *object)

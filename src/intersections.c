@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 15:46:57 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:56:02 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_ray		first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	e = transform_equ(&tmp_ray, obj);
 	*tmp = obj->intersect(&tmp_ray, e, obj, 1);
 	if (obj->material.texture || obj->material.chess)
-		tmp_ray.color = getTextColor(tmp_ray.inter, tmp_ray.obj);
+		tmp_ray.color = get_text_color(tmp_ray.inter, tmp_ray.obj);
 	else
 		tmp_ray.color = obj->material.color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;
@@ -96,7 +96,7 @@ t_ray		first_intersect(const t_ray *ray, t_object *obj, double *tmp)
 
 t_ray		second_intersect(const t_ray *ray, t_object *obj, double *tmp)
 {
-	t_ray	tmp_ray;
+	t_ray			tmp_ray;
 	t_parequation	e;
 
 	tmp_ray = *ray;
@@ -104,7 +104,7 @@ t_ray		second_intersect(const t_ray *ray, t_object *obj, double *tmp)
 	e = transform_equ(&tmp_ray, obj);
 	*tmp = obj->intersect(&tmp_ray, e, obj, 2);
 	if (obj->material.texture || obj->material.chess)
-		tmp_ray.color = getTextColor(tmp_ray.inter, tmp_ray.obj);
+		tmp_ray.color = get_text_color(tmp_ray.inter, tmp_ray.obj);
 	else
 		tmp_ray.color = obj->material.color;
 	tmp_ray.percuted_refractive_i = obj->obj_light.refractive_index;

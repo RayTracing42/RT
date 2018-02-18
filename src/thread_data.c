@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: llellouc <llellouc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:32:58 by llellouc          #+#    #+#             */
-/*   Updated: 2018/02/17 18:25:34 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 20:04:01 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 static t_thread_data	thread_data(int y_begin, int y_end, t_scene *scn,
 									int n_thread)
 {
-	t_thread_data	toRet;
+	t_thread_data	ret;
 
-	toRet.y_begin = y_begin;
-	toRet.y_end = y_end;
-	toRet.scn = *scn;
-	toRet.n_thread = n_thread;
-
-	return (toRet);
+	ret.y_begin = y_begin;
+	ret.y_end = y_end;
+	ret.scn = *scn;
+	ret.n_thread = n_thread;
+	return (ret);
 }
 
 static void				init_pxl_queue(t_thread_data *threads, int i)
@@ -61,7 +60,7 @@ t_thread_data			*init_thread_array(t_scene *scn, int nb_thread)
 	return (threads);
 }
 
-t_mutexes				*get_mutexes()
+t_mutexes				*get_mutexes(void)
 {
 	static t_mutexes	*mutex = NULL;
 

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/17 19:14:01 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 20:01:21 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -394,6 +394,14 @@ typedef struct				s_box_intersect
 	double					t;
 	t_plane					*p;
 }							t_box_intersect;
+
+typedef struct				s_hyperboloid_args
+{
+	double					a;
+	double					b;
+	double					c;
+	double					d;
+}							t_hyperboloid_args;
 
 typedef struct				s_hyperboloid
 {

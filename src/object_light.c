@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_light.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 11:53:24 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/17 16:17:21 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:16:38 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ t_obj_light		*new_obj_light(double power, t_object *obj)
 {
 	t_obj_light	*obl;
 
-	obl = (t_obj_light*)new_light(OBJECT, (t_vector){0, 0, 0}, obj->material.color, power);
+	obl = (t_obj_light*)new_light(OBJECT, (t_vector){0, 0, 0},
+								obj->material.color, power);
 	obj->is_light = 1;
 	obl->shape = obj;
 	obl->is_in_light = is_in_obj_light;

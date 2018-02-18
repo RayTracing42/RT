@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 17:35:03 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 19:04:10 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 	}
 	return (ray->color = (SDL_Color){0, 0, 0, 0});
 }
-
+/*
 static void		randomize_cam_orig(t_camera *cam, struct drand48_data *buff)
 {
 	double	r;
@@ -55,7 +55,7 @@ static void		randomize_cam_orig(t_camera *cam, struct drand48_data *buff)
 	drand48_r(buff, &r);
 	cam->origin.z += s * r * cam->depth;
 }
-
+*/
 static void		scan_pixel(t_ray *ray, t_thread_data *data, t_scanning_index *i)
 {
 	ray->equ.vc = *(t_vector*)&data->scn.cam.origin;
@@ -72,10 +72,10 @@ static int		scanning_multi(void *data_void)
 	t_scanning_index	i;
 	t_ray				ray;
 	t_dot				cam_orig;
-	struct drand48_data	buff;
+	//struct drand48_data	buff;
 
 	data = (t_thread_data *)data_void;
-	srand48_r(time(NULL) * data->n_thread, &buff);
+	//srand48_r(time(NULL) * data->n_thread, &buff);
 	cam_orig = data->scn.cam.origin;
 	ray.actual_refractive_i = 1;
 	ray.limit = 1;
@@ -88,7 +88,7 @@ static int		scanning_multi(void *data_void)
 		while (++i.x < WIN_WIDTH)
 		{
 			data->scn.cam.origin = cam_orig;
-			randomize_cam_orig(&data->scn.cam, &buff);
+			//randomize_cam_orig(&data->scn.cam, &buff);
 			scan_pixel(&ray, data, &i);
 		}
 	}

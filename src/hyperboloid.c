@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   hyperboloid.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 16:57:05 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/17 15:40:11 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 20:01:24 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
 
 static double	hyperboloid_intersection(t_ray *ray, t_parequation e,
 										t_object *obj, int i)
@@ -54,16 +53,15 @@ static int		is_in_hyperboloid(t_dot *i, t_object *obj)
 			(i->z * i->z) / h->c2 - 1));
 }
 
-t_hyperboloid	*new_hyperboloid(t_objs_comp args, double a, double b,
-								double c, double d)
+t_hyperboloid	*new_hyperboloid(t_objs_comp args, t_hyperboloid_args a)
 {
 	t_hyperboloid	*h;
 
 	h = (t_hyperboloid*)new_object(HYPERBOLOID, args);
-	h->a2 = a * a;
-	h->b2 = b * b;
-	h->c2 = c * c;
-	h->d = d;
+	h->a2 = a.a * a.a;
+	h->b2 = a.b * a.b;
+	h->c2 = a.c * a.c;
+	h->d = a.d;
 	h->intersect = &hyperboloid_intersection;
 	h->get_normal = &get_hyperboloid_normal;
 	h->is_in_obj = &is_in_hyperboloid;
