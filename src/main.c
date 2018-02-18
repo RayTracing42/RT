@@ -33,7 +33,11 @@ int	main_display(void *scene)
 	view_plane(&scn->cam);
 	reset_camera_fov(&scn->cam);
 	scanning(scn);
-	ft_putnbr(get_sdl_core()->aa);
+	if (get_sdl_core()->aa == 2)
+		{
+			antia();
+			antia();
+		}
 	refresh_win();
 	delete_pxl_queues();
 	return (1);

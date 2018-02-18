@@ -30,7 +30,7 @@ t_sdl_core	*get_sdl_core(void)
 											SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE)))
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	core->target = SDL_CreateTexture(core->renderer,
-		SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, WIN_WIDTH, WIN_HEIGHT);
+		SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, WIN_WIDTH * 4, WIN_HEIGHT * 4);
 	SDL_SetRenderTarget(core->renderer, core->target);
 	return (core);
 }
@@ -45,8 +45,11 @@ void		delete_sdl_core()
 
 void		refresh_win(void)
 {
+	SDL_Rect winsize;
+
+	winsize = (SDL_Rect){0, 0, WIN_WIDTH, WIN_HEIGHT};
 	SDL_SetRenderTarget(get_sdl_core()->renderer, NULL);
-	SDL_RenderCopy(get_sdl_core()->renderer, get_sdl_core()->target, NULL, NULL);
+	SDL_RenderCopy(get_sdl_core()->renderer, get_sdl_core()->target, &winsize, NULL);
 	SDL_RenderPresent(get_sdl_core()->renderer);
 	SDL_SetRenderTarget(get_sdl_core()->renderer, get_sdl_core()->target);
 }

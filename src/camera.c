@@ -29,6 +29,8 @@ t_camera	new_camera(const t_dot origin, const t_dot angle, double field_of_view,
 
 void		reset_camera_fov(t_camera * cam)
 {
-	cam->focal = get_sdl_core()->width / (2 * tan((cam->fov * M_PI / 180) /
+	// cam->focal = get_sdl_core()->width / (2 * tan((cam->fov * M_PI / 180) /
+	// 			2.0f));
+	cam->focal = (get_sdl_core()->width * 4) / (2 * tan((cam->fov * M_PI / 180) /
 				2.0f));
 }

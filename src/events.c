@@ -49,7 +49,10 @@ void	wait_events(t_event *list_evts, t_scene *scn)
 			tmp = tmp->next;
 		if (tmp)
 			flag = tmp->fct(&evt, tmp);
-		if (get_sdl_core()->aa == 10)
+		if (get_sdl_core()->aa == 2)
+		{
 			main_display(scn);
+			get_sdl_core()->aa = 1;
+		}
 	}
 }

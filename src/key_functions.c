@@ -22,18 +22,16 @@ int			key_management(SDL_Event *current, t_event *evt)
 		return (0);
 	if (current->key.keysym.sym == SDLK_a)
 		{
-			get_sdl_core()->width = (get_sdl_core()->width) * 2;
-			get_sdl_core()->height = (get_sdl_core()->height) * 2;
-			get_sdl_core()->aa = 10;
+			if (get_sdl_core()->aa != 1)
+			{
+			get_sdl_core()->width = (get_sdl_core()->width) * 4;
+			get_sdl_core()->height = (get_sdl_core()->height) * 4;
+			get_sdl_core()->aa = 2;
+			}
 		}
 	if (current->key.keysym.sym == SDLK_s)
 		{
 			screenshot();
-		}
-	if (current->key.keysym.sym == SDLK_d)
-		{
-			antia();
-			refresh_win();
 		}
 	return (1);
 }
