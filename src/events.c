@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/20 12:21:27 by edescoin          #+#    #+#             */
-/*   Updated: 2017/08/29 12:49:24 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 11:17:59 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,36 @@ void	new_event(t_event **head, SDL_EventType type, void *data, int (*fct)())
 	t_event	*event;
 
 	if (!(event = malloc(sizeof(t_event))))
-		exit_error("rtv1", "malloc");
+		exit_error("RT", "malloc");
 	*event = (t_event){type, data, fct, *head};
 	*head = event;
 }
 
-void	delete_event(t_event **head)
-{
-	free((*head)->data);
-	*head = (*head)->next;
-}
-
 void	clear_events(t_event **head)
 {
+	t_event	*tmp;
+
 	while (*head)
-		delete_event(head);
+	{
+		tmp = *head;
+		free(tmp->data);
+		*head = (*head)->next;
+		free(tmp);
+	}
 }
 
-void	wait_events(t_event *list_evts, t_scene *scn)
+t_evt_data	*new_evt_data(t_scene *scn, SDL_Thread *t)
+{
+	t_evt_data	*data;
+
+	if (!(data = malloc(sizeof(t_evt_data))))
+		exit_error("rt", "malloc");
+	data->scn = scn;
+	data->running_thread = t;
+	return (data);
+}
+
+void	wait_events(t_event *list_evts)
 {
 	SDL_Event	evt;
 	t_event		*tmp;
@@ -49,10 +61,5 @@ void	wait_events(t_event *list_evts, t_scene *scn)
 			tmp = tmp->next;
 		if (tmp)
 			flag = tmp->fct(&evt, tmp);
-		if (get_sdl_core()->aa == 2)
-		{
-			main_display(scn);
-			get_sdl_core()->aa = 1;
-		}
 	}
 }

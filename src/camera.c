@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 13:12:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/16 10:37:29 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 10:55:15 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ t_camera	new_camera(const t_dot origin, const t_dot angle, double field_of_view,
 	return (cam);
 }
 
-void		reset_camera_fov(t_camera * cam)
+void		reset_camera(t_camera *cam)
 {
-	// cam->focal = get_sdl_core()->width / (2 * tan((cam->fov * M_PI / 180) /
-	// 			2.0f));
-	cam->focal = (get_sdl_core()->width * 4) / (2 * tan((cam->fov * M_PI / 180) /
-				2.0f));
+	cam->focal = get_sdl_core()->width / (2 * tan((cam->fov * M_PI / 180) / 2.0f));
+	cam->vp.front = vector(1, 0, 0);
+	cam->vp.up = vector(0, 1, 0);
+	cam->vp.right = vector(0, 0, 1);
 }

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/16 10:36:39 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 11:05:01 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct				s_event
 
 typedef struct				s_evt_data
 {
+	struct s_scene			*scn;
+	SDL_Thread				*running_thread;
 }							t_evt_data;
 
 typedef struct				s_matrix

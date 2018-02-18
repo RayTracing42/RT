@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/04 13:36:18 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 11:17:57 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	main_display(void *scene)
 
 	scn = (t_scene*)scene;
 	view_plane(&scn->cam);
-	reset_camera_fov(&scn->cam);
 	scanning(scn);
 	if (get_sdl_core()->aa == 2)
 		{
@@ -46,18 +45,19 @@ int	main_display(void *scene)
 int			main(int ac, char **av)
 {
 	t_event		*events;
+	t_evt_data	*data;
 	t_scene		*scn;
-	SDL_Thread	*t;
 
 	events = NULL;
 	if (!(scn = parsing(ac, av)))
 		ft_putendl("usage : ./rt file.xml");
 	else
 	{
-		init_list_evts(&events, NULL);
-		t = SDL_CreateThread(main_display, "", scn);
-		wait_events(events, scn);
-		SDL_WaitThread(t, NULL);
+		data = new_evt_data(scn, SDL_CreateThread(main_display, "", scn));
+		init_list_evts(&events, data);
+		wait_events(events);
+		SDL_WaitThread(data->running_thread, NULL);
+		clear_events(&events);
 		delete_sdl_core();
 	}
 	exit(0);
