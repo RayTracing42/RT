@@ -6,7 +6,11 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/02/17 19:15:48 by shiro            ###   ########.fr       */
+=======
+/*   Updated: 2018/02/18 18:30:08 by edescoin         ###   ########.fr       */
+>>>>>>> AAliasing
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +29,22 @@ static void	init_list_evts(t_event **head, t_evt_data *data)
 	new_event(head, SDL_QUIT, NULL, &force_exit);
 }
 
-static int	main_display(void *scene)
+int	main_display(void *scene)
 {
 	t_scene	*scn;
 
+	get_pxl_queue(get_sdl_core()->nb_threads);
 	scn = (t_scene*)scene;
 	if (scn->background)
 		SDL_RenderCopy(get_sdl_core()->renderer, scn->background, NULL, NULL);
 	view_plane(&scn->cam);
 	scanning(scn);
-	refresh_win();
+	if (get_sdl_core()->aa)
+	{
+		antia();
+		antia();
+	}
+	refresh_win(scn);
 	delete_pxl_queues();
 	return (1);
 }
@@ -42,19 +52,21 @@ static int	main_display(void *scene)
 int			main(int ac, char **av)
 {
 	t_event		*events;
+	t_evt_data	*data;
 	t_scene		*scn;
-	SDL_Thread	*t;
 
 	events = NULL;
 	if (!(scn = parsing(ac, av)))
 		ft_putendl("usage : ./rt file.xml");
 	else
 	{
-		init_list_evts(&events, NULL);
-		t = SDL_CreateThread(main_display, "", scn);
+		srand(time(NULL));
+		srand48(time(NULL));
+		data = new_evt_data(scn, SDL_CreateThread(main_display, "", scn));
+		init_list_evts(&events, data);
 		wait_events(events);
-		SDL_WaitThread(t, NULL);
-		delete_scene(scn);
+		SDL_WaitThread(data->running_thread, NULL);
+		clear_events(&events);
 		delete_sdl_core();
 	}
 	exit(0);

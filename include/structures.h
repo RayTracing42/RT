@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 20:01:21 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 20:16:50 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct				s_sdl_core
 	int						height;
 	int						nb_threads;
 	int						fullscreen;
+	int						aa;
+
 }							t_sdl_core;
 
 typedef struct				s_event
@@ -61,6 +63,8 @@ typedef struct				s_event
 
 typedef struct				s_evt_data
 {
+	struct s_scene			*scn;
+	SDL_Thread				*running_thread;
 }							t_evt_data;
 
 typedef struct				s_time
@@ -526,6 +530,7 @@ typedef struct				s_camera
 	t_dot					angle;
 	double					depth;
 	double					focal;
+	double					fov;
 	t_view_plane			vp;
 }							t_camera;
 
@@ -553,6 +558,9 @@ typedef struct				s_list_lights
 typedef struct				s_scene
 {
 	double					brightness;
+	int						(*effects[14])();
+	SDL_Color				dt_col1;
+	SDL_Color				dt_col2;
 	t_camera				cam;
 	t_list_lights			*lights;
 	t_list_objs				*objects;
@@ -567,5 +575,40 @@ typedef struct				s_thread_data
 	int						y_begin;
 	int						y_end;
 }							t_thread_data;
+
+typedef struct				s_blur
+{
+	SDL_Color				tl1;
+	SDL_Color				tr1;
+	SDL_Color				bl1;
+	SDL_Color				br1;
+	SDL_Color				tl2;
+	SDL_Color				tr2;
+	SDL_Color				bl2;
+	SDL_Color				br2;
+	SDL_Color				curr;
+}							t_blur;
+
+typedef struct				s_duotone
+{
+	SDL_Color				c1;
+	SDL_Color				c2;
+}							t_duotone;
+
+typedef struct				s_perlin
+{
+	SDL_Surface				*perlin;
+	int								r;
+	int								tmp[512];
+	unsigned char			size;
+}							t_perlin;
+
+typedef struct				s_screenshot
+{
+	SDL_Renderer		*renderer;
+	SDL_Surface			*surface;
+	char						*name;
+	SDL_Rect				winsize;
+}							t_screenshot;
 
 #endif

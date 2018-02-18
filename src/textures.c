@@ -6,15 +6,25 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/02/18 19:55:22 by edescoin         ###   ########.fr       */
+=======
+/*   Updated: 2018/02/18 17:32:17 by edescoin         ###   ########.fr       */
+>>>>>>> AAliasing
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+<<<<<<< HEAD
 #include "texture_mapping.h"
 #include <math.h>
 
 static Uint32		getpixel(SDL_Surface *surface, int x, int y, int *err)
+=======
+#include <math.h>
+
+Uint32		getpixel(SDL_Surface *surface, int x, int y, int *err)
+>>>>>>> AAliasing
 {
 	int		bpp;
 	Uint8	*p;
@@ -33,7 +43,11 @@ static Uint32		getpixel(SDL_Surface *surface, int x, int y, int *err)
 	else if (bpp == 2)
 		return (*(Uint16 *)p);
 	else if (bpp == 3)
+<<<<<<< HEAD
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+=======
+		if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+>>>>>>> AAliasing
 			return (p[0] << 16 | p[1] << 8 | p[2]);
 		else
 			return (p[0] | p[1] << 8 | p[2] << 16);
@@ -42,6 +56,7 @@ static Uint32		getpixel(SDL_Surface *surface, int x, int y, int *err)
 	*err = 1;
 	return (0);
 }
+<<<<<<< HEAD
 
 void				planar_mapping(t_dot i, t_dot *textel, double streching,
 									SDL_Surface *texture)
@@ -110,3 +125,5 @@ t_vector			get_map_vector(t_dot pt, t_object *obj)
 	return ((t_vector){((int)(tmp.r)) / 255.0, ((int)(tmp.g)) / 255.0,
 						(((int)(tmp.b - 128))) / 255.0});
 }
+=======
+>>>>>>> AAliasing

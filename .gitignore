@@ -2,3 +2,5 @@
 *.out
 *.swp
 libraries/SDL/*
+.DS_Store
+.DS_Store

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 17:01:46 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 20:24:58 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ t_scene		*parsing(int argc, char **argv)
 			ft_putstr_fd("\nWarning: no light found!\n", 2);
 		if (!(scn->objects = parsing_object(scene, scn->objects)))
 			ft_putstr_fd("\nWarning: no object found!\n", 2);
-		if (close(fd) == -1)
-			exit_custom_error("rt", ":close() failed");
-		end_fct_norme((argc == 3 ? ft_atoi(argv[2]) : 1), file, scene);
+		close(fd);
+		get_sdl_core()->nb_threads = (argc == 3 ? ft_atoi(argv[2]) : 1);
+		free(scene);
+		free(file);
 	}
 	return (scn);
 }

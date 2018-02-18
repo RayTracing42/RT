@@ -38,7 +38,7 @@ void	view_plane_rotation(t_view_plane *vp, double x, double y, double z)
 
 void	view_plane(t_camera *cam)
 {
-	cam->vp.size = vector(cam->focal, WIN_HEIGHT, WIN_WIDTH);
+	cam->vp.size = vector(cam->focal, get_sdl_core()->height, get_sdl_core()->width);
 	view_plane_rotation(&cam->vp, ft_to_rad(cam->angle.x),
 						ft_to_rad(cam->angle.y), ft_to_rad(cam->angle.z));
 	cam->vp.up_left.x = cam->origin.x + cam->vp.front.x * cam->vp.size.x +

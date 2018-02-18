@@ -6,7 +6,11 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/02/18 19:04:10 by edescoin         ###   ########.fr       */
+=======
+/*   Updated: 2018/02/18 18:35:29 by edescoin         ###   ########.fr       */
+>>>>>>> AAliasing
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +40,28 @@ SDL_Color		effects(t_ray *ray, t_scene *scn)
 	}
 	return (ray->color = (SDL_Color){0, 0, 0, 0});
 }
+<<<<<<< HEAD
 /*
 static void		randomize_cam_orig(t_camera *cam, struct drand48_data *buff)
+=======
+
+static void		randomize_cam_orig(t_camera *cam)
+>>>>>>> AAliasing
 {
 	double	r;
 	int		s;
 
-	drand48_r(buff, &r);
+	r = drand48();
 	s = (int)(r * 10) % 2 ? -1 : 1;
-	drand48_r(buff, &r);
+	r = drand48();
 	cam->origin.x += s * r * cam->depth;
-	drand48_r(buff, &r);
+	r = drand48();
 	s = (int)(r * 10) % 2 ? -1 : 1;
-	drand48_r(buff, &r);
+	r = drand48();
 	cam->origin.y += s * r * cam->depth;
-	drand48_r(buff, &r);
+	r = drand48();
 	s = (int)(r * 10) % 2 ? -1 : 1;
-	drand48_r(buff, &r);
+	r = drand48();
 	cam->origin.z += s * r * cam->depth;
 }
 */
@@ -72,10 +81,15 @@ static int		scanning_multi(void *data_void)
 	t_scanning_index	i;
 	t_ray				ray;
 	t_dot				cam_orig;
+<<<<<<< HEAD
 	//struct drand48_data	buff;
 
 	data = (t_thread_data *)data_void;
 	//srand48_r(time(NULL) * data->n_thread, &buff);
+=======
+
+	data = (t_thread_data *)data_void;
+>>>>>>> AAliasing
 	cam_orig = data->scn.cam.origin;
 	ray.actual_refractive_i = 1;
 	ray.limit = 1;
@@ -85,11 +99,20 @@ static int		scanning_multi(void *data_void)
 	while (++i.y < data->y_end)
 	{
 		i.x = -1;
-		while (++i.x < WIN_WIDTH)
+		while (++i.x < get_sdl_core()->width)
 		{
 			data->scn.cam.origin = cam_orig;
+<<<<<<< HEAD
 			//randomize_cam_orig(&data->scn.cam, &buff);
 			scan_pixel(&ray, data, &i);
+=======
+			randomize_cam_orig(&data->scn.cam);
+			ray.equ.vc = *(t_vector*)&data->scn.cam.origin;
+			view_plane_vector(i.x, i.y, &data->scn.cam, &ray.equ.vd);
+			effects(&ray, &data->scn);
+			(*get_pxl_queue(data->n_thread))[++i.q] = (t_pxl_queue){-2, i.x, i.y, ray.color};
+			(*get_pxl_queue(data->n_thread))[i.q].rendered = 0;
+>>>>>>> AAliasing
 		}
 	}
 	remove_leaf(ray.tree);
