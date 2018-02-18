@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 11:05:01 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 13:20:32 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -508,6 +508,9 @@ typedef struct				s_list_lights
 typedef struct				s_scene
 {
 	double					brightness;
+	int						(*effects[14])();
+	SDL_Color				dt_col1;
+	SDL_Color				dt_col2;
 	t_camera				cam;
 	t_list_lights			*lights;
 	t_list_objs				*objects;

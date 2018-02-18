@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   blur_effect.c                                      :+:      :+:    :+:   */
+/*   effect_noise.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joinacio <joinacio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:27:44 by joinacio          #+#    #+#             */
-/*   Updated: 2017/12/07 04:18:03 by joinacio         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:07:10 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,15 @@ int		noise(void)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	apply_noise(screen, 0, 0);
 	return (0);
+}
+
+char	*parsing_noise(char *data, t_scene *scn, int *i)
+{
+	if (ft_strstr(data, "noise") != data)
+		return (data);
+	scn->effects[++(*i)] = noise;
+	data += 5;
+	while (*data && (ft_isspace(*data) || *data == ','))
+		data++;
+	return (data);
 }

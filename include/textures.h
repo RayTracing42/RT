@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel_utils.c                                      :+:      :+:    :+:   */
+/*   textures.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/30 09:27:44 by joinacio          #+#    #+#             */
-/*   Updated: 2018/02/18 14:30:39 by edescoin         ###   ########.fr       */
+/*   Created: 2018/02/11 11:42:19 by shiro             #+#    #+#             */
+/*   Updated: 2018/02/18 17:24:56 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#ifndef TEXTURES_H
+# define TEXTURES_H
+# include "structures.h"
 
-int		set_color(unsigned char a, unsigned char r, unsigned char v, unsigned char b)
-{
-	int color;
+Uint32		getpixel(SDL_Surface *surface, int x, int y, int *err);
 
-	color = (a * 16711680) + (r * 65536) + (v * 256) + b;
-	return (color);
-}
-
-void put_pixel32(SDL_Surface *surface, int x, int y, Uint32 colors)
-{
-    Uint32 *pixels = (Uint32 *)surface->pixels;
-    pixels[ ( y * surface->w ) + x ] = colors;
-}
+#endif

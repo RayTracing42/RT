@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+         #
+#    By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/09 15:55:46 by fcecilie          #+#    #+#              #
-#    Updated: 2018/02/04 12:51:10 by shiro            ###   ########.fr        #
+#    Updated: 2018/02/18 14:16:19 by edescoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC_LIBFT = ft_memset.c \
 			ft_isalnum.c \
 			ft_isascii.c \
 			ft_isprint.c \
+			ft_isspace.c \
 			ft_toupper.c \
 			ft_tolower.c \
 			ft_memalloc.c \

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/29 12:53:37 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 11:17:57 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:48:19 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int	main_display(void *scene)
 	scn = (t_scene*)scene;
 	view_plane(&scn->cam);
 	scanning(scn);
-	if (get_sdl_core()->aa == 2)
-		{
-			antia();
-			antia();
-		}
-	refresh_win();
+	if (get_sdl_core()->aa)
+	{
+		antia();
+		antia();
+	}
+	refresh_win(scn);
 	delete_pxl_queues();
 	return (1);
 }

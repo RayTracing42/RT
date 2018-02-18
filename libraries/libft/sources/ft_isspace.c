@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pixel_utils.c                                      :+:      :+:    :+:   */
+/*   isspace.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/30 09:27:44 by joinacio          #+#    #+#             */
-/*   Updated: 2018/02/18 14:30:39 by edescoin         ###   ########.fr       */
+/*   Created: 2016/11/08 15:36:06 by edescoin          #+#    #+#             */
+/*   Updated: 2016/11/08 20:04:55 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include "libft.h"
 
-int		set_color(unsigned char a, unsigned char r, unsigned char v, unsigned char b)
+int	ft_isspace(int c)
 {
-	int color;
-
-	color = (a * 16711680) + (r * 65536) + (v * 256) + b;
-	return (color);
-}
-
-void put_pixel32(SDL_Surface *surface, int x, int y, Uint32 colors)
-{
-    Uint32 *pixels = (Uint32 *)surface->pixels;
-    pixels[ ( y * surface->w ) + x ] = colors;
+	return (c == ' ' || c == '\f' || c == '\n' ||
+			c == '\r' || c == '\t' || c == '\v');
 }

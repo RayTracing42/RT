@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:52:28 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/16 10:41:04 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 17:02:46 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,35 @@ t_sdl_core	*get_sdl_core(void)
 		!(core->renderer = SDL_CreateRenderer(core->window, -1,
 											SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE)))
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
-	core->target = SDL_CreateTexture(core->renderer,
-		SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, WIN_WIDTH * 4, WIN_HEIGHT * 4);
+	core->target = SDL_CreateTexture(core->renderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, WIN_WIDTH, WIN_HEIGHT);
 	SDL_SetRenderTarget(core->renderer, core->target);
 	return (core);
 }
 
 void		delete_sdl_core()
 {
+	SDL_DestroyTexture(get_sdl_core()->target);
 	SDL_DestroyRenderer(get_sdl_core()->renderer);
 	SDL_DestroyWindow(get_sdl_core()->window);
 	SDL_Quit();
 	free(get_sdl_core());
 }
 
-void		refresh_win(void)
+static void		apply_effects(t_scene *scn)
 {
-	SDL_Rect winsize;
+	int	i;
 
-	winsize = (SDL_Rect){0, 0, WIN_WIDTH, WIN_HEIGHT};
+	i = -1;
+	while (scn->effects[++i])
+		scn->effects[i](scn->dt_col1, scn->dt_col2);
+}
+
+void		refresh_win(t_scene *scn)
+{
 	SDL_SetRenderTarget(get_sdl_core()->renderer, NULL);
-	SDL_RenderCopy(get_sdl_core()->renderer, get_sdl_core()->target, &winsize, NULL);
+	SDL_RenderCopy(get_sdl_core()->renderer, get_sdl_core()->target,
+					&((SDL_Rect){0, 0, WIN_WIDTH, WIN_HEIGHT}), NULL);
+	apply_effects(scn);
 	SDL_RenderPresent(get_sdl_core()->renderer);
 	SDL_SetRenderTarget(get_sdl_core()->renderer, get_sdl_core()->target);
 }

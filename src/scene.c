@@ -6,11 +6,20 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/19 14:41:24 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 14:14:55 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 16:57:37 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static void	init_scn_tab(t_scene *scn)
+{
+	int	i;
+
+	i = -1;
+	while(++i < 14)
+		scn->effects[i] = NULL;
+}
 
 t_scene	*new_scene(t_camera cam, double brightness)
 {
@@ -26,6 +35,9 @@ t_scene	*new_scene(t_camera cam, double brightness)
 	scene->cam = cam;
 	scene->lights = NULL;
 	scene->objects = NULL;
+	scene->dt_col1 = (SDL_Color){0, 0, 0, 0};
+	scene->dt_col2 = (SDL_Color){0, 0, 0, 0};
+	init_scn_tab(scene);
 	return (scene);
 }
 

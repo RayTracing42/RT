@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/03 15:48:47 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/18 17:33:54 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 
 # include "camera.h"
 # include "equations.h"
+# include "effects.h"
 # include "events.h"
 # include "graphics.h"
 # include "intersections.h"
@@ -54,6 +55,7 @@
 # include "scanning.h"
 # include "scene.h"
 # include "structures.h"
+# include "textures.h"
 # include "thread_data.h"
 # include "vectors.h"
 # include "vectors_transformations.h"

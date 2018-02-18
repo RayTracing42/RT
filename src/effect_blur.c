@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   blur_effect.c                                      :+:      :+:    :+:   */
+/*   effect_blur.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joinacio <joinacio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:27:44 by joinacio          #+#    #+#             */
-/*   Updated: 2017/12/07 04:18:03 by joinacio         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:39:49 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ SDL_Color 	get_pixel_colors(SDL_Surface *screen, int x, int y)
 	SDL_Color				rgba;
 
 	rgba = (SDL_Color){0, 0, 0, 0};
-	SDL_GetRGBA(((int*)screen->pixels)[x + (y * get_sdl_core()->width)],
-	screen->format, &rgba.r, &rgba.g, &rgba.b, &rgba.a);
+	SDL_GetRGBA(getpixel(screen, x, y, &(int){0}), screen->format, &rgba.r, &rgba.g, &rgba.b, &rgba.a);
 	return (rgba);
 }
 
@@ -78,4 +77,15 @@ int		blur(void)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	apply_blur(screen, 0, 0);
 	return (0);
+}
+
+char	*parsing_blur(char *data, t_scene *scn, int *i)
+{
+	if (ft_strstr(data, "blur") != data)
+		return (data);
+	scn->effects[++(*i)] = blur;
+	data += 4;
+	while (*data && (ft_isspace(*data) || *data == ','))
+		data++;
+	return (data);
 }

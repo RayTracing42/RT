@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   blur_effect.c                                      :+:      :+:    :+:   */
+/*   effect_anaglyph.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joinacio <joinacio@student.42.fr>          +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:27:44 by joinacio          #+#    #+#             */
-/*   Updated: 2017/12/07 04:18:03 by joinacio         ###   ########.fr       */
+/*   Updated: 2018/02/18 17:07:10 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,15 @@ int		anaglyph(void)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	apply_anaglyph(screen, 0, 0);
 	return (0);
+}
+
+char	*parsing_anaglyph(char *data, t_scene *scn, int *i)
+{
+	if (ft_strstr(data, "anaglyph") != data)
+		return (data);
+	scn->effects[++(*i)] = anaglyph;
+	data += 8;
+	while (*data && (ft_isspace(*data) || *data == ','))
+		data++;
+	return (data);
 }
