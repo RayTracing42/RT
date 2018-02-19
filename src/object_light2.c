@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 11:53:24 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/17 16:21:11 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/19 12:25:35 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_dot		get_cone_ray_vect(t_dot pos, t_obj_light *obl)
 	res = (t_dot){res.x / (1 + 2 * t), res.y / (1 - 2 * tana2 * t),
 				res.z / (1 + 2 * t)};
 	if (obl->shape->material.texture && !obl->shape->material.color.a)
-		obl->color = getTextColor(res, obl->shape);
+		obl->color = get_text_color(res, obl->shape);
 	mult_vect((t_vector*)&res, obl->shape->trans_const, (t_vector*)&res);
 	return ((t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
 					res.z + obl->shape->origin.z});
@@ -55,7 +55,7 @@ t_dot		get_cylinder_ray_vect(t_dot pos, t_obj_light *obl)
 	t = -0.5 + sqrt(res.x * res.x + res.z * res.z) / (2 * r);
 	res = (t_dot){res.x / (1 + 2 * t), res.y, res.z / (1 + 2 * t)};
 	if (obl->shape->material.texture && !obl->shape->material.color.a)
-		obl->color = getTextColor(res, obl->shape);
+		obl->color = get_text_color(res, obl->shape);
 	mult_vect((t_vector*)&res, obl->shape->trans_const, (t_vector*)&res);
 	return ((t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
 					res.z + obl->shape->origin.z});
@@ -77,7 +77,7 @@ t_dot		get_plane_ray_vect(t_dot pos, t_obj_light *obl)
 		(n.x * n.x + n.y * n.y + n.z * n.z);
 	res = (t_dot){res.x - n.x * t, res.y - n.y * t, res.z - n.z * t};
 	if (obl->shape->material.texture && !obl->shape->material.color.a)
-		obl->color = getTextColor(res, obl->shape);
+		obl->color = get_text_color(res, obl->shape);
 	mult_vect((t_vector*)&res, obl->shape->trans_const, (t_vector*)&res);
 	return ((t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
 					res.z + obl->shape->origin.z});
@@ -101,7 +101,7 @@ static int	get_box_plane_vect(t_dot *dst, t_dot pos, t_plane *p, t_box *b)
 	if (!is_in_box_boundaries(p, b, &res))
 		return (0);
 	if (p->material.texture && !p->material.color.a)
-		b->material.color = getTextColor(res, (t_object*)p);
+		b->material.color = get_text_color(res, (t_object*)p);
 	mult_vect((t_vector*)&res, p->trans_const, (t_vector*)&res);
 	*dst = (t_dot){res.x + p->origin.x, res.y + p->origin.y,
 				res.z + p->origin.z};

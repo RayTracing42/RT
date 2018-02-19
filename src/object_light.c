@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_light.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 11:53:24 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/18 19:16:38 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/19 13:15:08 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_dot	get_sphere_ray_vect(t_dot pos, t_obj_light *obl)
 	res = (t_dot){res.x / (1 + 2 * t), res.y / (1 + 2 * t),
 				res.z / (1 + 2 * t)};
 	if (obl->shape->material.texture && !obl->shape->material.color.a)
-		obl->color = getTextColor(res, obl->shape);
+		obl->color = get_text_color(res, obl->shape);
 	mult_vect((t_vector*)&res, obl->shape->trans_const, (t_vector*)&res);
 	return ((t_dot){res.x + obl->shape->origin.x, res.y + obl->shape->origin.y,
 					res.z + obl->shape->origin.z});

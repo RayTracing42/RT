@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_scene.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:48:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/18 22:36:20 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/19 13:30:55 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,17 @@ t_scene				*parsing_scene(char *scene)
 	t_scene		*scn;
 	t_camera	cam;
 
-	bg = NULL;
 	if (parsing_camera(scene, &cam))
 		exit_custom_error("rt", ":parsing_camera() failed");
 	if (!(data[0] = get_interval(scene, "<brightness>", "</brightness>")))
 		return (NULL);
 	if (between(brightness = atod(data[0]), 0, 100) == -1)
 		exit_custom_error("rt", ":brightness must be between <0 - 100>");
-	return (new_scene(cam, brightness, bg));
-	scn = new_scene(cam, brightness);
+	scn = new_scene(cam, brightness, NULL);
 	if ((data[1] = get_interval(scene, "<background>", "</background>")))
 		scn->background = parsing_background(data[1]);
 	if ((data[2] = get_interval(scene, "<effects>", "</effects>")))
-		parsing_effects(data, scn);
+		parsing_effects(data[2], scn);
 	free(data[0]);
 	free(data[1]);
 	free(data[2]);

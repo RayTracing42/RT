@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/18 21:24:15 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/19 14:22:09 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	scanning_multi(void *data_void)
 		while (++i.x < get_sdl_core()->width)
 		{
 			data->scn.cam.origin = cam_orig;
-			randomize_cam_orig(&data->scn.cam, &buff);
+			randomize_cam_orig(&data->scn.cam);
 			scan_pixel(&ray, data, &i);
 		}
 	}

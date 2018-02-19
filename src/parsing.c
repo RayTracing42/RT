@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/18 22:14:54 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/19 13:17:16 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,6 @@ void		parsing_physic(char *data_physic, t_objs_comp *args)
 		between(args->shininess = atod(data[3]), 0, 100) == -1)
 		exit_custom_error("rt", ":shininess must be between <0 - 100>");
 	free_tab(data, 4);
-}
-
-static void	end_fct_norme(int nb, char *file, char *scene)
-{
-	get_sdl_core()->nb_threads = nb;
-	get_pxl_queue(nb);
-	free(scene);
-	free(file);
 }
 
 t_scene		*parsing(int argc, char **argv)

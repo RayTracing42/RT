@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   box2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 14:56:42 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/18 19:09:55 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/19 12:24:18 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		is_in_box_boundaries(const t_plane *p, t_box *b, t_dot *d)
 	else if (p == b->left || p == b->right)
 		return (le(d->y, b->btr_corner.y) && gt(d->y, b->fbl_corner.y) &&
 				le(d->x, b->btr_corner.x) && gt(d->x, b->fbl_corner.x));
+	else
 		return (0);
 }
 
