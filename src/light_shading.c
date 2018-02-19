@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   light_shading.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/11 12:42:42 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/17 15:51:44 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/19 16:04:09 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <math.h>
 
-SDL_Color	get_shade_col(t_ray *light_ray, double opacity, double *coef)
+SDL_Color	get_shade_col(const t_ray *light_ray, double opacity, double *coef)
 {
 	SDL_Color	col;
 	t_vector	tmp_col;
@@ -34,8 +34,8 @@ SDL_Color	get_shade_col(t_ray *light_ray, double opacity, double *coef)
 	return (col);
 }
 
-SDL_Color	get_specular_col(t_ray *ray, t_ray *light_ray, double opacity,
-							int shade)
+SDL_Color	get_specular_col(const t_ray *ray, const t_ray *light_ray,
+							double opacity, int shade)
 {
 	t_vector	r;
 	t_vector	v;

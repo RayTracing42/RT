@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/19 15:16:03 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/19 16:20:21 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		choice_intersect(t_list_ray *l, t_ray *ray, double *dist)
 	}
 }
 
-static void	check_intersect2(t_ray *ray, t_list_objs *l, double *dist)
+static void	check_intersect2(t_ray *ray, const t_list_objs *l, double *dist)
 {
 	t_couple_ray	basic;
 	t_list_ray		*l_ray;
@@ -56,12 +56,13 @@ static void	check_intersect2(t_ray *ray, t_list_objs *l, double *dist)
 	}
 }
 
-double		check_intersect(t_ray *ray, t_list_objs *l, int check_lights,
-							t_object *filter)
+double		check_intersect(t_ray *ray, const t_list_objs *l, int check_lights,
+							const t_object *filter)
 {
 	double	dist;
 
 	dist = 0;
+	ray->obj = NULL;
 	while (l)
 	{
 		if ((!l->obj->is_light || check_lights) &&

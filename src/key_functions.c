@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   key_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 22:12:52 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 22:34:30 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/19 17:25:48 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static void	evt_antialiasing(t_evt_data *data)
+{
+	SDL_WaitThread(data->running_thread, NULL);
+	ft_putstr("\nLaunching antialiasing...\n");
+	get_sdl_core()->width *= 4;
+	get_sdl_core()->height *= 4;
+	SDL_DestroyTexture(get_sdl_core()->target);
+	get_sdl_core()->target = SDL_CreateTexture(get_sdl_core()->renderer,
+												SDL_PIXELFORMAT_RGBA32,
+												SDL_TEXTUREACCESS_TARGET,
+												WIN_WIDTH * 4, WIN_HEIGHT * 4);
+	SDL_SetRenderTarget(get_sdl_core()->renderer, get_sdl_core()->target);
+	get_sdl_core()->aa = 1;
+	reset_camera(&data->scn->cam);
+	data->running_thread = SDL_CreateThread(main_display, "", data->scn);
+}
+
+static void	evt_screenshot(t_evt_data *data)
+{
+	SDL_WaitThread(data->running_thread, NULL);
+	data->running_thread = NULL;
+	screenshot();
+	ft_putstr("\nScreenshot taken.\n");
+}
 
 int	key_management(SDL_Event *current, t_event *evt)
 {
@@ -19,25 +44,9 @@ int	key_management(SDL_Event *current, t_event *evt)
 	data = evt->data;
 	if (current->key.keysym.sym == SDLK_ESCAPE)
 		return (0);
-	if (current->key.keysym.sym == SDLK_a && !get_sdl_core()->aa)
-	{
-		SDL_WaitThread(data->running_thread, NULL);
-		get_sdl_core()->width *= 4;
-		get_sdl_core()->height *= 4;
-		SDL_DestroyTexture(get_sdl_core()->target);
-		get_sdl_core()->target = SDL_CreateTexture(get_sdl_core()->renderer,
-												SDL_PIXELFORMAT_RGBA32,
-												SDL_TEXTUREACCESS_TARGET,
-												WIN_WIDTH * 4, WIN_HEIGHT * 4);
-		SDL_SetRenderTarget(get_sdl_core()->renderer, get_sdl_core()->target);
-		get_sdl_core()->aa = 1;
-		reset_camera(&data->scn->cam);
-		data->running_thread = SDL_CreateThread(main_display, "", data->scn);
-	}
+	else if (current->key.keysym.sym == SDLK_a && !get_sdl_core()->aa)
+		evt_antialiasing(data);
 	else if (current->key.keysym.sym == SDLK_s)
-	{
-		SDL_WaitThread(data->running_thread, NULL);
-		screenshot();
-	}
+		evt_screenshot(data);
 	return (1);
 }

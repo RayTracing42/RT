@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:27:44 by joinacio          #+#    #+#             */
-/*   Updated: 2018/02/19 13:31:45 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/19 17:07:56 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		ft_access(const char *path)
 	int	fd;
 
 	fd = 0;
-	if ((fd = open(path, O_RDONLY) && fd == -1))
+	if ((fd = open(path, O_RDONLY)) && fd == -1)
 		return (-1);
 	close(fd);
 	return (0);
@@ -56,7 +56,7 @@ char	*name_screen(void)
 			free(name);
 		z++;
 	}
-	return ("Screenshot_MAX.bmp");
+	return (ft_strdup("Screenshot_MAX.bmp"));
 }
 
 int		screenshot(void)

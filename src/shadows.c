@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shadows.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/18 19:44:35 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/19 16:08:27 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static void			opacify_color(t_ray *light_ray, double *opacity)
 	light_ray->color.b *= (*opacity);
 }
 
-static void			set_multi_light_norme(t_ray *light_ray, t_ray *ray,
+static void			set_multi_light_norme(const t_ray *light_ray,
+										const t_ray *ray,
 										SDL_Color *multi_lights,
 										t_saloperie_de_norme_de_merde *so)
 {
