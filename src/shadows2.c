@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/16 11:22:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/19 16:05:44 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/19 18:47:41 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int			check_objs_on_ray(t_ray *light_ray, const t_list_objs *l_objs,
 
 	if (!light->is_in_light((t_light*)light, light_ray) ||
 		(!light_ray->equ.vd.x && !light_ray->equ.vd.y && !light_ray->equ.vd.z))
+	{
+		light_ray->shad_opacity = 1;
 		return (1);
+	}
 	tmp_ray = *light_ray;
 	tmp_ray.shad_opacity = 0;
 	tmp = check_intersect(&tmp_ray, l_objs, 0, filter);
