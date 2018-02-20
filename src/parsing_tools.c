@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_tools.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:47:51 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 16:52:15 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/20 13:33:48 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,10 @@ void	free_tab(char **data, int size)
 {
 	while (--size > -1)
 		free(data[size]);
+}
+
+void	init_tab(char **data, int size)
+{
+	while (--size > -1)
+		data[size] = NULL;
 }

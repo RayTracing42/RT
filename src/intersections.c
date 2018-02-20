@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 03:10:18 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/19 16:20:21 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/20 13:42:45 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ double		check_intersect(t_ray *ray, const t_list_objs *l, int check_lights,
 		l = l->next;
 	}
 	if (ray->obj && !ray->obj->material.normal_map)
-		correct_normal(*(t_dot*)&ray->equ.vc, ray->inter, &ray->normal);
+		correct_normal((t_dot){ray->equ.vc.x, ray->equ.vc.y, ray->equ.vc.z},
+						ray->inter, &ray->normal);
 	return (dist);
 }
 

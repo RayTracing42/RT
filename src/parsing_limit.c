@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_limit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 01:57:03 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 16:40:10 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/20 13:35:57 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	global_loop(t_object *obj, char *limit)
 	t_vector	normal;
 	int			status;
 
+	init_tab(data, 4);
+	status = EMPTY;
 	while ((data[0] = get_interval(limit, "<global>", "</global>")))
 	{
 		if (!(data[1] = get_interval(data[0], "<origin>", "</origin>"))
@@ -77,6 +79,8 @@ void	local_loop(t_object *obj, char *limit)
 	t_vector	normal;
 	int			status;
 
+	init_tab(data, 4);
+	status = EMPTY;
 	while ((data[0] = get_interval(limit, "<local>", "</local>")))
 	{
 		if (!(data[1] = get_interval(data[0], "<origin>", "</origin>"))

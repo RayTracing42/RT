@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 16:47:13 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 20:12:38 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/20 13:34:10 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int					between(double value, double low_limit,
 							double height_limit);
 int					get_status(char *status);
 void				free_tab(char **data, int size);
+void				init_tab(char **data, int size);
 
 /*
 **	parsing_interval.c

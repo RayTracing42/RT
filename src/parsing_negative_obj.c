@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_negative_obj.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcecilie <fcecilie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/04 00:21:37 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/17 16:41:14 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/20 13:47:00 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	parsing_negative_obj(t_object *obj, char *neg)
 
 	if (neg)
 	{
+		data[3] = NULL;
 		while ((data[0] = get_interval(neg, "<object>", "</object>")))
 		{
 			data[1] = get_interval(data[0], "<limit>", "</limit>");
