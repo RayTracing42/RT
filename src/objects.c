@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/20 15:14:23 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/20 19:08:51 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static size_t	get_type_size(t_type type)
 						sizeof(t_hyperboloid), sizeof(t_plane),
 						sizeof(t_sphere), sizeof(t_triangle)}[type]);
 }
-
 
 t_object		*new_object(t_type type, t_objs_comp args)
 {

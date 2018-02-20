@@ -210,9 +210,9 @@
 			</rotation>
 		</transformations>
 		<physic>
-			<refraction_amount>0.9</refraction_amount>
+			<refraction_amount>0</refraction_amount>
 			<reflexion_amount>0.1</reflexion_amount>
-			<refraction_index>1.5</refraction_index>
+			<refraction_index>1</refraction_index>
 			<shininess>40</shininess>
 		</physic>
 	</object>

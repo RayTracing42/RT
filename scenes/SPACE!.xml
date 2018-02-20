@@ -36,6 +36,7 @@
 					<file>./files/sun.bmp</file>
 					<scale>1</scale>
 					<mapping>spherical</mapping>
+					<repeat>true</repeat>
 				</texture>
 			</material>
 			<radius>50</radius>
@@ -62,6 +63,7 @@
 				<file>./files/earth_day_night.bmp</file>
 				<scale>1</scale>
 				<mapping>spherical</mapping>
+				<repeat>true</repeat>
 			</texture>
 		</material>
 		<radius>20</radius>
@@ -79,6 +81,7 @@
 				<file>./files/moon.bmp</file>
 				<scale>1</scale>
 				<mapping>spherical</mapping>
+				<repeat>true</repeat>
 			</texture>
 		</material>
 		<radius>3</radius>

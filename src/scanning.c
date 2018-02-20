@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:41:43 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/20 13:45:43 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/20 18:30:31 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	scanning_multi(void *data_void)
 	data = (t_thread_data *)data_void;
 	cam_orig = data->scn.cam.origin;
 	ray.actual_refractive_i = 1;
-	ray.limit = 1;
+	ray.limit = LIMIT;
 	ray.tree = add_new_leaf(NULL, NULL, NULL, 0);
 	i.q = -1;
 	i.y = data->y_begin;

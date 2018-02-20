@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 13:44:18 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 21:43:24 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/20 19:11:16 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void		apply_motionblur(SDL_Surface *screen, int x, int y);
 void		put_pixel32(SDL_Surface *surface, int x, int y, Uint32 colors);
 int			set_color(unsigned char a, unsigned char r, unsigned char v,
 						unsigned char b);
-int 		rand_between(int min, int max);
+int			rand_between(int min, int max);
 int			randbet255(int r, int c, int val);
 void		perlinmaker(t_perlin *p, int x, int y);
 void		perlin_pinpin(int x, int y);

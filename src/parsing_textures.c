@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_textures.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:52:29 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/19 19:57:36 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/20 19:09:52 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int			parsing_texture(char *data_txt, t_obj_material *material)
 	return (0);
 }
 
-static int	parsing_normal_map_norme(char *tmp[4], char *data_map, t_obj_material *material)
+static int	parsing_normal_map_norme(char *tmp[4], char *data_map,
+									t_obj_material *material)
 {
 	if (!(tmp[2] = get_interval(data_map, "<mapping>", "</mapping>")) &&
 		!material->texture)
@@ -74,7 +75,8 @@ static int	parsing_normal_map_norme(char *tmp[4], char *data_map, t_obj_material
 		material->map_mapping = material->texture_mapping;
 	else if (parsing_mapping(tmp[2], &material->map_mapping) == -1)
 		return (-1);
-	if (!(tmp[3] = get_interval(data_map, "<repeat>", "</repeat>")) && !material->texture)
+	if (!(tmp[3] = get_interval(data_map, "<repeat>", "</repeat>")) &&
+		!material->texture)
 		return (-1);
 	else if (!tmp[3] && material->texture)
 		material->map_repeat = material->txt_repeat;
@@ -99,7 +101,7 @@ int			parsing_normal_map(char *data_map, t_obj_material *material)
 	else if (!(material->map_streching = atod(tmp[1])))
 		return (-1);
 	if (parsing_normal_map_norme(tmp, data_map, material) == -1)
-		return(-1);
+		return (-1);
 	free_tab(tmp, 4);
 	return (0);
 }

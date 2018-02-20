@@ -109,11 +109,11 @@
 			<z>50</z>
 		</origin>
 		<color>
-			<r>100</r>
-			<g>100</g>
-			<b>100</b>
+			<r>200</r>
+			<g>200</g>
+			<b>200</b>
 		</color>
-		<power>0.8</power>
+		<power>1</power>
 	</light>
 
 </scene>

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: shiro <shiro@student.42.fr>                +#+  +:+       +#+         #
+#    By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/18 18:41:12 by edescoin          #+#    #+#              #
-#    Updated: 2018/02/19 13:54:58 by shiro            ###   ########.fr        #
+#    Updated: 2018/02/20 18:57:59 by edescoin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,6 @@ LFT_PATH = "$$(pwd)/libraries/libft"
 SDL_PATH = "$$(pwd)/libraries/SDL"
 
 LFT_INCLUDE = $(LFT_PATH)/includes
-
-SDL = `$(SDL_PATH)/build/bin/sdl2-config --cflags --libs`
 
 COLOR = \0033[1;35m
 
@@ -40,41 +38,76 @@ LIB = -L$(LIB_DIR) -lft
 #INC_SDL2 = `sdl2-config --cflags`
 INC_SDL2 = -I./SDL2/include -D_THREAD_SAFE
 #SDL2 = `sdl2-config --libs`
-SDL2 = -L./SDL2/lib -lSDL2
+SDL2 = `$(SDL_PATH)/build/bin/sdl2-config --cflags --libs`
 
-CC = /bin/clang $(FLAGS) $(INC)
-MAKE = /bin/make
+CC = /usr/bin/clang $(FLAGS) $(INC)
+MAKE = /usr/bin/make
 
 ## List of Functions
 
-SRC_FT = camera \
-		 check_intersect \
+SRC_FT = antialiasing \
+		 box \
+		 box2 \
+		 camera \
 		 cone \
 		 cylinder \
+		 effect_anaglyph \
+		 effect_blur \
+		 effect_bwnoise \
+		 effect_cartoon \
+		 effect_duotone \
+		 effect_gray \
+		 effect_laplacian \
+		 effect_lofi \
+		 effect_motionblur \
+		 effect_negative \
+		 effect_noise \
+		 effect_pop \
+		 effect_prewitt \
+		 effect_sepia \
+		 effect_utils \
 		 equations \
 		 events \
 		 graphics \
+		 hyperboloid \
+		 intersections \
+		 intersections2 \
 		 key_functions \
 		 light \
 		 light_shading \
 		 limit \
+		 limit2 \
+		 list_ray \
 		 main \
-		 matrice_rotation \
 		 matrix \
 		 matrix_ops \
 		 matrix_ops2 \
+		 matrix_ops3 \
+		 matrix_transformations \
+		 negative_obj \
+		 object_light \
+		 object_light2 \
 		 objects \
-		 objects2 \
 		 orb_light \
 		 parallel_light \
 		 parsing \
+		 parsing2 \
 		 parsing_camera \
+		 parsing_interval \
+		 parsing_interval2 \
 		 parsing_lights \
+		 parsing_lights2 \
 		 parsing_limit \
+		 parsing_negative_obj \
 		 parsing_objects \
+		 parsing_objects2 \
 		 parsing_scene \
+		 parsing_textures \
+		 parsing_textures2 \
 		 parsing_tools \
 		 parsing_transformations \
+		 perlin \
+		 pixel_utils \
 		 plane \
 		 reflect_refract_tree \
 		 reflexion \
@@ -82,19 +115,25 @@ SRC_FT = camera \
 		 refraction \
 		 rendering \
 		 scanning \
+		 scanning2 \
 		 scene \
 		 scene_lights \
 		 scene_objs \
+		 screenshot \
 		 shadows \
+		 shadows2 \
 		 sphere \
 		 spotlight \
+		 textures \
+		 textures2 \
 		 thread_data \
-		 transformations \
 		 triangle \
 		 utils \
 		 vectors \
 		 vectors2 \
-		 view_plane
+		 vectors_transformations \
+		 view_plane \
+
 
 ## List of Utilities
 
@@ -103,7 +142,7 @@ SRC = $(SRC_FT:%=$(SRC_DIR)/%.c)
 
 ## Rules of Makefile
 
-all: $(NAME)
+all: sdl2 libft $(NAME)
 	@echo "$(COLOR)$(NAME)\t\t\0033[1;30m[All OK]\0033[1;37m"
 
 $(OBJ_DIR):
@@ -141,11 +180,11 @@ sdl2_clean:
 	@rm -rf ./SDL2
 
 sdl2:
-	if ! [ -e ./SDL2 ]; then
-		curl -o SDL2 https://www.libsdl.org/release/SDL2-2.0.5.tar.gz
-		gunzip -c SDL2 | tar xopf -
-		@rm -rf SDL2
-		mv -f ./SDL2-2.0.5 ./SDL2
+	@if ! [ -e ./SDL2 ]; then\
+		curl -o SDL2 https://www.libsdl.org/release/SDL2-2.0.5.tar.gz;\
+		gunzip -c SDL2 | tar xopf -;\
+		rm -rf SDL2;\
+		mv -f ./SDL2-2.0.5 ./SDL2;\
 	fi
 	(cd ./SDL2 && ./configure)
 	(cd ./SDL2 && sed -i.bak 's/^\prefix =.*/\prefix = $$(srcdir)/' Makefile)
