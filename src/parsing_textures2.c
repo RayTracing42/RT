@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/11 12:52:29 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/18 19:23:29 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/20 20:04:29 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	parsing_material(char *data_mat, t_obj_material *material)
 		parsing_color(tmp[0], &material->color) == -1)
 		return (-1);
 	else if (!tmp[0])
-		material->color = (SDL_Color){0, 0, 0, 255};
+		material->color = (SDL_Color){0, 0, 0, 0};
 	material->chess = 0;
 	material->texture = NULL;
 	if ((tmp[1] = get_interval(data_mat, "<texture>", "</texture>")) &&
