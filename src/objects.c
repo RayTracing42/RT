@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:32:56 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/19 14:42:00 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/20 15:14:23 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,22 @@ void			delete_object(t_object *obj)
 {
 	if (obj)
 	{
+		if (obj->material.texture)
+			SDL_FreeSurface(obj->material.texture);
+		if (obj->material.normal_map)
+			SDL_FreeSurface(obj->material.normal_map);
 		delete_matrix(obj->trans_const);
 		delete_matrix(obj->trans_iconst);
 		delete_matrix(obj->trans_idir);
 		delete_matrix(obj->trans_norm);
 		while (obj->limit)
+		{
+			obj->limit->obj->material.normal_map = NULL;
+			obj->limit->obj->material.texture = NULL;
 			delete_cell_obj(&obj->limit);
+		}
 		while (obj->negative_obj)
 			delete_cell_obj(&obj->negative_obj);
-		if (obj->material.texture)
-			SDL_FreeSurface(obj->material.texture);
 		free(obj);
 	}
 }
