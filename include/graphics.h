@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/06 17:10:36 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 21:35:38 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/22 15:39:16 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,12 @@ int			screenshot(void);
 SDL_Color	pixels_merger(SDL_Color pixel1, SDL_Color pixel2);
 void		x4_antia(SDL_Surface *screen, int x, int y);
 int			antia(void);
+
+/*
+** loading_screen.c
+*/
+t_loadingbar	new_loading_bar();
+void			update_loading_bar(t_loadingbar *lb);
+void			destroy_loading_bar(t_loadingbar lb);
 
 #endif

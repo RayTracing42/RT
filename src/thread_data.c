@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:32:58 by llellouc          #+#    #+#             */
-/*   Updated: 2018/02/18 21:32:31 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/22 13:33:55 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,14 @@ t_mutexes				*get_mutexes(void)
 	{
 		if (!(mutex = malloc(sizeof(t_mutexes))))
 			exit_error("rt", "malloc");
-		if (!(mutex->intersect = SDL_CreateMutex()))
+		if (!(mutex->loading_bar = SDL_CreateMutex()))
 			exit_error("rt", "SDL_CreateMutex");
 	}
 	return (mutex);
+}
+
+void					destroy_mutexes()
+{
+	SDL_DestroyMutex(get_mutexes()->loading_bar);
+	free(get_mutexes());
 }

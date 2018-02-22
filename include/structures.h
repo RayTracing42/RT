@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 16:19:46 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/18 21:44:37 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/22 15:50:49 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef struct				s_mutexes
 {
-	SDL_mutex				*intersect;
+	SDL_mutex				*loading_bar;
 }							t_mutexes;
 
 typedef struct				s_pxl_queue
@@ -610,5 +610,14 @@ typedef struct				s_screenshot
 	char					*name;
 	SDL_Rect				winsize;
 }							t_screenshot;
+
+typedef struct				s_loadingbar
+{
+	SDL_Window				*window;
+	SDL_Renderer			*renderer;
+	SDL_Texture				*loadingtexture;
+	int						val;
+	int						old;
+}							t_loadingbar;
 
 #endif
