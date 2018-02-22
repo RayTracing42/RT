@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/22 16:14:57 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/22 17:05:46 by shiro            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define EMPTY		0
 # define FULL		1
 # define NONE		2
-# define WIN_WIDTH	1270//1920
-# define WIN_HEIGHT	650//1080
+# define WIN_WIDTH	1920
+# define WIN_HEIGHT	1080
 # define _A			0
 # define _B			1
 # define _C			2
