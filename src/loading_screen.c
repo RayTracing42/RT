@@ -6,20 +6,20 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:27:44 by joinacio          #+#    #+#             */
-/*   Updated: 2018/02/22 16:05:02 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/23 11:17:13 by joinacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_loadingbar	new_loading_bar()
+t_loadingbar	new_loading_bar(void)
 {
 	t_loadingbar	lb;
 	SDL_Surface		*tmp;
 
 	lb = (t_loadingbar){NULL, NULL, NULL, 0, 0};
 	tmp = NULL;
-	if(!(lb.window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED,
+	if (!(lb.window = SDL_CreateWindow(TITLE, SDL_WINDOWPOS_CENTERED,
 									SDL_WINDOWPOS_CENTERED,
 									WIN_WIDTH, WIN_HEIGHT,
 									SDL_WINDOW_SHOWN)) ||
@@ -43,9 +43,9 @@ void			destroy_loading_bar(t_loadingbar lb)
 void			update_loading_bar(t_loadingbar *lb)
 {
 	SDL_Rect		dim;
-	const double	p = ((double)lb->val) /
-						((get_sdl_core()->width * get_sdl_core()->height));
+	const double	p;
 
+	p = ((double)lb->val) / ((get_sdl_core()->width * get_sdl_core()->height));
 	if (lb->val >= lb->old + LB)
 	{
 		lb->old = lb->val;

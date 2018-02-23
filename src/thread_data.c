@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 13:32:58 by llellouc          #+#    #+#             */
-/*   Updated: 2018/02/22 13:33:55 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/23 11:17:39 by joinacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_mutexes				*get_mutexes(void)
 	return (mutex);
 }
 
-void					destroy_mutexes()
+void					destroy_mutexes(void)
 {
 	SDL_DestroyMutex(get_mutexes()->loading_bar);
 	free(get_mutexes());
