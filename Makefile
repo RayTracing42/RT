@@ -65,9 +65,9 @@ sdl: $(LIB_DIR)
 ------------"
 	@if [ ! -e $(SDL_PATH)/bin ]; then\
 		mkdir $(SDL_PATH)/bin && echo "mkdir $(SDL_PATH)/bin";\
+		cd SDL2 && CC=./build-scripts/gcc-fat.sh ./configure -q \
+--prefix=$(SDL_PATH)/bin && make && make install;\
 	fi
-	cd SDL2 && CC=./build-scripts/gcc-fat.sh ./configure -q \
---prefix=$(SDL_PATH)/bin && make && make install
 	@echo
 	@echo "               Creating symlinks..."
 	@echo "--------------------------------------------------------------------\
