@@ -52,6 +52,7 @@ void	apply_laplacian(SDL_Surface *screen, int x, int y)
 		x = 0;
 		y++;
 	}
+	SDL_FreeSurface(screensav);
 }
 
 int		laplacian(void)
@@ -67,6 +68,7 @@ int		laplacian(void)
 							screen->pixels, screen->pitch) != 0)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	apply_laplacian(screen, 0, 0);
+	SDL_FreeSurface(screen);
 	return (0);
 }
 

@@ -63,6 +63,8 @@ int		cartoon(void)
 							cartoon->pixels, cartoon->pitch) != 0)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	apply_cartoon(screen, cartoon, 0, 0);
+	SDL_FreeSurface(cartoon);
+	SDL_FreeSurface(screen);
 	return (0);
 }
 

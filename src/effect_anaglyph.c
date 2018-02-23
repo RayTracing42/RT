@@ -50,6 +50,7 @@ int		anaglyph(void)
 							screen->pixels, screen->pitch) != 0)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	apply_anaglyph(screen, 0, 0);
+	SDL_FreeSurface(screen);
 	return (0);
 }
 

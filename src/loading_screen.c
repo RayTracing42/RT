@@ -6,12 +6,12 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:27:44 by joinacio          #+#    #+#             */
-/*   Updated: 2018/02/23 12:17:55 by joinacio         ###   ########.fr       */
+/*   Updated: 2018/02/23 11:57:22 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#define NBOFPXL ((get_sdl_core()->width * get_sdl_core()->height));
+#define P ((double)lb->val) / ((get_sdl_core()->width * get_sdl_core()->height))
 
 t_loadingbar	new_loading_bar(void)
 {
@@ -36,7 +36,7 @@ void			destroy_loading_bar(t_loadingbar lb)
 void			update_loading_bar(t_loadingbar *lb)
 {
 	SDL_Rect		dim;
-	const double	p = ((double)lb->val) / NBOFPXL;
+	const double	p = P;
 
 	if (lb->val >= lb->old + LB)
 	{
@@ -44,8 +44,8 @@ void			update_loading_bar(t_loadingbar *lb)
 		dim = (SDL_Rect){0, WIN_HEIGHT - 20, WIN_WIDTH * p, 20};
 		SDL_SetRenderDrawColor(get_sdl_core()->renderer, 180, 180, 180, 255);
 		SDL_SetRenderTarget(get_sdl_core()->renderer, NULL);
-		SDL_RenderCopy(get_sdl_core()->renderer, \
-				lb->loadingtexture, NULL, NULL);
+		SDL_RenderCopy(get_sdl_core()->renderer, lb->loadingtexture, NULL,
+					NULL);
 		SDL_RenderFillRect(get_sdl_core()->renderer, &dim);
 		SDL_RenderPresent(get_sdl_core()->renderer);
 		SDL_SetRenderTarget(get_sdl_core()->renderer, get_sdl_core()->target);

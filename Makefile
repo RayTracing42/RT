@@ -63,6 +63,12 @@ sdl: $(LIB_DIR)
 	@echo "         Installing SDL2 in $(SDL_PATH)"
 	@echo "--------------------------------------------------------------------\
 ------------"
+	@if ! [ -e $(SDL_PATH) ]; then\
+		curl -o SDL2 https://www.libsdl.org/release/SDL2-2.0.5.tar.gz;\
+		gunzip -c SDL2 | tar xopf -;\
+		rm -rf SDL2;\
+		mv -f ./SDL2-2.0.5 $(SDL_PATH);\
+	fi
 	@if [ ! -e $(SDL_PATH)/bin ]; then\
 		mkdir $(SDL_PATH)/bin && echo "mkdir $(SDL_PATH)/bin";\
 		cd SDL2 && CC=./build-scripts/gcc-fat.sh ./configure -q \
