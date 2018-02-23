@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 10:59:52 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/22 16:15:08 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/23 11:13:46 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ static void	update_pxl_queue(t_pxl_queue **list_queue, int *nb_ended_threads,
 	int				rendered;
 
 	i = -1;
+	(void)lb;
 	while (++i < get_sdl_core()->nb_threads)
 	{
 		rendered = list_queue[i]->rendered;
 		if (!rendered)
 		{
-			lb->val++;
+			//lb->val++;
 			put_pixel(list_queue[i]->x, list_queue[i]->y, &list_queue[i]->col);
 			list_queue[i]->rendered = 1;
 			if ((list_queue[i] + 1)->rendered >= -1)
@@ -77,7 +78,7 @@ static void	update_pxl_queue(t_pxl_queue **list_queue, int *nb_ended_threads,
 		else if (rendered && rendered != -3 && !(list_queue[i] + 1)->rendered)
 			list_queue[i]++;
 	}
-	update_loading_bar(lb);
+	//update_loading_bar(lb);
 }
 
 int			rendering_thread(void *data)
@@ -85,10 +86,10 @@ int			rendering_thread(void *data)
 	int				i;
 	int				nb_ended_threads;
 	t_pxl_queue		**list_queue;
-	t_loadingbar	lb;
+	//t_loadingbar	lb;
 
 	(void)data;
-	lb = new_loading_bar();
+	//lb = new_loading_bar();
 	if (!(list_queue = malloc(get_sdl_core()->nb_threads *
 							sizeof(t_pxl_queue*))))
 		exit_error("rt", "malloc");
@@ -97,7 +98,7 @@ int			rendering_thread(void *data)
 		list_queue[i - 1] = *get_pxl_queue(i);
 	nb_ended_threads = 0;
 	while (nb_ended_threads != get_sdl_core()->nb_threads)
-		update_pxl_queue(list_queue, &nb_ended_threads, &lb);
-	destroy_loading_bar(lb);
+		update_pxl_queue(list_queue, &nb_ended_threads, NULL);//&lb);
+	//destroy_loading_bar(lb);
 	return (0);
 }
