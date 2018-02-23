@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/25 10:49:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/22 16:14:57 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/23 11:05:56 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@
 # include "effects.h"
 # include "events.h"
 # include "graphics.h"
-# include "../libraries/libft/includes/libft.h"
+# include "libft.h"
 # include "intersections.h"
 # include "lights.h"
 # include "light_shading.h"

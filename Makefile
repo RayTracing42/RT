@@ -1,196 +1,130 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/02/18 18:41:12 by edescoin          #+#    #+#              #
-#    Updated: 2018/02/20 18:57:59 by edescoin         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+CC=gcc
+CFLAGS= -Wall -Wextra -Werror -Ofast
+MAKE=/usr/bin/make
+NAME=rt
 
-NAME = rt
+OBJ_DIR=obj
+SRC_DIR=src
+LIB_DIR=lib
+INCLUDE_DIR=include
 
-SRC_DIR = src
-LIB_DIR = libraries
-INCLUDE_DIR = include
+FT_PATH=$$(pwd)/libft
+SDL_PATH=$$(pwd)/SDL2
 
-LFT_PATH = "$$(pwd)/libraries/libft"
-SDL_PATH = "$$(pwd)/libraries/SDL"
+SRCS=antialiasing.c box.c box2.c camera.c cone.c cylinder.c effect_anaglyph.c effect_blur.c effect_bwnoise.c effect_cartoon.c effect_duotone.c effect_gray.c effect_laplacian.c effect_lofi.c effect_motionblur.c effect_negative.c effect_noise.c effect_pop.c effect_prewitt.c effect_sepia.c effect_utils.c equations.c events.c graphics.c hyperboloid.c intersections.c intersections2.c key_functions.c light.c light_shading.c limit.c limit2.c list_ray.c loading_screen.c main.c matrix.c matrix_ops.c matrix_ops2.c matrix_ops3.c matrix_transformations.c negative_obj.c object_light.c object_light2.c objects.c orb_light.c parallel_light.c parsing.c parsing2.c parsing_camera.c parsing_interval.c parsing_interval2.c parsing_lights.c parsing_lights2.c parsing_limit.c parsing_negative_obj.c parsing_objects.c parsing_objects2.c parsing_scene.c parsing_textures.c parsing_textures2.c parsing_tools.c parsing_transformations.c perlin.c pixel_utils.c plane.c reflect_refract_tree.c reflexion.c refract_list.c refraction.c rendering.c scanning.c scanning2.c scene.c scene_lights.c scene_objs.c screenshot.c shadows.c shadows2.c sphere.c spotlight.c textures.c textures2.c thread_data.c triangle.c utils.c vectors.c vectors2.c vectors_transformations.c view_plane.c
+OBJS=$(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
+LIBS=-lft -lm
+LSDL2=`$(SDL_PATH)/SDL2/bin/bin/sdl2-config --cflags --libs`
 
-LFT_INCLUDE = $(LFT_PATH)/includes
-
-COLOR = \0033[1;35m
-
-## List of Directories
-
-INC_DIR = include
-OBJ_DIR = objs
-SRC_DIR = src
-LIB_DIR = libraries/libft
-
-## Compilating Utilities
-
-FLAGS = -Wall -Wextra -Werror -D_REENTRANT -Ofast
-INC = $(INC_DIR:%=-I./%)
-LIB = -L$(LIB_DIR) -lft
-#INC_SDL2 = `sdl2-config --cflags`
-INC_SDL2 = -I./SDL2/include -D_THREAD_SAFE
-#SDL2 = `sdl2-config --libs`
-SDL2 = `$(SDL_PATH)/build/bin/sdl2-config --cflags --libs`
-
-CC = /usr/bin/clang $(FLAGS) $(INC)
-MAKE = /usr/bin/make
-
-## List of Functions
-
-SRC_FT = antialiasing \
-		 box \
-		 box2 \
-		 camera \
-		 cone \
-		 cylinder \
-		 effect_anaglyph \
-		 effect_blur \
-		 effect_bwnoise \
-		 effect_cartoon \
-		 effect_duotone \
-		 effect_gray \
-		 effect_laplacian \
-		 effect_lofi \
-		 effect_motionblur \
-		 effect_negative \
-		 effect_noise \
-		 effect_pop \
-		 effect_prewitt \
-		 effect_sepia \
-		 effect_utils \
-		 equations \
-		 events \
-		 graphics \
-		 hyperboloid \
-		 intersections \
-		 intersections2 \
-		 key_functions \
-		 light \
-		 light_shading \
-		 limit \
-		 limit2 \
-		 list_ray \
-		 main \
-		 matrix \
-		 matrix_ops \
-		 matrix_ops2 \
-		 matrix_ops3 \
-		 matrix_transformations \
-		 negative_obj \
-		 object_light \
-		 object_light2 \
-		 objects \
-		 orb_light \
-		 parallel_light \
-		 parsing \
-		 parsing2 \
-		 parsing_camera \
-		 parsing_interval \
-		 parsing_interval2 \
-		 parsing_lights \
-		 parsing_lights2 \
-		 parsing_limit \
-		 parsing_negative_obj \
-		 parsing_objects \
-		 parsing_objects2 \
-		 parsing_scene \
-		 parsing_textures \
-		 parsing_textures2 \
-		 parsing_tools \
-		 parsing_transformations \
-		 perlin \
-		 pixel_utils \
-		 plane \
-		 reflect_refract_tree \
-		 reflexion \
-		 refract_list \
-		 refraction \
-		 rendering \
-		 scanning \
-		 scanning2 \
-		 scene \
-		 scene_lights \
-		 scene_objs \
-		 screenshot \
-		 shadows \
-		 shadows2 \
-		 sphere \
-		 spotlight \
-		 textures \
-		 textures2 \
-		 thread_data \
-		 triangle \
-		 utils \
-		 vectors \
-		 vectors2 \
-		 vectors_transformations \
-		 view_plane \
+.PHONY: all clean fclean re libft sdl debug-linux debug-mac
 
 
-## List of Utilities
+all: libft sdl $(OBJ_DIR) $(NAME)
 
-OBJ = $(SRC_FT:%=$(OBJ_DIR)/%.o)
-SRC = $(SRC_FT:%=$(SRC_DIR)/%.c)
-
-## Rules of Makefile
-
-all: sdl2 libft $(NAME)
-	@echo "$(COLOR)$(NAME)\t\t\0033[1;30m[All OK]\0033[1;37m"
+$(NAME): $(OBJS)
+	@echo "=================================================="
+	@echo
+	@echo "Objects generation : ""\x1B[38;5;40m""Done.""\x1B[0m"
+	@echo
+	@echo "                 Building $@..."
+	@echo "--------------------------------------------------"
+	$(CC) $(CFLAGS) $^ -o $@ $(LSDL2) -L$(LIB_DIR) $(LIBS)
+	@echo
+	@echo "\x1B[38;5;40m""Done.""\x1B[0m"
+	@echo
+	@echo "=================================================="
 
 $(OBJ_DIR):
-	@mkdir -p $@
-	@echo "$(COLOR)Creating    : \0033[0;32m$@\0033[1;37m"
+	@mkdir $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@$(CC) $(INC_SDL2) -c $< -o $@
-	@echo "$(COLOR)Compiling : \0033[0;32m$(@:$(OBJ_DIR)/%=%)\0033[1;37m"
+	@$(CC) $(CFLAGS) $^ -o $@ -c -I$(INCLUDE_DIR)
 
-$(NAME): $(OBJ_DIR) $(SRC)
-	@$(MAKE) -j -s $(OBJ)
-	@echo "$(COLOR)Objects\t\t\0033[0;32m[Created]\0033[1;37m"
-	@$(MAKE) -j -s -C $(LIB_DIR)
-	@$(CC) $(LIB) $(SDL2) $(OBJ) -o $@
-	@echo "$(COLOR)$(NAME)\t\t\0033[0;32m[Created]\0033[1;37m"
+$(LIB_DIR):
+	@mkdir $@
+
+libft: $(LIB_DIR)
+	@echo "                Compiling libft..."
+	@echo "--------------------------------------------------------------------\
+------------"
+	$(MAKE) -C $(FT_PATH)
+	@echo
+	@echo "                Creating symlinks..."
+	@echo "--------------------------------------------------------------------\
+------------"
+	ln -fs $(FT_PATH)/libft.a $(LIB_DIR)
+	ln -fs $(FT_PATH)/includes/libft.h $(INCLUDE_DIR)
+	@echo
+	@echo "\x1B[38;5;40m""Done.""\x1B[0m"
+	@echo
+
+
+sdl: $(LIB_DIR)
+	@echo "         Installing SDL2 in $(SDL_PATH)"
+	@echo "--------------------------------------------------------------------\
+------------"
+	@if [ ! -e $(SDL_PATH)/bin ]; then\
+		mkdir $(SDL_PATH)/bin && echo "mkdir $(SDL_PATH)/bin";\
+	fi
+	cd SDL2 && CC=./build-scripts/gcc-fat.sh ./configure -q \
+--prefix=$(SDL_PATH)/bin && make && make install
+	@echo
+	@echo "               Creating symlinks..."
+	@echo "--------------------------------------------------------------------\
+------------"
+	ln -fs $(SDL_PATH)/SDL2/bin/lib/libSDL2.a $(LIB_DIR)
+	ln -fs $(SDL_PATH)/SDL2/bin/include/SDL2 $(INCLUDE_DIR)
+	@echo
+	@echo "\x1B[38;5;40m""Done.""\x1B[0m"
+	@echo
+
 
 clean:
-	@rm -rf $(OBJ_DIR)
-	@$(MAKE) clean -C $(LIB_DIR)
-	@echo "$(COLOR)Objects\t\t\0033[0;31m[Deleted]\0033[1;37m"
+	@echo "                Cleaning libft..."
+	@echo "--------------------------------------------------------------------\
+------------"
+	$(MAKE) clean -C $(FT_PATH)
+	@echo
+	@echo "\x1B[38;5;40m""Done.""\x1B[0m"
+	@echo
+	@echo "                Removing objects..."
+	@echo "--------------------------------------------------------------------\
+------------"
+	rm -f $(OBJS)
+	@echo
+	@echo "\x1B[38;5;40m""Done.""\x1B[0m"
+	@echo
+
 
 fclean: clean
-	@rm -f $(NAME)
-	@$(MAKE) fclean -C $(LIB_DIR)
-	@echo "$(COLOR)$(NAME)\t\t\0033[0;31m[Deleted]\0033[1;37m"
+	@echo "                 Removing $(NAME)..."
+	@echo "--------------------------------------------------------------------\
+------------"
+	rm -f $(NAME)
+	@echo
+	@echo "\x1B[38;5;40m""Done.""\x1B[0m"
+	@echo
+	@echo "                Removing libft..."
+	@echo "--------------------------------------------------------------------\
+------------"
+	rm -f $(FT_PATH)/libft.a
+	@echo
+	@echo "\x1B[38;5;40m""Done.""\x1B[0m"
+	@echo
+	@echo "                Removing symlinks"
+	@echo "--------------------------------------------------"
+	rm -f $(LIB_DIR)/*
+	@echo
+	@echo "\x1B[38;5;40m""Done.""\x1B[0m"
+	@echo
+
 
 re: fclean all
 
-norme:
-	@norminette $(SRC) $(INC_DIR)/
-	@$(MAKE) norme -C $(LIB_DIR)
+debug-linux: $(OBJS)
+	$(CC) $(CFLAGS) $^ -L$(LIB_DIR) $(LIBS) -lSDL2
+	$(MAKE) clean
 
-sdl2_clean:
-	@rm -rf ./SDL2
-
-sdl2:
-	@if ! [ -e ./SDL2 ]; then\
-		curl -o SDL2 https://www.libsdl.org/release/SDL2-2.0.5.tar.gz;\
-		gunzip -c SDL2 | tar xopf -;\
-		rm -rf SDL2;\
-		mv -f ./SDL2-2.0.5 ./SDL2;\
-	fi
-	(cd ./SDL2 && ./configure)
-	(cd ./SDL2 && sed -i.bak 's/^\prefix =.*/\prefix = $$(srcdir)/' Makefile)
-	(cd ./SDL2 && $(MAKE) && $(MAKE) install)
-
-libft:
-	@cd $(LFT_PATH) && $(MAKE)
-
-.PHONY: all clean fclean re norme sdl2 sdl2_clean libft
+debug-mac: $(OBJS)
+	$(CC) $(CFLAGS) $^ `$(SDL_PATH)/SDL2/build/bin/sdl2-config --cflags --libs`\
+ -L$(LIB_DIR) -lft -lm

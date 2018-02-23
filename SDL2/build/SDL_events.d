@@ -18,6 +18,9 @@ build/SDL_events.lo: \
   include/SDL_log.h include/SDL_messagebox.h include/SDL_power.h \
   include/SDL_render.h include/SDL_system.h include/SDL_timer.h \
   include/SDL_version.h include/SDL_syswm.h \
+  /usr/X11R6/include/X11/Xlib.h /usr/X11R6/include/X11/X.h \
+  /usr/X11R6/include/X11/Xfuncproto.h /usr/X11R6/include/X11/Xosdefs.h \
+  /usr/X11R6/include/X11/Xatom.h \
   /Users/edescoin/Documents/GitHub/RT/SDL2/src/events/SDL_events_c.h \
   /Users/edescoin/Documents/GitHub/RT/SDL2/src/events/SDL_clipboardevents_c.h \
   /Users/edescoin/Documents/GitHub/RT/SDL2/src/events/SDL_dropevents_c.h \

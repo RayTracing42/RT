@@ -332,6 +332,57 @@ $(objects)/SDL_cocoavideo.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video
 $(objects)/SDL_cocoawindow.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/cocoa/SDL_cocoawindow.m
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
+$(objects)/SDL_x11clipboard.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11clipboard.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11dyn.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11dyn.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11events.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11events.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11framebuffer.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11framebuffer.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11keyboard.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11keyboard.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11messagebox.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11messagebox.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11modes.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11modes.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11mouse.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11mouse.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11opengl.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11opengl.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11opengles.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11opengles.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11shape.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11shape.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11touch.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11touch.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11video.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11video.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11window.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11window.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/SDL_x11xinput2.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11xinput2.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/edid-parse.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/edid-parse.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
+$(objects)/imKStoUCS.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/imKStoUCS.c
+	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
+
 $(objects)/SDL_systhread.lo: /Users/edescoin/Documents/GitHub/RT/SDL2/src/thread/pthread/SDL_systhread.c
 	$(RUN_CMD_CC)$(LIBTOOL) --tag=CC --mode=compile $(CC) $(CFLAGS) $(EXTRA_CFLAGS) -MMD -MT $@ -c $< -o $@
 
