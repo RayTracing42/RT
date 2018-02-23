@@ -52,7 +52,6 @@ void	apply_laplacian(SDL_Surface *screen, int x, int y)
 		x = 0;
 		y++;
 	}
-	SDL_FreeSurface(screensav);
 }
 
 int		laplacian(void)
