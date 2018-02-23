@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 10:59:52 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/22 16:15:08 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/23 11:30:18 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	update_pxl_queue(t_pxl_queue **list_queue, int *nb_ended_threads,
 	int				rendered;
 
 	i = -1;
+	(void)lb;
 	while (++i < get_sdl_core()->nb_threads)
 	{
 		rendered = list_queue[i]->rendered;

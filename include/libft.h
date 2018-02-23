@@ -1,1 +1,1 @@
-../libraries/libft/includes/libft.h
+/Users/edescoin/Documents/GitHub/RT/libft/includes/libft.h

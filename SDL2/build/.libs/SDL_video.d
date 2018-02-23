@@ -32,5 +32,9 @@ build/SDL_video.lo: \
   /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/../events/SDL_touch_c.h \
   /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/../events/SDL_windowevents_c.h \
   /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/../timer/SDL_timer_c.h \
-  include/SDL_syswm.h include/SDL_opengl.h include/SDL_opengl_glext.h \
-  /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/cocoa/SDL_cocoamessagebox.h
+  include/SDL_syswm.h /usr/X11R6/include/X11/Xlib.h \
+  /usr/X11R6/include/X11/X.h /usr/X11R6/include/X11/Xfuncproto.h \
+  /usr/X11R6/include/X11/Xosdefs.h /usr/X11R6/include/X11/Xatom.h \
+  include/SDL_opengl.h include/SDL_opengl_glext.h \
+  /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/cocoa/SDL_cocoamessagebox.h \
+  /Users/edescoin/Documents/GitHub/RT/SDL2/src/video/x11/SDL_x11messagebox.h
