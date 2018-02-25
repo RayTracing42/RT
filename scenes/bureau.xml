@@ -67,9 +67,9 @@
 	<light>
 		<type>orb</type>
 		<origin>
-			<x>16.5</x>
-			<y>-2</y>
-			<z>6</z>
+			<x>13</x>
+			<y>-1.2</y>
+			<z>4.1</z>
 		</origin>
 		<color>
 			<r>230</r>
