@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:27:44 by joinacio          #+#    #+#             */
-/*   Updated: 2018/02/18 20:45:50 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/23 14:53:32 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int		cartoon(void)
 	SDL_Surface	*cartoon;
 
 	if ((screen = SDL_CreateRGBSurface(0, get_sdl_core()->width,
-										get_sdl_core()->height, 32,
-										0, 0, 0, 0)) == NULL)
+							get_sdl_core()->height, 32, 0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	if (SDL_RenderReadPixels(get_sdl_core()->renderer, NULL,
 							SDL_GetWindowPixelFormat(get_sdl_core()->window),
@@ -55,8 +54,7 @@ int		cartoon(void)
 	prewitt();
 	negative();
 	if ((cartoon = SDL_CreateRGBSurface(0, get_sdl_core()->width,
-										get_sdl_core()->height, 32,
-										0, 0, 0, 0)) == NULL)
+							get_sdl_core()->height, 32, 0, 0, 0, 0)) == NULL)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	if (SDL_RenderReadPixels(get_sdl_core()->renderer, NULL,
 							SDL_GetWindowPixelFormat(get_sdl_core()->window),

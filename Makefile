@@ -117,6 +117,13 @@ fclean: clean
 	@echo
 	@echo "\x1B[38;5;40m""Done.""\x1B[0m"
 	@echo
+	@echo "                Removing SDL2..."
+	@echo "--------------------------------------------------------------------\
+------------"
+	rm -rf $(SDL_PATH)
+	@echo
+	@echo "\x1B[38;5;40m""Done.""\x1B[0m"
+	@echo
 	@echo "                Removing symlinks"
 	@echo "--------------------------------------------------"
 	rm -f $(LIB_DIR)/*

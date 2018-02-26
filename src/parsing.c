@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/26 14:43:47 by fcecilie          #+#    #+#             */
-/*   Updated: 2018/02/19 13:17:16 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/26 08:25:32 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ void		parsing_physic(char *data_physic, t_objs_comp *args)
 	free_tab(data, 4);
 }
 
+static void	parsing_threads(int ac, char **av)
+{
+	get_sdl_core()->nb_threads = (ac == 3 ? ft_atoi(av[2]) : 1);
+	if (get_sdl_core()->nb_threads > WIN_HEIGHT)
+		get_sdl_core()->nb_threads = WIN_HEIGHT;
+	else if (get_sdl_core()->nb_threads < 1)
+		exit_custom_error("rt", ":invalid number of threads");
+}
+
 t_scene		*parsing(int argc, char **argv)
 {
 	static t_scene	*scn = NULL;
@@ -46,8 +55,8 @@ t_scene		*parsing(int argc, char **argv)
 	char			*scene;
 	int				fd;
 
-	if ((argc == 2 || (argc == 3 && ft_atoi(argv[2]) > 0)) && argv[1] &&
-		ft_strstr(argv[1], ".xml"))
+	if ((argc == 2 || argc == 3) && argv[1] &&
+		!ft_strcmp(ft_strstr(argv[1], ".xml"), ".xml"))
 	{
 		if ((fd = open(argv[1], O_RDONLY)) == -1)
 			exit_custom_error("rt", ":open() failed");
@@ -61,7 +70,7 @@ t_scene		*parsing(int argc, char **argv)
 		if (!(scn->objects = parsing_object(scene, scn->objects)))
 			ft_putstr_fd("\nWarning: no object found!\n", 2);
 		close(fd);
-		get_sdl_core()->nb_threads = (argc == 3 ? ft_atoi(argv[2]) : 1);
+		parsing_threads(argc, argv);
 		free(scene);
 		free(file);
 	}

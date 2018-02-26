@@ -6,12 +6,11 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:27:44 by joinacio          #+#    #+#             */
-/*   Updated: 2018/02/23 11:57:22 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/23 14:54:08 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#define P ((double)lb->val) / ((get_sdl_core()->width * get_sdl_core()->height))
 
 t_loadingbar	new_loading_bar(void)
 {
@@ -36,8 +35,9 @@ void			destroy_loading_bar(t_loadingbar lb)
 void			update_loading_bar(t_loadingbar *lb)
 {
 	SDL_Rect		dim;
-	const double	p = P;
+	double			p;
 
+	p = ((double)lb->val) / ((get_sdl_core()->width * get_sdl_core()->height));
 	if (lb->val >= lb->old + LB)
 	{
 		lb->old = lb->val;

@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 10:59:52 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/23 11:30:18 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/02/23 13:43:41 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,10 @@ void		put_pixel(int x, int y, SDL_Color *color)
 static void	update_pxl_queue(t_pxl_queue **list_queue, int *nb_ended_threads,
 							t_loadingbar *lb)
 {
-	int				i;
-	int				rendered;
+	int	i;
+	int	rendered;
 
 	i = -1;
-	(void)lb;
 	while (++i < get_sdl_core()->nb_threads)
 	{
 		rendered = list_queue[i]->rendered;
@@ -99,6 +98,8 @@ int			rendering_thread(void *data)
 	nb_ended_threads = 0;
 	while (nb_ended_threads != get_sdl_core()->nb_threads)
 		update_pxl_queue(list_queue, &nb_ended_threads, &lb);
+	free(list_queue);
+	delete_pxl_queues();
 	destroy_loading_bar(lb);
 	return (0);
 }

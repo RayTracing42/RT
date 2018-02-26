@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
+/*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 22:12:52 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/19 17:25:48 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/23 15:01:28 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 static void	evt_antialiasing(t_evt_data *data)
 {
+	const int	w = WIN_WIDTH;
+	const int	h = WIN_HEIGHT;
+
 	SDL_WaitThread(data->running_thread, NULL);
 	ft_putstr("\nLaunching antialiasing...\n");
 	get_sdl_core()->width *= 4;
 	get_sdl_core()->height *= 4;
 	SDL_DestroyTexture(get_sdl_core()->target);
 	get_sdl_core()->target = SDL_CreateTexture(get_sdl_core()->renderer,
-												SDL_PIXELFORMAT_RGBA32,
+												SDL_PIXELFORMAT_RGBA8888,
 												SDL_TEXTUREACCESS_TARGET,
-												WIN_WIDTH * 4, WIN_HEIGHT * 4);
+												w * 4, h * 4);
 	SDL_SetRenderTarget(get_sdl_core()->renderer, get_sdl_core()->target);
 	get_sdl_core()->aa = 1;
 	reset_camera(&data->scn->cam);
@@ -37,7 +40,7 @@ static void	evt_screenshot(t_evt_data *data)
 	ft_putstr("\nScreenshot taken.\n");
 }
 
-int	key_management(SDL_Event *current, t_event *evt)
+int			key_management(SDL_Event *current, t_event *evt)
 {
 	t_evt_data	*data;
 

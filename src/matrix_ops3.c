@@ -6,7 +6,7 @@
 /*   By: shiro <shiro@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 15:55:50 by shiro             #+#    #+#             */
-/*   Updated: 2018/02/17 16:11:42 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/23 14:18:12 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ t_matrix	*mult_matrix(t_matrix **res, t_matrix *m1, t_matrix *m2)
 				tmp->mat[r][c] += m1->mat[r][i] * m2->mat[i][c];
 		}
 	}
-	return (copy_matrix(*res, tmp));
+	copy_matrix(*res, tmp);
+	delete_matrix(tmp);
+	return (*res);
 }
 
 t_matrix	*neg_matrix(t_matrix **res, t_matrix *m)

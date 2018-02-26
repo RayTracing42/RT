@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 16:30:54 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/17 16:08:09 by shiro            ###   ########.fr       */
+/*   Updated: 2018/02/23 14:21:51 by fcecilie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ static void		free_norme(t_la_norme_ce_putain_de_cancer *a)
 	delete_matrix(a->r_abcd[1]);
 	delete_matrix(a->r_abcd[2]);
 	delete_matrix(a->r_abcd[3]);
+	delete_matrix(a->inv_a);
+	delete_matrix(a->inv_d);
 }
 
 t_matrix		*get_inv_4x4mat(t_matrix *res, t_matrix *m)
