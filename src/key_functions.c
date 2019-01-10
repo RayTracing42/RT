@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/18 22:12:52 by edescoin          #+#    #+#             */
-/*   Updated: 2018/02/23 15:01:28 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/03/07 11:13:46 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	evt_antialiasing(t_evt_data *data)
 	const int	h = WIN_HEIGHT;
 
 	SDL_WaitThread(data->running_thread, NULL);
-	ft_putstr("\nLaunching antialiasing...\n");
+	/*ft_putstr("\nLaunching antialiasing...\n");
 	get_sdl_core()->width *= 4;
 	get_sdl_core()->height *= 4;
 	SDL_DestroyTexture(get_sdl_core()->target);
@@ -29,7 +29,7 @@ static void	evt_antialiasing(t_evt_data *data)
 	SDL_SetRenderTarget(get_sdl_core()->renderer, get_sdl_core()->target);
 	get_sdl_core()->aa = 1;
 	reset_camera(&data->scn->cam);
-	data->running_thread = SDL_CreateThread(main_display, "", data->scn);
+	data->running_thread = SDL_CreateThread(main_display, "", data->scn);*/
 }
 
 static void	evt_screenshot(t_evt_data *data)

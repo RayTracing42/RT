@@ -6,7 +6,7 @@
 /*   By: edescoin <edescoin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/30 09:27:44 by joinacio          #+#    #+#             */
-/*   Updated: 2018/02/18 21:53:20 by edescoin         ###   ########.fr       */
+/*   Updated: 2018/03/07 11:11:34 by edescoin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int			antia(void)
 							screen->pixels, screen->pitch) != 0)
 		exit_custom_error("rt : Erreur SDL2 : ", (char*)SDL_GetError());
 	x4_antia(screen, 0, 0);
+	SDL_FreeSurface(screen);
 	return (0);
 }
